@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PWA(Progressive Web App) 介紹與實際安裝 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtube的小天地"><meta property="og:title" content="PWA(Progressive Web App) 介紹與實際安裝" />
+<meta property="og:description" content="PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://880831ian.github.io/pwa/" /><meta property="og:image" content="https://880831ian.github.io/pwa/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-19T19:34:11+08:00" />
+<meta property="article:modified_time" content="2022-02-19T19:34:11+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://880831ian.github.io/pwa/featured-image.webp"/>
+<meta name="twitter:title" content="PWA(Progressive Web App) 介紹與實際安裝"/>
+<meta name="twitter:description" content="PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://880831ian.github.io/pwa/" /><link rel="prev" href="https://880831ian.github.io/tcp-udp-difference/" /><link rel="next" href="https://880831ian.github.io/lofi-land/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PWA(Progressive Web App) 介紹與實際安裝",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/880831ian.github.io\/pwa\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/880831ian.github.io\/pwa\/featured-image.webp",
+                            "width":  1400 ,
+                            "height":  425 
+                        }],"genre": "posts","keywords": "PWA, 設定教學","wordcount":  1870 ,
+        "url": "https:\/\/880831ian.github.io\/pwa\/","datePublished": "2022-02-19T19:34:11+08:00","dateModified": "2022-02-19T19:34:11+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/880831ian.github.io\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/en/pwa/">English</option><option value="/pwa/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/en/pwa/">English</option><option value="/pwa/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/pwa/featured-image.webp"
+        data-srcset="/pwa/featured-image.webp, /pwa/featured-image.webp 1.5x, /pwa/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/pwa/featured-image.webp"
+        title="/pwa/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">PWA(Progressive Web App) 介紹與實際安裝</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-19">2022-02-19</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1870 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介紹">介紹</a></li>
+    <li><a href="#實際安裝">實際安裝</a>
+      <ul>
+        <li><a href="#manifestjson-簡易介紹詳細可參考官方文件httpsdevelopermozillaorgzh-twdocsmozillaadd-onswebextensionsmanifestjson">manifest.json (簡易介紹，詳細可參考<a href="https://developer.mozilla.org/zh-TW/docs/Mozilla/Add-ons/WebExtensions/manifest.json">官方文件</a>)</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用方式">使用方式</a></li>
+    <li><a href="#如何使用">如何使用</a>
+      <ul>
+        <li><a href="#ios">IOS</a></li>
+        <li><a href="#android">ANDROID</a></li>
+      </ul>
+    </li>
+    <li><a href="#成功畫面">成功畫面</a>
+      <ul>
+        <li><a href="#其他說明">其他說明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。</p>
+<h2 id="介紹">介紹</h2>
+<p>PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。</p>
+<ul>
+<li>Progressive
+<ul>
+<li>漸進式，提供每一位用戶做基本的瀏覽。</li>
+</ul>
+</li>
+<li>Responsive
+<ul>
+<li>響應式的用戶介面，可以在不同裝置下作最佳化的顯示。</li>
+</ul>
+</li>
+<li>Connectivity independent
+<ul>
+<li>不依賴網路連接，透過 service workers 可以在低頻寬甚至是離線的環境下瀏覽網站。</li>
+</ul>
+</li>
+<li>App-like
+<ul>
+<li>讓網站可以具有像 APP 般的瀏覽速度等優點，提供更佳的用戶體驗。</li>
+</ul>
+</li>
+<li>Fresh
+<ul>
+<li>藉由 service worker 自動更新網站內容。</li>
+</ul>
+</li>
+<li>Installable
+<ul>
+<li>可以藉由 Add To Home，如同 App，會新增一個 icon，可以直接將網站加到手機桌面上做切換使用，不需要再透過 App Store 下載安裝。</li>
+</ul>
+</li>
+</ul>
+<p>詳細可參考<a href="https://developer.mozilla.org/zh-TW/docs/Web/Progressive_web_apps" target="_blank" rel="noopener noreffer">官方網站</a></p>
+<h2 id="實際安裝">實際安裝</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>面試者前往公司面試前，應事先準備以下幾點常見問題<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">先下載 <a href="https://nas.pin-yi.com/sharing/nElXqbqyt" target="_blank" rel="noopener noreffer">https://nas.pin-yi.com/sharing/nElXqbqyt</a> (放置小弟NAS雲端上)
+內有兩個檔案，分別是manifest.json、service-worker.js，以下各別做介紹</div>
+        </div>
+    </div>
+<h3 id="manifestjson-簡易介紹詳細可參考官方文件httpsdevelopermozillaorgzh-twdocsmozillaadd-onswebextensionsmanifestjson">manifest.json (簡易介紹，詳細可參考<a href="https://developer.mozilla.org/zh-TW/docs/Mozilla/Add-ons/WebExtensions/manifest.json" target="_blank" rel="noopener noreffer">官方文件</a>)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+          <span class="nt">&#34;background_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span> 
+          <span class="nt">&#34;display&#34;</span><span class="p">:</span> <span class="s2">&#34;standalone&#34;</span><span class="p">,</span> 
+          <span class="nt">&#34;orientation&#34;</span><span class="p">:</span><span class="s2">&#34;portrait&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;theme_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;short_name&#34;</span><span class="p">:</span> <span class="s2">&#34;縮短名稱&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;名稱&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;說明&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;lang&#34;</span><span class="p">:</span> <span class="s2">&#34;zh-TW&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;icons&#34;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+          <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="nt">&#34;start_url&#34;</span><span class="p">:</span> <span class="s2">&#34;./index.php&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>background_color 背景顏色
+<ul>
+<li>定義 Web 應用程式預期的背景顏色，這能在 Web 應用程式的啟動和載入內容之間創建平順的過場。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">	<span class="s2">&#34;background_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>display 背景顏色
+<ul>
+<li>定義開發者喜好的 Web 應用程式顯示模式。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">	<span class="s2">&#34;display&#34;</span><span class="err">:</span> <span class="s2">&#34;standalone&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>顯示模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fullscreen</td>
+<td>所有可用的顯示區域都被填充並且不顯示使用者代理 chrome 。</td>
+</tr>
+<tr>
+<td>standalone</td>
+<td>這看起來和感覺上就像是獨立應用程式一樣，包括有不同的執行視窗、有圖示的應用程式啟動器 … 等等。 在這模式下，使用者代理將不包含控制導覽列，但能包含其他的 UI 元素，像是狀態列。</td>
+</tr>
+<tr>
+<td>minimal-ui</td>
+<td>這看起來和感覺上就像是獨立應用程式一樣，但將有控制導覽列 UI 元素的最小設置，元素會因瀏覽器而不同。</td>
+</tr>
+<tr>
+<td>browser</td>
+<td>預設值。 應用程式如常規般地被開啟於瀏覽器分頁或新視窗，依瀏覽器與平台而不同。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>orientation 螢幕顯示方向
+<ul>
+<li>定義預設的顯示方向，通常應用在 GAME 裡，可能會需要強制設定方向。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;orientation&#34;</span><span class="err">:</span> <span class="s2">&#34;portrait&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>theme_color 網站佈景顏色
+<ul>
+<li>設定網站每個頁面的主題顏色，例如改變 URL 的顏色。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;theme_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>short_name 縮短名稱
+<ul>
+<li>定義 Web 應用程式的縮短名稱。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;short_name&#34;</span><span class="err">:</span> <span class="s2">&#34;縮短名稱&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>name 名稱
+<ul>
+<li>定義 Web 應用程式的名稱。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;名稱&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>name 名稱
+<ul>
+<li>定義 Web 應用程式的名稱。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;名稱&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>description 說明
+<ul>
+<li>提供一段描述來形容這個 Web 應用程式的作用是什麼。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;description&#34;</span><span class="err">:</span> <span class="s2">&#34;說明&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lang 語言
+<ul>
+<li>定義 Web 應用程式的語言。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;lang&#34;</span><span class="err">:</span> <span class="s2">&#34;zh-TW&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>icons 圖示
+<ul>
+<li>應用程式圖示的物件。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"> <span class="s2">&#34;icons&#34;</span><span class="err">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+          <span class="p">}</span>
+          <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>start_url 開始網址
+<ul>
+<li>定義 Web 應用程式的開始位置。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"> <span class="s2">&#34;start_url&#34;</span><span class="err">:</span> <span class="s2">&#34;./index.php&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>service-worker.js</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 當service worker在「安裝階段」時會觸發此事件
+</span><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Installing Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// 當service worker在「激活階段」時會觸發此事件
+</span><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Activating Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>   <span class="c1">// 加上這行是為了確保service worker被正確載入和激活，不加也行
+</span><span class="c1"></span><span class="p">});</span>
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Fetch something ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">));</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">deferredPrompt</span><span class="p">;</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt fired&#39;</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>  <span class="c1">// 取消預設的直接跳出通知設定
+</span><span class="c1"></span>    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span>  <span class="c1">// 將監聽到的install banner事件傳到deferredPrompt變數
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">deferredPrompt</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// 確定我們有「攔截」到chrome所發出的install banner事件
+</span><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">prompt</span><span class="p">();</span>   <span class="c1">// 決定要跳出通知
+</span><span class="c1"></span>
+    <span class="c1">// 根據用戶的選擇進行不同處理，這邊我指印出log結果
+</span><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">userChoice</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span><span class="p">);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span> <span class="o">===</span> <span class="s1">&#39;dismissed&#39;</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User cancelled installation&#39;</span><span class="p">);</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User added to home screen&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// 一旦用戶允許加入後，之後就不會再出現通知
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="使用方式">使用方式</h2>
+<p>先將 manifest.json 上述資料改為自己想要的設定，將manifest.json、service-worker.js 放置網頁根目錄，並開啟想要支援的網頁，以下使用小弟我<a href="https://pin-yi.com" target="_blank" rel="noopener noreffer">個人頁面</a>來做示範。</p>
+<ol>
+<li>先至編輯器內將manifest.json放到head內</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;manifest&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;./manifest.json&#34;</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/pwa/1GveueD.png" title="/images/pwa/1GveueD.png" data-thumbnail="/images/pwa/1GveueD.png" data-sub-html="<h2>範例頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/pwa/1GveueD.png"
+            data-srcset="/images/pwa/1GveueD.png, /images/pwa/1GveueD.png 1.5x, /images/pwa/1GveueD.png 2x"
+            data-sizes="auto"
+            alt="/images/pwa/1GveueD.png" width="700" />
+    </a><figcaption class="image-caption">範例頁面</figcaption>
+    </figure>
+<ol start="2">
+<li>於程式最後新增以下</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span>
+          <span class="p">{</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;./service-worker.js&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Service Worker Registered, Cheers to PWA Fire!&#34;</span><span class="p">);</span> <span class="p">});</span>
+          <span class="p">}</span>
+          <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/pwa/U4gQDWr.png" title="/images/pwa/U4gQDWr.png" data-thumbnail="/images/pwa/U4gQDWr.png" data-sub-html="<h2>範例頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/pwa/U4gQDWr.png"
+            data-srcset="/images/pwa/U4gQDWr.png, /images/pwa/U4gQDWr.png 1.5x, /images/pwa/U4gQDWr.png 2x"
+            data-sizes="auto"
+            alt="/images/pwa/U4gQDWr.png" width="700" />
+    </a><figcaption class="image-caption">範例頁面</figcaption>
+    </figure>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>提醒<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">manifest.json、service-worker.js　依據自己放置位置做更改😀</div>
+        </div>
+    </div>
+<h2 id="如何使用">如何使用</h2>
+<h3 id="ios">IOS</h3>
+<ul>
+<li>手機：Iphone 12 Pro (IOS 14.5)</li>
+<li>瀏覽器：Safari
+<ol>
+<li>先瀏覽範例網站小弟個人頁面。</li>
+<li>點選下方中間分享圖示，選擇加入主畫面，按下新增，就會出現在手機主畫面，打開後，就會發現操作跟APP相同。</li>
+</ol>
+</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/pwa/1CnD18Q.jpg" title="/images/pwa/1CnD18Q.jpg" data-thumbnail="/images/pwa/1CnD18Q.jpg" data-sub-html="<h2>範例頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/pwa/1CnD18Q.jpg"
+            data-srcset="/images/pwa/1CnD18Q.jpg, /images/pwa/1CnD18Q.jpg 1.5x, /images/pwa/1CnD18Q.jpg 2x"
+            data-sizes="auto"
+            alt="/images/pwa/1CnD18Q.jpg" width="700" />
+    </a><figcaption class="image-caption">範例頁面</figcaption>
+    </figure>
+<h3 id="android">ANDROID</h3>
+<ul>
+<li>手機：OnePlus 8T (ANDROID 11)</li>
+<li>瀏覽器：Chrome
+<ol>
+<li>先瀏覽範例網站小弟個人頁面。</li>
+<li>安裝應用程式至手機，經過下載，就會出現在手機主畫面，打開後，就會發現操作跟APP相同。</li>
+</ol>
+</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/pwa/8rSTs1q.png" title="/images/pwa/8rSTs1q.png" data-thumbnail="/images/pwa/8rSTs1q.png" data-sub-html="<h2>範例頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/pwa/8rSTs1q.png"
+            data-srcset="/images/pwa/8rSTs1q.png, /images/pwa/8rSTs1q.png 1.5x, /images/pwa/8rSTs1q.png 2x"
+            data-sizes="auto"
+            alt="/images/pwa/8rSTs1q.png" width="700" />
+    </a><figcaption class="image-caption">範例頁面</figcaption>
+    </figure>
+<br>
+<h2 id="成功畫面">成功畫面</h2>
+<figure><a class="lightgallery" href="/images/pwa/GcboFGA.png" title="/images/pwa/GcboFGA.png" data-thumbnail="/images/pwa/GcboFGA.png" data-sub-html="<h2>範例頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/pwa/GcboFGA.png"
+            data-srcset="/images/pwa/GcboFGA.png, /images/pwa/GcboFGA.png 1.5x, /images/pwa/GcboFGA.png 2x"
+            data-sizes="auto"
+            alt="/images/pwa/GcboFGA.png" width="700" />
+    </a><figcaption class="image-caption">範例頁面</figcaption>
+    </figure>
+<h3 id="其他說明">其他說明</h3>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>以上為備份筆記<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>資料來源:</p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10186584" target="_blank" rel="noopener noreffer">https://ithelp.ithome.com.tw/articles/10186584</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10188514" target="_blank" rel="noopener noreffer">https://ithelp.ithome.com.tw/articles/10188514</a></p>
+</div>
+        </div>
+    </div></div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/pwa/">PWA</a>
+                </span><span><a href="/tags/%E8%A8%AD%E5%AE%9A%E6%95%99%E5%AD%B8/">設定教學</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-02-19</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/pwa/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/pwa/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://880831ian.github.io/pwa/" data-title="PWA(Progressive Web App) 介紹與實際安裝" data-hashtags="PWA,設定教學"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://880831ian.github.io/pwa/" data-hashtag="PWA"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://880831ian.github.io/pwa/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://880831ian.github.io/pwa/" data-title="PWA(Progressive Web App) 介紹與實際安裝"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://880831ian.github.io/pwa/" data-title="PWA(Progressive Web App) 介紹與實際安裝"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://880831ian.github.io/pwa/" data-title="PWA(Progressive Web App) 介紹與實際安裝"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/tcp-udp-difference/" class="prev" rel="prev" title="TCP和UDP的差異"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/lofi-land/" class="next" rel="next" title="【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

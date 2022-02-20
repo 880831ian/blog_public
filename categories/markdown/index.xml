@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Markdown - Category - PinYi</title>
+        <link>https://880831ian.github.io/categories/markdown/</link>
+        <description>Markdown - Category - PinYi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="https://880831ian.github.io/categories/markdown/" rel="self" type="application/rss+xml" /><item>
+    <title>Basic Markdown Syntax</title>
+    <link>https://880831ian.github.io/basic-markdown-syntax/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://880831ian.github.io/basic-markdown-syntax/</guid>
+    <description><![CDATA[<p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>]]></description>
+</item>
+<item>
+    <title>Emoji Support</title>
+    <link>https://880831ian.github.io/emoji-support/</link>
+    <pubDate>Tue, 01 Oct 2019 17:55:28 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://880831ian.github.io/emoji-support/</guid>
+    <description><![CDATA[<p>Emoji can be enabled in a Hugo project in a number of ways.</p>]]></description>
+</item>
+</channel>
+</rss>
