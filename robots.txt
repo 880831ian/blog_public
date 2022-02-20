@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://880831ian.github.io/en/sitemap.xml
+Sitemap: https://pin-yi.me/en/sitemap.xml
