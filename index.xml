@@ -7,6 +7,12 @@
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 20 Feb 2022 11:20:50 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>主題文檔 - 基本概念</title>
+    <link>https://pin-yi.me/theme-documentation-basics/</link>
+    <pubDate>Fri, 06 Mar 2020 21:40:32 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-basics/</guid>
+    <description><![CDATA[<p>探索 Hugo - <strong>FeelIt</strong> 主題的全部內容和背後的核心概念.</p>]]></description>
+</item>
+<item>
     <title>主題文檔 - 內容</title>
     <link>https://pin-yi.me/theme-documentation-content/</link>
     <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-content/</guid>
@@ -62,14 +68,6 @@
     <pubDate>Fri, 14 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/resume/</guid>
     <description><![CDATA[<p>在寫履歷之前，我們先設想一下，你這份履歷是要給誰看的呢? 像是HR、獵頭公司、跨部門同部門的同事嗎?</p>
 <p>所以履歷的呈現方式，以及能不能讓他讀得懂很重要，你要把<strong>自己想成是個面試官，從面試官的角度去想</strong>，你希望看到那些內容</p>]]></description>
-</item>
-<item>
-    <title>面試該怎麼準備?</title>
-    <link>https://pin-yi.me/interview/</link>
-    <pubDate>Fri, 14 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/interview/</guid>
-    <description><![CDATA[<p>自我介紹先放線頭，可以幫助面試官找到話題，以持續後面的面試</p>
-<p>對徵才方的公司需要了解，且知道面試的職缺內容</p>
-<p>不要只在乎自己能夠拿到甚麼，而是要說出自己對於這份工作可以付出多少的價值</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -1,92 +1,95 @@
-# Theme Documentation - Basics
+# 主題文檔 - 基本概念
 
 
-Discover what the Hugo - **FeelIt** theme is all about and the core-concepts behind it.
+探索 Hugo - **FeelIt** 主題的全部內容和背後的核心概念.
 
 <!--more-->
 
-## 1 Requirements
+## 1 準備
 
-Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
+由於 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是這個主題唯一的依賴.
 
-Just install latest version of [:(far fa-file-archive fa-fw): Hugo (> 0.84.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+直接安裝滿足你操作系統 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo (> 0.84.0)](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/) and some of image resources are using webp which was introduced in [0.84.0](https://github.com/gohugoio/hugo/releases/tag/v0.84.0), this theme only supports Hugo versions above **0.84.0**.
+{{< admonition note "為什麽不支持早期版本的 Hugo?" >}}
+由於 [Markdown 渲染鉤子函數](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) 在 [Hugo 聖誕節版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入 一些圖像資源使用的是[0.84.0](https://github.com/gohugoio/hugo/releases/tag/v0.84.0)中引入的webp, 本主題只支持高於 **0.84.0** 的 Hugo 版本.
 {{< /admonition >}}
 
-{{< admonition tip "Hugo extended version is recommended" >}}
-Since some features of this theme need to processes :(fab fa-sass fa-fw): SCSS to :(fab fa-css3 fa-fw): CSS, it is recommended to use Hugo **extended** version for better experience.
+{{< admonition tip "推薦使用 Hugo extended 版本" >}}
+由於這個主題的一些特性需要將 :(fab fa-sass fa-fw): SCSS 轉換為 :(fab fa-css3 fa-fw): CSS, 推薦使用 Hugo **extended** 版本來獲得更好的使用體驗.
 {{< /admonition >}}
 
-## 2 Installation
+## 2 安裝
 
-The following steps are here to help you initialize your new website. If you don’t know Hugo at all, we strongly suggest you learn more about it by following this [great documentation for beginners](https://gohugo.io/getting-started/quick-start/).
+以下步驟可幫助你初始化新網站. 如果你根本不了解 Hugo, 我們強烈建議你按照此 [快速入門文檔](https://gohugo.io/getting-started/quick-start/) 進一步了解它.
 
-### 2.1 Create Your Project
+### 2.1 創建你的項目
 
-Hugo provides a `new` command to create a new website:
+Hugo 提供了一個 `new` 命令來創建一個新的網站:
 
 ```bash
 hugo new site my_website
 cd my_website
 ```
 
-### 2.2 Install the Theme
+### 2.2 安裝主題
 
-The **FeelIt** theme’s repository is: [https://github.com/khusika/FeelIt](https://github.com/khusika/FeelIt).
+**FeelIt** 主題的倉庫是: [https://github.com/khusika/FeelIt](https://github.com/khusika/FeelIt).
 
-You can download the [latest release :(far fa-file-archive fa-fw): .zip file](https://github.com/khusika/FeelIt/releases) of the theme and extract it in the `themes` directory.
+你可以下載主題的 [最新版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/khusika/FeelIt/releases) 並且解壓放到 `themes` 目錄.
 
-Alternatively, clone this repository to the `themes` directory:
+另外, 也可以直接把這個主題克隆到 `themes` 目錄:
 
 ```bash
 git clone https://github.com/khusika/FeelIt.git themes/FeelIt
 ```
 
-Or, create an empty git repository and make this repository a submodule of your site directory:
+或者, 初始化你的項目目錄為 git 倉庫, 並且把主題倉庫作為你的網站目錄的子模塊:
 
 ```bash
 git init
 git submodule add https://github.com/khusika/FeelIt.git themes/FeelIt
 ```
 
-### 2.3 Basic Configuration {#basic-configuration}
+### 2.3 基礎配置 {#basic-configuration}
 
-The following is a basic configuration for the FeelIt theme:
+以下是 FeelIt 主題的基本配置:
 
 ```toml
 baseURL = "http://example.org/"
-# [en, zh-cn, fr, ...] determines default content language
-defaultContentLanguage = "en"
-# language code
-languageCode = "en"
-title = "My New Hugo Site"
+# [en, zh-cn, fr, ...] 設置默認的語言
+defaultContentLanguage = "zh-cn"
+# 網站語言, 僅在這里 CN 大寫
+languageCode = "zh-CN"
+# 是否包括中日韓文字
+hasCJKLanguage = true
+# 網站標題
+title = "我的全新 Hugo 網站"
 
-# Change the default theme to be use when building the site with Hugo
+# 更改使用 Hugo 構建網站時使用的默認主題
 theme = "FeelIt"
 
 [params]
-  # FeelIt theme version
+  # FeelIt 主題版本
   version = "1.0.X"
 
 [menu]
   [[menu.main]]
     identifier = "posts"
-    # you can add extra information before the name (HTML format is supported), such as icons
+    # 你可以在名稱 (允許 HTML 格式) 之前添加其他信息, 例如圖標
     pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
+    # 你可以在名稱 (允許 HTML 格式) 之後添加其他信息, 例如圖標
     post = ""
-    name = "Posts"
+    name = "文章"
     url = "/posts/"
-    # title will be shown when you hover on this menu link
+    # 當你將鼠標懸停在此菜單鏈接上時, 將顯示的標題
     title = ""
     weight = 1
   [[menu.main]]
     identifier = "tags"
     pre = ""
     post = ""
-    name = "Tags"
+    name = "標簽"
     url = "/tags/"
     title = ""
     weight = 2
@@ -94,105 +97,105 @@ theme = "FeelIt"
     identifier = "categories"
     pre = ""
     post = ""
-    name = "Categories"
+    name = "分類"
     url = "/categories/"
     title = ""
     weight = 3
 
-# Markup related configuration in Hugo
+# Hugo 解析文檔的配置
 [markup]
-  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  # 語法高亮設置 (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
-    # false is a necessary configuration (https://github.com/khusika/FeelIt/issues/158)
+    # false 是必要的設置 (https://github.com/khusika/FeelIt/issues/158)
     noClasses = false
 ```
 
 {{< admonition >}}
-When building the website, you can set a theme by using `--theme` option. However, we suggest you modify the configuration file (**config.toml**) and set the theme as the default.
+在構建網站時, 你可以使用 `--theme` 選項設置主題. 但是, 我建議你修改配置文件 (**config.toml**) 將本主題設置為默認主題.
 {{< /admonition >}}
 
-### 2.4 Create Your First Post
+### 2.4 創建你的第一篇文章
 
-Here is the way to create your first post:
+以下是創建第一篇文章的方法:
 
 ```bash
 hugo new posts/first_post.md
 ```
 
-Feel free to edit the post file by adding some sample content and replacing the title value in the beginning of the file.
+通過添加一些示例內容並替換文件開頭的標題, 你可以隨意編輯文章.
 
 {{< admonition >}}
-By default all posts and pages are created as a draft. If you want to render these pages, remove the property `draft: true` from the metadata, set the property `draft: false` or add `-D`/`--buildDrafts` parameter to `hugo` command.
+默認情況下, 所有文章和頁面均作為草稿創建. 如果想要渲染這些頁面, 請從元數據中刪除屬性 `draft: true`, 設置屬性 `draft: false` 或者為 `hugo` 命令添加 `-D`/`--buildDrafts` 參數.
 {{< /admonition >}}
 
-### 2.5 Launching the Website Locally
+### 2.5 在本地啟動網站
 
-Launch by using the following command:
+使用以下命令啟動網站:
 
 ```bash
 hugo serve
 ```
 
-Go to `http://localhost:1313`.
+去查看 `http://localhost:1313`.
 
-![Basic configuration preview](basic-configuration-preview.png "Basic configuration preview")
+![基本配置下的預覽](basic-configuration-preview.zh-cn.png "基本配置下的預覽")
 
 {{< admonition tip >}}
-When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
+當你運行 `hugo serve` 時, 當文件內容更改時, 頁面會隨著更改自動刷新.
 {{< /admonition >}}
 
 {{< admonition >}}
-Since the theme use `.Scratch` in Hugo to implement some features,
-it is highly recommended that you add `--disableFastRender` parameter to `hugo server` command for the live preview of the page you are editing.
+由於本主題使用了 Hugo 中的 `.Scratch` 來實現一些特性,
+非常建議你為 `hugo server` 命令添加 `--disableFastRender` 參數來實時預覽你正在編輯的文章頁面.
 
 ```bash
 hugo serve --disableFastRender
 ```
 {{< /admonition >}}
 
-### 2.6 Build the Website
+### 2.6 構建網站
 
-When your site is ready to deploy, run the following command:
+當你準備好部署你的網站時, 運行以下命令:
 
 ```bash
 hugo
 ```
 
-A `public` folder will be generated, containing all static content and assets for your website. It can now be deployed on any web server.
+會生成一個 `public` 目錄, 其中包含你網站的所有靜態內容和資源. 現在可以將其部署在任何 Web 服務器上.
 
 {{< admonition tip >}}
-The website can be automatically published and hosted with [Netlify](https://www.netlify.com/) (Read more about [Automated HUGO deployments with Netlify](https://www.netlify.com/blog/2015/07/30/hosting-hugo-on-netlifyinsanely-fast-deploys/)).
-Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/), [Github pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), [Render](https://gohugo.io/hosting-and-deployment/hosting-on-render/) and more...
+網站內容可以通過 [Netlify](https://www.netlify.com/) 自動發布和托管 (了解有關[通過 Netlify 進行 HUGO 自動化部署](https://www.netlify.com/blog/2015/07/30/hosting-hugo-on-netlifyinsanely-fast-deploys/) 的更多信息).
+或者, 您可以使用 [AWS Amplify](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/), [Github pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), [Render](https://gohugo.io/hosting-and-deployment/hosting-on-render/) 以及更多...
 {{< /admonition >}}
 
-## 3 Configuration
+## 3 配置
 
-### 3.1 Site Configuration {#site-configuration}
+### 3.1 網站配置 {#site-configuration}
 
-In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **FeelIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
+除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜單配置](#basic-configuration) 之外, **FeelIt** 主題還允許您在網站配置中定義以下參數 (這是一個示例 `config.toml`, 其內容為默認值).
 
-Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
+請打開下面的代碼塊查看完整的示例配置 :(far fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} FeelIt theme version
+  # {{< version 0.2.0 changed >}} FeelIt 主題版本
   version = "1.0.X"
-  # site description
-  description = "This is My New Hugo Site"
-  # site keywords
+  # 網站描述
+  description = "這是我的全新 Hugo 網站"
+  # 網站關鍵詞
   keywords = ["Theme", "Hugo"]
-  # site default theme ("light", "dark", "auto")
+  # 網站默認主題樣式 ("light", "dark", "auto")
   defaultTheme = "auto"
-  # public git repo url only then enableGitInfo is true
+  # 公共 git 倉庫路徑，僅在 enableGitInfo 設為 true 時有效
   gitRepo = ""
-  # {{< version 0.1.1 >}} which hash function used for SRI, when empty, no SRI is used
+  # {{< version 0.1.1 >}} 哪種哈希函數用來 SRI, 為空時表示不使用 SRI
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
-  # {{< version 0.2.0 >}} date format
+  # {{< version 0.2.0 >}} 日期格式
   dateFormat = "2006-01-02"
-  # website images for Open Graph and Twitter Cards
+  # 網站圖片, 用於 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
-  # {{< version 1.0.0 >}} whether to enable CSS and JS source mapping
+  # {{< version 1.0.0 >}} 是否啟用 CSS 和 JS 源映射
   SourceMap = true
 
   # {{< version 1.0.1 >}}PWA config
@@ -202,126 +205,127 @@ Please open the code block below to view the complete sample configuration :(far
     # service-worker version
     version = "1.0.1"
 
-  # {{< version 0.2.0 >}} App icon config
+  # {{< version 0.2.0 >}} 應用圖標配置
   [params.app]
-    # optional site title override for the app when added to an iOS home screen or Android launcher
+    # 當添加到 iOS 主屏幕或者 Android 啟動器時的標題, 覆蓋默認標題
     title = "FeelIt"
-    # whether to omit favicon resource links
+    # 是否隱藏網站圖標資源鏈接
     noFavicon = false
-    # modern SVG favicon to use in place of older style .png and .ico files
+    # 更現代的 SVG 網站圖標, 可替代舊的 .png 和 .ico 文件
     svgFavicon = ""
-    # Android browser theme color
+    # Android 瀏覽器主題色
     themeColor = "#ffffff"
-    # Safari mask icon color
+    # Safari 圖標顏色
     iconColor = "#5bbad5"
-    # Windows v8-10 tile color
+    # Windows v8-10磁貼顏色
     tileColor = "#da532c"
 
-  # {{< version 0.2.0 >}} Search config
+  # {{< version 0.2.0 >}} 搜索配置
   [params.search]
     enable = true
-    # type of search engine ("lunr", "algolia")
+    # 搜索引擎的類型 ("lunr", "algolia")
     type = "lunr"
-    # max index length of the chunked content
+    # 文章內容最長索引長度
     contentLength = 4000
-    # placeholder of the search bar
+    # 搜索框的占位提示語
     placeholder = ""
-    # {{< version 0.2.1 >}} max number of results length
+    # {{< version 0.2.1 >}} 最大結果數目
     maxResultLength = 10
-    # {{< version 0.2.3 >}} snippet length of the result
-    snippetLength = 30
-    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+    # {{< version 0.2.3 >}} 結果內容片段長度
+    snippetLength = 50
+    # {{< version 0.2.1 >}} 搜索結果中高亮部分的 HTML 標簽
     highlightTag = "em"
-    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+    # {{< version 0.2.4 >}} 是否在搜索索引中使用基於 baseURL 的絕對路徑
     absoluteURL = false
     [params.search.algolia]
       index = ""
       appID = ""
       searchKey = ""
 
-  # Header config
+  # 頁面頭部導航欄配置
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
+    # 桌面端導航欄模式 ("fixed", "normal", "auto")
     desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
+    # 移動端導航欄模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
-    # {{< version 0.2.0 >}} Header title config
+    # {{< version 0.2.0 >}} 頁面頭部導航欄標題配置
     [params.header.title]
-      # URL of the LOGO
+      # LOGO 的 URL
       logo = ""
-      # title name
+      # 標題名稱
       name = ""
-      # you can add extra information before the name (HTML format is supported), such as icons
+      # 你可以在名稱 (允許 HTML 格式) 之前添加其他信息, 例如圖標
       pre = ""
-      # you can add extra information after the name (HTML format is supported), such as icons
+      # 你可以在名稱 (允許 HTML 格式) 之後添加其他信息, 例如圖標
       post = ""
-      # {{< version 0.2.5 >}} whether to use typeit animation for title name
+      # {{< version 0.2.5 >}} 是否為標題顯示打字機動畫
       typeit = false
-      # {{< version 1.0.0 >}} whether to show RSS icon
+      # {{< version 1.0.0 >}} 是否顯示RSS圖標
       rss = true
 
-  # Footer config
+  # 頁面底部信息配置
   [params.footer]
     enable = true
-    # {{< version 0.2.0 >}} Custom content (HTML format is supported)
+    # {{< version 0.2.0 >}} 自定義內容 (支持 HTML 格式)
     custom = ''
-    # {{< version 0.2.0 >}} whether to show Hugo and theme info
+    # {{< version 0.2.0 >}} 是否顯示 Hugo 和主題信息
     hugo = true
-    # {{< version 0.2.0 >}} whether to show copyright info
+    # {{< version 0.2.0 >}} 是否顯示版權信息
     copyright = true
-    # {{< version 0.2.0 >}} whether to show the author
+    # {{< version 0.2.0 >}} 是否顯示作者
     author = true
-    # Site creation time
+    # 網站創立年份
     since = 2019
-    # ICP info only in China (HTML format is supported)
+    # ICP 備案信息，僅在中國使用 (支持 HTML 格式)
     icp = ""
-    # license info (HTML format is supported)
+    # 許可協議信息 (支持 HTML 格式)
     license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
-  # {{< version 0.2.0 >}} Section (all posts) page config
+  # {{< version 0.2.0 >}} Section (所有文章) 頁面配置
   [params.section]
-    # special amount of posts in each section page
+    # section 頁面每頁顯示文章數量
     paginate = 20
-    # date format (month and day)
+    # 日期格式 (月和日)
     dateFormat = "01-02"
-    # amount of RSS pages
+    # RSS 文章數目
     rss = 10
 
-  # {{< version 0.2.0 >}} List (category or tag) page config
+  # {{< version 0.2.0 >}} List (目錄或標簽) 頁面配置
   [params.list]
-    # special amount of posts in each list page
+    # list 頁面每頁顯示文章數量
     paginate = 20
-    # date format (month and day)
+    # 日期格式 (月和日)
     dateFormat = "01-02"
-    # amount of RSS pages
+    # RSS 文章數目
     rss = 10
 
   # {{< version 1.0.2 >}}
+  # 關於頁面配置
   [params.about]
-    # whether to enable profile on about page
-    # depends on .Site.Params.home.profile.enable
+    # 是否啟用關於頁面的配置文件
+    # 依賴於取決於 .Site.Params.home.profile.enable
     enable = true
-    # whether to enable param layout
+    # 是否啟用參數布局
     param = true
-    # title for param layout
-    paramTitle = "Personal Information"
-    # general description of your site
-    # can be write with markdown style
-    description = "[FeelIt](https://github.com/khusika/FeelIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Khusika](https://khusika.com). It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt), and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt)."
-    # description of your status
+    # 參數布局的標題
+    paramTitle = "個人信息"
+    # 您網站的一般描述
+    # 可以用markdown樣式寫
+    description = "[FeelIt](https://github.com/khusika/FeelIt) 是一個由 [Khusika](https://khusika.com) 開發的**簡潔**、**優雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主題。 它的原型基於 [LoveIt 主題](https://github.com/dillonzq/LoveIt), [LeaveIt 主題](https://github.com/liuzc/LeaveIt), 和 [KeepIt 主題](https://github.com/Fastbyte01/KeepIt)。"
+    # 你的狀態描述
     [[params.about.status]]
       faIcon = "fas fa-building"
-      title = "Company"
+      title = "公司"
       desc = "FeelIt"
     [[params.about.status]]
       faIcon = "fas fa-briefcase fa-fw"
-      title = "Occupation"
-      desc = "Freelancer"
+      title = "職業"
+      desc = "自由職業者"
     [[params.about.status]]
-      title = "Location"
+      title = "地點"
       faIcon = "fas fa-map-marker-alt"
-      desc = "Earth"
-    # description of your parameter
+      desc = "地球"
+    # 參數說明
     [[params.about.parameter]]
       language = "UI/UX"
       level = "80"
@@ -332,36 +336,36 @@ Please open the code block below to view the complete sample configuration :(far
       language = "Go"
       level = "60"
 
-  # Home page config
+  # 主頁配置
   [params.home]
-    # {{< version 0.2.0 >}} amount of RSS pages
+    # {{< version 0.2.0 >}} RSS 文章數目
     rss = 10
-    # Home page profile
+    # 主頁個人信息
     [params.home.profile]
       enable = true
-      # Gravatar Email for preferred avatar in home page
+      # Gravatar 郵箱，用於優先在主頁顯示的頭像
       gravatarEmail = ""
-      # URL of avatar shown in home page
+      # 主頁顯示頭像的 URL
       avatarURL = "/images/avatar.png"
-      # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
+      # {{< version 0.2.7 changed >}} 主頁顯示的網站標題 (支持 HTML 格式)
       title = ""
-      # subtitle shown in home page
-      subtitle = "This is My New Hugo Site"
-      # whether to use typeit animation for subtitle
+      # 主頁顯示的網站副標題
+      subtitle = "這是我的全新 Hugo 網站"
+      # 是否為副標題顯示打字機動畫
       typeit = true
-      # whether to show social links
+      # 是否顯示社交賬號
       social = true
-      # {{< version 0.2.0 >}} disclaimer (HTML format is supported)
+      # {{< version 0.2.0 >}} 免責聲明 (支持 HTML 格式)
       disclaimer = ""
-    # Home page posts
+    # 主頁文章列表
     [params.home.posts]
       enable = true
-      # special amount of posts in each home posts page
+      # 主頁每頁顯示文章數量
       paginate = 6
       # {{< version 1.0.1 changed >}} display image-preview
       imagePreview = true
-      # {{< version 0.2.0 deleted >}} replaced with hiddenFromHomePage in params.page
-      # default behavior when you don't set "hiddenFromHomePage" in front matter
+      # {{< version 0.2.0 deleted >}} 被 params.page 中的 hiddenFromHomePage 替代
+      # 當你沒有在文章前置參數中設置 "hiddenFromHomePage" 時的默認行為
       defaultHiddenFromHomePage = false
 
   # {{< version 1.0.1 changed >}} oEmbed config
@@ -374,7 +378,7 @@ Please open the code block below to view the complete sample configuration :(far
     [params.oembed.twitter]
       enableDNT = false
 
-  # Social config about the author
+  # 作者的社交信息設置
   [params.social]
     GitHub = "xxxx"
     Linkedin = ""
@@ -443,74 +447,74 @@ Please open the code block below to view the complete sample configuration :(far
     xda = "" {{< version 1.0.2 >}}
     RSS = true # {{< version 0.2.0 >}}
 
-  # {{< version 0.2.0 changed >}} Page config
+  # {{< version 0.2.0 changed >}} 文章頁面配置
   [params.page]
-    # {{< version 0.2.0 >}} whether to hide a page from home page
+    # {{< version 0.2.0 >}} 是否在主頁隱藏一篇文章
     hiddenFromHomePage = false
-    # {{< version 0.2.0 >}} whether to hide a page from search results
+    # {{< version 0.2.0 >}} 是否在搜索結果中隱藏一篇文章
     hiddenFromSearch = false
-    # {{< version 0.2.0 >}} whether to enable twemoji
+    # {{< version 0.2.0 >}} 是否使用 twemoji
     twemoji = false
-    # whether to enable lightgallery
+    # 是否使用 lightgallery
     lightgallery = false
-    # {{< version 0.2.0 >}} whether to enable the ruby extended syntax
+    # {{< version 0.2.0 >}} 是否使用 ruby 擴展語法
     ruby = true
-    # {{< version 0.2.0 >}} whether to enable the fraction extended syntax
+    # {{< version 0.2.0 >}} 是否使用 fraction 擴展語法
     fraction = true
-    # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
+    # {{< version 0.2.0 >}} 是否使用 fontawesome 擴展語法
     fontawesome = true
-    # {{< version 1.0.0 >}} whether to use the fontawesome as cdn source
+    # {{< version 1.0.0 >}} 是否使用 fontawesome 作為CDN源
     cdnfontawesome = true
-    # whether to show link to Raw Markdown content of the content
+    # 是否在文章頁面顯示原始 Markdown 文檔鏈接
     linkToMarkdown = true
-    # {{< version 1.0.0 >}} whether to show link to improve the article
+    # {{< version 1.0.0 >}} 是否顯示鏈接以改善文章
     improveArticle = ""
-    # {{< version 0.2.4 >}} whether to show the full text content in RSS
+    # {{< version 0.2.4 >}} 是否在 RSS 中顯示全文內容
     rssFullText = false
-    # {{< version 0.2.0 >}} Table of the contents config
+    # {{< version 0.2.0 >}} 目錄配置
     [params.page.toc]
-      # whether to enable the table of the contents
+      # 是否使用目錄
       enable = true
-      # {{< version 0.2.9 >}} whether to keep the static table of the contents in front of the post
+      # {{< version 0.2.9 >}} 是否保持使用文章前面的靜態目錄
       keepStatic = true
-      # whether to make the table of the contents in the sidebar automatically collapsed
+      # 是否使側邊目錄自動折疊展開
       auto = true
-    # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
+    # {{< version 0.2.0 >}} 代碼配置
+    [params.page.code]
+      # 是否顯示代碼塊的覆制按鈕
+      copy = true
+      # 默認展開顯示的代碼行數
+      maxShownLines = 10
+    # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 數學公式
     [params.page.math]
       enable = true
-      # default block delimiter is $$ ... $$ and \\[ ... \\]
+      # 默認塊定界符是 $$ ... $$ 和 \\[ ... \\]
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
-      # default inline delimiter is $ ... $ and \\( ... \\)
+      # 默認行內定界符是 $ ... $ 和 \\( ... \\)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
-      # KaTeX extension copy_tex
+      # KaTeX 插件 copy_tex
       copyTex = true
-      # KaTeX extension mhchem
+      # KaTeX 插件 mhchem
       mhchem = true
-    # {{< version 0.2.0 >}} Code config
-    [params.page.code]
-      # whether to show the copy button of the code block
-      copy = true
-      # the maximum number of lines of displayed code by default
-      maxShownLines = 10
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} 配置
     [params.page.mapbox]
-      # access token of Mapbox GL JS
+      # Mapbox GL JS 的 access token
       accessToken = ""
-      # style for the light theme
+      # 淺色主題的地圖樣式
       lightStyle = "mapbox://styles/mapbox/light-v9"
-      # style for the dark theme
+      # 深色主題的地圖樣式
       darkStyle = "mapbox://styles/mapbox/dark-v9"
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
       geolocate = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol" ScaleControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol" ScaleControl >}}
       scale = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
-    # {{< version 0.2.0 changed >}} social share links in post page
+    # {{< version 0.2.0 changed >}} 文章頁面的分享信息設置
     [params.page.share]
       enable = true
       Twitter = true
@@ -540,26 +544,26 @@ Please open the code block below to view the complete sample configuration :(far
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 1.0.0 changed >}} Comment config
+    # {{< version 1.0.0 changed >}} 評論系統設置
     [params.page.comment]
       enable = true
-      # {{< link "https://disqus.com/" Disqus >}} comment config
+      # {{< link "https://disqus.com/" Disqus >}} 評論系統設置
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
         enable = false
-        # Disqus shortname to use Disqus in posts
+        # Disqus 的 shortname，用來在文章中啟用 Disqus 評論系統
         shortname = ""
-      # Vssue comment config (https://github.com/meteorlxy/vssue)
+      # Vssue 評論系統設置 (https://github.com/meteorlxy/vssue)
       [params.page.comment.vssue]
         # {{< version 1.0.0 >}}
         enable = false
-        # Vssue platform API ("bitbucket", "gitea", "gitee", "github", "github-v4", "gitlab")
+        # Vssue 平台 API ("bitbucket", "gitea", "gitee", "github", "github-v4", "gitlab")
         platform = ""
         owner = ""
         repo = ""
         clientId = ""
         clientSecret = ""
-      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config
+      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 評論系統設置
       [params.page.comment.gitalk]
         # {{< version 0.1.1 >}}
         enable = false
@@ -567,7 +571,7 @@ Please open the code block below to view the complete sample configuration :(far
         repo = ""
         clientId = ""
         clientSecret = ""
-      # {{< link "https://github.com/xCss/Valine" Valine >}} comment config
+      # {{< link "https://github.com/xCss/Valine" Valine >}} 評論系統設置
       [params.page.comment.valine]
         enable = false
         appId = ""
@@ -582,20 +586,20 @@ Please open the code block below to view the complete sample configuration :(far
         highlight = true
         enableQQ = false
         serverURLs = ""
-        # {{< version 0.2.6 >}} emoji data file name, default is "google.yml"
+        # {{< version 0.2.6 >}} emoji 數據文件名稱, 默認是 "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # located in "themes/FeelIt/assets/data/emoji/" directory
-        # you can store your own data files in the same path under your project:
+        # 位於 "themes/FeelIt/assets/data/emoji/" 目錄
+        # 可以在你的項目下相同路徑存放你自己的數據文件:
         # "assets/data/emoji/"
         emoji = ""
-      # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
+      # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 評論系統" >}}設置
       [params.page.comment.facebook]
         enable = false
         width = "100%"
         numPosts = 10
         appId = ""
-        languageCode = ""
-      # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config
+        languageCode = "zh_CN"
+      # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} 評論系統設置
       [params.page.comment.telegram]
         enable = false
         siteID = ""
@@ -605,10 +609,10 @@ Please open the code block below to view the complete sample configuration :(far
         colorful = true
         dislikes = false
         outlined = false
-      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
+      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 評論系統設置
       [params.page.comment.commento]
         enable = false
-      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} comment config
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} 評論系統設置
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -617,39 +621,39 @@ Please open the code block below to view the complete sample configuration :(far
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
-    # {{< version 0.2.7 >}} Third-party library config
+    # {{< version 0.2.7 >}} 第三方庫配置
     [params.page.library]
       [params.page.library.css]
         # someCSS = "some.css"
-        # located in "assets/"
-        # Or
+        # 位於 "assets/"
+        # 或者
         # someCSS = "https://cdn.example.com/some.css"
       [params.page.library.js]
         # someJavascript = "some.js"
-        # located in "assets/"
-        # Or
+        # 位於 "assets/"
+        # 或者
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.10 changed >}} Page SEO config
+    # {{< version 0.2.10 changed >}} 頁面 SEO 配置
     [params.page.seo]
-      # image URL
+      # 圖片 URL
       images = []
-      # Publisher info
+      # 出版者信息
       [params.page.seo.publisher]
         name = ""
         logoUrl = ""
 
-  # {{< version 0.2.5 >}} TypeIt config
+  # {{< version 0.2.5 >}} TypeIt 配置
   [params.typeit]
-    # typing speed between each step (measured in milliseconds)
+    # 每一步的打字速度 (單位是毫秒)
     speed = 100
-    # blinking speed of the cursor (measured in milliseconds)
+    # 光標的閃爍速度 (單位是毫秒)
     cursorSpeed = 1000
-    # character used for the cursor (HTML format is supported)
+    # 光標的字符 (支持 HTML 格式)
     cursorChar = "|"
-    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    # 打字結束之後光標的持續時間 (單位是毫秒, "-1" 代表無限大)
     duration = -1
 
-  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu
+  # 網站驗證代碼，用於 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
     google = ""
     bing = ""
@@ -657,66 +661,68 @@ Please open the code block below to view the complete sample configuration :(far
     pinterest = ""
     baidu = ""
 
-  # {{< version 0.2.10 >}} Site SEO config
+  # {{< version 0.2.10 >}} 網站 SEO 配置
   [params.seo]
-    # image URL
+    # 圖片 URL
     image = ""
-    # thumbnail URL
+    # 縮略圖 URL
     thumbnailUrl = ""
 
-  # {{< version 1.0.1 changed >}} Analytics config
+  # {{< version 1.0.1 changed >}} 網站分析配置
   [params.analytics]
     enable = false
-    # {{< version 1.0.0 deleted >}} privacy of the Google Analytics (replaced by privacy.googleAnalytics)
+    # {{< version 1.0.0 deleted >}} Google Analytics 相關隱私 (被 privacy.googleAnalytics 替代)
     [params.analytics.google]
-      # ...
+      id = ""
+      # 是否匿名化用戶 IP
+      anonymizeIP = true
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
-      # server url for your tracker if you're self hosting
+      # 自行托管追蹤器時的主機路徑
       server = ""
     # {{< version 1.0.1 >}} GoatCounter Analytics
     [params.analytics.goatcounter]
       # GoatCounter code
       code = ""
 
-  # {{< version 0.2.7 >}} Cookie consent config
+  # {{< version 0.2.7 >}} Cookie 許可配置
   [params.cookieconsent]
     enable = true
-    # text strings used for Cookie consent banner
+    # 用於 Cookie 許可橫幅的文本字符串
     [params.cookieconsent.content]
       message = ""
       dismiss = ""
       link = ""
 
-  # {{< version 0.2.7 changed >}} CDN config for third-party library files
+  # {{< version 0.2.7 changed >}} 第三方庫文件的 CDN 設置
   [params.cdn]
-    # CDN data file name, disabled by default
+    # CDN 數據文件名稱, 默認不啟用
     # ("jsdelivr.yml")
-    # located in "themes/FeelIt/assets/data/cdn/" directory
-    # you can store your own data files in the same path under your project:
+    # 位於 "themes/FeelIt/assets/data/cdn/" 目錄
+    # 可以在你的項目下相同路徑存放你自己的數據文件:
     # "assets/data/cdn/"
     data = ""
 
-  # {{< version 0.2.8 >}} Compatibility config
+  # {{< version 0.2.8 >}} 兼容性設置
   [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
+    # 是否使用 Polyfill.io 來兼容舊式瀏覽器
     polyfill = false
-    # whether to use object-fit-images to be compatible with older browsers
+    # 是否使用 object-fit-images 來兼容舊式瀏覽器
     objectFit = false
 
-# Markup related config in Hugo
+# Hugo 解析文檔的配置
 [markup]
-  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
+  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "語法高亮設置" >}}
   [markup.highlight]
     codeFences = true
     guessSyntax = true
     lineNos = true
     lineNumbersInTable = true
-    # false is a necessary configuration
+    # false 是必要的設置
     # ({{< link "https://github.com/khusika/FeelIt/issues/158" >}})
     noClasses = false
-  # Goldmark is from Hugo 0.60 the default library used for Markdown
+  # Goldmark 是 Hugo 0.60 以來的默認 Markdown 解析庫
   [markup.goldmark]
     [markup.goldmark.extensions]
       definitionList = true
@@ -727,39 +733,39 @@ Please open the code block below to view the complete sample configuration :(far
       taskList = true
       typographer = true
     [markup.goldmark.renderer]
-      # whether to use HTML tags directly in the document
+      # 是否在文檔中直接使用 HTML 標簽
       unsafe = true
-  # Table Of Contents settings
+  # 目錄設置
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
 
-# Author config
+# 作者配置
 [author]
   name = "xxxx"
   email = ""
   link = ""
 
-# Sitemap config
+# 網站地圖配置
 [sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}}
+# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks 配置" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
+# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "隱私信息配置" >}}
 [privacy]
-  # {{< version 0.2.0 changed >}} privacy of the Google Analytics
+  # {{< version 0.2.0 changed >}} Google Analytics 相關隱私
   [privacy.googleAnalytics]
     anonymizeIP = false
     disable = false
     respectDoNotTrack = false
     useSessionStorage = false
-  # {{< version 1.0.0 deleted >}} privacy of the Intagram (replaced by params.oembed.instagram)
+  # {{< version 1.0.0 deleted >}} Intagram 的隱私（由 params.oembed.instagram 代替）
   [privacy.instagram]
     # ...
   [privacy.twitter]
@@ -767,18 +773,18 @@ Please open the code block below to view the complete sample configuration :(far
   [privacy.youtube]
     privacyEnhanced = true
 
-# Options to make output .md files
+# 用於輸出 Markdown 格式文檔的設置
 [mediaTypes]
   [mediaTypes."text/plain"]
     suffixes = ["md"]
 
-# Options to make output .md files
+# 用於輸出 Markdown 格式文檔的設置
 [outputFormats.MarkDown]
   mediaType = "text/plain"
   isPlainText = true
   isHTML = false
 
-# Options to make hugo output files
+# 用於 Hugo 輸出文檔的設置
 [outputs]
   # {{< version 0.2.0 changed >}}
   home = ["HTML", "RSS", "JSON"]
@@ -789,68 +795,69 @@ Please open the code block below to view the complete sample configuration :(far
 ```
 
 {{< admonition >}}
-Note that some of these parameters are explained in details in other sections of this documentation.
+請注意, 本文檔其他部分將詳細解釋其中一些參數.
 {{< /admonition >}}
 
-{{< admonition note "Hugo environments" >}}
-Default environments are `development` with `hugo serve` and `production` with `hugo`.
+{{< admonition note "Hugo 的運行環境" >}}
+`hugo serve` 的默認運行環境是 `development`,
+而 `hugo` 的默認運行環境是 `production`.
 
-Due to limitations in the local `development` environment,
-the **comment system**, **CDN**, **fingerprint** and **PWA** will not be enabled in the `development` environment.
+由於本地 `development` 環境的限制,
+**評論系統**, **CDN**, **fingerprint** 和 **PWA** 不會在 `development` 環境下啟用.
 
-You could enable these features with `hugo serve -e production`.
+你可以使用 `hugo serve -e production` 命令來開啟這些特性.
 {{< /admonition >}}
 
-{{< admonition tip "Tips about CDN Configuration" >}}
+{{< admonition tip "關於 CDN 配置的技巧" >}}
 {{< version 0.2.7 changed >}}
 
 ```toml
 [params.cdn]
-  # CDN data file name, disabled by default
+  # CDN 數據文件名稱, 默認不啟用
   # ("jsdelivr.yml")
   data = ""
 ````
 
-The default CDN data file is located in `themes/FeelIt/assets/data/cdn/` directory.
-You can store your own data file in the same path under your project: `assets/data/cdn/`.
+默認的 CDN 數據文件位於 `themes/FeelIt/assets/data/cdn/` 目錄.
+可以在你的項目下相同路徑存放你自己的數據文件: `assets/data/cdn/`.
 {{< /admonition >}}
 
-{{< admonition tip "Tips about social Configuration" >}}
+{{< admonition tip "關於社交鏈接配置的技巧" >}}
 {{< version 0.2.0 >}}
 
-You can directly set your ID to get a default social link and its icon:
+你可以直接配置你的社交 ID 來生成一個默認社交鏈接和圖標:
 
 ```toml
 [params.social]
   Mastodon = "@xxxx"
 ```
 
-The social link generated is `https://mastodon.technology/@xxxx`.
+生成的社交鏈接是 `https://mastodon.technology/@xxxx`.
 
-Or You can set more options through a dict:
+或者你可以通過一個字典來設置更多的選項:
 
 ```toml
 [params.social]
   [params.social.Mastodon]
-    # weight when arranging icons (the greater the weight, the later the icon is positioned)
+    # 排列圖標時的權重 (權重越大, 圖標的位置越靠後)
     weight = 0
-    # your social ID
+    # 你的社交 ID
     id = "@xxxx"
-    # prefix of your social link
+    # 你的社交鏈接的前綴
     prefix = "https://mastodon.social/"
-    # content hovering on the icon
+    # 當鼠標停留在圖標上時的提示內容
     title = "Mastodon"
 ```
 
-The default data of all supported social links is located in `themes/FeelIt/assets/data/social.yaml`,
-which is you can refer to.
+所有支持的社交鏈接的默認數據位於 `themes/FeelIt/assets/data/social.yaml`.
+你可以參考它來配置你的社交鏈接.
 {{< /admonition >}}
 
-![Complete configuration preview](complete-configuration-preview.png "Complete configuration preview")
+![完整配置下的預覽](complete-configuration-preview.zh-cn.png "完整配置下的預覽")
 
-### 3.2 Favicons, Browserconfig, Manifest
+### 3.2 網站圖標, 瀏覽器配置, 網站清單
 
-It is recommended to put your own favicons:
+強烈建議你把:
 
 * apple-touch-icon.png (180x180)
 * favicon-32x32.png (32x32)
@@ -859,71 +866,69 @@ It is recommended to put your own favicons:
 * android-chrome-192x192.png (192x192)
 * android-chrome-512x512.png (512x512)
 
-into `/static`. They’re easily created via [https://realfavicongenerator.net/](https://realfavicongenerator.net/).
+放在 `/static` 目錄. 利用 [https://realfavicongenerator.net/](https://realfavicongenerator.net/) 可以很容易地生成這些文件.
 
-Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
+可以自定義 `browserconfig.xml` 和 `site.webmanifest` 文件來設置 theme-color 和 background-color.
 
-### 3.3 Style Customization
+### 3.3 自定義樣式
 
 {{< version 0.2.8 changed >}}
 
 {{< admonition >}}
-Hugo **extended** version is necessary for the style customization.
+Hugo **extended** 版本對於自定義樣式是必需的.
 {{< /admonition >}}
 
-**FeelIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
+通過定義自定義 `.scss` 樣式文件, **FeelIt** 主題支持可配置的樣式.
 
-The directory including the custom `.scss` style files is `assets/css` relative to **your project root directory**.
+包含自定義 `.scss` 樣式文件的目錄相對於 **你的項目根目錄** 的路徑為 `assets/css`.
 
-In `assets/css/_override.scss`, you can override the variables in `themes/FeelIt/assets/css/_variables.scss` to customize the style.
+在 `assets/css/_override.scss` 中, 你可以覆蓋 `themes/FeelIt/assets/css/_variables.scss` 中的變量以自定義樣式.
 
-Here is a example:
+這是一個例子:
 
 ```scss
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
 ```
 
-In `assets/css/_custom.scss`, you can add some css style code to customize the style.
+在 `assets/css/_custom.scss` 中, 你可以添加一些 CSS 樣式代碼以自定義樣式.
 
-## 4 Multilingual and i18n
+## 4 多語言和 i18n
 
-**FeelIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
+**FeelIt** 主題完全兼容 Hugo 的多語言模式, 並且支持在網頁上切換語言.
 
-![Language Switch](language-switch.gif "Language Switch")
+![語言切換](language-switch.gif "語言切換")
 
-### 4.1 Compatibility {#language-compatibility}
+### 4.1 兼容性 {#language-compatibility}
 
 {{< version 1.0.1 changed >}}
 
-| Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
-|:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
-| German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| Spanish              | `es`      | `es`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| French               | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Indonesian           | `id`      | `id`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Simplified Chinese   | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| Hungarian            | `hu`      | `hu`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Czech                | `cs`      | `cs`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Persian              | `fa`      | `fa`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| 語言 | Hugo 代碼 | HTML `lang` 屬性 | 主題文檔 | Lunr.js 支持 |
+|:---- |:----:|:----:|:----:|:----:|
+| 德語 | `de` | `de` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 英語 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 西班牙語 | `es` | `es` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 法語 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 印度尼西亞 | `id` | `id` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 意大利語 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 波蘭語 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 巴西葡萄牙語 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 羅馬尼亞語 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 俄語 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 塞爾維亞語 | `sr` | `sr` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 越南語 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 簡體中文 | `zh-cn` | `zh-CN` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 波斯語 | `fa` | `fa` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 
-### 4.2 Basic Configuration
+### 4.2 基本配置
 
-After learning [how Hugo handle multilingual websites](https://gohugo.io/content-management/multilingual), define your languages in your [site configuration](#site-configuration).
+學習了 [Hugo如何處理多語言網站](https://gohugo.io/content-management/multilingual) 之後, 請在 [站點配置](#site-configuration) 中定義你的網站語言.
 
-For example with English, Chinese and French website:
+例如, 一個支持英語, 中文和法語的網站配置:
 
 ```toml
-# [en, zh-cn, fr, pl, ...] determines default content language
-defaultContentLanguage = "en"
+# [en, zh-cn, fr, pl, ...] 設置默認的語言
+defaultContentLanguage = "zh-cn"
 
 [languages]
   [languages.en]
@@ -958,11 +963,11 @@ defaultContentLanguage = "en"
 
   [languages.zh-cn]
     weight = 2
-    title = "我的全新 Hugo 网站"
-    # language code, CN only here
+    title = "我的全新 Hugo 網站"
+    # 網站語言, 僅在這里 CN 大寫
     languageCode = "zh-CN"
-    languageName = "简体中文"
-    # whether to include Chinese/Japanese/Korean
+    languageName = "簡體中文"
+    # 是否包括中日韓文字
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
       identifier = "posts"
@@ -976,7 +981,7 @@ defaultContentLanguage = "en"
       identifier = "tags"
       pre = ""
       post = ""
-      name = "标签"
+      name = "標簽"
       url = "/tags/"
       title = ""
       weight = 2
@@ -984,7 +989,7 @@ defaultContentLanguage = "en"
       identifier = "categories"
       pre = ""
       post = ""
-      name = "分类"
+      name = "分類"
       url = "/categories/"
       title = ""
       weight = 3
@@ -1012,75 +1017,76 @@ defaultContentLanguage = "en"
       weight = 2
     [[languages.fr.menu.main]]
       identifier = "categories"
-      name = "Catégories"
       pre = ""
       post = ""
+      name = "Catégories"
       url = "/categories/"
       title = ""
       weight = 3
 ```
 
-Then, for each new page, append the language code to the file name.
+然後, 對於每個新頁面, 將語言代碼附加到文件名中.
 
-Single file `my-page.md` is split in three files:
+單個文件 `my-page.md` 需要分為三個文件:
 
-* in English: `my-page.en.md`
-* in Chinese: `my-page.zh-cn.md`
-* in French: `my-page.fr.md`
+* 英語: `my-page.en.md`
+* 中文: `my-page.zh-cn.md`
+* 法語: `my-page.fr.md`
 
 {{< admonition >}}
-Be aware that only translated pages are displayed in menu. It’s not replaced with default language content.
+請注意, 菜單中僅顯示翻譯的頁面. 它不會替換為默認語言內容.
 {{< /admonition >}}
 
 {{< admonition tip >}}
-Use [Front Matter parameter](https://gohugo.io/content-management/multilingual#translate-your-content) to translate urls too.
+也可以使用 [文章前置參數](https://gohugo.io/content-management/multilingual#translate-your-content) 來翻譯網址.
 {{< /admonition >}}
 
-### 4.3 Overwrite Translation Strings
+### 4.3 修改默認的翻譯字符串
 
-Translations strings are used for common default values used in the theme. Translations are available in [some languages](#language-compatibility), but you may use another language or want to override default values.
+翻譯字符串用於在主題中使用的常見默認值.
+目前提供[一些語言](#language-compatibility)的翻譯, 但你可能自定義其他語言或覆蓋默認值.
 
-To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/FeelIt/i18n/en.toml`.
+要覆蓋默認值, 請在你項目的 i18n 目錄 `i18n/<languageCode>.toml` 中創建一個新文件，並從 `themes/FeelIt/i18n/en.toml` 中獲得提示.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/khusika/FeelIt/pulls) to the theme!
+另外, 由於你的翻譯可能會幫助到其他人, 請花點時間通過 [:(fas fa-code-branch fa-fw): 創建一個 PR](https://github.com/khusika/FeelIt/pulls) 來貢獻主題翻譯, 謝謝!
 
-## 5 Search
+## 5 搜索
 
 {{< version 0.2.0 >}}
 
-Based on [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/), searching is supported in **FeelIt** theme.
+基於 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **FeelIt** 主題支持搜索功能.
 
-### 5.1 Output Configuration
+### 5.1 輸出配置
 
-In order to generate `index.json` for searching, add `JSON` output file type to the `home` of the `outputs` part in your [site configuration](#site-configuration).
+為了生成搜索功能所需要的 `index.json`, 請在你的 [網站配置](#site-configuration) 中添加 `JSON` 輸出文件類型到 `outputs` 部分的 `home` 字段中.
 
 ```toml
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 ```
 
-### 5.2 Search Configuration
+### 5.2 搜索配置
 
-Based on `index.json` generated by Hugo, you could activate searching.
+基於 Hugo 生成的 `index.json` 文件, 你可以激活搜索功能.
 
-Here is the search configuration in your [site configuration](#site-configuration):
+這是你的 [網站配置](#site-configuration) 中的搜索部分:
 
 ```toml
 [params.search]
   enable = true
-  # type of search engine ("lunr", "algolia")
+  # 搜索引擎的類型 ("lunr", "algolia")
   type = "lunr"
-  # max index length of the chunked content
+  # 文章內容最長索引長度
   contentLength = 4000
-  # placeholder of the search bar
+  # 搜索框的占位提示語
   placeholder = ""
-  # {{< version 0.2.1 >}} max number of results length
+  # {{< version 0.2.1 >}} 最大結果數目
   maxResultLength = 10
-  # {{< version 0.2.3 >}} snippet length of the result
-  snippetLength = 30
-  # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+  # {{< version 0.2.3 >}} 結果內容片段長度
+  snippetLength = 50
+  # {{< version 0.2.1 >}} 搜索結果中高亮部分的 HTML 標簽
   highlightTag = "em"
-  # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+  # {{< version 0.2.4 >}} 是否在搜索索引中使用基於 baseURL 的絕對路徑
   absoluteURL = false
   [params.search.algolia]
     index = ""
@@ -1088,22 +1094,19 @@ Here is the search configuration in your [site configuration](#site-configuratio
     searchKey = ""
 ```
 
-{{< admonition note "How to choose search engine?" >}}
-The following is a comparison of two search engines:
+{{< admonition note "怎樣選擇搜索引擎?" >}}
+以下是兩種搜索引擎的對比:
 
-* `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
-  but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
-* `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
+* `lunr`: 簡單, 無需同步 `index.json`, 沒有 `contentLength` 的限制, 但占用帶寬大且性能低 (特別是中文需要一個較大的分詞依賴庫)
+* `algolia`: 高性能並且占用帶寬低, 但需要同步 `index.json` 且有 `contentLength` 的限制
 
-{{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
-`contentLength` is used to limit the max index length of the part starting with `h2` and `h3` HTML tag.
+{{< version 0.2.3 >}} 文章內容被 `h2` 和 `h3` HTML 標簽切分來提高查詢效果並且基本實現全文搜索.
+`contentLength` 用來限制 `h2` 和 `h3` HTML 標簽開頭的內容部分的最大長度.
 {{< /admonition >}}
 
-{{< admonition tip "Tips about algolia" >}}
-You need to upload `index.json` files to algolia to activate searching.
-You could upload the `index.json` files by browsers but a CLI tool may be better.
-[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) is a good choice.
-To be compatible with Hugo multilingual mode,
-you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
+{{< admonition tip "關於 algolia 的使用技巧" >}}
+你需要上傳 `index.json` 到 algolia 來激活搜索功能. 你可以使用瀏覽器來上傳 `index.json` 文件但是一個自動化的腳本可能效果更好.
+[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) 是一個不錯的選擇.
+為了兼容 Hugo 的多語言模式, 你需要上傳不同語言的 `index.json` 文件到對應的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}
 

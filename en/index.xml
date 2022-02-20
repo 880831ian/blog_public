@@ -13,6 +13,12 @@
     <description><![CDATA[<p>Hualien LongStay started from Ji’an Township, and the month-long life with my family in Hualien officially started!</p>]]></description>
 </item>
 <item>
+    <title>Theme Documentation - Basics</title>
+    <link>https://pin-yi.me/en/theme-documentation-basics/</link>
+    <pubDate>Fri, 06 Mar 2020 21:29:01 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/en/theme-documentation-basics/</guid>
+    <description><![CDATA[<p>Discover what the Hugo - <strong>FeelIt</strong> theme is all about and the core-concepts behind it.</p>]]></description>
+</item>
+<item>
     <title>Theme Documentation - Content</title>
     <link>https://pin-yi.me/en/theme-documentation-content/</link>
     <pubDate>Thu, 05 Mar 2020 15:58:26 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/en/theme-documentation-content/</guid>
@@ -61,14 +67,6 @@ Let&rsquo;s slowly analyze two different network communication protocols, what&r
     <link>https://pin-yi.me/en/hualien-part2/</link>
     <pubDate>Sun, 16 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/en/hualien-part2/</guid>
     <description><![CDATA[<p>Our vision is to look straight ahead, why not try to see the beauty of Hualien coast from God&rsquo;s perspective.</p>]]></description>
-</item>
-<item>
-    <title>How to prepare for an interview?</title>
-    <link>https://pin-yi.me/en/interview/</link>
-    <pubDate>Fri, 14 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/en/interview/</guid>
-    <description><![CDATA[<p>Self-introduction first, can help the interviewer find the topic to continue the subsequent interview</p>
-<p>Need to know about the company that recruits talents, and know the content of the vacancies in the interview</p>
-<p>Don&rsquo;t just care about what you can get, but say how much value you can give to the job</p>]]></description>
 </item>
 </channel>
 </rss>

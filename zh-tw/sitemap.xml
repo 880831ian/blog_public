@@ -2,6 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://pin-yi.me/theme-documentation-basics/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://pin-yi.me/en/theme-documentation-basics/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://pin-yi.me/theme-documentation-basics/"
+                    /></url><url>
             <loc>https://pin-yi.me/theme-documentation-content/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -56,7 +65,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/surround-island/"
                     /></url><url>
-            <loc>https://pin-yi.me/hualien-part3/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/hualien-part3/</loc><lastmod>2022-01-19T12:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/hualien-part3/"
@@ -65,7 +74,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/hualien-part3/"
                     /></url><url>
-            <loc>https://pin-yi.me/hualien-part2/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/hualien-part2/</loc><lastmod>2022-01-16T12:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/hualien-part2/"
@@ -101,7 +110,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/asp.net-core/"
                     /></url><url>
-            <loc>https://pin-yi.me/hualien-part1/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/hualien-part1/</loc><lastmod>2021-08-16T12:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/hualien-part1/"
@@ -119,7 +128,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/painting/"
                     /></url><url>
-            <loc>https://pin-yi.me/giant-hand/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/giant-hand/</loc><lastmod>2021-02-05T16:34:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/giant-hand/"
@@ -281,7 +290,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/%E7%92%B0%E5%B3%B6/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/longstay/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/longstay/</loc><lastmod>2022-01-19T12:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/longstay/"
@@ -426,7 +435,15 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/categories/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/installation/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/installation/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://pin-yi.me/en/tags/installation/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://pin-yi.me/tags/installation/"
+                    /></url><url>
             <loc>https://pin-yi.me/posts/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -472,4 +489,12 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/categories/network/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/configuration/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url></urlset>
+            <loc>https://pin-yi.me/tags/configuration/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://pin-yi.me/en/tags/configuration/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://pin-yi.me/tags/configuration/"
+                    /></url></urlset>
