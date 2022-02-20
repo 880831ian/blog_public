@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ASP.NET Core介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtube的小天地"><meta property="og:title" content="ASP.NET Core介紹" />
+<meta property="og:description" content=".Net Core 是微軟新世代開發技術，不但實施了.NET跨平台開發與執行，同時也將框架大改造。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/asp.net-core/" /><meta property="og:image" content="https://pin-yi.me/asp.net-core/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-03T19:34:11+08:00" />
+<meta property="article:modified_time" content="2022-02-20T19:06:45+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/asp.net-core/featured-image.webp"/>
+<meta name="twitter:title" content="ASP.NET Core介紹"/>
+<meta name="twitter:description" content=".Net Core 是微軟新世代開發技術，不但實施了.NET跨平台開發與執行，同時也將框架大改造。"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/asp.net-core/" /><link rel="prev" href="https://pin-yi.me/hualien-part1/" /><link rel="next" href="https://pin-yi.me/interview/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ASP.NET Core介紹",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/asp.net-core\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/asp.net-core\/featured-image.webp",
+                            "width":  770 ,
+                            "height":  237 
+                        }],"genre": "posts","keywords": "ASP.NET Core, 介紹","wordcount":  1045 ,
+        "url": "https:\/\/pin-yi.me\/asp.net-core\/","datePublished": "2022-01-03T19:34:11+08:00","dateModified": "2022-02-20T19:06:45+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/en/asp.net-core/">English</option><option value="/asp.net-core/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/en/asp.net-core/">English</option><option value="/asp.net-core/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/asp.net-core/featured-image.webp"
+        data-srcset="/asp.net-core/featured-image.webp, /asp.net-core/featured-image.webp 1.5x, /asp.net-core/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/asp.net-core/featured-image.webp"
+        title="/asp.net-core/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">ASP.NET Core介紹</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-03">2022-01-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1045 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介紹">介紹</a></li>
+    <li><a href="#比較net-core--aspnet-code--aspnet-core-mvc">比較.NET Core / ASP.NET Code / ASP.NET Core MVC</a></li>
+    <li><a href="#mvc">MVC</a></li>
+    <li><a href="#aspnet-core-mvc">ASP.NET Core MVC?</a></li>
+    <li><a href="#mvc-執行流程">MVC 執行流程</a></li>
+    <li><a href="#mvc-專案資料夾功能說明">MVC 專案資料夾功能說明</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>.Net Core 是微軟新世代開發技術，不但實施了.NET跨平台開發與執行，同時也將框架大改造。</p>
+<h2 id="介紹">介紹</h2>
+<p>.Net Core 是微軟新世代開發技術，不但實施了.NET跨平台開發與執行，同時也將框架大改造。</p>
+<ul>
+<li>優勢
+<ul>
+<li>跨平台 (可運行於Windows、Mac OSX、Ubuntu Liunx ) 是第一款Microsoft有跨平台能力的Ｗeb 開發框架，並支援雲端。</li>
+<li>跨架構一致性（在x64、x86、ARM、ARM64不同處理器架構執行，仍然保持相同）</li>
+<li>彈性部署（主機可用IIS、Apache、Docker）。</li>
+<li>一種用於MVC和Web API的統一編程模型。</li>
+<li>開放原始碼（使用MIS和Apache2授權的開放原始碼）。</li>
+<li>單元測試（可測試性），並可模組化。</li>
+</ul>
+</li>
+</ul>
+<h2 id="比較net-core--aspnet-code--aspnet-core-mvc">比較.NET Core / ASP.NET Code / ASP.NET Core MVC</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">比較</th>
+<th style="text-align:center">.NET Core</th>
+<th style="text-align:center">ASP.NET Code</th>
+<th style="text-align:center">ASP.NET Core MVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">代表</td>
+<td style="text-align:center">.NET Framework</td>
+<td style="text-align:center">ASP.NET</td>
+<td style="text-align:center">ASP.NET MVC</td>
+</tr>
+<tr>
+<td style="text-align:center">說明</td>
+<td style="text-align:center">平台框架，最廣泛的技術意義</td>
+<td style="text-align:center">網頁技術</td>
+<td style="text-align:center">ASP.NET Core 網頁技術中的MVC開發框架</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mvc">MVC</h2>
+<p>是一種設計的樣式，代表Model、View、Controller 三個部分</p>
+<ul>
+<li>Model 負責處理邏輯及資料面 (資料庫存取)</li>
+<li>View負責處理UI介面（HTML、Javescript、CSS）</li>
+<li>Controller負責接收Request請求、協調Model、View、將回應結果給使用者</li>
+</ul>
+<p>該分工好處是可以達到關注點分離（SoC）、較好的分層架構、降低複雜度，往後方便對程式進行維護。</p>
+<h2 id="aspnet-core-mvc">ASP.NET Core MVC?</h2>
+<p>是支援MVC設計的框架。</p>
+<h2 id="mvc-執行流程">MVC 執行流程</h2>
+<ol>
+<li>使用者在瀏覽器輸入URL網址後，會發出Request 請求至伺服器</li>
+<li>中間會先經過Routing路由機制，找到對應的Controller及Action Method</li>
+<li>Action 會呼叫Model，以讀取或是更新資料</li>
+<li>Model會先進行邏輯計算及資料庫存取，再回傳給Action</li>
+<li>Action會將Model資料丟給View作網頁呈現</li>
+<li>View Engine 將最終HTML 結果寫入Reponse 輸出資料流，回應給使用者瀏覽器。</li>
+</ol>
+<h2 id="mvc-專案資料夾功能說明">MVC 專案資料夾功能說明</h2>
+<ul>
+<li>Properties&gt;launchSettings.json
+(本機開發電腦的環境組態檔)</li>
+<li>wwwroot 資料夾 (公開的靜態資源檔目錄，如css、js、images等等)</li>
+<li>Controller 資料夾 (Controller 控制項類別所在目錄)</li>
+<li>Model 資料夾 (Model 模型類別所在目錄)</li>
+<li>View 資料夾 (有Home、Shared、_ViewImports.cshtml、_ViewStart.cshtml)
+Home 目錄內有Index、Provacy兩個cshtml
+Shared 目錄內有_Layout.cshtml、_ValidationScriptsPartial.cshtml、Error.cshtml</li>
+<li>appsettings.json (供應用程式使用的組態設定)</li>
+<li>Program.cs (程式進入點，主要負責創建Host、環境及組態設定)</li>
+<li>Startup.cs (負責DI Container及Middleware 元件設定)</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/asp.net-core/">ASP.NET Core</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-02-20&nbsp;<a class="git-hash" href="https://github.com/khusika/FeelIt/commit/06e664a5cc04e2c6e96c272cfaa60a30ed2de145" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;06e664a:&nbsp;Initial commit">
+                            <i class="fas fa-hashtag fa-fw"></i>06e664a</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/asp.net-core/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/asp.net-core/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/asp.net-core/" data-title="ASP.NET Core介紹" data-hashtags="ASP.NET Core,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/asp.net-core/" data-hashtag="ASP.NET Core"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/asp.net-core/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/asp.net-core/" data-title="ASP.NET Core介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/asp.net-core/" data-title="ASP.NET Core介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/asp.net-core/" data-title="ASP.NET Core介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/hualien-part1/" class="prev" rel="prev" title="花蓮吉安鄉在地旅遊 【Part 1】 花蓮要怎麼玩？玩一個月帶你認識你不知道的花蓮"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/interview/" class="next" rel="next" title="面試該怎麼準備?">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

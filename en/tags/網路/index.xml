@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>網路 - Tag - PinYi</title>
+        <link>https://pin-yi.me/en/tags/%E7%B6%B2%E8%B7%AF/</link>
+        <description>網路 - Tag - PinYi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 18 Feb 2022 19:34:11 &#43;0800</lastBuildDate><atom:link href="https://pin-yi.me/en/tags/%E7%B6%B2%E8%B7%AF/" rel="self" type="application/rss+xml" /><item>
+    <title>Differences between TCP and UDP</title>
+    <link>https://pin-yi.me/en/tcp-udp-difference/</link>
+    <pubDate>Fri, 18 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/en/tcp-udp-difference/</guid>
+    <description><![CDATA[<p>Both TCP and UDP are common network communication protocols. These two protocols can ensure the speed and integrity of Internet data transmission. They operate in different ways. TCP is more reliable and UDP is faster.
+Let&rsquo;s slowly analyze two different network communication protocols, what&rsquo;s so special!?</p>]]></description>
+</item>
+</channel>
+</rss>
