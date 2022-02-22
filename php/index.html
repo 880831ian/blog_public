@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PHP 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtube的小天地"><meta property="og:title" content="PHP 介紹" />
+<meta property="og:description" content="介紹 PHP" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/php/" /><meta property="og:image" content="https://pin-yi.me/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-22T22:00:22+08:00" />
+<meta property="article:modified_time" content="2022-02-22T22:00:22+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/logo.png"/>
+
+<meta name="twitter:title" content="PHP 介紹"/>
+<meta name="twitter:description" content="介紹 PHP"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/php/" /><link rel="prev" href="https://pin-yi.me/lofi-land/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PHP 介紹",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/php\/"
+        },"image": ["https:\/\/pin-yi.me\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "PHP, 介紹","wordcount":  5062 ,
+        "url": "https:\/\/pin-yi.me\/php\/","datePublished": "2022-02-22T22:00:22+08:00","dateModified": "2022-02-22T22:00:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/php/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/php/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">PHP 介紹</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-22">2022-02-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5062 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-php-是什麼">1. PHP 是什麼</a></li>
+    <li><a href="#2-php-基本語法">2. PHP 基本語法</a>
+      <ul>
+        <li><a href="#標籤">標籤</a></li>
+        <li><a href="#註解">註解</a></li>
+        <li><a href="#變數">變數</a></li>
+        <li><a href="#變數作用區9">變數作用區9</a>
+          <ul>
+            <li><a href="#local">local</a></li>
+            <li><a href="#整數-integer">整數 (Integer)</a></li>
+            <li><a href="#浮點數-float">浮點數 (Float)</a></li>
+            <li><a href="#布林-boolean">布林 (Boolean)</a></li>
+            <li><a href="#陣列-array">陣列 (Array)</a></li>
+            <li><a href="#物件-object">物件 (Object)</a></li>
+            <li><a href="#空值-null">空值 (NULL)</a></li>
+          </ul>
+        </li>
+        <li><a href="#運算符號">運算符號</a></li>
+        <li><a href="#條件判斷">條件判斷</a>
+          <ul>
+            <li><a href="#if">if</a></li>
+            <li><a href="#if-else">if-else</a></li>
+            <li><a href="#if-elseif-else">if-elseif-else</a></li>
+            <li><a href="#switch">switch</a></li>
+          </ul>
+        </li>
+        <li><a href="#迴圈">迴圈</a>
+          <ul>
+            <li><a href="#while">while</a></li>
+            <li><a href="#dowhile">do&hellip;while</a></li>
+            <li><a href="#for">for</a></li>
+            <li><a href="#foreach">foreach</a></li>
+            <li><a href="#break">break</a></li>
+            <li><a href="#continue">continue</a></li>
+          </ul>
+        </li>
+        <li><a href="#函式">函式</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-php-進階語法">3. PHP 進階語法</a>
+      <ul>
+        <li><a href="#日期和時間">日期和時間</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-php-表單">4. PHP 表單</a>
+      <ul>
+        <li><a href="#get">GET</a></li>
+        <li><a href="#post">POST</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-php-常用函式">5. PHP 常用函式</a></li>
+    <li><a href="#6-php-restful">6. PHP RESTful</a></li>
+    <li><a href="#7-php-進階語法">7. PHP 進階語法</a></li>
+    <li><a href="#8-資料來源">8. 資料來源</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>介紹 PHP</p>
+<h2 id="1-php-是什麼">1. PHP 是什麼</h2>
+<p>PHP 全名是(PHP:Hypertext Preprocessor)，是後端的腳本語言</p>
+<p>根據W3Techs的報告，截至2021年9月，有78.9%網站都是使用PHP，像是著名的 FaceBook、Tesla、Slack、WordPress</p>
+<p><a href="https://stackshare.io/php" target="_blank" rel="noopener noreffer">stackshare</a> 是分享開發工具的網站，可以看到不少公司也是使用PHP來進行開發的</p>
+<p>其優點是</p>
+<ul>
+<li>是開源、免費的</li>
+<li>是跨平台的開發語言，Linux、Windows、macOS也可以使用</li>
+<li>能開發：動態網站、爬蟲程式、WordPress 外掛佈景主題</li>
+<li>也可以結合多種的資料庫，例如：Mysql、Mariadb、Oracle</li>
+</ul>
+<p>過去使用 PHP 開發網頁程式，就是有什麼寫什麼，程式邏輯和網頁顯示混在一起，雖然開發方便但會造成高維護成本，和難以擴充功能</p>
+<ul>
+<li>物件導向程式設計</li>
+<li>函數式編程</li>
+<li>事件驅動程式開發</li>
+</ul>
+<p>PHP 有各式各樣的 Web Framework：</p>
+<ul>
+<li>Laravel - 最受歡迎的PHP Web Framewrok</li>
+<li>Codelgniter - 最新版的Codelgniter4 只有 1.4 MB，小而強</li>
+</ul>
+<h2 id="2-php-基本語法">2. PHP 基本語法</h2>
+<h3 id="標籤">標籤</h3>
+<p>PHP 程式可以放置在檔案中的任何位置，其檔案副檔名是&quot;<code>.php</code>&quot;，</p>
+<ul>
+<li>PHP的標籤是開頭 <?php 以及 ?> 結尾</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="p">[</span> <span class="nx">程式碼</span> <span class="p">]</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>PHP 不分大小寫，例如 if、else、while、echo，函數等，但<strong>變數有區分大小寫</strong></li>
+</ul>
+<p>(圖1)</p>
+<h3 id="註解">註解</h3>
+<p>PHP 程式中可以使用註解功能，註解後該段程式不會被執行</p>
+<ul>
+<li>PHP 單行註解</li>
+</ul>
+<p>(圖2)</p>
+<ul>
+<li>PHP 多行註解</li>
+</ul>
+<p>(圖3)</p>
+<h3 id="變數">變數</h3>
+<p>PHP 程式中可以使用變數功能，變數是儲存訊息的容器，變數以&quot; <code>$</code> &ldquo;符號開頭，後面是變數名稱</p>
+<p>PHP 變數規則</p>
+<ul>
+<li>變數名必須以字母或是下底線開頭，不可以<strong>用數字開頭</strong></li>
+<li>變數名只包含字母數字或是下底線(A-z、0-9、_)</li>
+<li>變數名區分大小寫 ($age 跟 $AGE 是兩個不同的變數)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="nv">$color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">;</span>
+<span class="nv">$items</span> <span class="o">=</span> <span class="s1">&#39;Toy&#39;</span><span class="p">;</span>
+<span class="nv">$num1</span> <span class="o">=</span> <span class="s1">&#39;13&#39;</span><span class="p">;</span>
+<span class="nv">$num2</span> <span class="o">=</span> <span class="s1">&#39;18&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&#34;I have &#34;</span> <span class="o">.</span><span class="nv">$num1</span><span class="o">+</span><span class="nv">$num2</span> <span class="o">.</span><span class="s2">&#34; &#34;</span><span class="o">.</span> <span class="nv">$color</span> <span class="o">.</span><span class="s2">&#34; &#34;</span><span class="o">.</span> <span class="nv">$items</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖4)</p>
+<h3 id="變數作用區9">變數作用區9</h3>
+<p>PHP 變數有不同的作用區(local、global、static)</p>
+<h4 id="local">local</h4>
+<p>函式中的變數具有local scope，只能用於該函式中使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">	<span class="o">&lt;?</span><span class="nx">php</span>
+	<span class="k">function</span> <span class="nf">myTest</span><span class="p">()</span> <span class="p">{</span>
+	  <span class="nv">$x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// local scope
+</span><span class="c1"></span>	  <span class="k">echo</span> <span class="s2">&#34;&lt;p&gt;Variable x inside function is: </span><span class="si">$x</span><span class="s2">&lt;/p&gt;&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="nx">myTest</span><span class="p">();</span>
+	
+	<span class="c1">// using x outside the function will generate an error
+</span><span class="c1"></span>	<span class="k">echo</span> <span class="s2">&#34;&lt;p&gt;Variable x outside function is: </span><span class="si">$x</span><span class="s2">&lt;/p&gt;&#34;</span><span class="p">;</span>
+	<span class="cp">?&gt;</span><span class="err">
+</span><span class="err">	```
+</span><span class="err">	
+</span><span class="err">(圖5)
+</span><span class="err">
+</span><span class="err">#### global
+</span><span class="err">
+</span><span class="err">函式外部的變數具有global scope，只能用於該函式外部使用
+</span><span class="err">	
+</span><span class="err">	```php
+</span><span class="err">	&lt;?php
+</span><span class="err">	$x = 5; // global scope
+</span><span class="err">	
+</span><span class="err">	function myTest() {
+</span><span class="err">	  // using x inside this function will generate an error
+</span><span class="err">	  echo &#34;&lt;p&gt;Variable x inside function is: $x&lt;/p&gt;&#34;;
+</span><span class="err">	}
+</span><span class="err">	myTest();
+</span><span class="err">	
+</span><span class="err">	echo &#34;&lt;p&gt;Variable x outside function is: $x&lt;/p&gt;&#34;;
+</span><span class="err">	?&gt;
+</span><span class="err">	```
+</span><span class="err">	
+</span><span class="err">	(圖6)
+</span><span class="err">	
+</span><span class="err">想要在函式中，用外部的變數，就在函式內用global 來定義變數
+</span><span class="err">	
+</span><span class="err">	```php
+</span><span class="err">	&lt;?php
+</span><span class="err">	$x = 5;
+</span><span class="err">	$y = 10;
+</span><span class="err">	
+</span><span class="err">	function myTest() {
+</span><span class="err">	  global $x, $y;
+</span><span class="err">	  $y = $x + $y;
+</span><span class="err">	}
+</span><span class="err">	
+</span><span class="err">	myTest();
+</span><span class="err">	echo $y; // outputs 15
+</span><span class="err">	?&gt;
+</span><span class="err">	```
+</span><span class="err">
+</span><span class="err">	(圖7)
+</span><span class="err">
+</span><span class="err">#### static
+</span><span class="err">
+</span><span class="err">正常函式執行完，變數值都會被刪除，想要保留值可以加 static
+</span><span class="err">	
+</span><span class="err">	```php
+</span><span class="err">	&lt;?php
+</span><span class="err">	function myTest() {
+</span><span class="err">	  static $x = 0;
+</span><span class="err">	  echo $x;
+</span><span class="err">	  $x++;
+</span><span class="err">	}
+</span><span class="err">	
+</span><span class="err">	myTest();
+</span><span class="err">	myTest();
+</span><span class="err">	myTest();
+</span><span class="err">	?&gt;
+</span><span class="err">	```
+</span><span class="err">	
+</span><span class="err">	(圖8)
+</span><span class="err">
+</span><span class="err">### 顯示
+</span><span class="err">
+</span><span class="err">PHP 程式中可以用 echo 以及 print 來顯示資訊 
+</span><span class="err">
+</span><span class="err">* PHP echo / print 顯示
+</span><span class="err">
+</span><span class="err">	```php
+</span><span class="err">	&lt;?php
+</span><span class="err">	$txt1 = &#34;學習PHP&#34;;
+</span><span class="err">	$txt2 = &#34;Ian_Zhuang&#34;;
+</span><span class="err">	$x = 5;
+</span><span class="err">	$y = 4;
+</span><span class="err">	
+</span><span class="err">	echo &#34;&lt;h2&gt;&#34; . $txt1 . &#34;&lt;/h2&gt;&#34;;
+</span><span class="err">	echo $txt2 . &#34; 在 &#34; . $txt1 . &#34;&lt;br&gt;&#34;;
+</span><span class="err">	echo $x + $y;
+</span><span class="err">	
+</span><span class="err">	print &#34;&lt;h2&gt;&#34; . $txt1 . &#34;&lt;/h2&gt;&#34;;
+</span><span class="err">	print $txt2 . &#34; 在 &#34; . $txt1 . &#34;&lt;br&gt;&#34;;
+</span><span class="err">	print $x + $y;
+</span><span class="err">	?&gt;
+</span><span class="err">	```
+</span><span class="err">	(圖9)
+</span><span class="err">
+</span><span class="err">### 資料型態
+</span><span class="err">
+</span><span class="err">變數可以儲存不同型態的資料，以下是 PHP 支持的資料型態 
+</span><span class="err">
+</span><span class="err">! 可以用var_dump() 函數
+</span><span class="err">來查看資料的x態以及值
+</span><span class="err">
+</span><span class="err">* 字串 (String)
+</span><span class="err">* 整數 (Integer)
+</span><span class="err">* 浮點數 (Float)
+</span><span class="err">* 布林 (Boolean)
+</span><span class="err">* 陣列 (Array)
+</span><span class="err">* 物件 (Object)
+</span><span class="err">* 空值 (NULL)
+</span><span class="err">
+</span><span class="err">#### 字串 (String)
+</span><span class="err">字串可以是引號內的任何文本，可以使用單引號或雙引號來表示
+</span><span class="err">
+</span><span class="err">```php
+</span><span class="err">&lt;?php
+</span><span class="err">$x = &#34;Hello world!&#34;;
+</span><span class="err">$y = &#39;Hello world!&#39;;
+</span><span class="err">
+</span><span class="err">echo $x;
+</span><span class="err">echo &#34;&lt;br&gt;&#34;;
+</span><span class="err">echo $y;
+</span><span class="err">?&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖10)</p>
+<h4 id="整數-integer">整數 (Integer)</h4>
+<p>整數有幾點規則：</p>
+<ol>
+<li>必須至少有一個數字</li>
+<li>不能有小數點</li>
+<li>可以是正數也可以是負數</li>
+<li>可以指定不同的進制表示法</li>
+<li>其範圍介於 -2,147,483,648 和 2,147,483,647 之間的非十進制數</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">5985</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖11)</p>
+<h4 id="浮點數-float">浮點數 (Float)</h4>
+<p>浮點數是帶小數點的數字或指數形式的數字</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mf">10.365</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖12)</p>
+<h4 id="布林-boolean">布林 (Boolean)</h4>
+<p>布爾值表示兩種可能的狀態：TRUE 或 FALSE</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="nv">$y</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖13)</p>
+<h4 id="陣列-array">陣列 (Array)</h4>
+<p>陣列可以將多個值存在一個變數中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mf">10.365</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖14)</p>
+<h4 id="物件-object">物件 (Object)</h4>
+<p>在討論物件前，要先知道類別(Class)與物件(Object)的關係</p>
+<ul>
+<li>類別 (Class) ：可以比喻為房屋的設計藍圖，是為了讓大家了解房屋的結構與形狀。</li>
+<li>物件 (Object) ：可以比喻為真的房屋，物件是類別的實體化</li>
+</ul>
+<p>為了要蓋好一棟房子有房子的設計藍圖(類別)還不夠，還需要蓋房子的材料，而材料就是所謂的資料(data)。</p>
+<p>類別定義結構和行為用來產生物件，當多個物件是由同一
+個類別產生出來時，每個物件都是一個獨立個體。</p>
+<ol>
+<li>建立類別語法很簡單，只需要使用 Class 來定義一個類別</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="c1">// 在大括號裡面宣告類別的屬性與方法
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">;</span> <span class="c1">//使用 new 來實體化類別並將他存入變數中
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$obj</span><span class="p">);</span> <span class="c1">//查看類別內容
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖15)</p>
+<ol start="2">
+<li>我們在替 MyClass 加入屬性，用 public 決定屬性的可視性</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$prop</span> <span class="o">=</span> <span class="s2">&#34;I&#39;m a class Property&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">prop</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖16)</p>
+<p>因為有很多物件實例化都來自同一個類別，如果沒有指定被實體化的物件，程式碼會無法判斷，所以要用 <strong>-&gt;</strong> 在 PHP 的物件中，來存取物件的屬性和方法。</p>
+<ol start="3">
+<li>定義類別(Class)的方法(Methods)，方法(Methods)是類別裡面的函式(Functions)，物件可以藉由執行這些方法來更動每個物件的行為。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$prop</span> <span class="o">=</span> <span class="s2">&#34;I&#39;m a class Property!&#34;</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">set</span><span class="p">(</span><span class="nv">$newval</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prop</span> <span class="o">=</span> <span class="nv">$newval</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prop</span> <span class="o">.</span> <span class="s2">&#34;&lt;br /&gt;&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>                             <span class="c1">//得到屬性的值。
+</span><span class="c1"></span>
+<span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s2">&#34;I&#39;m a new Property value!&#34;</span><span class="p">);</span>       <span class="c1">//設定新的屬性的值。
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖17)</p>
+<p>物件導向允許物件透過$this來參考自己。物件使用$this就如同直接使用物件名稱來指定物件，同等於MyClass-&gt;prop1。</p>
+<h4 id="空值-null">空值 (NULL)</h4>
+<p>Null 是一種特殊的數據類型，它只能有一個值：NULL</p>
+<p>如果創建的變量沒有值，則會自動為其分配 NULL</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="s2">&#34;Hello world!&#34;</span><span class="p">;</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>(圖18)</p>
+<h3 id="運算符號">運算符號</h3>
+<p>PHP 將運算符號分為以下幾組</p>
+<ul>
+<li>算術運算符</li>
+<li>賦值運算符</li>
+<li>比較運算符</li>
+<li>邏輯運算符</li>
+<li>字符串運算符</li>
+</ul>
+<p>####算術運算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$x</span> <span class="o">+</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">// 輸出 x + y ，3 + 6 ，顯示 9
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$x</span> <span class="o">-</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">// 輸出 x - y ，3 - 6 ，顯示 -3
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$x</span> <span class="o">*</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">// 輸出 x * y ，3 * 6 ，顯示 18
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$x</span> <span class="o">/</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">// 輸出 x / y ，3 / 6 ，顯示 0.5
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$x</span> <span class="o">%</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">// 輸出 x % y ，3 % 6 ，顯示 3
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$x</span> <span class="o">**</span> <span class="nv">$y</span><span class="p">;</span> <span class="c1">// 輸出 x ^ y ，3 ^ 6 ，顯示 729
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>####賦值運算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="k">echo</span> <span class="nv">$x</span> <span class="o">+=</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">//輸出 x = x + y ， 9 = 3 + 6 ，輸出 9
+</span><span class="c1"></span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="k">echo</span> <span class="nv">$x</span> <span class="o">-=</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">//輸出 x = x - y ， -3 = 3 - 6 ，輸出 -3
+</span><span class="c1"></span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="k">echo</span> <span class="nv">$x</span> <span class="o">*=</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">//輸出 x = x * y ， 18 = 3 * 6 ，輸出 18
+</span><span class="c1"></span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="k">echo</span> <span class="nv">$x</span> <span class="o">/=</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">//輸出 x = x / y ， 0.5 = 3 / 6 ，輸出 0.5
+</span><span class="c1"></span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="k">echo</span> <span class="nv">$x</span> <span class="o">%=</span> <span class="nv">$y</span><span class="p">;</span>  <span class="c1">//輸出 x = x % y ， 3 = 3 % 6 ，輸出 3
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>####比較運算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="nv">$z</span> <span class="o">=</span> <span class="s2">&#34;6&#34;</span><span class="p">;</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="nv">$y</span><span class="p">);</span>  <span class="c1">// 判斷 x 等於 y (值)，3 不等於6 ，回傳 false
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">===</span> <span class="nv">$z</span><span class="p">);</span> <span class="c1">// 判斷 x 等於 z (型態)，數字不等於字串 ，回傳 false
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">!=</span> <span class="nv">$y</span><span class="p">);</span>  <span class="c1">// 判斷 x 不等於 y (值)，3不等於6 ，回傳 true
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;&gt;</span> <span class="nv">$y</span><span class="p">);</span>  <span class="c1">// 判斷 x 不等於 y (型態)，數字不等於字串 ，回傳 true
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&gt;</span> <span class="nv">$y</span><span class="p">);</span>   <span class="c1">// 判斷 x 大於 y ，3沒有大於6 ，回傳 false
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;</span> <span class="nv">$y</span><span class="p">);</span>   <span class="c1">// 判斷 x 小於 y ，3小於6 ，回傳 true
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&gt;=</span> <span class="nv">$y</span><span class="p">);</span>  <span class="c1">// 判斷 x 大於等於 y ，3沒有大於等於6 ，回傳 false
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;=</span> <span class="nv">$y</span><span class="p">);</span>  <span class="c1">// 判斷 x 小於等於 y ，3小於等於6 ，回傳 true
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;=&gt;</span> <span class="nv">$y</span><span class="p">);</span> <span class="c1">// 判斷 x y 的關係 ，如果 x 大於 y ，回傳 1 ; 如果 x 小於 y ，就回傳 0 ; 如果 x 等於 y ，就回傳+1
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>####邏輯運算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">and</span> <span class="nv">$y</span> <span class="o">==</span> <span class="mi">6</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;And&#34;</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// 判斷 x 等於 3 且 y 等於 6 (兩者都要true)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">or</span> <span class="nv">$y</span> <span class="k">or</span> <span class="mi">9</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;Or&#34;</span><span class="p">;</span> <span class="p">}</span>    <span class="c1">// 判斷 x 等於 3 或 y 等於 9 (擇一true)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="nv">$y</span> <span class="o">==</span> <span class="mi">6</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;And&#34;</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// 判斷 x 等於 3 且 y 等於 6 (兩者都要true)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">||</span> <span class="nv">$y</span> <span class="o">==</span> <span class="mi">9</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;Or&#34;</span><span class="p">;</span> <span class="p">}</span>    <span class="c1">// 判斷 x 等於 3 或 y 等於 9 (擇一true)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">xor</span> <span class="nv">$y</span> <span class="o">==</span> <span class="mi">9</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;Xor&#34;</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// 判斷 x 等於 3 或 y 等於 9 (任一者為true，但只能一者為true)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">){</span>  <span class="k">echo</span> <span class="s2">&#34;Not&#34;</span><span class="p">;</span> <span class="p">}</span>              <span class="c1">// 判斷 x 不等於 4
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="條件判斷">條件判斷</h3>
+<p>條件語句用於根據不同的條件下的操作</p>
+<ul>
+<li>if</li>
+<li>if&hellip;else</li>
+<li>if&hellip;elseif&hellip;else</li>
+<li>switch</li>
+</ul>
+<h4 id="if">if</h4>
+<p>如果條件為真，就執行代碼</p>
+<ul>
+<li>案例：如果現在時間(hour)小於20，就輸出 Have a good day !</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$t</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;H&#34;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">&lt;</span> <span class="s2">&#34;20&#34;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good day!&#34;</span><span class="p">;</span>
+<span class="p">}</span><span class="nx">s</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">Have a good day!
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="if-else">if-else</h4>
+<p>如果條件為真，就執行該程式碼，如果條件為假，就執行另一個程式碼</p>
+<ul>
+<li>案例：如果現在時間(hour)小於20，就輸出 Have a good day! ，超過時間，就輸出 Have a good night!</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$t</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;H&#34;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">&lt;</span> <span class="s2">&#34;20&#34;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good day!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good night!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="if-elseif-else">if-elseif-else</h4>
+<p>針對兩個以上的條件判斷，如果條件為真，就執行該程式碼，如果條件為假，就執行另一個程式碼</p>
+<ul>
+<li>案例：如果現在時間(hour)小於10，就輸出 Have a good morning! ，如果時間小於20，輸出Have a good day!，否則，就輸出 Have a good night!</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$t</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;H&#34;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">&lt;</span> <span class="s2">&#34;10&#34;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good morning!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">elseif</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)</span>  <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good day!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Have a good night!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="switch">switch</h4>
+<p>根據不同的條件來執行不同的操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$weather</span> <span class="o">=</span> <span class="s1">&#39;下雨天&#39;</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="p">(</span><span class="nv">$weather</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">case</span> <span class="s1">&#39;晴天&#39;</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="s2">&#34;今天天氣是『 </span><span class="si">$weather</span><span class="s2"> 』&#34;</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s1">&#39;陰天&#39;</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="s2">&#34;今天天氣是『 </span><span class="si">$weather</span><span class="s2"> 』&#34;</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s1">&#39;下雨天&#39;</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="s2">&#34;今天天氣是『 </span><span class="si">$weather</span><span class="s2"> 』&#34;</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="s2">&#34;世界末日&#34;</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="迴圈">迴圈</h3>
+<p>想要相同程式碼反覆執行一定的次數</p>
+<ul>
+<li>while</li>
+<li>do&hellip;while</li>
+<li>for</li>
+<li>foreach</li>
+</ul>
+<h4 id="while">while</h4>
+<p>如果條件為真，就執行代碼</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;The number is: </span><span class="si">$x</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+  <span class="nv">$x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 1
+The number is: 2
+The number is: 3
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="dowhile">do&hellip;while</h4>
+<p>先執行一次do，再檢查指定條件是否為真，是的話就會循環通過該程式碼</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="k">do</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;The number is: </span><span class="si">$x</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+  <span class="nv">$x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 6
+</code></pre></td></tr></table>
+</div>
+</div><p>因為do…while的條件會在執行循環程式碼後才檢查，所以do…while <strong>至少會循環一次</strong>該程式碼。</p>
+<h4 id="for">for</h4>
+<p>假如預先知道需要循環幾次，就可以使用for，可以設定程式碼在循環中的次數。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$x</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;The number is: </span><span class="si">$x</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 0
+The number is: 1
+The number is: 2
+The number is: 3
+The number is: 4
+The number is: 5
+The number is: 6
+The number is: 7
+The number is: 8
+The number is: 9
+The number is: 10
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="foreach">foreach</h4>
+<p>此循環適用於陣列，可以用來顯示陣列的key跟value</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$age</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;Peter&#34;</span><span class="o">=&gt;</span><span class="s2">&#34;35&#34;</span><span class="p">,</span> <span class="s2">&#34;Ben&#34;</span><span class="o">=&gt;</span><span class="s2">&#34;37&#34;</span><span class="p">,</span> <span class="s2">&#34;Joe&#34;</span><span class="o">=&gt;</span><span class="s2">&#34;43&#34;</span><span class="p">);</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$age</span> <span class="k">as</span> <span class="nv">$x</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;</span><span class="si">$x</span><span class="s2"> = </span><span class="si">$val</span><span class="s2">&lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">Peter = 35
+Ben = 37
+Joe = 43
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="break">break</h4>
+<p>想要在迴圈執行中跳出，可以使用break 指令，來跳出循環。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>  
+<span class="k">for</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">echo</span> <span class="s2">&#34;The number is: </span><span class="si">$x</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 0
+The number is: 1
+The number is: 2
+The number is: 3
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="continue">continue</h4>
+<p>continue 與 break 是相對的指令。break 中斷目前執行的迴圈，continue 則是回到迴圈的開頭，執行「下一次」迴圈。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nv">$x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">continue</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">echo</span> <span class="s2">&#34;The number is: </span><span class="si">$x</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 0
+The number is: 1
+The number is: 3
+The number is: 4
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="函式">函式</h3>
+<p>PHP除了內建的函式外，還可以創建自己的函式
+注意：函式名稱必須以字母或下底線開頭。不區分大小寫。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">function</span> <span class="nf">writeMsg</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;Hello world!&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">writeMsg</span><span class="p">();</span> <span class="c1">// call the function
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">Hello world!
+</code></pre></td></tr></table>
+</div>
+</div><p>也可以在函式裡面放入任意數量的參數，只需要用逗號分開</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">function</span> <span class="nf">familyName</span><span class="p">(</span><span class="nv">$fname</span><span class="p">,</span> <span class="nv">$year</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">&#34;</span><span class="si">$fname</span><span class="s2"> Born in </span><span class="si">$year</span><span class="s2"> &lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">familyName</span><span class="p">(</span><span class="s2">&#34;Hege&#34;</span><span class="p">,</span> <span class="s2">&#34;1975&#34;</span><span class="p">);</span>
+<span class="nx">familyName</span><span class="p">(</span><span class="s2">&#34;Stale&#34;</span><span class="p">,</span> <span class="s2">&#34;1978&#34;</span><span class="p">);</span>
+<span class="nx">familyName</span><span class="p">(</span><span class="s2">&#34;Kai Jim&#34;</span><span class="p">,</span> <span class="s2">&#34;1983&#34;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">Hege Born in 1975
+Stale Born in 1978
+Kai Jim Born in 1983
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-php-進階語法">3. PHP 進階語法</h2>
+<h3 id="日期和時間">日期和時間</h3>
+<p>可以透過輸入參數，顯示想要的日期</p>
+<ul>
+<li>d - 代表月份中的某天（01 到 31）</li>
+<li>m - 代表一個月（01 到 12）</li>
+<li>Y - 代表年份（四位數）</li>
+<li>l（小寫“L”）— 代表星期幾</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="s2">&#34;Today is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y/m/d&#34;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&#34;Today is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y.m.d&#34;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&#34;Today is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d&#34;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&#34;Today is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;l&#34;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">Today is 2022/02/22
+Today is 2022.02.22
+Today is 2022-02-22
+Today is Tuesday
+</code></pre></td></tr></table>
+</div>
+</div><p>可以使用 strtotime()，顯示想要的日期</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$d</span><span class="o">=</span><span class="nx">strtotime</span><span class="p">(</span><span class="s2">&#34;tomorrow&#34;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">,</span> <span class="nv">$d</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+
+<span class="nv">$d</span><span class="o">=</span><span class="nx">strtotime</span><span class="p">(</span><span class="s2">&#34;next Saturday&#34;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">,</span> <span class="nv">$d</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+
+<span class="nv">$d</span><span class="o">=</span><span class="nx">strtotime</span><span class="p">(</span><span class="s2">&#34;+3 Months&#34;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;Y-m-d h:i:sa&#34;</span><span class="p">,</span> <span class="nv">$d</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">2022-02-23 12:00:00am
+2022-02-26 12:00:00am
+2022-05-22 04:21:41am
+</code></pre></td></tr></table>
+</div>
+</div><p>可以透過輸入參數，顯示想要的時間</p>
+<ul>
+<li>H - 一個小時的 24 小時格式（00 到 23）</li>
+<li>h - 小時的 12 小時格式，前面補零（01 到 12）</li>
+<li>i - 前面補零的分鐘（00 到 59）</li>
+<li>s - 前面補零的秒數（00 到 59）</li>
+<li>a - 小寫的 Ante meridiem 和 Post meridiem（am 或 pm）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">date_default_timezone_set</span><span class="p">(</span><span class="s2">&#34;Asia/Taipei&#34;</span><span class="p">);</span> 
+<span class="k">echo</span> <span class="s2">&#34;The time is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;h:i:sa&#34;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The time is 12:12:10am
+</code></pre></td></tr></table>
+</div>
+</div><p>###json</p>
+<p>可以使用json_encode()，將陣列存為JSON格式，也可以用json_decode()，將JSON格式變成陣列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$age</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;Peter&#34;</span><span class="o">=&gt;</span><span class="s1">&#39;35&#39;</span><span class="p">,</span> <span class="s2">&#34;Ben&#34;</span><span class="o">=&gt;</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="s2">&#34;Ian&#34;</span><span class="o">=&gt;</span><span class="s1">&#39;22&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$enjson</span> <span class="o">=</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$age</span><span class="p">);</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nx">json_decode</span><span class="p">(</span><span class="nv">$enjson</span><span class="p">,</span><span class="k">true</span><span class="p">));</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">{&#34;Peter&#34;:&#34;35&#34;,&#34;Ben&#34;:&#34;45&#34;,&#34;Ian&#34;:&#34;22&#34;}
+array (size=3)
+  &#39;Peter&#39; =&gt; string &#39;35&#39; (length=2)
+  &#39;Ben&#39; =&gt; string &#39;45&#39; (length=2)
+  &#39;Ian&#39; =&gt; string &#39;22&#39; (length=2)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-php-表單">4. PHP 表單</h2>
+<p>PHP 可以用 $_GET 和 $_POST 於收集表單數據</p>
+<h3 id="get">GET</h3>
+<p>我們先模擬 $_GET ，先建立一個 index.html 的檔案程式碼如下</p>
+<ul>
+<li>HTML 表單 (GET)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;welcome_get.php&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;get&#34;</span><span class="p">&gt;</span>
+Name: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;name&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+E-mail: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;email&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再建立一個 welcome.php 的檔案程式碼如下</p>
+<ul>
+<li>PHP ($_GET)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+
+<span class="nx">Welcome</span> <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="err">&lt;br&gt;
+</span><span class="err">Your email address is: &lt;?php echo $_GET[&#34;email&#34;]; ?&gt;
+</span><span class="err">
+</span><span class="err">&lt;/body&gt;
+</span><span class="err">&lt;/html&gt;
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>我們先模擬 $_POST ，先建立一個 index.html 的檔案程式碼如下</p>
+<ul>
+<li>HTML 表單 (POST)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;welcome_get.php&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span><span class="p">&gt;</span>
+Name: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;name&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+E-mail: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;email&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="post">POST</h3>
+<p>再建立一個 welcome.php 的檔案程式碼如下</p>
+<ul>
+<li>PHP ($_POST)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+
+<span class="nx">Welcome</span> <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="err">&lt;br&gt;
+</span><span class="err">Your email address is: &lt;?php echo $_POST[&#34;email&#34;]; ?&gt;
+</span><span class="err">
+</span><span class="err">&lt;/body&gt;
+</span><span class="err">&lt;/html&gt;
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-php-常用函式">5. PHP 常用函式</h2>
+<h2 id="6-php-restful">6. PHP RESTful</h2>
+<h2 id="7-php-進階語法">7. PHP 進階語法</h2>
+<h2 id="8-資料來源">8. 資料來源</h2>
+<p>Middleware 元件設定)</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/php/">PHP</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-02-22</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/php/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/php/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/php/" data-title="PHP 介紹" data-hashtags="PHP,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/php/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/php/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/lofi-land/" class="prev" rel="prev" title="【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
