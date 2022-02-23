@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtube的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 22 Feb 2022 22:00:22 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -27,8 +27,9 @@
 <item>
     <title>PHP 介紹</title>
     <link>https://pin-yi.me/php/</link>
-    <pubDate>Tue, 22 Feb 2022 22:00:22 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php/</guid>
-    <description><![CDATA[<p>介紹 PHP</p>]]></description>
+    <pubDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php/</guid>
+    <description><![CDATA[<p>PHP 全名是(PHP:Hypertext Preprocessor)，是後端的腳本語言</p>
+<p>根據W3Techs的報告，截至2021年9月，有78.9%網站都是使用PHP，像是著名的 FaceBook、Tesla、Slack、WordPress</p>]]></description>
 </item>
 <item>
     <title>【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG</title>

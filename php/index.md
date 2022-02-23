@@ -1,7 +1,9 @@
 # PHP 介紹
 
 
-介紹 PHP
+PHP 全名是(PHP:Hypertext Preprocessor)，是後端的腳本語言
+
+根據W3Techs的報告，截至2021年9月，有78.9%網站都是使用PHP，像是著名的 FaceBook、Tesla、Slack、WordPress
 <!--more-->
 
 ## 1. PHP 是什麼
@@ -30,6 +32,28 @@ PHP 有各式各樣的 Web Framework：
 * Laravel - 最受歡迎的PHP Web Framewrok
 * Codelgniter - 最新版的Codelgniter4 只有 1.4 MB，小而強
 
+### php-cli vs php-fpm
+
+#### CGI
+
+CGI 是一種協定，為了保障 web server 傳過來的資料是標準格式
+
+* 如果請求 index.html ，web server 會先去找這個文件，在丟給瀏覽器，但這個僅限靜態文件而已
+
+* 如果請求 index.php ，就需要去找 php 的解析器來處理，那處理中一定會傳遞一些資料，像是 post 或是 url 還有 http header等，CGI 就是規定要傳哪些資料、以及怎麼樣的格式
+
+#### FastCGI
+
+* 是用來提高 CGI 處理性能用的
+
+#### PHP-cli vs PHP-fpm 
+
+* PHP-cli 可以直接在命令列使用php命令來處理或顯示 php檔案，因為他內建了一個 HTTP 伺服器，可以提供 HTTP 服務
+
+* PHP-fpm 是一個多進程架構的 FastCGI 服務，內建了 PHP 的解析器，配合Nginx來使用
+
+
+
 ## 2. PHP 基本語法
 
 ### 標籤
@@ -45,7 +69,20 @@ PHP 程式可以放置在檔案中的任何位置，其檔案副檔名是"```.ph
 ```
 * PHP 不分大小寫，例如 if、else、while、echo，函數等，但**變數有區分大小寫**
 
-(圖1)
+
+```php
+$color = 'blue';
+echo "My car is " . $color . "<br>";
+ECHo "My car is " . $cOLOr . "<br>";
+eCHo "My car is " . $COLOR . "<br>";
+```
+
+```html
+My car is blue
+My pen is
+My dog is
+```
+
 
 ### 註解
 
@@ -53,11 +90,21 @@ PHP 程式中可以使用註解功能，註解後該段程式不會被執行
 
 * PHP 單行註解
 
-(圖2)
+```php
+// 註解的用意是可以告訴自己或是閱讀該程式的人該行程式碼的用意或想法
+```
 
 * PHP 多行註解
 
-(圖3)
+
+```php
+/*
+註解的用意是可以告訴自己或是閱讀該程式的人該行程式碼的用意或想法
+echo "My car is " . $color . "<br>";
+ECHo "My car is " . $cOLOr . "<br>";
+eCHo "My car is " . $COLOR . "<br>";
+*/
+```
 
 ### 變數
 
@@ -69,18 +116,20 @@ PHP 變數規則
 * 變數名只包含字母數字或是下底線(A-z、0-9、_)
 * 變數名區分大小寫 ($age 跟 $AGE 是兩個不同的變數)
 
+
 ```php
-<?php 
 $color = 'blue';
 $items = 'Toy';
 $num1 = '13';
 $num2 = '18';
-echo "I have " .$num1+$num2 ." ". $color ." ". $items;
-?>
+echo "I have " . $num1+$num2 . " " . $color . " " . $items;
 ```
-(圖4)
 
-### 變數作用區9
+```html
+I have 31 blue Toy
+```
+
+### 變數作用區
 
 PHP 變數有不同的作用區(local、global、static)
 
@@ -99,15 +148,18 @@ PHP 變數有不同的作用區(local、global、static)
 	// using x outside the function will generate an error
 	echo "<p>Variable x outside function is: $x</p>";
 	?>
-	```
-	
-(圖5)
+```	
+
+```html
+Variable x inside function is: 5
+Variable x outside function is:
+```
 
 #### global
 
 函式外部的變數具有global scope，只能用於該函式外部使用
-	
-	```php
+
+```php
 	<?php
 	$x = 5; // global scope
 	
@@ -119,13 +171,17 @@ PHP 變數有不同的作用區(local、global、static)
 	
 	echo "<p>Variable x outside function is: $x</p>";
 	?>
-	```
-	
-	(圖6)
+```
+
+```html
+Variable x inside function is:
+Variable x outside function is: 5
+```
+
 	
 想要在函式中，用外部的變數，就在函式內用global 來定義變數
 	
-	```php
+```php
 	<?php
 	$x = 5;
 	$y = 10;
@@ -138,15 +194,17 @@ PHP 變數有不同的作用區(local、global、static)
 	myTest();
 	echo $y; // outputs 15
 	?>
-	```
+```
 
-	(圖7)
+```hmtl
+15
+```
 
 #### static
 
 正常函式執行完，變數值都會被刪除，想要保留值可以加 static
 	
-	```php
+```php
 	<?php
 	function myTest() {
 	  static $x = 0;
@@ -158,9 +216,11 @@ PHP 變數有不同的作用區(local、global、static)
 	myTest();
 	myTest();
 	?>
-	```
+```
 	
-	(圖8)
+```html
+012
+```
 
 ### 顯示
 
@@ -168,7 +228,7 @@ PHP 程式中可以用 echo 以及 print 來顯示資訊
 
 * PHP echo / print 顯示
 
-	```php
+```php
 	<?php
 	$txt1 = "學習PHP";
 	$txt2 = "Ian_Zhuang";
@@ -183,8 +243,17 @@ PHP 程式中可以用 echo 以及 print 來顯示資訊
 	print $txt2 . " 在 " . $txt1 . "<br>";
 	print $x + $y;
 	?>
-	```
-	(圖9)
+```
+
+```html
+學習PHP
+Ian_Zhuang 在 學習PHP
+9
+
+學習PHP
+Ian_Zhuang 在 學習PHP
+9
+```
 
 ### 資料型態
 
@@ -214,7 +283,11 @@ echo "<br>";
 echo $y;
 ?>
 ```
-(圖10)
+
+```html
+Hello world!
+Hello world!
+```
 
 #### 整數 (Integer)
 整數有幾點規則：
@@ -225,13 +298,16 @@ echo $y;
 4. 可以指定不同的進制表示法
 5. 其範圍介於 -2,147,483,648 和 2,147,483,647 之間的非十進制數
 
-``` php
+```php
 <?php
 $x = 5985;
 var_dump($x);
 ?>
 ```
-(圖11)
+
+```html
+int 5985
+```
 
 #### 浮點數 (Float)
 
@@ -243,7 +319,10 @@ $x = 10.365;
 var_dump($x);
 ?>
 ```
-(圖12)
+
+```html
+float 10.365
+```
 
 #### 布林 (Boolean)
 
@@ -256,7 +335,10 @@ $y = false;
 var_dump($x);
 ?>
 ```
-(圖13)
+
+```html
+boolean true
+```
 
 #### 陣列 (Array)
 
@@ -268,7 +350,13 @@ $x = 10.365;
 var_dump($x);
 ?>
 ```
-(圖14)
+
+```html
+array (size=3)
+ 0 => string 'Apple' (length=5)
+ 1 => string '小米' (length=6)
+ 2 => string 'Sony' (length=4)
+```
 
 #### 物件 (Object)
 
@@ -297,7 +385,9 @@ var_dump($obj); //查看類別內容
 
 ```
 
-(圖15)
+```html
+object(MyClass)[1]
+```
 
 2. 我們在替 MyClass 加入屬性，用 public 決定屬性的可視性
 
@@ -313,7 +403,9 @@ echo $obj->prop;
 ?>
 ```
 
-(圖16)
+```html
+I'm a class Property
+```
 
 因為有很多物件實例化都來自同一個類別，如果沒有指定被實體化的物件，程式碼會無法判斷，所以要用 **->** 在 PHP 的物件中，來存取物件的屬性和方法。
 
@@ -346,7 +438,11 @@ echo $obj->get();
 ?>
 ```
 
-(圖17)
+
+```html
+I'm a class Property!
+I'm a new Property value!
+```
 
 物件導向允許物件透過$this來參考自己。物件使用$this就如同直接使用物件名稱來指定物件，同等於MyClass->prop1。
 
@@ -363,7 +459,10 @@ $x = null;
 var_dump($x);
 ?>
 ```
-(圖18)
+
+```html
+null
+```
 
 ### 運算符號
 
@@ -375,7 +474,7 @@ PHP 將運算符號分為以下幾組
 * 邏輯運算符
 * 字符串運算符
 
-####算術運算符
+#### 算術運算符
 
 ```php
 <?php 
@@ -390,7 +489,7 @@ echo $x ** $y; // 輸出 x ^ y ，3 ^ 6 ，顯示 729
 ```
 
 
-####賦值運算符
+#### 賦值運算符
 
 ```php
 <?php 
@@ -403,7 +502,7 @@ $x = 3; $y = 6; echo $x %= $y;  //輸出 x = x % y ， 3 = 3 % 6 ，輸出 3
 ```
 
 
-####比較運算符
+#### 比較運算符
 
 ```php
 <?php 
@@ -420,7 +519,7 @@ var_dump($x <=> $y); // 判斷 x y 的關係 ，如果 x 大於 y ，回傳 1 ; 
 ?>
 ```
 
-####邏輯運算符
+#### 邏輯運算符
 
 ```php
 <?php 
@@ -727,7 +826,7 @@ Stale Born in 1978
 Kai Jim Born in 1983
 ```
 
-## 3. PHP 進階語法
+## 3. PHP 常用函式
 
 ### 日期和時間
 可以透過輸入參數，顯示想要的日期
@@ -799,9 +898,9 @@ echo "The time is " . date("h:i:sa");
 ```html
 The time is 12:12:10am
 ```
-###json
+### json
 
-可以使用json_encode()，將陣列存為JSON格式，也可以用json_decode()，將JSON格式變成陣列。
+可以使用 json_encode()，將陣列存為 JSON 格式，也可以用 json_decode()，將JSON格式變成陣列
 
 ```php
 <?php
@@ -821,14 +920,92 @@ array (size=3)
   'Ian' => string '22' (length=2)
 ```
 
+### min/max
+
+可以使用 min()，來找到參數列表裡面的最小值，也可以 max()，來找到參數列表裡面的最大值
+
+```php
+<?php
+echo(min(0, 150, 30, 20, -8, -200));  
+echo '<br>';
+echo(max(0, 150, 30, 20, -8, -200)); 
+?>
+```
+
+* 輸出
+
+```html
+-200
+150
+```
+
+### abs
+
+可以使用 abs()，將參數值變成絕對值
+
+```php
+<?php
+echo(abs(-6.7)); 
+?>
+```
+
+* 輸出
+
+```html
+6.7
+```
+
+### round
+
+可以使用 round()，將浮點數四捨五入到最接近的整數
+
+```php
+<?php
+echo(round(0.60));  
+echo '<br>';
+echo(round(0.49));  
+?>
+```
+
+* 輸出
+
+```html
+1
+0
+```
+
+### rand
+
+可以使用 rand()，會隨機產生一個亂數，也可以設定最大值與最小值的範圍來隨機產生亂數
+
+```php
+<?php
+echo(round(0,100));  
+?>
+```
+
+* 輸出
+
+```html
+88
+```
 
 ## 4. PHP 表單
 
-PHP 可以用 $_GET 和 $_POST 於收集表單數據
+### GET vs POST 
+
+舉個例子，如果 HTTP 代表現在我們現實生活中寄信的機制，那麼信封的撰寫格式就是 HTTP。我們可以將信封外的內容稱為 http-header，信封內的書信稱為 message-body。
+
+假設 GET 表示信封內不得裝信件的寄送方式，像是明信片一樣，你可以把要傳遞的資訊寫在信封(http-header)上。而 POST 就是信封內有裝信件的寄送方式，不但信封可以寫東西，信封內 (message-body) 還可以放你想要寄送的資料或檔案。
+
+因為使用 GET 的方法來傳送表單訊息對每個人都是可見的(所有的變數名稱與值都會顯示在 URL)，所以絕對不要使用 GET 來傳送密碼或是一些敏感訊息。
+
+PHP 可以用 $_GET 和 $_POST 來收集表單數據
 
 ### GET
 
 我們先模擬 $_GET ，先建立一個 index.html 的檔案程式碼如下
+
 * HTML 表單 (GET)
 
 ```html
@@ -859,7 +1036,11 @@ Your email address is: <?php echo $_GET["email"]; ?>
 </html>
 
 ```
+
+### POST
+
 我們先模擬 $_POST ，先建立一個 index.html 的檔案程式碼如下
+
 * HTML 表單 (POST)
 
 ```html
@@ -875,8 +1056,6 @@ E-mail: <input type="text" name="email"><br>
 </body>
 </html>
 ```
-
-### POST
 
 再建立一個 welcome.php 的檔案程式碼如下
 
@@ -894,15 +1073,99 @@ Your email address is: <?php echo $_POST["email"]; ?>
 
 ```
 
-## 5. PHP 常用函式
+### 資料驗證
 
-## 6. PHP RESTful
+* 密碼：需為8碼至20碼，且並包含特殊符號、大小寫英文字母、數字至少各1碼
 
-## 7. PHP 進階語法
+``` php
+<?php
+$password = '@aaaa5aI';
+if(preg_match('/(?=.*[@#$%^&+=])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[@#$%^&+=a-zA-Z0-9]{8,20}$/', $password)){
+    echo '密碼『',$password,'』正確。';
+} else{
+    echo '密碼『',$password,'』不正確(需符合8至20碼，且包含特殊符號、大小寫英文、數字各一碼)。';
+}
+?>
+``` 
 
-## 8. 資料來源
+* 輸出
+
+``` php
+密碼『@aaaa5ai』不正確(需符合8至20碼，且包含特殊符號、大小寫英文、數字各一碼)。
+密碼『@aaaa5aI』正確。
+```
+
+* 手機電話：需為10碼，且開頭為09接後8碼的數字
+
+``` php
+<?php
+$phone = '0912345678';
+if(preg_match('/^09[0-9]{8}$/', $password)){
+    echo '手機電話『',$phone,'』正確。';
+} else{
+    echo '手機電話『',$phone,'』不正確(需為10碼，且符合開頭為09後接8碼的數字)。';
+}
+?>
+``` 
+
+* 輸出
+
+``` php
+手機電話『0212345678』不正確(需為10碼，且符合開頭為09後接8碼的數字)。
+手機電話『0912345678』正確。
+```
+
+* 信箱
+
+``` php
+<?php
+$email = '123@gmail.com';
+if(filter_var("$email", FILTER_VALIDATE_EMAIL))
+{
+    echo '信箱『',$email,'』正確。';
+} else{
+    echo '信箱『',$email,'』不正確。';
+}
+?>
+``` 
+
+* 輸出
+
+``` php
+信箱『123@gmailcom』不正確。
+信箱『123@gmail.com』正確。
+```
+
+## 5. PHP RESTful
+
+REST ，指得是一組架構約束條件和原則，符合 REST 設計風格的Web API 稱為 RESTful API，主要以下面三點為定義
+
+* 直觀簡單的資源網址URL 比如：http://example.com/resources
+
+* 傳輸的資源：Web 服務接受與返回的類型，比如：JSON、XML
+
+* 對資源的操作：Web 服務在該資源上所支持的請求方法，比如：POST、GET、PUT、DELETE
 
 
 
-Middleware 元件設定)
+## 6. 資料來源
+[PHP 是什麼，架設網站最適合的程式語言
+](https://kamadiam.com/what-is-php/)
+
+[PHP 新手指南：3分鐘快速認識PHP
+](https://www.happycoding.today/posts/23)
+
+[PHP 教程
+](https://www.w3schools.com/php/)
+
+[PHP基礎語法(一)：Hello world與基本資料型態
+](https://ithelp.ithome.com.tw/articles/10218595)
+
+[PHP-物件導向(OOP)介紹
+](https://ithelp.ithome.com.tw/articles/10206973)
+
+[秒懂PHP的FastCGI跟PHP-FPM有什麼關係
+](https://www.astralweb.com.tw/what-is-differences-between-fastcgi-php-fpm/)
+
+
 
