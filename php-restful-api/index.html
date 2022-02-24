@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtube的小天地"><meta property="og:title" content="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API" />
+<meta property="og:description" content="由於網路上文章幾乎都是使用 apache 來實作第一個 PHP RESTful API  (留言板)， 也較沒有中文的版本，剛好這次也在學習，所以把學習的紀錄分享給大家，本次教學內容採用的是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/php-restful-api/" /><meta property="og:image" content="https://pin-yi.me/php-restful-api/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-24T22:24:24+08:00" />
+<meta property="article:modified_time" content="2022-02-24T22:24:24+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/php-restful-api/featured-image.webp"/>
+<meta name="twitter:title" content="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API"/>
+<meta name="twitter:description" content="由於網路上文章幾乎都是使用 apache 來實作第一個 PHP RESTful API  (留言板)， 也較沒有中文的版本，剛好這次也在學習，所以把學習的紀錄分享給大家，本次教學內容採用的是"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/php-restful-api/" /><link rel="prev" href="https://pin-yi.me/php/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何在 Nginx 下實作第一個 PHP 留言板 RESTful API",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/php-restful-api\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/php-restful-api\/featured-image.webp",
+                            "width":  938 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "PHP, RESTful API, 介紹","wordcount":  968 ,
+        "url": "https:\/\/pin-yi.me\/php-restful-api\/","datePublished": "2022-02-24T22:24:24+08:00","dateModified": "2022-02-24T22:24:24+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/php-restful-api/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/php-restful-api/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/php-restful-api/featured-image.webp"
+        data-srcset="/php-restful-api/featured-image.webp, /php-restful-api/featured-image.webp 1.5x, /php-restful-api/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/php-restful-api/featured-image.webp"
+        title="/php-restful-api/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-24">2022-02-24</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 968 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-首先要先來修改我們的-nginxconf">1. 首先要先來修改我們的 Nginx.conf</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>由於網路上文章幾乎都是使用 apache 來實作第一個 PHP RESTful API  (留言板)， 也較沒有中文的版本，剛好這次也在學習，所以把學習的紀錄分享給大家，本次教學內容採用的是</p>
+<ul>
+<li>macOS 11.6</li>
+<li>Nginx 1.21.6</li>
+<li>PHP 8.1.2</li>
+<li>無框架</li>
+</ul>
+<p>來做教學以及示範，那我們先來簡單了解一下什麼是RESTful API：</p>
+<p>REST ，指得是一組架構約束條件和原則，符合 REST 設計風格的Web API 稱為 RESTful API，主要以下面三點為定義</p>
+<ul>
+<li>直觀簡單的資源網址URL 比如：http://example.com/resources</li>
+<li>傳輸的資源：Web 服務接受與返回的類型，比如：JSON、XML</li>
+<li>對資源的操作：Web 服務在該資源上所支持的請求方法，比如：POST、GET、PUT、DELETE</li>
+</ul>
+<h3 id="1-首先要先來修改我們的-nginxconf">1. 首先要先來修改我們的 Nginx.conf</h3>
+<p>我們這邊就直接對架設好的 Nginx 設定檔來修改，如果不清楚要怎麼架設的，這方面網路上蠻多文章，如果還是不清楚，可以留言告訴我，我在另外寫一篇文章來介紹環境安裝。</p>
+<p>我們待會的實作，會將希望將</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/index.php?message_board=all
+</code></pre></td></tr></table>
+</div>
+</div><p>變成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/message_board
+</code></pre></td></tr></table>
+</div>
+</div><p>來實現我們在介紹時所說的直觀簡單的資源網址，我說明一下上面網址的關係，http://localhost 是因為我們本地端運行，如果已經上線的，那就是你自己的網址；/api 是我來放這支 api 的目錄，他位於網頁的根目錄下方(詳細的配置下方會附上)， index.php 是我來放這支 api 的網頁，會在 include request 及 responce 進來，後面的 message_board 是我們這次的資源，後面可以接我想要處理的參數</p>
+<p>那要怎麼達成讓網址變成我們想要呈現的直觀簡單的網址呢，這時候我們就要使用 Nginx.conf 來做設定，網路上的文章比較多的是 apache 的 htaccess ，我一開始還以為 Nginx 也可以使用 htaccess ，試了半天才知道，在 Nginx 要改用 Nginx.conf 來設定 ， 那我下方會附上我原本的 .htaccess 以及轉換後的 conf ，網路上蠻多工具可以線上轉換，我推薦可以用 <a href="https://winginx.com/en/htaccess" target="_blank" rel="noopener noreffer">Apache htaccess to Nginx converter
+</a> ，那接下來我一步一步來介紹</p>
+<ul>
+<li>Apache .htaccess 檔案</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-.htaccess" data-lang=".htaccess"><span class="nb">RewriteRule</span> ^/api/message_board$   <span class="sx">/api/index.php</span>?message_board=all [nc,qsa]
+<span class="nb">RewriteRule</span> ^/api/message_board/(\d+)$   <span class="sx">/api/index.php</span>?message_board=$1 [nc,qsa]
+</code></pre></td></tr></table>
+</div>
+</div><p>這是我會修改部分的 Nginx.conf ，可以看到最後兩條 location，這邊就是我們轉換過來的設定</p>
+<ul>
+<li>Nginx.conf 檔案(片段)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            index  index.html index.htm index.php;
+        }
+
+		location = /api/message_board {
+		  rewrite ^(.*)$ /api/index.php?message_board=all;
+		}
+		
+		location /api {
+		  rewrite ^/api/message_board/(\d+)$ /api/index.php?message_board=$1;
+		}
+</code></pre></td></tr></table>
+</div>
+</div><p>他的意思代表的我們網址路徑是在 /api/message_board ，我們讓原本 /api/index.php?message_board 這段變成 /api/message_board/ 的設定，設定好記得先下  <code>sh sudo nginx -t </code> 指令來檢查一下Nginx.conf檔案是不是都正確，再用 <code>sh sudo nginx -s reload </code> 指令重新啟動 Nginx  (是否成功，後面會帶到如何做測試，就繼續一起往下看吧！)</p>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://www.cnblogs.com/luyucheng/p/6016801.html" target="_blank" rel="noopener noreffer">PHP實現RESTful風格的API實例</a></p>
+<p><a href="https://cg2010studio.com/2016/08/06/xamppphp-%E8%A3%BD%E4%BD%9Crestful-api/" target="_blank" rel="noopener noreffer">[XAMPP][PHP] 製作Restful API
+</a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/php/">PHP</a>
+                </span><span><a href="/tags/restful-api/">RESTful API</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-02-24</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/php-restful-api/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/php-restful-api/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/php-restful-api/" data-title="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API" data-hashtags="PHP,RESTful API,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/php-restful-api/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/php-restful-api/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/php-restful-api/" data-title="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/php-restful-api/" data-title="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/php-restful-api/" data-title="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/php/" class="prev" rel="prev" title="PHP 介紹"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":20},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

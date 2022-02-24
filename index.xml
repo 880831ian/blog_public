@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtube的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
+    <link>https://pin-yi.me/php-restful-api/</link>
+    <pubDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php-restful-api/</guid>
+    <description><![CDATA[<p>由於網路上文章幾乎都是使用 apache 來實作第一個 PHP RESTful API  (留言板)， 也較沒有中文的版本，剛好這次也在學習，所以把學習的紀錄分享給大家，本次教學內容採用的是</p>]]></description>
 </item>
 <item>
     <title>PHP 介紹</title>
@@ -62,12 +68,6 @@
     <link>https://pin-yi.me/hualien-part3/</link>
     <pubDate>Wed, 19 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/hualien-part3/</guid>
     <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>空拍帶你看花蓮 【Part 2】 花蓮要怎麼玩？玩一個月帶你認識你不知道的花蓮</title>
-    <link>https://pin-yi.me/hualien-part2/</link>
-    <pubDate>Sun, 16 Jan 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/hualien-part2/</guid>
-    <description><![CDATA[<p>我們的視野都是向前平視，何不試試用上帝視角來看花蓮海岸的美</p>]]></description>
 </item>
 </channel>
 </rss>
