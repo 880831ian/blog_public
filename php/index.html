@@ -35,7 +35,7 @@
                             "url": "https:\/\/pin-yi.me\/php\/featured-image.webp",
                             "width":  1920 ,
                             "height":  1032 
-                        }],"genre": "posts","keywords": "PHP, 介紹","wordcount":  6814 ,
+                        }],"genre": "posts","keywords": "PHP, PHP 基礎語法, PHP 常用函式, PHP 表單, 介紹","wordcount":  6865 ,
         "url": "https:\/\/pin-yi.me\/php\/","datePublished": "2022-02-22T22:22:22+08:00","dateModified": "2022-02-23T22:28:43+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -133,7 +133,7 @@ if (!doNotTrack) {
         alt="/php/featured-image.webp"
         title="/php/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">PHP 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-22">2022-02-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 6814 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-22">2022-02-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 6865 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 14 分鐘</span>&nbsp;</div>
             </div>
             
@@ -280,9 +280,9 @@ if (!doNotTrack) {
 </ul>
 <h2 id="2-php-基本語法">2. PHP 基本語法</h2>
 <h3 id="標籤">標籤</h3>
-<p>PHP 程式可以放置在檔案中的任何位置，其檔案副檔名是&quot;<code>.php</code>&quot;，</p>
+<p>PHP 程式可以放置在檔案中的任何位置，其檔案副檔名是<code>.php</code>，</p>
 <ul>
-<li>PHP的標籤是開頭 <?php 以及 ?> 結尾</li>
+<li>PHP的標籤是開頭 &lt; ?php 以及 ? &gt; 結尾</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -609,8 +609,14 @@ Ian_Zhuang 在 學習PHP
 </div>
 </div><h3 id="資料型態">資料型態</h3>
 <p>變數可以儲存不同型態的資料，以下是 PHP 支持的資料型態</p>
-<p>! 可以用var_dump() 函數
-來查看資料的x態以及值</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>小提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">可以用var_dump() 函數來查看資料的型態以及值</div>
+        </div>
+    </div>
 <ul>
 <li>字串 (String)</li>
 <li>整數 (Integer)</li>
@@ -846,7 +852,7 @@ Hello world!
 <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">I&#39;m a class Property
 </code></pre></td></tr></table>
 </div>
-</div><p>因為有很多物件實例化都來自同一個類別，如果沒有指定被實體化的物件，程式碼會無法判斷，所以要用 <strong>-&gt;</strong> 在 PHP 的物件中，來存取物件的屬性和方法。</p>
+</div><p>因為有很多物件實例化都來自同一個類別，如果沒有指定被實體化的物件，程式碼會無法判斷，所以要用 <strong><font color='blue'>-&gt;</font></strong> 在 PHP 的物件中，來存取物件的屬性和方法。</p>
 <ol start="3">
 <li>定義類別(Class)的方法(Methods)，方法(Methods)是類別裡面的函式(Functions)，物件可以藉由執行這些方法來更動每個物件的行為。</li>
 </ol>
@@ -1216,7 +1222,7 @@ I&#39;m a new Property value!
 <li>foreach</li>
 </ul>
 <h4 id="while">while</h4>
-<p>如果條件為真，就執行代碼</p>
+<p>只要指定條件為真，就會循環通過該程式碼</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1291,7 +1297,7 @@ The number is: 3
 <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The number is: 6
 </code></pre></td></tr></table>
 </div>
-</div><p>因為do…while的條件會在執行循環程式碼後才檢查，所以do…while <strong>至少會循環一次</strong>該程式碼。</p>
+</div><p>因為do…while的條件會在執行循環程式碼後才檢查，所以do…while <font color='red'><strong>至少會循環一次</strong></font>該程式碼。</p>
 <h4 id="for">for</h4>
 <p>假如預先知道需要循環幾次，就可以使用for，可以設定程式碼在循環中的次數。</p>
 <div class="highlight"><div class="chroma">
@@ -1462,7 +1468,7 @@ The number is: 4
 </div>
 </div><h3 id="函式">函式</h3>
 <p>PHP除了內建的函式外，還可以創建自己的函式
-注意：函式名稱必須以字母或下底線開頭。不區分大小寫。</p>
+注意：函式名稱必須<font color='red'><strong>以字母或下底線開頭</strong></font>。不區分大小寫。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1578,6 +1584,39 @@ Today is 2022-02-22
 Today is Tuesday
 </code></pre></td></tr></table>
 </div>
+</div><p>可以透過輸入參數，顯示想要的時間</p>
+<ul>
+<li>H - 一個小時的 24 小時格式（00 到 23）</li>
+<li>h - 小時的 12 小時格式，前面補零（01 到 12）</li>
+<li>i - 前面補零的分鐘（00 到 59）</li>
+<li>s - 前面補零的秒數（00 到 59）</li>
+<li>a - 小寫的 Ante meridiem 和 Post meridiem（am 或 pm）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">date_default_timezone_set</span><span class="p">(</span><span class="s2">&#34;Asia/Taipei&#34;</span><span class="p">);</span> 
+<span class="k">echo</span> <span class="s2">&#34;The time is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;h:i:sa&#34;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>輸出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The time is 12:12:10am
+</code></pre></td></tr></table>
+</div>
 </div><p>可以使用 strtotime()，顯示想要的日期</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1618,39 +1657,6 @@ Today is Tuesday
 <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">2022-02-23 12:00:00am
 2022-02-26 12:00:00am
 2022-05-22 04:21:41am
-</code></pre></td></tr></table>
-</div>
-</div><p>可以透過輸入參數，顯示想要的時間</p>
-<ul>
-<li>H - 一個小時的 24 小時格式（00 到 23）</li>
-<li>h - 小時的 12 小時格式，前面補零（01 到 12）</li>
-<li>i - 前面補零的分鐘（00 到 59）</li>
-<li>s - 前面補零的秒數（00 到 59）</li>
-<li>a - 小寫的 Ante meridiem 和 Post meridiem（am 或 pm）</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nx">date_default_timezone_set</span><span class="p">(</span><span class="s2">&#34;Asia/Taipei&#34;</span><span class="p">);</span> 
-<span class="k">echo</span> <span class="s2">&#34;The time is &#34;</span> <span class="o">.</span> <span class="nx">date</span><span class="p">(</span><span class="s2">&#34;h:i:sa&#34;</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>輸出</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">The time is 12:12:10am
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="json">json</h3>
@@ -2060,6 +2066,15 @@ E-mail: <span class="p">&lt;</span><span class="nt">input</span> <span class="na
 <p>對資源的操作：Web 服務在該資源上所支持的請求方法，比如：POST、GET、PUT、DELETE</p>
 </li>
 </ul>
+<div class="details admonition success open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-check-circle fa-fw"></i>加油 還有一篇可以一起學習<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">詳細可以參考另一篇文章 <a href="https://pin-yi.me/php-restful-api/" target="_blank" rel="noopener noreffer">如何在 Nginx 下實作第一個 PHP 留言板 RESTful API
+</a> 裡面有更詳細的介紹</div>
+        </div>
+    </div>
 <h2 id="6-資料來源">6. 資料來源</h2>
 <p><a href="https://kamadiam.com/what-is-php/" target="_blank" rel="noopener noreffer">PHP 是什麼，架設網站最適合的程式語言
 </a></p>
@@ -2074,6 +2089,9 @@ E-mail: <span class="p">&lt;</span><span class="nt">input</span> <span class="na
 <p><a href="https://www.astralweb.com.tw/what-is-differences-between-fastcgi-php-fpm/" target="_blank" rel="noopener noreffer">秒懂PHP的FastCGI跟PHP-FPM有什麼關係
 </a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/php/">PHP</a>
+                </span><span><a href="/tags/php-%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95/">PHP 基礎語法</a>
+                </span><span><a href="/tags/php-%E5%B8%B8%E7%94%A8%E5%87%BD%E5%BC%8F/">PHP 常用函式</a>
+                </span><span><a href="/tags/php-%E8%A1%A8%E5%96%AE/">PHP 表單</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新於 2022-02-23&nbsp;<a class="git-hash" href="https://github.com/khusika/FeelIt/commit/de8ed8125dc672e9d369d194885fde142bcd5cf1" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;de8ed81:&nbsp;v1.0.3">
@@ -2085,7 +2103,7 @@ E-mail: <span class="p">&lt;</span><span class="nt">input</span> <span class="na
                         <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/php/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/php/" data-title="PHP 介紹" data-hashtags="PHP,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/php/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/php/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/php/" data-title="PHP 介紹" data-hashtags="PHP,PHP 基礎語法,PHP 常用函式,PHP 表單,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/php/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/php/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/php/" data-title="PHP 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/lofi-land/" class="prev" rel="prev" title="【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/php-restful-api/" class="next" rel="next" title="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>

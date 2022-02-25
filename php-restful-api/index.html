@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/php-restful-api\/featured-image.webp",
                             "width":  1838 ,
                             "height":  730 
-                        }],"genre": "posts","keywords": "PHP, RESTful API, Nginx, 實作, 介紹","wordcount":  2137 ,
+                        }],"genre": "posts","keywords": "PHP, RESTful API, Nginx, 實作, 介紹","wordcount":  2150 ,
         "url": "https:\/\/pin-yi.me\/php-restful-api\/","datePublished": "2022-02-24T22:24:24+08:00","dateModified": "2022-02-25T10:54:10+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/php-restful-api/featured-image.webp"
         title="/php-restful-api/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-24">2022-02-24</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2137 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-24">2022-02-24</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2150 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
@@ -157,7 +157,7 @@ if (!doNotTrack) {
     </li>
     <li><a href="#實作開始">實作開始</a>
       <ul>
-        <li><a href="#1-首先要先來修改我們的-nginxconf">1. 首先要先來修改我們的 Nginx.conf</a></li>
+        <li><a href="#1-修改-nginxconf">1. 修改 Nginx.conf</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -195,7 +195,7 @@ if (!doNotTrack) {
 <p>可以看到這張圖後面的 Endpoint，分別代表應用服務 (Application context) 、 版本 (Version)、 資源(Resource)、 參數(Parameter) 。</p>
 <ul>
 <li>應用服務：可以取名 api 或是 restful-api 。</li>
-<li>版本：可以對 API 進行版本控制，可以有升級的服務，也不會對現有的 API 進行重大更改。</li>
+<li>版本：可以對 API 進行版本控制，可以有升級的服務，也不會對現有的 API 造成影響。</li>
 <li>資源：要使用名詞而非動詞來命名，且建議使用複數
 <ul>
 <li>壞的命名(以我們要實作的留言板查詢、新增、修改、刪除示範)
@@ -218,7 +218,7 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h4 id="對資源的操作">對資源的操作</h4>
-<p>RESTful API 傳送時，會依照我們所定的 HTTP Request Method 請求方法，那主要有以下 4 種的 Request</p>
+<p>RESTful API 傳送時，會依照我們所定的 HTTP Request Method 請求方法，那主要有以下 4 種的 Method</p>
 <ul>
 <li>GET : 此方法只能向指定的資源要求取得資料，並不會更動內部的資料</li>
 <li>POST：向指定的資源要求新增資料</li>
@@ -288,6 +288,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
+<p>( 參考<a href="https://www.footmark.com.tw/news/programming-language/design/restful-webapi-design-guide/" target="_blank" rel="noopener noreffer">RESTful Web API 設計指南</a> )</p>
 <h3 id="為什麼要使用-restful-api">為什麼要使用 RESTful API</h3>
 <ol>
 <li>REST 使用所有標準 HTTP 協議方法 - GET、POST、PUT、DELETE、PATCH ，以及更具體的 URL 。</li>
@@ -303,15 +304,15 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h2 id="實作開始">實作開始</h2>
-<h3 id="1-首先要先來修改我們的-nginxconf">1. 首先要先來修改我們的 Nginx.conf</h3>
+<h3 id="1-修改-nginxconf">1. 修改 Nginx.conf</h3>
 <p>我們這邊就直接對架設好的 Nginx 設定檔來修改，如果不清楚要怎麼架設的，這方面網路上蠻多文章，如果還是不清楚，可以留言告訴我，我在另外寫一篇文章來介紹環境安裝。</p>
-<p>我們待會的實作，會將希望將</p>
+<p>為什麼要先修改 conf 呢？修改的目的就是要讓原本網址</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/index.php?message_board=all
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/index.php?messages=all
 </code></pre></td></tr></table>
 </div>
 </div><p>變成</p>
@@ -320,12 +321,31 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/message_board
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost/api/messages
 </code></pre></td></tr></table>
 </div>
-</div><p>來實現我們在介紹時所說的直觀簡單的資源網址，我說明一下上面網址的關係，http://localhost 是因為我們本地端運行，如果已經上線的，那就是你自己的網址；/api 是我來放這支 api 的目錄，他位於網頁的根目錄下方(詳細的配置下方會附上)， index.php 是我來放這支 api 的網頁，會在 include request 及 responce 進來，後面的 message_board 是我們這次的資源，後面可以接我想要處理的參數</p>
-<p>那要怎麼達成讓網址變成我們想要呈現的直觀簡單的網址呢，這時候我們就要使用 Nginx.conf 來做設定，網路上的文章比較多的是 apache 的 htaccess ，我一開始還以為 Nginx 也可以使用 htaccess ，試了半天才知道，在 Nginx 要改用 Nginx.conf 來設定 ， 那我下方會附上我原本的 .htaccess 以及轉換後的 conf ，網路上蠻多工具可以線上轉換，我推薦可以用 <a href="https://winginx.com/en/htaccess" target="_blank" rel="noopener noreffer">Apache htaccess to Nginx converter
-</a> ，那接下來我一步一步來介紹</p>
+</div><p>來實現我們在介紹時所說的直觀簡單的資源網址，我說明一下上面網址的關係，</p>
+<ul>
+<li>
+<p>http://localhost 是因為我們本地端運行，如果已經上線的，那就是你自己的網址，</p>
+</li>
+<li>
+<p>/api 是我來放這支 api 的目錄，他位於網頁的根目錄下方(詳細的配置下方會附上)，</p>
+</li>
+<li>
+<p>index.php 是我來放這支 api 的網頁，後面的 messages 是我們這次的資源，後面可以接我想要處理的參數</p>
+</li>
+</ul>
+<p>那要怎麼達成讓網址變成我們想要呈現的直觀簡單的網址呢，這時候我們就要使用 Nginx.conf 來做設定，網路上的文章比較多的是 apache 的 htaccess，我一開始還以為 Nginx 也可以使用 htaccess ，試了半天才知道，在 Nginx 要改用 Nginx.conf 來設定，那我下方會附上我原本的 .htaccess 以及轉換後的 conf，那接下來我一步一步來介紹</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>線上轉換工具<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">網路上蠻多工具可以線上轉換，我推薦可以用 <a href="https://winginx.com/en/htaccess" target="_blank" rel="noopener noreffer">Apache htaccess to Nginx converter
+</a></div>
+        </div>
+    </div>
 <ul>
 <li>Apache .htaccess 檔案</li>
 </ul>
@@ -335,8 +355,8 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-.htaccess" data-lang=".htaccess"><span class="nb">RewriteRule</span> ^/api/message_board$   <span class="sx">/api/index.php</span>?message_board=all [nc,qsa]
-<span class="nb">RewriteRule</span> ^/api/message_board/(\d+)$   <span class="sx">/api/index.php</span>?message_board=$1 [nc,qsa]
+<pre tabindex="0" class="chroma"><code class="language-.htaccess" data-lang=".htaccess"><span class="nb">RewriteRule</span> ^/api/messages$   <span class="sx">/api/index.php</span>?messages=all [nc,qsa]
+<span class="nb">RewriteRule</span> ^/api/messages/(\d+)$   <span class="sx">/api/index.php</span>?messages=$1 [nc,qsa]
 </code></pre></td></tr></table>
 </div>
 </div><p>這是我會修改部分的 Nginx.conf ，可以看到最後兩條 location，這邊就是我們轉換過來的設定</p>
@@ -380,17 +400,37 @@ if (!doNotTrack) {
             index  index.html index.htm index.php;
         }
 
-		location = /api/message_board {
-		  rewrite ^(.*)$ /api/index.php?message_board=all;
+		location = /api/messages {
+		  rewrite ^(.*)$ /api/index.php?messages=all;
 		}
 		
 		location /api {
-		  rewrite ^/api/message_board/(\d+)$ /api/index.php?message_board=$1;
+		  rewrite ^/api/messages/(\d+)$ /api/index.php?messages=$1;
 		}
 </code></pre></td></tr></table>
 </div>
-</div><p>他的意思代表的我們網址路徑是在 /api/message_board ，我們讓原本 /api/index.php?message_board 這段變成 /api/message_board/ 的設定，設定好記得先下  <code>sh sudo nginx -t </code> 指令來檢查一下Nginx.conf檔案是不是都正確，再用 <code>sh sudo nginx -s reload </code> 指令重新啟動 Nginx  (是否成功，後面會帶到如何做測試，就繼續一起往下看吧！)</p>
-<h2 id="參考資料">參考資料</h2>
+</div><p>他的意思代表的我們網址路徑是在 /api/messages ，我們讓原本 /api/index.php?messages 這段變成 /api/messages/ 的設定，設定好記得先下  <code>sh sudo nginx -t </code> 指令來檢查一下Nginx.conf檔案是不是都正確，再用 <code>sh sudo nginx -s reload </code> 指令重新啟動 Nginx  (是否成功，後面會帶到如何做測試，就繼續一起往下看吧！)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">messages</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="kt">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">CHARACTER</span><span class="w"> </span><span class="kt">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">message</span><span class="o">`</span><span class="w"> </span><span class="kt">text</span><span class="w"> </span><span class="k">CHARACTER</span><span class="w"> </span><span class="kt">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">sendtime</span><span class="o">`</span><span class="w"> </span><span class="kt">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">version</span><span class="o">`</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="no">NULL</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="參考資料">參考資料</h2>
 <p><a href="https://www.cnblogs.com/luyucheng/p/6016801.html" target="_blank" rel="noopener noreffer">PHP實現RESTful風格的API實例</a></p>
 <p><a href="https://cg2010studio.com/2016/08/06/xamppphp-%E8%A3%BD%E4%BD%9Crestful-api/" target="_blank" rel="noopener noreffer">[XAMPP][PHP] 製作Restful API
 </a></p>
