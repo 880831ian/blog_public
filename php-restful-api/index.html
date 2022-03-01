@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/php-restful-api/" /><meta property="og:image" content="https://pin-yi.me/php-restful-api/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-24T22:24:24+08:00" />
-<meta property="article:modified_time" content="2022-02-25T18:10:20+08:00" />
+<meta property="article:modified_time" content="2022-03-01T18:14:37+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/php-restful-api/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/php-restful-api\/featured-image.webp",
                             "width":  1838 ,
                             "height":  730 
-                        }],"genre": "posts","keywords": "PHP, RESTful API, Nginx, 實作, 介紹","wordcount":  2150 ,
-        "url": "https:\/\/pin-yi.me\/php-restful-api\/","datePublished": "2022-02-24T22:24:24+08:00","dateModified": "2022-02-25T18:10:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "PHP, RESTful API, Nginx, 實作, 介紹","wordcount":  2200 ,
+        "url": "https:\/\/pin-yi.me\/php-restful-api\/","datePublished": "2022-02-24T22:24:24+08:00","dateModified": "2022-03-01T18:14:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/php-restful-api/featured-image.webp"
         title="/php-restful-api/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-24">2022-02-24</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2150 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-24">2022-02-24</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2200 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
@@ -177,7 +177,7 @@ if (!doNotTrack) {
 <p>REST ，指得是一組架構約束條件和原則，符合 REST 設計風格的Web API 稱為 RESTful API，主要以下面三點為定義</p>
 <ul>
 <li>直觀簡單的資源網址 URL 比如：http://example.com/resources</li>
-<li>對資源的操作：Web 服務在該資源上所支持的請求方法，比如：POST、GET、PUT、DELETE</li>
+<li>對資源的操作：Web 服務在該資源上所支持的請求方法，比如：POST、GET、PUT、PATCH、DELETE</li>
 <li>傳輸的資源：Web 服務接受與返回的類型，比如：JSON、XML</li>
 </ul>
 <p>分別說明每一項定義</p>
@@ -209,8 +209,9 @@ if (!doNotTrack) {
 <li>好的命名
 <ul>
 <li>查詢 GET =&gt; /messages (回傳所有留言)</li>
-<li>新增 POST =&gt; /messages/1 (新增留言)</li>
-<li>修改 PUT =&gt; /messages/1 (修改單筆留言)</li>
+<li>新增 POST =&gt; /messages (新增留言)</li>
+<li>修改 PUT =&gt; /messages/1 (修改單筆留言全部資料)</li>
+<li>修改 PATCH =&gt; /messages/1 (修改單筆留言有更動資料)</li>
 <li>刪除 DELETE =&gt; /messages/1 (刪除單筆留言)</li>
 </ul>
 </li>
@@ -218,11 +219,12 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h4 id="對資源的操作">對資源的操作</h4>
-<p>RESTful API 傳送時，會依照我們所定的 HTTP Request Method 請求方法，那主要有以下 4 種的 Method</p>
+<p>RESTful API 傳送時，會依照我們所定的 HTTP Request Method 請求方法，那主要有以下 5 種的 Method</p>
 <ul>
 <li>GET : 此方法只能向指定的資源要求取得資料，並不會更動內部的資料</li>
 <li>POST：向指定的資源要求新增資料</li>
 <li>PUT：向指定的資源要求修改資料內容</li>
+<li>PATCH：向指定的資源要求修改部分資料內容</li>
 <li>DELETE：向指定的資源要求刪除資料內容</li>
 </ul>
 <h4 id="傳輸的資源">傳輸的資源</h4>
@@ -443,8 +445,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-02-25&nbsp;<a class="git-hash" href="https://github.com/khusika/FeelIt/commit/17a6ed52871f9f9242d56c91bc43d213925793fe" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(ian_zhuang@mail.chungyo.net)&nbsp;17a6ed5:&nbsp;v1.0.7">
-                            <i class="fas fa-hashtag fa-fw"></i>17a6ed5</a></span>
+                <span>更新於 2022-03-01&nbsp;<a class="git-hash" href="https://github.com/khusika/FeelIt/commit/78559f77cd7b328463398100d6f80f179b05b76f" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(ian_zhuang@mail.chungyo.net)&nbsp;78559f7:&nbsp;v1.0.9">
+                            <i class="fas fa-hashtag fa-fw"></i>78559f7</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/php-restful-api/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
