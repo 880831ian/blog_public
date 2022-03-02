@@ -45,7 +45,7 @@ Laravel 是基於上面所說的 MVC 架構打造的框架，並且設計出許�
 
 該框架可能是Web 開發人員中最受歡迎的框架。Laravel 是一個免費的開源PHP 框架，適用於Web 應用程序開發，且適用於移動應用程序場。(上面有介紹過，這邊就簡化)
 
-#### 為什麼要選擇 Laravel 框架
+####  Laravel 框架優點
 * 易於學習
 * 無縫數據遷移
 * 在 PHP 社群中很受歡迎
@@ -64,7 +64,7 @@ Symfony 非常穩定、文檔齊全、性能卓越。這些特點使Symfony 成�
 
 可以直接從舊組件構建，節約了大量成本。Symfony 易於在大多數平台上安裝和配置，並且可以獨立於數據庫引擎。它具有高度的靈活性，可以與 Drupal 等大型項目集成
 
-#### 為什麼要選擇 Symfony 框架
+####  Symfony 框架優點
 
 * 官方長期技術支持
 * 內置測試功能
@@ -79,7 +79,7 @@ Symfony 非常穩定、文檔齊全、性能卓越。這些特點使Symfony 成�
 
 CodeIgniter 還提供了幾個預構建的模塊，用於為Web 開發創建健壯的、可重用的組件。由於設置過程簡單，這個PHP 框架非常適合初學者。
 
-#### 為什麼要選擇 CodeIgniter 框架
+#### CodeIgniter 框架優點
 
 * MVC 架構
 * Top-Notch 錯誤處理
@@ -96,7 +96,7 @@ CakePHP 起初是一個簡單而優雅的工具包，在過去的15 年裡它變
 
 使用CakePHP 部署Web 網站是"小菜一碟"，只需要一個Web 服務器和CakePHP 框架的副本。
 
-#### 為什麼要選擇 CakePHP 框架
+#### CakePHP 框架優點
 
 * 插件和組件的簡易擴展
 * 適當的類繼承
@@ -115,7 +115,7 @@ Zend 構建於敏捷方法之上，可幫助開發人員為大型客戶創建、
 
 Zend 框架主要受大型IT 企業和銀行等金融機構的青睞。
 
-#### 為什麼要選擇 Zend 2 框架
+####  Zend 2 框架優點
 
 * MVC 組件
 * 卓越的前端技術支持工具
@@ -140,13 +140,13 @@ Zend 框架主要受大型IT 企業和銀行等金融機構的青睞。
 安裝完後可以使用來檢查是否安裝成功
 
 ```sh
-$ php --version                                                                                                                                      (1s)[12:21:35]
-PHP 8.1.2 (cli) (built: Jan 21 2022 04:47:26) (NTS)
-Copyright (c) The PHP Group
+$ php --version                                                                                                                                      
+PHP 7.1.33 (cli) (built: Jan 20 2022 04:04:37) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
 ```
 <br>
 
-再安裝 composer ，請參考 [ composer 官網的安裝教學](https://getcomposer.org/download/)
+再安裝 Composer ，請參考 [ Composer 官網的安裝教學](https://getcomposer.org/download/)
 
 
 ```sh
@@ -154,7 +154,7 @@ $ composer --version
 Composer version 2.2.7
 ```
 <br>
-都安裝好後，我們就要來安裝 Laravel 框架囉，根據 Laravel 官網安裝步驟，先用 composer 來安裝
+都安裝好後，我們就要來安裝 Laravel 框架囉，根據 Laravel 官網安裝步驟，先用 Composer 來安裝
 
 ```sh
 composer global require "laravel/installer"
@@ -168,7 +168,7 @@ zsh: command not found: laravel
 ```
 <br>
 
-發現 cmd 找不到 laravel 這個命令，那我們看一下官網怎麼說
+發現 zsh 找不到 laravel 這個命令，那我們看一下官網怎麼說
 
 `Make sure to place the $HOME/.composer/vendor/bin directory (or the equivalent directory for your OS) in your $PATH so the laravel executable can be located by your system.`
 
@@ -193,18 +193,71 @@ source .bash_profile
 
 ```sh
 $ laravel --version                                                                                                                                 
-zsh: command not found: laravel
+Laravel Installer 2.3.0
 ```
 <br>
 
-
-本次配置如下
+本次配置版本如下
 
 * macOS 11.6
-* PHP 8.1.2
-* co
-* Laravel 5.4 
-* 
+* PHP 7.1.33
+* Composer 2.2.7
+* Laravel Installer 2.3.0
+
+
+### 新增專案
+
+安裝成功後，就可以開始來使用 Laravel 框架生成檔案囉！要怎麼做呢？就接著看下去吧
+
+可以使用 Laravel 來新增專案
+
+```sh
+$ laravel new 專案名稱
+```
+<br>
+
+也可以透過 composer 指令 (可以指定框架版本，那我們這次使用的是5.4版本)
+
+```sh
+$ composer create-project --prefer-dist laravel/laravel 專案名稱 "5.4.*"
+```
+<br>
+
+完成後就進入該專案目錄底下，接著可以執行該指令來檢查框架版本
+
+```sh
+$ php artisan -V
+Laravel Framework 5.4.36
+```
+<br>
+
+{{< admonition type=tap title="小提醒" open=true >}}
+Laravel 框架的版本，取決於你的 PHP 版本，所以要找相對應的歐！，使用 Laravel 5.4 跟 PHP 8.1 ，他會說PHP 版本太新，無法安裝。
+{{< /admonition >}}
+
+### Laravel 資料夾與檔案介紹
+
+我們可以看到這個專案目錄下，Laravel 	幫我們生成了許多資料夾以及檔案，接著來簡單說明每一個資料夾與檔案的功能與用途吧
+
+* app：主要放置 Controller 的地方，提供網站的應用處理流程，包括處理用戶的行為和資料 Model 上的改變等事件之類別方法，提供給 view 來呼叫。透過 laravel 之架構也可透過 controller 輕易建構 RESTful API。
+* boostrap：內含之 app.php 為將此框架初始化及建構起來之程式。
+* config：內含此專案網站之環境設定、資料庫設定等設定程式。
+* database：放置資料庫設定 (Model)。
+* public：放置網站入口，透過 index.php 導入從 route 設定之首頁
+* resources：放置 view 的資源，用以呈現網站頁面
+* routes：放置所有專案 route 的設定，其中較常用之 web.php 做為主要頁面導向及與 controller 的溝通，而 api.php 則作為專案提供 api 的設定。
+* storage：主要放置些程式生成的檔案如頁面樣板 (Blade templates)、系統記錄 (logs)、file caches、file based sessions 等資料。
+* tests：放置測試用例 (Test Case)。
+* vendor：放置透過 composer 下載管理的套件。
+* artisan：可於專案中透過 "php artisan" 執行 laravel 設計好的基本操作行為，如建立 controller 等動作。
+* composer.json：管理專案使用套件，詳細用法見 composer 官方說明。
+* composer.lock：鎖定專案使用套件版號。
+* package.json：管理 npm 套件，主要提供給前端使用。
+* phpunit.xml：phpunit 測試設定檔，可規範執行單元測試之範圍，做批量測試。
+* webpack.mix.js：build 設定檔，幫助我們將 resources 中之 js 及 sass 等前端設定檔 compile 成 js、css 等檔案並 deploy 到 public 中供頁面使用。
+
+
+
 
 ## 參考資料
 
@@ -212,3 +265,5 @@ zsh: command not found: laravel
 
 [比較 PHP 網頁框架
 ](https://opensourcedoc.com/blog/comparing-php-web-frameworks/)
+
+[Laravel 從入門到放棄 (一) – 透過 composer 架設 laravel 網站](https://christmasq.wordpress.com/2018/12/04/php-laravel-%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E6%94%BE%E6%A3%84-%E4%B8%80-%E9%80%8F%E9%81%8E-composer-%E6%9E%B6%E8%A8%AD-laravel-%E7%B6%B2%E7%AB%99/)
