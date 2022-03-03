@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://pin-yi.me/en/theme-documentation-basics/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/theme-documentation-basics/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/theme-documentation-basics/"
@@ -47,7 +47,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/pwa/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tcp-udp-difference/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tcp-udp-difference/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tcp-udp-difference/"
@@ -110,7 +110,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/asp.net-core/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/hualien-part1/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/hualien-part1/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/hualien-part1/"
@@ -164,7 +164,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/emoji-support/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/"
@@ -173,7 +173,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/"
@@ -182,7 +182,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/youtube/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/youtube/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/youtube/"
@@ -191,7 +191,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/youtube/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/%E6%97%85%E9%81%8A/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/%E6%97%85%E9%81%8A/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/%E6%97%85%E9%81%8A/"
@@ -245,7 +245,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/%E8%A8%AD%E5%AE%9A%E6%95%99%E5%AD%B8/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/tcp/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/tcp/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/tcp/"
@@ -254,7 +254,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/tcp/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/udp/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/udp/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/udp/"
@@ -263,7 +263,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/udp/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/%E7%B6%B2%E8%B7%AF/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/%E7%B6%B2%E8%B7%AF/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/%E7%B6%B2%E8%B7%AF/"
@@ -290,7 +290,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/%E7%92%B0%E5%B3%B6/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/longstay/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/longstay/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/longstay/"
@@ -353,7 +353,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/%E6%B2%B9%E7%95%AB/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/configuration/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/configuration/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/configuration/"
@@ -362,7 +362,7 @@
                     hreflang="en"
                     href="https://pin-yi.me/en/tags/configuration/"
                     /></url><url>
-            <loc>https://pin-yi.me/en/tags/installation/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/en/tags/installation/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-tw"
                         href="https://pin-yi.me/tags/installation/"

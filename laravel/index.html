@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/laravel/" /><meta property="og:image" content="https://pin-yi.me/laravel/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-02T10:33:45+08:00" />
-<meta property="article:modified_time" content="2022-03-02T18:17:22+08:00" />
+<meta property="article:modified_time" content="2022-03-03T18:51:44+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/laravel/featured-image.webp"/>
@@ -31,10 +31,10 @@
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/pin-yi.me\/laravel\/featured-image.webp",
-                            "width":  2804 ,
-                            "height":  1024 
-                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, 實作, 介紹","wordcount":  3152 ,
-        "url": "https:\/\/pin-yi.me\/laravel\/","datePublished": "2022-03-02T10:33:45+08:00","dateModified": "2022-03-02T18:17:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                            "width":  2070 ,
+                            "height":  590 
+                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, 實作, 介紹","wordcount":  6000 ,
+        "url": "https:\/\/pin-yi.me\/laravel\/","datePublished": "2022-03-02T10:33:45+08:00","dateModified": "2022-03-03T18:51:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/laravel/featured-image.webp"
         title="/laravel/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Laravel 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-02">2022-03-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3152 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-02">2022-03-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 6000 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 12 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -146,31 +146,11 @@ if (!doNotTrack) {
     <li><a href="#laravel-框架">Laravel 框架</a></li>
     <li><a href="#php-常見框架對比">PHP 常見框架對比</a>
       <ul>
-        <li><a href="#laravel">Laravel</a>
-          <ul>
-            <li><a href="#laravel-框架優點">Laravel 框架優點</a></li>
-          </ul>
-        </li>
-        <li><a href="#symfony">Symfony</a>
-          <ul>
-            <li><a href="#symfony-框架優點">Symfony 框架優點</a></li>
-          </ul>
-        </li>
-        <li><a href="#codeigniter">CodeIgniter</a>
-          <ul>
-            <li><a href="#codeigniter-框架優點">CodeIgniter 框架優點</a></li>
-          </ul>
-        </li>
-        <li><a href="#cakephp">CakePHP</a>
-          <ul>
-            <li><a href="#cakephp-框架優點">CakePHP 框架優點</a></li>
-          </ul>
-        </li>
-        <li><a href="#zend-2">Zend 2</a>
-          <ul>
-            <li><a href="#zend-2-框架優點">Zend 2 框架優點</a></li>
-          </ul>
-        </li>
+        <li><a href="#laravel">Laravel</a></li>
+        <li><a href="#symfony">Symfony</a></li>
+        <li><a href="#codeigniter">CodeIgniter</a></li>
+        <li><a href="#cakephp">CakePHP</a></li>
+        <li><a href="#zend-2">Zend 2</a></li>
       </ul>
     </li>
     <li><a href="#實作">實作</a>
@@ -178,6 +158,24 @@ if (!doNotTrack) {
         <li><a href="#環境設定">環境設定</a></li>
         <li><a href="#新增專案">新增專案</a></li>
         <li><a href="#laravel-資料夾與檔案介紹">Laravel 資料夾與檔案介紹</a></li>
+        <li><a href="#建立第一個-laravel-網頁">建立第一個 Laravel 網頁</a>
+          <ul>
+            <li><a href="#維護模式">維護模式</a></li>
+            <li><a href="#routes-路由">routes 路由</a>
+              <ul>
+                <li><a href="#webphp">web.php</a></li>
+                <li><a href="#apiphp">api.php</a></li>
+              </ul>
+            </li>
+            <li><a href="#database-資料庫">Database 資料庫</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#測試">測試</a>
+      <ul>
+        <li><a href="#如何運行自動測試">如何運行自動測試</a></li>
+        <li><a href="#實作測試程式">實作測試程式</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -284,7 +282,7 @@ if (!doNotTrack) {
 </table>
 <h3 id="laravel">Laravel</h3>
 <p>該框架可能是Web 開發人員中最受歡迎的框架。Laravel 是一個免費的開源PHP 框架，適用於Web 應用程序開發，且適用於移動應用程序場。(上面有介紹過，這邊就簡化)</p>
-<h4 id="laravel-框架優點">Laravel 框架優點</h4>
+<p><strong>Laravel 框架優點</strong></p>
 <ul>
 <li>易於學習</li>
 <li>無縫數據遷移</li>
@@ -299,7 +297,7 @@ if (!doNotTrack) {
 <p>Symfony 非常穩定、文檔齊全、性能卓越。這些特點使Symfony 成為開發大型企業項目的完美選擇。</p>
 <p>使 Symfony 成為 PHP 框架中獨一無二的特性之一是它的可重用 PHP 組件。使用可重用組件，開發時間減少了許多模塊，如表單創建、對象配置、模板等。</p>
 <p>可以直接從舊組件構建，節約了大量成本。Symfony 易於在大多數平台上安裝和配置，並且可以獨立於數據庫引擎。它具有高度的靈活性，可以與 Drupal 等大型項目集成</p>
-<h4 id="symfony-框架優點">Symfony 框架優點</h4>
+<p><strong>Symfony 框架優點</strong></p>
 <ul>
 <li>官方長期技術支持</li>
 <li>內置測試功能</li>
@@ -310,7 +308,7 @@ if (!doNotTrack) {
 <p>該框架可能是最適合開發動態網站的PHP 框架。它是一個非常簡單的輕量級PHP 框架。</p>
 <p>它的大小只有2 MB 左右（包括文檔）。因此，CodeIgniter 本身俱有最小的佔用空間，它允許Web 開發人員添加第三方插件來開發更複雜的功能。</p>
 <p>CodeIgniter 還提供了幾個預構建的模塊，用於為Web 開發創建健壯的、可重用的組件。由於設置過程簡單，這個PHP 框架非常適合初學者。</p>
-<h4 id="codeigniter-框架優點">CodeIgniter 框架優點</h4>
+<p><strong>CodeIgniter 框架優點</strong></p>
 <ul>
 <li>MVC 架構</li>
 <li>Top-Notch 錯誤處理</li>
@@ -323,7 +321,7 @@ if (!doNotTrack) {
 <p>該框架對個人是完全免費，並提供付費的商業用途。它將幫助您開發功能豐富且視覺上令人印象深刻的網站。</p>
 <p>CakePHP 起初是一個簡單而優雅的工具包，在過去的15 年裡它變得更加強大。由於它的CRUD（創建、讀取、更新和刪除）框架，CakePHP 是最容易學習的框架。</p>
 <p>使用CakePHP 部署Web 網站是&quot;小菜一碟&quot;，只需要一個Web 服務器和CakePHP 框架的副本。</p>
-<h4 id="cakephp-框架優點">CakePHP 框架優點</h4>
+<p><strong>CakePHP 框架優點</strong></p>
 <ul>
 <li>插件和組件的簡易擴展</li>
 <li>適當的類繼承</li>
@@ -337,7 +335,7 @@ if (!doNotTrack) {
 <p>該框架是一個完整的面向對象的PHP 框架。這個PHP 框架是可定制的，對於需要添加項目特定功能的開發人員來說，這是一個好處。</p>
 <p>Zend 構建於敏捷方法之上，可幫助開發人員為大型客戶創建、高質量的Web 應用程序的框架。它非常適合複雜的企業級項目，Zend 主要關注安全性、性能和可擴展性。</p>
 <p>Zend 框架主要受大型IT 企業和銀行等金融機構的青睞。</p>
-<h4 id="zend-2-框架優點">Zend 2 框架優點</h4>
+<p><strong>Zend 2 框架優點</strong></p>
 <ul>
 <li>MVC 組件</li>
 <li>卓越的前端技術支持工具</li>
@@ -391,7 +389,7 @@ Composer version 2.2.7
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">composer global require <span class="s2">&#34;laravel/installer&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ composer global require <span class="s2">&#34;laravel/installer&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -427,7 +425,7 @@ zsh: <span class="nb">command</span> not found: laravel
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">source</span> .bash_profile
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">source</span> .bash_profile
 </code></pre></td></tr></table>
 </div>
 </div><p>我們再次檢查是否安裝好 Laravel</p>
@@ -492,7 +490,7 @@ Laravel Framework 5.4.36
         </div>
     </div>
 <h3 id="laravel-資料夾與檔案介紹">Laravel 資料夾與檔案介紹</h3>
-<p>我們可以看到這個專案目錄下，Laravel 	幫我們生成了許多資料夾以及檔案，接著來簡單說明每一個資料夾與檔案的功能與用途吧</p>
+<p>我們可以看到這個專案目錄下，Laravel 幫我們生成了許多資料夾以及檔案，接著來簡單說明每一個資料夾與檔案的功能與用途吧</p>
 <ul>
 <li>app：主要放置 Controller 的地方，提供網站的應用處理流程，包括處理用戶的行為和資料 Model 上的改變等事件之類別方法，提供給 view 來呼叫。透過 laravel 之架構也可透過 controller 輕易建構 RESTful API。</li>
 <li>boostrap：內含之 app.php 為將此框架初始化及建構起來之程式。</li>
@@ -511,18 +509,480 @@ Laravel Framework 5.4.36
 <li>phpunit.xml：phpunit 測試設定檔，可規範執行單元測試之範圍，做批量測試。</li>
 <li>webpack.mix.js：build 設定檔，幫助我們將 resources 中之 js 及 sass 等前端設定檔 compile 成 js、css 等檔案並 deploy 到 public 中供頁面使用。</li>
 </ul>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>文章參考來源<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">下面教學流程是參考ReccaChao <a href="https://ithelp.ithome.com.tw/articles/10213294" target="_blank" rel="noopener noreffer"> Laravel 6.0 初體驗！怎麼用最新的 laravel 架網站！</a> 的文章下去說明以及學習，在學期過程中再加上自己的理解以及不同範例的筆記來分享給大家，大家也可以先去瀏覽大大的文章，再回來呦XD</div>
+        </div>
+    </div>
+<h3 id="建立第一個-laravel-網頁">建立第一個 Laravel 網頁</h3>
+<p>我們經過千辛萬苦，將 Laravel 給安裝好，也設定好它所需的環境參數，打開 IED 準備開始學習如何建立第一個 Laravel 網頁吧！</p>
+<p>在開始說明前，還要先下一個指令，在介紹 Laravel 專案下的資料夾以及檔案中，其中一個 &ldquo;Artisan&rdquo;，是 Laravel 專用的指令工具，可以幫我們處理很多事情。</p>
+<p>像是我們現在要啟動內建的伺服器來瀏覽我們的網站，這時我們要下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ poser global requirephp artisan serve
+Laravel development server started: &lt;http://127.0.0.1:8000&gt;
+<span class="o">[</span>Thu Mar  <span class="m">3</span> 15:13:07 2022<span class="o">]</span> 127.0.0.1:52345 <span class="o">[</span>200<span class="o">]</span>: /favicon.ico
+</code></pre></td></tr></table>
+</div>
+</div><br>
+這個伺服器會在這個終端機下被建立，屬於這個專案的伺服器，如果想要關閉，可以使用 Ctrl + C 來關閉。
+<div class="details admonition tap open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>小提醒<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">由於此伺服器是專屬於該專案的伺服器，所以下指令時，也要在該專案的目錄下歐！</div>
+        </div>
+    </div>
+<p>如果想要使用特定的 Port ，可以在後面加入此參數，就可以依照設定的 Port 來當作我們伺服器的位子囉！(預設是8000 Port)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan serve --port<span class="o">=</span><span class="m">7777</span>
+Laravel development server started: &lt;http://127.0.0.1:7777&gt;
+<span class="o">[</span>Thu Mar  <span class="m">3</span> 15:45:23 2022<span class="o">]</span> 127.0.0.1:54206 <span class="o">[</span>200<span class="o">]</span>: /favicon.ico
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="維護模式">維護模式</h4>
+<p>當我們想要修改系統或是資料庫的欄位時，就可以將該網站設定成維修模式。Laravel 讓這個工作變得很容易，只需要用以下兩個指令來控制</p>
+<p>啟動維護模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan down --message<span class="o">=</span><span class="s2">&#34;Upgrading Database&#34;</span> --retry<span class="o">=</span><span class="m">60</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+還可以設定一些參數， --message 是用來顯示或紀錄客製化訊息， --retry 用來當作HTTP head 的 Retry-After 的值
+<br>
+<figure><a class="lightgallery" href="/images/laravel/error503.png" title="/images/laravel/error503.png" data-thumbnail="/images/laravel/error503.png" data-sub-html="<h2>Laravel 維護模式顯示頁面</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel/error503.png"
+            data-srcset="/images/laravel/error503.png, /images/laravel/error503.png 1.5x, /images/laravel/error503.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel/error503.png" width="700" />
+    </a><figcaption class="image-caption">Laravel 維護模式顯示頁面</figcaption>
+    </figure>
+<br>
+關閉維護模式
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan up
+</code></pre></td></tr></table>
+</div>
+</div><p><div class="details admonition abstract open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-list-ul fa-fw"></i>維護模式顯示模板<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">維護模式顯示的預設模板放置在 resources/views/errors/503.blade.php。你可以自由的根據需求修改。</div>
+        </div>
+    </div>
+<br></p>
+<h4 id="routes-路由">routes 路由</h4>
+<p>我們要來建立我的第一個網頁，網頁的其中一個關鍵就是路徑，那我們網站的路徑，在 Laravel 裡面，都放置在 routes/ 裡面，打開後可以看到4個檔案有</p>
+<ul>
+<li>api.php：我們在做前後端分離的專案時會使用這個檔案。</li>
+<li>channels.php：和 Broadcast 有關係，這個是 Laravel ，不太常使用，所以先跳過，之後有碰到再來說明。</li>
+<li>console.php：這個和我們指令有關，像是我們上面介紹的 php artisan ，這個檔案就是和這個部分有關。</li>
+<li>web.php：這個和我們現在要說明的路徑有關，我們在瀏覽器打的網址，前面是 domain name，那在 domain 之後的字串，會在我們這個檔案裡面來定義哪些字串要導向哪一個流程或是檔案。</li>
+</ul>
+<h5 id="webphp">web.php</h5>
+<p>那我們就先來針對 web.php 來做介紹，我們剛剛使用指令開啟的伺服器網址是 <code>http://127.0.0.1:8000</code>，使用瀏覽器進入後，可以看到下面這個 Laravel 預設的頁面(此為 Laravel 5.4版本，新版的好像不太一樣)</p>
+<figure><a class="lightgallery" href="/images/laravel/laravel_welcome.png" title="/images/laravel/laravel_welcome.png" data-thumbnail="/images/laravel/laravel_welcome.png" data-sub-html="<h2>Laravel 預設首頁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel/laravel_welcome.png"
+            data-srcset="/images/laravel/laravel_welcome.png, /images/laravel/laravel_welcome.png 1.5x, /images/laravel/laravel_welcome.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel/laravel_welcome.png" width="700" />
+    </a><figcaption class="image-caption">Laravel 預設首頁</figcaption>
+    </figure>
+<p>那我們開啟 routes/web.php 檔案中，可以看到下面這一段預設的路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;welcome&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>這段的意思就是代表，如果我們網址沒有輸入其他的目錄，就會顯示 welcome 這個網頁，那 welcome 這個顯示的畫面，就放在 <code>resources/view</code> 底下名為 welcome.blade.php 的檔案中，打開來看就是簡單的 HTML。</p>
+<p>那現在我們了解路由的含義，現在換我們來實作一個看看，首先我們希望網址列輸入 <code>https://127.0.0.1:8000/hello-world</code> 可以出現 <code>hello world</code> 的字樣，那我們可以到 web.php 中，新增下面這個路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello-world&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;hello-world&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>再到到 <code>resources/view</code> 新增 hello-world.blade.php 檔案，簡單輸入 HTML 格式，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;IE=edge&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> hello ~ pinyi <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>使用瀏覽器在網址列輸入 <code>http://127.0.0.1/hello-world</code> ，就可以看到顯示 <code>hello ~ pinyi </code> 的字樣囉～</p>
+<p>除了回傳網頁來做顯示以外，也可以單獨回傳字串，並帶入參數歐，我們來試試看要怎麼做。首先我們先將路由修改成下方，讓我們在 hello-world 後面可以輸入我們的名稱，並且顯示在畫面上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello-world/{name}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;hello ~ &#39;</span> <span class="o">.</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們在網址列輸入 <code>http://127.0.0.1/hello-world/pinyi</code> 就會顯示 <code>hello ~ pinyi</code> ，很神奇吧，只要在括號中 {} 輸入你要的參數，並且後面的 function 也要帶入參數，就可以將資料給帶進去了 !</p>
+<h5 id="apiphp">api.php</h5>
+<p>我們可以看到 api.php 檔案也是使用 Route 來運作，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;auth:api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/user&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>middleware 就是一種過濾或是防火牆的概念，這個我們後續會再說明。我們也在此新增一個跟上面一樣的 hello-world，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello-world&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello World ~&#39;</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 api.php 比較特別的部分是需要在字串前面加入 api ，因為 api.php 就是預設讓我們來放 api 的地方，如範例 url:{domain}/api/hello-world，那就會回傳 <code>hello world ~</code></p>
+<h4 id="database-資料庫">Database 資料庫</h4>
+<p>我們在 <a href="https://pin-yi.me/laravel/#laravel-%e6%a1%86%e6%9e%b6" target="_blank" rel="noopener noreffer">Laravel 框架</a> 部分有提到 Laravel 支援 MySQL、PostgreSQL、SQLite 、SQL Server 資料庫，本次介紹使用 MySQL 來做說明。</p>
+<p>首先我們要先確認資料庫是否與 PHP 有所連結，我們先打開 <code>.env</code> 這個隱藏檔來看，大約在第8行有一段關於資料庫的敘述</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-env" data-lang="env"><span class="nv">DB_CONNECTION</span><span class="o">=</span>mysql
+<span class="nv">DB_HOST</span><span class="o">=</span>127.0.0.1
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">3306</span>
+<span class="nv">DB_DATABASE</span><span class="o">=</span>homestead
+<span class="nv">DB_USERNAME</span><span class="o">=</span>homestead
+<span class="nv">DB_PASSWORD</span><span class="o">=</span>secret
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="測試">測試</h2>
+<p>寫完程式後，除了自己一個一個去測試，也可以寫成程式來測試是否有錯誤。會在此談到測試，是因為自動測試變得簡單也是 Laravel 這個框架的一個重要特性。</p>
+<p>那我先來說明一下什麼是自動測試</p>
+<ul>
+<li>簡單來說，常見的測試，就是我們在完成新功能後，會一個一個實際去測試我們寫的功能，是不是跟我們預想的那樣子運行。</li>
+<li>一開始網站還小，功能不多時，還可以應付。但當網站越來越龐大，功能越來越多後，或是要使用不同權限帳號來檢查所有功能，會很辛苦的。</li>
+</ul>
+<p>幸好，我們可以用自動測試的程式來解決這些瑣事！</p>
+<ul>
+<li>如果我們每次為每個功能撰寫程式時，都寫另一段小程式來測試這個功能。</li>
+<li>隨著時間過去，需求的改變，雖然功能越來越多，但是相對應的，測試這些功能的程式也會越來越多，並且不管這個功能是多久之前開發的，每個功能都有相對應的測試。</li>
+</ul>
+<h3 id="如何運行自動測試">如何運行自動測試</h3>
+<p>在 PHP 的世界，自動測試通常使用 <a href="https://phpunit.de/" target="_blank" rel="noopener noreffer">PHPUnit</a> 這個工具。然後 Laravel 在安裝時，也自動幫我們安裝這個工具了～
+Laravel 幫我們把 PHPUnit 安裝在 <code>vendor/</code> 裡面，我們來看看要怎麼使用它吧！使用的指令如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vendor/phpunit/phpunit/phpunit
+PHPUnit 5.7.27 by Sebastian Bergmann and contributors.
+
+..                                                                  <span class="m">2</span> / <span class="m">2</span> <span class="o">(</span>100%<span class="o">)</span>
+
+Time: <span class="m">146</span> ms, Memory: 10.00MB
+
+OK <span class="o">(</span><span class="m">2</span> tests, <span class="m">2</span> assertions<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>奇怪，我們什麼都還沒做，為什麼會有兩個程式已經通過測試了，是因為 Laravel 預設兩個檔案來當測試的案例，分別位於 <code>tests/Feature/ExampleTest.php</code> 以及 <code>tests/Unit/ExampleTest.php</code>  (單元測試)，我這邊就簡單說明 <code>Feature/ExampleTest.php</code> 這個測試程式做哪些事情</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">namespace</span> <span class="nx">Tests\Feature</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Tests\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\WithoutMiddleware</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\DatabaseMigrations</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\DatabaseTransactions</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExampleTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * A basic test example.
+</span><span class="sd">     *
+</span><span class="sd">     * @return void
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testBasicTest</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">assertStatus</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>他檢查如果連線到 <code>/</code> ，HTTP Status 有沒有回傳 200 ， 這個測試功能就是在檢查首頁是否存在 ～</p>
+<h3 id="實作測試程式">實作測試程式</h3>
+<p>大概了解原理後，一樣我們來實作看看，我們想要連線到 <code>hello-world/</code>，HTTP Status 會回傳 200 ，以及網站內要看到『 hello world ~ 』的文字。那我們輸入指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan make:test HelloWorldTest
+Test created successfully.
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>Laravel 自動幫我們在 <code>tests/Feature</code> 底下新增了 HelloWorldTest.php 檔案，內容如下(框架版本5.4)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">namespace</span> <span class="nx">Tests\Feature</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Tests\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\WithoutMiddleware</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\DatabaseMigrations</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Testing\DatabaseTransactions</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">HelloWorldTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * A basic test example.
+</span><span class="sd">     *
+</span><span class="sd">     * @return void
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我們將他預設的 testExample() 的內容改成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExample</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello-world&#39;</span><span class="p">);</span>
+
+        <span class="c1">// 如果連線 hello-world/，HTTP Status 應該要顯示 200
+</span><span class="c1"></span>        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">assertStatus</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+        
+        <span class="c1">//連線到網頁內，應該要可以看到「『 hello world ~』文字
+</span><span class="c1"></span>        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">assertSee</span><span class="p">(</span><span class="s1">&#39;hello world ~&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>來運作一下吧，一樣使用同樣的指令來做測試，順便讓大家看一下測試錯誤的錯誤訊息吧！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vendor/phpunit/phpunit/phpunit
+PHPUnit 5.7.27 by Sebastian Bergmann and contributors.
+
+.F.                                                                 <span class="m">3</span> / <span class="m">3</span> <span class="o">(</span>100%<span class="o">)</span>
+
+Time: <span class="m">200</span> ms, Memory: 10.00MB
+
+There was <span class="m">1</span> failure:
+
+1<span class="o">)</span> Tests<span class="se">\F</span>eature<span class="se">\H</span>elloWorldTest::testExample
+Expected status code <span class="m">200</span> but received 404.
+Failed asserting that <span class="nb">false</span> is true.
+
+FAILURES!
+Tests: 3, Assertions: 3, Failures: 1.
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我故意在 routes 下沒有 <code>hello-world/</code> 路徑，所以返回顯示 404 ，而不是 200 ，因此，就可以知道要怎麼去修改程式囉  !</p>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://ithelp.ithome.com.tw/articles/10237537" target="_blank" rel="noopener noreffer">PHP與Laravel簡介</a></p>
 <p><a href="https://opensourcedoc.com/blog/comparing-php-web-frameworks/" target="_blank" rel="noopener noreffer">比較 PHP 網頁框架
 </a></p>
-<p><a href="https://christmasq.wordpress.com/2018/12/04/php-laravel-%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E6%94%BE%E6%A3%84-%E4%B8%80-%E9%80%8F%E9%81%8E-composer-%E6%9E%B6%E8%A8%AD-laravel-%E7%B6%B2%E7%AB%99/" target="_blank" rel="noopener noreffer">Laravel 從入門到放棄 (一) – 透過 composer 架設 laravel 網站</a></p></div><div class="post-footer" id="post-footer">
+<p><a href="https://christmasq.wordpress.com/2018/12/04/php-laravel-%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E6%94%BE%E6%A3%84-%E4%B8%80-%E9%80%8F%E9%81%8E-composer-%E6%9E%B6%E8%A8%AD-laravel-%E7%B6%B2%E7%AB%99/" target="_blank" rel="noopener noreffer">Laravel 從入門到放棄 (一) – 透過 composer 架設 laravel 網站</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10213294" target="_blank" rel="noopener noreffer">Laravel 6.0 初體驗！怎麼用最新的 laravel 架網站！</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10217731" target="_blank" rel="noopener noreffer">Laravel Route(路由)</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/php/">PHP</a>
                 </span><span><a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>
                 </span><span><a href="/tags/laravel/">Laravel</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-02</span>
+                <span>更新於 2022-03-03&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/9bdee569dd4f405c3b0d871050c6009e30dc7951" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(ian_zhuang@mail.chungyo.net)&nbsp;9bdee56:&nbsp;# 新增/修改 Laravel">
+                            <i class="fas fa-hashtag fa-fw"></i>9bdee56</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -563,4 +1023,4 @@ if ('serviceWorker' in navigator) {
                 <i class="fas fa-chevron-up fa-fw"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
                 <i class="fas fa-comment-alt fa-fw"></i>
-            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":20},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":30},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
