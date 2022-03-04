@@ -23,10 +23,16 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
-    <title>Laravel 介紹</title>
+    <title>面試官常問的 MySQL 資料型態差別 char varchar text</title>
+    <link>https://pin-yi.me/char-varchar/</link>
+    <pubDate>Fri, 04 Mar 2022 17:44:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/char-varchar/</guid>
+    <description><![CDATA[每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？ 文字資料型態 主要有這三點，那我會分]]></description>
+</item>
+<item>
+    <title>Laravel 介紹 (使用 Laravel 從零到有開發出一個留言板功能並搭配 RESTful API 來CRUD) </title>
     <link>https://pin-yi.me/laravel/</link>
     <pubDate>Wed, 02 Mar 2022 10:33:45 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel/</guid>
-    <description><![CDATA[<p>本章節會介紹什麼是 Laravel ，以及它有什麼特別之處，可以讓它在2015年被評為最受歡迎的 PHP  框架第一名，並說明為什麼要使用框架，最後再附上實作來作證。</p>]]></description>
+    <description><![CDATA[<p>本文章會介紹什麼是 Laravel ，以及它有什麼特別之處，可以讓它在2015年被評為最受歡迎的 PHP  框架第一名，並說明為什麼要使用框架，最後實作一個留言板功能搭配 RESTful API 來CRUD。</p>]]></description>
 </item>
 <item>
     <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
@@ -38,8 +44,7 @@
     <title>PHP 介紹</title>
     <link>https://pin-yi.me/php/</link>
     <pubDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php/</guid>
-    <description><![CDATA[<p>PHP 全名是超文本前處理器(Hypertext Preprocessor)，是一種開源的通用電腦手稿語言</p>
-<p>根據W3Techs的報告，截至2021年9月，有78.9%網站都是使用PHP，像是著名的 FaceBook、Tesla、Slack、WordPress</p>]]></description>
+    <description><![CDATA[1. PHP 是什麼 PHP 全名是超文本前處理器(Hypertext Preprocessor)，是一種開源的通用電腦手稿語言 根據W3Techs的報告，截至2]]></description>
 </item>
 <item>
     <title>【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG</title>
@@ -60,12 +65,6 @@
     <pubDate>Fri, 18 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/tcp-udp-difference/</guid>
     <description><![CDATA[<p>TCP 與 UDP 都是常見的網路通訊協定，這兩種協定能確保網際網路資料傳輸的快速以及完整性，它們的運作方式不太一樣，TCP 較為可靠，UDP 較為快速。
 我們來慢慢分析兩種不同的網路通訊協定，有什麼特別之處!?</p>]]></description>
-</item>
-<item>
-    <title>【 四極點機車環島】台灣人一定要去一次的旅行，巧遇保育類動物穿山甲</title>
-    <link>https://pin-yi.me/surround-island/</link>
-    <pubDate>Mon, 31 Jan 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/surround-island/</guid>
-    <description><![CDATA[<p>網路上流傳著一個說法，說台灣人一生必做的3大事情</p>]]></description>
 </item>
 </channel>
 </rss>

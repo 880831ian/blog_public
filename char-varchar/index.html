@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>面試官常問的 MySQL 資料型態差別 char varchar text - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="面試官常問的 MySQL 資料型態差別 char varchar text" />
+<meta property="og:description" content="每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？ 文字資料型態 主要有這三點，那我會分" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/char-varchar/" /><meta property="og:image" content="https://pin-yi.me/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-04T17:44:00+08:00" />
+<meta property="article:modified_time" content="2022-03-04T17:44:45+47:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/logo.png"/>
+
+<meta name="twitter:title" content="面試官常問的 MySQL 資料型態差別 char varchar text"/>
+<meta name="twitter:description" content="每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？ 文字資料型態 主要有這三點，那我會分"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/char-varchar/" /><link rel="prev" href="https://pin-yi.me/laravel/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "面試官常問的 MySQL 資料型態差別 char varchar text",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/char-varchar\/"
+        },"image": ["https:\/\/pin-yi.me\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "資料型態","wordcount":  691 ,
+        "url": "https:\/\/pin-yi.me\/char-varchar\/","datePublished": "2022-03-04T17:44:00+08:00","dateModified": "2022-03-04T17:44:45+47:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/char-varchar/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/char-varchar/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">面試官常問的 MySQL 資料型態差別 char varchar text</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-04">2022-03-04</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 691 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#文字資料型態">文字資料型態</a>
+      <ul>
+        <li><a href="#char">char</a></li>
+        <li><a href="#varchar">varchar</a></li>
+        <li><a href="#text">text</a></li>
+        <li><a href="#可變跟不可變的差異">可變跟不可變的差異</a></li>
+        <li><a href="#查詢速度比較">查詢速度比較</a></li>
+        <li><a href="#儲存方式">儲存方式</a></li>
+        <li><a href="#比較差異表格">比較差異表格</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？</p>
+<h2 id="文字資料型態">文字資料型態</h2>
+<p>主要有這三點，那我會分別來介紹，最後附上一個表格來整理一下今天所講的。</p>
+<ul>
+<li>char</li>
+<li>varchar</li>
+<li>text</li>
+</ul>
+<h3 id="char">char</h3>
+<p><code>char</code> 的長度是不可變動的，每一條資料佔用等長的字節空間，適合用在身分證號碼、手機號碼等。</p>
+<h3 id="varchar">varchar</h3>
+<p><code>varchar</code> 的長度是可以變動的，可以設定最大長度，就適合用於在長度可變的屬性。</p>
+<h3 id="text">text</h3>
+<p><code>text</code> 的長度不需要設定，當我們不知道屬性的長度時，就適合用 <code>text</code>。</p>
+<h3 id="可變跟不可變的差異">可變跟不可變的差異</h3>
+<p>疑~ 什麼是可變，什麼是不可變長度呀 ?</p>
+<p>簡單來說，我們現在定義一個 <code>char[10]</code> 以及 <code>varchar[10]</code>，現在我們存入的資料是 &ldquo;pinyi&rdquo; 5字元的字串，</p>
+<p>由於 <code>char</code> 是不可變長度，所佔的長度依舊是 10 ，那如果是 <code>varchar</code> 可變長度，除了字元所佔的5格，後面的 5 個空格會自動消失，varchar 會自動把長度變成 5 。</p>
+<p>取資料時，<code>char</code> 型別要用 <code>trim()</code> 來去除多餘的空白，而 <code>varchar</code> 不需要。</p>
+<h3 id="查詢速度比較">查詢速度比較</h3>
+<p>如果我們來依照查詢速度來比較，想也不用想，一定是 <code>char</code> 第一名，因為他有固定的數量，比起 <code>varchar</code> 第二名可變長度還可以更快進行查詢，當然沒有長度限制的 <code>text</code> 一定是最慢。</p>
+<h3 id="儲存方式">儲存方式</h3>
+<p><code>char</code> 的儲存方式是，對於英文字元 (ASCII) 佔用 1 位元組，對於中文佔用 2 位元組 ;</p>
+<p><code>varchar</code> 的儲存方式是，對每個英文字元 (ASCII) 佔用 2 位元組，中文也佔用 2 位元組 ;</p>
+<h3 id="比較差異表格">比較差異表格</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字串資料型態</th>
+<th style="text-align:center">char</th>
+<th style="text-align:center">varchar</th>
+<th style="text-align:center">text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">長度狀態</td>
+<td style="text-align:center">不可變</td>
+<td style="text-align:center">可變</td>
+<td style="text-align:center">不需要設定</td>
+</tr>
+<tr>
+<td style="text-align:center">查詢速度</td>
+<td style="text-align:center">第一</td>
+<td style="text-align:center">第二</td>
+<td style="text-align:center">第三</td>
+</tr>
+<tr>
+<td style="text-align:center">英文所佔用位元組</td>
+<td style="text-align:center">1 Byte</td>
+<td style="text-align:center">2 Byte</td>
+<td style="text-align:center">Ｘ</td>
+</tr>
+<tr>
+<td style="text-align:center">中文所佔用位元組</td>
+<td style="text-align:center">2 Byte</td>
+<td style="text-align:center">2 Byte</td>
+<td style="text-align:center">Ｘ</td>
+</tr>
+<tr>
+<td style="text-align:center">最大長度</td>
+<td style="text-align:center">1 &lt;= M &lt;= 255</td>
+<td style="text-align:center">L &lt;= M or 1 &lt;= M &lt;= 255</td>
+<td style="text-align:center">L &lt;2^16</td>
+</tr>
+</tbody>
+</table>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://kknews.cc/code/ey26lgy.html" target="_blank" rel="noopener noreffer">面試官：你們資料庫選擇varchar和char的原則到底什麼？</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10213922" target="_blank" rel="noopener noreffer">SQL Server 資料型態 char varchar nchar nvarchar</a></p>
+<p><a href="https://www.twblogs.net/a/5c126982bd9eee5e40bb4de6" target="_blank" rel="noopener noreffer">MySQL性能優化之char、varchar、text的區別</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B/">資料型態</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-03-04</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/char-varchar/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/char-varchar/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/char-varchar/" data-title="面試官常問的 MySQL 資料型態差別 char varchar text" data-hashtags="資料型態"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/char-varchar/" data-hashtag="資料型態"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/char-varchar/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/char-varchar/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/char-varchar/" data-title="面試官常問的 MySQL 資料型態差別 char varchar text"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/char-varchar/" data-title="面試官常問的 MySQL 資料型態差別 char varchar text"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/char-varchar/" data-title="面試官常問的 MySQL 資料型態差別 char varchar text"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/laravel/" class="prev" rel="prev" title="Laravel 介紹 (使用 Laravel 從零到有開發出一個留言板功能並搭配 RESTful API 來CRUD) "><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":30},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

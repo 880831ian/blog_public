@@ -29,7 +29,8 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/theme-documentation-built-in-shortcodes/"
                     /></url><url>
-            <loc>https://pin-yi.me/laravel/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/char-varchar/</loc><lastmod>2022-03-04T17:44:45&#43;47:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/laravel/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/php-restful-api/</loc><lastmod>2022-03-01T18:20:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/php/</loc><lastmod>2022-03-01T18:24:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/lofi-land/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
@@ -167,9 +168,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/emoji-support/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/laravel/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/php/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/"
@@ -178,7 +177,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/"
@@ -187,7 +186,10 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B/</loc><lastmod>2022-03-04T17:44:45&#43;47:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/laravel/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/php/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/%E4%BB%8B%E7%B4%B9/"
@@ -196,8 +198,8 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/%E6%A1%86%E6%9E%B6/</loc><lastmod>2022-03-03T18:51:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E6%A1%86%E6%9E%B6/</loc><lastmod>2022-03-04T16:57:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/nginx/</loc><lastmod>2022-03-01T18:20:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/restful-api/</loc><lastmod>2022-03-01T18:20:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/php-%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95/</loc><lastmod>2022-03-01T18:24:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
