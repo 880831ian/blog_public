@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Redis 介紹</title>
+    <link>https://pin-yi.me/redis/</link>
+    <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/redis/</guid>
+    <description><![CDATA[什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療]]></description>
+</item>
+<item>
     <title>面試官常問的 MySQL 資料型態差別 char varchar text</title>
     <link>https://pin-yi.me/char-varchar/</link>
     <pubDate>Fri, 04 Mar 2022 17:44:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/char-varchar/</guid>
@@ -58,13 +64,6 @@
     <link>https://pin-yi.me/pwa/</link>
     <pubDate>Sat, 19 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/pwa/</guid>
     <description><![CDATA[<p>PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。</p>]]></description>
-</item>
-<item>
-    <title>TCP和UDP的差異</title>
-    <link>https://pin-yi.me/tcp-udp-difference/</link>
-    <pubDate>Fri, 18 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/tcp-udp-difference/</guid>
-    <description><![CDATA[<p>TCP 與 UDP 都是常見的網路通訊協定，這兩種協定能確保網際網路資料傳輸的快速以及完整性，它們的運作方式不太一樣，TCP 較為可靠，UDP 較為快速。
-我們來慢慢分析兩種不同的網路通訊協定，有什麼特別之處!?</p>]]></description>
 </item>
 </channel>
 </rss>

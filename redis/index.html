@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Redis 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Redis 介紹" />
+<meta property="og:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/redis/" /><meta property="og:image" content="https://pin-yi.me/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
+<meta property="article:modified_time" content="2022-03-08T14:28:32+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/logo.png"/>
+
+<meta name="twitter:title" content="Redis 介紹"/>
+<meta name="twitter:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/redis/" /><link rel="prev" href="https://pin-yi.me/char-varchar/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Redis 介紹",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/redis\/"
+        },"image": ["https:\/\/pin-yi.me\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "Redis","wordcount":  1906 ,
+        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-08T14:28:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/redis/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/redis/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">Redis 介紹</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1906 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什麼是-redis-">什麼是 Redis ?</a>
+      <ul>
+        <li><a href="#redis-的優勢">Redis 的優勢</a>
+          <ul>
+            <li><a href="#效能">效能</a></li>
+            <li><a href="#彈性的資料結構">彈性的資料結構</a></li>
+            <li><a href="#簡單易用">簡單易用</a></li>
+            <li><a href="#複寫和持久性">複寫和持久性</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#實際操作">實際操作</a>
+      <ul>
+        <li><a href="#安裝-redis">安裝 Redis</a></li>
+        <li><a href="#執行-redis">執行 Redis</a>
+          <ul>
+            <li><a href="#server">Server</a></li>
+            <li><a href="#cli">Cli</a></li>
+          </ul>
+        </li>
+        <li><a href="#資料型態">資料型態</a>
+          <ul>
+            <li><a href="#字串-strings">字串 (Strings)</a>
+              <ul>
+                <li><a href="#setget">set、get</a></li>
+                <li><a href="#incrdecr">incr、decr</a></li>
+                <li><a href="#mset">mset</a></li>
+              </ul>
+            </li>
+            <li><a href="#雜湊-hash">雜湊 (Hash)</a></li>
+            <li><a href="#列表-list">列表 (List)</a></li>
+            <li><a href="#集合-sets">集合 (Sets)</a></li>
+            <li><a href="#有序集合-zset">有序集合 (Zset)</a></li>
+          </ul>
+        </li>
+        <li><a href="#發布訂閱-pubsub">發布訂閱 (PUB/SUB)</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="什麼是-redis-">什麼是 Redis ?</h2>
+<p>Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。</p>
+<p>由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健等即時應用服務每秒處理幾百萬個請求。</p>
+<h3 id="redis-的優勢">Redis 的優勢</h3>
+<h4 id="效能">效能</h4>
+<p>所有的 Redis 資料都是存放在記憶體中，進而去實現低延遲和高傳輸量的資料存取。</p>
+<h4 id="彈性的資料結構">彈性的資料結構</h4>
+<p>一般的鍵值資料存放區提供的資料結構有限，而 Redis 提供多樣化的資料結構來滿足服務的需求，包含字串(Strings)、雜湊(Hash)、列表(List)、集合(Sets)、有序集合(Zset)。(後續會有詳細介紹)</p>
+<h4 id="簡單易用">簡單易用</h4>
+<p>Redis 可以用更少、更精簡的指令來取代傳統複雜的程式碼，可以存取應用程式的資料。並支援 Java、Python、PHP、C/C++、C#、JavaScript、Node.js、Ruby、R、GO。</p>
+<h4 id="複寫和持久性">複寫和持久性</h4>
+<p>Redis 主要採主副本架構，支援非同步複寫，可以將資料複製到多個伺服器。不但可以提升讀取效能(因為請求可分割到多部伺服器)，還可以再主服務器發生故障時快速恢復。至於持久性，Redis 支援時間點備份，會將資料複製到磁碟中。</p>
+<br>
+<h2 id="實際操作">實際操作</h2>
+<h3 id="安裝-redis">安裝 Redis</h3>
+<p>使用 Homebrew 來安裝 Redis  (Mac OS：11.6)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ brew install redis
+</code></pre></td></tr></table>
+</div>
+</div><br>
+安裝好用 -v 檢查版本
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-server -v
+Redis server <span class="nv">v</span><span class="o">=</span>6.2.6 <span class="nv">sha</span><span class="o">=</span>00000000:0 <span class="nv">malloc</span><span class="o">=</span>libc <span class="nv">bits</span><span class="o">=</span><span class="m">64</span> <span class="nv">build</span><span class="o">=</span>c6f3693d1aced7d9
+$ redis-cli -v
+redis-cli 6.2.6
+</code></pre></td></tr></table>
+</div>
+</div><p>還記得我們上面有說 Redis 會分成主副架構，一個是 Server、另一個是 Cli，所以在稍後測試時，需要開啟兩個 Terminal 來執行歐！</p>
+<h3 id="執行-redis">執行 Redis</h3>
+<h4 id="server">Server</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-server
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span>
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=39403, just started</span>
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * Increased maximum number of open files to <span class="m">10032</span> <span class="o">(</span>it was originally <span class="nb">set</span> to 256<span class="o">)</span>.
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * monotonic clock: POSIX clock_gettime
+                _._
+           _.-<span class="sb">``</span>__ <span class="s1">&#39;&#39;</span>-._
+      _.-<span class="sb">``</span>    <span class="sb">`</span>.  <span class="sb">`</span>_.  <span class="s1">&#39;&#39;</span>-._           Redis 6.2.6 <span class="o">(</span>00000000/0<span class="o">)</span> <span class="m">64</span> bit
+  .-<span class="sb">``</span> .-<span class="sb">```</span>.  <span class="sb">```</span><span class="se">\/</span>    _.,_ <span class="s1">&#39;&#39;</span>-._
+ <span class="o">(</span>    <span class="s1">&#39;      ,       .-`  | `,    )     Running in standalone mode
+</span><span class="s1"> |`-._`-...-` __...-.``-._|&#39;</span><span class="sb">`</span> _.-<span class="s1">&#39;|     Port: 6379
+</span><span class="s1"> |    `-._   `._    /     _.-&#39;</span>    <span class="p">|</span>     PID: <span class="m">39403</span>
+  <span class="sb">`</span>-._    <span class="sb">`</span>-._  <span class="sb">`</span>-./  _.-<span class="s1">&#39;    _.-&#39;</span>
+ <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
+</span><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |           https://redis.io
+</span><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+ <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
+</span><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |
+</span><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+      <span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>
+          <span class="sb">`</span>-._        _.-<span class="s1">&#39;
+</span><span class="s1">              `-.__.-&#39;</span>
+
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 <span class="c1"># Server initialized</span>
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 * Ready to accept connections
+</code></pre></td></tr></table>
+</div>
+</div><p>如果出現上面符號，就代表 Server 已經啟動，接下來再開另一個 Terminal 來執行 Cli。</p>
+<br>
+<h4 id="cli">Cli</h4>
+<p>開啟後，在下一個 <code>ping</code> 指令，該指令用於檢測 redis 服務是否啟動，正常會顯示 <code>pong</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-cli
+127.0.0.1:6379&gt; ping
+PONG
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接下來，我們都會在 Cli 視窗做測試，會詳細介紹每一個資料型態以及其適合情境。</p>
+<h3 id="資料型態">資料型態</h3>
+<h4 id="字串-strings">字串 (Strings)</h4>
+<h5 id="setget">set、get</h5>
+<p>這是最基本的型態，一個 Strings 的欄位，最高可儲存 512 MB，這裡會用到的指令是 <code>set</code>、<code>get</code> ，分別用來儲存以及讀取字串，我們來看一下範例吧。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> string hello-world
+OK
+127.0.0.1:6379&gt; get string
+<span class="s2">&#34;hello-world&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我們先用 <code>set</code> 將 hello-world 字串存到 string 這個 key，再用 <code>get</code> 顯示 string 裡面的值。</p>
+<br>
+<h5 id="incrdecr">incr、decr</h5>
+<p>Redis 還有一些方便的指令，可以將字串轉成數字，做累加或累減。會使用到 <code>incr</code> 、<code>decr</code> ，分別代表累加，像是我們的 ++ ，以及累減，像是我們的 - -。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> num <span class="m">10</span>
+OK
+127.0.0.1:6379&gt; incr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
+127.0.0.1:6379&gt; incr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+127.0.0.1:6379&gt; decr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
+127.0.0.1:6379&gt; decr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="mset">mset</h5>
+<p>我們也可以設定的時候，把要設定的值都一起設定，只需要使用 <code>mset</code> 就可以達成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; mset <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">2</span>
+OK
+127.0.0.1:6379&gt; get <span class="m">1</span>
+<span class="s2">&#34;1&#34;</span>
+127.0.0.1:6379&gt; get <span class="m">2</span>
+<span class="s2">&#34;2&#34;</span>
+127.0.0.1:6379&gt; get <span class="m">3</span>
+<span class="o">(</span>nil<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果用 <code>get</code> 顯示資料，若沒有對應的 key ，會顯示 (nil)。</p>
+<br>
+<h4 id="雜湊-hash">雜湊 (Hash)</h4>
+<p>可以把他想像成二維陣列，應該會比較好理解，我網路上找了一張圖，應該會比較清楚！</p>
+<figure><a class="lightgallery" href="/images/redis/hash.png" title="/images/redis/hash.png" data-thumbnail="/images/redis/hash.png" data-sub-html="<h2>Hash 示意圖 (Redis 基本資料形態)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/hash.png"
+            data-srcset="/images/redis/hash.png, /images/redis/hash.png 1.5x, /images/redis/hash.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/hash.png" width="500" />
+    </a><figcaption class="image-caption">Hash 示意圖 (<a href="https://blog.judysocute.com/2020/10/04/redis-%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E5%BD%A2%E6%85%8B/" target="_blank" rel="noopener noreffer">Redis 基本資料形態</a>)</figcaption>
+    </figure>
+<p>他的資料型態有像是，一個 user001 裡面是一個 Hash，Hash 裡面又會存放 name、phone、gender ，我們來實際操作看看。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hget student name
+<span class="s2">&#34;ian&#34;</span>
+127.0.0.1:6379&gt; hget student phone
+<span class="s2">&#34;0980123456&#34;</span>
+127.0.0.1:6379&gt; hget student gender
+<span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Hash 的話要使用 <code>hset</code>、<code>hget</code> 來對 hash 做寫以及讀 。</p>
+<br>
+<h4 id="列表-list">列表 (List)</h4>
+<p>這個也是很常見的 list 結構，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>List</code> 做讀寫。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; LPUSH list2 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; Lrange list2 <span class="m">0</span> <span class="m">10</span>
+1<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+7<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="集合-sets">集合 (Sets)</h4>
+<p>其實跟 List 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做讀寫。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd list3 a b c d a a b b
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; smembers list3
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到他實際寫入的只有 4 筆資料。</p>
+<br>
+<h4 id="有序集合-zset">有序集合 (Zset)</h4>
+<p>故名思義，有序集合就是有排序的集合，Sorted Sets 結構會 <strong>多一個數字值去為排序的權重</strong> 來決定先後順序，這邊會使用到 <code>zadd</code> 、 <code> zrangebyscore</code> 來對 <code>Zset</code> 做讀寫。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd sortset <span class="m">10</span> <span class="s1">&#39;10&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">6</span> <span class="s1">&#39;6&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">2</span> <span class="s1">&#39;2&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">99</span> <span class="s1">&#39;99&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zrangebyscore sortset <span class="m">0</span> <span class="m">100</span>
+1<span class="o">)</span> <span class="s2">&#34;2&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;6&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;10&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;99&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>就可以看出在顯示的時候並不是依照寫入順序，而是依照我們所設定的權重去排序的。
+<br></p>
+<h3 id="發布訂閱-pubsub">發布訂閱 (PUB/SUB)</h3>
+<p>Redis 發布訂閱 (pub/sub) 是一種消息通信模式，發送者 (pub) 發送消息，訂閱者 (sub) 接收消息。</p>
+<p>Redis 客戶端可以使用 <code>subscribe</code> 來訂閱任意數量的頻道。</p>
+<p>下面這張圖是頻道1，以及訂閱這個頻道的三個用戶端分別是客戶端2、客戶端7、客戶端5</p>
+<br>
+<figure><a class="lightgallery" href="/images/redis/channel.png" title="/images/redis/channel.png" data-thumbnail="/images/redis/channel.png" data-sub-html="<h2>Subscribe 示意圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/channel.png"
+            data-srcset="/images/redis/channel.png, /images/redis/channel.png 1.5x, /images/redis/channel.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/channel.png" width="600" />
+    </a><figcaption class="image-caption">Subscribe 示意圖</figcaption>
+    </figure>
+<br>
+<p>當我們有新消息通過 <code>publish</code> 指令發送給頻道1 ，這個消息就會被發送給有訂閱頻道1的三個客戶端。</p>
+<br>
+<figure><a class="lightgallery" href="/images/redis/message.png" title="/images/redis/message.png" data-thumbnail="/images/redis/message.png" data-sub-html="<h2>Publish 示意圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/message.png"
+            data-srcset="/images/redis/message.png, /images/redis/message.png 1.5x, /images/redis/message.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/message.png" width="600" />
+    </a><figcaption class="image-caption">Publish 示意圖</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://redis.io" target="_blank" rel="noopener noreffer">Redis 官網</a></p>
+<p><a href="https://aws.amazon.com/tw/redis/" target="_blank" rel="noopener noreffer">Redis</a></p>
+<p><a href="https://blog.judysocute.com/2020/10/04/redis-%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E5%BD%A2%E6%85%8B/" target="_blank" rel="noopener noreffer">Redis 基本資料形態</a></p>
+<p><a href="https://www.runoob.com/redis/redis-pub-sub.html" target="_blank" rel="noopener noreffer">Redis 發布訂閱</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/redis/">Redis</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-03-08&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/afbdaa2547ee6b0379ffdd93bf94fcf76437e8d2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;afbdaa2:&nbsp;# 新增 Redis">
+                            <i class="fas fa-hashtag fa-fw"></i>afbdaa2</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/redis/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/redis/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/redis/" data-title="Redis 介紹" data-hashtags="Redis"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/redis/" data-hashtag="Redis"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/redis/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/redis/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/redis/" data-title="Redis 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/redis/" data-title="Redis 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/redis/" data-title="Redis 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/char-varchar/" class="prev" rel="prev" title="面試官常問的 MySQL 資料型態差別 char varchar text"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":30},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
