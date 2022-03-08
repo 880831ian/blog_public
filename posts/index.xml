@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)</title>
+    <link>https://pin-yi.me/laravel-advanced/</link>
+    <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel-advanced/</guid>
+    <description><![CDATA[本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常]]></description>
+</item>
+<item>
     <title>Redis 介紹</title>
     <link>https://pin-yi.me/redis/</link>
     <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/redis/</guid>
@@ -58,12 +64,6 @@
     <pubDate>Sun, 20 Feb 2022 11:20:50 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/lofi-land/</guid>
     <description><![CDATA[<p>在過年要準備收假前，來一趟高級的露營，與很久不見的好友，一起泡溫泉、喝酒、吃烤肉、聊天，</p>
 <p>還有甚麼事情，比這件事還更快樂的呢 !</p>]]></description>
-</item>
-<item>
-    <title>PWA(Progressive Web App) 介紹與實際安裝</title>
-    <link>https://pin-yi.me/pwa/</link>
-    <pubDate>Sat, 19 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/pwa/</guid>
-    <description><![CDATA[<p>PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。</p>]]></description>
 </item>
 </channel>
 </rss>

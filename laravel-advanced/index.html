@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)" />
+<meta property="og:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/laravel-advanced/" /><meta property="og:image" content="https://pin-yi.me/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
+<meta property="article:modified_time" content="2022-03-08T18:26:13+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/logo.png"/>
+
+<meta name="twitter:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)"/>
+<meta name="twitter:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/laravel-advanced/" /><link rel="prev" href="https://pin-yi.me/redis/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/laravel-advanced\/"
+        },"image": ["https:\/\/pin-yi.me\/images\/Apple-Devices-Preview.webp"],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, 實作, 介紹","wordcount":  1471 ,
+        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-08T18:26:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/laravel-advanced/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/laravel-advanced/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1471 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#laravel-內建會員系統">Laravel 內建會員系統</a>
+      <ul>
+        <li><a href="#實作">實作</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>本篇是 <a href="https://pin-yi.me/laravel/" target="_blank" rel="noopener noreffer">Laravel 介紹</a> 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～</p>
+<h2 id="laravel-內建會員系統">Laravel 內建會員系統</h2>
+<p>Laravel 這個框架，很方便的地方就是，他可以將我們常用的帳號登入註冊等功能內建在 Laravel 框架內，那我們來看一下要怎麼使用吧。(本篇 Laravel Framework：5.4.36)</p>
+<p>它的配置文件在 <code>config/auth.php</code> ，其中包含了用於調整認證服務行為或是標注選項配置等。</p>
+<br>
+<p>要怎麼開始呢!? 先使用 <code>artisan</code> 指令產生我們要的檔案以及路由吧！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan make:auth
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>主要會產生</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">	new file:   app/Http/Controllers/HomeController.php
+	new file:   resources/views/auth/login.blade.php
+	new file:   resources/views/auth/passwords/email.blade.php
+	new file:   resources/views/auth/passwords/reset.blade.php
+	new file:   resources/views/auth/register.blade.php
+	new file:   resources/views/home.blade.php
+	new file:   resources/views/layouts/app.blade.php
+	modified:   routes/web.php
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>其中 <code>routes/web.php</code> 多了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">();</span>
+
+<span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="s1">&#39;HomeController@index&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">);</span> 
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>views 底下放的就是顯示的畫面，所以現在可以瀏覽</p>
+<p>登入頁面：<code>http://127.0.0.1:8000/login</code></p>
+<p>註冊頁面：<code>http://127.0.0.1:8000/register</code></p>
+<p>其他像是 <code>controller</code> 或是 <code>migration</code> 都已經內建在裡面了，稍後實作會講到！</p>
+<br>
+<h3 id="實作">實作</h3>
+<p>我們照上一篇的流程，由於 <code>route</code> 已經設定好，所以我們先來設定 <code>migration</code> ， 檔案就放在 <code>database/migrations</code> 底下的 <code>{日期時間}_create_users_table.php</code> ，我們來看一下預設的資料表有哪些欄位吧!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+</span><span class="sd">     * Reverse the migrations.
+</span><span class="sd">     *
+</span><span class="sd">     * @return void
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>簡單看一下，他會建立一個名叫 <code>users</code> 的資料表，欄位分別有自動累加(id)、字串(name)、唯一字串(email)、字串(密碼)、rememberToken()、timestamps()。</p>
+<br>
+<p>那我們這次想要做的事，不使用 email 做登入，改成使用 username來當作登入驗證，所以我們把 name、email的欄位改成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;api_token&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+</span><span class="sd">     * Reverse the migrations.
+</span><span class="sd">     *
+</span><span class="sd">     * @return void
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>設定 username 欄位為唯一值，移除掉 email ，再加入一個 api_token 用於後續的 RESTful API 驗證。</p>
+<br>
+<p>使用 <code>php artisan migrate</code> 將 <code>users</code> 這個 table 給建起來。</p>
+<p>因為我們修改 name、email 改成 username 這個欄位，所以我們也要修改一下 views 顯示的畫面，由於是簡單的 HTML 這邊就不再多描述，有問題可以下方留言&gt;&lt;</p>
+ <br>
+<p>接下來到 <code>app</code> 底下找到 <code>User.php</code> 檔案，由於筆者習慣將 <code>model</code> 放到專屬的資料夾，不要讓他在 <code>app</code> 裡面流浪，所以會建立一個 <code>Models</code>  的資料夾，來存放所有的 <code>models</code> ，那移動原本的 <code>model</code> 有些有使用到它的路徑都要做修改，這邊以 <code>User</code> 檔案為示範。(因為後續會說到怎麼驗證登入 API ，所以上一篇的 Message model 也要記得修改歐！)</p>
+ <br>
+<p>因為我們移動後，原本的路徑是 <code>App</code> 要改成 <code>App\Models</code>，會影響到的程式有以下幾個 (附上片段程式碼)</p>
+<ul>
+<li><code>config/auth.php</code> 約在70行左右</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;eloquent&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
+</span><span class="c1"></span>        <span class="p">],</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li><code>config/services.php</code> 約在33行左右</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="s1">&#39;stripe&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
+</span><span class="c1"></span>        <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_KEY&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_SECRET&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li><code>database/factories/UserFactory.php</code> 約在15行左右</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Faker\Generator</span> <span class="nv">$faker</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//修改片段
+</span><span class="c1"></span>    <span class="k">static</span> <span class="nv">$password</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">safeEmail</span><span class="p">,</span>
+        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span> <span class="o">?:</span> <span class="nv">$password</span> <span class="o">=</span> <span class="nx">bcrypt</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;remember_token&#39;</span> <span class="o">=&gt;</span> <span class="nx">str_random</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="p">];</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li><code>app/Http/Controllers/Auth/RegisterController.php</code> 約在5行左右</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>都修改好了，我們就繼續來修改 <code>User</code> 這個 model ，將原本的 name、email ，修改成以下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Notifications\Notifiable</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
+<span class="p">{</span>
+   <span class="k">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+
+   <span class="sd">/**
+</span><span class="sd">    * The attributes that are mass assignable.
+</span><span class="sd">    *
+</span><span class="sd">    * @var array
+</span><span class="sd">    */</span>
+   <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;api_token&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+   <span class="p">];</span>
+
+   <span class="sd">/**
+</span><span class="sd">    * The attributes that should be hidden for arrays.
+</span><span class="sd">    *
+</span><span class="sd">    * @var array
+</span><span class="sd">    */</span>
+   <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;api_token&#39;</span><span class="p">,</span> <span class="s1">&#39;remember_token&#39;</span><span class="p">,</span> 
+   <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div> <br>
+<p>裡面有一個是 <code>fillable</code> 跟 <code>hiddem</code> ，順便解釋一下這兩個是在做什麼</p>
+<ul>
+<li>fillable：當使用者輸入這些 attribute 以外的參數(資料表的欄位)，就會發生錯誤。</li>
+<li>hidden：想要限制能出現在陣列或是JSON 格式的屬性資料，比如密碼欄位等等，不想要顯示，只需要把該欄位加入 <code>hidden</code>。</li>
+</ul>
+<p>再加碼一個</p>
+<ul>
+<li>guarded：這個屬性與 <code>fillable</code> 相反，當使用者輸入該參數的值，就會被擋掉。以下這個例子是允許任何的 input 資料，但十分建議不要這樣。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">protected</span> <span class="nv">$guarded</span> <span class="o">=</span> <span class="p">[];</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://www.itread01.com/content/1545012913.html" target="_blank" rel="noopener noreffer">Laravel Auth 自定義user 模型目錄結構</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10220381" target="_blank" rel="noopener noreffer">user ( Model )</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/php/">PHP</a>
+                </span><span><a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>
+                </span><span><a href="/tags/laravel/">Laravel</a>
+                </span><span><a href="/tags/restful-api/">RESTful API</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-03-08&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0db2ecd609750efa6c5f56498aebd221f40a72ce" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0db2ecd:&nbsp;# 新增 Laravel 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>0db2ecd</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/laravel-advanced/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/laravel-advanced/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/laravel-advanced/" data-title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)" data-hashtags="PHP,框架,Laravel,RESTful API,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/laravel-advanced/" data-hashtag="PHP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/laravel-advanced/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/laravel-advanced/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/laravel-advanced/" data-title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/laravel-advanced/" data-title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/laravel-advanced/" data-title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 repository設計模式)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/redis/" class="prev" rel="prev" title="Redis 介紹"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="commento"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://.disqus.com/embed.js" defer></script><script src="https://cdn.commento.io/js/commento.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":30},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
