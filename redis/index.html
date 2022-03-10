@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/redis\/featured-image.webp",
                             "width":  2536 ,
                             "height":  762 
-                        }],"genre": "posts","keywords": "Redis","wordcount":  1906 ,
+                        }],"genre": "posts","keywords": "Redis","wordcount":  2391 ,
         "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-08T14:28:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/redis/featured-image.webp"
         title="/redis/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Redis 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1906 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2391 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -169,10 +169,17 @@ if (!doNotTrack) {
               <ul>
                 <li><a href="#setget">set、get</a></li>
                 <li><a href="#incrdecr">incr、decr</a></li>
+                <li><a href="#append">append</a></li>
+                <li><a href="#getrange">getrange</a></li>
                 <li><a href="#mset">mset</a></li>
               </ul>
             </li>
-            <li><a href="#雜湊-hash">雜湊 (Hash)</a></li>
+            <li><a href="#雜湊-hash">雜湊 (Hash)</a>
+              <ul>
+                <li><a href="#hgetall">hgetall</a></li>
+                <li><a href="#hkeys">hkeys</a></li>
+              </ul>
+            </li>
             <li><a href="#列表-list">列表 (List)</a></li>
             <li><a href="#集合-sets">集合 (Sets)</a></li>
             <li><a href="#有序集合-zset">有序集合 (Zset)</a></li>
@@ -324,7 +331,7 @@ OK
 </div><p>我們先用 <code>set</code> 將 hello-world 字串存到 string 這個 key，再用 <code>get</code> 顯示 string 裡面的值。</p>
 <br>
 <h5 id="incrdecr">incr、decr</h5>
-<p>Redis 還有一些方便的指令，可以將字串轉成數字，做累加或累減。會使用到 <code>incr</code> 、<code>decr</code> ，分別代表累加，像是我們的 ++ ，以及累減，像是我們的 - -。</p>
+<p>Redis 還有一些方便的指令，如果存入的是 integer 型態，就可以使用 <code>incr</code> 、<code>decr</code> ，來累加與累減，分別代表累加，像是我們的 ++ ，以及累減，像是我們的 - -。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -352,7 +359,59 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<h5 id="mset">mset</h5>
+<h5 id="append">append</h5>
+<p>如果 key 已經存在並且它是字串，可以使用 <code>append</code> 指令，會在字串最後附加進去，如果不存在，則會直接建立一個，並把值存進去。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; exists mykey
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+127.0.0.1:6379&gt; append mykey <span class="s2">&#34;Hello&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
+127.0.0.1:6379&gt; append mykey <span class="s2">&#34; World~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+127.0.0.1:6379&gt; get mykey
+<span class="s2">&#34;Hello World~&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="getrange">getrange</h5>
+<p>可以輸入字串的開始位元與結束位元，會依照你輸入的去顯示字串。我把它想成是陣列的 key 與 value 的關係。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> a <span class="s2">&#34;This is a string&#34;</span>
+OK
+127.0.0.1:6379&gt; getrange a <span class="m">0</span> <span class="m">3</span>
+<span class="s2">&#34;This&#34;</span>
+127.0.0.1:6379&gt; getrange a -3 -1
+<span class="s2">&#34;ing&#34;</span>
+127.0.0.1:6379&gt; getrange a <span class="m">0</span> -1
+<span class="s2">&#34;This is a string&#34;</span>
+127.0.0.1:6379&gt; getrange a <span class="m">10</span> <span class="m">100</span>
+<span class="s2">&#34;string&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="mset">mset</h5>
 <p>我們也可以設定的時候，把要設定的值都一起設定，只需要使用 <code>mset</code> 就可以達成。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -414,7 +473,53 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><p>Hash 的話要使用 <code>hset</code>、<code>hget</code> 來對 hash 做寫以及讀 。</p>
-<br>
+<h5 id="hgetall">hgetall</h5>
+<p>想要一次顯示 Hash 裡面的 key 跟 value ，可以使用 <code>hgetall</code> 來顯示全部資料。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="hkeys">hkeys</h5>
+<p>想要單獨顯示 Hash 裡面的 key ，可以使用 <code>hkeys</code> 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hkeys student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h4 id="列表-list">列表 (List)</h4>
 <p>這個也是很常見的 list 結構，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>List</code> 做讀寫。</p>
 <div class="highlight"><div class="chroma">
@@ -431,9 +536,9 @@ OK
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; LPUSH list2 a a b b c d e
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; lpush list2 a a b b c d e
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
-127.0.0.1:6379&gt; Lrange list2 <span class="m">0</span> <span class="m">10</span>
+127.0.0.1:6379&gt; lrange list2 <span class="m">0</span> <span class="m">10</span>
 1<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
 2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
 3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
@@ -533,6 +638,81 @@ OK
     </a><figcaption class="image-caption">Publish 示意圖</figcaption>
     </figure>
 <br>
+<p>我們來模擬一下吧 ! 先開兩個 Terminal 來執行 <code>redis-cli</code> 一個當作發送(pub)，另一個當作接收(sub)。</p>
+<p>我們先用第一個 Terminal 訂閱一個頻道 channel_1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; subscribe channel_1
+Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
+1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>開啟另一個 Terminal 發送訊息到 channel_1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;Hello World~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;ian~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;test~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+這時候再切換回來第一個 Terminal ，就可以看到他接收到我們傳送的訊息
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; subscribe channel_1
+Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
+1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;Hello World~&#34;</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;ian~&#34;</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;test~&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://redis.io" target="_blank" rel="noopener noreffer">Redis 官網</a></p>
 <p><a href="https://aws.amazon.com/tw/redis/" target="_blank" rel="noopener noreffer">Redis</a></p>
