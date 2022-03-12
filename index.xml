@@ -34,7 +34,7 @@
     <title>Redis 介紹</title>
     <link>https://pin-yi.me/redis/</link>
     <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/redis/</guid>
-    <description><![CDATA[什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療]]></description>
+    <description><![CDATA[什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料庫 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健]]></description>
 </item>
 <item>
     <title>面試官常問的 MySQL 資料型態差別 char varchar text</title>

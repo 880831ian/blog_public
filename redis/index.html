@@ -5,16 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Redis 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Redis 介紹" />
-<meta property="og:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療" />
+<meta property="og:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料庫 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/redis/" /><meta property="og:image" content="https://pin-yi.me/redis/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-08T14:28:32+08:00" />
+<meta property="article:modified_time" content="2022-03-12T18:44:44+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/redis/featured-image.webp"/>
 <meta name="twitter:title" content="Redis 介紹"/>
-<meta name="twitter:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療"/>
+<meta name="twitter:description" content="什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料庫 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/redis/" /><link rel="prev" href="https://pin-yi.me/char-varchar/" /><link rel="next" href="https://pin-yi.me/laravel-advanced/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/redis\/featured-image.webp",
                             "width":  2536 ,
                             "height":  762 
-                        }],"genre": "posts","keywords": "Redis","wordcount":  2391 ,
-        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-08T14:28:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Redis","wordcount":  3343 ,
+        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-12T18:44:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/redis/featured-image.webp"
         title="/redis/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Redis 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2391 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3343 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -172,17 +172,42 @@ if (!doNotTrack) {
                 <li><a href="#append">append</a></li>
                 <li><a href="#getrange">getrange</a></li>
                 <li><a href="#mset">mset</a></li>
+                <li><a href="#字串型態適合場景">字串型態適合場景</a></li>
               </ul>
             </li>
-            <li><a href="#雜湊-hash">雜湊 (Hash)</a>
+            <li><a href="#哈希-hash">哈希 (Hash)</a>
               <ul>
+                <li><a href="#hsethget">hset、hget</a></li>
                 <li><a href="#hgetall">hgetall</a></li>
                 <li><a href="#hkeys">hkeys</a></li>
+                <li><a href="#hvals">hvals</a></li>
+                <li><a href="#hlen">hlen</a></li>
+                <li><a href="#hincrby">hincrby</a></li>
+                <li><a href="#hdel">hdel</a></li>
+                <li><a href="#哈希型態適合場景">哈希型態適合場景</a></li>
               </ul>
             </li>
-            <li><a href="#列表-list">列表 (List)</a></li>
-            <li><a href="#集合-sets">集合 (Sets)</a></li>
-            <li><a href="#有序集合-zset">有序集合 (Zset)</a></li>
+            <li><a href="#列表-list">列表 (List)</a>
+              <ul>
+                <li><a href="#lpushlrange">lpush、lrange</a></li>
+                <li><a href="#rpush">rpush</a></li>
+                <li><a href="#lpoprpop">lpop、rpop</a></li>
+                <li><a href="#lset">lset</a></li>
+                <li><a href="#列表型態適合場景">列表型態適合場景</a></li>
+              </ul>
+            </li>
+            <li><a href="#集合-sets">集合 (Sets)</a>
+              <ul>
+                <li><a href="#spop">spop</a></li>
+                <li><a href="#sdiff">sdiff</a></li>
+                <li><a href="#集合型態適合場景">集合型態適合場景</a></li>
+              </ul>
+            </li>
+            <li><a href="#有序集合-zset">有序集合 (Zset)</a>
+              <ul>
+                <li><a href="#有序集合型態適合場景">有序集合型態適合場景</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><a href="#發布訂閱-pubsub">發布訂閱 (PUB/SUB)</a></li>
@@ -192,13 +217,13 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><h2 id="什麼是-redis-">什麼是 Redis ?</h2>
-<p>Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料存放區 (keys-value database)。</p>
+<p>Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料庫 (keys-value database)。</p>
 <p>由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健等即時應用服務每秒處理幾百萬個請求。</p>
 <h3 id="redis-的優勢">Redis 的優勢</h3>
 <h4 id="效能">效能</h4>
-<p>所有的 Redis 資料都是存放在記憶體中，進而去實現低延遲和高傳輸量的資料存取。</p>
+<p>所有的 Redis 資料都是存放在記憶體中，進而實現低延遲和高傳輸量的資料存取。</p>
 <h4 id="彈性的資料結構">彈性的資料結構</h4>
-<p>一般的鍵值資料存放區提供的資料結構有限，而 Redis 提供多樣化的資料結構來滿足服務的需求，包含字串(Strings)、雜湊(Hash)、列表(List)、集合(Sets)、有序集合(Zset)。(後續會有詳細介紹)</p>
+<p>一般的鍵值資料庫提供的資料結構有限，而 Redis 提供多樣化的資料結構來滿足服務的需求，包含字串(Strings)、哈希(Hash)、列表(List)、集合(Sets)、有序集合(Zset)。(後續會有詳細介紹)</p>
 <h4 id="簡單易用">簡單易用</h4>
 <p>Redis 可以用更少、更精簡的指令來取代傳統複雜的程式碼，可以存取應用程式的資料。並支援 Java、Python、PHP、C/C++、C#、JavaScript、Node.js、Ruby、R、GO。</p>
 <h4 id="複寫和持久性">複寫和持久性</h4>
@@ -310,10 +335,18 @@ PONG
 </div>
 </div><br>
 <p>接下來，我們都會在 Cli 視窗做測試，會詳細介紹每一個資料型態以及其適合情境。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>redis 圖形化工具<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">後續會使用 Cli 畫面來做示範，但也有不錯的圖形化工具可以用於 redis 上 <a href="https://github.com/qishibo/AnotherRedisDesktopManager" target="_blank" rel="noopener noreffer">AnotherRedisDesktopManager</a> 大家可以去試用看看~</div>
+        </div>
+    </div>
 <h3 id="資料型態">資料型態</h3>
 <h4 id="字串-strings">字串 (Strings)</h4>
 <h5 id="setget">set、get</h5>
-<p>這是最基本的型態，一個 Strings 的欄位，最高可儲存 512 MB，這裡會用到的指令是 <code>set</code>、<code>get</code> ，分別用來儲存以及讀取字串，我們來看一下範例吧。</p>
+<p>這是最基本的型態，可以存放 binary, string, integer, float資料，一個 Strings 的欄位，最高可儲存 512 Megabytes，這裡會用到的指令是 <code>set</code>、<code>get</code> ，分別用來儲存以及讀取字串，我們來看一下範例吧。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -328,10 +361,10 @@ OK
 <span class="s2">&#34;hello-world&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>我們先用 <code>set</code> 將 hello-world 字串存到 string 這個 key，再用 <code>get</code> 顯示 string 裡面的值。</p>
+</div><p>我們先用 <code>set</code> 將 hello-world 字串存到 string 這個 key，再用 <code>get</code> 顯示 string 裡面的 value。</p>
 <br>
 <h5 id="incrdecr">incr、decr</h5>
-<p>Redis 還有一些方便的指令，如果存入的是 integer 型態，就可以使用 <code>incr</code> 、<code>decr</code> ，來累加與累減，分別代表累加，像是我們的 ++ ，以及累減，像是我們的 - -。</p>
+<p>Redis 還有一些方便的指令，如果存入的 value 是 integer 型態，就可以使用 <code>incr</code> 、<code>decr</code> ，來累加與累減。分別代表累加，像是我們的 ++ ，以及累減，像是我們的 - -。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -384,7 +417,7 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><h5 id="getrange">getrange</h5>
-<p>可以輸入字串的開始位元與結束位元，會依照你輸入的去顯示字串。我把它想成是陣列的 key 與 value 的關係。</p>
+<p>可以輸入字串的開始位元與結束位元，會依照你輸入的去顯示字串。我把它理解成是陣列的 key 與 value 的關係。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -437,7 +470,21 @@ OK
 </div>
 </div><p>如果用 <code>get</code> 顯示資料，若沒有對應的 key ，會顯示 (nil)。</p>
 <br>
-<h4 id="雜湊-hash">雜湊 (Hash)</h4>
+<h5 id="字串型態適合場景">字串型態適合場景</h5>
+<p><strong>字串(strings) 型態適合用於圖片快取 （使用binary）、累計次數、觀看累計次數</strong></p>
+<br>
+<figure><a class="lightgallery" href="/images/redis/string.png" title="/images/redis/string.png" data-thumbnail="/images/redis/string.png" data-sub-html="<h2>String 適用場景圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/string.png"
+            data-srcset="/images/redis/string.png, /images/redis/string.png 1.5x, /images/redis/string.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/string.png" width="700" />
+    </a><figcaption class="image-caption">String 適用場景圖</figcaption>
+    </figure>
+<br>
+<h4 id="哈希-hash">哈希 (Hash)</h4>
 <p>可以把他想像成二維陣列，應該會比較好理解，我網路上找了一張圖，應該會比較清楚！</p>
 <figure><a class="lightgallery" href="/images/redis/hash.png" title="/images/redis/hash.png" data-thumbnail="/images/redis/hash.png" data-sub-html="<h2>Hash 示意圖 (Redis 基本資料形態)</h2>">
         <img
@@ -449,7 +496,9 @@ OK
             alt="/images/redis/hash.png" width="500" />
     </a><figcaption class="image-caption">Hash 示意圖 (<a href="https://blog.judysocute.com/2020/10/04/redis-%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E5%BD%A2%E6%85%8B/" target="_blank" rel="noopener noreffer">Redis 基本資料形態</a>)</figcaption>
     </figure>
+<p>Hash是用來存放一組相同性質的資料，這些資料 Hash 或是物件的某一屬性，與 String 較為不同的是他可以取回單一個欄位資料，但 String 必須取回所有資料，單一個 Key 可以存放2^32 - 1的資料欄位，</p>
 <p>他的資料型態有像是，一個 user001 裡面是一個 Hash，Hash 裡面又會存放 name、phone、gender ，我們來實際操作看看。</p>
+<h5 id="hsethget">hset、hget</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -472,7 +521,7 @@ OK
 <span class="s2">&#34;M&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Hash 的話要使用 <code>hset</code>、<code>hget</code> 來對 hash 做寫以及讀 。</p>
+</div><p>Hash 的話要使用 <code>hset</code>、<code>hget</code> 來對 hash 做儲存以及讀取。</p>
 <h5 id="hgetall">hgetall</h5>
 <p>想要一次顯示 Hash 裡面的 key 跟 value ，可以使用 <code>hgetall</code> 來顯示全部資料。</p>
 <div class="highlight"><div class="chroma">
@@ -520,8 +569,111 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<h5 id="hvals">hvals</h5>
+<p>想要單獨顯示 Hash 裡面的 value ，可以使用 <code>hvals</code> 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hvals student
+1<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="hlen">hlen</h5>
+<p>想要顯示 Hash 裡面的 key 長度，可以使用 <code>hlen </code> 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+127.0.0.1:6379&gt; hlen student
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="hincrby">hincrby</h5>
+<p>想要增加 Hash 裡面的 value 整數長度，可以使用 <code>hincrby </code> 來新增。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset <span class="nb">test</span> a <span class="m">10</span> b <span class="m">20</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; hincrby <span class="nb">test</span> a <span class="m">2</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="hdel">hdel</h5>
+<p>想要刪除 Hash 裡面的 key，可以使用 <code>hdel </code> 來刪除。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hdel student phone
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="哈希型態適合場景">哈希型態適合場景</h5>
+<p><strong>哈希(Hash) 型態適合用於每次只需要取用一部分的資料</strong></p>
+<br>
+<figure><a class="lightgallery" href="/images/redis/hash-template.png" title="/images/redis/hash-template.png" data-thumbnail="/images/redis/hash-template.png" data-sub-html="<h2>Hash 適用場景圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/hash-template.png"
+            data-srcset="/images/redis/hash-template.png, /images/redis/hash-template.png 1.5x, /images/redis/hash-template.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/hash-template.png" width="700" />
+    </a><figcaption class="image-caption">Hash 適用場景圖</figcaption>
+    </figure>
+<br>
 <h4 id="列表-list">列表 (List)</h4>
-<p>這個也是很常見的 list 結構，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>List</code> 做讀寫。</p>
+<h5 id="lpushlrange">lpush、lrange</h5>
+<p>List 資料型態可以想像成程式語言中的Array物件。List 單一個Key可以存放2^32 - 1，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>List</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -549,8 +701,90 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<h5 id="rpush">rpush</h5>
+<p>除了從隊伍頭放入資料，也可以用 <code>rpush</code> 從隊伍尾放入資料，如果使用 <code>lrange</code> 來顯示方向也會相反歐。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; rpush list3 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">10</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+7<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="lpoprpop">lpop、rpop</h5>
+<p>也可以使用 <code>lpop</code>、<code>rpop</code> 分別從隊伍頭或尾彈出一筆資料。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; rpush list3 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; lpop list3
+<span class="s2">&#34;a&#34;</span>
+127.0.0.1:6379&gt; rpop list3
+<span class="s2">&#34;e&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="lset">lset</h5>
+<p>可以使用 <code>lset</code> 來設定指定位置的資料。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+127.0.0.1:6379&gt; lset list3 <span class="m">1</span> w
+OK
+127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;w&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="列表型態適合場景">列表型態適合場景</h5>
+<p><strong>列表(List) 型態適合用於文章列表或者資料分頁展示的應用</strong></p>
+<br>
 <h4 id="集合-sets">集合 (Sets)</h4>
-<p>其實跟 List 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做讀寫。</p>
+<p>其實跟 List 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -572,6 +806,61 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到他實際寫入的只有 4 筆資料。</p>
+<br>
+<h5 id="spop">spop</h5>
+<p>將 <code>set</code> 隨機跳出一定 <code>count</code> 數量資料。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="sdiff">sdiff</h5>
+<p>會顯示第一個集合與其他集合不同的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; sadd set2 a b 
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; sadd set3  b 
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; sdiff set1 set2 set3
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="集合型態適合場景">集合型態適合場景</h5>
+<p><strong>集合(Sets) 型態適合用於文章中的Tag標籤、或是要排除相同資料</strong></p>
 <br>
 <h4 id="有序集合-zset">有序集合 (Zset)</h4>
 <p>故名思義，有序集合就是有排序的集合，Sorted Sets 結構會 <strong>多一個數字值去為排序的權重</strong> 來決定先後順序，這邊會使用到 <code>zadd</code> 、 <code> zrangebyscore</code> 來對 <code>Zset</code> 做讀寫。</p>
@@ -609,6 +898,9 @@ OK
 </div>
 </div><p>就可以看出在顯示的時候並不是依照寫入順序，而是依照我們所設定的權重去排序的。
 <br></p>
+<h5 id="有序集合型態適合場景">有序集合型態適合場景</h5>
+<p><strong>有序集合(Zset) 型態適合用於需要有序排列的資料</strong></p>
+<br>
 <h3 id="發布訂閱-pubsub">發布訂閱 (PUB/SUB)</h3>
 <p>Redis 發布訂閱 (pub/sub) 是一種消息通信模式，發送者 (pub) 發送消息，訂閱者 (sub) 接收消息。</p>
 <p>Redis 客戶端可以使用 <code>subscribe</code> 來訂閱任意數量的頻道。</p>
@@ -721,8 +1013,8 @@ Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/redis/">Redis</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-08&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/afbdaa2547ee6b0379ffdd93bf94fcf76437e8d2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;afbdaa2:&nbsp;# 新增 Redis">
-                            <i class="fas fa-hashtag fa-fw"></i>afbdaa2</a></span>
+                <span>更新於 2022-03-12&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a78262886703142d3dd01e84e86dcdddd20a2241" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;a782628:&nbsp;# 修改 Redis">
+                            <i class="fas fa-hashtag fa-fw"></i>a782628</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/redis/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
