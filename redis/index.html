@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/redis/" /><meta property="og:image" content="https://pin-yi.me/redis/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-12T18:44:44+08:00" />
+<meta property="article:modified_time" content="2022-03-13T11:07:41+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/redis/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/redis\/featured-image.webp",
                             "width":  2536 ,
                             "height":  762 
-                        }],"genre": "posts","keywords": "Redis","wordcount":  3343 ,
-        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-12T18:44:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Redis","wordcount":  3353 ,
+        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-13T11:07:41+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/redis/featured-image.webp"
         title="/redis/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Redis 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3343 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3353 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
             </div>
             
@@ -175,7 +175,7 @@ if (!doNotTrack) {
                 <li><a href="#字串型態適合場景">字串型態適合場景</a></li>
               </ul>
             </li>
-            <li><a href="#哈希-hash">哈希 (Hash)</a>
+            <li><a href="#哈希-hashes">哈希 (Hashes)</a>
               <ul>
                 <li><a href="#hsethget">hset、hget</a></li>
                 <li><a href="#hgetall">hgetall</a></li>
@@ -187,7 +187,7 @@ if (!doNotTrack) {
                 <li><a href="#哈希型態適合場景">哈希型態適合場景</a></li>
               </ul>
             </li>
-            <li><a href="#列表-list">列表 (List)</a>
+            <li><a href="#列表-lists">列表 (Lists)</a>
               <ul>
                 <li><a href="#lpushlrange">lpush、lrange</a></li>
                 <li><a href="#rpush">rpush</a></li>
@@ -223,11 +223,11 @@ if (!doNotTrack) {
 <h4 id="效能">效能</h4>
 <p>所有的 Redis 資料都是存放在記憶體中，進而實現低延遲和高傳輸量的資料存取。</p>
 <h4 id="彈性的資料結構">彈性的資料結構</h4>
-<p>一般的鍵值資料庫提供的資料結構有限，而 Redis 提供多樣化的資料結構來滿足服務的需求，包含字串(Strings)、哈希(Hash)、列表(List)、集合(Sets)、有序集合(Zset)。(後續會有詳細介紹)</p>
+<p>一般的鍵值資料庫提供的資料結構有限，而 Redis 提供多樣化的資料結構來滿足服務的需求，包含字串(Strings)、哈希(Hashes)、列表(Lists)、集合(Sets)、有序集合(Zset)。(後續會有詳細介紹)</p>
 <h4 id="簡單易用">簡單易用</h4>
 <p>Redis 可以用更少、更精簡的指令來取代傳統複雜的程式碼，可以存取應用程式的資料。並支援 Java、Python、PHP、C/C++、C#、JavaScript、Node.js、Ruby、R、GO。</p>
 <h4 id="複寫和持久性">複寫和持久性</h4>
-<p>Redis 主要採主副本架構，支援非同步複寫，可以將資料複製到多個伺服器。不但可以提升讀取效能(因為請求可分割到多部伺服器)，還可以再主服務器發生故障時快速恢復。至於持久性，Redis 支援時間點備份，會將資料複製到磁碟中。</p>
+<p>Redis 採主要-複本架構，支援非同步複寫，可以將資料複寫到多個複本伺服器。不但可以提升讀取效能(因為請求可分割到多部伺服器)，還可以再主服務器發生故障時快速恢復。至於持久性，Redis 支援時間點備份，會將資料複製到磁碟中。</p>
 <br>
 <h2 id="實際操作">實際操作</h2>
 <h3 id="安裝-redis">安裝 Redis</h3>
@@ -484,9 +484,9 @@ OK
     </a><figcaption class="image-caption">String 適用場景圖</figcaption>
     </figure>
 <br>
-<h4 id="哈希-hash">哈希 (Hash)</h4>
+<h4 id="哈希-hashes">哈希 (Hashes)</h4>
 <p>可以把他想像成二維陣列，應該會比較好理解，我網路上找了一張圖，應該會比較清楚！</p>
-<figure><a class="lightgallery" href="/images/redis/hash.png" title="/images/redis/hash.png" data-thumbnail="/images/redis/hash.png" data-sub-html="<h2>Hash 示意圖 (Redis 基本資料形態)</h2>">
+<figure><a class="lightgallery" href="/images/redis/hash.png" title="/images/redis/hash.png" data-thumbnail="/images/redis/hash.png" data-sub-html="<h2>Hashes 示意圖 (Redis 基本資料形態)</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -494,10 +494,10 @@ OK
             data-srcset="/images/redis/hash.png, /images/redis/hash.png 1.5x, /images/redis/hash.png 2x"
             data-sizes="auto"
             alt="/images/redis/hash.png" width="500" />
-    </a><figcaption class="image-caption">Hash 示意圖 (<a href="https://blog.judysocute.com/2020/10/04/redis-%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E5%BD%A2%E6%85%8B/" target="_blank" rel="noopener noreffer">Redis 基本資料形態</a>)</figcaption>
+    </a><figcaption class="image-caption">Hashes 示意圖 (<a href="https://blog.judysocute.com/2020/10/04/redis-%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E5%BD%A2%E6%85%8B/" target="_blank" rel="noopener noreffer">Redis 基本資料形態</a>)</figcaption>
     </figure>
-<p>Hash是用來存放一組相同性質的資料，這些資料 Hash 或是物件的某一屬性，與 String 較為不同的是他可以取回單一個欄位資料，但 String 必須取回所有資料，單一個 Key 可以存放2^32 - 1的資料欄位，</p>
-<p>他的資料型態有像是，一個 user001 裡面是一個 Hash，Hash 裡面又會存放 name、phone、gender ，我們來實際操作看看。</p>
+<p>Hashes 是用來存放一組相同性質的資料，這些資料 Hashes 或是物件的某一屬性，與 String 較為不同的是他可以取回單一個欄位資料，但 String 必須取回所有資料，單一個 Key 可以存放2^32 - 1的資料欄位，</p>
+<p>他的資料型態有像是，一個 user001 裡面是一個 Hashes，Hashes 裡面又會存放 name、phone、gender ，我們來實際操作看看。</p>
 <h5 id="hsethget">hset、hget</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -521,9 +521,9 @@ OK
 <span class="s2">&#34;M&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Hash 的話要使用 <code>hset</code>、<code>hget</code> 來對 hash 做儲存以及讀取。</p>
+</div><p>Hashes 的話要使用 <code>hset</code>、<code>hget</code> 來對 Hashes 做儲存以及讀取。</p>
 <h5 id="hgetall">hgetall</h5>
-<p>想要一次顯示 Hash 裡面的 key 跟 value ，可以使用 <code>hgetall</code> 來顯示全部資料。</p>
+<p>想要一次顯示 Hashes 裡面的 key 跟 value ，可以使用 <code>hgetall</code> 來顯示全部資料。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -549,7 +549,7 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><h5 id="hkeys">hkeys</h5>
-<p>想要單獨顯示 Hash 裡面的 key ，可以使用 <code>hkeys</code> 來顯示。</p>
+<p>想要單獨顯示 Hashes 裡面的 key ，可以使用 <code>hkeys</code> 來顯示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -570,7 +570,7 @@ OK
 </div>
 </div><br>
 <h5 id="hvals">hvals</h5>
-<p>想要單獨顯示 Hash 裡面的 value ，可以使用 <code>hvals</code> 來顯示。</p>
+<p>想要單獨顯示 Hashes 裡面的 value ，可以使用 <code>hvals</code> 來顯示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -591,7 +591,7 @@ OK
 </div>
 </div><br>
 <h5 id="hlen">hlen</h5>
-<p>想要顯示 Hash 裡面的 key 長度，可以使用 <code>hlen </code> 來顯示。</p>
+<p>想要顯示 Hashes 裡面的 key 長度，可以使用 <code>hlen </code> 來顯示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -614,7 +614,7 @@ OK
 </div>
 </div><br>
 <h5 id="hincrby">hincrby</h5>
-<p>想要增加 Hash 裡面的 value 整數長度，可以使用 <code>hincrby </code> 來新增。</p>
+<p>想要增加 Hashes 裡面的 value 整數長度，可以使用 <code>hincrby </code> 來新增。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -631,7 +631,7 @@ OK
 </div>
 </div><br>
 <h5 id="hdel">hdel</h5>
-<p>想要刪除 Hash 裡面的 key，可以使用 <code>hdel </code> 來刪除。</p>
+<p>想要刪除 Hashes 裡面的 key，可以使用 <code>hdel </code> 來刪除。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -658,9 +658,9 @@ OK
 </div>
 </div><br>
 <h5 id="哈希型態適合場景">哈希型態適合場景</h5>
-<p><strong>哈希(Hash) 型態適合用於每次只需要取用一部分的資料</strong></p>
+<p><strong>哈希(Hashes) 型態適合用於每次只需要取用一部分的資料</strong></p>
 <br>
-<figure><a class="lightgallery" href="/images/redis/hash-template.png" title="/images/redis/hash-template.png" data-thumbnail="/images/redis/hash-template.png" data-sub-html="<h2>Hash 適用場景圖</h2>">
+<figure><a class="lightgallery" href="/images/redis/hash-template.png" title="/images/redis/hash-template.png" data-thumbnail="/images/redis/hash-template.png" data-sub-html="<h2>Hashes 適用場景圖</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -668,12 +668,12 @@ OK
             data-srcset="/images/redis/hash-template.png, /images/redis/hash-template.png 1.5x, /images/redis/hash-template.png 2x"
             data-sizes="auto"
             alt="/images/redis/hash-template.png" width="700" />
-    </a><figcaption class="image-caption">Hash 適用場景圖</figcaption>
+    </a><figcaption class="image-caption">Hashes 適用場景圖</figcaption>
     </figure>
 <br>
-<h4 id="列表-list">列表 (List)</h4>
+<h4 id="列表-lists">列表 (Lists)</h4>
 <h5 id="lpushlrange">lpush、lrange</h5>
-<p>List 資料型態可以想像成程式語言中的Array物件。List 單一個Key可以存放2^32 - 1，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>List</code> 做儲存以及讀取。</p>
+<p>Lists 資料型態可以想像成程式語言中的Array物件。Lists 單一個Key可以存放2^32 - 1，這邊會使用到 <code>lpush</code>、<code>lrange</code> 來對 <code>Lists</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -781,10 +781,10 @@ OK
 </div>
 </div><br>
 <h5 id="列表型態適合場景">列表型態適合場景</h5>
-<p><strong>列表(List) 型態適合用於文章列表或者資料分頁展示的應用</strong></p>
+<p><strong>列表(Lists) 型態適合用於文章列表或者資料分頁展示的應用</strong></p>
 <br>
 <h4 id="集合-sets">集合 (Sets)</h4>
-<p>其實跟 List 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做儲存以及讀取。</p>
+<p>其實跟 Lists 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1013,8 +1013,8 @@ Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/redis/">Redis</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-12&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a78262886703142d3dd01e84e86dcdddd20a2241" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;a782628:&nbsp;# 修改 Redis">
-                            <i class="fas fa-hashtag fa-fw"></i>a782628</a></span>
+                <span>更新於 2022-03-13&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/eab634669161b17f805f3505376a8196f9dcd273" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;eab6346:&nbsp;# 修改 Redis">
+                            <i class="fas fa-hashtag fa-fw"></i>eab6346</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/redis/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
