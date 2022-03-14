@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/redis/" /><meta property="og:image" content="https://pin-yi.me/redis/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-13T12:05:50+08:00" />
+<meta property="article:modified_time" content="2022-03-14T17:11:21+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/redis/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/redis\/featured-image.webp",
                             "width":  2536 ,
                             "height":  762 
-                        }],"genre": "posts","keywords": "Redis","wordcount":  3333 ,
-        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-13T12:05:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Redis","wordcount":  3682 ,
+        "url": "https:\/\/pin-yi.me\/redis\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-14T17:11:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/redis/featured-image.webp"
         title="/redis/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Redis 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3333 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3682 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -199,12 +199,17 @@ if (!doNotTrack) {
             <li><a href="#集合-sets">集合 (Sets)</a>
               <ul>
                 <li><a href="#spop">spop</a></li>
+                <li><a href="#sismember">sismember</a></li>
+                <li><a href="#srem">srem</a></li>
                 <li><a href="#sdiff">sdiff</a></li>
                 <li><a href="#集合型態適合場景">集合型態適合場景</a></li>
               </ul>
             </li>
             <li><a href="#有序集合-zset">有序集合 (Zset)</a>
               <ul>
+                <li><a href="#withscores">withscores</a></li>
+                <li><a href="#zremrangebyscore">zremrangebyscore</a></li>
+                <li><a href="#zcard">zcard</a></li>
                 <li><a href="#有序集合型態適合場景">有序集合型態適合場景</a></li>
               </ul>
             </li>
@@ -393,7 +398,7 @@ OK
 </div>
 </div><br>
 <h5 id="append">append</h5>
-<p>如果 key 已經存在並且它是字串，可以使用 <code>append</code> 指令，會在字串最後附加進去，如果不存在，則會直接建立一個，並把值存進去。</p>
+<p>如果 key 已經存在並且它是字串，可以使用 <code>append</code> 指令，會從字串最後面附加進去，如果不存在，則會直接建立一個，並把值存進去。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -406,13 +411,13 @@ OK
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; exists mykey
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; exists str
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
-127.0.0.1:6379&gt; append mykey <span class="s2">&#34;Hello&#34;</span>
+127.0.0.1:6379&gt; append str <span class="s2">&#34;Hello&#34;</span>
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
-127.0.0.1:6379&gt; append mykey <span class="s2">&#34; World~&#34;</span>
+127.0.0.1:6379&gt; append str <span class="s2">&#34; World~&#34;</span>
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
-127.0.0.1:6379&gt; get mykey
+127.0.0.1:6379&gt; get str
 <span class="s2">&#34;Hello World~&#34;</span>
 </code></pre></td></tr></table>
 </div>
@@ -783,6 +788,17 @@ OK
 <h5 id="列表型態適合場景">列表型態適合場景</h5>
 <p><strong>列表(Lists) 型態適合用於文章列表或者資料分頁展示的應用</strong></p>
 <br>
+<figure><a class="lightgallery" href="/images/redis/list.png" title="/images/redis/list.png" data-thumbnail="/images/redis/list.png" data-sub-html="<h2>Lists 適用場景圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/list.png"
+            data-srcset="/images/redis/list.png, /images/redis/list.png 1.5x, /images/redis/list.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/list.png" width="700" />
+    </a><figcaption class="image-caption">Lists 適用場景圖</figcaption>
+    </figure>
+<br>
 <h4 id="集合-sets">集合 (Sets)</h4>
 <p>其實跟 Lists 一樣，就是資料的集合，只是 <code>Sets</code> 多了一層限制，就是集合中的值不能重複，這邊會使用到 <code>sadd</code>、<code>smembers</code> 來對 <code>Sets</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
@@ -796,9 +812,9 @@ OK
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd list3 a b c d a a b b
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a b c d a a b b
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-127.0.0.1:6379&gt; smembers list3
+127.0.0.1:6379&gt; smembers set1
 1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
 2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
 3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
@@ -808,7 +824,7 @@ OK
 </div><p>可以看到他實際寫入的只有 4 筆資料。</p>
 <br>
 <h5 id="spop">spop</h5>
-<p>將 <code>set</code> 隨機跳出一定 <code>count</code> 數量資料。</p>
+<p>從 <code>set</code> 集合中隨機跳出一定數量的資料。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -832,6 +848,50 @@ OK
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<h5 id="sismember">sismember</h5>
+<p>可以使用 <code>sismember</code> 來檢查輸入值是否為 <code>Set</code> 集合的成員。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; sismember <span class="nb">set</span> d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; sismember <span class="nb">set</span> f
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="srem">srem</h5>
+<p>可以使用 <code>srem</code> 來刪除 <code>Set</code> 集合中的成員。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; srem <span class="nb">set</span> a d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; smembers <span class="nb">set</span>
+1<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h5 id="sdiff">sdiff</h5>
 <p>會顯示第一個集合與其他集合不同的值。</p>
 <div class="highlight"><div class="chroma">
@@ -851,7 +911,7 @@ OK
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
 127.0.0.1:6379&gt; sadd set2 a b 
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-127.0.0.1:6379&gt; sadd set3  b 
+127.0.0.1:6379&gt; sadd set3 b 
 <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
 127.0.0.1:6379&gt; sdiff set1 set2 set3
 1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
@@ -862,8 +922,19 @@ OK
 <h5 id="集合型態適合場景">集合型態適合場景</h5>
 <p><strong>集合(Sets) 型態適合用於文章中的Tag標籤、或是要排除相同資料</strong></p>
 <br>
+<figure><a class="lightgallery" href="/images/redis/set.png" title="/images/redis/set.png" data-thumbnail="/images/redis/set.png" data-sub-html="<h2>Sets 適用場景圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/set.png"
+            data-srcset="/images/redis/set.png, /images/redis/set.png 1.5x, /images/redis/set.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/set.png" width="700" />
+    </a><figcaption class="image-caption">Sets 適用場景圖</figcaption>
+    </figure>
+<br>
 <h4 id="有序集合-zset">有序集合 (Zset)</h4>
-<p>故名思義，有序集合就是有排序的集合，Sorted Sets 結構會 <strong>多一個數字值去為排序的權重</strong> 來決定先後順序，這邊會使用到 <code>zadd</code> 、 <code> zrangebyscore</code> 來對 <code>Zset</code> 做讀寫。</p>
+<p>故名思義，有序集合就是有排序的集合，Sorted Sets 結構會 <strong>多一個數字值去為排序的權重</strong> 來決定先後順序，這邊會使用到 <code>zadd</code> 、 <code> zrangebyscore</code> 來對 <code>Zset</code> 做儲存以及讀取。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -898,8 +969,114 @@ OK
 </div>
 </div><p>就可以看出在顯示的時候並不是依照寫入順序，而是依照我們所設定的權重去排序的。
 <br></p>
+<h5 id="withscores">withscores</h5>
+<p>如果想要顯示 value 與 score ，可以使用 withscores 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
+1<span class="o">)</span> <span class="s2">&#34;tom&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;2000&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;peter&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;3500&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="zremrangebyscore">zremrangebyscore</h5>
+<p>移除有序集合中，指定分數內區間的所有成員。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zremrangebyscore money <span class="m">1500</span> <span class="m">3500</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
+1<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="zcard">zcard</h5>
+<p>可以使用 zcard 來計算集合中元素的數量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd sort <span class="m">10</span> <span class="m">10</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">3</span> <span class="m">3</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">66</span> <span class="m">66</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">33</span> <span class="m">33</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zcard sort
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h5 id="有序集合型態適合場景">有序集合型態適合場景</h5>
 <p><strong>有序集合(Zset) 型態適合用於需要有序排列的資料</strong></p>
+<br>
+<figure><a class="lightgallery" href="/images/redis/zset.png" title="/images/redis/zset.png" data-thumbnail="/images/redis/zset.png" data-sub-html="<h2>Zset 適用場景圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis/zset.png"
+            data-srcset="/images/redis/zset.png, /images/redis/zset.png 1.5x, /images/redis/zset.png 2x"
+            data-sizes="auto"
+            alt="/images/redis/zset.png" width="700" />
+    </a><figcaption class="image-caption">Zset 適用場景圖</figcaption>
+    </figure>
 <br>
 <h3 id="發布訂閱-pubsub">發布訂閱 (PUB/SUB)</h3>
 <p>Redis 發布訂閱 (pub/sub) 是一種消息通信模式，發送者 (pub) 發送消息，訂閱者 (sub) 接收消息。</p>
@@ -1013,8 +1190,8 @@ Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/redis/">Redis</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-13&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4f779f1862f6dfba1bb6b2cda5c8c63150a9327b" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;4f779f1:&nbsp;# 修改 Redis">
-                            <i class="fas fa-hashtag fa-fw"></i>4f779f1</a></span>
+                <span>更新於 2022-03-14&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/35bca25115068f4225a66bcc78e3dcb4102cdc48" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;35bca25:&nbsp;# 修改 Redis">
+                            <i class="fas fa-hashtag fa-fw"></i>35bca25</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/redis/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
