@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 14 Mar 2022 17:23:11 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)</title>
+    <link>https://pin-yi.me/docker/</link>
+    <pubDate>Mon, 14 Mar 2022 17:23:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker/</guid>
+    <description><![CDATA[什麼是 Docker ? Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到『容器』的標準單位。其中包含了程式]]></description>
 </item>
 <item>
     <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</title>
@@ -59,13 +65,6 @@
     <link>https://pin-yi.me/php/</link>
     <pubDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php/</guid>
     <description><![CDATA[1. PHP 是什麼 PHP 全名是超文本前處理器(Hypertext Preprocessor)，是一種開源的通用電腦手稿語言 根據W3Techs的報告，截至2]]></description>
-</item>
-<item>
-    <title>【自然圈豪華露營Lo fi Land】花好月圓人團圓VLOG</title>
-    <link>https://pin-yi.me/lofi-land/</link>
-    <pubDate>Sun, 20 Feb 2022 11:20:50 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/lofi-land/</guid>
-    <description><![CDATA[<p>在過年要準備收假前，來一趟高級的露營，與很久不見的好友，一起泡溫泉、喝酒、吃烤肉、聊天，</p>
-<p>還有甚麼事情，比這件事還更快樂的呢 !</p>]]></description>
 </item>
 </channel>
 </rss>
