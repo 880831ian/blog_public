@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)" />
+        <title>Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)" />
 <meta property="og:description" content="什麼是 Docker ? Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到『容器』的標準單位。其中包含了程式" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/docker/" /><meta property="og:image" content="https://pin-yi.me/docker/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/docker/featured-image.webp"/>
-<meta name="twitter:title" content="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"/>
+<meta name="twitter:title" content="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"/>
 <meta name="twitter:description" content="什麼是 Docker ? Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到『容器』的標準單位。其中包含了程式"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/docker/" /><link rel="prev" href="https://pin-yi.me/laravel-advanced/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Docker 介紹 (使用 Docker-compose 打包 php+mysql+nginx 環境)",
+        "headline": "Docker 介紹 (如何使用 Docker-compose 打包 php+mysql+nginx 環境)",
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/docker\/featured-image.webp",
                             "width":  2478 ,
                             "height":  1128 
-                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  1175 ,
+                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  5268 ,
         "url": "https:\/\/pin-yi.me\/docker\/","datePublished": "2022-03-14T17:23:11+08:00","dateModified": "2022-03-14T18:32:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -129,10 +129,10 @@ if (!doNotTrack) {
         data-srcset="/docker/featured-image.webp, /docker/featured-image.webp 1.5x, /docker/featured-image.webp 2x"
         data-sizes="auto"
         alt="/docker/featured-image.webp"
-        title="/docker/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)</h2><div class="post-meta">
+        title="/docker/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1175 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5268 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -143,11 +143,62 @@ if (!doNotTrack) {
                     <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#什麼是-docker-">什麼是 Docker ?</a></li>
+    <li><a href="#docker-基本概念">Docker 基本概念</a>
+      <ul>
+        <li><a href="#映像檔-image">映像檔 (Image)</a></li>
+        <li><a href="#容器-container">容器 (Container)</a></li>
+        <li><a href="#倉庫-repository">倉庫 (Repository)</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker-實作">Docker 實作</a>
+      <ul>
+        <li><a href="#映像檔-image-1">映像檔 (Image)</a>
+          <ul>
+            <li><a href="#如何從倉庫取得映像檔">如何從倉庫取得映像檔</a></li>
+            <li><a href="#管理本地主機上的映像檔">管理本地主機上的映像檔</a>
+              <ul>
+                <li><a href="#查看映像檔-images">查看映像檔 (images)</a></li>
+                <li><a href="#儲存映像檔-save">儲存映像檔 (save)</a></li>
+                <li><a href="#刪除映像檔-rmi">刪除映像檔 (rmi)</a></li>
+              </ul>
+            </li>
+            <li><a href="#映像檔實作">映像檔實作</a>
+              <ul>
+                <li><a href="#編輯-dockerfile-映像檔">編輯 Dockerfile 映像檔</a></li>
+                <li><a href="#使用-dockerfile-建立映像檔">使用 Dockerfile 建立映像檔</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#容器-container-1">容器 (Container)</a>
+          <ul>
+            <li><a href="#container-執行時的操作">Container 執行時的操作</a>
+              <ul>
+                <li><a href="#執行容器-run">執行容器 (run)</a></li>
+                <li><a href="#顯示容器-ps">顯示容器 (ps)</a></li>
+                <li><a href="#顯示容器紀錄-logs">顯示容器紀錄 (logs)</a></li>
+                <li><a href="#刪除容器-rm--f">刪除容器 (rm -f)</a></li>
+                <li><a href="#進入容器-exec">進入容器 (exec)</a></li>
+                <li><a href="#匯出檔案-export">匯出檔案 (export)</a></li>
+                <li><a href="#匯入檔案-import">匯入檔案 (import)</a></li>
+              </ul>
+            </li>
+            <li><a href="#container-的狀態">Container 的狀態</a>
+              <ul>
+                <li><a href="#檢查容器狀態-inspect">檢查容器狀態 (inspect)</a></li>
+                <li><a href="#查看容器的cpu記憶體及網路使用-stats">查看容器的CPU、記憶體及網路使用 (stats)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#倉庫-repository-1">倉庫 (Repository)</a></li>
+      </ul>
+    </li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><h2 id="什麼是-docker-">什麼是 Docker ?</h2>
-<p>Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到『容器』的標準單位。其中包含了程式庫、系統工具、程式碼、執行軟體所需的所有項目。
+<p>Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到『容器』的標準單位。其中包含了程式庫、系統工具、程式碼、執行軟體時所需的所有項目。
 剛剛有提到容器，也就是 Container ，是一種虛擬化技術，它高效率虛擬化及易於遷移和擴展的特性，非常適合現代雲端的開發及佈署。那 Container 與傳統虛擬機有什麼差別呢？我們來看看下面這張圖</p>
 <br>
 <figure><a class="lightgallery" href="/images/docker/container-vm.png" title="/images/docker/container-vm.png" data-thumbnail="/images/docker/container-vm.png" data-sub-html="<h2>Container 與 VM 的差異</h2>">
@@ -164,7 +215,7 @@ if (!doNotTrack) {
 <table>
 <thead>
 <tr>
-<th style="text-align:center">比較</th>
+<th style="text-align:center">區別比較</th>
 <th style="text-align:center">Container</th>
 <th style="text-align:center">VM</th>
 </tr>
@@ -223,10 +274,663 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br>
+<h2 id="docker-基本概念">Docker 基本概念</h2>
+<ul>
+<li>映像檔 (Image)</li>
+<li>容器 (Container)</li>
+<li>倉庫 (Repository)</li>
+</ul>
+<p>這三個是 Docker 最基本的組成，了解後就可以知道整個 Docker 的生命週期。</p>
+<h3 id="映像檔-image">映像檔 (Image)</h3>
+<p>Docker 映像檔是一個唯獨的模板。</p>
+<p>例如：一個映像檔可在包含一個完整的 Linux 作業系統環境，裡面可以只安裝 Nginx 或使用者會使用到的其他應用程式。</p>
+<p>我們會使用映像檔來建立 Docker 的容器 (Container) ，Docker 也提供很簡單的機制來建議映像檔或是更新現有的映像檔，也可以去下載別人已經做好的映像檔。</p>
+<br>
+<h3 id="容器-container">容器 (Container)</h3>
+<p>Docker 是利用容器來執行應用程式。</p>
+<p>每一個容器都是由映像檔所建立的的執行程式。它可以被啟動、開始、停止、刪除。且每一個容器都是相互隔離的，不會相互影響。</p>
+<br>
+<h3 id="倉庫-repository">倉庫 (Repository)</h3>
+<p>倉庫是集中放置映像檔的所在地，倉庫分為公開倉庫 (Public) 和 私有倉庫 (Private) 兩種形式。最大的倉庫註冊伺服器當然是  (<a href="https://hub.docker.com/" target="_blank" rel="noopener noreffer">Docker hub</a>) ，存放數量龐大的映像檔供使用者下載，使用者也可以在本地網路內建立一個私有倉庫。可以將倉庫的概念理解成跟 Git 相似。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>倉庫與倉庫註冊伺服器 (Registry) 的不同<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>倉庫註冊伺服器 (Registry) 裡面可以存放很多的倉庫，每一個倉庫又包含了很多的映像檔，每一個映像檔有不同的標籤 (tag) 。</p>
+<p>舉個例子：Docker hub 是最大的倉庫註冊伺服器 (Registry) ，裡面又有很多不同的倉庫，像是 mariadb ，裡面又會包含很多的映像檔，以及不同的標籤 (tag)。</p>
+</div>
+        </div>
+    </div>
+<br>
+<h2 id="docker-實作">Docker 實作</h2>
+<p>本章節會介紹 Docker 三大組件映像檔 (image)、容器 (Container)、倉庫 (Repository) 是要如何實際操作，且他們的關聯性是什麼，可以先理解成，<strong>我們先到 Docker hub 下載我們要用的映像檔 (Image)，然後啟動這些映像檔 (Image)，變成一堆的容器 (Container)，或是把我們想要的程式用 Dockerfile 打包成映像檔 (Image)，再上傳到倉庫 (Repository)內。</strong></p>
+<br>
+<h3 id="映像檔-image-1">映像檔 (Image)</h3>
+<p>本小節會介紹有關映像檔的內容，包括：</p>
+<ul>
+<li>如何從倉庫取得映像檔</li>
+<li>如何管理本地主機上的映像檔</li>
+<li>映像檔實作</li>
+</ul>
+<br>
+<h4 id="如何從倉庫取得映像檔">如何從倉庫取得映像檔</h4>
+<p>我們可以先到 <a href="https://hub.docker.com/" target="_blank" rel="noopener noreffer">Docker hub</a> 上面看看有什麼服務或程式想要下載來做使用，找到想要的服務，我們可以下 <code>docker pull {要下載的服務、程式名稱}</code> ，<font color='green'>我們這邊就與我們這次要實作的主題一樣，先下載 PHP+Mysql+Nginx 這三個映像檔</font>。</p>
+<ul>
+<li>php</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull php
+Using default tag: latest
+latest: Pulling from library/php
+f7a1c6dad281: Pull <span class="nb">complete</span>
+.... 省略 ....
+Digest: sha256:296a2346b33b4c561b07b48cd1c3d97c5a79dd5dcab92ec9f3bf1520d418f163
+Status: Downloaded newer image <span class="k">for</span> php:latest
+docker.io/library/php:latest
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>mysql</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+15115158dd02: Pull <span class="nb">complete</span>
+.... 省略 ....
+Digest: sha256:b17a66b49277a68066559416cf44a185cfee538d0e16b5624781019bc716c122
+Status: Downloaded newer image <span class="k">for</span> mysql:latest
+docker.io/library/mysql:latest
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>nginx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+f7a1c6dad281: Already exists
+4d3e1d15534c: Pull <span class="nb">complete</span>
+.... 省略 ....
+Digest: sha256:1c13bc6de5dfca749c377974146ac05256791ca2fe1979fc8e8278bf0121d285
+Status: Downloaded newer image <span class="k">for</span> nginx:latest
+docker.io/library/nginx:latest
+</code></pre></td></tr></table>
+</div>
+</div><p>由於我們下載的沒有加任何的 <code>tag</code> 也就是版本，所以我們都是下載最新版 latest ，如果想要下載特定版本，可以在服務名稱後面加上 <code>:版本</code> ，就可以下載對應的版本囉！</p>
+<br>
+<p>如果有標記 <code>Official Image</code> 就代表是官方釋出的映像檔 ~</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker/docker-image.png" title="/images/docker/docker-image.png" data-thumbnail="/images/docker/docker-image.png" data-sub-html="<h2>Docker hub 下載 Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker/docker-image.png"
+            data-srcset="/images/docker/docker-image.png, /images/docker/docker-image.png 1.5x, /images/docker/docker-image.png 2x"
+            data-sizes="auto"
+            alt="/images/docker/docker-image.png" width="900" />
+    </a><figcaption class="image-caption">Docker hub 下載 Image</figcaption>
+    </figure>
+<br>
+<h4 id="管理本地主機上的映像檔">管理本地主機上的映像檔</h4>
+<h5 id="查看映像檔-images">查看映像檔 (images)</h5>
+<p>當我們下載好映像檔後，可以使用 <code>docker images</code> 來列出本機已下載的映像檔。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+php          latest    d6229b88aa29   <span class="m">3</span> days ago    484MB
+mysql        latest    826efd84393b   <span class="m">6</span> days ago    521MB
+nginx        latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們來看看都列出哪些訊息吧！</p>
+<ul>
+<li>REPOSITORY：來自於哪一個倉庫，像是 php、mysql、nginx。</li>
+<li>TAG：映像檔的標籤，因為我們都下載最新版本所以是 latest。</li>
+<li>IMAGE ID：它的唯一 <code>ID</code> 號碼。</li>
+<li>CREATED：建立時間。</li>
+<li>VIRTUAL SIZE：映像檔大小。</li>
+</ul>
+<br>
+<h5 id="儲存映像檔-save">儲存映像檔 (save)</h5>
+<p>想要儲存映像檔，可以使用 <code>docker save {映像檔名稱} &gt; {檔案名稱}.tar</code>，來做儲存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker save nginx &gt; nginx.tar
+$ ls <span class="p">|</span> grep <span class="s1">&#39;nginx&#39;</span>
+nginx.tar
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="刪除映像檔-rmi">刪除映像檔 (rmi)</h5>
+<p>想要刪除映像檔，可以使用 <code>docker rmi {映像檔名稱}</code> 來做刪除。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker rmi pinyi/demo-image
+Untagged: pinyi/demo-image:latest
+Deleted: sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>注意！刪除映像檔(Image)時，要先用 <code>docker rm {容器}</code> 去刪除所有依賴這個映像檔的容器。</li>
+</ul>
+<br>
+<p>接著要怎麼建立自己的映像檔呢？我們要使用 Dockerfile 來建立映像檔。</p>
+<h4 id="映像檔實作">映像檔實作</h4>
+<h5 id="編輯-dockerfile-映像檔">編輯 Dockerfile 映像檔</h5>
+<p>Dockerfile 是一種文字格式的設定檔，可以透過 Dockerfile 快速建立自訂的映像檔，換句話說，Dockerfile 就像是建置Docker Image 的腳本。</p>
+<p>舉個例子：可以把自己想像成一位設計師，設計好房子的格局、擺飾等，畫好設計圖 (Dockerfile) 後，最後請師傅 (Docker) 依你的構思完成就可以了。</p>
+<br>
+<p>我們就來開始實作一個 Dockerfile 吧 ~</p>
+<ol>
+<li>我們先創建一個來放 Dockerfile 的資料夾，可以直接在路徑下建立出映像檔</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">mkdir demo-dockerfile
+<span class="nb">cd</span> demo-dockerfile/
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>Dockerfile 結構，大致可以分為四個部分</p>
+<ul>
+<li>基礎映像檔資訊</li>
+<li>維護者資訊</li>
+<li>映像檔操作指令</li>
+<li>容器啟動時需執行的指令</li>
+</ul>
+<br>
+<ol start="2">
+<li>我們有說過 Dockerfile 是一個文字格式的設定檔，所以我們用 vim 來編寫 Dockerfile。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">vim Dockerfile
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 基礎映像檔資訊
+FROM ubuntu:latest
+
+# 維護者資訊
+MAINTAINER ian
+
+# 映像檔操作指令
+RUN apt-get update -y\
+    &amp;&amp; apt-get install nginx -y
+
+# 運行時容器提供服務的通道
+EXPOSE 80
+
+# 容器啟動時需執行的指令
+CMD [&#34;nginx&#34;,&#34;-g&#34;,&#34;daemon off;&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p><code>FROM ubuntu:latest</code></p>
+<p>第一行為必要的指定基礎映像檔，這邊使用 ubuntu 作為基礎映像檔，我們用最新版本，所以是 latest。</p>
+<br>
+<p><code>MAINTAINER ian</code></p>
+<p>維護者資訊想不也是不可以少的，這邊也可以輸入 Email 資訊，只是要注意的是此資訊會寫入產出映像檔的Author名稱屬性中。</p>
+<br>
+<p><code>RUN apt-get update -y\ &amp;&amp; apt-get install nginx -y</code></p>
+<p>這邊是最重要的部分，想要在映像檔案上設定或安裝都需要將命令寫在這，格式必須依 RUN <command> ，RUN 指令後面放 Linux 指令，如果指令太長可以使用\來換行。 -y 是在安裝 Nginx，會同意所有進行中所出現的問題。</p>
+<br>
+<p><code>EXPOSE 80</code></p>
+<p>設定運行時容器提供服務的通道。</p>
+<br>
+<p><code>CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code></p>
+<p>最後就是啟動指定容器時預設執行的指令，格式是 CMD [&ldquo;executable&rdquo;,&ldquo;param1&rdquo;,&ldquo;param2&rdquo;]。</p>
+<br>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Docker 運行 nginx 時為什麼要使用 daemon off;<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>因為 Docker 容器啟動時，默認會把容器內部第一個進程，作爲 docker 容器是否正常運行的依據，如果 docker 容器 pid = 1 到進程掛了，docker 就會退出！</p>
+<p>Docker 未執行自定義的 CMD 之前， nginx 的 pid 是 1，執行到 CMD 之後，nginx 就在後台運行，bash 或是 sh 的腳本就會變成 pid =1 。</p>
+<p>所以一但執行完 CMD，nginx 容器就會退出了，所以才需要加上 <code>-g daemon off;</code>。</p>
+<p>在 Nginx 官方的 <a href="https://hub.docker.com/_/nginx" target="_blank" rel="noopener noreffer">Docker Repository</a> 也有說明，在 Complex configuration 內。</p>
+</div>
+        </div>
+    </div>
+<br>
+<p>順便說一下使用 Dockerfile 的優點：1 . 可以進行 Git 版控，讓你管理或分享更方便 2 . 佔用容量小，因為只是純文字檔而已。</p>
+<br>
+<h5 id="使用-dockerfile-建立映像檔">使用 Dockerfile 建立映像檔</h5>
+<p>我們已經編輯完 Dockerfile 檔案了，接下來要執行來產生映像檔，我們要使用 <code>docker build</code> 來建立，我們一起來看看吧</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker build -t pinyi/demo-image . 
+</code></pre></td></tr></table>
+</div>
+</div><p>因為我們在 dockerfile 的目錄下，所以直接使用 “.” 來做建立動作，也可以使用 -f 來指定 dockerfile 的路徑位置。使用 -t 來設定映像檔的名稱，我們這邊取名叫 pinyi/demo-image。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>+<span class="o">]</span> Building 2.7s <span class="o">(</span>7/7<span class="o">)</span> <span class="nv">FINISHED</span>
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                   0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 44B                                                                                    0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                      0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                        0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/ubuntu:latest                                                       2.6s
+ <span class="o">=</span>&gt; <span class="o">[</span>auth<span class="o">]</span> library/ubuntu:pull token <span class="k">for</span> registry-1.docker.io                                                          0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/library/ubuntu:latest@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f  0.0s
+ <span class="o">=</span>&gt; CACHED <span class="o">[</span>2/2<span class="o">]</span> RUN apt-get update -y    <span class="o">&amp;&amp;</span> apt-get install nginx -y                                                  0.0s
+ <span class="o">=</span>&gt; exporting to image                                                                                                 0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37                           0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/pinyi/demo-image
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>完成後我們使用 <code>docker images</code> 來看看是否建立成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker images
+REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
+pinyi/demo-image   latest    1f56acbcbe9e   <span class="m">2</span> hours ago   166MB
+php                latest    d6229b88aa29   <span class="m">4</span> days ago    484MB
+mysql              latest    826efd84393b   <span class="m">6</span> days ago    521MB
+nginx              latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
+</code></pre></td></tr></table>
+</div>
+</div><p>執行運作的部分，我們放到容器 (Container)的章節在介紹 ~</p>
+<br>
+<h3 id="容器-container-1">容器 (Container)</h3>
+<p>我們在介紹指令前，先來了解一下 Dockerfile、Docker Image、Docker Container 這三個的關係，可以先參考以下圖片</p>
+<figure><a class="lightgallery" href="/images/docker/container.png" title="/images/docker/container.png" data-thumbnail="/images/docker/container.png" data-sub-html="<h2>容器 Container 組成</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker/container.png"
+            data-srcset="/images/docker/container.png, /images/docker/container.png 1.5x, /images/docker/container.png 2x"
+            data-sizes="auto"
+            alt="/images/docker/container.png" width="400" />
+    </a><figcaption class="image-caption">容器 Container 組成</figcaption>
+    </figure>
+<br>
+<p>我們在啟動 Container 時，會有這三個部分組成，最底層是映像檔 (Image)，這一層主要是透過撰寫 Dockerfile 之後 build 出來的 Docker Image，就像我們前面說的它是一個唯獨的檔案。執行啟動了 Docker Container，就會加上第二層，就是需要先 Init Container 的設定，例如是 hostname、環境變數、網路連接等系統設定，最後最上層再加上使用者可以在此層去讀寫資料。</p>
+<br>
+<p>有關於容器 (Container) 的指令非常多，光是簡單的 run 就有很多參數，我們先列出比較常用且基本的 Container 指令～</p>
+<h4 id="container-執行時的操作">Container 執行時的操作</h4>
+<h5 id="執行容器-run">執行容器 (run)</h5>
+<p>我們想要創建一個新的容器並運行，就可以使用 <code>docker run</code>，我們來看看他可以使用哪些參數吧！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run <span class="o">[</span>OPTIONS<span class="o">]</span> IMAGE <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARG...<span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>OPTIONS 說明：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">參數</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-d</td>
+<td style="text-align:center">後台運行容器</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td style="text-align:center">以交互模式運行容器，通常與 -t 同時使用</td>
+</tr>
+<tr>
+<td style="text-align:center">-t</td>
+<td style="text-align:center">為容器重新分配一個偽輸入終端，通常與 -i 同時使用</td>
+</tr>
+<tr>
+<td style="text-align:center">-p</td>
+<td style="text-align:center">指定容器與本機的Port ，格式是 <code>主機Port : 容器Port</code></td>
+</tr>
+<tr>
+<td style="text-align:center">&ndash;name=&quot;{}&quot;</td>
+<td style="text-align:center">為容器設定名稱</td>
+</tr>
+<tr>
+<td style="text-align:center">&ndash;net=&quot;{}&quot;</td>
+<td style="text-align:center">指定容器的網路連接類型，支援 bridge/host/none/container 四種模式</td>
+</tr>
+<tr>
+<td style="text-align:center">&ndash;link=[]</td>
+<td style="text-align:center">添加連接到另一個容器</td>
+</tr>
+<tr>
+<td style="text-align:center">&ndash;volume,-v</td>
+<td style="text-align:center">綁定一個本機的路徑</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>我們啟動我們下載好的 Nginx 來試試看吧！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -d -p 7777:80 --name<span class="o">=</span><span class="s2">&#34;demo-nginx&#34;</span> -v /Users/ian_zhuang/Desktop/data:/usr/share/nginx/html nginx
+4f34a38d672a4e6c9063e48f0631739c2b4684e3fbad8d5d51b2da212c1aafa8
+</code></pre></td></tr></table>
+</div>
+</div><p>我們將 Nginx 容器在背景執行，且將預設的80 Port 與本機的7777 Port 綁在一起，讓我們在本機瀏覽7777 Port 會直接導向容器的80Port，設定容器的名字叫做 “demo-nginx&quot; ，我們把桌面的 data 資料夾指向 Nginx 容器的路徑，我們就可以在本機新增檔案同步到容器中。</p>
+<br>
+<h5 id="顯示容器-ps">顯示容器 (ps)</h5>
+<p>使用 <code>docker ps</code> 來檢查一下是否啟動成功 (<code>ps</code> 可以顯示映像檔的基本資訊，如果沒有加 -a 只會顯示執行中的容器)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS          PORTS                  NAMES
+4f34a38d672a   nginx     <span class="s2">&#34;/docker-entrypoint.…&#34;</span>   About a minute ago   Up <span class="m">59</span> seconds   0.0.0.0:7777-&gt;80/tcp   demo-nginx
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接著我們測試是否有把桌面 data 資料夾掛到容器的路徑，我們先在 data 新增一個 hello.html ，裡面隨意輸入，瀏覽一下 <code>http://127.0.0.1:7777/hello.html</code> ，看看是否成功。</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker/container-v.png" title="/images/docker/container-v.png" data-thumbnail="/images/docker/container-v.png" data-sub-html="<h2>容器 Container -volume 測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker/container-v.png"
+            data-srcset="/images/docker/container-v.png, /images/docker/container-v.png 1.5x, /images/docker/container-v.png 2x"
+            data-sizes="auto"
+            alt="/images/docker/container-v.png" width="700" />
+    </a><figcaption class="image-caption">容器 Container -volume 測試</figcaption>
+    </figure>
+<br>
+<h5 id="顯示容器紀錄-logs">顯示容器紀錄 (logs)</h5>
+<p>想要看到我們執行 Container 的紀錄，可以使用 <code>logs</code> 指令來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker logs demo-nginx
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking <span class="k">for</span> shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+... 省略 ...
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">33</span>
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">34</span>
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">35</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="刪除容器-rm--f">刪除容器 (rm -f)</h5>
+<p>想要刪除不需要的 Container，可以使用 <code>rm</code> 指令來做刪除，<code>-f</code> 是強制刪除容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker rm -f demo-nginx
+demo-nginx
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="進入容器-exec">進入容器 (exec)</h5>
+<p>想要進入 container 來查看資料或是修改檔案，可以使用 <code>exec</code> 來進入容器中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker <span class="nb">exec</span> -it demo-nginx /bin/bash
+root@d5cf843e9781:/# ls
+bin  boot  dev	docker-entrypoint.d  docker-entrypoint.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@d5cf843e9781:/# <span class="nb">cd</span> usr/
+bin/     games/   include/ lib/     libexec/ local/   sbin/    share/   src/
+root@d5cf843e9781:/# <span class="nb">cd</span> usr/bin/
+root@d5cf843e9781:/usr/bin# <span class="nb">pwd</span>
+/usr/bin
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="匯出檔案-export">匯出檔案 (export)</h5>
+<p>我們前面有提到說，如果刪除了容器，以前寫入的資料也會不見，如果想要輸出資料，可以使用 <code>export</code> 來將可讀可寫那一層匯成檔案。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker <span class="nb">export</span> demo-nginx &gt; demo-nginx.tar
+$ ls <span class="p">|</span> grep <span class="s1">&#39;demo&#39;</span>
+demo-nginx.tar
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>save 跟 export 的區別<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>還記得我們在儲存映像檔的時候有介紹到save嗎，那他跟 export的區別是什麼呢？我們可以理解成</p>
+<p>save 是把 Docker Image 原始檔儲存，export 是把修改 Image 的內容都儲存。</p>
+</div>
+        </div>
+    </div>
+<br>
+<h5 id="匯入檔案-import">匯入檔案 (import)</h5>
+<p>有匯出檔案，當然也有匯入檔案拉，可以使用 <code>import</code> 將我們匯出的檔案匯入 Docker Image 裡面。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ cat ~/Desktop/demo-nginx.tar<span class="p">|</span> docker import - import-nginx
+sha256:7b8e3bd74b89b198b4b215ba5390535027c381c5683949bb6e0248ece7b7fe00
+
+$ docker images
+REPOSITORY     TAG       IMAGE ID       CREATED          SIZE
+import-nginx   latest    7b8e3bd74b89   <span class="m">19</span> seconds ago   140MB
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="container-的狀態">Container 的狀態</h4>
+<br>
+<h5 id="檢查容器狀態-inspect">檢查容器狀態 (inspect)</h5>
+<p>想要查看容器的狀態數據，可以使用 <code>inspect</code> 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;e6690239ba28c60c8e98a647114b2d2d3e30008212f98f34c8b2f9ba1173ee9a&#34;</span>,
+        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2022-03-15T10:13:44.6165343Z&#34;</span>,
+        <span class="s2">&#34;Path&#34;</span>: <span class="s2">&#34;/docker-entrypoint.sh&#34;</span>,
+        <span class="s2">&#34;Args&#34;</span>: <span class="o">[</span>
+            <span class="s2">&#34;nginx&#34;</span>,
+            <span class="s2">&#34;-g&#34;</span>,
+            <span class="s2">&#34;daemon off;&#34;</span>
+        <span class="o">]</span>,
+        <span class="s2">&#34;State&#34;</span>: <span class="o">{</span>
+            <span class="s2">&#34;Status&#34;</span>: <span class="s2">&#34;running&#34;</span>,
+            <span class="s2">&#34;Running&#34;</span>: true,
+            <span class="s2">&#34;Paused&#34;</span>: false,
+.... 省略 ....
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h5 id="查看容器的cpu記憶體及網路使用-stats">查看容器的CPU、記憶體及網路使用 (stats)</h5>
+<p>想要查看容器的CPU、記憶體及網路使用，可以使用 <code>stats</code> 來顯示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O     PIDS
+e6690239ba28   <span class="nb">test</span>      0.00%     3.934MiB / 1.939GiB   0.20%     1.16kB / 0B   0B / 12.3kB   <span class="m">5</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="倉庫-repository-1">倉庫 (Repository)</h3>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreffer">Docker 官網</a></p>
 <p><a href="https://aws.amazon.com/tw/docker/" target="_blank" rel="noopener noreffer">什麼是 Docker？</a></p>
 <p><a href="https://philipzheng.gitbook.io/docker_practice/#yuan-chu-chu-ji-can-kao-zi-liao" target="_blank" rel="noopener noreffer">Docker－－從入門到實踐</a></p>
+<p><a href="https://medium.com/@jackercleaninglab/dockerfile-%E5%BB%BA%E7%AB%8B%E8%87%AA%E8%A8%82%E6%98%A0%E5%83%8F%E6%AA%94-%E6%9E%B6%E8%B5%B7%E7%B6%B2%E7%AB%99%E5%BF%AB%E9%80%9F%E5%8F%88%E7%B0%A1%E5%96%AE-%E4%B8%80-22b2743f97b9" target="_blank" rel="noopener noreffer">Dockerfile 建立自訂映像檔 — 架起網站快速又簡單（一）</a></p>
+<p><a href="https://ithelp.ithome.com.tw/users/20103456/ironman/1320" target="_blank" rel="noopener noreffer">用30天來介紹和使用 Docker</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/docker/">Docker</a>
                 </span><span><a href="/tags/%E5%AE%B9%E5%99%A8/">容器</a>
@@ -241,7 +945,7 @@ if (!doNotTrack) {
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/docker/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)" data-hashtags="Docker,容器,虛擬化"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/docker/" data-hashtag="Docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)" data-hashtags="Docker,容器,虛擬化"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/docker/" data-hashtag="Docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 打包 php&#43;mysql&#43;nginx 環境)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/laravel-advanced/" class="prev" rel="prev" title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
