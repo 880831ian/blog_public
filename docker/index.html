@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/docker\/featured-image.webp",
                             "width":  2478 ,
                             "height":  1128 
-                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  9298 ,
+                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  9203 ,
         "url": "https:\/\/pin-yi.me\/docker\/","datePublished": "2022-03-14T17:23:11+08:00","dateModified": "2022-03-17T17:32:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/docker/featured-image.webp"
         title="/docker/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9298 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-14">2022-03-14</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9203 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 19 分鐘</span>&nbsp;</div>
             </div>
             
@@ -297,7 +297,7 @@ if (!doNotTrack) {
 <p>更有效率的虛擬化：Docker 容器的執行不需要額外的虛擬化支援，它是核心層級的虛擬化，因此可以實作更高的效能和效率。</p>
 </li>
 <li>
-<p>更輕鬆的遷移和擴展：Docker 容器幾乎可以在任意的平台上執行，包括實體機器、虛擬機、公有雲、私有雲、個人電腦、伺服器等。 這種兼容性可以讓使用者把一個應用程式從一個平台直接遷移到另外一個。</p>
+<p>更輕鬆的遷移和擴展：Docker 容器幾乎可以在任意的平台上執行，包括實體機器、虛擬機、公有雲、私有雲、個人電腦、伺服器等。 這種兼容性可以讓使用者把一個服務從一個平台直接遷移到另外一個。</p>
 </li>
 <li>
 <p>更簡單的管理：使用 Docker，只需要小小的修改，就可以替代以往大量的更新工作。所有的修改都以增量的方式被分發和更新，從而實作自動化並且有效率的管理。</p>
@@ -357,33 +357,7 @@ if (!doNotTrack) {
 </ul>
 <br>
 <h4 id="如何從倉庫取得映像檔">如何從倉庫取得映像檔</h4>
-<p>我們可以先到 <a href="https://hub.docker.com/" target="_blank" rel="noopener noreffer">Docker hub</a> 上面看看有什麼服務或程式想要下載來做使用 [ 詳細介紹會放到<a href="https://pin-yi.me/docker/#%e5%80%89%e5%ba%ab-repository-1" target="_blank" rel="noopener noreffer">倉庫 (Repository) </a>章節]，找到想要的服務，我們可以下 <code>docker pull {要下載的服務、程式名稱}</code> ，<font color='green'>我們這邊就與我們這次要實作的主題一樣，先下載 PHP+Mysql+Nginx 這三個映像檔</font>。</p>
-<ul>
-<li>php</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull php
-Using default tag: latest
-latest: Pulling from library/php
-f7a1c6dad281: Pull <span class="nb">complete</span>
-.... 省略 ....
-Digest: sha256:296a2346b33b4c561b07b48cd1c3d97c5a79dd5dcab92ec9f3bf1520d418f163
-Status: Downloaded newer image <span class="k">for</span> php:latest
-docker.io/library/php:latest
-</code></pre></td></tr></table>
-</div>
-</div><br>
+<p>我們可以先到 <a href="https://hub.docker.com/" target="_blank" rel="noopener noreffer">Docker hub</a> 上面看看有什麼服務或程式想要下載來做使用 [ 詳細介紹會放到<a href="https://pin-yi.me/docker/#%e5%80%89%e5%ba%ab-repository-1" target="_blank" rel="noopener noreffer">倉庫 (Repository) </a>章節]，找到想要的服務，我們可以下 <code>docker pull {要下載的服務、程式名稱}</code> ，我們這邊就先下載 Mysql 這個映像檔。</p>
 <ul>
 <li>mysql</li>
 </ul>
@@ -410,34 +384,7 @@ docker.io/library/mysql:latest
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<ul>
-<li>nginx</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull nginx
-Using default tag: latest
-latest: Pulling from library/nginx
-f7a1c6dad281: Already exists
-4d3e1d15534c: Pull <span class="nb">complete</span>
-.... 省略 ....
-Digest: sha256:1c13bc6de5dfca749c377974146ac05256791ca2fe1979fc8e8278bf0121d285
-Status: Downloaded newer image <span class="k">for</span> nginx:latest
-docker.io/library/nginx:latest
-</code></pre></td></tr></table>
-</div>
-</div><p>由於我們下載的沒有加任何的 <code>tag</code> ，也就是版本，所以我們都是下載最新版 latest ，如果想要下載特定版本，可以在服務名稱後面加上 <code>:{版本}</code> ，就可以下載對應的版本囉！</p>
+<p>由於我們下載的沒有加任何的 <code>tag</code> ，也就是版本，所以我們都是下載最新版 latest ，如果想要下載特定版本，可以在服務名稱後面加上 <code>:{版本}</code> ，就可以下載對應的版本囉！</p>
 <br>
 <p>如果有標記 <code>Official Image</code> 就代表是官方釋出的映像檔 ~ 在穩定性以及安全上更有保障，所以大家可以優先下載歐！</p>
 <br>
@@ -490,9 +437,9 @@ nginx        latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker save nginx &gt; nginx.tar
-$ ls <span class="p">|</span> grep <span class="s1">&#39;nginx&#39;</span>
-nginx.tar
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker save mysql &gt; mysql.tar
+$ ls <span class="p">|</span> grep <span class="s1">&#39;mysql&#39;</span>
+mysql.tar
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -587,7 +534,7 @@ Deleted: sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37
 FROM ubuntu:latest
 
 # 維護者資訊
-MAINTAINER ian
+LABEL maintainer=&#34;880831ian@gmail.com&#34;
 
 # 映像檔操作指令
 RUN apt-get update -y\
@@ -604,7 +551,7 @@ CMD [&#34;nginx&#34;,&#34;-g&#34;,&#34;daemon off;&#34;]
 <p><code>FROM ubuntu:latest</code></p>
 <p>第一行為必要的指定基礎映像檔，這邊使用 ubuntu 作為基礎映像檔，我們用最新版本，所以是 latest。</p>
 <br>
-<p><code>MAINTAINER ian</code></p>
+<p><code>LABEL maintainer=&quot;880831ian@gmail.com&quot;</code></p>
 <p>維護者資訊想不也是不可以少的，這邊也可以輸入 Email 資訊，只是要注意的是此資訊會寫入產出映像檔的Author名稱屬性中。</p>
 <br>
 <p><code>RUN apt-get update -y\ &amp;&amp; apt-get install nginx -y</code></p>
