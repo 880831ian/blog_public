@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/laravel-advanced\/featured-image.webp",
                             "width":  2520 ,
                             "height":  896 
-                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7011 ,
+                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7562 ,
         "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-19T19:37:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/laravel-advanced/featured-image.webp"
         title="/laravel-advanced/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7011 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 14 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7562 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 16 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -171,7 +171,8 @@ if (!doNotTrack) {
               <ul>
                 <li><a href="#route">Route</a></li>
                 <li><a href="#model-1">Model</a></li>
-                <li><a href="#controllerrepository">Controller/Repository</a></li>
+                <li><a href="#repository">Repository</a></li>
+                <li><a href="#controller-1">Controller</a></li>
               </ul>
             </li>
           </ul>
@@ -1118,6 +1119,7 @@ Middleware created successfully.
 <br>
 <h5 id="model-1">Model</h5>
 <p>因為我們在取得資料時，不希望顯示 <code>user_id</code> 以及 <code>version</code> 跟 <code>deleted_at</code> 給使用者，所以在 <code>app\Models\Message.php</code> 這個 model 裡面用 <code>hidden</code> 來做設定。</p>
+<p><strong>message</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1154,10 +1156,44 @@ Middleware created successfully.
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
+</div><br>
+<p><strong>like</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Like</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">SoftDeletes</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;like&#39;</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;message_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span>
+    <span class="p">];</span>
+    <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
 </div><p>可以看到我們還多引用 SoftDeletes ，它叫軟刪除，一般來說我們在設計資料庫時，不會真正意義上的把資料刪掉，還記得我們再新增 message 跟 like 資料表時，有多了一個  <code>softDeletes()</code> 欄位嗎，這個欄位就是當我們刪除時，他會記錄刪除時間，但在查詢時就不會顯示這筆資料，讓使用者覺得資料已經真正刪除了，但實際上資料還是存在在資料庫中。</p>
 <br>
-<h5 id="controllerrepository">Controller/Repository</h5>
-<p>接下來會連同 Repository 設計模式一起說明，所以會講得比較詳細。還記得我們上次把 RESTful API 要處理的邏輯都寫在 Controller 裡面嗎，我們光是一個小功能就讓整個 Controller 變得肥大，在後續維護時或是新增功能時，會導致十分不便利，因此我們要將 Repository 設計模式 給導入，那要怎麼實作呢～</p>
+<h5 id="repository">Repository</h5>
+<p>還記得我們上次把 RESTful API 要處理的邏輯都寫在 Controller 裡面嗎，我們光是一個小功能就讓整個 Controller 變得肥大，在後續維護時或是新增功能時，會導致十分不便利，因此我們要將 Repository 設計模式 給導入，那要怎麼實作呢～</p>
 <br>
 <p>我們要先在 <code>app</code> 底下新增一個 <code>Repositories</code> 目錄，在目錄底下再新增一個 <code>MessageRepository.php</code> 檔案來專門放我們與資料庫拿資料的程式，讓 Controller 單純處理商業邏輯我們整個檔案分成幾段來看</p>
 <br>
@@ -1205,7 +1241,7 @@ Middleware created successfully.
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<p><strong>查詢留言功能</strong></p>
+<p><strong>查詢留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1252,10 +1288,10 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>回傳全部的留言資料 <code>getAllMessage()</code>，將 model 的資料表所有的資料 get()，再去做 tojson 並回應 200 的 status code ;</p>
-<p>回傳{id}留言資料 <code>getMessage($id)</code> 會先使用到我們的 <code>is_exist()</code> 來做檢查，如果有就搜尋這個 id ，並他的資料做  get() ，再去做 tojson 並回應 200 的 status code ; 如果沒有，就回應找不到訊息以及 404 的 status code 。</p>
+</div><p>回傳全部的留言資料 <code>getAllMessage()</code>，使用 Message model 的資料表收尋 message要輸出的資料(不想要顯示的已經在 model 透過 hidden 給隱藏)，最後多一個來顯示各個文章的總數。</p>
+<p>回傳{id}留言資料 <code>getMessage($id)</code>，一樣跟回傳全部的留言資料一樣，只是多一個 where 來顯示輸出的 id 留言資料。</p>
 <br>
-<p><strong>新增留言功能</strong></p>
+<p><strong>新增留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1278,9 +1314,9 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>先檢查 request 是否符合 <code>max20_content ()</code> ，如果符合就回應內容長度超過20個字元以及 400 的 status code ; 如果不符合就取我們 <code>TokenAuth</code> 的 <code>auth_user</code> 將他的 $auth_user[&lsquo;id&rsquo;] 以及 $auth_user[&lsquo;username&rsquo;] 寫入 $message-&gt;user_id 跟 $message-&gt;name ，以及其他的資料做儲存，最後回應新增紀錄成功 201 的 status code 。</p>
+</div><p>使用 create 來新增資料，將 user_id 帶入傳值進來的 <code>$id</code>，name 帶入 <code>$username</code>，content 帶入 <code>$content</code>。</p>
 <br>
-<p><strong>修改留言功能</strong></p>
+<p><strong>修改留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1309,9 +1345,9 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>先檢查 <code>is_exists($id)</code> 是否存在以及 version 做 lockForUpdate，再檢查 max20_content() 內容有沒有超過，如果都沒有才可以進行修改，修改時，也會檢查是否有 request content ，沒有就照舊使用原始資料，也會依照判斷回傳修改成功 200、權限不正確 403、找不到訊息 404 的 status code 。</p>
+</div><p>先使用 where 來檢查樂觀鎖 version ，在查詢此 id 是否存在，最後用 update 來更新資料表，分別更新 user_id 、name、content、version 等欄位。</p>
 <br>
-<p><strong>按讚留言功能</strong></p>
+<p><strong>按讚留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1334,9 +1370,9 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>由於按讚功能，只需要檢查按讚 id 是否存在即可，故使用 is_exists($id) 來做判斷，有 id 就回應按讚成功 200，沒有就回應找不到訊息 404。</p>
+</div><p>按讚我們會在 like 的資料表中來新增紀錄，所以也是使用 create 來新增，新增 message_id、user_id、created_at 。</p>
 <br>
-<p><strong>刪除功能</strong></p>
+<p><strong>刪除留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1361,8 +1397,9 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>也一樣，先檢查 id 是否存在，再檢查刪除者是否與留言者為同一人。</p>
+</div><p>刪除功能由於 FK 外鍵的緣故，所以刪除 message 時，必須先刪除綁定的 like id ，所以分別會有兩個，一個是刪除 like 、另一個是刪除 message。</p>
 <br>
+<h5 id="controller-1">Controller</h5>
 <p>到這裡我們講完 <code>MessageRepository.php</code> 的內容了，那原本的 Controller 剩下什麼呢 !?</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1384,6 +1421,82 @@ Middleware created successfully.
 </div>
 </div><p>我們在商業邏輯上會處理 Request 內容，以及使用 MessageRepository 來對資料庫做存取、Auth 取的登入者的資訊等等功能，所以要記得先把他引用進來歐。</p>
 <br>
+<p><strong>查詢留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 查詢全部的留言
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAll</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getAllMessage</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 查詢id留言
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><font color='red'>由於我們 MessageRepository 都只有單純與資料庫進行交握，所以所有的判斷以及回傳都會在 controller 來做處理</font>，<code>getAll()</code> 會使用到 MessageRepository::getAllMessage() 的查詢並回傳顯示查詢的資料。</p>
+<p><code>get(id)</code> 會先用 MessageRepository::getMessage($id) 來檢查 id 是否存在，如果不存在就會回傳找不到留言 404 的 status code，如果存在就回傳 MessageRepository::getMessage($id) 的資料。</p>
+<br>
+<p><strong>新增留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 新增留言
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+
+        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;max:20&#39;</span><span class="p">];</span>
+        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;內容長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;新增紀錄成功&#34;</span><span class="p">],</span> <span class="mi">201</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我們先使用 <code>Auth::user()</code> 將登入的使用者資料存在 <code>$user</code> 中，在檢查輸入的 request 內容是否有超過 20 的字元，如果有就回傳內容長度超過20個字元 400。接著就用 MessageRepository::createMessage 將要新增的資料帶入，最後回傳新增紀錄成功 201 。</p>
+<br>
+<p><strong>修改留言功能</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1408,108 +1521,9 @@ Middleware created successfully.
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span><span class="lnt">82
-</span><span class="lnt">83
-</span><span class="lnt">84
-</span><span class="lnt">85
-</span><span class="lnt">86
-</span><span class="lnt">87
-</span><span class="lnt">88
-</span><span class="lnt">89
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">MessageController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="c1">// 查詢全部的留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAll</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getAllMessage</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 查詢id留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 新增留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
-
-        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;max:20&#39;</span><span class="p">];</span>
-        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;內容長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;新增紀錄成功&#34;</span><span class="p">],</span> <span class="mi">201</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 更新id留言
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 更新id留言
 </span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
@@ -1531,8 +1545,28 @@ Middleware created successfully.
         <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;修改成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
     <span class="p">}</span>
-
-    <span class="c1">// 按讚id留言
+</code></pre></td></tr></table>
+</div>
+</div><p>一樣先把登入的使用者存入 <code>$user</code>，檢查是否有這個 id ，沒有就回傳找不到留言 404，接下來檢查輸入的內容長度，如果超過，就回傳內容長度超過20個字元 400，再檢查要修改留言的與留言者是不是同一個使用者，如果不是就回傳權限不正確 403，最後就將資料透過 MessageRepository::updateMessage 來做更新，並回傳修改成功 200。</p>
+<br>
+<p><strong>按讚留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 按讚id留言
 </span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">like</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
@@ -1544,8 +1578,36 @@ Middleware created successfully.
         <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">likeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;按讚成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
     <span class="p">}</span>
-
-    <span class="c1">// 刪除id留言
+</code></pre></td></tr></table>
+</div>
+</div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，接著就使用 MessageRepository::likeMessage 來記錄按讚留言，並回傳按讚成功 404。</p>
+<br>
+<p><strong>刪除留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 刪除id留言
 </span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
@@ -1565,13 +1627,12 @@ Middleware created successfully.
         <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;刪除成功,沒有返回任何內容&#34;</span><span class="p">],</span> <span class="mi">204</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>我們將它改成這樣，可以讓我們的 Controller 變的更容易閱讀，以及更方便修改。</p>
+</div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，在檢查文章權限，錯誤就回傳權限不正確 403，最後檢查是否有被按讚，有的話要先刪除 like 裡面的按讚紀錄，最後再刪除文章(所有的刪除，因為我們在 model 裡面有使用 softdelete 軟刪除，所以不會真的刪除，而是在欄位的 deleted_at 加入刪除時間，來讓查詢時以為他被刪除了！)</p>
 <br>
 <h3 id="postman-測試">Postman 測試</h3>
-<p>那我們一樣來看一下 Postman 的測試，這邊只顯示有加入 api_token 以及沒有的差別。</p>
+<p>那我們一樣來看一下 Postman 的測試，這邊只顯示是否有登入去使用 API。</p>
 <h5 id="新增留言---成功">新增留言 - 成功</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/post-api-success.png" title="/images/laravel-advanced/post-api-success.png" data-thumbnail="/images/laravel-advanced/post-api-success.png" data-sub-html="<h2>新增留言 成功</h2>">
         <img
