@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/docker/" /><meta property="og:image" content="https://pin-yi.me/docker/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-14T17:23:11+08:00" />
-<meta property="article:modified_time" content="2022-03-18T18:16:38+08:00" />
+<meta property="article:modified_time" content="2022-03-21T11:23:57+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/docker/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  2478 ,
                             "height":  1128 
                         }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  9188 ,
-        "url": "https:\/\/pin-yi.me\/docker\/","datePublished": "2022-03-14T17:23:11+08:00","dateModified": "2022-03-18T18:16:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/docker\/","datePublished": "2022-03-14T17:23:11+08:00","dateModified": "2022-03-21T11:23:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -1004,7 +1004,7 @@ latest: digest: sha256:814caacaf3dad3eccb43dc9bcad635d0473bd5946295d40ca1ec23d13
 <p>所以我們可以使用兩種方式來解決！</p>
 <ol>
 <li>在執行 <code>docker run</code> 指令時加入 <code>-v</code> 參數，將 Container 的檔案路徑映射到本地端的檔案路徑。</li>
-<li>在撰寫 Dockerfile 時，加入 <code>VOLUME</code> 指令，可以做到把資料存放在實體主機上。使用這個方法還要搭配我們介紹 <a href="https://pin-yi.me/docker/#%e6%aa%a2%e6%9f%a5%e5%ae%b9%e5%99%a8%e7%8b%80%e6%85%8b-inspect" target="_blank" rel="noopener noreffer">Container 的狀態 &gt; 檢查容器狀態 (inspect)</a> ，來查詢本地端檔案的存放路徑在哪。</li>
+<li>在撰寫 Dockerfile 時，加入 <code>VOLUME</code> 指令，可以將資料存放在實體主機上。使用這個方法還要搭配我們介紹 <a href="https://pin-yi.me/docker/#%e6%aa%a2%e6%9f%a5%e5%ae%b9%e5%99%a8%e7%8b%80%e6%85%8b-inspect" target="_blank" rel="noopener noreffer">Container 的狀態 &gt; 檢查容器狀態 (inspect)</a> ，來查詢本地端檔案的存放路徑在哪。</li>
 </ol>
 <br>
 <h4 id="使用--v-指令將容器映射到本地端">使用 -v 指令將容器映射到本地端</h4>
@@ -1408,9 +1408,9 @@ br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
 <br>
 <h3 id="docker-compose">Docker-compose</h3>
 <p>我們在執行多個容器時，需要重複的下 <code>run</code> 指令來執行，以及容器與容器之間要做關聯也要記得每一個之間要怎麼連結，會變得很麻煩且不易管理，所以有了 <code>docker-compose</code> 可以將多個容器組合起來，變成一個強大的功能。</p>
-<p>只要寫一個 <code>docker-compose.yml</code> 把所有會使用到的 Docker image 以及每一個容器之間的關連或是網路的設定都寫上去，最後再使用 <code>docker-compose up</code> 指令，就可以把所有的容器都執行起來囉！</p>
+<p>只要寫一個 <code>docker-compose.yml</code> 把所有會使用到的 Docker image 以及每一個容器之間的關聯或是網路的設定都寫上去，最後再使用 <code>docker-compose up</code> 指令，就可以把所有的容器都執行起來囉！</p>
 <br>
-<p>我們就直接來實作我們這次的標題，要使用 docker-compose 來整合 PHP  環境。</p>
+<p>我們就直接來實作我們這次的標題，要使用 docker-compose 來整合 PHP MySQL Nginx 環境。</p>
 <ol>
 <li>我們先開啟一個資料夾，取名叫 <code>docker-compose</code> ，來放置我們的 docker-compose 檔案</li>
 <li>接著新增 <code>docker-compose.yml</code> 檔案，要準備來撰寫我們的設定檔囉！ 由於內容有點長，所以我分段說明，(<a href="https://github.com/880831ian/docker-compose-php-mysql-nginx" target="_blank" rel="noopener noreffer">這邊有放已經寫好的檔案歐</a>)</li>
@@ -1602,8 +1602,8 @@ br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
                 </span><span><a href="/tags/%E5%AE%B9%E5%99%A8/">容器</a>
                 </span><span><a href="/tags/%E8%99%9B%E6%93%AC%E5%8C%96/">虛擬化</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-18&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/17390bbae17a01bacdc2990271ee8ef4faa4180a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;17390bb:&nbsp;# 修改 Docker">
-                            <i class="fas fa-hashtag fa-fw"></i>17390bb</a></span>
+                <span>更新於 2022-03-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/297aae35e700bb789bfc615f2097ba45c92e31c6" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;297aae3:&nbsp;# 修改 Docker">
+                            <i class="fas fa-hashtag fa-fw"></i>297aae3</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/docker/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
