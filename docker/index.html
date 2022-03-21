@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"/>
 <meta name="twitter:description" content="什麼是 Docker ? Docker 是一種軟體平台，它可以快速建立、測試和部署應用程式。為什麼可以快速建立呢？因為 Docker 會將軟體封裝到名為『容器』的標準單位。其中會包含"/>
 <meta name="application-name" content="PinYi">
-<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/docker/" /><link rel="prev" href="https://pin-yi.me/laravel-advanced/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/docker/" /><link rel="prev" href="https://pin-yi.me/laravel-advanced/" /><link rel="next" href="https://pin-yi.me/go/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/docker\/featured-image.webp",
                             "width":  2478 ,
                             "height":  1128 
-                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化","wordcount":  9188 ,
+                        }],"genre": "posts","keywords": "Docker, 容器, 虛擬化, 實作, 介紹","wordcount":  9188 ,
         "url": "https:\/\/pin-yi.me\/docker\/","datePublished": "2022-03-14T17:23:11+08:00","dateModified": "2022-03-21T11:23:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -1601,6 +1601,8 @@ br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/docker/">Docker</a>
                 </span><span><a href="/tags/%E5%AE%B9%E5%99%A8/">容器</a>
                 </span><span><a href="/tags/%E8%99%9B%E6%93%AC%E5%8C%96/">虛擬化</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
                 <span>更新於 2022-03-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/297aae35e700bb789bfc615f2097ba45c92e31c6" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;297aae3:&nbsp;# 修改 Docker">
                             <i class="fas fa-hashtag fa-fw"></i>297aae3</a></span>
@@ -1611,9 +1613,9 @@ br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/docker/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)" data-hashtags="Docker,容器,虛擬化"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/docker/" data-hashtag="Docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)" data-hashtags="Docker,容器,虛擬化,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/docker/" data-hashtag="Docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/docker/" data-title="Docker 介紹 (如何使用 Docker-compose 建置 PHP&#43;MySQl&#43;Nginx 環境)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/laravel-advanced/" class="prev" rel="prev" title="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/go/" class="next" rel="next" title="Go 介紹">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript><div id="commento"></div><noscript>
