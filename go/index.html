@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go/" /><meta property="og:image" content="https://pin-yi.me/go/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-21T11:33:25+08:00" />
-<meta property="article:modified_time" content="2022-03-21T18:18:22+08:00" />
+<meta property="article:modified_time" content="2022-03-22T17:52:22+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
                             "width":  2352 ,
                             "height":  794 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  4233 ,
-        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-21T18:18:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  4253 ,
+        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-22T17:52:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4233 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4253 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 9 分鐘</span>&nbsp;</div>
             </div>
             
@@ -963,7 +963,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
 	<span class="kd">var</span> <span class="nx">a</span> <span class="p">=</span> <span class="mi">4</span> <span class="o">&lt;=</span> <span class="mi">7</span> 
 	<span class="kd">var</span> <span class="nx">b</span> <span class="p">=</span> <span class="mi">10</span> <span class="o">!=</span> <span class="mi">10</span>
 	<span class="kd">var</span> <span class="nx">c</span> <span class="p">=</span> <span class="mi">10</span> <span class="p">&gt;</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span> 
-	<span class="kd">var</span> <span class="nx">d</span> <span class="p">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">||</span> <span class="mi">10</span><span class="o">/</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span>
+	<span class="kd">var</span> <span class="nx">d</span> <span class="p">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">||</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span>
 	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v\n%v\n%v\n%v\n&#34;</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1065,6 +1065,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </div>
 </div><p>就會跳出錯誤說明別不同，無法直接做運算，那要怎麼辦呢！？</p>
 <br>
+<p>使用型別轉換，將型別值轉成相同的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1106,8 +1107,8 @@ false<span class="o">(</span>bool<span class="o">)</span>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/53c5199d9164241a40151b39ba8add816dc60f71" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;53c5199:&nbsp;#新增 Go、修改 Docker">
-                            <i class="fas fa-hashtag fa-fw"></i>53c5199</a></span>
+                <span>更新於 2022-03-22&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/7df74a1b657c79fb6e081f2ae7a319778e2abe68" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;7df74a1:&nbsp;# 修改 Docker、Go">
+                            <i class="fas fa-hashtag fa-fw"></i>7df74a1</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
