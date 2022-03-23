@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
                             "width":  2352 ,
                             "height":  794 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  4253 ,
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  4561 ,
         "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-22T17:52:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -130,9 +130,9 @@ if (!doNotTrack) {
         data-sizes="auto"
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
-                <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4253 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 9 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4561 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -150,12 +150,13 @@ if (!doNotTrack) {
         <li><a href="#套件相依性管理">套件相依性管理</a></li>
       </ul>
     </li>
-    <li><a href="#go-變數型態">Go 變數型態</a>
+    <li><a href="#go-資料型態">Go 資料型態</a>
       <ul>
         <li><a href="#字串">字串</a></li>
         <li><a href="#整數">整數</a></li>
         <li><a href="#浮點數">浮點數</a></li>
         <li><a href="#布林值">布林值</a></li>
+        <li><a href="#字符">字符</a></li>
         <li><a href="#數字型別的運算">數字型別的運算</a></li>
         <li><a href="#型別轉換">型別轉換</a></li>
       </ul>
@@ -316,7 +317,7 @@ go version go1.18 darwin/amd64
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export GOPATH=/Desktop/你專案的路徑/goworkspace
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export GOPATH=你專案的路徑/goworkspace
 $ source .bash_profile
 </code></pre></td></tr></table>
 </div>
@@ -550,12 +551,12 @@ dlv          go-outline   gomodifytags goplay       gopls        gotests      he
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$  ls
-go.mod   hello    hello.go
+go.mod   hello    .
 
 $ go clean
 
 $ ls 
-go.mod   hello.go
+go.mod   .
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -729,8 +730,8 @@ Hello World //黃色
 </div>
 </div><p>由於 Makedown 沒辦法於程式碼區域顯示正確顏色，用註解標示一下XD</p>
 <br>
-<h2 id="go-變數型態">Go 變數型態</h2>
-<p>我們在學習 Go 語言之前，要先了解一下基本的變數型態，可以簡單分為 字串、整數、浮點數、布林值</p>
+<h2 id="go-資料型態">Go 資料型態</h2>
+<p>我們在學習 Go 語言之前，要先了解一下基本的資料型態，可以簡單分為 字串、整數、浮點數、布林值、字符</p>
 <h3 id="字串">字串</h3>
 <p>在 Go 語言中，字串必須用雙引號給匡起來，也可以使用反引號來宣告。用雙引號刮起來的字串不能包含換行，但可以包含跳脫字元，例如 <code>\n</code> 、<code>\t</code> 。由於反引號內包含的是原始字串，可以跨越多行，所以跳脫符號在原始字串中沒有任何含義。</p>
 <div class="highlight"><div class="chroma">
@@ -758,7 +759,7 @@ Hello World //黃色
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run hello.go
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
 資料型態 name : ian<span class="o">(</span>string<span class="o">)</span>
 資料型態 address : 台中市太平區<span class="o">(</span>string<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -874,7 +875,7 @@ Hello World //黃色
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run hello.go
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
 97, 1200, 500, 034, 0xff
 </code></pre></td></tr></table>
 </div>
@@ -910,7 +911,7 @@ Hello World //黃色
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run hello.go
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
 245.466400<span class="o">(</span>float64<span class="o">)</span>
 1452.339966<span class="o">(</span>float32<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -941,7 +942,7 @@ Hello World //黃色
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$  go run hello.go 
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
 true<span class="o">(</span>bool<span class="o">)</span>
 false<span class="o">(</span>bool<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -977,11 +978,57 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$  go run hello.go 
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
 <span class="nb">true</span>
 <span class="nb">false</span>
 <span class="nb">false</span>
 <span class="nb">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="字符">字符</h3>
+<p>字符串中的每一個元素叫做字符，字符會使用單引號匡起來，像是 <code>&quot;abc&quot;</code> 這個字符串，其中 <code>'a'</code>、<code>'b'</code>、<code>'c'</code> 就是字符，可以從字符串元素中來獲得字符。</p>
+<p>Go 語言的字符有以下兩種：</p>
+<ul>
+<li>一種叫 byte 類型，可以叫做 uint8 類型，代表 ASCll 碼的一個字符。</li>
+<li>另一種是 rune 類型，代表一個 UTF-8 字符，當需要處理中文、日文或是其他複合字符時，就會使用到 rune 類型。rune 類型等於 int32 類型。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">&#39;A&#39;</span>
+	<span class="kd">var</span> <span class="nx">b</span> <span class="kt">rune</span> <span class="p">=</span> <span class="sc">&#39;嗨&#39;</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%d(%T) %d(%T)\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%d 十進制表示,%T 輸出型態
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%c %c\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%c 相應Unicode碼點所表示的字符
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%x %x\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%x 六進制表示
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%U %U\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%U 輸出格式為Unicode格式:U+hhhh的字符串
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+65<span class="o">(</span>uint8<span class="o">)</span> 21992<span class="o">(</span>int32<span class="o">)</span>
+A 嗨
+<span class="m">41</span> 55e8
+U+0041 U+55E8
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -1030,6 +1077,14 @@ false<span class="o">(</span>bool<span class="o">)</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">res1 : 40, res2 : 10, res3 : 38.48451000647496
+</code></pre></td></tr></table>
+</div>
 </div><br>
 <h3 id="型別轉換">型別轉換</h3>
 <p>Go 有一個強型別系統，它不允許混合型別。舉例來說，你不能把 <code>int</code> 變數加到 <code>float64</code> 變數中，也不能將 <code>int</code> 變數加到 <code>int64</code> 變數中。</p>
@@ -1058,9 +1113,9 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run hello.go 
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
 <span class="c1"># command-line-arguments</span>
-./hello.go:11:19: invalid operation: a + c <span class="o">(</span>mismatched types int64 and int<span class="o">)</span>
+./.:11:19: invalid operation: a + c <span class="o">(</span>mismatched types int64 and int<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>就會跳出錯誤說明別不同，無法直接做運算，那要怎麼辦呢！？</p>
@@ -1090,7 +1145,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run hello.go 
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
 <span class="m">4</span> <span class="m">4</span> <span class="m">504</span>
 </code></pre></td></tr></table>
 </div>
@@ -1102,6 +1157,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
 <p><a href="https://myapollo.com.tw/zh-tw/golang-go-module-tutorial/" target="_blank" rel="noopener noreffer">從一知半解到略懂 Go modules</a></p>
 <p><a href="https://ithelp.ithome.com.tw/articles/10186546" target="_blank" rel="noopener noreffer">30天就Go(3)：操作指令及Hello World!</a></p>
 <p><a href="https://calvertyang.github.io/2019/11/05/golang-basic-types-operators-type-conversion/" target="_blank" rel="noopener noreffer">Golang 基本型別、運算子和型別轉換</a></p>
+<p><a href="http://c.biancheng.net/view/18.html" target="_blank" rel="noopener noreffer">Go語言字符類型（byte和rune）</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/go/">Go</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
@@ -1125,7 +1181,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
                 Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
             </noscript></div></article></div>
             </main>
-            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
 </div>
 <script>
 if ('serviceWorker' in navigator) {
