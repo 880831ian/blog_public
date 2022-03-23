@@ -40,7 +40,7 @@
     <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</title>
     <link>https://pin-yi.me/laravel-advanced/</link>
     <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel-advanced/</guid>
-    <description><![CDATA[本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常]]></description>
+    <description><![CDATA[本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (可以從這裡下載最後程式碼！) Laravel 內建會員系統 Laravel 這個框架，很]]></description>
 </item>
 <item>
     <title>Redis 介紹</title>

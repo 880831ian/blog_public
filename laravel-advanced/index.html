@@ -5,16 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)" />
-<meta property="og:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常" />
+<meta property="og:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (可以從這裡下載最後程式碼！) Laravel 內建會員系統 Laravel 這個框架，很" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/laravel-advanced/" /><meta property="og:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-20T15:08:28+08:00" />
+<meta property="article:modified_time" content="2022-03-23T16:49:02+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/>
 <meta name="twitter:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)"/>
-<meta name="twitter:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ Laravel 內建會員系統 Laravel 這個框架，很方便的地方就是，他可以將我們常"/>
+<meta name="twitter:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (可以從這裡下載最後程式碼！) Laravel 內建會員系統 Laravel 這個框架，很"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/laravel-advanced/" /><link rel="prev" href="https://pin-yi.me/redis/" /><link rel="next" href="https://pin-yi.me/docker/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/laravel-advanced\/featured-image.webp",
                             "width":  2520 ,
                             "height":  896 
-                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7703 ,
-        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-20T15:08:28+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7930 ,
+        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-23T16:49:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/laravel-advanced/featured-image.webp"
         title="/laravel-advanced/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7703 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7930 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 16 分鐘</span>&nbsp;</div>
             </div>
             
@@ -181,15 +181,16 @@ if (!doNotTrack) {
           <ul>
             <li>
               <ul>
+                <li><a href="#登入">登入</a></li>
                 <li><a href="#新增留言---成功">新增留言 - 成功</a></li>
                 <li><a href="#新增留言---失敗">新增留言 - 失敗</a></li>
                 <li><a href="#修改留言---成功">修改留言 - 成功</a></li>
-                <li><a href="#修改留言---失敗---沒有token">修改留言 - 失敗 - 沒有Token</a></li>
+                <li><a href="#修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</a></li>
                 <li><a href="#修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</a></li>
                 <li><a href="#按讚留言---成功">按讚留言 - 成功</a></li>
-                <li><a href="#按讚留言---失敗---沒有token">按讚留言 - 失敗 - 沒有Token</a></li>
+                <li><a href="#按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</a></li>
                 <li><a href="#刪除留言---成功">刪除留言 - 成功</a></li>
-                <li><a href="#刪除留言---失敗---沒有token">刪除留言 - 失敗 - 沒有Token</a></li>
+                <li><a href="#刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</a></li>
                 <li><a href="#刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</a></li>
               </ul>
             </li>
@@ -200,7 +201,7 @@ if (!doNotTrack) {
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>本篇是 <a href="https://pin-yi.me/laravel/" target="_blank" rel="noopener noreffer">Laravel 介紹</a> 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～</p>
+                </div><div class="content" id="content"><p>本篇是 <a href="https://pin-yi.me/laravel/" target="_blank" rel="noopener noreffer">Laravel 介紹</a> 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (<a href="https://github.com/880831ian/laravel-restful-api-messageboard" target="_blank" rel="noopener noreffer">可以從這裡下載最後程式碼！</a>)</p>
 <h2 id="laravel-內建會員系統">Laravel 內建會員系統</h2>
 <p>Laravel 這個框架，很方便的地方就是，他可以將我們常用的帳號登入註冊等功能內建在 Laravel 框架內，那我們來看一下要怎麼使用吧。(本篇 Laravel Framework：5.4.36)</p>
 <p>它的配置文件在 <code>config/auth.php</code> ，其中包含了用於調整認證服務行為或是標注選項配置等。</p>
@@ -774,7 +775,7 @@ if (!doNotTrack) {
 </div><p>上面有說因為使用了 <code>AuthenticatesUsers</code>  來做驗證，我們盡量不去修改框架內的檔案，當然 Laravel 也有配套措施，只要使用 <code>username()</code> 這個方法就可以指定登入要驗證的欄位，因為筆者在學習這段時也找了很久，這邊附上<a href="https://laravel.com/api/6.x/Illuminate/Foundation/Auth/AuthenticatesUsers.html" target="_blank" rel="noopener noreffer"> Laravel API</a> 可以去查看一下。</p>
 <p>我們這時就可以使用 <code>http://127.0.0.1:8000/login</code> 來登入囉！試試看吧～</p>
 <h3 id="驗證-restful-api-是否登入">驗證 RESTful API 是否登入</h3>
-<p>本篇會使用到上一篇的 RESTful API 留言板來進行修改，所以有興趣的朋友，可以先去看玩上一篇 <a href="" rel="">Laravel 介紹</a> 歐～</p>
+<p>本篇會使用到上一篇的 RESTful API 留言板來進行修改，所以有興趣的朋友，可以先去看玩上一篇 <a href="https://pin-yi.me/laravel" target="_blank" rel="noopener noreffer">Laravel 介紹</a> 歐～</p>
 <p>接下來也會同時使用 Repository 設計模式來修改程式碼，那 Repository 設計模式是什麼呢，讓我先來介紹。</p>
 <h4 id="repository-設計模式">Repository 設計模式</h4>
 <p>還記得我們上一次，把所有的邏輯以及資料庫的處理的都放在 <code>Controller</code> 裡面嗎！如果只是單一個小專案，還可以這樣做沒關係，但專案越來越大，會使用的功能也越來越多，會造成 <code>Controller</code> 檔案肥大且難以維護，基於 SOLID 原則，我們應該要使用 Repository 設計模式來補助  <code>Controller</code>，將相關的資料庫邏輯放在不同的 <code>Repository</code>，方便中大型的專案做維護。</p>
@@ -816,7 +817,6 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
@@ -825,8 +825,7 @@ if (!doNotTrack) {
             <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span> <span class="c1">//留言板編號
 </span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">();</span> <span class="c1">//留言者ID
 </span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">//留言者姓名
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">//留言板內容
+            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">//留言板內容
 </span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
             <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span> <span class="c1">//留言板建立以及編輯的時間
 </span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">softDeletes</span><span class="p">();</span> <span class="c1">//軟刪除時間
@@ -835,7 +834,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們將資料庫的名稱從 <code>messsages</code> 改為 <code>message</code> ，後續程式部分也都會修改，大家要在注意一下 ～</p>
-<p>我們這次加入了留言者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、按讚者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、留言板樂觀鎖、softDeletes軟刪除的欄位(軟刪除後續會提到)。</p>
+<p>我們這次加入了留言者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、按讚者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、留言板樂觀鎖、softDeletes軟刪除的欄位(軟刪除後續會提到)，並且因為我們同樣的資料不要重複儲存，所以刪除 <code>name</code> 要查詢就使用 join 來做查詢。</p>
 <p>我們還希望可以多一個來存放是誰按讚的的資料表。所以一樣使用 <code>migration</code>  新增一個 {日期時間}_create_like_table.php 檔案</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -984,7 +983,7 @@ if (!doNotTrack) {
             <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span>
             <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">password</span>
         <span class="p">]))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入失敗&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入失敗&#34;</span><span class="p">],</span> <span class="mi">401</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
     <span class="p">}</span>
@@ -1118,7 +1117,7 @@ Middleware created successfully.
 </div><p>可以看到跟我們上一篇的 route 設定的差不多，只是將 <code>MessageController</code> 後面的方法做了一點變化，簡化名稱(這與我們後面講到的 Repository 設計模式有關)，以及加上 <code>like</code> 這個方法來當作我們的按讚功能，後面將我們需要登入驗證才可以使用的功能，加入 <code>middleware('api.auth');</code></p>
 <br>
 <h5 id="model-1">Model</h5>
-<p>因為我們在取得資料時，不希望顯示 <code>user_id</code> 以及 <code>version</code> 跟 <code>deleted_at</code> 給使用者，所以在 <code>app\Models\Message.php</code> 這個 model 裡面用 <code>hidden</code> 來做設定。</p>
+<p>因為我們在取得資料時，不希望顯示 <code>deleted_at</code> 給使用者，所以在 <code>app\Models\Message.php</code> 這個 model 裡面用 <code>hidden</code> 來做設定。</p>
 <p><strong>message</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1137,9 +1136,13 @@ Middleware created successfully.
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">Model</span>
@@ -1151,7 +1154,7 @@ Middleware created successfully.
         <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span>
     <span class="p">];</span>
     <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;deleted_at&#39;</span>
+        <span class="s1">&#39;deleted_at&#39;</span>
     <span class="p">];</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1214,34 +1217,6 @@ Middleware created successfully.
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<p>由於我們在 Controller 會先做一些權限的判斷，分別是 getMessageUserID 取得 message 的發文者 id 以及 getLikeMessage 取得 like 的 id。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getMessageUserID</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$message</span> <span class="o">=</span> <span class="nx">Message</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getLikeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Like</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><br>
 <p><strong>查詢留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1265,12 +1240,36 @@ Middleware created successfully.
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getAllMessage</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;message.*&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
+            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
+            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
+            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.updated_at&#39;</span>
+        <span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
@@ -1279,8 +1278,16 @@ Middleware created successfully.
 
     <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;message.*&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
+            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
+            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
+            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;message.updated_at&#39;</span>
+        <span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
@@ -1289,7 +1296,7 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>回傳全部的留言資料 <code>getAllMessage()</code>，使用 Message model 的資料表收尋 message要輸出的資料(不想要顯示的已經在 model 透過 hidden 給隱藏)，最後多一個來顯示各個文章的總數。</p>
+</div><p>回傳全部的留言資料 <code>getAllMessage()</code>，由於我們想要顯示留言者 id，只能一個一個把我們想要的 select 出來，不能透過 model 來顯示，使用 leftjoin 來查詢，最後多一個來顯示各個文章的總數。</p>
 <p>回傳{id}留言資料 <code>getMessage($id)</code>，一樣跟回傳全部的留言資料一樣，只是多一個 where 來顯示輸出的 id 留言資料。</p>
 <br>
 <p><strong>新增留言資料讀取</strong></p>
@@ -1302,20 +1309,18 @@ Middleware created successfully.
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">createMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$content</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">createMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="nx">Message</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
             <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
-            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$username</span><span class="p">,</span>
-            <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
+            <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span>
         <span class="p">]);</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>使用 create 來新增資料，將 user_id 帶入傳值進來的 <code>$id</code>，name 帶入 <code>$username</code>，content 帶入 <code>$content</code>。</p>
+</div><p>使用 create 來新增資料，將 user_id 帶入傳值進來的 <code>$id</code>，content 帶入 <code>$content</code>。</p>
 <br>
 <p><strong>修改留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1330,23 +1335,21 @@ Middleware created successfully.
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">,</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$content</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span>
-                <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user_id</span><span class="p">,</span>
-                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$username</span><span class="p">,</span>
                 <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
-                <span class="s1">&#39;version&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                <span class="s1">&#39;version&#39;</span> <span class="o">=&gt;</span> <span class="nv">$version</span> <span class="o">+</span> <span class="mi">1</span>
             <span class="p">]);</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>先使用 where 來檢查樂觀鎖 version ，在查詢此 id 是否存在，最後用 update 來更新資料表，分別更新 user_id 、name、content、version 等欄位。</p>
+</div><p>先使用 where 來檢查樂觀鎖 version ，在查詢此 id 是否存在，以及編輯者是否為發文者，最後用 update 來更新資料表，分別更新 user_id、content、version(樂觀鎖每次加1) 等欄位。</p>
 <br>
 <p><strong>按讚留言資料讀取</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1382,23 +1385,17 @@ Middleware created successfully.
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">deletelikeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nx">Like</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;message_id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nx">Message</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>刪除功能由於 FK 外鍵的緣故，所以刪除 message 時，必須先刪除綁定的 like id ，所以分別會有兩個，一個是刪除 like 、另一個是刪除 message。</p>
+</div><p>刪除功能因為我們使用軟刪除，所以不用顧慮 FK 外鍵，所以可以直接刪除 message。</p>
 <br>
 <h5 id="controller-1">Controller</h5>
 <p>到這裡我們講完 <code>MessageRepository.php</code> 的內容了，那原本的 Controller 剩下什麼呢 !?</p>
@@ -1450,15 +1447,15 @@ Middleware created successfully.
     <span class="c1">// 查詢id留言
 </span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$message</span><span class="p">;</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><font color='red'>由於我們 MessageRepository 都只有單純與資料庫進行交握，所以所有的判斷以及回傳都會在 controller 來做處理</font>，<code>getAll()</code> 會使用到 MessageRepository::getAllMessage() 的查詢並回傳顯示查詢的資料。</p>
-<p><code>get(id)</code> 會先用 MessageRepository::getMessage($id) 來檢查 id 是否存在，如果不存在就會回傳找不到留言 404 的 status code，如果存在就回傳 MessageRepository::getMessage($id) 的資料。</p>
+</div><p><font color='red'>由於我們 MessageRepository 都只有單純與資料庫進行交握，所有的判斷以及回傳都會在 controller 來做處理</font>，<code>getAll()</code> 會使用到 <code>MessageRepository::getAllMessage()</code> 的查詢並回傳顯示查詢的資料。</p>
+<p><code>get(id)</code> 會先用 MessageRepository::getMessage($id) 來檢查 id 是否存在，如果不存在就會回傳找不到留言 404 的 status code，如果存在就回傳存在變數 <code>message</code> 的 <code>MessageRepository::getMessage($id)</code> 資料。</p>
 <br>
 <p><strong>新增留言功能</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1490,7 +1487,7 @@ Middleware created successfully.
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;內容長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
+        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;新增紀錄成功&#34;</span><span class="p">],</span> <span class="mi">201</span><span class="p">);</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1522,6 +1519,11 @@ Middleware created successfully.
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 更新id留言
@@ -1529,7 +1531,7 @@ Middleware created successfully.
     <span class="p">{</span>
         <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
         <span class="p">}</span>
 
@@ -1539,16 +1541,21 @@ Middleware created successfully.
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;內容長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessageUserID</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="o">!=</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$message</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$user_id</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">];</span>
+            <span class="nv">$version</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$user_id</span> <span class="o">!=</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;權限不正確&#34;</span><span class="p">],</span> <span class="mi">403</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
+        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">,</span> <span class="nv">$version</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;修改成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>一樣先把登入的使用者存入 <code>$user</code>，檢查是否有這個 id ，沒有就回傳找不到留言 404，接下來檢查輸入的內容長度，如果超過，就回傳內容長度超過20個字元 400，再檢查要修改留言的與留言者是不是同一個使用者，如果不是就回傳權限不正確 403，最後就將資料透過 MessageRepository::updateMessage 來做更新，並回傳修改成功 200。</p>
+</div><p>一樣先把登入的使用者存入 <code>$user</code>，檢查是否有這個 id ，沒有就回傳找不到留言 404，接下來檢查輸入的內容長度，如果超過，就回傳內容長度超過20個字元 400，再檢查要修改留言的與留言者是不是同一個使用者，如果不是就回傳權限不正確 403，最後就將資料透過 <code>MessageRepository::updateMessage</code> 來做更新，並回傳修改成功 200。</p>
 <br>
 <p><strong>按讚留言功能</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1581,7 +1588,7 @@ Middleware created successfully.
     <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，接著就使用 MessageRepository::likeMessage 來記錄按讚留言，並回傳按讚成功 404。</p>
+</div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，接著就使用 <code>MessageRepository::likeMessage</code> 來記錄按讚留言，並回傳按讚成功 404。</p>
 <br>
 <p><strong>刪除留言功能</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1613,19 +1620,19 @@ Middleware created successfully.
     <span class="p">{</span>
         <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessageUserID</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="o">!=</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$message</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$user_id</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$user_id</span> <span class="o">!=</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;權限不正確&#34;</span><span class="p">],</span> <span class="mi">403</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getLikeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
-            <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deletelikeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">);</span>
         <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;刪除成功,沒有返回任何內容&#34;</span><span class="p">],</span> <span class="mi">204</span><span class="p">);</span>
     <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1633,7 +1640,21 @@ Middleware created successfully.
 </div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，在檢查文章權限，錯誤就回傳權限不正確 403，最後檢查是否有被按讚，有的話要先刪除 like 裡面的按讚紀錄，最後再刪除文章(所有的刪除，因為我們在 model 裡面有使用 softdelete 軟刪除，所以不會真的刪除，而是在欄位的 deleted_at 加入刪除時間，來讓查詢時以為他被刪除了！)</p>
 <br>
 <h3 id="postman-測試">Postman 測試</h3>
-<p>那我們一樣來看一下 Postman 的測試，這邊只顯示是否有登入去使用 API。</p>
+<p>那我們一樣來看一下 Postman 的測試，這邊只顯示需要登入才能使用的 API。</p>
+<h5 id="登入">登入</h5>
+<figure><a class="lightgallery" href="/images/laravel-advanced/login.png" title="/images/laravel-advanced/login.png" data-thumbnail="/images/laravel-advanced/login.png" data-sub-html="<h2>新增留言 成功</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-advanced/login.png"
+            data-srcset="/images/laravel-advanced/login.png, /images/laravel-advanced/login.png 1.5x, /images/laravel-advanced/login.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-advanced/login.png" width="600" />
+    </a><figcaption class="image-caption">新增留言 成功</figcaption>
+    </figure>
+<br> 
+<p>我們把帳號密碼放到 Body 來傳送，如果帳號密碼正確，就會顯示登入成功，並且在 Cookie 裡面的 laravel_session，可以用來判斷是否登入，以及登入的人是誰。</p>
+<br> 
 <h5 id="新增留言---成功">新增留言 - 成功</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/post-api-success.png" title="/images/laravel-advanced/post-api-success.png" data-thumbnail="/images/laravel-advanced/post-api-success.png" data-sub-html="<h2>新增留言 成功</h2>">
         <img
@@ -1646,7 +1667,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">新增留言 成功</figcaption>
     </figure>
 <br> 
-<p>新增留言成功，因為 <strong><font color='blue'>api 有輸入 api_token</font></strong> 會顯示新增紀錄成功以及回應 201 Created</p>
+<p>新增留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> 會顯示新增紀錄成功以及回應 201 Created</p>
 <br>
 <h5 id="新增留言---失敗">新增留言 - 失敗</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/post-api-error.png" title="/images/laravel-advanced/post-api-error.png" data-thumbnail="/images/laravel-advanced/post-api-error.png" data-sub-html="<h2>新增留言 失敗</h2>">
@@ -1660,7 +1681,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">新增留言 失敗</figcaption>
     </figure>
 <br> 
-<p>新增留言失敗，因為 <strong><font color='red'>api 沒有輸入 api_token</font></strong> ，所以會顯示用戶需要認證以及回應 401 Unauthorized</p>
+<p>新增留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，所以會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
 <h5 id="修改留言---成功">修改留言 - 成功</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-success.png" title="/images/laravel-advanced/put-api-success" data-thumbnail="/images/laravel-advanced/put-api-success.png" data-sub-html="<h2>修改留言 成功</h2>">
@@ -1674,9 +1695,9 @@ Middleware created successfully.
     </a><figcaption class="image-caption">修改留言 成功</figcaption>
     </figure>
 <br> 
-<p>修改留言成功，因為 <strong><font color='blue'>api 有輸入 api_token</font></strong> ，會顯示修改成功以及回應 200 OK</p>
+<p>修改留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示修改成功以及回應 200 OK</p>
 <br>
-<h5 id="修改留言---失敗---沒有token">修改留言 - 失敗 - 沒有Token</h5>
+<h5 id="修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-error-1.png" title="/images/laravel-advanced/put-api-error-1.png" data-thumbnail="/images/laravel-advanced/put-api-error-1.png" data-sub-html="<h2>修改留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1688,7 +1709,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">修改留言 失敗</figcaption>
     </figure>
 <br> 
-<p>修改留言失敗，因為 <strong><font color='red'>api 沒有輸入 api_token</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
+<p>修改留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
 <h5 id="修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-error-2.png" title="/images/laravel-advanced/put-api-error-2.png" data-thumbnail="/images/laravel-advanced/put-api-error-2.png" data-sub-html="<h2>修改留言 失敗</h2>">
@@ -1702,7 +1723,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">修改留言 失敗</figcaption>
     </figure>
 <br> 
-<p>修改留言失敗，雖然 <strong><font color='red'>有輸入正確的 token ，但不是當初的留言者</font></strong> ，會顯示權限不正確以及回應 403 Forbidden</p>
+<p>修改留言失敗，雖然 <strong><font color='red'>有登入，但存在 Cookie 裡面的 laravel_session 不是當初的留言者</font></strong> ，會顯示權限不正確以及回應 403 Forbidden</p>
 <br>
 <h5 id="按讚留言---成功">按讚留言 - 成功</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/patch-api-success.png" title="/images/laravel-advanced/patch-api-success" data-thumbnail="/images/laravel-advanced/patch-api-success.png" data-sub-html="<h2>修改留言 成功</h2>">
@@ -1716,9 +1737,9 @@ Middleware created successfully.
     </a><figcaption class="image-caption">修改留言 成功</figcaption>
     </figure>
 <br> 
-<p>按讚留言成功，因為 <strong><font color='blue'>api 有輸入 api_token</font></strong> ，會顯示按讚成功以及回應 200 OK</p>
+<p>按讚留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示按讚成功以及回應 200 OK</p>
 <br>
-<h5 id="按讚留言---失敗---沒有token">按讚留言 - 失敗 - 沒有Token</h5>
+<h5 id="按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/patch-api-error.png" title="/images/laravel-advanced/patch-api-error.png" data-thumbnail="/images/laravel-advanced/patch-api-error.png" data-sub-html="<h2>修改留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1730,7 +1751,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">修改留言 失敗</figcaption>
     </figure>
 <br> 
-<p>按讚留言失敗，因為 <strong><font color='red'>api 沒有輸入 api_token</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
+<p>按讚留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
 <h5 id="刪除留言---成功">刪除留言 - 成功</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-success.png" title="/images/laravel-advanced/delete-api-success.png" data-thumbnail="/images/laravel-advanced/delete-api-success.png" data-sub-html="<h2>刪除留言 成功</h2>">
@@ -1744,9 +1765,9 @@ Middleware created successfully.
     </a><figcaption class="image-caption">刪除留言 成功</figcaption>
     </figure>
 <br> 
-<p>刪除留言成功，因為 <strong><font color='blue'>api 有輸入 api_token</font></strong> ，不會顯示訊息但會回應 204 No Content</p>
+<p>刪除留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，不會顯示訊息但會回應 204 No Content</p>
 <br>
-<h5 id="刪除留言---失敗---沒有token">刪除留言 - 失敗 - 沒有Token</h5>
+<h5 id="刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-error-1.png" title="/images/laravel-advanced/delete-api-error-1.png" data-thumbnail="/images/laravel-advanced/delete-api-error-1.png" data-sub-html="<h2>刪除留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1758,7 +1779,7 @@ Middleware created successfully.
     </a><figcaption class="image-caption">刪除留言 失敗</figcaption>
     </figure>
 <br> 
-<p>刪除留言失敗，因為 <strong><font color='red'>api 沒有輸入 api_token</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
+<p>刪除留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
 <h5 id="刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</h5>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-error-2.png" title="/images/laravel-advanced/delete-api-error-2.png" data-thumbnail="/images/laravel-advanced/delete-api-error-2.png" data-sub-html="<h2>刪除留言 失敗</h2>">
@@ -1788,8 +1809,8 @@ Middleware created successfully.
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/2519f4efd4170e85be9c5a8975552349a0f7f17f" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;2519f4e:&nbsp;# 修改 Laravel 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>2519f4e</a></span>
+                <span>更新於 2022-03-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ba87596d3d66ed2e87e1127dc0c48dab197b9e7c" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ba87596:&nbsp;# 修改 Laravel 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>ba87596</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
