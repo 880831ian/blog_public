@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go/" /><meta property="og:image" content="https://pin-yi.me/go/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-21T11:33:25+08:00" />
-<meta property="article:modified_time" content="2022-03-24T14:43:37+08:00" />
+<meta property="article:modified_time" content="2022-03-24T16:38:00+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
                             "width":  790 ,
                             "height":  260 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  6826 ,
-        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-24T14:43:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  7384 ,
+        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-24T16:38:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 6826 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 14 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7384 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 15 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -176,19 +176,23 @@ if (!doNotTrack) {
         </li>
       </ul>
     </li>
-    <li><a href="#指標">指標</a></li>
-    <li><a href="#陣列">陣列</a>
+    <li><a href="#資料結構">資料結構</a>
       <ul>
+        <li><a href="#指標">指標</a></li>
+        <li><a href="#陣列">陣列</a></li>
         <li><a href="#切片">切片</a></li>
+        <li><a href="#結構">結構</a></li>
       </ul>
     </li>
-    <li><a href="#go-條件判斷">Go 條件判斷</a>
+    <li><a href="#go-控制流程">Go 控制流程</a>
       <ul>
         <li><a href="#if">if</a></li>
         <li><a href="#switch">switch</a></li>
       </ul>
     </li>
     <li><a href="#go-迴圈">Go 迴圈</a></li>
+    <li><a href="#goroutine">Goroutine</a></li>
+    <li><a href="#channel">Channel</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -1440,8 +1444,9 @@ Hello <span class="m">9999</span>
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<h2 id="指標">指標</h2>
-<p>指標是程式語言中的一類資料型態及其物件或變數，用來表示或儲存記憶體位址，這個位址的值直接指向存在該位址物件的值。</p>
+<h2 id="資料結構">資料結構</h2>
+<h3 id="指標">指標</h3>
+<p>指標是程式語言中的一類資料結構及其物件或變數，用來表示或儲存記憶體位址，這個位址的值直接指向存在該位址物件的值。</p>
 <p>Go 支持指標，指標的聲明方式為 *T，可以藉由變數名稱前面加 <code>&amp;</code> 來獲得變數的位址，由於 Go 支持 GC ，在 Go 語言中不支持指標的運算。</p>
 <p>表示法</p>
 <ul>
@@ -1491,7 +1496,7 @@ pInt <span class="nv">指向的值</span> <span class="o">=</span> <span class="
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<h2 id="陣列">陣列</h2>
+<h3 id="陣列">陣列</h3>
 <p>我們已經學會要怎麼宣告變數，以及如何使用變數來儲存值。但當我們今天想要儲存多個數值，使用原本的方式，需要創建許多變數才能儲存，因此有了陣列可以來儲存大量資料。</p>
 <p>陣列 (Array) 是由同類型的元素集合所組成的資料結構，分配一塊連續的記憶體來儲存。利用元素的索引可以計算出該元素所對應的儲存位址。</p>
 <div class="highlight"><div class="chroma">
@@ -1673,7 +1678,9 @@ a 的記憶體分配位置 0xc0000180f0
 <span class="nv">擴容後指標</span> <span class="o">=</span> 0xc000022080 改變
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="go-條件判斷">Go 條件判斷</h2>
+</div><h3 id="結構">結構</h3>
+<p>我們介紹的變數都是儲存單一的值或是多個相同型態的值，那如果要用變數表示較複雜的概念，像是紀錄一個人的名字、年齡或是身高時，由於這些是不同的資料型態，所以要記錄下來時，就必須使用不同的容器，這裡會介紹 Go 語言中的結構 Struct</p>
+<h2 id="go-控制流程">Go 控制流程</h2>
 <h3 id="if">if</h3>
 <p>結構裡會有一個條件，這個條件是個布林值，如果為 true，則會執行括號裡的程式碼，相反的，如果為 false，則會直接跳過：</p>
 <div class="highlight"><div class="chroma">
@@ -1807,6 +1814,7 @@ a 的記憶體分配位置 0xc0000180f0
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<p><strong>break</strong></p>
 <p>也可以使用 <code>break</code>，依條件需求讓迴圈提早跳出結束：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1847,6 +1855,7 @@ a 的記憶體分配位置 0xc0000180f0
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<p><strong>Continue</strong></p>
 <p>或是使用 <code>continue</code> 若符合條件，便會跳過到此迴圈，直接進入下個迭代：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1887,6 +1896,202 @@ a 的記憶體分配位置 0xc0000180f0
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<p><strong>GoTo</strong></p>
+<p>使用 goto 可以無條件轉移到程式中指定的行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">)</span>
+	<span class="k">goto</span> <span class="nx">labele1</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">)</span>
+<span class="nx">labele1</span><span class="p">:</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;4&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;5&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;6&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="m">1</span>
+<span class="m">2</span>
+<span class="m">4</span>
+<span class="m">5</span>
+<span class="m">6</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="goroutine">Goroutine</h2>
+<p>Go 支持多併發，如何使用 goroutine 來執行多併發，只要使用 <code>go</code> 這個關鍵字來執行 func 就可以了 !</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Hello</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">go</span> <span class="nf">Hello</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">main	
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到沒有顯示 Hello,world 字串，是因為要執行 Hello func 的時候 main func 已經結束了。</p>
+<br>
+<p>我們試著在 main func 中加入 time.sleep 來故意延遲 main func 執行時間：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">Hello</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">go</span> <span class="nf">Hello</span><span class="p">()</span>
+	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+Hello, world
+main
+</code></pre></td></tr></table>
+</div>
+</div><p>我們這時就可以看到 Hello, world 字串有顯示出來。</p>
+<br>
+<p>使用 sync.waitgroup 讓主線程等待協程完成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Hello</span><span class="p">(</span><span class="nx">str</span> <span class="o">*</span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="nx">str</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">str</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+	<span class="nx">str</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">go</span> <span class="nf">Hello</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">str</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
+	<span class="nx">str</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+main
+Hello, world <span class="m">0</span>
+Hello, world <span class="m">1</span>
+Hello, world <span class="m">2</span>
+Hello, world <span class="m">3</span>
+Hello, world <span class="m">4</span>
+Hello, world <span class="m">5</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>WaitGroup：它能夠阻擋主線程的執行，直到所有的 <code>goroutine</code> 執行完畢。</p>
+<p>WaitGroup 使用方法</p>
+<ul>
+<li>Add(delta int)：計數器增加 delta</li>
+<li>Done()：計數器-1，相等於ADD(-1)</li>
+<li>Wait()：阻擋直到所有的 WaitGroup 數量變成零，即計數器變為0</li>
+<li>defer：是用來宣告 function 結束前的動作。</li>
+</ul>
+<br>
+<h2 id="channel">Channel</h2>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://go.dev/doc/tutorial/getting-started" target="_blank" rel="noopener noreffer">Go 官網</a></p>
 <p><a href="https://ithelp.ithome.com.tw/users/20137500/ironman/4184" target="_blank" rel="noopener noreffer">golang後端入門分享</a></p>
@@ -1900,8 +2105,8 @@ a 的記憶體分配位置 0xc0000180f0
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-24&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/895a5a118d39ab0fc7a47cc218ba2ebec6fe1286" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;895a5a1:&nbsp;# 新增/修改 Go、修改 Go 文章封面">
-                            <i class="fas fa-hashtag fa-fw"></i>895a5a1</a></span>
+                <span>更新於 2022-03-24&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/06d79a46d20d42f386c95586f51d925a1b96b00b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;06d79a4:&nbsp;# 新增/修改 Go">
+                            <i class="fas fa-hashtag fa-fw"></i>06d79a4</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
