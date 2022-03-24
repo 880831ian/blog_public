@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go/" /><meta property="og:image" content="https://pin-yi.me/go/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-21T11:33:25+08:00" />
-<meta property="article:modified_time" content="2022-03-23T18:25:18+08:00" />
+<meta property="article:modified_time" content="2022-03-24T14:43:37+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go/featured-image.webp"/>
@@ -31,10 +31,10 @@
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
-                            "width":  2352 ,
-                            "height":  794 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  4561 ,
-        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-23T18:25:18+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                            "width":  790 ,
+                            "height":  260 
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  6826 ,
+        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-24T14:43:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4561 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 6826 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 14 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -153,14 +153,42 @@ if (!doNotTrack) {
     <li><a href="#go-資料型態">Go 資料型態</a>
       <ul>
         <li><a href="#字串">字串</a></li>
+        <li><a href="#字符">字符</a></li>
         <li><a href="#整數">整數</a></li>
         <li><a href="#浮點數">浮點數</a></li>
         <li><a href="#布林值">布林值</a></li>
-        <li><a href="#字符">字符</a></li>
+        <li><a href="#字典">字典</a></li>
         <li><a href="#數字型別的運算">數字型別的運算</a></li>
         <li><a href="#型別轉換">型別轉換</a></li>
       </ul>
     </li>
+    <li><a href="#變數">變數</a>
+      <ul>
+        <li><a href="#使用--來宣告">使用 <code>:=</code> 來宣告</a></li>
+        <li><a href="#先宣告資料型態">先宣告資料型態</a></li>
+        <li><a href="#直接宣告並賦值">直接宣告並賦值</a></li>
+        <li><a href="#常見宣告錯誤">常見宣告錯誤</a>
+          <ul>
+            <li><a href="#重複宣告變數">重複宣告變數</a></li>
+            <li><a href="#在-main-函式外賦值">在 main 函式外賦值</a></li>
+            <li><a href="#沒有宣告變數就使用">沒有宣告變數就使用</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#指標">指標</a></li>
+    <li><a href="#陣列">陣列</a>
+      <ul>
+        <li><a href="#切片">切片</a></li>
+      </ul>
+    </li>
+    <li><a href="#go-條件判斷">Go 條件判斷</a>
+      <ul>
+        <li><a href="#if">if</a></li>
+        <li><a href="#switch">switch</a></li>
+      </ul>
+    </li>
+    <li><a href="#go-迴圈">Go 迴圈</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -169,13 +197,13 @@ if (!doNotTrack) {
 <p>Go 是由 Google 開發並維護的編譯程式語言，支援垃圾回收與併發，由於開發人之一也是 C 語言的作者，所以 Go 也繼承了許多 C 的風格
 其特點有以下幾點：</p>
 <ul>
-<li>開源：Go 為開放原始碼，可以直接到<a href="https://github.com/golang/go" target="_blank" rel="noopener noreffer">專案的 GitHub</a> 來查看 Go 底層的原始碼。</li>
 <li>靜態型別：因爲靜態型別的特性，可以在編譯期間就進行完整的型別檢查，可以找出大部分的型別錯誤。</li>
 <li>編譯速度：因為 Go 語言先天優勢是架構設計非常單純，並不像物件導向語言龐大，取在編譯時不用相依其他的 library，因此讓他有更好的執行效率。</li>
 <li>語法簡潔：Go 關鍵字不多，不到30幾個，因為其關鍵字不少也與 C 的關鍵字重複，學習更容易上手。</li>
-<li>原生支援併發：在目前電腦都是多顆核心的時代下， Go 在先天設計上就支援了併發，也就是所謂的 <code>goroutine</code> ，這是 Go 最大特色之一，thread 的使用是非常消耗系統資源的，當使用越多管理上也越困難，而 goroutine 有輕巧低消耗資源的特性，而這個優點在於系統支援的消耗也會比較少。</li>
+<li>垃圾回收：Go 有自動內存回收機制，不需要由開發人員來管理。垃圾回收是一種記憶體管理機制。當程式所佔用記憶體不再被該程式給存取時，會借助垃圾回收演算法，將記憶體空間歸還給作業系統。</li>
+<li>原生支援併發：Go 語言支持併發，只需要透過 <code>go</code> 關鍵字來開啟 <code>goroutine</code> 將可。<code>goroutine</code> 是輕量級的線程，<code>goroutine</code> 的調度是由 Go 運行時進行管理的。
+<br></li>
 </ul>
-<br>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-lightbulb fa-fw"></i>靜態型別/動態型別<i class="details-icon fas fa-angle-right fa-fw"></i>
@@ -731,7 +759,7 @@ Hello World //黃色
 </div><p>由於 Makedown 沒辦法於程式碼區域顯示正確顏色，用註解標示一下XD</p>
 <br>
 <h2 id="go-資料型態">Go 資料型態</h2>
-<p>我們在學習 Go 語言之前，要先了解一下基本的資料型態，可以簡單分為 字串、整數、浮點數、布林值、字符</p>
+<p>我們在學習 Go 語言之前，要先了解一下基本的資料型態，可以簡單分為 字串、字符、整數、浮點數、布林值、字典</p>
 <h3 id="字串">字串</h3>
 <p>在 Go 語言中，字串必須用雙引號給匡起來，也可以使用反引號來宣告。用雙引號刮起來的字串不能包含換行，但可以包含跳脫字元，例如 <code>\n</code> 、<code>\t</code> 。由於反引號內包含的是原始字串，可以跨越多行，所以跳脫符號在原始字串中沒有任何含義。</p>
 <div class="highlight"><div class="chroma">
@@ -762,6 +790,52 @@ Hello World //黃色
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
 資料型態 name : ian<span class="o">(</span>string<span class="o">)</span>
 資料型態 address : 台中市太平區<span class="o">(</span>string<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="字符">字符</h3>
+<p>字串中的每一個元素叫做字符，字符會使用單引號匡起來，像是 <code>&quot;abc&quot;</code> 這個字串，其中 <code>'a'</code>、<code>'b'</code>、<code>'c'</code> 就是字符，可以從字串元素中來獲得字符。</p>
+<p>Go 語言的字符有以下兩種：</p>
+<ul>
+<li>一種叫 byte 類型，可以叫做 uint8 類型，代表 ASCll 碼的一個字符。</li>
+<li>另一種是 rune 類型，代表一個 UTF-8 字符，當需要處理中文、日文或是其他複合字符時，就會使用到 rune 類型。rune 類型等於 int32 類型。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">&#39;A&#39;</span>
+	<span class="kd">var</span> <span class="nx">b</span> <span class="kt">rune</span> <span class="p">=</span> <span class="sc">&#39;嗨&#39;</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%c %c\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%c 所表示的字符
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%d(%T) %d(%T)\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%d 十進制表示,%T 輸出型態
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%x %x\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%x 十六進制表示
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%U %U\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%U 輸出格式為 Unicode 格式:U+hhhh的字串
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+A 嗨
+65<span class="o">(</span>uint8<span class="o">)</span> 21992<span class="o">(</span>int32<span class="o">)</span>
+<span class="m">41</span> 55e8
+U+0041 U+55E8
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -986,13 +1060,8 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<h3 id="字符">字符</h3>
-<p>字符串中的每一個元素叫做字符，字符會使用單引號匡起來，像是 <code>&quot;abc&quot;</code> 這個字符串，其中 <code>'a'</code>、<code>'b'</code>、<code>'c'</code> 就是字符，可以從字符串元素中來獲得字符。</p>
-<p>Go 語言的字符有以下兩種：</p>
-<ul>
-<li>一種叫 byte 類型，可以叫做 uint8 類型，代表 ASCll 碼的一個字符。</li>
-<li>另一種是 rune 類型，代表一個 UTF-8 字符，當需要處理中文、日文或是其他複合字符時，就會使用到 rune 類型。rune 類型等於 int32 類型。</li>
-</ul>
+<h3 id="字典">字典</h3>
+<p>字典 (Map) 是 Go 內建的類型，是一種無序列的鍵值(key-value)的集合，可以透過 key 快速查詢並找到數據。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1002,17 +1071,15 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">&#39;A&#39;</span>
-	<span class="kd">var</span> <span class="nx">b</span> <span class="kt">rune</span> <span class="p">=</span> <span class="sc">&#39;嗨&#39;</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%d(%T) %d(%T)\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%d 十進制表示,%T 輸出型態
-</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%c %c\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%c 相應Unicode碼點所表示的字符
-</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%x %x\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%x 六進制表示
-</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%U %U\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//%U 輸出格式為Unicode格式:U+hhhh的字符串
-</span><span class="c1"></span><span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">map3</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="mi">99</span> <span class="p">:</span> <span class="s">&#34;Go&#34;</span><span class="p">,</span> <span class="mi">87</span> <span class="p">:</span> <span class="s">&#34;Python&#34;</span><span class="p">,</span> <span class="mi">79</span> <span class="p">:</span> <span class="s">&#34;Java&#34;</span><span class="p">,</span> <span class="mi">93</span><span class="p">:</span> <span class="s">&#34;Html&#34;</span><span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">map3</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;map3[99] =&#34;</span><span class="p">,</span><span class="nx">map3</span><span class="p">[</span><span class="mi">99</span><span class="p">],</span><span class="s">&#34;map3[79] =&#34;</span><span class="p">,</span><span class="nx">map3</span><span class="p">[</span><span class="mi">79</span><span class="p">])</span>
+	<span class="nx">map3</span><span class="p">[</span><span class="mi">79</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;PHP&#34;</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;修改數據後，map3[99] =&#34;</span><span class="p">,</span><span class="nx">map3</span><span class="p">[</span><span class="mi">99</span><span class="p">],</span><span class="s">&#34;map3[79] =&#34;</span><span class="p">,</span><span class="nx">map3</span><span class="p">[</span><span class="mi">79</span><span class="p">])</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1020,15 +1087,11 @@ false<span class="o">(</span>bool<span class="o">)</span>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
-65<span class="o">(</span>uint8<span class="o">)</span> 21992<span class="o">(</span>int32<span class="o">)</span>
-A 嗨
-<span class="m">41</span> 55e8
-U+0041 U+55E8
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">map<span class="o">[</span>79:Java 87:Python 93:Html 99:Go<span class="o">]</span>
+map3<span class="o">[</span>99<span class="o">]</span> <span class="o">=</span> Go map3<span class="o">[</span>79<span class="o">]</span> <span class="o">=</span> Java
+修改數據後，map3<span class="o">[</span>99<span class="o">]</span> <span class="o">=</span> Go map3<span class="o">[</span>79<span class="o">]</span> <span class="o">=</span> PHP
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -1151,6 +1214,679 @@ U+0041 U+55E8
 </div>
 </div><p>一般將值 <code>v</code> 轉換為型別 <code>T</code> 的語法是 <code>T(V)</code> 。</p>
 <br>
+<h2 id="變數">變數</h2>
+<p>在使用變數做宣告時，Go 有三種宣告的方式：</p>
+<br>
+<h3 id="使用--來宣告">使用 <code>:=</code> 來宣告</h3>
+<p>表示之前沒有進行宣告過。這是 Go 中最常見的變數宣告方式，但不能用縮寫方式來定義變數 (<code>foo := bar</code>) ，因為 package scope 的變數都是以 keyword 作為開頭。且只能在 function 中使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="o">:=</span> <span class="s">&#34;bar&#34;</span>
+	<span class="nx">b</span> <span class="o">:=</span> <span class="mi">4</span>
+	<span class="nx">c</span> <span class="o">:=</span> <span class="kc">true</span>
+	<span class="c1">// 也可以簡寫成這樣
+</span><span class="c1"></span>	<span class="nx">d</span><span class="p">,</span><span class="nx">e</span><span class="p">,</span><span class="nx">f</span> <span class="o">:=</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="kc">true</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">);</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">e</span><span class="p">,</span><span class="nx">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+bar <span class="m">4</span> <span class="nb">true</span>
+bar <span class="m">4</span> <span class="nb">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="先宣告資料型態">先宣告資料型態</h3>
+<p>當不知道變數的起始值，或是需要在 package scope 中宣告變數時可以使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">a</span> <span class="kt">string</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="kt">int</span> 
+
+<span class="c1">// 也可以簡寫成這樣
+</span><span class="c1"></span><span class="kd">var</span> <span class="p">(</span>
+	<span class="nx">c</span> <span class="kt">string</span>
+	<span class="nx">d</span> <span class="kt">float64</span>
+<span class="p">)</span>
+<span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span>
+	<span class="nx">b</span> <span class="p">=</span> <span class="mi">123</span>
+	<span class="nx">c</span> <span class="p">=</span> <span class="s">&#34;ian&#34;</span>
+	<span class="nx">d</span> <span class="p">=</span> <span class="mf">3.5</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>⚠️ 不建議把變數寫在全域變數中 ⚠️</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+Hello <span class="m">123</span> ian 3.5
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="直接宣告並賦值">直接宣告並賦值</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="p">(</span>
+		<span class="nx">a</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span>
+		<span class="nx">b</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">9999</span>
+	<span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+Hello <span class="m">9999</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="常見宣告錯誤">常見宣告錯誤</h3>
+<h4 id="重複宣告變數">重複宣告變數</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="s">&#34;ian&#34;</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="s">&#34;pinyi&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+<span class="c1"># github.com/880831ian/go/test</span>
+./test.go:4:2: name declared but not used
+./test.go:5:7: no new variables on left side of :<span class="o">=</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="在-main-函式外賦值">在 main 函式外賦值</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">a</span> <span class="kt">int</span>
+<span class="nx">b</span> <span class="o">:=</span> <span class="s">&#34;Hello&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+<span class="c1"># github.com/880831ian/go/test</span>
+./test.go:6:1: syntax error: non-declaration statement outside <span class="k">function</span> body
+</code></pre></td></tr></table>
+</div>
+</div><p>我們可以在 main 函示外宣告變數，但無法在 main 函示外賦值</p>
+<br>
+<h4 id="沒有宣告變數就使用">沒有宣告變數就使用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="p">=</span> <span class="mi">123</span>
+	<span class="nx">b</span> <span class="p">=</span> <span class="kc">true</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+<span class="c1"># github.com/880831ian/go/test</span>
+./test.go:6:2: undefined: a
+./test.go:7:2: undefined: b
+./test.go:8:14: undefined: a
+./test.go:8:16: undefined: b
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="指標">指標</h2>
+<p>指標是程式語言中的一類資料型態及其物件或變數，用來表示或儲存記憶體位址，這個位址的值直接指向存在該位址物件的值。</p>
+<p>Go 支持指標，指標的聲明方式為 *T，可以藉由變數名稱前面加 <code>&amp;</code> 來獲得變數的位址，由於 Go 支持 GC ，在 Go 語言中不支持指標的運算。</p>
+<p>表示法</p>
+<ul>
+<li>使用 <code>&amp;</code> 來獲得指標位址</li>
+<li>使用 <code>*</code> 來獲得指標所指向的值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">2</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;a 位址 = &#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;a 的值 = %v\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">)</span>
+ 	<span class="kd">var</span> <span class="nx">pInt</span> <span class="o">*</span><span class="kt">int</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">a</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;pInt = %v\n&#34;</span><span class="p">,</span> <span class="nx">pInt</span><span class="p">);</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;pInt 位址 = %v\n&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">pInt</span><span class="p">);</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;pInt 指向的值 = %v\n&#34;</span><span class="p">,</span><span class="o">*</span><span class="nx">pInt</span><span class="p">);</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+a <span class="nv">位址</span> <span class="o">=</span>  0xc0000b2008
+a <span class="nv">的值</span> <span class="o">=</span> <span class="m">2</span>
+<span class="nv">pInt</span> <span class="o">=</span> 0xc0000b2008
+pInt <span class="nv">位址</span> <span class="o">=</span> 0xc0000ac020
+pInt <span class="nv">指向的值</span> <span class="o">=</span> <span class="m">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="陣列">陣列</h2>
+<p>我們已經學會要怎麼宣告變數，以及如何使用變數來儲存值。但當我們今天想要儲存多個數值，使用原本的方式，需要創建許多變數才能儲存，因此有了陣列可以來儲存大量資料。</p>
+<p>陣列 (Array) 是由同類型的元素集合所組成的資料結構，分配一塊連續的記憶體來儲存。利用元素的索引可以計算出該元素所對應的儲存位址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="kt">float32</span>
+	<span class="nx">a</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="mf">1.4</span>
+	<span class="nx">a</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="mf">3.14</span>
+
+	<span class="c1">// 也可以寫成這樣
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">b</span> <span class="p">=</span> <span class="p">[]</span> <span class="kt">int</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">333</span><span class="p">}</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="nx">b</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+<span class="o">[</span>1.4 3.14<span class="o">]</span> <span class="o">[</span><span class="m">10</span> <span class="m">20</span> <span class="m">99</span> 333<span class="o">]</span>
+<span class="m">2</span> <span class="m">4</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+上面有提到他會分配連續記憶體來儲存，我們來看看他是怎麼存的！
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;a 的記憶體分配位置 %p \n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;陣列 a 的索引 0 記憶體分配位置 %p \n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;陣列 a 的索引 1 記憶體分配位置 %p \n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;陣列 a 的索引 2 記憶體分配位置 %p \n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run . 
+a 的記憶體分配位置 0xc0000180f0 
+陣列 a 的索引 <span class="m">0</span> 記憶體分配位置 0xc0000180f0 
+陣列 a 的索引 <span class="m">1</span> 記憶體分配位置 0xc0000180f8 
+陣列 a 的索引 <span class="m">2</span> 記憶體分配位置 0xc000018100 
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="切片">切片</h3>
+<p>前面提到陣列的使用，陣列使用上是實值類型以及陣列長度不可變的情況下，間接限制了使用場景。</p>
+<p>切片 (slice) 是 Go 對陣列在進行一層的封裝，是一個擁有相同類型元素的可變長度序列，可以非常靈活運用，自動擴容，可以快速且方便的操作數據集合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="o">:=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">66</span><span class="p">}</span>
+	<span class="nx">b</span> <span class="o">:=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="c1">//基於 a 陣列創建切片，等於 b 包含 a[1],a[2],a[3]
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v(%T)\n&#34;</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;len = %v\n&#34;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">b</span><span class="p">))</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;cap = %v\n&#34;</span><span class="p">,</span><span class="nb">cap</span><span class="p">(</span><span class="nx">b</span><span class="p">))</span>	
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span><span class="m">75</span> <span class="m">58</span> 60<span class="o">]([]</span>int<span class="o">)</span>
+<span class="nv">len</span> <span class="o">=</span> <span class="m">3</span>
+<span class="nv">cap</span> <span class="o">=</span> <span class="m">4</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>len(b) 表示可見元素有幾個(直接打印元素看到的元素個數)，而 cap(b) 表示所有元素有幾個。
+[1:4] 代表從第二個元素開始 (0為第一個元素，1位第二的元素)，取到第4個元素 (下標為 4-1=3，下標3代表第四個元素)</p>
+<br>
+<p>使用 <code>make</code> 創建切片</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1">//創建長度 5,容量 10 的切片
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;a = %v, len(a) = %v, cap(a) = %v\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">cap</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nv">a</span> <span class="o">=</span> <span class="o">[</span><span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> 0<span class="o">]</span>, len<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> 5, cap<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> <span class="m">10</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 make 創建長度5 ,容量 10 的切片</p>
+<br>
+<p>使用 <code>append</code> 來達成新增元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">a</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">//創建長度 5,容量 10 的切片
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;a = %v, len(a) = %v, cap(a) = %v\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">cap</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;指標為 %p\n&#34;</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span>
+	<span class="nx">a</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;a = %v, len(a) = %v, cap(a) = %v\n&#34;</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">cap</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;擴容後指標 = %p 改變\n&#34;</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nv">a</span> <span class="o">=</span> <span class="o">[</span><span class="m">0</span> 0<span class="o">]</span>, len<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> 2, cap<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> <span class="m">2</span>
+指標為 0xc000014080
+<span class="nv">a</span> <span class="o">=</span> <span class="o">[</span><span class="m">0</span> <span class="m">0</span> 10<span class="o">]</span>, len<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> 3, cap<span class="o">(</span>a<span class="o">)</span> <span class="o">=</span> <span class="m">4</span>
+<span class="nv">擴容後指標</span> <span class="o">=</span> 0xc000022080 改變
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="go-條件判斷">Go 條件判斷</h2>
+<h3 id="if">if</h3>
+<p>結構裡會有一個條件，這個條件是個布林值，如果為 true，則會執行括號裡的程式碼，相反的，如果為 false，則會直接跳過：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">x</span> <span class="p">=</span> <span class="mi">2</span>
+	<span class="kd">var</span> <span class="nx">y</span> <span class="p">=</span> <span class="mi">1</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;x = &#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="s">&#34;,y = &#34;</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span>
+	
+	<span class="k">if</span> <span class="nx">x</span><span class="o">==</span><span class="nx">y</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v 等於 %v\n&#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v 不等於 %v\n&#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+<span class="nv">x</span> <span class="o">=</span>  <span class="m">2</span> ,y <span class="o">=</span>  <span class="m">1</span>
+<span class="m">2</span> 不等於 <span class="m">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="switch">switch</h3>
+<p>switch 其目的是簡化 if 的條件，swtich 會檢查符合的條件，並且執行條件內的程式碼，如果都沒有符合，則會執行 default 內的程式碼：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="nx">x</span> <span class="o">:=</span> <span class="mi">12</span>
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v 小於 10\n&#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+	<span class="k">case</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v 大於等於10, 小於 20\n&#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v 大於 20\n&#34;</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+<span class="m">12</span> 大於等於10, 小於 <span class="m">20</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="go-迴圈">Go 迴圈</h2>
+<p>迴圈是每個程式語言必備的函式，藉以迴圈來達成反覆或是循環的動作。而 Go 語言的迴圈只有使用 <code>for</code> 迴圈來表達三種不同的迴圈 (for、while、loop)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+<span class="m">0</span>
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+<span class="m">4</span>
+<span class="m">5</span>
+<span class="m">6</span>
+<span class="m">7</span>
+<span class="m">8</span>
+<span class="m">9</span>
+<span class="m">10</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>也可以使用 <code>break</code>，依條件需求讓迴圈提早跳出結束：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">i</span> <span class="p">&gt;</span> <span class="mi">3</span> <span class="p">{</span>
+			<span class="k">break</span>
+		<span class="p">}</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+<span class="m">0</span>
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>或是使用 <code>continue</code> 若符合條件，便會跳過到此迴圈，直接進入下個迭代：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span> <span class="p">(){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+			<span class="k">continue</span>
+		<span class="p">}</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="m">1</span>
+<span class="m">3</span>
+<span class="m">5</span>
+<span class="m">7</span>
+<span class="m">9</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://go.dev/doc/tutorial/getting-started" target="_blank" rel="noopener noreffer">Go 官網</a></p>
 <p><a href="https://ithelp.ithome.com.tw/users/20137500/ironman/4184" target="_blank" rel="noopener noreffer">golang後端入門分享</a></p>
@@ -1158,13 +1894,14 @@ U+0041 U+55E8
 <p><a href="https://ithelp.ithome.com.tw/articles/10186546" target="_blank" rel="noopener noreffer">30天就Go(3)：操作指令及Hello World!</a></p>
 <p><a href="https://calvertyang.github.io/2019/11/05/golang-basic-types-operators-type-conversion/" target="_blank" rel="noopener noreffer">Golang 基本型別、運算子和型別轉換</a></p>
 <p><a href="http://c.biancheng.net/view/18.html" target="_blank" rel="noopener noreffer">Go語言字符類型（byte和rune）</a></p>
+<p><a href="https://ithelp.ithome.com.tw/users/20129671/ironman/3326" target="_blank" rel="noopener noreffer">golang初探</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/go/">Go</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/20d7213ff7d94096e7c490a9836e738ead2c7709" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;20d7213:&nbsp;# 新增/修改 Go">
-                            <i class="fas fa-hashtag fa-fw"></i>20d7213</a></span>
+                <span>更新於 2022-03-24&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/895a5a118d39ab0fc7a47cc218ba2ebec6fe1286" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;895a5a1:&nbsp;# 新增/修改 Go、修改 Go 文章封面">
+                            <i class="fas fa-hashtag fa-fw"></i>895a5a1</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
