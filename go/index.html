@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go/" /><meta property="og:image" content="https://pin-yi.me/go/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-21T11:33:25+08:00" />
-<meta property="article:modified_time" content="2022-03-24T16:38:00+08:00" />
+<meta property="article:modified_time" content="2022-03-25T16:50:00+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
                             "width":  790 ,
                             "height":  260 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  8350 ,
-        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-24T16:38:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  8349 ,
+        "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-25T16:50:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 8350 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 8349 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 17 分鐘</span>&nbsp;</div>
             </div>
             
@@ -159,7 +159,7 @@ if (!doNotTrack) {
           <ul>
             <li><a href="#重複宣告變數">重複宣告變數</a></li>
             <li><a href="#在-main-函式外賦值">在 main 函式外賦值</a></li>
-            <li><a href="#沒有宣告變數就使用">沒有宣告變數就使用</a></li>
+            <li><a href="#沒有宣告就使用變數">沒有宣告就使用變數</a></li>
           </ul>
         </li>
       </ul>
@@ -171,7 +171,7 @@ if (!doNotTrack) {
         <li><a href="#整數-integer">整數 Integer</a></li>
         <li><a href="#浮點數-float">浮點數 Float</a></li>
         <li><a href="#布林值-bool">布林值 Bool</a></li>
-        <li><a href="#字典-map">字典 Map</a></li>
+        <li><a href="#映射-map">映射 Map</a></li>
         <li><a href="#數字型別的運算">數字型別的運算</a></li>
         <li><a href="#型別轉換">型別轉換</a></li>
       </ul>
@@ -965,7 +965,7 @@ Hello <span class="m">9999</span>
 </div>
 </div><p>我們可以在 main 函式外宣告變數，但無法在 main 函式外賦值</p>
 <br>
-<h4 id="沒有宣告變數就使用">沒有宣告變數就使用</h4>
+<h4 id="沒有宣告就使用變數">沒有宣告就使用變數</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1002,7 +1002,7 @@ Hello <span class="m">9999</span>
 </div>
 </div><br>
 <h2 id="go-資料型態">Go 資料型態</h2>
-<p>我們在學習 Go 語言之前，要先了解一下基本的資料型態，可以簡單分為 字串、字符、整數、浮點數、布林值、字典</p>
+<p>我們在學習 Go 語言之前，要先了解一下基本的資料型態，可以簡單分為 字串、字符、整數、浮點數、布林值、映射</p>
 <h3 id="字串-string">字串 String</h3>
 <p>在 Go 語言中，字串必須用雙引號給匡起來，也可以使用反引號來宣告。用雙引號刮起來的字串不能包含換行，但可以包含跳脫字元，例如 <code>\n</code> 、<code>\t</code> 。由於反引號內包含的是原始字串，可以跨越多行，所以跳脫符號在原始字串中沒有任何含義。</p>
 <div class="highlight"><div class="chroma">
@@ -1199,7 +1199,7 @@ U+0041 U+55E8
 </div><p>在 Go 中，也可以使用前綴 <code>0</code> 來宣告八進制數字，或是使用 <code>0x</code> 來宣告十六進制數字。</p>
 <br>
 <h3 id="浮點數-float">浮點數 Float</h3>
-<p>浮點數型別用於儲存袋小數部分的數字。Go 有兩種浮點數型別：</p>
+<p>浮點數型別用於儲存小數部分的數字。Go 有兩種浮點數型別：</p>
 <ul>
 <li>float32：在記憶體中佔用32位元，並以單精度浮點數格式儲存。</li>
 <li>float64：在記憶體中佔用64位元，並以雙精度浮點數格式儲存。</li>
@@ -1303,8 +1303,8 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<h3 id="字典-map">字典 Map</h3>
-<p>字典 (Map) 是 Go 內建的類型，是一種無序列的鍵值(key-value)的集合，可以透過 key 快速查詢並找到數據。</p>
+<h3 id="映射-map">映射 Map</h3>
+<p>映射 (Map) 是 Go 內建的類型，是一種無序列的鍵值(key-value)的集合，可以透過 key 快速查詢並找到數據。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2383,8 +2383,8 @@ Hello, world <span class="m">5</span>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-24&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/06d79a46d20d42f386c95586f51d925a1b96b00b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;06d79a4:&nbsp;# 新增/修改 Go">
-                            <i class="fas fa-hashtag fa-fw"></i>06d79a4</a></span>
+                <span>更新於 2022-03-25&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a0a7e1a442934a470a22c2543b47e1162fbdfa1a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a0a7e1a:&nbsp;# 新增/修改 Go">
+                            <i class="fas fa-hashtag fa-fw"></i>a0a7e1a</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
