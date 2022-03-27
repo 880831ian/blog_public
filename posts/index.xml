@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
+    <link>https://pin-yi.me/go-restful-api-orm/</link>
+    <pubDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/go-restful-api-orm/</guid>
+    <description><![CDATA[參考資料 基於Gin+Gorm框架搭建MVC模式的Go語言後端系統]]></description>
+</item>
+<item>
     <title>Go 介紹</title>
     <link>https://pin-yi.me/go/</link>
     <pubDate>Mon, 21 Mar 2022 11:33:25 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/go/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/laravel/</link>
     <pubDate>Wed, 02 Mar 2022 10:33:45 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel/</guid>
     <description><![CDATA[<p>本文章會介紹什麼是 Laravel ，以及它有什麼特別之處，可以讓它在2015年被評為最受歡迎的 PHP  框架第一名，並說明為什麼要使用框架，最後實作一個留言板功能搭配 RESTful API 來實現 CRUD。</p>]]></description>
-</item>
-<item>
-    <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
-    <link>https://pin-yi.me/php-restful-api/</link>
-    <pubDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/php-restful-api/</guid>
-    <description><![CDATA[<p>由於網路上文章幾乎都是使用 Apache 來實作第一個 PHP RESTful API，也比較沒有中文的介紹，剛好這次也還在學習，所以把學習的紀錄分享給大家，這次會搭配實作留言板來說明，那本次教學內容採用的是</p>]]></description>
 </item>
 </channel>
 </rss>
