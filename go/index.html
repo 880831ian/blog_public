@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/go\/featured-image.webp",
                             "width":  790 ,
                             "height":  260 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  8349 ,
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  8270 ,
         "url": "https:\/\/pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-25T18:16:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 8349 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 8270 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 17 分鐘</span>&nbsp;</div>
             </div>
             
@@ -207,7 +207,7 @@ if (!doNotTrack) {
 <li>編譯速度：因為 Go 語言先天優勢是架構設計非常單純，並不像物件導向語言龐大，取在編譯時不用相依其他的 library，因此讓他有更好的執行效率。</li>
 <li>語法簡潔：Go 關鍵字不多，不到30幾個，因為其關鍵字不少也與 C 的關鍵字重複，學習更容易上手。</li>
 <li>垃圾回收：Go 有自動內存回收機制，不需要由開發人員來管理。垃圾回收是一種記憶體管理機制。當程式所佔用記憶體不再被該程式給存取時，會借助垃圾回收演算法，將記憶體空間歸還給作業系統。</li>
-<li>原生支援併發：Go 語言支持併發，只需要透過 <code>go</code> 關鍵字來開啟 <code>goroutine</code> 將可。<code>goroutine</code> 是輕量級的線程，<code>goroutine</code> 的調度是由 Go 運行時進行管理的。
+<li>原生支援併發：Go 語言支持併發，只需要透過 <code>go</code> 關鍵字來開啟 <code>goroutine</code> 將可。<code>goroutine</code> 是 Go 語言實現併發的一種方式，在執行的過程需要少量的記憶體，來暫存自己的上下文，就可在不同的時間點來分段執行程式。並且有 <code>channel</code> 可以跟 <code>goroutine</code> 進行資料溝通。
 <br></li>
 </ul>
 <div class="details admonition tip open">
@@ -377,8 +377,8 @@ cd helloworld
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ go mod init github.com/880831ian/go/helloworld
-go: creating new go.mod: module github.com/880831ian/go/helloworld
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ go mod init helloworld
+go: creating new go.mod: module helloworld
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -392,7 +392,7 @@ go: creating new go.mod: module github.com/880831ian/go/helloworld
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ cat go.mod
-module github.com/880831ian/go/helloworld
+module helloworld
 
 go 1.18
 </code></pre></td></tr></table>
@@ -472,7 +472,7 @@ touch greeting/greeting.go cli/say.go
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;github.com/880831ian/go/helloworld/greeting&#34;</span>
+	<span class="s">&#34;helloworld/greeting&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">(){</span>
@@ -1304,7 +1304,7 @@ false<span class="o">(</span>bool<span class="o">)</span>
 </div>
 </div><br>
 <h3 id="映射-map">映射 Map</h3>
-<p>映射 (Map) 是 Go 內建的類型，是一種無序列的鍵值(key-value)的集合，可以透過 key 快速查詢並找到數據。</p>
+<p>映射 (Map) 是 Go 內建的類型，是一種鍵值(key-value)的集合，可以透過 key 快速查詢並找到數據。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1393,7 +1393,7 @@ map3<span class="o">[</span>99<span class="o">]</span> <span class="o">=</span> 
 </div>
 </div><br>
 <h3 id="型別轉換">型別轉換</h3>
-<p>Go 有一個強型別系統，它不允許混合型別。舉例來說，你不能把 <code>int</code> 變數加到 <code>float64</code> 變數中，也不能將 <code>int</code> 變數加到 <code>int64</code> 變數中。</p>
+<p>Go 有一個強型別系統，它不允許混合型別。舉例來說：不能把 <code>int</code> 變數加到 <code>float64</code> 變數中，也不能將 <code>int</code> 變數加到 <code>int64</code> 變數中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1459,7 +1459,7 @@ map3<span class="o">[</span>99<span class="o">]</span> <span class="o">=</span> 
 <br>
 <h2 id="go-資料結構">Go 資料結構</h2>
 <h3 id="指標-pointer">指標 Pointer</h3>
-<p>指標是程式語言中的一類資料結構及其物件或變數，用來表示或儲存記憶體位址，這個位址的值直接指向存在該位址物件的值。</p>
+<p>指標是程式語言中的資料結構及其物件或變數，用來表示或儲存記憶體位址，這個位址的值直接指向存在該位址物件的值。</p>
 <p>Go 支持指標，指標的聲明方式為 *T，可以藉由變數名稱前面加 <code>&amp;</code> 來獲得變數的位址，由於 Go 支持 GC ，在 Go 語言中不支持指標的運算。</p>
 <p>表示法</p>
 <ul>
@@ -1693,7 +1693,7 @@ a 的記憶體分配位置 0xc0000180f0
 </div>
 </div><br>
 <h3 id="結構-struct">結構 Struct</h3>
-<p>我們介紹的變數都是儲存單一的值或是多個相同型態的值，那如果要用變數表示較複雜的概念，像是紀錄一個人的名字、年齡或是身高時，由於這些是不同的資料型態，所以要記錄下來時，就必須使用不同的容器，這裡會介紹 Go 語言中的結構 Struct：</p>
+<p>我們介紹的變數都是儲存單一的值或是多個相同型態的值，那如果要用變數表示較複雜的概念，像是紀錄一個人的名字、年齡或是身高時，由於這些是不同的<strong>資料型態</strong>，所以要記錄下來時，就必須使用不同的容器，這裡會介紹 Go 語言中的結構 Struct：</p>
 <p><strong>建立結構</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1708,29 +1708,19 @@ a 的記憶體分配位置 0xc0000180f0
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Rectangle</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">length</span> <span class="kt">float64</span>
-	<span class="nx">width</span> <span class="kt">float64</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Student</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Id</span> <span class="kt">int</span>
+    <span class="nx">Name</span> <span class="kt">string</span>
+    <span class="nx">Score</span> <span class="kt">float64</span>
 <span class="p">}</span>
 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">x</span> <span class="o">:=</span> <span class="nx">Rectangle</span> <span class="p">{</span>
-		<span class="nx">length</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span>
-		<span class="nx">width</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
-	<span class="p">}</span>
-
-	<span class="k">if</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="nx">x</span><span class="p">.</span><span class="nx">width</span> <span class="p">{</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;這個圖形是正方形，其面積是 : &#34;</span><span class="p">,</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="nx">x</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;這個圖形是長方形，其面積是 : &#34;</span><span class="p">,</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="nx">x</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span>
+    <span class="nx">student</span> <span class="o">:=</span> <span class="nx">Student</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;ian&#34;</span><span class="p">,</span> <span class="mf">89.4</span><span class="p">}</span> 
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">student</span><span class="p">)</span> 
 <span class="p">}</span>
+
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1740,10 +1730,10 @@ a 的記憶體分配位置 0xc0000180f0
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
-這個圖形是長方形，其面積是 :  15.400000000000002
+<span class="o">{</span><span class="m">1</span> ian 89.4<span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>我們先宣告一個名為 Rectangle 的 <code>struct</code> 結構，裡面屬性有 length 和 width，再以此結構宣告一個變數 x 並填入屬性，依照屬性來判斷是否為正方形，並計算其面積。</p>
+</div><p>我們先宣告一個名為 Student 的 <code>struct</code> 結構，裡面屬性有 Id 和 Name 以及 Score，再以此結構宣告一個變數 student 並填入屬性，以顯示不同資料型態的值。</p>
 <br>
 <h2 id="go-控制流程">Go 控制流程</h2>
 <h3 id="if">if</h3>
@@ -2221,23 +2211,27 @@ full name : ian Zhuang ,Salary : <span class="m">2000</span>
 <p>Go 支持多併發，如何使用 goroutine 來執行多併發，只要使用 <code>go</code> 這個關鍵字來執行 func 就可以了 !</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Hello</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">say</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+   <span class="p">}</span>
 <span class="p">}</span>
-
+ 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">go</span> <span class="nf">Hello</span><span class="p">()</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
+   <span class="k">go</span> <span class="nf">say</span><span class="p">(</span><span class="s">&#34;world&#34;</span><span class="p">)</span>
+   <span class="nf">say</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -2245,15 +2239,64 @@ full name : ian Zhuang ,Salary : <span class="m">2000</span>
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
-main	
+hello
+hello	
 </code></pre></td></tr></table>
 </div>
-</div><p>可以看到沒有顯示 Hello,world 字串，是因為要執行 Hello func 的時候 main func 已經結束了。</p>
+</div><p>可以看到沒有顯示 world 字串，是因為要執行 world 的時候程式已經結束了。</p>
 <br>
-<p>我們試著在 main func 中加入 time.sleep 來故意延遲 main func 執行時間：</p>
+<p>我們試著加入 time.sleep 來故意延遲程式執行時間：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">say</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">go</span> <span class="nf">say</span><span class="p">(</span><span class="s">&#34;world&#34;</span><span class="p">)</span>
+   <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+   <span class="nf">say</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
+world
+world
+hello
+hello
+</code></pre></td></tr></table>
+</div>
+</div><p>我們這時就可以看到 world 字串有顯示出來。</p>
+<br>
+<p>但在實務上，比較少直接使用上面這個方法，來讓併發得以實現，而是使用 sync 套件裡的方法 WaitGroup，來實現併發。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2272,68 +2315,19 @@ main
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;time&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">Hello</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+ 
+<span class="kd">func</span> <span class="nf">count</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+   <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
 <span class="p">}</span>
-
+ 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">go</span> <span class="nf">Hello</span><span class="p">()</span>
-	<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
-Hello, world
-main
-</code></pre></td></tr></table>
-</div>
-</div><p>我們這時就可以看到 Hello, world 字串有顯示出來。</p>
-<br>
-<p>使用 sync.waitgroup 讓主線程等待協程完成</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Hello</span><span class="p">(</span><span class="nx">str</span> <span class="o">*</span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="k">defer</span> <span class="nx">str</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">str</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="nx">str</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-	<span class="k">go</span> <span class="nf">Hello</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">str</span><span class="p">)</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;main&#34;</span><span class="p">)</span>
-	<span class="nx">str</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+   <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+   <span class="k">go</span> <span class="nf">count</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">)</span>
+   <span class="k">go</span> <span class="nf">count</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">)</span>
+   <span class="k">go</span> <span class="nf">count</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">)</span>
+   <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -2343,30 +2337,15 @@ main
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go run .
-main
-Hello, world <span class="m">0</span>
-Hello, world <span class="m">1</span>
-Hello, world <span class="m">2</span>
-Hello, world <span class="m">3</span>
-Hello, world <span class="m">4</span>
-Hello, world <span class="m">5</span>
+<span class="m">3</span>
+<span class="m">2</span>
+<span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>WaitGroup：它能夠阻擋主線程的執行，直到所有的 <code>goroutine</code> 執行完畢。</p>
-<p>WaitGroup 使用方法</p>
-<ul>
-<li>Add(delta int)：計數器增加 delta</li>
-<li>Done()：計數器-1，相等於ADD(-1)</li>
-<li>Wait()：阻擋直到所有的 WaitGroup 數量變成零，即計數器變為0</li>
-<li>defer：是用來宣告 function 結束前的動作。</li>
-</ul>
+</div><p>我們來說明以下上面的程式碼，在程式碼尾端加上 <code>wg.Wait()</code>，需要讓他達成一些條件，才可以往後執行，而這個條件，就是收到 <code>wg.Done()</code> 的呼叫次數。而這個次數，即是 <code>wg.Add(3)</code> 裡的數字3。</p>
 <br>
 <h2 id="channel">Channel</h2>
 <br>
