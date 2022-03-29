@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)" />
+<meta property="og:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 版本資訊 macOS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/go-restful-api-repository-messageboard/" /><meta property="og:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-27T21:27:19+08:00" />
+<meta property="article:modified_time" content="2022-03-29T18:27:15+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/>
+<meta name="twitter:title" content="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"/>
+<meta name="twitter:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 版本資訊 macOS"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="prev" href="https://pin-yi.me/go/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/featured-image.webp",
+                            "width":  1920 ,
+                            "height":  450 
+                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  1495 ,
+        "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-03-29T18:27:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/go-restful-api-repository-messageboard/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/go-restful-api-repository-messageboard/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/go-restful-api-repository-messageboard/featured-image.webp"
+        data-srcset="/go-restful-api-repository-messageboard/featured-image.webp, /go-restful-api-repository-messageboard/featured-image.webp 1.5x, /go-restful-api-repository-messageboard/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/go-restful-api-repository-messageboard/featured-image.webp"
+        title="/go-restful-api-repository-messageboard/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1495 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#實作">實作</a>
+      <ul>
+        <li><a href="#檔案結構">檔案結構</a></li>
+        <li><a href="#gomod">go.mod</a></li>
+        <li><a href="#maingo">main.go</a></li>
+        <li><a href="#config">config</a></li>
+        <li><a href="#routersgo">Routers.go</a></li>
+        <li><a href="#modelgo">Model.go</a></li>
+        <li><a href="#controllergo">Controller.go</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。</p>
+<p>建議可以先觀看 <a href="https://pin-yi.me/go/" target="_blank" rel="noopener noreffer">Go 介紹</a> 文章來簡單學習 Go 語言。</p>
+<p>版本資訊</p>
+<ul>
+<li>macOS：11.6</li>
+<li>Go：go version go1.18 darwin/amd64</li>
+<li>Mysql：mysql  Ver 8.0.28 for macos11.6 on x86_64 (Homebrew)
+<br></li>
+</ul>
+<h2 id="實作">實作</h2>
+<h3 id="檔案結構">檔案結構</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── config
+│   ├── config.go
+│   └── connect.yaml
+├── controller
+│   └── Controller.go
+├── go.mod
+├── go.sum
+├── main.go
+├── model
+│   └── Model.go
+├── repository
+│   └── Repository.go
+└── routes
+    └── Routers.go
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們來說明一下上面的資料夾個別功能與作用</p>
+<ul>
+<li>config：放置設定檔案，並讀取設定檔與連線資料庫。</li>
+<li>controller：商用邏輯控制。</li>
+<li>model：定義資料表資料型態。</li>
+<li>repository：處理與資料庫進行交握。</li>
+<li>routes：設定網站網址路由。</li>
+</ul>
+<h3 id="gomod">go.mod</h3>
+<p>一開始我們創好資料夾後，要先來設定 go.mod 的 module</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go mod init message
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>go.mod 檔案</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">module message
+
+go 1.18
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接著使用 <code>go get</code> 來引入 <code>gin</code>、<code>gorm</code>、<code>mysql</code>、<code>yaml</code> 套件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go get -u github.com/gin-gonic/gin
+$ go get -u gorm.io/gorm
+$ go get -u gorm.io/driver/mysql
+$ go get -u gopkg.in/yaml.v2
+</code></pre></td></tr></table>
+</div>
+</div><p>可以在查看一下 go.mod 檔案是否多了很多 indirect</p>
+<br>
+<h3 id="maingo">main.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;message/config&#34;</span>
+	<span class="s">&#34;message/model&#34;</span>
+	<span class="s">&#34;message/routes&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//連線資料庫
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nf">InitMySql</span><span class="p">()</span> <span class="p">;</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="c1">//連結模型
+</span><span class="c1"></span>	<span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">{})</span>
+	<span class="c1">//註冊路由
+</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">routes</span><span class="p">.</span><span class="nf">SetRouter</span><span class="p">()</span>
+	<span class="c1">//啟動埠為8081的專案
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;開啟127.0.0.0.1:8081...&#34;</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;127.0.0.1:8081&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>引入我們 Repository 架構，將 config、model、routes 導入，先測試是否可以連線資料庫，使用 <code>AutoMigrate</code> 來新增資料表(如果沒有才新增)，註冊網址路由，最後啟動專案，我們將 Port 設定成 8081。</p>
+<br>
+<h3 id="config">config</h3>
+<p>我們剛剛有引入 <code>yaml</code> 套件，因為我們設定檔案會使用 yaml 來編輯</p>
+<ul>
+<li>connect.yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="m">127.0.0.1</span><span class="w">
+</span><span class="w"></span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span><span class="w"></span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;密碼&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;資料庫名稱&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3306</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>我們把 mysql 連線的資訊寫在此處。</p>
+<br>
+<ul>
+<li>config.go (下面為一個檔案，但長度有點長，分開說明)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">config</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;io/ioutil&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;gopkg.in/yaml.v2&#34;</span>
+	<span class="s">&#34;gorm.io/gorm&#34;</span>
+	<span class="s">&#34;gorm.io/driver/mysql&#34;</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>import 會使用到的套件。</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">Sql</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+
+<span class="kd">type</span> <span class="nx">conf</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Host</span>     <span class="kt">string</span> <span class="s">`yaml:&#34;host&#34;`</span>
+	<span class="nx">UserName</span> <span class="kt">string</span> <span class="s">`yaml:&#34;username&#34;`</span>
+	<span class="nx">Password</span> <span class="kt">string</span> <span class="s">`yaml:&#34;password&#34;`</span>
+	<span class="nx">DbName</span>   <span class="kt">string</span> <span class="s">`yaml:&#34;dbname&#34;`</span>
+	<span class="nx">Port</span>     <span class="kt">string</span> <span class="s">`yaml:&#34;port&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">conf</span><span class="p">)</span> <span class="nf">getConf</span><span class="p">()</span> <span class="o">*</span><span class="nx">conf</span> <span class="p">{</span>
+	<span class="c1">//讀取config/connect.yaml檔案
+</span><span class="c1"></span>	<span class="nx">yamlFile</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;config/connect.yaml&#34;</span><span class="p">)</span>
+	<span class="c1">//若出現錯誤，列印錯誤訊息
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="c1">//將讀取的字串轉換成結構體conf
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">yaml</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">yamlFile</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">c</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>設定資料庫連線的 conf ，設定連線的 config 讀取 yaml 檔案。</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//初始化連線資料庫
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">InitMySql</span><span class="p">()</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">c</span> <span class="nx">conf</span>
+	<span class="c1">//獲取yaml配置引數
+</span><span class="c1"></span>	<span class="nx">conf</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">getConf</span><span class="p">()</span>
+	<span class="c1">//將yaml配置引數拼接成連線資料庫的url
+</span><span class="c1"></span>	<span class="nx">dsn</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&#34;</span><span class="p">,</span>
+		<span class="nx">conf</span><span class="p">.</span><span class="nx">UserName</span><span class="p">,</span>
+		<span class="nx">conf</span><span class="p">.</span><span class="nx">Password</span><span class="p">,</span>
+		<span class="nx">conf</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span>
+		<span class="nx">conf</span><span class="p">.</span><span class="nx">Port</span><span class="p">,</span>
+		<span class="nx">conf</span><span class="p">.</span><span class="nx">DbName</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="c1">//連線資料庫
+</span><span class="c1"></span>	<span class="nx">Sql</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">DSN</span><span class="p">:</span> <span class="nx">dsn</span><span class="p">}),</span> <span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{})</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>初始化資料庫，會把剛剛讀取 yaml 的 conf  串接成可以連接資料庫的 url ，最後連線資料庫。</p>
+<br>
+<h3 id="routersgo">Routers.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">routes</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;message/controller&#34;</span>
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">SetRouter</span><span class="p">()</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span> <span class="p">{</span>
+	<span class="c1">//顯示 debug 模式
+</span><span class="c1"></span>	<span class="nx">gin</span><span class="p">.</span><span class="nf">SetMode</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">ReleaseMode</span><span class="p">)</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">v1</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;api/v1&#34;</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">//新增留言
+</span><span class="c1"></span>		<span class="nx">v1</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/message&#34;</span><span class="p">,</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">Create</span><span class="p">)</span>
+		<span class="c1">//查詢全部留言
+</span><span class="c1"></span>		<span class="nx">v1</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/message&#34;</span><span class="p">,</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">GetAll</span><span class="p">)</span>
+		<span class="c1">//查詢 {id} 留言
+</span><span class="c1"></span>		<span class="nx">v1</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/message/:id&#34;</span><span class="p">,</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">Get</span><span class="p">)</span>
+		<span class="c1">//修改 {id} 留言
+</span><span class="c1"></span>		<span class="nx">v1</span><span class="p">.</span><span class="nf">PATCH</span><span class="p">(</span><span class="s">&#34;/message/:id&#34;</span><span class="p">,</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">Update</span><span class="p">)</span>
+		<span class="c1">//刪除 {id} 留言
+</span><span class="c1"></span>		<span class="nx">v1</span><span class="p">.</span><span class="nf">DELETE</span><span class="p">(</span><span class="s">&#34;/message/:id&#34;</span><span class="p">,</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">Delete</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">r</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>設定路由，版本 v1 網址是 <code>api/v1</code> ，分別是新增留言、查詢全部留言、查詢 {id} 留言、修改 {id} 留言、刪除 {id} 留言，連接到不同的 <code>controller</code> function 。</p>
+<br>
+<h3 id="modelgo">Model.go</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">model</span>
+
+<span class="kn">import</span> 	<span class="s">&#34;gorm.io/gorm&#34;</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">Message</span><span class="p">)</span> <span class="nf">TableName</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s">&#34;message&#34;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Message</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Id</span>        <span class="kt">int</span>    <span class="s">`gorm:&#34;primary_key,type:INT;not null;AUTO_INCREMENT&#34;`</span>
+	<span class="nx">User_Id</span>   <span class="kt">int</span>    <span class="s">`json:&#34;User_Id&#34;  binding:&#34;required&#34;`</span>
+	<span class="nx">Content</span>   <span class="kt">string</span> <span class="s">`json:&#34;Content&#34;  binding:&#34;required&#34;`</span>
+	<span class="nx">Version</span>   <span class="kt">int</span>    <span class="s">`gorm:&#34;default:0&#34;`</span>
+	<span class="c1">// 包含 CreatedAt 和 UpdatedAt 和 DeletedAt 欄位
+</span><span class="c1"></span>    <span class="nx">gorm</span><span class="p">.</span><span class="nx">Model</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>設定資料表的結構，使用 gorm.Model 預設裡面會包含 CreatedAt 和 UpdatedAt 和 DeletedAt 欄位。</p>
+<br>
+<h3 id="controllergo">Controller.go</h3>
+<p><strong>(下面為一個檔案，但長度有點長，分開說明)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">controller</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;message/model&#34;</span>
+	<span class="s">&#34;message/repository&#34;</span>
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>引入套件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">GetAll</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">message</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetAllMessage</span><span class="p">()</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://iter01.com/609571.html" target="_blank" rel="noopener noreffer">基於Gin+Gorm框架搭建MVC模式的Go語言後端系統</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/go/">Go</a>
+                </span><span><a href="/tags/restful-api/">RESTful API</a>
+                </span><span><a href="/tags/mysql/">Mysql</a>
+                </span><span><a href="/tags/repository/">Repository</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-03-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/49ee575e423a900d922e138965fd8cd730acfc44" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;49ee575:&nbsp;# 新增/修改 Go Repository Restful API 的留言板">
+                            <i class="fas fa-hashtag fa-fw"></i>49ee575</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/go-restful-api-repository-messageboard/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/go-restful-api-repository-messageboard/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)" data-hashtags="Go,RESTful API,Mysql,Repository,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/go/" class="prev" rel="prev" title="Go 介紹"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":40},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
