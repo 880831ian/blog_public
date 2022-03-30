@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/laravel-advanced/" /><meta property="og:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-30T09:11:48+08:00" />
+<meta property="article:modified_time" content="2022-03-30T10:06:33+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  2520 ,
                             "height":  896 
                         }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7930 ,
-        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-30T09:11:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-30T10:06:33+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -176,21 +176,17 @@ if (!doNotTrack) {
         </li>
         <li><a href="#postman-測試">Postman 測試</a>
           <ul>
-            <li>
-              <ul>
-                <li><a href="#登入">登入</a></li>
-                <li><a href="#新增留言---成功">新增留言 - 成功</a></li>
-                <li><a href="#新增留言---失敗">新增留言 - 失敗</a></li>
-                <li><a href="#修改留言---成功">修改留言 - 成功</a></li>
-                <li><a href="#修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</a></li>
-                <li><a href="#修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</a></li>
-                <li><a href="#按讚留言---成功">按讚留言 - 成功</a></li>
-                <li><a href="#按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</a></li>
-                <li><a href="#刪除留言---成功">刪除留言 - 成功</a></li>
-                <li><a href="#刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</a></li>
-                <li><a href="#刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</a></li>
-              </ul>
-            </li>
+            <li><a href="#登入">登入</a></li>
+            <li><a href="#新增留言---成功">新增留言 - 成功</a></li>
+            <li><a href="#新增留言---失敗">新增留言 - 失敗</a></li>
+            <li><a href="#修改留言---成功">修改留言 - 成功</a></li>
+            <li><a href="#修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</a></li>
+            <li><a href="#修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</a></li>
+            <li><a href="#按讚留言---成功">按讚留言 - 成功</a></li>
+            <li><a href="#按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</a></li>
+            <li><a href="#刪除留言---成功">刪除留言 - 成功</a></li>
+            <li><a href="#刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</a></li>
+            <li><a href="#刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</a></li>
           </ul>
         </li>
       </ul>
@@ -1638,7 +1634,7 @@ Middleware created successfully.
 <br>
 <h3 id="postman-測試">Postman 測試</h3>
 <p>那我們一樣來看一下 Postman 的測試，這邊只顯示需要登入才能使用的 API。</p>
-<h5 id="登入">登入</h5>
+<h4 id="登入">登入</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/login.png" title="/images/laravel-advanced/login.png" data-thumbnail="/images/laravel-advanced/login.png" data-sub-html="<h2>新增留言 成功</h2>">
         <img
             class="lazyload"
@@ -1652,7 +1648,7 @@ Middleware created successfully.
 <br> 
 <p>我們把帳號密碼放到 Body 來傳送，如果帳號密碼正確，就會顯示登入成功，並且在 Cookie 裡面的 laravel_session，可以用來判斷是否登入，以及登入的人是誰。</p>
 <br> 
-<h5 id="新增留言---成功">新增留言 - 成功</h5>
+<h4 id="新增留言---成功">新增留言 - 成功</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/post-api-success.png" title="/images/laravel-advanced/post-api-success.png" data-thumbnail="/images/laravel-advanced/post-api-success.png" data-sub-html="<h2>新增留言 成功</h2>">
         <img
             class="lazyload"
@@ -1666,7 +1662,7 @@ Middleware created successfully.
 <br> 
 <p>新增留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> 會顯示新增紀錄成功以及回應 201 Created</p>
 <br>
-<h5 id="新增留言---失敗">新增留言 - 失敗</h5>
+<h4 id="新增留言---失敗">新增留言 - 失敗</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/post-api-error.png" title="/images/laravel-advanced/post-api-error.png" data-thumbnail="/images/laravel-advanced/post-api-error.png" data-sub-html="<h2>新增留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1680,7 +1676,7 @@ Middleware created successfully.
 <br> 
 <p>新增留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，所以會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
-<h5 id="修改留言---成功">修改留言 - 成功</h5>
+<h4 id="修改留言---成功">修改留言 - 成功</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-success.png" title="/images/laravel-advanced/put-api-success" data-thumbnail="/images/laravel-advanced/put-api-success.png" data-sub-html="<h2>修改留言 成功</h2>">
         <img
             class="lazyload"
@@ -1694,7 +1690,7 @@ Middleware created successfully.
 <br> 
 <p>修改留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示修改成功以及回應 200 OK</p>
 <br>
-<h5 id="修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</h5>
+<h4 id="修改留言---失敗---沒有登入">修改留言 - 失敗 - 沒有登入</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-error-1.png" title="/images/laravel-advanced/put-api-error-1.png" data-thumbnail="/images/laravel-advanced/put-api-error-1.png" data-sub-html="<h2>修改留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1708,7 +1704,7 @@ Middleware created successfully.
 <br> 
 <p>修改留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
-<h5 id="修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</h5>
+<h4 id="修改留言---失敗---權限不足">修改留言 - 失敗 - 權限不足</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/put-api-error-2.png" title="/images/laravel-advanced/put-api-error-2.png" data-thumbnail="/images/laravel-advanced/put-api-error-2.png" data-sub-html="<h2>修改留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1722,7 +1718,7 @@ Middleware created successfully.
 <br> 
 <p>修改留言失敗，雖然 <strong><font color='red'>有登入，但存在 Cookie 裡面的 laravel_session 不是當初的留言者</font></strong> ，會顯示權限不正確以及回應 403 Forbidden</p>
 <br>
-<h5 id="按讚留言---成功">按讚留言 - 成功</h5>
+<h4 id="按讚留言---成功">按讚留言 - 成功</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/patch-api-success.png" title="/images/laravel-advanced/patch-api-success" data-thumbnail="/images/laravel-advanced/patch-api-success.png" data-sub-html="<h2>修改留言 成功</h2>">
         <img
             class="lazyload"
@@ -1736,7 +1732,7 @@ Middleware created successfully.
 <br> 
 <p>按讚留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示按讚成功以及回應 200 OK</p>
 <br>
-<h5 id="按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</h5>
+<h4 id="按讚留言---失敗---沒有登入">按讚留言 - 失敗 - 沒有登入</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/patch-api-error.png" title="/images/laravel-advanced/patch-api-error.png" data-thumbnail="/images/laravel-advanced/patch-api-error.png" data-sub-html="<h2>修改留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1750,7 +1746,7 @@ Middleware created successfully.
 <br> 
 <p>按讚留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
-<h5 id="刪除留言---成功">刪除留言 - 成功</h5>
+<h4 id="刪除留言---成功">刪除留言 - 成功</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-success.png" title="/images/laravel-advanced/delete-api-success.png" data-thumbnail="/images/laravel-advanced/delete-api-success.png" data-sub-html="<h2>刪除留言 成功</h2>">
         <img
             class="lazyload"
@@ -1764,7 +1760,7 @@ Middleware created successfully.
 <br> 
 <p>刪除留言成功，因為 <strong><font color='blue'>有登入，所以可以從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，不會顯示訊息但會回應 204 No Content</p>
 <br>
-<h5 id="刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</h5>
+<h4 id="刪除留言---失敗---沒有登入">刪除留言 - 失敗 - 沒有登入</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-error-1.png" title="/images/laravel-advanced/delete-api-error-1.png" data-thumbnail="/images/laravel-advanced/delete-api-error-1.png" data-sub-html="<h2>刪除留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1778,7 +1774,7 @@ Middleware created successfully.
 <br> 
 <p>刪除留言失敗，因為 <strong><font color='red'>沒有登入，無法從 Cookie 裡面的 laravel_session 來驗證是否登入</font></strong> ，會顯示用戶需要認證以及回應 401 Unauthorized</p>
 <br>
-<h5 id="刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</h5>
+<h4 id="刪除留言---失敗---權限不足">刪除留言 - 失敗 - 權限不足</h4>
 <figure><a class="lightgallery" href="/images/laravel-advanced/delete-api-error-2.png" title="/images/laravel-advanced/delete-api-error-2.png" data-thumbnail="/images/laravel-advanced/delete-api-error-2.png" data-sub-html="<h2>刪除留言 失敗</h2>">
         <img
             class="lazyload"
@@ -1806,8 +1802,8 @@ Middleware created successfully.
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ec6aa4299b05b542aec1b6dbb9e6afa2be4604fb" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ec6aa42:&nbsp;# 修改 Laravel 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>ec6aa42</a></span>
+                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/b8714109d7a009a33aa66c816767f5d694c0dcb0" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;b871410:&nbsp;# 修改 Laravel 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>b871410</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
