@@ -9,14 +9,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go-restful-api-repository-messageboard/" /><meta property="og:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-27T21:27:19+08:00" />
-<meta property="article:modified_time" content="2022-03-29T18:27:15+08:00" />
+<meta property="article:modified_time" content="2022-03-30T10:42:50+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/>
 <meta name="twitter:title" content="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"/>
 <meta name="twitter:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 版本資訊 macOS"/>
 <meta name="application-name" content="PinYi">
-<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="prev" href="https://pin-yi.me/go/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="prev" href="https://pin-yi.me/go/" /><link rel="next" href="https://pin-yi.me/node/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -34,7 +34,7 @@
                             "width":  1920 ,
                             "height":  450 
                         }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2545 ,
-        "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-03-29T18:27:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-03-30T10:42:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -986,8 +986,8 @@ $ go get -u gopkg.in/yaml.v2
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/49ee575e423a900d922e138965fd8cd730acfc44" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;49ee575:&nbsp;# 新增/修改 Go Repository Restful API 的留言板">
-                            <i class="fas fa-hashtag fa-fw"></i>49ee575</a></span>
+                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0b223ec44e68c86eb407f2f6371c283b6020b1c8" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0b223ec:&nbsp;# 新增/修改 Go Repository Restful API 的留言板">
+                            <i class="fas fa-hashtag fa-fw"></i>0b223ec</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go-restful-api-repository-messageboard/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -997,7 +997,7 @@ $ go get -u gopkg.in/yaml.v2
         </div><div class="post-info-share">
             <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)" data-hashtags="Go,RESTful API,Mysql,Repository,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/go-restful-api-repository-messageboard/" data-title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/go/" class="prev" rel="prev" title="Go 介紹"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/node/" class="next" rel="next" title="Node.js 介紹">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>

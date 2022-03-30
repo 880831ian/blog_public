@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Node.js 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Node.js 介紹" />
+<meta property="og:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/node/" /><meta property="og:image" content="https://pin-yi.me/node/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-30T10:45:29+08:00" />
+<meta property="article:modified_time" content="2022-03-30T10:45:29+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/node/featured-image.webp"/>
+<meta name="twitter:title" content="Node.js 介紹"/>
+<meta name="twitter:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/node/" /><link rel="prev" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Node.js 介紹",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/node\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/node\/featured-image.webp",
+                            "width":  1200 ,
+                            "height":  323 
+                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  3805 ,
+        "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-03-30T10:45:29+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/node/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/node/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/node/featured-image.webp"
+        data-srcset="/node/featured-image.webp, /node/featured-image.webp 1.5x, /node/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/node/featured-image.webp"
+        title="/node/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Node.js 介紹</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3805 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什麼是-nodejs-">什麼是 Node.js ?</a>
+      <ul>
+        <li><a href="#非阻塞">非阻塞</a></li>
+        <li><a href="#非同步">非同步</a></li>
+        <li><a href="#事件驅動">事件驅動</a>
+          <ul>
+            <li><a href="#事件-event">事件 (event)</a></li>
+            <li><a href="#事件驅動-event-driven">事件驅動 (event-driven)</a></li>
+            <li><a href="#事件迴圈">事件迴圈</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#npm">NPM</a></li>
+    <li><a href="#repl">REPL</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="什麼是-nodejs-">什麼是 Node.js ?</h2>
+<p>Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。</p>
+<p>Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，使用非阻塞輸入輸出、非同步、事件驅動等技術來提高效能，可最佳化應用程式的傳輸量和規模。這些技術通常用於資料密集的即時應用程式。</p>
+<br>
+<figure><a class="lightgallery" href="/images/node/main-nodejs.png" title="/images/node/main-nodejs.png" data-thumbnail="/images/node/main-nodejs.png" data-sub-html="<h2>主要的 Node.js 組件 (An Intro to Node.js That You May Have Missed)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/node/main-nodejs.png"
+            data-srcset="/images/node/main-nodejs.png, /images/node/main-nodejs.png 1.5x, /images/node/main-nodejs.png 2x"
+            data-sizes="auto"
+            alt="/images/node/main-nodejs.png" width="700" />
+    </a><figcaption class="image-caption">主要的 Node.js 組件 (<a href="https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7" target="_blank" rel="noopener noreffer">An Intro to Node.js That You May Have Missed</a>)</figcaption>
+    </figure>
+<br>
+<p>以下會先從非阻塞輸入輸出、非同步，再談到事件驅動。</p>
+<br>
+<h3 id="非阻塞">非阻塞</h3>
+<p>輸入輸出(I/O) 是程式跟系統記憶體或網路的互動，例如發送 HTTP 請求、對資料庫CRUD 操作等等。</p>
+<p>以網站開發者角度來看，大部分的網站程式都不需要太多的 CPU 計算，反而是在等待大量的 I/O 處理完畢 (HTTP 請求、資料庫的取得資料或是更新資料等)，所以處理 I/O 的速度會是網頁程式效能的關鍵。</p>
+<br>
+<p>那要怎麼才能讓等待 I/O 的時間，不要卡住後續的程式碼呢？可以讓程式一邊等 I/O 處理，一邊繼續執行其他部分的程式碼，主要有兩種方法：</p>
+<ol>
+<li>多執行緒 (multi-threaded)：使用阻塞 (blocking) I/O 的設計。</li>
+<li>單執行緒 (single-threaded)：使用非阻塞 (non-blocking) I/O 的設計 + 非同步 (asynchronous) 處理。</li>
+</ol>
+<br>
+<p><strong>阻塞就是 I/O 的處理阻擋了其他後續程式碼的執行</strong>。舉個例子：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">阻塞 (blocking)</th>
+<th style="text-align:center">非阻塞 (non-blocking)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">阻塞後續程式碼的執行，就好像是我們去附近買烤肉，交給老闆後，為了想吃到熱騰騰的食物，所以只能留在原地，不能先去其他地方</td>
+<td style="text-align:center">非阻塞不會阻擋後續程式碼的執行，就好像是我們去百貨公司美食街點餐，點完餐後會拿到一個呼叫器，就可以先離開，等到呼叫器想了再回去拿即可</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>像是 <strong>Python、Ruby 等語言是使用多執行緒 (multi-threaded)，使用阻塞 I/O</strong> ：</p>
+<p>程式會等網路或是記憶體得作業結束後才會繼續往下，等待時間這個作業中的執行緒不會去做其他事情。</p>
+<p>如果想要達到『等待 I/O 期間不要卡住其他程式碼』，的做法就是新開一個執行緒，直到任務完成，再告訴主執行緒說( 我完成囉！) 即可。</p>
+<br>
+<p><strong>Node.js 使用單執行緒 (single-threaded) ，非阻塞 I/O + 非同步函式</strong>：</p>
+<p>Node.js 使用非阻塞設計，那要怎麼去操作資料庫或是 HTTP 請求的輸入輸出呢？就要透過非同步 (asynchronous) 來處理囉！</p>
+<br>
+<h3 id="非同步">非同步</h3>
+<p>非同步也可以稱為異步，它的作用就是讓程式不要被阻擋等 I/O 處理完，才可以跑下一行程式碼，函式中的 callback 被呼叫的時候再執行後續要做的事情。</p>
+<p>JaveScript 實現非同步的方法不斷演進著：從 callback、promises 到最新的 asymc-await 函式。</p>
+<br>
+<p>同步 vs. 非同步</p>
+<p>我們使用 Node.js 的 File System (文件系統)模組作為簡單的例子，以下是 <strong>同步的寫法</strong> (程式會停止前進，直到跑完 <code>readFileSync</code>)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;fs&#34;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s2">&#34;file.md&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">encoding</span><span class="o">:</span> <span class="s2">&#34;utf8&#34;</span> <span class="p">});</span> <span class="c1">// blocks here until file is read
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node index.js
+readFileSync 測試
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>以下是非同步的寫法 (程式會繼續從下處裡後續程式碼，等 <code>readFile</code> 跑完再回來對資料 <code>doSomething</code>)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;fs&#34;</span><span class="p">);</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&#34;file.md&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">encoding</span><span class="o">:</span> <span class="s2">&#34;utf8&#34;</span><span class="p">,</span> <span class="nx">flag</span><span class="o">:</span> <span class="s2">&#34;r&#34;</span> <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="nx">doSomething</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="kd">function</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node index.js
+readFileSync 測試
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p><strong>為什麼 Node.js 有了非阻塞 I/O 跟 非同步函式，就可以實現單執行緒設定呢?</strong></p>
+<p>雖然 Google V8 JavaScript 引擎是單執行緒設定，但它的底層 C ++ API 並不是。這代表我們可以呼叫一些非同步的程式碼像是 File System 時，Node 會請它底層的 <code>Libuv</code> 去跑這些程式碼，跑完後再執行 callback 或拋出錯誤。</p>
+<br>
+<figure><a class="lightgallery" href="/images/node/run-nodejs.png" title="/images/node/run-nodejs.png" data-thumbnail="/images/node/run-nodejs.png" data-sub-html="<h2>Node.js 運行時的圖示 (An Intro to Node.js That You May Have Missed)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/node/run-nodejs.png"
+            data-srcset="/images/node/run-nodejs.png, /images/node/run-nodejs.png 1.5x, /images/node/run-nodejs.png 2x"
+            data-sizes="auto"
+            alt="/images/node/run-nodejs.png" width="700" />
+    </a><figcaption class="image-caption">Node.js 運行時的圖示 (<a href="https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7" target="_blank" rel="noopener noreffer">An Intro to Node.js That You May Have Missed</a>)</figcaption>
+    </figure>
+<br>
+<p>Libuv 是非同步處理的函式庫（以 C 語言為主)，在面對非同步作業時，會開啟執行緒池 (thread pool / worker pool) ，預設共有四個執行緒 (也就是 worker threads)，運算這些 I/O 用的方式是事件迴圈 (event loop)。</p>
+<p>所以就算 V8 處理程式碼是單執行緒，一但進入到 Libuv 手上，它還是會幫你把會阻塞的 I/O 分工到執行緒池中交給不同的執行緒去處理，直到 callback 發生才會丟回應讓程式知道。</p>
+<p>那我們來看看 Libuv 如何透過事件迴圈有效的處理非同步 I/O。</p>
+<br>
+<h3 id="事件驅動">事件驅動</h3>
+<h4 id="事件-event">事件 (event)</h4>
+<p>事件是指用戶或是系統作出的動作，例如使用者點選按鈕，或是檔案讀取完成、某種錯誤產生等等，都叫做事件。</p>
+<br>
+<h4 id="事件驅動-event-driven">事件驅動 (event-driven)</h4>
+<p>事件驅動是一種程式執行模型，表示程式的進行是依據事件的發生而定，監聽到事件就處理、處理完就執行 callback ，透過不斷的監聽跟回應事件執行程式。</p>
+<p>而事件驅動在不同的地方有不同的實現。瀏覽器 (前端) 和 Node.js (後端) 基於不同的技術實現了各自的事件迴圈。就 Ndoe.js 來說，事件就是交給 Libuv 去處理 ; 至於瀏覽器的事件迴圈在 HTML 5 的規範中有定義。</p>
+<br>
+<h4 id="事件迴圈">事件迴圈</h4>
+<p>因為 Node.js 只有一個執行緒，所以當 Libuv 把非同步事件處理完後，callback 要被丟回應用程式中排隊，等待主執行緒的 stack 為空的時候，才會開始執行。這個排隊的地方就是事件佇列 (event queue)。</p>
+<p>Libuv 會不斷檢查有沒有 callback 需要被執行，有的話分配到主執行緒結束手邊的程式後處理，因此這個過程稱為 『事件迴圈』。</p>
+<br>
+<figure><a class="lightgallery" href="/images/node/revent-loop.png" title="/images/node/event-loop.png" data-thumbnail="/images/node/event-loop.png" data-sub-html="<h2>事件迴圈(event loop) (Node.js 101 — 單執行緒、非同步、非阻塞 I/O 與事件迴圈)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/node/event-loop.png"
+            data-srcset="/images/node/event-loop.png, /images/node/event-loop.png 1.5x, /images/node/revent-loop.png 2x"
+            data-sizes="auto"
+            alt="/images/node/event-loop.png" width="700" />
+    </a><figcaption class="image-caption">事件迴圈(event loop) (<a href="https://medium.com/wenchin-rolls-around/node-js-101-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92-%E9%9D%9E%E5%90%8C%E6%AD%A5-%E9%9D%9E%E9%98%BB%E5%A1%9E-i-o-%E8%88%87%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88-ef94f8359eee" target="_blank" rel="noopener noreffer">Node.js 101 — 單執行緒、非同步、非阻塞 I/O 與事件迴圈</a>)</figcaption>
+    </figure>
+<br>
+<p>Libuv 事件迴圈有哪些階段呢？</p>
+<figure><a class="lightgallery" href="/images/node/libuv.png" title="/images/node/libuv.png" data-thumbnail="/images/node/libuv.png" data-sub-html="<h2>libuv 事件迴圈 (nexocode)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/node/libuv.png"
+            data-srcset="/images/node/libuv.png, /images/node/libuv.png 1.5x, /images/node/libuv.png 2x"
+            data-sizes="auto"
+            alt="/images/node/libuv.png" width="700" />
+    </a><figcaption class="image-caption">libuv 事件迴圈 (<a href="https://nexocode.com/blog/posts/behind-nodejs-event-loop/" target="_blank" rel="noopener noreffer">nexocode</a>)</figcaption>
+    </figure>
+<br>
+<p>Libuv 的事件迴圈共有六個階段，每個階段的作用如下：</p>
+<ol>
+<li>Timers：執行 setTimeout() 和 setInterval() 中到期的 callback，函式裡的時間值是個門檻 (也就是如果設定 1000，最快可以一秒後馬上執行，但可能超過一秒才會執行)，這還要看 OS 如何排序所有的 callback。</li>
+<li>Pending callbacks：上一輪迴圈中有少數的 I/O callback 會被延遲到這一輪的這一階段執行。</li>
+<li>Idle, prepare：Idle handle callback 會被執行、prepare handles 會在迴圈被 I/O 阻塞前執行 callback。</li>
+<li>Poll：最重要的一個階段，它會尋找新的 I/O 事件，可能的話會馬上執行 I/O callback，如果沒辦法馬上執行，它會延遲執行並把它註冊為一個 pending callback 在下一輪執行。這個階段有兩個主要任務：計算要阻塞多久、還有找遍所有在 polling 佇列中事件並執行 callback，直到佇列清空或是執行的 callback 數量達到系統上限。這個階段會阻塞執行緒。</li>
+<li>Check：跟 prepare 相反，會在迴圈被 I/O 阻塞後執行 callback，還有執行 setImmediate() 的 callback。</li>
+<li>Close callbacks：執行 close 事件的 callback，利如 socket.destroy()。</li>
+</ol>
+<br>
+<p>事件迴圈就是不斷重複以上階段。每個階段都有自己的 callback 佇列，在進入某個階段時，都會從所屬的佇列中取出 callback 來執行，當佇列為空或者被執行 callback 的數量達到系統的最大數量時，就會進入下一階段。</p>
+<br>
+<p>根據以上提到事件驅動、單執行緒和非同步、非阻塞的 I/O 處理特性，Node.js 很適合拿來開發 I/O 密集型應用程式，如影音串流、即時互動、在線聊天、遊戲、協作工具、股票行情等軟體。</p>
+<br>
+<h2 id="npm">NPM</h2>
+<p>NPM 是跟 Node.js 一起安裝的線上套件庫，可以下載各式各樣的 JavaScript 套件來使用，能解決 Node.js 代碼部署上的很多問題。</p>
+<br>
+<p>安裝好後，可以使用 <code>npm -v</code> 來檢查版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ npm -v
+8.5.0
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>跟 NPM 息息相關的是 <code>package.json</code> 這個檔案，他是掌管專案資訊的重要檔案，我們可以使用 <code>init</code> 指令來設定 package.json：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+.... 省略 ....
+
+Press ^C at any <span class="nb">time</span> to quit.
+package name: <span class="o">(</span>message<span class="o">)</span> demo
+version: <span class="o">(</span>1.0.0<span class="o">)</span> 
+description: 
+entry point: <span class="o">(</span>index.js<span class="o">)</span> 
+<span class="nb">test</span> command: 
+git repository: 
+keywords: 
+author: ian &lt;880831ian@gmail.com&gt;
+license: <span class="o">(</span>ISC<span class="o">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>name: 就是該專案的名字，它預設就是該目錄名。</li>
+<li>description: 專案描述。</li>
+<li>entry point: 專案切入點，這有點複雜，之後再說。</li>
+<li>test command: 專案測試指令，之後說。</li>
+<li>git repository: 專案原始碼的版本控管位置。</li>
+<li>keywoard: 專案關鍵字</li>
+<li>author: 專案作者，以 author-name <a href="mailto:author@email.com" rel="">author@email.com</a> 寫之。</li>
+<li>license: 專案版權。</li>
+</ul>
+<br>
+<p>設定好後，專案資料夾就會多一個 <code>package.json</code> 的檔案，打開後可以看到，是我們剛剛所設定好的資訊：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;demo&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0.0&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;main&#34;</span><span class="p">:</span> <span class="s2">&#34;index.js&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;ian &lt;880831ian@gmail.com&gt;&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;license&#34;</span><span class="p">:</span> <span class="s2">&#34;ISC&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接下來，要如何下載網路上的模組，要使用 <code>install</code> 指令來下載，我們下載 Node.js 最小又靈活的 Web 應用程式框架 express 來做示範：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ npm install express
+
+added <span class="m">50</span> packages, and audited <span class="m">51</span> packages in 1s
+
+<span class="m">2</span> packages are looking <span class="k">for</span> funding
+  run <span class="sb">`</span>npm fund<span class="sb">`</span> <span class="k">for</span> details
+
+found <span class="m">0</span> vulnerabilities
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>下載好後，可以看到剛剛 <code>package.json</code> 檔案多了 <code>dependencies</code> 欄位，它裡面會紀錄我們安裝了哪些套件，所以未來我們想知道專案使用了哪些套件，我們可以從 <code>dependencies</code> 這個欄位知道。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;demo&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0.0&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;main&#34;</span><span class="p">:</span> <span class="s2">&#34;index.js&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;ian &lt;880831ian@gmail.com&gt;&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;license&#34;</span><span class="p">:</span> <span class="s2">&#34;ISC&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;dependencies&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;express&#34;</span><span class="p">:</span> <span class="s2">&#34;^4.17.3&#34;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>除此之外，還會多一個 <code>node_modules</code> 資料夾，這個資料夾就會存放我們所下載的套件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ls node_modules/
+accepts             cookie-signature    etag                inherits            mime-types          qs                  setprototypeof
+array-flatten       debug               express             ipaddr.js           ms                  range-parser        statuses
+body-parser         depd                finalhandler        media-typer         negotiator          raw-body            toidentifier
+bytes               destroy             forwarded           merge-descriptors   on-finished         safe-buffer         type-is
+content-disposition ee-first            fresh               methods             parseurl            safer-buffer        unpipe
+content-type        encodeurl           http-errors         mime                path-to-regexp      send                utils-merge
+cookie              escape-html         iconv-lite          mime-db             proxy-addr          serve-static        vary
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>當我們都安裝好後，express 已經包在 <code>node_modules</code> 目錄內，在專案裡面，就可以使用 require(&lsquo;套件名稱‘) 來使用套件囉！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>因為這些套件都可以直接在網路上下載到，所以在推送 git 專案時，可以使用 <code>.gitignore</code> 來隱藏不想被 push 的檔案，當我們想要下載套件回來時，只要使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ npm install
+</code></pre></td></tr></table>
+</div>
+</div><p>就可以依照 <code>package.json</code> 裡面的 <code>dependencies</code> 來下載套件！</p>
+<h2 id="repl">REPL</h2>
+<p>Node.js REPL  (交互式解釋器)：表示一個電腦環境，類似 Windoes 系統的終端或是 Unix/Linux 的 Shell，我們可以在終端機上輸入命令，並接收系統的響應。</p>
+<p>Node 自帶了交互式解釋器，可以執行以下任務：</p>
+<ul>
+<li>讀取：讀取用戶輸入，解析輸入的 JavaScript 數據結構並儲存在內存中。</li>
+<li>執行：執行輸入的數據結構。</li>
+<li>顯示：輸出結果。</li>
+<li>循環：循環以上任務直到用戶按下兩次的 ctrl+c 按鈕退出。</li>
+</ul>
+<br>
+<p>我們可以輸入以下命令來啟動 Node 的終端：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node
+Welcome to Node.js v16.14.2.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt;
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>可以執行簡單的數學運算：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node
+
+Welcome to Node.js v16.14.2.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt; 1+4
+<span class="m">5</span>
+&gt; 5/2
+2.5
+&gt; 3*7
+<span class="m">21</span>
+&gt; 4-3
+<span class="m">1</span>
+&gt; <span class="m">1</span> + <span class="o">(</span>2*4<span class="o">)</span> -5
+<span class="m">4</span>
+&gt;
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>也可以將數據存在變數中，在需要時使用它。變數宣告需要使用 <code>var</code> 關鍵字，如果沒有使用關鍵字，會直接顯示出來。也可以使用 <code>console.log()</code> 來輸出變數</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node
+
+Welcome to Node.js v16.14.2.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt; <span class="nv">x</span> <span class="o">=</span> <span class="m">19</span>
+<span class="m">19</span>
+&gt; var <span class="nv">y</span> <span class="o">=</span> <span class="m">10</span>
+undefined
+&gt; x + y
+<span class="m">29</span>
+&gt; console.log<span class="o">(</span><span class="s2">&#34;Hello&#34;</span><span class="o">)</span>
+Hello
+undefined
+&gt;
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>Node REPL 也支持輸入多行表達式，我們試著寫一個 do-while 迴圈：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">Welcome to Node.js v16.14.2.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt; var <span class="nv">x</span> <span class="o">=</span> <span class="m">0</span>
+undefined
+&gt; <span class="k">do</span> <span class="o">{</span>
+... x++<span class="p">;</span>
+... console.log<span class="o">(</span><span class="s2">&#34;x:&#34;</span> + x<span class="o">)</span><span class="p">;</span>
+... <span class="o">}</span> <span class="k">while</span> <span class="o">(</span>x&lt;5<span class="o">)</span><span class="p">;</span>
+x:1
+x:2
+x:3
+x:4
+x:5
+undefined
+&gt;
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://nodejs.dev/learn/introduction-to-nodejs" target="_blank" rel="noopener noreffer">Node.js 官網</a></p>
+<p><a href="https://medium.com/wenchin-rolls-around/node-js-101-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92-%E9%9D%9E%E5%90%8C%E6%AD%A5-%E9%9D%9E%E9%98%BB%E5%A1%9E-i-o-%E8%88%87%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88-ef94f8359eee" target="_blank" rel="noopener noreffer">Node.js 101 — 單執行緒、非同步、非阻塞 I/O 與事件迴圈</a></p>
+<p><a href="https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7" target="_blank" rel="noopener noreffer">An Intro to Node.js That You May Have Missed
+</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/node.js/">Node.js</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-03-30</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/node/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Node/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/node/" data-title="Node.js 介紹" data-hashtags="Node.js,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/node/" data-hashtag="Node.js"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/node/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/node/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/node/" data-title="Node.js 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/node/" data-title="Node.js 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/node/" data-title="Node.js 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/go-restful-api-repository-messageboard/" class="prev" rel="prev" title="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":40},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

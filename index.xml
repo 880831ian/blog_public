@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>Node.js 介紹</title>
+    <link>https://pin-yi.me/node/</link>
+    <pubDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node/</guid>
+    <description><![CDATA[什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，]]></description>
 </item>
 <item>
     <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
@@ -59,12 +65,6 @@
     <link>https://pin-yi.me/char-varchar/</link>
     <pubDate>Fri, 04 Mar 2022 17:44:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/char-varchar/</guid>
     <description><![CDATA[每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？ 文字資料型態 主要有這三點，那我會分]]></description>
-</item>
-<item>
-    <title>Laravel 介紹 (使用 Laravel 從零到有開發出一個留言板功能並搭配 RESTful API 來實現 CRUD) </title>
-    <link>https://pin-yi.me/laravel/</link>
-    <pubDate>Wed, 02 Mar 2022 10:33:45 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel/</guid>
-    <description><![CDATA[<p>本文章會介紹什麼是 Laravel ，以及它有什麼特別之處，可以讓它在2015年被評為最受歡迎的 PHP  框架第一名，並說明為什麼要使用框架，最後實作一個留言板功能搭配 RESTful API 來實現 CRUD。</p>]]></description>
 </item>
 </channel>
 </rss>
