@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/laravel-advanced/" /><meta property="og:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-08T09:00:59+08:00" />
-<meta property="article:modified_time" content="2022-03-23T16:49:02+08:00" />
+<meta property="article:modified_time" content="2022-03-30T09:11:48+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/laravel-advanced/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  2520 ,
                             "height":  896 
                         }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7930 ,
-        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-23T16:49:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-03-30T09:11:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -167,14 +167,11 @@ if (!doNotTrack) {
             <li><a href="#repository-設計模式">Repository 設計模式</a></li>
             <li><a href="#migration-1">Migration</a></li>
             <li><a href="#登入-api">登入 API</a></li>
-            <li><a href="#middleware">Middleware</a>
-              <ul>
-                <li><a href="#route">Route</a></li>
-                <li><a href="#model-1">Model</a></li>
-                <li><a href="#repository">Repository</a></li>
-                <li><a href="#controller-1">Controller</a></li>
-              </ul>
-            </li>
+            <li><a href="#middleware">Middleware</a></li>
+            <li><a href="#route">Route</a></li>
+            <li><a href="#model-1">Model</a></li>
+            <li><a href="#repository">Repository</a></li>
+            <li><a href="#controller-1">Controller</a></li>
           </ul>
         </li>
         <li><a href="#postman-測試">Postman 測試</a>
@@ -1094,7 +1091,7 @@ Middleware created successfully.
 </div>
 </div><p>這邊的意思是指，在 request 的時候，我們使用內建的 <code>Auth::check</code> 來檢查，如果登入就可以繼續使用，如果沒有登入會回傳用戶需要認證以及 401 的 status code。</p>
 <br>
-<h5 id="route">Route</h5>
+<h4 id="route">Route</h4>
 <p>接下來，我們要把我們設定好的 <code>ApiAuth</code> 設定在 <code>route\api.php</code> 的路由中，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1116,7 +1113,7 @@ Middleware created successfully.
 </div>
 </div><p>可以看到跟我們上一篇的 route 設定的差不多，只是將 <code>MessageController</code> 後面的方法做了一點變化，簡化名稱(這與我們後面講到的 Repository 設計模式有關)，以及加上 <code>like</code> 這個方法來當作我們的按讚功能，後面將我們需要登入驗證才可以使用的功能，加入 <code>middleware('api.auth');</code></p>
 <br>
-<h5 id="model-1">Model</h5>
+<h4 id="model-1">Model</h4>
 <p>因為我們在取得資料時，不希望顯示 <code>deleted_at</code> 給使用者，所以在 <code>app\Models\Message.php</code> 這個 model 裡面用 <code>hidden</code> 來做設定。</p>
 <p><strong>message</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1196,7 +1193,7 @@ Middleware created successfully.
 </div>
 </div><p>可以看到我們還多引用 SoftDeletes ，它叫軟刪除，一般來說我們在設計資料庫時，不會真正意義上的把資料刪掉，還記得我們再新增 message 跟 like 資料表時，有多了一個  <code>softDeletes()</code> 欄位嗎，這個欄位就是當我們刪除時，他會記錄刪除時間，但在查詢時就不會顯示這筆資料，讓使用者覺得資料已經真正刪除了，但實際上資料還是存在在資料庫中。</p>
 <br>
-<h5 id="repository">Repository</h5>
+<h4 id="repository">Repository</h4>
 <p>還記得我們上次把 RESTful API 要處理的邏輯都寫在 Controller 裡面嗎，我們光是一個小功能就讓整個 Controller 變得肥大，在後續維護時或是新增功能時，會導致十分不便利，因此我們要將 Repository 設計模式 給導入，那要怎麼實作呢～</p>
 <br>
 <p>我們要先在 <code>app</code> 底下新增一個 <code>Repositories</code> 目錄，在目錄底下再新增一個 <code>MessageRepository.php</code> 檔案來專門放我們與資料庫拿資料的程式，讓 Controller 單純處理商業邏輯我們整個檔案分成幾段來看</p>
@@ -1397,7 +1394,7 @@ Middleware created successfully.
 </div>
 </div><p>刪除功能因為我們使用軟刪除，所以不用顧慮 FK 外鍵，所以可以直接刪除 message。</p>
 <br>
-<h5 id="controller-1">Controller</h5>
+<h4 id="controller-1">Controller</h4>
 <p>到這裡我們講完 <code>MessageRepository.php</code> 的內容了，那原本的 Controller 剩下什麼呢 !?</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1809,8 +1806,8 @@ Middleware created successfully.
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ba87596d3d66ed2e87e1127dc0c48dab197b9e7c" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ba87596:&nbsp;# 修改 Laravel 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>ba87596</a></span>
+                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ec6aa4299b05b542aec1b6dbb9e6afa2be4604fb" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ec6aa42:&nbsp;# 修改 Laravel 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>ec6aa42</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
