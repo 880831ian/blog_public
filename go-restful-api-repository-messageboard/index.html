@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  1495 ,
+                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2545 ,
         "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-03-29T18:27:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/go-restful-api-repository-messageboard/featured-image.webp"
         title="/go-restful-api-repository-messageboard/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1495 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2545 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -151,6 +151,20 @@ if (!doNotTrack) {
         <li><a href="#routersgo">Routers.go</a></li>
         <li><a href="#modelgo">Model.go</a></li>
         <li><a href="#controllergo">Controller.go</a></li>
+        <li><a href="#repositorygo">Repository.go</a></li>
+      </ul>
+    </li>
+    <li><a href="#postman-測試">Postman 測試</a>
+      <ul>
+        <li><a href="#查詢全部留言---成功無資料">查詢全部留言 - 成功(無資料)</a></li>
+        <li><a href="#查詢全部留言---成功有資料">查詢全部留言 - 成功(有資料)</a></li>
+        <li><a href="#查詢id留言---成功">查詢{id}留言 - 成功</a></li>
+        <li><a href="#查詢id留言---失敗">查詢{id}留言 - 失敗</a></li>
+        <li><a href="#新增留言---成功">新增留言 - 成功</a></li>
+        <li><a href="#修改id留言---成功">修改{id}留言 - 成功</a></li>
+        <li><a href="#修改id留言---失敗">修改{id}留言 - 失敗</a></li>
+        <li><a href="#刪除id留言---成功">刪除{id}留言 - 成功</a></li>
+        <li><a href="#執行結果">執行結果</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -586,7 +600,9 @@ $ go get -u gopkg.in/yaml.v2
 <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>引入套件</p>
+</div><p>import 會使用到的套件。</p>
+<br>
+<p><strong>查詢留言功能</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -631,7 +647,335 @@ $ go get -u gopkg.in/yaml.v2
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
+</div><p><code>GetAll()</code> 會使用到 repository.GetAllMessage()` 查詢並回傳顯示查詢的資料。</p>
+<p><code>c.Param(&quot;id&quot;)</code> 是網址讀入後的 id，網址是<code>http://127.0.0.1:8081/api/v1/message/{id}</code> ，將輸入的 id 透過 <code>repository.GetMessage()</code> 查詢並回傳顯示查詢的資料。</p>
+<br>
+<p><strong>新增留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Create</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">Bind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
+	
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">CreateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;錯誤請求&#34;</span><span class="p">})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusCreated</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 Gin 框架中的 <code>Bind 函數</code>，可以將 url 的查詢參數 query parameter，http 的 Header、body 中提交的數據給取出，透過 <code>repository.CreateMessage()</code> 將要新增的資料帶入，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusCreated</code> 以及新增的資料。</p>
+<br>
+<p><strong>修改留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
+	
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">UpdateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">),</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span><span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;錯誤請求&#34;</span><span class="p">})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先使用 <code>repository.GetMessage()</code> 以及 <code>c.Param(&quot;id&quot;)</code> 來查詢此 id 是否存在，再帶入要修改的 <code>Content</code> ，透過 <code>repository.UpdateMessage()</code> 將資料修改，，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusOK</code> 以及修改的資料。</p>
+<br>
+<p><strong>刪除留言功能</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Delete</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">DeleteMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNoContent</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;刪除留言成功&#34;</span><span class="p">})</span>	
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>透過 <code>repository.DeleteMessage()</code> 將資料刪除，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusNoContent</code>。</p>
+<br>
+<h3 id="repositorygo">Repository.go</h3>
+<p><strong>(下面為一個檔案，但長度有點長，分開說明)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">repository</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;message/config&#34;</span>
+	<span class="s">&#34;message/model&#34;</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>import 會使用到的套件。</p>
+<br>
+<p><strong>查詢留言資料讀取</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//查詢全部留言
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetAllMessage</span><span class="p">()</span> <span class="p">(</span><span class="nx">message</span> <span class="p">[]</span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span><span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="c1">//查詢 {id} 留言
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
 </div><br>
+<p><strong>新增留言資料讀取</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//新增留言
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">CreateMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p><strong>修改留言資料讀取</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//更新 {id} 留言
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">UpdateMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">Update</span><span class="p">(</span><span class="s">&#34;content&#34;</span> <span class="p">,</span><span class="nx">content</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p><strong>刪除留言資料讀取</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//刪除 {id} 留言
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">DeleteMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">Delete</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">err</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h2 id="postman-測試">Postman 測試</h2>
+<h3 id="查詢全部留言---成功無資料">查詢全部留言 - 成功(無資料)</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/get-success-1.png" title="/images/go-restful-api-repository-messageboard/get-success-1.png" data-thumbnail="/images/go-restful-api-repository-messageboard/get-success-1.png" data-sub-html="<h2>查詢留言 成功(無資料)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/get-success-1.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/get-success-1.png, /images/go-restful-api-repository-messageboard/get-success-1.png 1.5x, /images/go-restful-api-repository-messageboard/get-success-1.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/get-success-1.png" width="700" />
+    </a><figcaption class="image-caption">查詢留言 成功(無資料)</figcaption>
+    </figure>
+<br>
+<h3 id="查詢全部留言---成功有資料">查詢全部留言 - 成功(有資料)</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/get-success-2.png" title="/images/go-restful-api-repository-messageboard/get-success-2.png" data-thumbnail="/images/go-restful-api-repository-messageboard/get-success-2.png" data-sub-html="<h2>查詢留言 成功(有資料)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/get-success-2.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/get-success-2.png, /images/go-restful-api-repository-messageboard/get-success-2.png 1.5x, /images/go-restful-api-repository-messageboard/get-success-2.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/get-success-2.png" width="700" />
+    </a><figcaption class="image-caption">查詢留言 成功(有資料)</figcaption>
+    </figure>
+<br>
+<h3 id="查詢id留言---成功">查詢{id}留言 - 成功</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/get-id-succes.png" title="/images/go-restful-api-repository-messageboard/get-id-succes.png" data-thumbnail="/images/go-restful-api-repository-messageboard/get-id-succes.png" data-sub-html="<h2>查詢{id}留言 成功</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/get-id-succes.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/get-id-succes.png, /images/go-restful-api-repository-messageboard/get-id-succes.png 1.5x, /images/go-restful-api-repository-messageboard/get-id-succes.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/get-id-succes.png" width="700" />
+    </a><figcaption class="image-caption">查詢{id}留言 成功</figcaption>
+    </figure>
+<br>
+<h3 id="查詢id留言---失敗">查詢{id}留言 - 失敗</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/get-error.png" title="/images/go-restful-api-repository-messageboard/get-error.png" data-thumbnail="/images/go-restful-api-repository-messageboard/get-error.png" data-sub-html="<h2>查詢{id}留言 失敗</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/get-error.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/get-error.png, /images/go-restful-api-repository-messageboard/get-error.png 1.5x, /images/go-restful-api-repository-messageboard/get-error.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/get-error.png" width="700" />
+    </a><figcaption class="image-caption">查詢{id}留言 失敗</figcaption>
+    </figure>
+<br>
+<h3 id="新增留言---成功">新增留言 - 成功</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/create.png" title="/images/go-restful-api-repository-messageboard/create.png" data-thumbnail="/images/go-restful-api-repository-messageboard/create.png" data-sub-html="<h2>新增留言 成功</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/create.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/create.png, /images/go-restful-api-repository-messageboard/create.png 1.5x, /images/go-restful-api-repository-messageboard/create.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/create.png" width="700" />
+    </a><figcaption class="image-caption">新增留言 成功</figcaption>
+    </figure>
+<br>
+<h3 id="修改id留言---成功">修改{id}留言 - 成功</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/patch-success.png" title="/images/go-restful-api-repository-messageboard/patch-success.png" data-thumbnail="/images/go-restful-api-repository-messageboard/patch-success.png" data-sub-html="<h2>修改 {id}留言 成功</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/patch-success.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/patch-success.png, /images/go-restful-api-repository-messageboard/patch-success.png 1.5x, /images/go-restful-api-repository-messageboard/patch-success.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/patch-success.png" width="700" />
+    </a><figcaption class="image-caption">修改 {id}留言 成功</figcaption>
+    </figure>
+<br>
+<h3 id="修改id留言---失敗">修改{id}留言 - 失敗</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/patch-error.png" title="/images/go-restful-api-repository-messageboard/patch-error.png" data-thumbnail="/images/go-restful-api-repository-messageboard/patch-error.png" data-sub-html="<h2>修改 {id}留言 失敗</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/patch-error.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/patch-error.png, /images/go-restful-api-repository-messageboard/patch-error.png 1.5x, /images/go-restful-api-repository-messageboard/patch-error.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/patch-error.png" width="700" />
+    </a><figcaption class="image-caption">修改 {id}留言 失敗</figcaption>
+    </figure>
+<br>
+<h3 id="刪除id留言---成功">刪除{id}留言 - 成功</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/delete.png" title="/images/go-restful-api-repository-messageboard/delete.png" data-thumbnail="/images/go-restful-api-repository-messageboard/delete.png" data-sub-html="<h2>刪除 {id}留言 成功</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/delete.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/delete.png, /images/go-restful-api-repository-messageboard/delete.png 1.5x, /images/go-restful-api-repository-messageboard/delete.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/delete.png" width="700" />
+    </a><figcaption class="image-caption">刪除 {id}留言 成功</figcaption>
+    </figure>
+<br>
+<h3 id="執行結果">執行結果</h3>
+<figure><a class="lightgallery" href="/images/go-restful-api-repository-messageboard/gin-cli.png" title="/images/go-restful-api-repository-messageboard/gin-cli.png" data-thumbnail="/images/go-restful-api-repository-messageboard/gin-cli.png" data-sub-html="<h2>執行結果</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/go-restful-api-repository-messageboard/gin-cli.png"
+            data-srcset="/images/go-restful-api-repository-messageboard/gin-cli.png, /images/go-restful-api-repository-messageboard/gin-cli.png 1.5x, /images/go-restful-api-repository-messageboard/gin-cli.png 2x"
+            data-sizes="auto"
+            alt="/images/go-restful-api-repository-messageboard/gin-cli.png" width="700" />
+    </a><figcaption class="image-caption">執行結果</figcaption>
+    </figure>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://iter01.com/609571.html" target="_blank" rel="noopener noreffer">基於Gin+Gorm框架搭建MVC模式的Go語言後端系統</a></p>
 </div><div class="post-footer" id="post-footer">
