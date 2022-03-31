@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/node/" /><meta property="og:image" content="https://pin-yi.me/node/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-30T10:45:29+08:00" />
-<meta property="article:modified_time" content="2022-03-30T21:43:15+08:00" />
+<meta property="article:modified_time" content="2022-03-31T18:29:48+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/node/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/node\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  3805 ,
-        "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-03-30T21:43:15+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  3893 ,
+        "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-03-31T18:29:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/node/featured-image.webp"
         title="/node/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Node.js 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3805 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3893 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
@@ -637,7 +637,7 @@ undefined
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<p>Node REPL 也支持輸入多行表達式，我們試著寫一個 do-while 迴圈：</p>
+<p>Node REPL 也支持輸入多行程式，我們試著寫一個 do-while 迴圈：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -675,18 +675,62 @@ undefined
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<p>也可以使下底線(_)來獲得上一個程式的運算結果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ node
+
+Welcome to Node.js v16.14.2.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt; var <span class="nv">x</span> <span class="o">=</span> <span class="m">10</span>
+undefined
+&gt; var <span class="nv">y</span> <span class="o">=</span> <span class="m">20</span>
+undefined
+&gt; x + y
+<span class="m">30</span>
+&gt; var <span class="nv">sum</span> <span class="o">=</span> _
+undefined
+&gt; console.log<span class="o">(</span>sum<span class="o">)</span>
+<span class="m">30</span>
+undefined
+&gt;
+</code></pre></td></tr></table>
+</div>
+</div><br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://nodejs.dev/learn/introduction-to-nodejs" target="_blank" rel="noopener noreffer">Node.js 官網</a></p>
 <p><a href="https://medium.com/wenchin-rolls-around/node-js-101-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92-%E9%9D%9E%E5%90%8C%E6%AD%A5-%E9%9D%9E%E9%98%BB%E5%A1%9E-i-o-%E8%88%87%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88-ef94f8359eee" target="_blank" rel="noopener noreffer">Node.js 101 — 單執行緒、非同步、非阻塞 I/O 與事件迴圈</a></p>
 <p><a href="https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7" target="_blank" rel="noopener noreffer">An Intro to Node.js That You May Have Missed
+</a></p>
+<p><a href="https://sequelize.org/v6/index.html" target="_blank" rel="noopener noreffer">Sequelize
+</a></p>
+<p><a href="https://hackmd.io/@TSMI_E7ORNeP8YBbWm-lFA/ryCtaVW_M?print-pdf#%E4%BD%BF%E7%94%A8sequelize%E5%BB%BA%E7%AB%8B%E4%B8%80%E5%BC%B5user-table" target="_blank" rel="noopener noreffer">透過 sequelize 來達成 DB Schema Migration
 </a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/node.js/">Node.js</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/60a5a63cd49b5ede9cb152c084e0ec22ce61564e" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;60a5a63:&nbsp;# 修改 Node 文章封面">
-                            <i class="fas fa-hashtag fa-fw"></i>60a5a63</a></span>
+                <span>更新於 2022-03-31&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/5fbb38aee834c4501f582eb51fd43bc95ead8b6f" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;5fbb38a:&nbsp;# 新增/修改 Node">
+                            <i class="fas fa-hashtag fa-fw"></i>5fbb38a</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/node/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
