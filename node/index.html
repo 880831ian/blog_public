@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Node.js 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Node.js 介紹" />
-<meta property="og:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，" />
+<meta property="og:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/node/" /><meta property="og:image" content="https://pin-yi.me/node/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-30T10:45:29+08:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/node/featured-image.webp"/>
 <meta name="twitter:title" content="Node.js 介紹"/>
-<meta name="twitter:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，"/>
+<meta name="twitter:description" content="什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/node/" /><link rel="prev" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/node\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  3893 ,
+                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  4672 ,
         "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-03-31T18:29:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/node/featured-image.webp"
         title="/node/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Node.js 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3893 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4672 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -144,24 +144,34 @@ if (!doNotTrack) {
   <ul>
     <li><a href="#什麼是-nodejs-">什麼是 Node.js ?</a>
       <ul>
-        <li><a href="#非阻塞">非阻塞</a></li>
-        <li><a href="#非同步">非同步</a></li>
-        <li><a href="#事件驅動">事件驅動</a>
+        <li><a href="#非阻塞-non-blocking">非阻塞 (non-blocking)</a></li>
+        <li><a href="#非同步-asynchronous">非同步 (asynchronous)</a></li>
+        <li><a href="#事件驅動-event-driven">事件驅動 (event-driven)</a>
           <ul>
             <li><a href="#事件-event">事件 (event)</a></li>
-            <li><a href="#事件驅動-event-driven">事件驅動 (event-driven)</a></li>
-            <li><a href="#事件迴圈">事件迴圈</a></li>
+            <li><a href="#事件驅動-event-driven-1">事件驅動 (event-driven)</a></li>
+            <li><a href="#事件迴圈-event-loop">事件迴圈 (event loop)</a></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><a href="#npm">NPM</a></li>
     <li><a href="#repl">REPL</a></li>
+    <li><a href="#express">Express</a>
+      <ul>
+        <li><a href="#畫面-view">畫面 (view)</a>
+          <ul>
+            <li><a href="#heading"></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><h2 id="什麼是-nodejs-">什麼是 Node.js ?</h2>
 <p>Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。</p>
+<p>Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發網站開發人員使用已懂的 JavaScript 語言就可以自行設定網站伺服器。</p>
 <p>Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，使用非阻塞輸入輸出、非同步、事件驅動等技術來提高效能，可最佳化應用程式的傳輸量和規模。這些技術通常用於資料密集的即時應用程式。</p>
 <br>
 <figure><a class="lightgallery" href="/images/node/main-nodejs.png" title="/images/node/main-nodejs.png" data-thumbnail="/images/node/main-nodejs.png" data-sub-html="<h2>主要的 Node.js 組件 (An Intro to Node.js That You May Have Missed)</h2>">
@@ -175,9 +185,20 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">主要的 Node.js 組件 (<a href="https://itnext.io/an-intro-to-node-js-that-you-may-have-missed-b175ef4277f7" target="_blank" rel="noopener noreffer">An Intro to Node.js That You May Have Missed</a>)</figcaption>
     </figure>
 <br>
+<p>Node.js 能快速的原因是因為他對資源的調校不同，當程式收到一筆連線，相較於 PHP 的每次連線都會新生成一個執行緒，當連線數量暴增時很快就會消耗掉系統的資源，並且容易產生阻塞 (block)，而 Node.js 則是會通知作業系統透過 epoll、kqueue、/dev/poll、select 等將連線保留，並放入 heap 中配置，先讓連線進入休眠 (Sleep) 狀態，等系統通知才觸發連線的 callback。這種處理方式只會佔用記憶體，並不會使用到 CPU 資源。另外因為 JavaScript 語言的特性，每一個 request 都會有一個 callback，可以避免發生阻塞的狀況發生。</p>
+<br>
+<div class="details admonition tap open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>什麼是 callback<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"></div>
+        </div>
+    </div>
+<br>
 <p>以下會先從非阻塞輸入輸出、非同步，再談到事件驅動。</p>
 <br>
-<h3 id="非阻塞">非阻塞</h3>
+<h3 id="非阻塞-non-blocking">非阻塞 (non-blocking)</h3>
 <p>輸入輸出(I/O) 是程式跟系統記憶體或網路的互動，例如發送 HTTP 請求、對資料庫CRUD 操作等等。</p>
 <p>以網站開發者角度來看，大部分的網站程式都不需要太多的 CPU 計算，反而是在等待大量的 I/O 處理完畢 (HTTP 請求、資料庫的取得資料或是更新資料等)，所以處理 I/O 的速度會是網頁程式效能的關鍵。</p>
 <br>
@@ -210,7 +231,7 @@ if (!doNotTrack) {
 <p><strong>Node.js 使用單執行緒 (single-threaded) ，非阻塞 I/O + 非同步函式</strong>：</p>
 <p>Node.js 使用非阻塞設計，那要怎麼去操作資料庫或是 HTTP 請求的輸入輸出呢？就要透過非同步 (asynchronous) 來處理囉！</p>
 <br>
-<h3 id="非同步">非同步</h3>
+<h3 id="非同步-asynchronous">非同步 (asynchronous)</h3>
 <p>非同步也可以稱為異步，它的作用就是讓程式不要被阻擋等 I/O 處理完，才可以跑下一行程式碼，函式中的 callback 被呼叫的時候再執行後續要做的事情。</p>
 <p>JaveScript 實現非同步的方法不斷演進著：從 callback、promises 到最新的 asymc-await 函式。</p>
 <br>
@@ -291,15 +312,15 @@ readFileSync 測試
 <p>所以就算 V8 處理程式碼是單執行緒，一但進入到 Libuv 手上，它還是會幫你把會阻塞的 I/O 分工到執行緒池中交給不同的執行緒去處理，直到 callback 發生才會丟回應讓程式知道。</p>
 <p>那我們來看看 Libuv 如何透過事件迴圈有效的處理非同步 I/O。</p>
 <br>
-<h3 id="事件驅動">事件驅動</h3>
+<h3 id="事件驅動-event-driven">事件驅動 (event-driven)</h3>
 <h4 id="事件-event">事件 (event)</h4>
 <p>事件是指用戶或是系統作出的動作，例如使用者點選按鈕，或是檔案讀取完成、某種錯誤產生等等，都叫做事件。</p>
 <br>
-<h4 id="事件驅動-event-driven">事件驅動 (event-driven)</h4>
+<h4 id="事件驅動-event-driven-1">事件驅動 (event-driven)</h4>
 <p>事件驅動是一種程式執行模型，表示程式的進行是依據事件的發生而定，監聽到事件就處理、處理完就執行 callback ，透過不斷的監聽跟回應事件執行程式。</p>
 <p>而事件驅動在不同的地方有不同的實現。瀏覽器 (前端) 和 Node.js (後端) 基於不同的技術實現了各自的事件迴圈。就 Ndoe.js 來說，事件就是交給 Libuv 去處理 ; 至於瀏覽器的事件迴圈在 HTML 5 的規範中有定義。</p>
 <br>
-<h4 id="事件迴圈">事件迴圈</h4>
+<h4 id="事件迴圈-event-loop">事件迴圈 (event loop)</h4>
 <p>因為 Node.js 只有一個執行緒，所以當 Libuv 把非同步事件處理完後，callback 要被丟回應用程式中排隊，等待主執行緒的 stack 為空的時候，才會開始執行。這個排隊的地方就是事件佇列 (event queue)。</p>
 <p>Libuv 會不斷檢查有沒有 callback 需要被執行，有的話分配到主執行緒結束手邊的程式後處理，因此這個過程稱為 『事件迴圈』。</p>
 <br>
@@ -715,6 +736,86 @@ undefined
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<h2 id="express">Express</h2>
+<p>Node.js 在實作上不會單獨使用，通常會搭配框架去使用，像是 <a href="https://expressjs.com/" target="_blank" rel="noopener noreffer">Express JS 後端框架</a>，可以讓開發人員在寫同一個功能時，少寫很多程式的工具。</p>
+<p>Express 是 Node.js 環境下提供的輕量後端架構，自由度極高，透過豐富的 HTTP 工具，能快速發開後端應用程式，它提供：</p>
+<ul>
+<li>替不同 HTTP Method、不同 URL 路徑的 requests 編寫不同的處理方法。</li>
+<li>透過整合「畫面」的渲染引擎來達到插入資料到樣板產生 response。</li>
+<li>設定常見的 web 應用程式，例如：連線用的 Port 和產生 response 樣板的位置。</li>
+<li>在 request 的處理流程中增加而外的中間層 (Middleware) 進行處理。</li>
+</ul>
+<br>
+<p>第一個 Express Hello world 程式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Example app listening on port </span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>應用程式會啟動伺服器，並使用 Port 3000 來連線。應用程式指向 URL (/) 的路由，以 &ldquo;Hello World!&rdquo; 回應如果是其他路徑，res 就會回應 404 找不到。</p>
+<br>
+<h3 id="畫面-view">畫面 (view)</h3>
+<p>剛剛有提到說它可以使用整合「畫面」的渲染引擎來顯示到樣板，我們可以透過 <code>--view</code> 指令來產生樣板以及應用程式的目錄：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ express --view<span class="o">=</span>pub
+   create : public/
+   create : public/javascripts/
+   create : public/images/
+   create : public/stylesheets/
+   create : public/stylesheets/style.css
+   create : routes/
+   create : routes/index.js
+   create : routes/users.js
+   create : views/
+   create : app.js
+   create : package.json
+   create : bin/
+   create : bin/www
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="heading"></h4>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://nodejs.dev/learn/introduction-to-nodejs" target="_blank" rel="noopener noreffer">Node.js 官網</a></p>
 <p><a href="https://medium.com/wenchin-rolls-around/node-js-101-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92-%E9%9D%9E%E5%90%8C%E6%AD%A5-%E9%9D%9E%E9%98%BB%E5%A1%9E-i-o-%E8%88%87%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88-ef94f8359eee" target="_blank" rel="noopener noreffer">Node.js 101 — 單執行緒、非同步、非阻塞 I/O 與事件迴圈</a></p>
@@ -724,6 +825,9 @@ undefined
 </a></p>
 <p><a href="https://hackmd.io/@TSMI_E7ORNeP8YBbWm-lFA/ryCtaVW_M?print-pdf#%E4%BD%BF%E7%94%A8sequelize%E5%BB%BA%E7%AB%8B%E4%B8%80%E5%BC%B5user-table" target="_blank" rel="noopener noreffer">透過 sequelize 來達成 DB Schema Migration
 </a></p>
+<p><a href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E5%BF%83%E5%BE%97-%E8%AA%8D%E8%AD%98%E5%90%8C%E6%AD%A5%E8%88%87%E9%9D%9E%E5%90%8C%E6%AD%A5-callback-promise-async-await-640ea491ea64" target="_blank" rel="noopener noreffer">認識同步與非同步 — Callback + Promise + Async/Await
+</a>
+<a href="https://ithelp.ithome.com.tw/articles/10206555" target="_blank" rel="noopener noreffer">你懂 JavaScript 嗎？#23 Callback</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/node.js/">Node.js</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>

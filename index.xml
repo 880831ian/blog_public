@@ -28,7 +28,7 @@
     <title>Node.js 介紹</title>
     <link>https://pin-yi.me/node/</link>
     <pubDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node/</guid>
-    <description><![CDATA[什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，]]></description>
+    <description><![CDATA[什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發]]></description>
 </item>
 <item>
     <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
