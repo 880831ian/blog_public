@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go-restful-api-repository-messageboard/" /><meta property="og:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-27T21:27:19+08:00" />
-<meta property="article:modified_time" content="2022-03-30T10:42:50+08:00" />
+<meta property="article:modified_time" content="2022-04-03T23:44:45+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2545 ,
-        "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-03-30T10:42:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2532 ,
+        "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-04-03T23:44:45+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go-restful-api-repository-messageboard/featured-image.webp"
         title="/go-restful-api-repository-messageboard/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2545 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2532 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
@@ -201,26 +201,26 @@ if (!doNotTrack) {
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
-├── config
-│   ├── config.go
+├── sql
+│   ├── sql
 │   └── connect.yaml
 ├── controller
-│   └── Controller.go
+│   └── controller.go
 ├── go.mod
 ├── go.sum
 ├── main.go
 ├── model
-│   └── Model.go
+│   └── model.go
 ├── repository
-│   └── Repository.go
+│   └── repository.go
 └── routes
-    └── Routers.go
+    └── routers.go
 </code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們來說明一下上面的資料夾個別功能與作用</p>
 <ul>
-<li>config：放置設定檔案，並讀取設定檔與連線資料庫。</li>
+<li>sql：放置連線資料庫檔案。</li>
 <li>controller：商用邏輯控制。</li>
 <li>model：定義資料表資料型態。</li>
 <li>repository：處理與資料庫進行交握。</li>
@@ -299,7 +299,7 @@ $ go get -u gopkg.in/yaml.v2
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;message/config&#34;</span>
+	<span class="s">&#34;message/sql&#34;</span>
 	<span class="s">&#34;message/model&#34;</span>
 	<span class="s">&#34;message/routes&#34;</span>
 	<span class="s">&#34;fmt&#34;</span>
@@ -986,8 +986,8 @@ $ go get -u gopkg.in/yaml.v2
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0b223ec44e68c86eb407f2f6371c283b6020b1c8" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0b223ec:&nbsp;# 新增/修改 Go Repository Restful API 的留言板">
-                            <i class="fas fa-hashtag fa-fw"></i>0b223ec</a></span>
+                <span>更新於 2022-04-03&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/2af57d9ca54d8760f9249f5dcf878476516d2d60" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;2af57d9:&nbsp;# 新增/修改 Go、修改 Node 文章封面">
+                            <i class="fas fa-hashtag fa-fw"></i>2af57d9</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/go-restful-api-repository-messageboard/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
