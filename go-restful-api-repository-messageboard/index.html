@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)" />
-<meta property="og:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 版本資訊 macOS" />
+<meta property="og:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/go-restful-api-repository-messageboard/" /><meta property="og:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-27T21:27:19+08:00" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/go-restful-api-repository-messageboard/featured-image.webp"/>
 <meta name="twitter:title" content="用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)"/>
-<meta name="twitter:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 版本資訊 macOS"/>
+<meta name="twitter:description" content="本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/go-restful-api-repository-messageboard/" /><link rel="prev" href="https://pin-yi.me/go/" /><link rel="next" href="https://pin-yi.me/node/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2532 ,
+                        }],"genre": "posts","keywords": "Go, RESTful API, Mysql, Repository, 實作, 介紹","wordcount":  2623 ,
         "url": "https:\/\/pin-yi.me\/go-restful-api-repository-messageboard\/","datePublished": "2022-03-27T21:27:19+08:00","dateModified": "2022-04-03T23:44:45+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go-restful-api-repository-messageboard/featured-image.webp"
         title="/go-restful-api-repository-messageboard/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2532 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-27">2022-03-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2623 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
@@ -147,11 +147,11 @@ if (!doNotTrack) {
         <li><a href="#檔案結構">檔案結構</a></li>
         <li><a href="#gomod">go.mod</a></li>
         <li><a href="#maingo">main.go</a></li>
-        <li><a href="#config">config</a></li>
-        <li><a href="#routersgo">Routers.go</a></li>
-        <li><a href="#modelgo">Model.go</a></li>
-        <li><a href="#controllergo">Controller.go</a></li>
-        <li><a href="#repositorygo">Repository.go</a></li>
+        <li><a href="#sql">sql</a></li>
+        <li><a href="#routergo">router.go</a></li>
+        <li><a href="#modelgo">model.go</a></li>
+        <li><a href="#controllergo">controller.go</a></li>
+        <li><a href="#repositorygo">repository.go</a></li>
       </ul>
     </li>
     <li><a href="#postman-測試">Postman 測試</a>
@@ -172,6 +172,8 @@ if (!doNotTrack) {
 </nav></div>
                 </div><div class="content" id="content"><p>本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。</p>
 <p>建議可以先觀看 <a href="https://pin-yi.me/go/" target="_blank" rel="noopener noreffer">Go 介紹</a> 文章來簡單學習 Go 語言。</p>
+<p><a href="https://github.com/880831ian/go-restful-api-repository-messageboard" target="_blank" rel="noopener noreffer">範例程式連結 點我 😘
+</a></p>
 <p>版本資訊</p>
 <ul>
 <li>macOS：11.6</li>
@@ -201,9 +203,6 @@ if (!doNotTrack) {
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
-├── sql
-│   ├── sql
-│   └── connect.yaml
 ├── controller
 │   └── controller.go
 ├── go.mod
@@ -213,8 +212,11 @@ if (!doNotTrack) {
 │   └── model.go
 ├── repository
 │   └── repository.go
-└── routes
-    └── routers.go
+├── router
+│   └── router.go
+└── sql
+    ├── connect.yaml
+    └── sql.go
 </code></pre></td></tr></table>
 </div>
 </div><br>
@@ -224,7 +226,7 @@ if (!doNotTrack) {
 <li>controller：商用邏輯控制。</li>
 <li>model：定義資料表資料型態。</li>
 <li>repository：處理與資料庫進行交握。</li>
-<li>routes：設定網站網址路由。</li>
+<li>router：設定網站網址路由。</li>
 </ul>
 <h3 id="gomod">go.mod</h3>
 <p>一開始我們創好資料夾後，要先來設定 go.mod 的 module</p>
@@ -294,35 +296,43 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;message/sql&#34;</span>
-	<span class="s">&#34;message/model&#34;</span>
-	<span class="s">&#34;message/routes&#34;</span>
 	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;message/model&#34;</span>
+	<span class="s">&#34;message/router&#34;</span>
+	<span class="s">&#34;message/sql&#34;</span>
 <span class="p">)</span>
 
 <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 	<span class="c1">//連線資料庫
-</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nf">InitMySql</span><span class="p">()</span> <span class="p">;</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">sql</span><span class="p">.</span><span class="nf">InitMySql</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 	<span class="p">}</span>
+	
 	<span class="c1">//連結模型
-</span><span class="c1"></span>	<span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">{})</span>
+</span><span class="c1"></span>	<span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">{})</span>
+	<span class="c1">//sql.Connect.Table(&#34;message&#34;) //也可以使用連線已有資料表方式
+</span><span class="c1"></span>	
 	<span class="c1">//註冊路由
-</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">routes</span><span class="p">.</span><span class="nf">SetRouter</span><span class="p">()</span>
+</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">router</span><span class="p">.</span><span class="nf">SetRouter</span><span class="p">()</span>
+	
 	<span class="c1">//啟動埠為8081的專案
 </span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;開啟127.0.0.0.1:8081...&#34;</span><span class="p">)</span>
 	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;127.0.0.1:8081&#34;</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>引入我們 Repository 架構，將 config、model、routes 導入，先測試是否可以連線資料庫，使用 <code>AutoMigrate</code> 來新增資料表(如果沒有才新增)，註冊網址路由，最後啟動專案，我們將 Port 設定成 8081。</p>
+</div><p>引入我們 Repository 架構，將 config、model、router 導入，先測試是否可以連線資料庫，使用 <code>AutoMigrate</code> 來新增資料表(如果沒有才新增)，或是使用 Table 來連線已有資料表，註冊網址路由，最後啟動專案，我們將 Port 設定成 8081。</p>
 <br>
-<h3 id="config">config</h3>
+<h3 id="sql">sql</h3>
 <p>我們剛剛有引入 <code>yaml</code> 套件，因為我們設定檔案會使用 yaml 來編輯</p>
 <ul>
 <li>connect.yaml</li>
@@ -346,7 +356,7 @@ $ go get -u gopkg.in/yaml.v2
 </div><p>我們把 mysql 連線的資訊寫在此處。</p>
 <br>
 <ul>
-<li>config.go (下面為一個檔案，但長度有點長，分開說明)</li>
+<li>sql.go (下面為一個檔案，但長度有點長，分開說明)</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -361,7 +371,7 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">config</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">sql</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;io/ioutil&#34;</span>
@@ -400,9 +410,11 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">Sql</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">Connect</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
 
 <span class="kd">type</span> <span class="nx">conf</span> <span class="kd">struct</span> <span class="p">{</span>
 	<span class="nx">Host</span>     <span class="kt">string</span> <span class="s">`yaml:&#34;host&#34;`</span>
@@ -414,11 +426,13 @@ $ go get -u gopkg.in/yaml.v2
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">conf</span><span class="p">)</span> <span class="nf">getConf</span><span class="p">()</span> <span class="o">*</span><span class="nx">conf</span> <span class="p">{</span>
 	<span class="c1">//讀取config/connect.yaml檔案
-</span><span class="c1"></span>	<span class="nx">yamlFile</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;config/connect.yaml&#34;</span><span class="p">)</span>
+</span><span class="c1"></span>	<span class="nx">yamlFile</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;sql/connect.yaml&#34;</span><span class="p">)</span>
+	
 	<span class="c1">//若出現錯誤，列印錯誤訊息
 </span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
 	<span class="p">}</span>
+	
 	<span class="c1">//將讀取的字串轉換成結構體conf
 </span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">yaml</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">yamlFile</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
@@ -428,7 +442,7 @@ $ go get -u gopkg.in/yaml.v2
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>設定資料庫連線的 conf ，設定連線的 config 讀取 yaml 檔案。</p>
+</div><p>設定資料庫連線的 conf 來讀取 yaml 檔案。</p>
 <br>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -449,13 +463,18 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//初始化連線資料庫
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">InitMySql</span><span class="p">()</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">c</span> <span class="nx">conf</span>
+	
 	<span class="c1">//獲取yaml配置引數
 </span><span class="c1"></span>	<span class="nx">conf</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">getConf</span><span class="p">()</span>
+	
 	<span class="c1">//將yaml配置引數拼接成連線資料庫的url
 </span><span class="c1"></span>	<span class="nx">dsn</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&#34;</span><span class="p">,</span>
 		<span class="nx">conf</span><span class="p">.</span><span class="nx">UserName</span><span class="p">,</span>
@@ -464,15 +483,16 @@ $ go get -u gopkg.in/yaml.v2
 		<span class="nx">conf</span><span class="p">.</span><span class="nx">Port</span><span class="p">,</span>
 		<span class="nx">conf</span><span class="p">.</span><span class="nx">DbName</span><span class="p">,</span>
 	<span class="p">)</span>
+	
 	<span class="c1">//連線資料庫
-</span><span class="c1"></span>	<span class="nx">Sql</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">DSN</span><span class="p">:</span> <span class="nx">dsn</span><span class="p">}),</span> <span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{})</span>
+</span><span class="c1"></span>	<span class="nx">Connect</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">DSN</span><span class="p">:</span> <span class="nx">dsn</span><span class="p">}),</span> <span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{})</span>
 	<span class="k">return</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>初始化資料庫，會把剛剛讀取 yaml 的 conf  串接成可以連接資料庫的 url ，最後連線資料庫。</p>
 <br>
-<h3 id="routersgo">Routers.go</h3>
+<h3 id="routergo">router.go</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -504,7 +524,7 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">routes</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">router</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;message/controller&#34;</span>
@@ -535,7 +555,7 @@ $ go get -u gopkg.in/yaml.v2
 </div>
 </div><p>設定路由，版本 v1 網址是 <code>api/v1</code> ，分別是新增留言、查詢全部留言、查詢 {id} 留言、修改 {id} 留言、刪除 {id} 留言，連接到不同的 <code>controller</code> function 。</p>
 <br>
-<h3 id="modelgo">Model.go</h3>
+<h3 id="modelgo">model.go</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -576,26 +596,30 @@ $ go get -u gopkg.in/yaml.v2
 </div>
 </div><p>設定資料表的結構，使用 gorm.Model 預設裡面會包含 CreatedAt 和 UpdatedAt 和 DeletedAt 欄位。</p>
 <br>
-<h3 id="controllergo">Controller.go</h3>
+<h3 id="controllergo">controller.go</h3>
 <p><strong>(下面為一個檔案，但長度有點長，分開說明)</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">controller</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;net/http&#34;</span>
 	<span class="s">&#34;message/model&#34;</span>
 	<span class="s">&#34;message/repository&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;unicode/utf8&#34;</span>
+
 	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
 <span class="p">)</span>
 </code></pre></td></tr></table>
@@ -627,10 +651,10 @@ $ go get -u gopkg.in/yaml.v2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">GetAll</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">message</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetAllMessage</span><span class="p">()</span>
+	<span class="nx">message</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetAllMessage</span><span class="p">()</span>
 
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
 	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
@@ -640,14 +664,14 @@ $ go get -u gopkg.in/yaml.v2
 	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
 
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
 	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><code>GetAll()</code> 會使用到 repository.GetAllMessage()` 查詢並回傳顯示查詢的資料。</p>
+</div><p><code>GetAll()</code> 會使用到 <code>repository.GetAllMessage()</code> 查詢並回傳顯示查詢的資料。</p>
 <p><code>c.Param(&quot;id&quot;)</code> 是網址讀入後的 id，網址是<code>http://127.0.0.1:8081/api/v1/message/{id}</code> ，將輸入的 id 透過 <code>repository.GetMessage()</code> 查詢並回傳顯示查詢的資料。</p>
 <br>
 <p><strong>新增留言功能</strong></p>
@@ -663,21 +687,25 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Create</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nf">Bind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
-	
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">CreateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;錯誤請求&#34;</span><span class="p">})</span>
+
+	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="nx">utf8</span><span class="p">.</span><span class="nf">RuneCountInString</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
+
+	<span class="nx">c</span><span class="p">.</span><span class="nf">Bind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
+	<span class="nx">repository</span><span class="p">.</span><span class="nf">CreateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
 	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusCreated</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>使用 Gin 框架中的 <code>Bind 函數</code>，可以將 url 的查詢參數 query parameter，http 的 Header、body 中提交的數據給取出，透過 <code>repository.CreateMessage()</code> 將要新增的資料帶入，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusCreated</code> 以及新增的資料。</p>
+</div><p>使用 Gin 框架中的 <code>Bind 函數</code>，可以將 url 的查詢參數 query parameter，http 的 Header、body 中提交的數據給取出，透過 <code>repository.CreateMessage()</code> 將要新增的資料帶入，如果失敗就顯示 <code>http.StatusBadRequest</code>，如果成功就顯示 <code>http.StatusCreated</code> 以及新增的資料。</p>
 <br>
 <p><strong>修改留言功能</strong></p>
 <div class="highlight"><div class="chroma">
@@ -695,24 +723,26 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
-	
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
+
+	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="nx">utf8</span><span class="p">.</span><span class="nf">RuneCountInString</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">UpdateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">),</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span><span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;錯誤請求&#34;</span><span class="p">})</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">UpdateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;Content&#34;</span><span class="p">),</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
 	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>先使用 <code>repository.GetMessage()</code> 以及 <code>c.Param(&quot;id&quot;)</code> 來查詢此 id 是否存在，再帶入要修改的 <code>Content</code> ，透過 <code>repository.UpdateMessage()</code> 將資料修改，，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusOK</code> 以及修改的資料。</p>
+</div><p>先使用 <code>repository.GetMessage()</code> 以及 <code>c.Param(&quot;id&quot;)</code> 來查詢此 id 是否存在，再帶入要修改的 <code>Content</code> ，透過 <code>repository.UpdateMessage()</code> 將資料修改，，如果失敗就顯示 <code>http.StatusNotFound</code> 以及找不到留言，如果成功就顯示 <code>http.StatusOK</code> 以及修改的資料。</p>
 <br>
 <p><strong>刪除留言功能</strong></p>
 <div class="highlight"><div class="chroma">
@@ -731,18 +761,19 @@ $ go get -u gopkg.in/yaml.v2
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Delete</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">message</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Message</span>
 
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">DeleteMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
-		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">DeleteMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;找不到留言&#34;</span><span class="p">})</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNoContent</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;刪除留言成功&#34;</span><span class="p">})</span>	
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNoContent</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;刪除留言成功&#34;</span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>透過 <code>repository.DeleteMessage()</code> 將資料刪除，如果失敗就顯示 <code>http.StatusBadRequest</code> 以及 錯誤請求，如果成功就顯示 <code>http.StatusNoContent</code>。</p>
+</div><p>透過 <code>repository.DeleteMessage()</code> 將資料刪除，如果失敗就顯示 <code>http.StatusNotFound </code> 以及找不到留言，如果成功就顯示 <code>http.StatusNoContent</code>。</p>
 <br>
-<h3 id="repositorygo">Repository.go</h3>
+<h3 id="repositorygo">repository.go</h3>
 <p><strong>(下面為一個檔案，但長度有點長，分開說明)</strong></p>
+<p>所有的邏輯判斷都要在 controller 處理，所以 repository.go 就單純對資料庫就 CRUD：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -756,8 +787,8 @@ $ go get -u gopkg.in/yaml.v2
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">repository</span>
 
 <span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;message/config&#34;</span>
 	<span class="s">&#34;message/model&#34;</span>
+	<span class="s">&#34;message/sql&#34;</span>
 <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -777,26 +808,18 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//查詢全部留言
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetAllMessage</span><span class="p">()</span> <span class="p">(</span><span class="nx">message</span> <span class="p">[]</span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span><span class="nx">err</span>
-	<span class="p">}</span>
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetAllMessage</span><span class="p">()</span> <span class="p">(</span><span class="nx">message</span> <span class="p">[]</span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span>
 	<span class="k">return</span>
 <span class="p">}</span>
 
 <span class="c1">//查詢 {id} 留言
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">nil</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span>
+	<span class="k">return</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -809,16 +832,12 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//新增留言
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">CreateMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">nil</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span>
+	<span class="k">return</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -831,16 +850,12 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//更新 {id} 留言
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">UpdateMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">Update</span><span class="p">(</span><span class="s">&#34;content&#34;</span> <span class="p">,</span><span class="nx">content</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">nil</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nf">Update</span><span class="p">(</span><span class="s">&#34;content&#34;</span><span class="p">,</span> <span class="nx">content</span><span class="p">).</span><span class="nx">Error</span>
+	<span class="k">return</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -853,16 +868,12 @@ $ go get -u gopkg.in/yaml.v2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//刪除 {id} 留言
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">DeleteMessage</span><span class="p">(</span><span class="nx">message</span> <span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">Message</span><span class="p">,</span> <span class="nx">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Sql</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">Delete</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">nil</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">Connect</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id=?&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">).</span><span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nf">Delete</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">).</span><span class="nx">Error</span>
+	<span class="k">return</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
