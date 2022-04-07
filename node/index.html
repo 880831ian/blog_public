@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/node/" /><meta property="og:image" content="https://pin-yi.me/node/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-30T10:45:29+08:00" />
-<meta property="article:modified_time" content="2022-04-06T19:11:59+08:00" />
+<meta property="article:modified_time" content="2022-04-07T14:37:18+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/node/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/node\/featured-image.webp",
                             "width":  1920 ,
                             "height":  450 
-                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  9359 ,
-        "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-04-06T19:11:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Node.js, 實作, 介紹","wordcount":  9372 ,
+        "url": "https:\/\/pin-yi.me\/node\/","datePublished": "2022-03-30T10:45:29+08:00","dateModified": "2022-04-07T14:37:18+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/node/featured-image.webp"
         title="/node/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Node.js 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9359 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-30">2022-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9372 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 19 分鐘</span>&nbsp;</div>
             </div>
             
@@ -149,23 +149,23 @@ if (!doNotTrack) {
           <ul>
             <li><a href="#callback">Callback</a>
               <ul>
-                <li><a href="#什麼是-callback">什麼是 callback</a></li>
+                <li><a href="#什麼是-callback">什麼是 Callback</a></li>
                 <li><a href="#回呼地獄-callback-hell">回呼地獄 (Callback Hell)</a></li>
-                <li><a href="#分別回呼-split-callback">分別回呼 (split Callback)</a></li>
+                <li><a href="#分別回呼-split-callback">分別回呼 (Split Callback)</a></li>
                 <li><a href="#錯誤優先處理-error-first-style">錯誤優先處理 (Error-First Style)</a></li>
               </ul>
             </li>
             <li><a href="#promise">Promise</a>
               <ul>
                 <li><a href="#then-方法">.then() 方法</a></li>
-                <li><a href="#catch-方法">catch() 方法</a></li>
+                <li><a href="#catch-方法">.catch() 方法</a></li>
                 <li><a href="#串接-then-方法">串接 then() 方法</a></li>
                 <li><a href="#promiseall-方法">Promise.all([&hellip;.]) 方法</a></li>
               </ul>
             </li>
-            <li><a href="#aysncawait">Aysnc/Await</a>
+            <li><a href="#asyncawait">Async/Await</a>
               <ul>
-                <li><a href="#aysncawait-範例">Aysnc/Await 範例</a></li>
+                <li><a href="#asyncawait-範例">Async/Await 範例</a></li>
                 <li><a href="#await-搭配-promiseall-方法">await 搭配 Promise.all([&hellip;]) 方法</a></li>
               </ul>
             </li>
@@ -194,7 +194,7 @@ if (!doNotTrack) {
                 </div><div class="content" id="content"><h2 id="什麼是-nodejs-">什麼是 Node.js ?</h2>
 <p>Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。</p>
 <p>Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發網站開發人員使用已懂的 JavaScript 語言就可以自行設定網站伺服器。</p>
-<p>Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv，可以用指令去執行 JavaScript，使用非阻塞輸入輸出、非同步、事件驅動等技術來提高效能，可最佳化應用程式的傳輸量和規模。這些技術通常用於資料密集的即時應用程式。</p>
+<p>Node.js 採用 Google 開發的 Chrome V8 JavaScript 引擎和 libuv 函式庫，可以用指令去執行 JavaScript，使用非阻塞輸入輸出、非同步、事件驅動等技術來提高效能，可最佳化應用程式的傳輸量和規模。這些技術通常用於資料密集的即時應用程式。</p>
 <br>
 <figure><a class="lightgallery" href="/images/node/main-nodejs.png" title="/images/node/main-nodejs.png" data-thumbnail="/images/node/main-nodejs.png" data-sub-html="<h2>主要的 Node.js 組件 (An Intro to Node.js That You May Have Missed)</h2>">
         <img
@@ -265,10 +265,10 @@ if (!doNotTrack) {
 </ul>
 <p>可以想像一下你去咖啡廳買拿鐵跟黑咖啡，可能會發生的情況是：</p>
 <ol>
-<li>你點了拿貼跟黑咖啡</li>
+<li>你點了拿鐵跟黑咖啡</li>
 <li>店員在收銀機上輸入點餐內容</li>
 <li>店員請同事 A 準備拿鐵、請同事 B 準備黑咖啡，並告知做完後，要提醒店員</li>
-<li>黑咖啡製作的比較快，B 同事會先完成，而剛好店員剛幫你結帳完沒事，所以把黑咖啡拿給你</li>
+<li>黑咖啡製作會比較快，B 同事會先完成，而剛好店員剛幫你結帳完沒事，所以把黑咖啡拿給你</li>
 <li>拿鐵製作包含較多步驟，花費時間較久，等 A 同事完成後，店員剛好沒事，所以把拿鐵拿給你</li>
 </ol>
 <br>
@@ -292,15 +292,15 @@ if (!doNotTrack) {
 <p>從咖啡店的例子中可以發現：</p>
 <ol>
 <li>櫃檯店員手上一次能做的事情只有一件 (Single thread 單執行緒)，只是在非同步的例子中，將製作咖啡的事情委派給其他同事處理，讓自己可以繼續幫你結帳，來提高效率 — JavaScript 是 Single thread，一次只能做一件事情。</li>
-<li>在非同步的例子中，櫃檯店員將製作咖啡的事情委派出去，其實店員也不知道哪一個任務會先被完成，但店員還是可以繼續完成結帳的任務，不會因為同事 A、B 還在製作咖啡，就不能接下去動作 (non-blocking) — JavaScript 一次只能做一件事，但藉由 Node 提供的 API 協助，在背後處理這些事件 (同事在背後製作咖啡)，得以等待製作同時，不會被阻塞 (blocking) 到下一件事情的執行。</li>
+<li>在非同步的例子中，櫃檯店員將製作咖啡的事情委派出去，其實店員也不知道哪一個任務會先被完成，但店員還是可以繼續完成結帳的任務，不會因為同事 A、B 還在製作咖啡，就不能接下去動作 (non-blocking) — JavaScript 一次只能做一件事，但藉由 Node 提供的 API 協助，在背後處理這些事件 (同事在背後製作咖啡)，可以等待製作同時，不會被阻塞 (blocking) 到下一件事情的執行。</li>
 <li>非同步的例子中，店員委派事情的流程很簡單：就是請同事完成製作咖啡 (event) + 在收到同事通知完成後接手咖啡，並轉交給你 (callback function) — 若是採用非同步處理，會有 callback function 來指定事件完成後要接續做什麼：它不會立即被執行，而是等待委託的事情被完成後才處發。</li>
 <li>當同事 A、B 分別通知完成後，就會依序把咖啡放在店員的旁邊排成一排 (event queue)。想向店員有一個小助手 (event loop) ，他的工作內容是確認店員結帳完了沒有：如果結帳完了，就會把隊伍中第一杯咖啡叫給店員，讓店員交給你 (觸發 callback function) ; 如果店員還在結帳，就會讓隊伍中的咖啡擺在旁邊繼續等待。</li>
 </ol>
 <br>
-<p>JaveScript 實現非同步的方法不斷演進著：從 callback、promises 到最新的 asymc-await 函式。</p>
+<p>JaveScript 實現非同步的方法不斷演進著：從 callback、promises 到最新的 async-await 函式。</p>
 <br>
 <h4 id="callback">Callback</h4>
-<h5 id="什麼是-callback">什麼是 callback</h5>
+<h5 id="什麼是-callback">什麼是 Callback</h5>
 <p>假設有 A、B、C 三件工作，其中 B 必須等待 C 做完才能執行。大部份的人幾乎都是做 A，再做 C，等待 C 做完以後最後做 B。但對於可多工的人來說，卻可能是同時做 A 與 C（多工），等待 C 完成後做 B。</p>
 <p>Callback function 是一個被作為參數帶入另一個函式中的「函式」，這個被作為參數帶入的函式將在「未來某個時間點」被呼叫和執行 — 這是處理非同步事件的一種方式。</p>
 <p>再次舉 A、B、C 三件工作的例子，其中 B 必須等待 C 做完才能執行，於是我們將 B 放到 C 的 callback 中，讓宿主環境在收到 C 完成的回應時後 B 放到佇列中準備執行。</p>
@@ -355,11 +355,11 @@ if (!doNotTrack) {
 </div>
 </div><p>callbackFunctionName 做為參數被帶入 addEventListener() 中，callbackFunctionName 不會立即被執行，而是未來按鈕被點擊時才會執行。</p>
 <br>
-<p>callback 主要有一個缺點：<code>回呼地獄</code></p>
+<p>Callback 主要有一個缺點：<code>回呼地獄</code></p>
 <br>
 <h5 id="回呼地獄-callback-hell">回呼地獄 (Callback Hell)</h5>
-<p>回呼地獄 (Callback Hell) 又稱為「毀滅金字塔」，指的是層次太深的巢狀 callback，讓程式變的更複雜且難以預測或是追蹤。</p>
-<p>向遠端伺服器發出請求並獲得資訊後，執行 callback，再發出請求，獲得資訊後執行 callback，再發出請求，獲得資訊後執行 callback，就會不小心一層包一層，變成所謂的 callback hell。</p>
+<p>回呼地獄 (Callback Hell) 又稱為「毀滅金字塔」，指的是層次太深的巢狀 Callback，讓程式變的更複雜且難以預測或是追蹤。</p>
+<p>向遠端伺服器發出請求並獲得資訊後，執行 Callback，再發出請求，獲得資訊後執行 Callback，再發出請求，獲得資訊後執行 Callback，就會不小心一層包一層，變成所謂的 Callback Hell。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -396,8 +396,8 @@ if (!doNotTrack) {
 <br>
 <p>那在同步執行情況下，可以使用 <code>try...catch</code> 來捕捉錯誤訊息，但如果是在非同步情況下，要怎麼處理錯誤或是例外訊息呢！？ 主要有兩種方式：</p>
 <br>
-<h5 id="分別回呼-split-callback">分別回呼 (split Callback)</h5>
-<p>分別的回呼要設定兩個 callback，一個用於成功通知，另一個則用於錯誤通知。如下，第一個參數是用於成功的 callback，第二個參數是用於失敗的 callback：</p>
+<h5 id="分別回呼-split-callback">分別回呼 (Split Callback)</h5>
+<p>分別的回呼要設定兩個 Callback，一個用於成功通知，另一個則用於錯誤通知。如下，第一個參數是用於成功的 Callback，第二個參數是用於失敗的 Callback：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -423,7 +423,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<p>那如果在 callback 中發生錯誤，要怎麼辦呢!?</p>
+<p>那如果在 Callback 中發生錯誤，要怎麼辦呢!?</p>
 <br>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -453,7 +453,7 @@ if (!doNotTrack) {
 <span class="c1">// Uncaught (in promise) ReferenceError: x is not defined
 </span></code></pre></td></tr></table>
 </div>
-</div><p>會直接報錯，並不會進入到 failure 這個 callback 裡面，也就是說，如果是在 callback 內發生錯誤，是不會被捕捉到的。</p>
+</div><p>會直接報錯，並不會進入到 failure 這個 Callback 裡面，也就是說，如果是在 Callback 內發生錯誤，是不會被捕捉到的。</p>
 <br>
 <h5 id="錯誤優先處理-error-first-style">錯誤優先處理 (Error-First Style)</h5>
 <p>Node.js 的 API 常見這樣的設計方式，第一個參數是 error ，第二個參數是回應的資料 (data)。檢查 error 是否有值或是 true，否則就接續處理 data。</p>
@@ -481,7 +481,7 @@ if (!doNotTrack) {
 <span class="nx">ajax</span><span class="p">(</span><span class="s1">&#39;http://sample.url&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>接下來我們來看 promise，可以解決難以預測的 callback hell 問題。</p>
+</div><p>接下來我們來看 Promise，可以解決 callback 可讀性低的 Callback Hell 問題。</p>
 <br>
 <h4 id="promise">Promise</h4>
 <p>Promise：Callback 以外的另一種方式來處理非同步事件，且可讀性與可維護性比 Callback 好很多。
@@ -513,16 +513,16 @@ Promise 是一個物件，代表著一個尚未完成，但最終會完成的一
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">getData</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// 非同步的作業...code...
-</span><span class="c1"></span>  
-  <span class="c1">// 作業完成，並回傳錯誤訊息時
-</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="s1">&#39;錯誤訊息&#39;</span><span class="p">)}</span> 
-  
-  <span class="c1">// 作業成功完成
-</span><span class="c1"></span>  <span class="nx">resolve</span><span class="p">({</span>
-    <span class="nx">data1</span><span class="o">:</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span>
-    <span class="nx">data2</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span>
-  <span class="p">})</span>
+    <span class="c1">// 製作咖啡.....
+</span><span class="c1"></span>    
+    <span class="c1">// 作業完成，並回傳錯誤訊息時
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="s1">&#39;牛奶或是咖啡豆沒了&#39;</span><span class="p">)</span>
+    <span class="p">}</span> 
+    <span class="c1">// 作業成功完成
+</span><span class="c1"></span>    <span class="nx">resolve</span><span class="p">({</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="s1">&#39;咖啡交到你手上&#39;</span><span class="p">,</span>
+    <span class="p">})</span>
 <span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
@@ -548,7 +548,7 @@ Promise 是一個物件，代表著一個尚未完成，但最終會完成的一
 </div>
 </div><p>以剛剛咖啡店的例子來看， <code>then()</code> 方法就像你會去聽咖啡人員是否叫號，並確認咖啡是否成功準備好了，就領取咖啡來喝。</p>
 <br>
-<h5 id="catch-方法">catch() 方法</h5>
+<h5 id="catch-方法">.catch() 方法</h5>
 <p>當從 <code>reject()</code> 獲得錯誤訊息時 - 狀態由 Pending 轉為 Rejected - <code>catch()</code> 方法就會被調用來處理錯誤。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -678,10 +678,10 @@ Promise 是一個物件，代表著一個尚未完成，但最終會完成的一
 </div>
 </div><p>我們模擬一下我們要分別向三個資料庫請求資料 (我們以 <code>setTimeout()</code> 示意非同步處理事件)，可以看到我們要先等第一個資料庫成功回傳資料後，才展開第二次請求，等到成功收到回傳後才開始第三次請求。而使用 <code>Promise.all()</code> 方法，我們能先依序向資料庫發出請求，並在成功獲得全部回傳資料後，才會做後續的動作。</p>
 <br>
-<h4 id="aysncawait">Aysnc/Await</h4>
+<h4 id="asyncawait">Async/Await</h4>
 <p>那我們剛剛透過 Promise 包裝和使用，的確避免了 callback hell 讓整個流程變得很清楚，提升了程式碼的易讀性與可維護性。</p>
-<p>Aysnc/Await 是所謂的語法糖衣，是一種新的語法撰寫方式，來處理「非同步事件」，讓非同步的程式碼讀起來更像在寫「同步程式碼」。</p>
-<p>Aysnc/Await 是用來簡單化和清楚化 Promise 串連 then 這種相對複雜的結構，他回傳的一樣也是 Promise 物件，只是針對 promise-based 寫法進行包裝。</p>
+<p>Async/Await 是所謂的語法糖衣，是一種新的語法撰寫方式，來處理「非同步事件」，讓非同步的程式碼讀起來更像在寫「同步程式碼」。</p>
+<p>Async/Await 是用來簡單化和清楚化 Promise 串連 then 這種相對複雜的結構，他回傳的一樣也是 Promise 物件，只是針對 promise-based 寫法進行包裝。</p>
 <br>
 <p>Async 關鍵字</p>
 <p><code>async</code> 關鍵字可以放在任意函式前面，它代表「我們正宣告一個非同步的函式，且這個函式會回傳一個 Promise 物件」：</p>
@@ -716,7 +716,7 @@ Promise 是一個物件，代表著一個尚未完成，但最終會完成的一
 <li>優點：可以直接使用 await 後獲得的回傳值存於一個變數中做後續使用，而不是在呼叫 <code>then()</code> 方法一個一個串，讓程式碼看起來像是在處裡一般的同步程式碼，提升了易讀性與可維護性。</li>
 </ul>
 <br>
-<h5 id="aysncawait-範例">Aysnc/Await 範例</h5>
+<h5 id="asyncawait-範例">Async/Await 範例</h5>
 <p>我們在後續的範例，一樣使用 <code>setTimeout()</code> 來模擬資料庫請求和等待資料的非同步：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1497,8 +1497,8 @@ Example app listening on port <span class="m">3000</span>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/d73f8c1fb16895632cebdc53ed17a572f726d8e3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;d73f8c1:&nbsp;# 新增/修改 Node">
-                            <i class="fas fa-hashtag fa-fw"></i>d73f8c1</a></span>
+                <span>更新於 2022-04-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/96a5958a59c9f5ac150486c460d0d6d3e351292b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;96a5958:&nbsp;# 新增/修改 Node">
+                            <i class="fas fa-hashtag fa-fw"></i>96a5958</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/node/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
