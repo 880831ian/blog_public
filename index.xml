@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>用 Node.js寫一個 Repository Restful API 的留言板 (express、sequelize 套件)</title>
+    <link>https://pin-yi.me/node-restful-api-repository-messageboard/</link>
+    <pubDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node-restful-api-repository-messageboard/</guid>
+    <description><![CDATA[本文章是使用 Node.js 來寫一個 Repository Restful API 的留言板，並且會使用 express 以及 sequelize (使用 Mysql)套件。 建議可以先觀看 Node.js 介紹 文章來簡單學習 Node 語言。 範例程式連結 點我 😘]]></description>
 </item>
 <item>
     <title>Node.js 介紹</title>
@@ -59,12 +65,6 @@
     <link>https://pin-yi.me/redis/</link>
     <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/redis/</guid>
     <description><![CDATA[什麼是 Redis ? Redis 全名是 Remote Dictionary Server ，是快速的開源記憶體鍵值資料庫 (keys-value database)。 由於 Redis 的回應時間極短，低於一毫秒，可以讓遊戲、金融服務、醫療保健]]></description>
-</item>
-<item>
-    <title>面試官常問的 MySQL 資料型態差別 char varchar text</title>
-    <link>https://pin-yi.me/char-varchar/</link>
-    <pubDate>Fri, 04 Mar 2022 17:44:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/char-varchar/</guid>
-    <description><![CDATA[每當我們在建立資料表時，都必須先決定我們要用的資料型態，然而在輸入文字存入資料時，你都用哪一種資料型態呢？ 文字資料型態 主要有這三點，那我會分]]></description>
 </item>
 </channel>
 </rss>
