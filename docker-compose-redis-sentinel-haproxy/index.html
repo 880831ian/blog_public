@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)" />
+<meta property="og:description" content="前情提要：本篇是 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程式碼，並加上 HAProxy 來做負載平衡！ 什麼是 HAProxy 以及負載均衡 ? HAProxy 是一個使用 C 語言編寫" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" /><meta property="og:image" content="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-22T14:00:00+08:00" />
+<meta property="article:modified_time" content="2022-04-22T14:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/featured-image.webp"/>
+<meta name="twitter:title" content="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)"/>
+<meta name="twitter:description" content="前情提要：本篇是 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程式碼，並加上 HAProxy 來做負載平衡！ 什麼是 HAProxy 以及負載均衡 ? HAProxy 是一個使用 C 語言編寫"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" /><link rel="prev" href="https://pin-yi.me/docker-compose-redis-sentinel/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/docker-compose-redis-sentinel-haproxy\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/docker-compose-redis-sentinel-haproxy\/featured-image.webp",
+                            "width":  1560 ,
+                            "height":  370 
+                        }],"genre": "posts","keywords": "HAProxy, Redis, Docker, Sentinel, 負載平衡, 哨兵模式, 實作","wordcount":  3678 ,
+        "url": "https:\/\/pin-yi.me\/docker-compose-redis-sentinel-haproxy\/","datePublished": "2022-04-22T14:00:00+08:00","dateModified": "2022-04-22T14:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/docker-compose-redis-sentinel-haproxy/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/docker-compose-redis-sentinel-haproxy/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/docker-compose-redis-sentinel-haproxy/featured-image.webp"
+        data-srcset="/docker-compose-redis-sentinel-haproxy/featured-image.webp, /docker-compose-redis-sentinel-haproxy/featured-image.webp 1.5x, /docker-compose-redis-sentinel-haproxy/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/docker-compose-redis-sentinel-haproxy/featured-image.webp"
+        title="/docker-compose-redis-sentinel-haproxy/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-22">2022-04-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3678 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什麼是-haproxy-以及負載均衡-">什麼是 HAProxy 以及負載均衡 ?</a></li>
+    <li><a href="#實作">實作</a>
+      <ul>
+        <li><a href="#檔案結構">檔案結構</a></li>
+        <li><a href="#docker-composeyaml">Docker-compose.yaml</a></li>
+        <li><a href="#docker-volumehaproxyhaproxycfg">docker-volume/haproxy/haproxy.cfg</a></li>
+        <li><a href="#docker-volumenginxnginxconf">docker-volume/nginx/nginx.conf</a></li>
+        <li><a href="#docker-volumephprwphp">docker-volume/php/rw.php</a></li>
+        <li><a href="#docker-volumephprphp">docker-volume/php/r.php</a></li>
+        <li><a href="#phpdockerfile">php/Dockerfile</a></li>
+        <li><a href="#redissh">redis.sh</a></li>
+        <li><a href="#sentineldocker-composeyaml">sentinel/Docker-compose.yaml</a></li>
+        <li><a href="#sentinelsentineconf">sentinel/sentine.conf</a></li>
+      </ul>
+    </li>
+    <li><a href="#測試">測試</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>前情提要：本篇是 <a href="https://pin-yi.me/docker-compose-redis-sentinel/" target="_blank" rel="noopener noreffer">Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作</a> 的後續文章，主要會優化原本的程式碼，並加上 HAProxy 來做負載平衡！</p>
+<h2 id="什麼是-haproxy-以及負載均衡-">什麼是 HAProxy 以及負載均衡 ?</h2>
+<p>HAProxy 是一個使用 C 語言編寫的自由及開放原始碼軟體，其提供高可用性、負載均衡，以及基於 TCP 和 HTTP 的應用程式代理。</p>
+<p>負載平衡 (Load Balance)：</p>
+<p>現在很多網路服務都需要服務大量使用者，以前可以砸錢擴充機器硬體設施，但隨著網路服務的用量暴增，增加伺服器硬體設備已經無法解決問題。</p>
+<p>為了可以擴充服務，負載平衡成為主流的技術，這幾年雖然雲端與分散式儲存運算技術火紅，除非有特別的使用需求，不然在技術上負載均衡算是比較容易達成與掌握的技術。</p>
+<p>負載平衡除了分流能力之外，有另一個很大的好處就是可以提供 High Availability，也就是傳說中的 HA 架構，好讓你一台機器掛了其他伺服器可以繼續服務，降低斷線率。</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/haproxy.png" title="/images/docker-compose-redis-sentinel-haproxy/haproxy.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/haproxy.png" data-sub-html="<h2>HAProxy 與 Reids Sentinel 示意圖 selcukusta/redis-sentinel-with-haproxy</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/haproxy.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/haproxy.png, /images/docker-compose-redis-sentinel-haproxy/haproxy.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/haproxy.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/haproxy.png" width="700" />
+    </a><figcaption class="image-caption">HAProxy 與 Reids Sentinel 示意圖 <a href="https://github.com/selcukusta/redis-sentinel-with-haproxy" target="_blank" rel="noopener noreffer">selcukusta/redis-sentinel-with-haproxy</a></figcaption>
+    </figure>
+<br>
+<h2 id="實作">實作</h2>
+<p>那接下來會使用 Docker-compose 實作 Redis 哨兵模式 + HAProxy，<a href="https://github.com/880831ian/docker-compose-redis-sentinel-haproxy" target="_blank" rel="noopener noreffer">範例程式連結 點我</a> 😘</p>
+<p>版本資訊</p>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.12, build e91ed57</li>
+<li>Nginx：1.20</li>
+<li>PHP：7.4-fpm</li>
+<li>Redis：6.2.6</li>
+<li>HAProxy：HAProxy version 2.5.5-384c5c5 2022/03/14 - <a href="https://haproxy.org/" target="_blank" rel="noopener noreffer">https://haproxy.org/</a></li>
+</ul>
+<br>
+<h3 id="檔案結構">檔案結構</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── Docker-compose.yaml
+├── docker-volume
+│   ├── haproxy
+│   │   └── haproxy.cfg
+│   ├── nginx
+│   │   └── nginx.conf
+│   ├── php
+│   │   ├── info.php
+│   │   ├── r.php
+│   │   └── rw.php
+│   └── redis
+│       ├── redis.conf
+│       ├── redis1
+│       ├── redis2
+│       └── redis3
+├── php
+│   └── Dockerfile
+├── redis.sh
+└── sentinel
+    ├── Docker-compose.yaml
+    ├── sentinel1
+    │   └── sentinel.conf
+    ├── sentinel2
+    │   └── sentinel.conf
+    └── sentinel3
+        └── sentinel.conf
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>這是主要的結構，簡單說明一下：</p>
+<ul>
+<li>Docker-compose.yaml：會放置要產生的 Nginx、PHP、redis1、redis2、redis3 容器設定檔。</li>
+<li>docker-volume/haproxy/haproxy.cfg：haproxy 的設定檔。</li>
+<li>docker-volume/nginx/nginx.conf：nginx 的設定檔。</li>
+<li>docker-volume/php/(r.php、rw.php)：測試用檔案。</li>
+<li>docker-volume/redis/redis.conf：redis 的設定檔。</li>
+<li>docker-volume/redis/(redis1、redis2、redis3)：放 redis 的資料。</li>
+<li>php/Dokcerfile：因為在 php 要使用 redis 需要多安裝一些設定，所以用 Dockerfile 另外寫 PHP 的映像檔。</li>
+<li>redis.sh：是我另外多寫的腳本，可以查看相對應的角色。</li>
+<li>sentinel/Docker-compose.yaml：會放置要產生的 haproxy、sentinel1、sentinel2、sentinel3 的容器設定檔。</li>
+<li>sentinel/(sentinel1、sentinel2、sentinel3)/.conf：哨兵的設定檔。</li>
+</ul>
+<br>
+<p>那我們就依照安裝的設定開始說明：</p>
+<h3 id="docker-composeyaml">Docker-compose.yaml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.20</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;8888:80&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/nginx/:/etc/nginx/conf.d/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/nginx/:/var/log/nginx/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">9000</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/php/:/var/www/html</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis1</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis1/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis1:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.11</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis2</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis2/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis2:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.12</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis1</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis3</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis3/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis3:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.13</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis1</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis2</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.0</span><span class="l">/16</span><span class="w">
+</span><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.1</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>一樣詳細的 Docker 設定說明，可以參考 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 內有詳細設定說明。其他比較特別的地方是：</p>
+<ul>
+<li>幫每一個容器都設定好 IP ，方便後續測試使用。</li>
+<li>有掛載 log 目錄，可以將我們設定好的 log 做收集。</li>
+<li>呈上，有加入 environment 時區，這樣在看 log 的時候才知道正確時間。</li>
+</ul>
+<br>
+<h3 id="docker-volumehaproxyhaproxycfg">docker-volume/haproxy/haproxy.cfg</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="na">global</span>
+  <span class="na">log stdout format raw local0 info</span>
+
+<span class="na">defaults</span>
+  <span class="na">mode http # 默認模式 { tcp | http | health }，tcp 是4層，http 是7層，health 只會返回 OK</span>
+  <span class="na">timeout client 10s  # 客戶端超時</span>
+  <span class="na">timeout connect 5s  # 連接超時</span>
+  <span class="na">timeout server 10s # 伺服器超時</span>
+  <span class="na">timeout http-request 10s</span>
+  <span class="na">log global</span>
+
+<span class="na">listen admin_status</span>
+  <span class="na">bind 0.0.0.0:8404</span>
+  <span class="na">mode http</span>
+  <span class="na">stats enable</span>
+  <span class="na">stats uri /redis</span>
+  <span class="na">stats realm Global\ statistics</span>
+  <span class="na">stats refresh 1s</span>
+
+<span class="na">listen rw-redis # 判斷是否為 master 並可讀可寫</span>
+  <span class="na">bind 0.0.0.0:16379</span>
+  <span class="na">mode tcp</span>
+  <span class="na">balance roundrobin</span>
+  <span class="na">option tcp-check # redis 健康检查，確保是 master</span>
+  <span class="na">tcp-check connect   </span>
+  <span class="na">tcp-check send PING\r\n</span>
+  <span class="na">tcp-check expect string +PONG</span>
+  <span class="na">tcp-check send info\ replication\r\n</span>
+  <span class="na">tcp-check expect string role:master</span>
+  <span class="na">tcp-check send QUIT\r\n</span>
+  <span class="na">tcp-check expect string +OK</span>
+  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
+  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
+  <span class="na">server redis3 redis3:6379 check inter 2000</span>
+
+<span class="na">listen r-redis  # 判斷是否為 master、slave 並可讀</span>
+  <span class="na">bind 0.0.0.0:16380</span>
+  <span class="na">mode tcp</span>
+  <span class="na">balance roundrobin</span>
+  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
+  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
+  <span class="na">server redis3 redis3:6379 check inter 2000</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>這裡是本章的重點，我們會在這邊設定好 haproxy，詳細說明請看：</p>
+<p>defaults：
+一些初始值，像是 mode 我們預設 http，它主要有三種模式 { tcp | http | health }，tcp 是4層，http 是7層，health 只會返回 OK，以及客戶端、連接、伺服器、http 請求超時時間設定。</p>
+<p>listen admin_status：</p>
+<ul>
+<li>bind：我們要開啟 HAProxy 監控平台的 port。</li>
+<li>mode：模式，我們使用 http 模式。</li>
+<li>stats ：是否要啟動平台。</li>
+<li>stats uri：平台網址，我們使用 redis。</li>
+<li>stats refresh：平台自動更新時間，我們設定 1 秒。</li>
+</ul>
+<p>listen rw-redis：</p>
+<ul>
+<li>bind ：rw 使用 16379 Port 來當輸出。</li>
+<li>balance：使用負載平衡。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">option tcp-check # redis 健康检查，確保是 master
+  tcp-check connect   
+  tcp-check send PING\r\n
+  tcp-check expect string +PONG
+  tcp-check send info\ replication\r\n
+  tcp-check expect string role:master
+  tcp-check send QUIT\r\n
+  tcp-check expect string +OK
+</code></pre></td></tr></table>
+</div>
+</div><p>上面這些是用來判斷角色是不是 master。</p>
+<p>最後放我們 3 個 redis 服務：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> server redis1 redis1:6379 check inter 2000 
+ server redis2 redis2:6379 check inter 2000 
+ server redis3 redis3:6379 check inter 2000
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>check：開啟健康偵測。</li>
+<li>inter：參數更改檢查間隔，預設是 2 秒。</li>
+</ul>
+<br>
+<h3 id="docker-volumenginxnginxconf">docker-volume/nginx/nginx.conf</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">server {
+  listen 80;
+  server_name default_server;
+  return 404;
+}
+
+server {
+  listen 80;
+  server_name test.com;
+  index index.php index.html;
+
+  error_log  /var/log/nginx/error.log  warn;
+  access_log /var/log/nginx/access.log;
+  root /var/www/html;
+
+  location / {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
+  location ~ \.php$ {
+      fastcgi_pass php:9000;
+      fastcgi_index index.php;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Nginx 設定檔案。</p>
+<br>
+<h3 id="docker-volumephprwphp">docker-volume/php/rw.php</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
+<span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16379</span><span class="p">);</span>
+<span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
+
+<span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>跟 <code>r.php</code> 比較不同的是，使用 16379 Port，我們在 <code>haproxy.cfg</code> 有設定 rw-redis，來判斷是不是 master 並且是可讀可寫。</p>
+<br>
+<h3 id="docker-volumephprphp">docker-volume/php/r.php</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
+<span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16380</span><span class="p">);</span>
+<span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
+
+<span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 16380 Port，在 <code>haproxy.cfg</code> 有設定 r-redis，來顯示是不是 master、slave 且可讀。</p>
+<br>
+<h3 id="phpdockerfile">php/Dockerfile</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> php:7.4-fpm</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pecl install -o -f redis <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  rm -rf /tmp/pear <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;extension=redis.so&#34;</span> &gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_handler = redis&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_path = tcp://redis:6379&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>因為 PHP 要使用 Redis，會需要安裝一些套件，所以我們將 PHP 分開來，使用 Dockerfile 來設定映像檔。</p>
+<br>
+<h3 id="redissh">redis.sh</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">green</span><span class="o">=</span><span class="s2">&#34;\033[1;32m&#34;</span><span class="p">;</span><span class="nv">white</span><span class="o">=</span><span class="s2">&#34;\033[1;0m&#34;</span><span class="p">;</span><span class="nv">red</span><span class="o">=</span><span class="s2">&#34;\033[1;31m&#34;</span><span class="p">;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;redis1 IPAddress:&#34;</span>
+<span class="nv">redis1_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis1 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis1_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;redis2 IPAddress:&#34;</span>
+<span class="nv">redis2_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis2 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis2_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;redis3 IPAddress:&#34;</span>
+<span class="nv">redis3_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis3 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis3_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;haproxy IPAddress:&#34;</span>
+<span class="nv">haproxy_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect haproxy <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$haproxy_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;redis1:&#34;</span>
+docker <span class="nb">exec</span> -it redis1 redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;redis2:&#34;</span>
+docker <span class="nb">exec</span> -it redis2 redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;redis3:&#34;</span>
+docker <span class="nb">exec</span> -it redis3 redis-cli info Replication <span class="p">|</span> grep role
+</code></pre></td></tr></table>
+</div>
+</div><p>這個是我自己所寫的腳本，可以詳細知道目前服務的角色轉移狀況。</p>
+<br>
+<h3 id="sentineldocker-composeyaml">sentinel/Docker-compose.yaml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">haproxy</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../docker-volume/haproxy/:/usr/local/etc/haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.20</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">16379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8404</span><span class="p">:</span><span class="m">8404</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-1</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26379</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel1:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel1:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-2</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26380</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel2:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel2:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-3</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26381</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel3:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel3:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="sentinelsentineconf">sentinel/sentine.conf</h3>
+<p>因為 sentine 內容都基本上相同，所以舉一個來說明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port 26379
+
+logfile &#34;/var/log/redis/redis-sentinel.log&#34;
+
+protected-mode no
+
+#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
+sentinel monitor mymaster 172.20.0.11 6379 2
+
+#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
+sentinel down-after-milliseconds mymaster 5000
+</code></pre></td></tr></table>
+</div>
+</div><p>要設定指定的 Port sentine1 是 26379、sentine2 是 26380、sentine3 是 26381。接下來要設定要監控的 Master，最後的數字代表我們前面有提到客觀下線需要達到的哨兵數。以及主觀下線的時間跟 failover 超過的時間。</p>
+<br>
+<h2 id="測試">測試</h2>
+<p>我們先用 docker-compose up 來啟動 Docker-compose.yaml，接著再啟動 sentinel/Docker-compose.yaml：</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/yaml.png" title="/images/docker-compose-redis-sentinel-haproxy/yaml.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/yaml.png" data-sub-html="<h2>啟動 Docker-compose.yaml</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/yaml.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/yaml.png, /images/docker-compose-redis-sentinel-haproxy/yaml.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/yaml.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/yaml.png" width="700" />
+    </a><figcaption class="image-caption">啟動 Docker-compose.yaml</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png" title="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png" data-sub-html="<h2>啟動 sentinel/Docker-compose.yaml</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png, /images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/sentinel-yaml.png" width="700" />
+    </a><figcaption class="image-caption">啟動 sentinel/Docker-compose.yaml</figcaption>
+    </figure>
+由於為了測試，有先將所有容器設定好 IP，就不會像上一篇文章一樣要去抓 IP ，才能啟動 Sentinel。</p>
+<br>
+<p>這時候可以使用瀏覽器搜尋以下網址：</p>
+<ul>
+<li><code>test.com:8404/redis</code>：HAProxy 監看平台(只取片段)。</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png" title="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png" data-sub-html="<h2>HAProxy 監控平台</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png, /images/docker-compose-redis-sentinel-haproxy/haproxy8404.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/haproxy8404.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/haproxy8404.png" width="1200" />
+    </a><figcaption class="image-caption">HAProxy 監控平台</figcaption>
+    </figure>
+<br>
+<ul>
+<li><code>test.com:8888/rw.php</code>：只會顯示 master，並且可讀可寫。</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/rw.png" title="/images/docker-compose-redis-sentinel-haproxy/rw.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/rw.png" data-sub-html="<h2>master  (redis1)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/rw.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/rw.png, /images/docker-compose-redis-sentinel-haproxy/rw.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/rw.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/rw.png" width="600" />
+    </a><figcaption class="image-caption">master  (redis1)</figcaption>
+    </figure>
+<br>
+<ul>
+<li><code>test.com:8888/r.php</code>：會顯示 master、slave，且可讀。</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/r1.png" title="/images/docker-compose-redis-sentinel-haproxy/r1.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/r1.png" data-sub-html="<h2>master  (redis1)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/r1.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/r1.png, /images/docker-compose-redis-sentinel-haproxy/r1.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/r1.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/r1.png" width="600" />
+    </a><figcaption class="image-caption">master  (redis1)</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/r3.png" title="/images/docker-compose-redis-sentinel-haproxy/r3.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/r3.png" data-sub-html="<h2>slave (redis2)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/r3.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/r3.png, /images/docker-compose-redis-sentinel-haproxy/r3.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/r3.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/r3.png" width="600" />
+    </a><figcaption class="image-caption">slave (redis2)</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/r2.png" title="/images/docker-compose-redis-sentinel-haproxy/r2.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/r2.png" data-sub-html="<h2>slave (redis3)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/r2.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/r2.png, /images/docker-compose-redis-sentinel-haproxy/r2.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/r2.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/r2.png" width="600" />
+    </a><figcaption class="image-caption">slave (redis3)</figcaption>
+    </figure>
+<br></p>
+<p>接下來可以執行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ sh redis.sh
+
+redis1 IPAddress:
+172.20.0.11
+------------------------------
+redis2 IPAddress:
+172.20.0.12
+------------------------------
+redis3 IPAddress:
+172.20.0.13
+------------------------------
+haproxy IPAddress:
+172.20.0.20
+------------------------------
+redis1:
+role:master
+redis2:
+role:slave
+redis3:
+role:slave
+</code></pre></td></tr></table>
+</div>
+</div><p>就會顯示三個 redis 的 IP 以及 haproxy 的 IP，這些都是已經寫在 Docker-compose.yaml 檔案內的，如果忘記的可以再往前看 ↑</p>
+<p>接下來我們可以先一直 F5 <code>test.com:8888/r.php</code>，來模擬大量的讀取請求，如果發現網站內容一直在更換，就代表我們成功透過 HAProxy 做到負載平衡了，可以將讀取的需求分給三個服務做處理！那因為 <code>test.com:8888/rw.php</code> 他只會抓 master，所以刷新還是同一個 master。</p>
+<br>
+<p>還記得我們上次用 Redis 的哨兵模式嗎？那我們用它來搭配 Haproxy 會有什麼結果呢？</p>
+<p>我們先使用 <code>docker stop</code> 來模擬服務中斷：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker stop redis1 
+
+redis1
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到 <code>test.com:8404/redis</code> 原本綠色的 redis1 開始變成黃色，最後變成紅色：</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png" title="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png" data-sub-html="<h2>模擬中斷服務 HAProxy 監控平台</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png, /images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-1.png" width="1200" />
+    </a><figcaption class="image-caption">模擬中斷服務 HAProxy 監控平台</figcaption>
+    </figure>
+<br>
+<p>最後可以看到 Redis Sentinel 作動，將 master 轉移到 redis3：</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png" title="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png" data-sub-html="<h2>模擬中斷服務 HAProxy 監控平台</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png, /images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/haproxy8404-2.png" width="1200" />
+    </a><figcaption class="image-caption">模擬中斷服務 HAProxy 監控平台</figcaption>
+    </figure>
+<br>
+<p>這時候我們再去看 <code>test.com:8888/rw.php</code> ，就會發現與剛剛的 master 不太一樣囉，因為已經變成 redis2 了！</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/rw-1.png" title="/images/docker-compose-redis-sentinel-haproxy/rw-1.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/rw-1.png" data-sub-html="<h2>master (redis2)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/rw-1.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/rw-1.png, /images/docker-compose-redis-sentinel-haproxy/rw-1.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/rw-1.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/rw-1.png" width="600" />
+    </a><figcaption class="image-caption">master (redis2)</figcaption>
+    </figure>
+代表我們 HAProxy 也有成功將 master 給顯示出來！</p>
+<br>
+<p>我們再去看 <code>test.com:8888/r.php</code> ，就可以發現剩下 redis2 以及 redis 3 了，因為 redis1 被我們給暫停服務了，而且 redis2 變成 master！</p>
+<br>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/r4.png" title="/images/docker-compose-redis-sentinel-haproxy/r4.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/r4.png" data-sub-html="<h2>master (redis2)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/r4.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/r4.png, /images/docker-compose-redis-sentinel-haproxy/r4.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/r4.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/r4.png" width="600" />
+    </a><figcaption class="image-caption">master (redis2)</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/docker-compose-redis-sentinel-haproxy/r2.png" title="/images/docker-compose-redis-sentinel-haproxy/r2.png" data-thumbnail="/images/docker-compose-redis-sentinel-haproxy/r2.png" data-sub-html="<h2>slave (redis3)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/docker-compose-redis-sentinel-haproxy/r2.png"
+            data-srcset="/images/docker-compose-redis-sentinel-haproxy/r2.png, /images/docker-compose-redis-sentinel-haproxy/r2.png 1.5x, /images/docker-compose-redis-sentinel-haproxy/r2.png 2x"
+            data-sizes="auto"
+            alt="/images/docker-compose-redis-sentinel-haproxy/r2.png" width="600" />
+    </a><figcaption class="image-caption">slave (redis3)</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="http://www.haproxy.org/" target="_blank" rel="noopener noreffer">HAProxy 首頁</a></p>
+<p><a href="https://tw511.com/a/01/6959.html" target="_blank" rel="noopener noreffer">HAproxy的安裝設定及範例</a></p>
+<p><a href="https://www.cnblogs.com/tzm7614/p/5691912.html" target="_blank" rel="noopener noreffer">redis sentinel集群配置及haproxy配置</a></p>
+<p><a href="https://blog.toright.com/posts/3967/%E5%AF%8C%E4%BA%BA%E7%94%A8-l4-switch%EF%BC%8C%E7%AA%AE%E4%BA%BA%E7%94%A8-linux-haproxy%EF%BC%81.html" target="_blank" rel="noopener noreffer">富人用 L4 Switch，窮人用 Linux HAProxy！</a></p>
+<p><a href="https://github.com/selcukusta/redis-sentinel-with-haproxy" target="_blank" rel="noopener noreffer">selcukusta/redis-sentinel-with-haproxy</a></p>
+<p><a href="https://www.haproxy.com/blog/how-to-enable-health-checks-in-haproxy/" target="_blank" rel="noopener noreffer">How to Enable Health Checks in HAProxy</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/haproxy/">HAProxy</a>
+                </span><span><a href="/tags/redis/">Redis</a>
+                </span><span><a href="/tags/docker/">Docker</a>
+                </span><span><a href="/tags/sentinel/">Sentinel</a>
+                </span><span><a href="/tags/%E8%B2%A0%E8%BC%89%E5%B9%B3%E8%A1%A1/">負載平衡</a>
+                </span><span><a href="/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">哨兵模式</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-04-22</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/docker-compose-redis-sentinel-haproxy/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/docker-compose-redis-sentinel-haproxy/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" data-title="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)" data-hashtags="HAProxy,Redis,Docker,Sentinel,負載平衡,哨兵模式,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" data-hashtag="HAProxy"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" data-title="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" data-title="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/docker-compose-redis-sentinel-haproxy/" data-title="用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/docker-compose-redis-sentinel/" class="prev" rel="prev" title="Redis 哨兵模式 (Sentinel) 搭配 Docker 實作"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":100},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
