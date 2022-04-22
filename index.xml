@@ -26,8 +26,8 @@
 </item>
 <item>
     <title>Redis 哨兵模式 (Sentinel) 搭配 Docker 實作</title>
-    <link>https://pin-yi.me/redis-sentinel-docker/</link>
-    <pubDate>Tue, 19 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/redis-sentinel-docker/</guid>
+    <link>https://pin-yi.me/docker-redis-sentinel/</link>
+    <pubDate>Tue, 19 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-redis-sentinel/</guid>
     <description><![CDATA[什麼是 Redis 哨兵模式 (Sentinel) ? 有關 Redis 之前有寫一篇 Redis 的介紹文，有興趣可以去看看！ Redis 提供非常實用的功能來讓我們實現多機的 in-memory 資料庫： 主從複製模式 (Master-Slave Replication) 哨兵模式]]></description>
 </item>
 <item>
