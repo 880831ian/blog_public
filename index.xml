@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 22 Apr 2022 14:00:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)</title>
+    <link>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</link>
+    <pubDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</guid>
+    <description><![CDATA[前情提要：本篇是 用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose) 以及 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程]]></description>
 </item>
 <item>
     <title>用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)</title>
@@ -59,12 +65,6 @@
     <link>https://pin-yi.me/go-restful-api-repository-messageboard/</link>
     <pubDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/go-restful-api-repository-messageboard/</guid>
     <description><![CDATA[本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘]]></description>
-</item>
-<item>
-    <title>Go 介紹</title>
-    <link>https://pin-yi.me/go/</link>
-    <pubDate>Mon, 21 Mar 2022 11:33:25 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/go/</guid>
-    <description><![CDATA[什麼是 Go ? Go 全名是 go programming language 又被稱為 Golang，是因為 go 這個詞太廣泛，不易搜尋，所以也可以叫 Golang。 Go 是由 Google 開發並維護的編譯程式語言，支]]></description>
 </item>
 </channel>
 </rss>
