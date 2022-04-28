@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Kubernetes (K8s) 介紹</title>
+    <link>https://pin-yi.me/k8s/</link>
+    <pubDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s/</guid>
+    <description><![CDATA[什麼是 Kubernetes (K8s)? K8s 全名是 Kubernetes，這麼名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以被叫 K8s 是因為]]></description>
+</item>
+<item>
     <title>用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)</title>
     <link>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</link>
     <pubDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/node/</link>
     <pubDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node/</guid>
     <description><![CDATA[什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發]]></description>
-</item>
-<item>
-    <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
-    <link>https://pin-yi.me/go-restful-api-repository-messageboard/</link>
-    <pubDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/go-restful-api-repository-messageboard/</guid>
-    <description><![CDATA[本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘]]></description>
 </item>
 </channel>
 </rss>
