@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Kubernetes (K8s) 介紹 - PinYi</title><meta name="description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"><meta property="og:title" content="Kubernetes (K8s) 介紹" />
+        <title>Kubernetes (K8s) 介紹 - 基本 - PinYi</title><meta name="description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"><meta property="og:title" content="Kubernetes (K8s) 介紹 - 基本" />
 <meta property="og:description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s/" /><meta property="og:image" content="https://pin-yi.me/k8s/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s/featured-image.webp"/>
-<meta name="twitter:title" content="Kubernetes (K8s) 介紹"/>
+<meta name="twitter:title" content="Kubernetes (K8s) 介紹 - 基本"/>
 <meta name="twitter:description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/k8s/" /><link rel="prev" href="https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Kubernetes (K8s) 介紹",
+        "headline": "Kubernetes (K8s) 介紹 - 基本",
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/k8s\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3231 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3791 ,
         "url": "https:\/\/pin-yi.me\/k8s\/","datePublished": "2022-04-28T18:17:00+08:00","dateModified": "2022-04-29T09:33:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -129,10 +129,10 @@ if (!doNotTrack) {
         data-srcset="/k8s/featured-image.webp, /k8s/featured-image.webp 1.5x, /k8s/featured-image.webp 2x"
         data-sizes="auto"
         alt="/k8s/featured-image.webp"
-        title="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹</h2><div class="post-meta">
+        title="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 基本</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3231 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3791 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -161,6 +161,7 @@ if (!doNotTrack) {
             <li><a href="#kube-controller-manager">kube-controller-manager</a></li>
           </ul>
         </li>
+        <li><a href="#cluster">Cluster</a></li>
       </ul>
     </li>
     <li><a href="#基本運作">基本運作</a></li>
@@ -192,11 +193,11 @@ if (!doNotTrack) {
 <p>Kubernetes 是一種開源可用來自動化部屬、擴展以及管理多個容器的系統，適用於當容器數量增加，需要穩定容器環境，以及管理資源或權限分配的狀況。</p>
 <p>我們之前在 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 文章中，已經有介紹以往傳統虛擬機以及容器化的 Docker 差異以及優點，那當我們在管理容器時，其中一個容器出現故障，則需要啟動另一個容器，如果要用手動，會十分麻煩，所以這時就是 Kubernetes 的厲害的地方了，Kubernetes 提供：</p>
 <ul>
-<li>服務發現和負載平衡：K8s 可以使用 DNS 名稱或是自己的 IP 位址來公開容器。如果容器流量過高，Kubernetes 能夠使用負載平衡和分配網路流量，使部署能夠更穩定。</li>
+<li>服務發現和負載平衡：K8s 可以使用 DNS 名稱或是自己的 IP 位址來公開容器。如果容器流量過高，Kubernetes 能夠使用負載平衡和分配網路流量，能使部署更穩定。</li>
 <li>編排儲存：Kubernetes 允許使用自動掛載來選擇儲存系統，例如使用本地儲存，或是公共雲等。</li>
 <li>自動部署、刪除：可以使用 Kubernetes 來幫我們自動化部屬新的容器、刪除現有的容器並將其資源用於新容器。</li>
-<li>自動打包：當我們為 Kubernetes 提供一個節點集群，它可以用來運行容器化的任務，告訴 Kubernetes 每個容器需要多少 CPU 和 RAM。Kubernetes 可以將容器安裝到節點上，充分利用資源。</li>
-<li>自動修復：Kubernetes 會重新啟動失敗的容器、替換容器、刪除不回應用戶的不健康容器，並且在容器準備好服務之前不會將它通知客戶端。</li>
+<li>自動打包：當我們為 Kubernetes 提供一個節點叢集，它可以用來運行容器化的任務，告訴 Kubernetes 每個容器需要多少 CPU 和 RAM。Kubernetes 可以將容器安裝到節點上，充分利用資源。</li>
+<li>自動修復：Kubernetes 會重新啟動失敗的容器、替換容器、刪除不回應用戶的不健康容器，並且在容器準備好服務之前不會通知客戶端。</li>
 <li>機密和配置管理：Kubernetes 允許儲存和管理敏感訊息，例如密碼、OAuth token 和 SSH 金鑰。可以部署和更新機密的應用程序配置。</li>
 </ul>
 <br>
@@ -211,7 +212,43 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption"><a href="https://kubernetes.io/" target="_blank" rel="noopener noreffer">kubernetes 官網</a></figcaption>
     </figure>
 <br>
-<p>Kubernetes 很常被拿來與 Docker Swarm 做比較，兩者不同得是，Docker Swarm 必須建構在 Docker 的架構下，功能侷限、無法挑拖。Kubernetes 則因為功能廣泛，而逐漸取代 Docker Swarm 在市場上的地位。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>常見誤解<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">很多人認為 Kubernetes 是 <code>docker container</code> 的管理工具，包含我也是，但其實 Kubernetes 是用來管理 <code>containerized applications</code> <strong>並不是專屬於 <code>docker</code></strong> 獨享，作為一個 <code>container orchestrator</code> 的角色，Kubernetes 希望<strong>能夠管理所有容器化</strong>的應用程式</div>
+        </div>
+    </div>
+<br>
+<p>Kubernetes 很常被拿來與 Docker Swarm 做比較，兩者不同的是，Docker Swarm 必須建構在 Docker 的架構下，功能侷限、無法跳脫。</p>
+<p>Kubernetes 則因為功能較為廣泛，而逐漸取代 Docker Swarm 在市場上的地位。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">比較</th>
+<th style="text-align:center">Kubernetes</th>
+<th style="text-align:center">Docker Swarm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">說明</td>
+<td style="text-align:center">Kubernetes 是一個開源容器的編排平台，Kubernetes 的叢集結構比 Docker Swarm 更為複雜。<br> Kubernetes 通常有建構器和工作節點，還可進一步分為 Pod、命名空間、配置映射等。</td>
+<td style="text-align:center">Docker Swarm 是一個由 Docker 構建和維護的開源容器編排平台。<br>一個 Docker Swarm 叢集通常包含三個項目：Nodes、Services and tasks、Load balancers。</td>
+</tr>
+<tr>
+<td style="text-align:center">優點</td>
+<td style="text-align:center">它有龐大的開源社群，由 Google 支持。<br>它可以維持和管理大型架構和複雜的工作負載。<br>它是自動化，並支持自動化擴展的自我修護能力。<br>它有內建監控和廣泛的可用集成。</td>
+<td style="text-align:center">Docker Swarm 安裝簡單，它輕量化且容易學習使用。<br>Docker Swarm 與 Docker CLI 一起運作，因此不需要多運行或是安裝新的 CLI</td>
+</tr>
+<tr>
+<td style="text-align:center">缺點</td>
+<td style="text-align:center">它複雜的安裝過程以及較難學習<br>它需要安裝單獨的 CLI 工具並且學習每一個工具</td>
+<td style="text-align:center">它是輕量級且與 Docker API 相關聯，與 Kubernetes 相比，Docker Swarm 被限制很多功能，且自動化也沒有 Kubernetes 強大。</td>
+</tr>
+</tbody>
+</table>
 <br>
 <h2 id="kubernetes-元件介紹與說明">Kubernetes 元件介紹與說明</h2>
 <p>Kubernetes 是如何幫我們管理以及部署 Container ? 要了解 Kubernetes 如何運作，就要先了解它的元件以及架構：</p>
@@ -219,7 +256,7 @@ if (!doNotTrack) {
 <h3 id="pod">Pod</h3>
 <p>Kubernetes 運作中最小的單位，一個 Pod 會對應到一個應用服務 (Application)，舉例來說一個 Pod 可能會對應到一個 API Server。</p>
 <ul>
-<li>每個 Pod 都有一個身分證，也就是屬於這個 Pod 的 <code>yaml</code> 檔。</li>
+<li>每個 Pod 都有一個定義文件，也就是屬於這個 Pod 的 <code>yaml</code> 檔。</li>
 <li>一個 Pod 裡面可以有一個或多個 Container，但一般情況一個 Pod 最好只有一個 Container。</li>
 <li>同一個 Pod 中的 Containers 共享相同的資源以及網路，彼此透過 local port number 溝通。</li>
 </ul>
@@ -234,7 +271,15 @@ if (!doNotTrack) {
 <p>該 Node 的傳訊員，負責更新 Node 的 iptables，讓 Kubernetes 中不在該 Node 的其他物件可以得知該 Node 上的所有 Pods 的最新狀態。</p>
 <br>
 <h4 id="container-runtime">Container Runtime</h4>
-<p>該 Node 真正負責容器執行的程式，以 Dokcer 容器為例其對應的 Container Runtime 就是 Dokcer Engine。</p>
+<p>該 Node 真正負責容器執行的程式，K8s 預設是 <code>Docker</code>，但也支援其他 Runtime Engine，例如 rkt、CRI-O、containerd</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>常見誤解<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">很多人認為 Kubernetes 是 <code>docker container</code> 的管理工具，包含我也是，但其實 Kubernetes 是用來管理 <code>containerized applications</code> <strong>並不是專屬於 <code>docker</code></strong> 獨享，作為一個 <code>container orchestrator</code> 的角色，Kubernetes 希望<strong>能夠管理所有容器化</strong>的應用程式</div>
+        </div>
+    </div>
 <br>
 <h3 id="master-node">Master Node</h3>
 <p>Kubernetes 運作的指揮中心，可以簡化看成一個特殊化的 Node 來負責管理所有其他的 Node。</p>
@@ -248,7 +293,7 @@ if (!doNotTrack) {
 <br>
 <h4 id="etcd">etcd</h4>
 <ul>
-<li>用來存放 Kubernetes Cluster 的資料做為備份，當 Master 因為某些原因而故障時，可以透過 etcd 幫我們還原 Kubernetes 的狀態。</li>
+<li>etcd 是兼具一制性和高可用性的分散式鍵值數據庫，可以保存 Kubernetes 所有 Cluster 的後台數據庫。</li>
 </ul>
 <br>
 <h4 id="kube-scheduler">kube-scheduler</h4>
@@ -263,6 +308,9 @@ if (!doNotTrack) {
 <li>controller-manager 的監視與嘗試更新也都需要透過訪問 kube-apiserver 達成。</li>
 </ul>
 <br>
+<h3 id="cluster">Cluster</h3>
+<p>Kubernetes 中多個 Node 與 Master 的集合。基本上可以想成在同一個環境裡所有 Node 集合在一起的單位。</p>
+<br>
 <h2 id="基本運作">基本運作</h2>
 <figure><a class="lightgallery" href="/images/K8s/k8s.jpg" title="/images/K8s/k8s.jpg" data-thumbnail="/images/K8s/k8s.jpg" data-sub-html="<h2>kubernetes 組件 Kubernetes 基礎教學（一）原理介紹</h2>">
         <img
@@ -275,7 +323,7 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">kubernetes 組件 <a href="https://cwhu.medium.com/kubernetes-basic-concept-tutorial-e033e3504ec0" target="_blank" rel="noopener noreffer">Kubernetes 基礎教學（一）原理介紹</a></figcaption>
     </figure>
 <p>接下來我們用 「Kuberntes 是如何建立一個 Pod ？」來複習一下整個 Kubernetes 的架構。</p>
-<p>(上圖是一個簡易的 Kuubernetes Cluster ，通常 Cluster 中會有多個 Master 作為備援，但為了簡化我們只顯示一個。)</p>
+<p>(上圖是一個簡易的 Kubernetes Cluster ，通常 Cluster 中會有多個 Master 作為備援，但為了簡化我們只顯示一個。)</p>
 <ol>
 <li>當使用者要部署一個新的 Pod 到 Kubernetes Cluster 時，使用者要先透過 User Command (kubectl) 輸入建立 Pod 對應的指令 (後面會說明要如何實際的動手建立一個 Pod)。此時指令會經過一層確認使用者身份後，傳遞到 Master Node 中的 API Server，API Server 會把指令備份到 etcd。</li>
 <li>controller-manager 會從 API Server 收到需要創建一個新的 Pod 的訊息，並檢查如果資源許可，就會建立一個新的 Pod。最後 Scheduler 在定期訪問 API Server 時，會詢問 controller-manager 是否有建置新的 Pod，如果發現新建立的 Pod 時，Scheduler 就會負責把 Pod 配送到最適合的 Node 上面。</li>
@@ -286,7 +334,7 @@ if (!doNotTrack) {
 <ul>
 <li><a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener noreffer">Minikube</a></li>
 </ul>
-<p>一個 Google 發佈的輕量級工具，讓開發者可以輕鬆體驗一個 Kubernetes Cluster。</p>
+<p>一個 Google 發佈的輕量級工具，讓開發者可以輕鬆體驗一個 Kubernetes Cluster。<font color='red'>(僅限開發測試環境)</font></p>
 <br>
 <figure><a class="lightgallery" href="/images/K8s/minikube.png" title="/images/K8s/minikube.png" data-thumbnail="/images/K8s/minikube.png" data-sub-html="<h2>安裝 minikube</h2>">
         <img
@@ -336,10 +384,10 @@ if (!doNotTrack) {
         </div>
     </div>
 <p>我們啟動 minikube 後，我們要打做一個可以在 Pod 運行的小程式。這個小程式是一個 Node.js 的 Web 程式，他會建立一個 Server 來監聽 3000 Port，收到 request 進來後會渲染 <code>index.html</code> 這個檔案，這個檔案裡面會有一隻可愛的小柴犬。</p>
-<p>因為本章是在介紹 K8s 所以我把程式碼放在 <a href="https://github.com/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">Github</a>，以及附上 <a href="https://hub.docker.com/repository/docker/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">Dockerhub 的 Repository</a> 可以直接使用包好的 image 來做測試！</p>
+<p>因為本文章是在介紹 kubernetes 所以在程式部分就不多做說明，我把程式碼放在 <a href="https://github.com/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">Github</a>，以及附上 <a href="https://hub.docker.com/repository/docker/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">Dockerhub 的 Repository</a> 可以直接使用包好的 image 來做測試！</p>
 <br>
 <h3 id="pod-yaml-檔案說明">Pod yaml 檔案說明</h3>
-<p>接下來我們要先撰寫一個 Pod 的身份證 (.yaml) 檔，這個 <code>.yaml</code> 檔就可以建立出 Pod 了！</p>
+<p>接下來我們要先撰寫一個 Pod 的定義文件 (.yaml) 檔，這個 <code>.yaml</code> 檔就可以建立出 Pod 了！</p>
 <ul>
 <li>kubernetes-demo.yaml (程式縮排要正確，不然會無法執行歐！)</li>
 </ul>
@@ -394,7 +442,7 @@ if (!doNotTrack) {
 </ul>
 <br>
 <h3 id="使用-kubectl-建立-pod">使用 kubectl 建立 Pod</h3>
-<p>當我們有了身份證後，我們就可以使用 kubectl 的指令來建立 Pod</p>
+<p>當我們有了定義文件後，我們就可以使用 kubectl 的指令來建立 Pod</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -457,7 +505,7 @@ http://127.0.0.1:55991/api/v1/namespaces/kubernetes-dashboard/services/http:kube
     </figure>
 <br>
 <h3 id="連線到-pod-的服務">連線到 Pod 的服務</h3>
-<p>當我們建立好 Pod 之後，打開瀏覽器 <code>localhost:3000</code> 會發現，什麼都沒有，是因為我們剛剛在 <code>.yaml</code> 裡面設定的是 Pod 的 Port ，它與本機的 Port 是不相通的，因此我們需要使用 <code>kubectl port-forward</code> ，來將 Pod 與本機端做 mapping。</p>
+<p>當我們建立好 Pod 之後，打開瀏覽器 <code>localhost:3000</code> 會發現，什麼都沒有，是因為我們剛剛在 <code>.yaml</code> 裡面設定的是 Pod 的 Port ，它與本機的 Port 是不相通的，因此我們需要使用 <code>kubectl port-forward &lt;pod&gt; &lt;external-port&gt;:&lt;pod-port&gt;</code> ，來將 Pod 與本機端做 mapping。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -476,7 +524,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </div>
 </div><p>我們在此瀏覽 <code>localhost:3000</code>，就會看到可愛的柴犬囉！</p>
 <br>
-<figure><a class="lightgallery" href="/images/K8s/Shiba-Inu.png" title="/images/K8s/Shiba-Inu.png" data-thumbnail="/images/K8s/Shiba-Inu.png" data-sub-html="<h2>成功用 kubernetes 顯示</h2>">
+<figure><a class="lightgallery" href="/images/K8s/Shiba-Inu.png" title="/images/K8s/Shiba-Inu.png" data-thumbnail="/images/K8s/Shiba-Inu.png" data-sub-html="<h2>成功顯示柴犬</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -484,14 +532,14 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
             data-srcset="/images/K8s/Shiba-Inu.png, /images/K8s/Shiba-Inu.png 1.5x, /images/K8s/Shiba-Inu.png 2x"
             data-sizes="auto"
             alt="/images/K8s/Shiba-Inu.png" width="900" />
-    </a><figcaption class="image-caption">成功用 kubernetes 顯示</figcaption>
+    </a><figcaption class="image-caption">成功顯示柴犬</figcaption>
     </figure>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://kubernetes.io/" target="_blank" rel="noopener noreffer">kubernetes 官網</a></p>
 <p><a href="https://www.sysage.com.tw/news/technology/293" target="_blank" rel="noopener noreffer">Kubernetes（K8s）是什麼？基礎介紹+3大優點解析</a></p>
+<p><a href="https://circleci.com/blog/docker-swarm-vs-kubernetes/" target="_blank" rel="noopener noreffer">Docker Swarm vs Kubernetes: how to choose a container orchestration tool</a></p>
 <p><a href="https://cwhu.medium.com/kubernetes-basic-concept-tutorial-e033e3504ec0" target="_blank" rel="noopener noreffer">Kubernetes 基礎教學（一）原理介紹</a></p>
-<p><a href="https://cwhu.medium.com/kubernetes-implement-ingress-deployment-tutorial-7431c5f96c3e" target="_blank" rel="noopener noreffer">Kubernetes 基礎教學（二）實作範例：Pod、Service、Deployment、Ingress</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kubernetes/">Kubernetes</a>
                 </span><span><a href="/tags/k8s/">K8s</a>
@@ -508,7 +556,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/K8s/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹" data-hashtags="Kubernetes,K8s,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/k8s/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/k8s/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/k8s/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹 - 基本" data-hashtags="Kubernetes,K8s,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/k8s/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/k8s/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/k8s/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹 - 基本"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹 - 基本"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/k8s/" data-title="Kubernetes (K8s) 介紹 - 基本"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/docker-compose-redis-sentinel-haproxy-efk/" class="prev" rel="prev" title="用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>

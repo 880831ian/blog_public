@@ -32,10 +32,10 @@
             <loc>https://pin-yi.me/k8s/</loc><lastmod>2022-04-29T09:33:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/docker-compose-redis-sentinel-haproxy/</loc><lastmod>2022-04-22T17:35:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/docker-compose-redis-sentinel/</loc><lastmod>2022-04-22T15:36:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/git/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/docker-compose-redis-sentinel/</loc><lastmod>2022-04-22T15:36:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/git/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/node-restful-api-repository-messageboard/</loc><lastmod>2022-04-11T15:54:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://pin-yi.me/node/</loc><lastmod>2022-04-08T15:24:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/node/</loc><lastmod>2022-04-08T15:24:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
             <loc>https://pin-yi.me/go-restful-api-repository-messageboard/</loc><lastmod>2022-04-04T10:47:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
             <loc>https://pin-yi.me/go/</loc><lastmod>2022-03-29T12:27:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://pin-yi.me/docker/</loc><lastmod>2022-03-22T17:52:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -217,8 +217,8 @@
             <loc>https://pin-yi.me/tags/sentinel/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/%E8%B2%A0%E8%BC%89%E5%B9%B3%E8%A1%A1/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/git/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://pin-yi.me/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/git/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/</loc><lastmod>2022-04-15T12:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/tags/mysql/</loc><lastmod>2022-04-11T15:54:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/tags/node.js/</loc><lastmod>2022-04-11T15:54:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/tags/repository/</loc><lastmod>2022-04-11T15:54:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
