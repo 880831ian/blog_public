@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Kubernetes (K8s) 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Kubernetes (K8s) 介紹" />
-<meta property="og:description" content="什麼是 Kubernetes (K8s)? K8s 全名是 Kubernetes，這麼名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以被叫 K8s 是因為" />
+        <title>Kubernetes (K8s) 介紹 - PinYi</title><meta name="description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"><meta property="og:title" content="Kubernetes (K8s) 介紹" />
+<meta property="og:description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s/" /><meta property="og:image" content="https://pin-yi.me/k8s/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-28T18:17:00+08:00" />
-<meta property="article:modified_time" content="2022-04-28T18:17:00+08:00" />
+<meta property="article:modified_time" content="2022-04-29T09:33:12+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s/featured-image.webp"/>
 <meta name="twitter:title" content="Kubernetes (K8s) 介紹"/>
-<meta name="twitter:description" content="什麼是 Kubernetes (K8s)? K8s 全名是 Kubernetes，這麼名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以被叫 K8s 是因為"/>
+<meta name="twitter:description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/k8s/" /><link rel="prev" href="https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,13 +33,13 @@
                             "url": "https:\/\/pin-yi.me\/k8s\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3242 ,
-        "url": "https:\/\/pin-yi.me\/k8s\/","datePublished": "2022-04-28T18:17:00+08:00","dateModified": "2022-04-28T18:17:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3231 ,
+        "url": "https:\/\/pin-yi.me\/k8s\/","datePublished": "2022-04-28T18:17:00+08:00","dateModified": "2022-04-29T09:33:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
                 "name": "PinYi"
-            },"description": ""
+            },"description": "此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"
     }
     </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
@@ -129,9 +129,9 @@ if (!doNotTrack) {
         data-srcset="/k8s/featured-image.webp, /k8s/featured-image.webp 1.5x, /k8s/featured-image.webp 2x"
         data-sizes="auto"
         alt="/k8s/featured-image.webp"
-        title="/k8s/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹</h2><div class="post-meta">
+        title="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3242 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3231 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
             </div>
             
@@ -176,7 +176,7 @@ if (!doNotTrack) {
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><h2 id="什麼是-kubernetes-k8s">什麼是 Kubernetes (K8s)?</h2>
-<p>K8s 全名是 Kubernetes，這麼名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以被叫 K8s 是因為 Kubernetes 的 k 到 s 中間有 8 的英文字母，所以為了方便，大家都改成這個名稱要叫他！</p>
+<p>Kubernetes 也可以叫 K8s，這個名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以叫 K8s 是因為 Kubernetes 的 k 到 s 中間有 8 的英文字母，為了方便，大家常以這個名稱來稱呼他！</p>
 <br>
 <figure><a class="lightgallery" href="/images/K8s/logo.jpg" title="/images/K8s/logo.jpg" data-thumbnail="/images/K8s/logo.jpg" data-sub-html="<h2>kubernetes logo</h2>">
         <img
@@ -190,7 +190,7 @@ if (!doNotTrack) {
     </figure>
 <br>
 <p>Kubernetes 是一種開源可用來自動化部屬、擴展以及管理多個容器的系統，適用於當容器數量增加，需要穩定容器環境，以及管理資源或權限分配的狀況。</p>
-<p>我們之前在 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 文章中，已經有介紹以往傳統虛擬機以及容器化的 Docker 差異以及優點，那當我們在管理容器時，如果其中一個容器出現故障，則需要啟動另一個容器，如果要用手動，會十分麻煩，所以這時就是 Kubernetes 的厲害的地方了，Kubernetes 提供：</p>
+<p>我們之前在 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 文章中，已經有介紹以往傳統虛擬機以及容器化的 Docker 差異以及優點，那當我們在管理容器時，其中一個容器出現故障，則需要啟動另一個容器，如果要用手動，會十分麻煩，所以這時就是 Kubernetes 的厲害的地方了，Kubernetes 提供：</p>
 <ul>
 <li>服務發現和負載平衡：K8s 可以使用 DNS 名稱或是自己的 IP 位址來公開容器。如果容器流量過高，Kubernetes 能夠使用負載平衡和分配網路流量，使部署能夠更穩定。</li>
 <li>編排儲存：Kubernetes 允許使用自動掛載來選擇儲存系統，例如使用本地儲存，或是公共雲等。</li>
@@ -499,7 +499,8 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-28</span>
+                <span>更新於 2022-04-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/1231e33cdb662b891d7b90ce0ff48be467839047" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;1231e33:&nbsp;# 更新 Kubernetes (K8s) 介紹">
+                            <i class="fas fa-hashtag fa-fw"></i>1231e33</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
