@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 03 May 2022 10:39:00 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、Deployment、ReplicaSet)</title>
+    <link>https://pin-yi.me/k8s-advanced/</link>
+    <pubDate>Tue, 03 May 2022 10:39:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-advanced/</guid>
+    <description><![CDATA[前面我們在基本篇中，為了使 Pod 能夠與本機連線，使用了 port-forward，還有另一種方法就是今天要介紹的第一個主題：Service 那我們會]]></description>
 </item>
 <item>
     <title>Kubernetes (K8s) 介紹 - 基本</title>
@@ -59,12 +65,6 @@
     <link>https://pin-yi.me/node-restful-api-repository-messageboard/</link>
     <pubDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node-restful-api-repository-messageboard/</guid>
     <description><![CDATA[本文章是使用 Node.js 來寫一個 Repository Restful API 的留言板，並且會使用 express 以及 sequelize (使用 Mysql)套件。 建議可以先觀看 Node.js 介紹 文章來簡單學習 Node 語言。 範例程式連結 點我 😘]]></description>
-</item>
-<item>
-    <title>Node.js 介紹</title>
-    <link>https://pin-yi.me/node/</link>
-    <pubDate>Wed, 30 Mar 2022 10:45:29 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node/</guid>
-    <description><![CDATA[什麼是 Node.js ? Node.js 是能夠在伺服器端運行 JavaScript 的開放原始碼、跨平台執行環境。 Node.js 的出現，讓前端網站開發人員可以使用 JaveScript 來做後端或是系統層面的工作。讓前端開發]]></description>
 </item>
 </channel>
 </rss>
