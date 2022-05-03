@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/k8s\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3791 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  4331 ,
         "url": "https:\/\/pin-yi.me\/k8s\/","datePublished": "2022-04-28T18:17:00+08:00","dateModified": "2022-04-29T16:59:06+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/k8s/featured-image.webp"
         title="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 基本</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3791 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4331 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 9 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -217,12 +217,12 @@ if (!doNotTrack) {
             <i class="icon fas fa-lightbulb fa-fw"></i>常見誤解<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">很多人認為 Kubernetes 是 <code>docker container</code> 的管理工具，包含我也是，但其實 Kubernetes 是用來管理 <code>containerized applications</code> <strong>並不是專屬於 <code>docker</code></strong> 獨享，作為一個 <code>container orchestrator</code> 的角色，Kubernetes 希望<strong>能夠管理所有容器化</strong>的應用程式</div>
+            <div class="admonition-content">很多人認為 Kubernetes 是 <code>docker container</code> 的管理工具，包含我也是，但其實 Kubernetes 是用來管理容器化 (<code>containerized applications</code>) <strong>並不是專屬於 <code>docker</code></strong> 獨享，作為一個 <code>container orchestrator</code> 的角色，Kubernetes 希望<strong>能夠管理所有容器化</strong>的應用程式</div>
         </div>
     </div>
 <br>
 <p>Kubernetes 很常被拿來與 Docker Swarm 做比較，兩者不同的是，Docker Swarm 必須建構在 Docker 的架構下，功能侷限、無法跳脫。</p>
-<p>Kubernetes 則因為功能較為廣泛，而逐漸取代 Docker Swarm 在市場上的地位。</p>
+<p>Kubernetes 則因為功能較為廣泛，而逐漸取代 Docker Swarm 在市場上的地位。下方有簡易的比較表格：</p>
 <table>
 <thead>
 <tr>
@@ -422,19 +422,20 @@ if (!doNotTrack) {
 </span></code></pre></td></tr></table>
 </div>
 </div><p>apiVersion</p>
-<ul>
-<li>該元件的版本號</li>
-</ul>
+<p>該元件的版本號，必須依照 Server 上 K8s 版本來做設定 (想要知道k8s 版本，可以使用 <code>kubectl version</code> 指令來查詢，會顯示 client 跟 server 的版本訊息，client 代表 kubectl 版本訊息，server 代表的是 master node 的 k8s 版本訊息)，目前 k8s 都使用 1.23 版本以上，所以 <code>apiVersion</code> 直接寫 <code>v1</code> 即可。</p>
+<br>
 <p>kind</p>
-<ul>
-<li>該元件的屬性，常見的有 <code>Pod</code>、<code>Node</code>、<code>Service</code>、<code>Namespace</code>、<code>ReplicationController</code> 等等</li>
-</ul>
+<p>該元件的屬性，用來決定此設定檔的類型，常見的有 <code>Pod</code>、<code>Node</code>、<code>Service</code>、<code>Namespace</code>、<code>ReplicationController</code> 等等</p>
+<br>
 <p>metadata</p>
+<p>用來擺放描述性資料的地方，像是 Pod 名稱或是標籤等等都會放在此處。</p>
 <ul>
 <li>name：指定該 Pod 的名稱</li>
 <li>labels：指定該 Pod 的標籤</li>
 </ul>
+<br>
 <p>spec</p>
+<p>用來描述物件生成的細節，像是 Pod 內其實是跑 Dokcer container，所以在 Pod 的 spec 內就會描述 container 的細節。</p>
 <ul>
 <li>container.name：指定運行的 Container 的名稱</li>
 <li>container.image：指定 Container 要使用哪個 Image，這裡會從 DockerHub 上搜尋</li>
@@ -446,12 +447,43 @@ if (!doNotTrack) {
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl create -f kubernetes-demo.yaml
+
+kubectl apply -f kubernetes-demo.yaml
 </code></pre></td></tr></table>
 </div>
-</div><br>
+</div><p>可以使用 <code>create</code> or <code>apply</code> 來建立 Pod ，那這兩個的差異是什麼呢？</p>
+<ul>
+<li>kubectl create</li>
+</ul>
+<ol>
+<li>
+<p><code>kubectl create</code> 是所謂的 &ldquo;命令式管理&rdquo; (<code>Imperative Management</code>)。通過這種方式，可以告訴 Kubernets API 你要建立、更新、刪除的內容。</p>
+</li>
+<li>
+<p><code>kubectl create</code> 命令是先刪除所有現有的東西，重新根據 YAML 文件生成新的 Pod。所以要求 YAML 文件中的配置必須完整。</p>
+</li>
+<li>
+<p><code>kubectl create</code> 命令，使用同一個 YAML 文件重複建立會失敗。</p>
+</li>
+</ol>
+<br>
+<ul>
+<li>kubectl apply</li>
+</ul>
+<ol>
+<li>
+<p><code>kubectl apply</code> 是 &ldquo;聲明式管理&rdquo; (<code>Declarative Management</code>)方法的一部分。在該方法中，即使對目標用了其他更新，也可以保持你對目標應用的更新。</p>
+</li>
+<li>
+<p><code>kubectl apply</code>命令，根據配置文件裡面令出來的內容，生成就有的。所以 YAML 文件的內容可以只寫需要升級的欄位。</p>
+</li>
+</ol>
+<br>
 <p>如果看到 <code>pod/kubernetes-demo-pod created</code> 就代表我們成功建立第一個 Pod 了，接下來我們可以使用：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -473,6 +505,19 @@ kubernetes-demo-pod   1/1     Running   <span class="m">0</span>          3m5s
 </code></pre></td></tr></table>
 </div>
 </div><br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Pod 指令介紹<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>查詢現有 Pod 狀態 <code>kubectl get po/pod/pods</code></p>
+<p>查看該 Pod 詳細資訊 <code>kubectl describe pods &lt;pod-name&gt;</code></p>
+<p>刪除 Pod <code>kubectl delete pods</code></p>
+<p>查看 Pod log <code>kubectl logs &lt;pod-name&gt;</code></p>
+</div>
+        </div>
+    </div>
+<br>
 <p>也可以使用 minikube 圖形化頁面來看一下是否成功！</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
