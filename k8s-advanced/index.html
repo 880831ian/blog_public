@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s-advanced/" /><meta property="og:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-03T10:39:00+08:00" />
-<meta property="article:modified_time" content="2022-05-03T17:49:58+08:00" />
+<meta property="article:modified_time" content="2022-05-04T17:41:12+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/k8s-advanced\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3483 ,
-        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-03T17:49:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3495 ,
+        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-04T17:41:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s-advanced/featured-image.webp"
         title="此文章是介紹 Kubernetes 進階，會介紹 Service、Ingress、Deployment、ReplicaSet 等等，多數是參考網路大神分享，加上自己整理自己能理解的加以介紹，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、Deployment、ReplicaSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3483 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3495 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
             </div>
             
@@ -534,6 +534,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </div><br>
 <p>因為有兩種方法，第一種 (設定網域以及路徑)跟第二種 (只設定路徑沒有設定網域)，所以底下也會分成兩種來說明！</p>
 <h3 id="設定網域以及路徑">設定網域以及路徑</h3>
+<p><a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Ingress-Domain" target="_blank" rel="noopener noreffer">Github 程式碼連結</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -574,6 +575,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </div>
 </div><br>
 <h3 id="只設定路徑沒有設定網域">只設定路徑沒有設定網域</h3>
+<p><a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Ingress-Path" target="_blank" rel="noopener noreffer">Github 程式碼連結</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -817,8 +819,8 @@ kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-03&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/614631214c34377914eaa35f4d933f6b19e153b5" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6146312:&nbsp;# 新增 Kubernetes (K8s) 介紹 - 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>6146312</a></span>
+                <span>更新於 2022-05-04&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/f210a7b2dc3eb38431a59a6e8d928314e0747185" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;f210a7b:&nbsp;# 新增/更新 Kubernetes (K8s) 介紹 - 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>f210a7b</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
