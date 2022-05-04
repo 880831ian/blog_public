@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/k8s-advanced\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  1654 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  3483 ,
         "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-03T17:49:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/k8s-advanced/featured-image.webp"
         title="此文章是介紹 Kubernetes 進階，會介紹 Service、Ingress、Deployment、ReplicaSet 等等，多數是參考網路大神分享，加上自己整理自己能理解的加以介紹，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、Deployment、ReplicaSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1654 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3483 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 7 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -149,12 +149,23 @@ if (!doNotTrack) {
         <li><a href="#nodeport">NodePort</a></li>
         <li><a href="#externalname">ExternalName</a></li>
         <li><a href="#loadbalancer">LoadBalancer</a></li>
-        <li><a href="#實作">實作</a></li>
+        <li><a href="#nodeport-實作">NodePort 實作</a></li>
+        <li><a href="#loadbalancer-實作">LoadBalancer 實作</a></li>
       </ul>
     </li>
     <li><a href="#什麼是-ingress-">什麼是 Ingress ?</a>
       <ul>
         <li><a href="#ingress-功能">Ingress 功能</a></li>
+        <li><a href="#minikube-啟動-ingress">minikube 啟動 Ingress</a></li>
+        <li><a href="#設定-etchosts">設定 /etc/hosts</a></li>
+        <li><a href="#設定網域以及路徑">設定網域以及路徑</a></li>
+        <li><a href="#只設定路徑沒有設定網域">只設定路徑沒有設定網域</a></li>
+        <li><a href="#建立-ingress">建立 Ingress</a>
+          <ul>
+            <li><a href="#設定網域以及路徑-1">設定網域以及路徑</a></li>
+            <li><a href="#只設定路徑沒有設定網域-1">只設定路徑沒有設定網域</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -175,7 +186,7 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl port-forward kubernetes-demo-pod 3000:3000
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl port-forward kubernetes-demo-pod 3000:3000
 
 Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
 Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
@@ -210,8 +221,110 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
     </a><figcaption class="image-caption">k8s service 流程圖 <a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-service-%E7%AF%87-d19d4c6e945f" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Service 篇</a></figcaption>
     </figure>
 <br>
-<h3 id="實作">實作</h3>
-<p>那我們來用 Service (LoadBalancer) 改寫<a href="https://pin-yi.me/k8s" target="_blank" rel="noopener noreffer">基本篇</a>的連線問題 ：(<a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Service" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>)</p>
+<h3 id="nodeport-實作">NodePort 實作</h3>
+<p>那我們來用 Service (NodePort) 改寫<a href="https://pin-yi.me/k8s" target="_blank" rel="noopener noreffer">基本篇</a>的連線問題 ：(<a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Service-NodePort" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>)</p>
+<ul>
+<li>service.yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30001</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
+<p>kind</p>
+<p>該元件的屬性，此設定檔的類型是：Service</p>
+<p>spec</p>
+<ul>
+<li>type：指定此 Service 要使用的方法，這邊我們使用 NodePort。</li>
+<li>ports.protocol：此為連線的網路協議，預設值為 <code>TCP</code>，當然也可以使用 <code>UDP</code>。</li>
+<li>ports.port：此為建立好的 Service 要以哪個 Port 連接到 Pod 上。</li>
+<li>ports.targetPort：此為目標 Pod 的 Port ，通常 port 跟 targetPort 一樣。</li>
+<li>ports.nodePort：此為機器上的 Port 要對應到該 Service 上，這個設定要 nodePort 形式的 Service 才會有效果，假設今天沒有設定 nodePort ，Kubernetes 會自動開一個機器上的 Port 來對應該 Service ，範圍是在 30000 - 37267之間。</li>
+<li>selector.app：如果要使 Service 連接到正確的 Pod 就必須利用 <code>selector</code>，只要原封不動的把 Pod 的 <code>Labels</code> 複製上去即可。</li>
+</ul>
+<br>
+<p>接下來使用 <code>kubectl apply</code> 建立 service：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/service-4.png" title="/images/K8s-advanced/service-4.png" data-thumbnail="/images/K8s-advanced/service-4.png" data-sub-html="<h2>k8s 建立 service (NodePort)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/service-4.png"
+            data-srcset="/images/K8s-advanced/service-4.png, /images/K8s-advanced/service-4.png 1.5x, /images/K8s-advanced/service-4.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/service-4.png" width="1300" />
+    </a><figcaption class="image-caption">k8s 建立 service (NodePort)</figcaption>
+    </figure>
+<br>
+<p>接下來取得 minikube Node IP，可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube ip
+
+192.168.64.11
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>打開瀏覽器搜尋 <code>192.168.64.11:30001</code> 就可以看到我們可愛的柴犬囉 &gt;&lt;</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-1.png" title="/images/K8s-advanced/Shiba-Inu-1.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-1.png" data-sub-html="<h2>成功顯示柴犬</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-1.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-1.png, /images/K8s-advanced/Shiba-Inu-1.png 1.5x, /images/K8s-advanced/Shiba-Inu-1.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-1.png" width="1000" />
+    </a><figcaption class="image-caption">成功顯示柴犬</figcaption>
+    </figure>
+<br>
+<h3 id="loadbalancer-實作">LoadBalancer 實作</h3>
+<p>那我們來用 Service (LoadBalancer) 改寫<a href="https://pin-yi.me/k8s" target="_blank" rel="noopener noreffer">基本篇</a>的連線問題 ：(<a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Service-LoadBalancer" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>)</p>
 <ul>
 <li>service.yaml</li>
 </ul>
@@ -243,21 +356,21 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
 </span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="c"># 外部訪問 Port</span><span class="w">
-</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="c"># Pod內部 Port</span><span class="w">
+</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
 </span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>結構與 Pod 相同，以下簡單說明不同之處：</p>
+</div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
 <p>kind</p>
 <p>該元件的屬性，此設定檔的類型是：Service</p>
 <p>spec</p>
 <ul>
 <li>type：指定此 Service 要使用的方法，這邊我們使用 LoadBalancer。</li>
 <li>ports.protocol：此為連線的網路協議，預設值為 <code>TCP</code>，當然也可以使用 <code>UDP</code>。</li>
-<li>ports.protocol.port：此為外部訪問的 Port。</li>
-<li>ports.protocol.targetPort：此為 Pod 內部訪問的 Port。</li>
+<li>ports.port：此為建立好的 Service 要以哪個 Port 連接到 Pod 上。</li>
+<li>ports.targetPort：此為目標 Pod 的 Port ，通常 port 跟 targetPort 一樣。</li>
 <li>selector.app：如果要使 Service 連接到正確的 Pod 就必須利用 <code>selector</code>，只要原封不動的把 Pod 的 <code>Labels</code> 複製上去即可。</li>
 </ul>
 <br>
@@ -267,11 +380,11 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl apply -f service.yaml
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
 </code></pre></td></tr></table>
 </div>
 </div><br>
-<figure><a class="lightgallery" href="/images/K8s-advanced/service-1.png" title="/images/K8s-advanced/service-1.png" data-thumbnail="/images/K8s-advanced/service-1.png" data-sub-html="<h2>k8s 建立 service</h2>">
+<figure><a class="lightgallery" href="/images/K8s-advanced/service-1.png" title="/images/K8s-advanced/service-1.png" data-thumbnail="/images/K8s-advanced/service-1.png" data-sub-html="<h2>k8s 建立 service (LoadBalancer)</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -279,7 +392,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
             data-srcset="/images/K8s-advanced/service-1.png, /images/K8s-advanced/service-1.png 1.5x, /images/K8s-advanced/service-1.png 2x"
             data-sizes="auto"
             alt="/images/K8s-advanced/service-1.png" width="1300" />
-    </a><figcaption class="image-caption">k8s 建立 service</figcaption>
+    </a><figcaption class="image-caption">k8s 建立 service (LoadBalancer)</figcaption>
     </figure>
 <p>可以看到 dashboard 有我們剛剛啟動的 Service，但是啟動後前面的燈是黃色的，是因為 minikube LoadBalancer 需要透過 <code>tunnel</code> 才可以使用，可以參考 minikube 官網說明：</p>
 <br>
@@ -306,7 +419,7 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">minikube tunnel
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube tunnel
 
 ✅  Tunnel successfully started
 
@@ -338,12 +451,40 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
             data-src="/images/K8s-advanced/Shiba-Inu.png"
             data-srcset="/images/K8s-advanced/Shiba-Inu.png, /images/K8s-advanced/Shiba-Inu.png 1.5x, /images/K8s-advanced/Shiba-Inu.png 2x"
             data-sizes="auto"
-            alt="/images/K8s-advanced/Shiba-Inu.png" width="900" />
+            alt="/images/K8s-advanced/Shiba-Inu.png" width="1000" />
     </a><figcaption class="image-caption">成功顯示柴犬</figcaption>
     </figure>
 <br>
 <h2 id="什麼是-ingress-">什麼是 Ingress ?</h2>
+<p>還記得我們在 Service - NodePort 時，需要打 <code>&lt;ip&gt;:&lt;port&gt;</code> ，但現在網站除了網域以外，基本上不會需要自己去打 IP 以及 Port 了吧！那為了解決這個問題，有了 Ingreess。</p>
 <p>Ingress 可以幫助我們統一對外的 port number，並根據 hostname 或是 pathname 來決定請求要轉發到哪一個 Service 上，之後就可以利用該 Service 連接到 Pod 來處理服務。</p>
+<p>我們先來看一下一般的 Service ：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/describe-service.png" title="/images/K8s-advanced/describe-service.png" data-thumbnail="/images/K8s-advanced/describe-service.png" data-sub-html="<h2>Service 圖片來源：[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/describe-service.png"
+            data-srcset="/images/K8s-advanced/describe-service.png, /images/K8s-advanced/describe-service.png 1.5x, /images/K8s-advanced/describe-service.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/describe-service.png" width="800" />
+    </a><figcaption class="image-caption">Service 圖片來源：<a href="https://ithelp.ithome.com.tw/articles/10196261" target="_blank" rel="noopener noreffer">[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</a></figcaption>
+    </figure>
+<p>可以看到當多個 Service 同時運行時，Node 都需要有對應的 port number 去對應每個 Server 的 port number。像是 GCP 這種雲端服務，每台機器都會配置屬於自己的防火牆。這也代表，不論新增、刪除 Service 物件，都必須要額外多調整防火牆的設定，Port 的管理也想對複雜。</p>
+<br>
+<p>若是使用 Ingress，我們只需要開放一個對外的 port numer，Ingree 可以在設定檔中設定不同的路徑，決定要將使用者的請求傳送到哪一個 Service 物件上：</p>
+<figure><a class="lightgallery" href="/images/K8s-advanced/describe-ingress.png" title="/images/K8s-advanced/describe-ingress.png" data-thumbnail="/images/K8s-advanced/describe-ingress.png" data-sub-html="<h2>Ingress 圖片來源：[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/describe-ingress.png"
+            data-srcset="/images/K8s-advanced/describe-ingress.png, /images/K8s-advanced/describe-ingress.png 1.5x, /images/K8s-advanced/describe-ingress.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/describe-ingress.png" width="900" />
+    </a><figcaption class="image-caption">Ingress 圖片來源：<a href="https://ithelp.ithome.com.tw/articles/10196261" target="_blank" rel="noopener noreffer">[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</a></figcaption>
+    </figure>
+<p>這樣的設計，除了讓維運人員不需要維護多個 port 或是頻繁的更改防火牆外，可以自訂條件的功能，也使得請求的導向可以更加彈性。</p>
+<br>
 <h3 id="ingress-功能">Ingress 功能</h3>
 <ul>
 <li>將不同&quot;路徑&quot;的請求對應到不同的 Service 物件</li>
@@ -360,8 +501,315 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </ul>
 <p>SSL 全名是傳輸層安全性協定，而網站通常都會利用 https 進行加密以確保資料安全，但 Service 與 Pod 之間的溝通都是以無加密方式傳輸，所以 Ingress 就支援解密，讓 Service 與 Pod 可以正常溝通傳遞資料。</p>
 <br>
+<h3 id="minikube-啟動-ingress">minikube 啟動 Ingress</h3>
+<p>由於 minikube 預設沒有啟動 Ingress 功能，因此需要額外使用 <code>minikube addons enable ingress</code> 讓 minikube 啟動 Ingress (Ingress 也需要先安裝 Hyperfix)：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/ingress.png" title="/images/K8s-advanced/ingress.png" data-thumbnail="/images/K8s-advanced/ingress.png" data-sub-html="<h2>Ingress 圖片來源：[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/ingress.png"
+            data-srcset="/images/K8s-advanced/ingress.png, /images/K8s-advanced/ingress.png 1.5x, /images/K8s-advanced/ingress.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/ingress.png" width="900" />
+    </a><figcaption class="image-caption">Ingress 圖片來源：<a href="https://ithelp.ithome.com.tw/articles/10196261" target="_blank" rel="noopener noreffer">[Day 19] 在 Kubernetes 中實現負載平衡 - Ingress Controller</a></figcaption>
+    </figure>
+<br>
+<h3 id="設定-etchosts">設定 /etc/hosts</h3>
+<p>加入 Ingress 基本上就需要網域才可以使用，但我們在本機上做練習，所以只要修改本機的 host 檔案就可以了(加入 minikube ip 以及想要的網域名稱)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vim /etc/hosts
+
+192.168.64.11 test.tw
+192.168.64.11 test-test.tw
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>因為有兩種方法，第一種 (設定網域以及路徑)跟第二種 (只設定路徑沒有設定網域)，所以底下也會分成兩種來說明！</p>
+<h3 id="設定網域以及路徑">設定網域以及路徑</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;test.tw&#34;</span><span class="w">
+</span><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="只設定路徑沒有設定網域">只設定路徑沒有設定網域</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>Ingress 整體寫法與 Service 差不多，只差在 <code>spec</code> 的細部設定，我們就來說一下 spec 設定吧：</p>
+<p>對了～ Ingress 的 apiVersion 不像是 Pod 跟 Service 一樣使用 <code>v1</code> ，因為目前支援 Ingress 的 API 只有 networking.k8s.io/v1，詳細可以參考 <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener noreffer">kubernetes Ingress 官網</a></p>
+<ul>
+<li>rules</li>
+</ul>
+<p>這代表這個 Ingress 的轉發規則，此 Ingress 所有的設定都必須寫載 <code>rules</code> 內。</p>
+<ul>
+<li>host</li>
+</ul>
+<p>設定可以連接到 Service 物件的網路名稱。</p>
+<ul>
+<li>path</li>
+</ul>
+<p>設定可以連接到 Service 物件的路徑名稱。</p>
+<ul>
+<li>pathType</li>
+</ul>
+<p>分為 <code>Prefix</code> 和 <code>Exact</code> 兩種，Prefix：前綴符合就符合規則 ; Exact：需要完全一致才行，包含大小寫。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">type</th>
+<th style="text-align:center">path</th>
+<th style="text-align:center">request path</th>
+<th style="text-align:center">macth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Prefix</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">全部路徑</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Exact</td>
+<td style="text-align:center">/aa</td>
+<td style="text-align:center">/aa</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Exact</td>
+<td style="text-align:center">/bb</td>
+<td style="text-align:center">/cc</td>
+<td style="text-align:center">No</td>
+</tr>
+<tr>
+<td style="text-align:center">Prefix</td>
+<td style="text-align:center">/aa</td>
+<td style="text-align:center">/aa,/aa/</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Prefix</td>
+<td style="text-align:center">/aa/cc</td>
+<td style="text-align:center">/aa/ccc</td>
+<td style="text-align:center">No</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>service.name</li>
+</ul>
+<p>設定連接到的 Service 名稱，這裡要填寫的就是 Service 中在 <code>metadata</code> 內寫的 <code>name</code>。</p>
+<ul>
+<li>service.port.number</li>
+</ul>
+<p>設定要經由哪個 port 連接到 Service 物件，就像是 Service 的 Port 要連接到 Pod 的 targetPort。</p>
+<br>
+<h3 id="建立-ingress">建立 Ingress</h3>
+<p>一樣我們分成兩個做說明</p>
+<h4 id="設定網域以及路徑-1">設定網域以及路徑</h4>
+<p>一樣使用 <code>apply</code> 來建立：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
+
+ingress.networking.k8s.io/kubernetes-demo-ingress created
+</code></pre></td></tr></table>
+</div>
+</div><br> 
+<p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
+
+NAME                      CLASS   HOSTS     ADDRESS         PORTS   AGE
+kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
+</code></pre></td></tr></table>
+</div>
+</div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
+<br>
+<ul>
+<li><code>test.tw</code>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-3.png" title="/images/K8s-advanced/Shiba-Inu-3.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-3.png" data-sub-html="<h2>成功顯示柴犬</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-3.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-3.png, /images/K8s-advanced/Shiba-Inu-3.png 1.5x, /images/K8s-advanced/Shiba-Inu-3.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-3.png" width="1000" />
+    </a><figcaption class="image-caption">成功顯示柴犬</figcaption>
+    </figure></li>
+</ul>
+<br>
+<ul>
+<li><code>test-test.tw </code>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-4.png" title="/images/K8s-advanced/Shiba-Inu-4.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-4.png" data-sub-html="<h2>顯示 404</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-4.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-4.png, /images/K8s-advanced/Shiba-Inu-4.png 1.5x, /images/K8s-advanced/Shiba-Inu-4.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-4.png" width="800" />
+    </a><figcaption class="image-caption">顯示 404</figcaption>
+    </figure></li>
+</ul>
+<br>
+<p>從上面結果可以知道，因為我們有設定 domain，所以只有符合的才會連接到 Service 。</p>
+<br>
+<h4 id="只設定路徑沒有設定網域-1">只設定路徑沒有設定網域</h4>
+<p>一樣使用 <code>apply</code> 來建立：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
+
+ingress.networking.k8s.io/kubernetes-demo-ingress created
+</code></pre></td></tr></table>
+</div>
+</div><br> 
+<p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
+
+NAME                      CLASS   HOSTS   ADDRESS         PORTS   AGE
+kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
+</code></pre></td></tr></table>
+</div>
+</div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
+<br>
+<ul>
+<li><code>test.tw</code>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-3.png" title="/images/K8s-advanced/Shiba-Inu-3.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-3.png" data-sub-html="<h2>成功顯示柴犬</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-3.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-3.png, /images/K8s-advanced/Shiba-Inu-3.png 1.5x, /images/K8s-advanced/Shiba-Inu-3.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-3.png" width="1000" />
+    </a><figcaption class="image-caption">成功顯示柴犬</figcaption>
+    </figure></li>
+</ul>
+<br>
+<ul>
+<li><code>test-test.tw </code>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-5.png" title="/images/K8s-advanced/Shiba-Inu-5.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-5.png" data-sub-html="<h2>顯示 404</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-5.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-5.png, /images/K8s-advanced/Shiba-Inu-5.png 1.5x, /images/K8s-advanced/Shiba-Inu-5.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-5.png" width="1000" />
+    </a><figcaption class="image-caption">顯示 404</figcaption>
+    </figure></li>
+</ul>
+<br>
+<p>從上面結果可以知道，可以發現 hosts 的部分是 <code>*</code> ，這代表所有背後指向 <code>192.168.64.11</code> 這個 IP 的網域都可以直接連接到 Service 物件。</p>
+<br>
 <h2 id="參考資料">參考資料</h2>
-<p><a href="https://medium.com/andy-blog/tagged/k8s" target="_blank" rel="noopener noreffer">Kubernetes 那些事</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-service-%E7%AF%87-d19d4c6e945f" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Service 篇</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-ingress-%E7%AF%87-%E4%B8%80-92944d4bf97d" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Ingress 篇（一）</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-ingress-%E7%AF%87-%E4%BA%8C-559c7a41404b" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Ingress 篇（二）</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kubernetes/">Kubernetes</a>
                 </span><span><a href="/tags/k8s/">K8s</a>
