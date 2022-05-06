@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s-advanced/" /><meta property="og:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-03T10:39:00+08:00" />
-<meta property="article:modified_time" content="2022-05-04T17:45:52+08:00" />
+<meta property="article:modified_time" content="2022-05-06T16:33:08+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/k8s-advanced\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  5899 ,
-        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-04T17:45:52+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  9080 ,
+        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-06T16:33:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/k8s-advanced/featured-image.webp"
         title="此文章是介紹 Kubernetes 進階，會介紹 Service、Ingress、Deployment、ReplicaSet 等等，多數是參考網路大神分享，加上自己整理自己能理解的加以介紹，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5899 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 12 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9080 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 19 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -183,6 +183,21 @@ if (!doNotTrack) {
         <li><a href="#replication-controller-建立">Replication Controller 建立</a></li>
       </ul>
     </li>
+    <li><a href="#什麼是-replicaset-">什麼是 ReplicaSet ?</a>
+      <ul>
+        <li><a href="#replcaset-的特性">ReplcaSet 的特性</a></li>
+      </ul>
+    </li>
+    <li><a href="#什麼是-deployment-">什麼是 Deployment ?</a>
+      <ul>
+        <li><a href="#deployment-的特性">Deployment 的特性</a></li>
+        <li><a href="#deployment-搭配-replicaset-寫法">Deployment 搭配 ReplicaSet 寫法</a></li>
+        <li><a href="#deployment-建立">Deployment 建立</a></li>
+        <li><a href="#如何更新-deployment-內部的-pod">如何更新 Deployment 內部的 Pod</a></li>
+        <li><a href="#deployment-回朔版本">Deployment 回朔版本</a></li>
+        <li><a href="#為甚麼不用-replication-controller">為甚麼不用 Replication Controller</a></li>
+      </ul>
+    </li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -201,12 +216,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl port-forward kubernetes-demo-pod 3000:3000
-
-Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
-Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
-Handling connection <span class="k">for</span> <span class="m">3000</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl port-forward kubernetes-demo-pod 3000:3000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
+</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
+</span></span><span class="line"><span class="cl">Handling connection <span class="k">for</span> <span class="m">3000</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我們把 kubernetes-demo-pod 這個 pod，用 port-forward 設定本機 3000 port 與 pod  3000 port 做映射，當我們瀏覽 <code>http://localhost:3000</code> 就可以看到 pod 裡面的內容了！</p>
 <p>雖然很方便，可以馬上就開好要映射的 port，但缺點就是每次建立 pod 時都需要手動去打指令來設定 port，且時間久了，也會忘記本機上哪些 port 有被使用到，因此這邊推薦使用 <code>Service</code> 來取代 <code>port-forward</code>，那我們來看看 <code>Service</code> 是什麼吧。</p>
@@ -260,22 +275,22 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
-</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30001</span><span class="w">
-</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
 <p>kind</p>
@@ -296,8 +311,8 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f service.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/service-4.png" title="/images/K8s-advanced/service-4.png" data-thumbnail="/images/K8s-advanced/service-4.png" data-sub-html="<h2>k8s 建立 service (NodePort)</h2>">
@@ -319,10 +334,10 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube ip
-
-192.168.64.11
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube ip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">192.168.64.11
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>打開瀏覽器搜尋 <code>192.168.64.11:30001</code> 就可以看到我們可愛的柴犬囉 &gt;&lt;</p>
@@ -361,21 +376,21 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
-</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
 <p>kind</p>
@@ -395,8 +410,8 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f service.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/service-1.png" title="/images/K8s-advanced/service-1.png" data-thumbnail="/images/K8s-advanced/service-1.png" data-sub-html="<h2>k8s 建立 service (LoadBalancer)</h2>">
@@ -434,14 +449,14 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube tunnel
-
-✅  Tunnel successfully started
-
-📌  NOTE: Please <span class="k">do</span> not close this terminal as this process must stay alive <span class="k">for</span> the tunnel to be accessible ...
-
-🏃  Starting tunnel <span class="k">for</span> service kubernetes-demo-service.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube tunnel
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✅  Tunnel successfully started
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">📌  NOTE: Please <span class="k">do</span> not close this terminal as this process must stay alive <span class="k">for</span> the tunnel to be accessible ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">🏃  Starting tunnel <span class="k">for</span> service kubernetes-demo-service.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>就可以看到燈號已經變成綠燈，在外部 Endpoints 多一個連結，可以直接點開</p>
@@ -540,11 +555,11 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vim /etc/hosts
-
-192.168.64.11 test.tw
-192.168.64.11 test-test.tw
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim /etc/hosts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">192.168.64.11 test.tw
+</span></span><span class="line"><span class="cl">192.168.64.11 test-test.tw
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>因為有兩種方法，第一種 (設定網域以及路徑)跟第二種 (只設定路徑沒有設定網域)，所以底下也會分成兩種來說明！</p>
@@ -570,23 +585,23 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;test.tw&#34;</span><span class="w">
-</span><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
-</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
-</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
-</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
-</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;test.tw&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="只設定路徑沒有設定網域">只設定路徑沒有設定網域</h3>
@@ -610,22 +625,22 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
-</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
-</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
-</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
-</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>Ingress 整體寫法與 Service 差不多，只差在 <code>spec</code> 的細部設定，我們就來說一下 spec 設定吧：</p>
@@ -708,10 +723,10 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
-
-ingress.networking.k8s.io/kubernetes-demo-ingress created
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl apply -f ingress.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ingress.networking.k8s.io/kubernetes-demo-ingress created
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br> 
 <p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
@@ -723,11 +738,11 @@ ingress.networking.k8s.io/kubernetes-demo-ingress created
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
-
-NAME                      CLASS   HOSTS     ADDRESS         PORTS   AGE
-kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl  get ing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                      CLASS   HOSTS     ADDRESS         PORTS   AGE
+</span></span><span class="line"><span class="cl">kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
 <br>
@@ -770,10 +785,10 @@ kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
-
-ingress.networking.k8s.io/kubernetes-demo-ingress created
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl apply -f ingress.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ingress.networking.k8s.io/kubernetes-demo-ingress created
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br> 
 <p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
@@ -785,11 +800,11 @@ ingress.networking.k8s.io/kubernetes-demo-ingress created
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
-
-NAME                      CLASS   HOSTS   ADDRESS         PORTS   AGE
-kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl  get ing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                      CLASS   HOSTS   ADDRESS         PORTS   AGE
+</span></span><span class="line"><span class="cl">kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
 <br>
@@ -900,7 +915,7 @@ kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
 <p>上面有提到 Replication Controller 可以利用設定 <code>replica</code> 的方式快速建立 Pod 數量，除了建立之外 Replication Controller 也確保 Pod 數量與我們設定的 <code>replica</code> 一致，假如今天不小心刪除其中一個 Pod，這時候 Replication Controller 會自動再產生一個新的 Pod 來補齊刪除的 Pod 空缺，所以我們可以善用 Replication Controller 來讓系統更佳穩定。</p>
 <br>
 <h3 id="replication-controller-寫法">Replication Controller 寫法</h3>
-<p>我們來修改一下之前的 kubernetes-demo.yaml Pod 檔案：</p>
+<p>我們來修改一下之前的 kubernetes-demo.yaml Pod 檔案：(<a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/ReplicationController" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -923,25 +938,25 @@ kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicationController</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
-</span><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
-</span><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicationController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>這個設定檔看似複雜但其實很簡單，可以發現 <code>template</code> 區塊內的設定基本上就是 Pod 的設定，再加上一些屬於 Replication Controller 的設定。</p>
 <p>由於我們要建立的是 Replication Controller，因此在一開始的 <code>spec</code> 要填的是 Replication Controller 的設定，所以 <code>replica</code> 會擺在第一個 <code>spec</code> 內。</p>
@@ -957,10 +972,10 @@ kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f kubernetes-demo.yaml
-
-replicationcontroller/kubernetes-demo created
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f kubernetes-demo.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">replicationcontroller/kubernetes-demo created
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>來查看一下 Replication Controller 是否有成功建立起來，可以使用 <code>kubectl get rc</code> 來查詢：</p>
@@ -972,11 +987,11 @@ replicationcontroller/kubernetes-demo created
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get rc
-
-NAME              DESIRED   CURRENT   READY   AGE
-kubernetes-demo   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       28s
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get rc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">kubernetes-demo   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       28s
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接下來可以查看 Pod 是否有出現 3 個，所以使用 <code>kubectl get po</code> 來查詢：</p>
@@ -990,13 +1005,13 @@ kubernetes-demo   <span class="m">3</span>         <span class="m">3</span>     
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get po
-
-NAME                    READY   STATUS    RESTARTS   AGE
-kubernetes-demo-4zkxm   1/1     Running   <span class="m">0</span>          37s
-kubernetes-demo-cp8jt   1/1     Running   <span class="m">0</span>          37s
-kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get po
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                    READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">kubernetes-demo-4zkxm   1/1     Running   <span class="m">0</span>          37s
+</span></span><span class="line"><span class="cl">kubernetes-demo-cp8jt   1/1     Running   <span class="m">0</span>          37s
+</span></span><span class="line"><span class="cl">kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到為了不要讓名稱重複，所以 Replication Controller 會在每一個 Pod 名稱後面加入亂數。</p>
 <br>
@@ -1040,6 +1055,391 @@ kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
 <p>綜上所述，可以知道 Replication Controller 真的會控制 Pod 數量，那我們刪掉一個 Pod 他就重生一個，這樣不會永遠都刪不完嗎？其實我們可以把 Replication Controller 砍掉就好了，而 Replication Controller 刪除時，也會自動終止底下的 Pod ，最後 Pod 都會自動刪除。</p>
 <p>但其實 Kubernetes 官方不建議使用 Replication Controller 的方式來控制 Pod，而是建議使用 Deployment 搭配 ReplicaSet 來控制，我們接下來要介紹的主題就是：<code>Deployment</code> 跟 <code>ReplicaSet</code> 。</p>
 <br>
+<h2 id="什麼是-replicaset-">什麼是 ReplicaSet ?</h2>
+<p>看到 <code>Replica</code> 大家應該就知道這個跟控制 Pod 的數量有關係了！其實 <code>Replica</code> 跟 <code>Replication Controller</code> 很像，<code>ReplcaSet</code> 提供了更彈性的 selector，在 <code>Replication Controller</code> 中我們必須要把完整的 <code>key/value</code> Label 寫上去，在 <code>ReplicaSet</code> 不用這個麻煩，但 <code>ReplicaSet</code> 一樣也可以寫上完整的 Label ，這個就看開發者要怎麼去設計了！</p>
+<br>
+<h3 id="replcaset-的特性">ReplcaSet 的特性</h3>
+<p>上面有提到 <code>ReplcaSet</code> 非常彈性的 selector，這邊要說的是 <code>ReplcaSet</code> 是如何讓 selector 變得更加彈性，這裡一共要介紹兩種 <code>ReplcaSet</code> 的 selector 寫法：</p>
+<br>
+<ul>
+<li>matchLabels</li>
+</ul>
+<p><code>matchLabels</code> 其實跟一般的 selector 做的事情一模一樣，也要寫出完整的 Label 出來，整體大概會長像這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>matchExpressions</li>
+</ul>
+<p><code>matchExpressions</code> 則是提供更彈性的選取條件，每一筆條件主要由 key、operator、value 組成，並且使用一個 <code>{ }</code> 包起來，看起來很像 JS 的 物件型態，整體大概會長像這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- {<span class="nt">key: app, operator: In, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">demo, test]}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>看起來似乎很複雜但其實很容易理解，上面的示範中 Expression 翻成中文就是只要 Label 的 key 是 <code>app</code> 且值符合 <code>[demo, test]</code> 陣列中的其中一個值的 Pod 就會被選取到。</p>
+<br>
+<p>我們在隨便取得例子：假設有一個 <code>matchExpression</code> 長得像這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- {<span class="nt">key: env, operator: NotIn, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">hello, hi]}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們可以得知要選取 Label 的 key 為 <code>env</code> 且值不能是 <code>[hello, hi]</code> 其中一個值的 Pod。</p>
+<br>
+<h2 id="什麼是-deployment-">什麼是 Deployment ?</h2>
+<p>Deployment 是一種負責管理 <code>ReplicaSet</code> 以及控制 Pod 更新的物件，在先前的文章都沒有提到 Pod 的更新，是因為 Pod 無法直接做更新，必須砍掉重建才會是新的內容，有了 Deployment 之後我們就可以很方便的進行 Pod 的更新了！</p>
+<p>由於 <code>ReplicaSet</code> 本身也會控制 Pod，所以整個看起來會像是 Deployment 控制 Pod，但其實真正控制 Pod 的是 <code>ReplicaSet</code> ~</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/deployment.png" title="/images/K8s-advanced/deployment.png" data-thumbnail="/images/K8s-advanced/deployment.png" data-sub-html="<h2>Deployment 與 ReplicaSet 架構圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/deployment.png"
+            data-srcset="/images/K8s-advanced/deployment.png, /images/K8s-advanced/deployment.png 1.5x, /images/K8s-advanced/deployment.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/deployment.png" width="500" />
+    </a><figcaption class="image-caption">Deployment 與 ReplicaSet 架構圖</figcaption>
+    </figure>
+<br>
+<h3 id="deployment-的特性">Deployment 的特性</h3>
+<ul>
+<li>部署一個應用服務</li>
+</ul>
+<p>上面我們提到 Deployment 可以幫助 Pod 進行更新，通常在開發一個產品的時候一定會不斷的更新，透過 Deployment 我們可以快速的更新 Pod 內部的 container，所以通常在部署應用的時候都會使用 Deployment 來進行部署。</p>
+<br>
+<ul>
+<li>在服務升級過程中可以達成無停機服務遷移 (Zero downtime deployment)</li>
+</ul>
+<p>在 Deployment 幫 Pod 內部 container 進行更新的過程有一個專有名稱叫做 <code>RollingUpdate</code> ，<code>RollingUpdate</code> 翻成中文的意思是滾動更新，在更新的過程中 Deployment 會先產生一個新的 ReplicaSet 而這個 ReplicaSet 內部的 Pod 會運行新的內容，待新的 Pod 被 Kubernetes 確認可以正常運行後 Deployment 才會將舊的 ReplicaSet 進行取代的動作，這樣就完成了無停機服務遷移了。</p>
+<br>
+<ul>
+<li>可以 Rollback 到先前版本</li>
+</ul>
+<p>每一次的 Deployment 在進行 RollingUpdate 的時候都會把當前的 ReplicaSet 做一個版本控制的紀錄，就像是 git commit 一樣，所以我們也可以利用這些紀錄來快速恢復成以前的版本，這些 Pod 也就會變成先前的內容。</p>
+<br>
+<p>講完基本的介紹後，接下來要介紹的是要如何撰寫以及建立一個 Deployment：</p>
+<h3 id="deployment-搭配-replicaset-寫法">Deployment 搭配 ReplicaSet 寫法</h3>
+<p><a href="https://github.com/880831ian/kubernetes-tutorial/tree/master/Deployment-ReplicaSet" target="_blank" rel="noopener noreffer">Github 程式碼連結</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">minReadySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">revisionHistoryLimit</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>看到 Deployment 是不是覺得跟 Replication Controller 非常相似呢？其實 Deployment 就多了再 RollingUpdate 時的設定以及 ReplicaSet 的設定而已，下面來說明一下這些設定：</p>
+<p>首先一開始的 apiVersion 的值已經不是 <code>v1</code> 了，改成 <code>apps/v1</code>，由於 Kubernetes 針對 Deployment、RollingUpdate、ReplicaSet 等等設定了新的 <code>apiVersion</code> 值，通常都用 <code>apps/v1</code> 都是用來設定跟應用程式有關的架設，所以 Deployment 這邊要記得改成 <code>apps/v1</code> 歐！</p>
+<br>
+<p>在 <code>spec</code> 的地方有看到 <code>strategy</code> 新的設定值，這個主要用來設定 Deployment 更新的策略，這裡的 <code>strategy.type</code> 有兩種設定：</p>
+<ul>
+<li>RollingUpdate</li>
+</ul>
+<p>此為預設值，先建立新的 ReplicaSet 並控制新內容的 Pod，待新 Pod 也可以正常運作後，才會通知 ReplicaSet 將原有的 Pod 給移除，由於過程中會有新舊兩種 Pod 同時上線，因此會有一段時間是新舊內容會隨機出現的情形發生。</p>
+<p>這邊可以看到除了 <code>type</code> 以外還寫了 <code>maxSurage</code> 以及 <code>maxUnavailablle</code>，這兩個設定值為 RollingUpdate 過程的設定，接下來一樣說明一下兩個設定的功能：</p>
+<p><code>macSurge</code>：代表 ReplicaSet 可以產生比 Deployment 設定中的 <code>replica</code> 所設定的數量還多幾個出來，多新增 Pod 的好處是在 RollingUpdate 過程中可以減少舊內容顯示在頁面的機率。</p>
+<p><code>macUnavailable</code>：代表在 RollingUpdate 過程中，可以允許多少的 Pod 無法使用，假設 <code>macSurge</code> 設定非 0，<code>maxUnavailable</code> 也要設定非 0。</p>
+<br>
+<ul>
+<li>Recreate</li>
+</ul>
+<p>先通知當前 ReplicaSet 把舊的 Pod 砍掉再產生新的 ReplicaSet 並控制新內容的 Pod，由於先砍掉 Pod 才建立新的 Pod ，所以中間有一段時間伺服器會無法連線。</p>
+<p>也因為 Recreate 會砍掉重建，因此 Recreate 無法像 RollingUpdate 設定 <code>maxSurge</code> 以及 <code>macUnavailable</code>。</p>
+<br>
+<p>講完 Deployment 的更新流程設定後，接下來要講 Deployment 完成更新後的設定，這邊有兩種設定：</p>
+<ul>
+<li>minReadySeconds</li>
+</ul>
+<p><code>minReadySeconds</code> 代表當新的 Pod 建立好並且運行的 container 沒有 crash 的情況下，最少需要多少時間可以開始接受 Request，預設為 0 秒，代表當 Pod 一被建立起來，就可以馬上開始接受 Request，假設今天 container 在剛運行的時後需要花時間做初始化，這時候就可以利用 <code>minReadySeconds</code> 讓此 Pod 不會馬上接受到 Request ，這個是選填的設定。</p>
+<br>
+<ul>
+<li>revisionHistoryLimit</li>
+</ul>
+<p>每次 Deployment 在進行更新的時候，都會產生一個新的 ReplicaSet 用來進行版本控制，在 Deployment 中這個專有名稱稱為 <code>revision</code>，所以這個設定就是要設定最多只會有多少個 <code>revision</code>，這個也是選填的設定。</p>
+<br>
+<h3 id="deployment-建立">Deployment 建立</h3>
+<p>老樣子，使用 <code>apply</code> 來建立 Deployment，我們可使用 <code>kubectl get deploy</code> 來查看是否建立成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get deploy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class="line"><span class="cl">kubernetes-deployment   3/3     <span class="m">3</span>            <span class="m">3</span>           8m31s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>由於 Deployment 直接管理 ReplcaSet，因此我們可以查看 ReplcaSet 是否也有被建立起來：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get rs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       10m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到 ReplcaSet 後面會自動加上一小段亂數，這邊是 Deployment 在建立 ReplicaSet 的時候加進去的，這樣之後可以更方便的利用 ReplcaSet 進行 rollback 的動作。</p>
+<br>
+<p>由於 ReplicaSet 會直接管理 Pod，因此我們也可以查看 Pod 是否有被建立起來：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get po
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                                    READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-cjbz6   1/1     Running   <span class="m">0</span>          12m
+</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-mjvd7   1/1     Running   <span class="m">0</span>          12m
+</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-r92zt  1/1     Running   <span class="m">0</span>          11m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>那我們用 <code>minikube dashboard</code> 來查看一下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/DeploymentReplicaSet.png" title="/images/K8s-advanced/DeploymentReplicaSet.png" data-thumbnail="/images/K8s-advanced/DeploymentReplicaSet.png" data-sub-html="<h2>minikube dashboard 查看 Deployment 與 ReplicaSet</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/DeploymentReplicaSet.png"
+            data-srcset="/images/K8s-advanced/DeploymentReplicaSet.png, /images/K8s-advanced/DeploymentReplicaSet.png 1.5x, /images/K8s-advanced/DeploymentReplicaSet.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/DeploymentReplicaSet.png" width="1200" />
+    </a><figcaption class="image-caption">minikube dashboard 查看 Deployment 與 ReplicaSet</figcaption>
+    </figure>
+<br>
+<p>Deployment 的最後要來說的是要如何更新底下的 Pod 呢，大家就接著往下看囉！</p>
+<h3 id="如何更新-deployment-內部的-pod">如何更新 Deployment 內部的 Pod</h3>
+<p>大家都知道 Pod 是 Kubernetes 最小的運行單位，所以更新 Pod 的意思就是把內部運行的 container 進行更新，也就是說我們只要更新 Pod 的 image 就可以順利的讓 Pod 運行最新的內容，Deployment 就是運用這個原理才進行 Pod 的內容更新，方法也很簡單只要利用 <code>Set</code> 這個參數就可以了，可以使用 <code>kubectl set -h</code> 可以看 <code>set</code> 這個參數真正的用法。</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/set.png" title="/images/K8s-advanced/set.png" data-thumbnail="/images/K8s-advanced/set.png" data-sub-html="<h2>kubectl set</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/set.png"
+            data-srcset="/images/K8s-advanced/set.png, /images/K8s-advanced/set.png 1.5x, /images/K8s-advanced/set.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/set.png" width="800" />
+    </a><figcaption class="image-caption">kubectl set</figcaption>
+    </figure>
+<br>
+<p>可以看到 <code>set</code> 後面還要接 <code>SUBCOMMAND</code>，而 <code>SUBCOMMAND</code> 就是 <code>Available Commands</code> 的內容，由於我們要更新的是 image 所以這邊的 <code>SUBCOMMAND</code> 會是 <code>image</code>，完整指令是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl <span class="nb">set</span> image deployment/kubernetes-deployment kubernetes-demo-container<span class="o">=</span>880831ian/kubernetes-demo:v1 --record
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/kubernetes-deployment image updated
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>使用 set 來更新 Pod，格式是 <code>kubectl set image deployment/&lt;deployment name&gt; &lt;pod name&gt;=&lt;要更新的 image&gt;</code>，後面加上 <code>--record</code> 參數，這樣會紀錄每次更新的時候到底更新哪些內容，這樣日後要進行 rollback 也會比較容易知道要 rollback 回哪個 revision，由於要顯示差異，所以在 <a href="https://hub.docker.com/repository/docker/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">dockerhub</a> 上又多推一個版本 <code>v1</code>，將原本柴犬的圖片改成 kubernetes logo，等於我們更新是從 <code>kubernetes-demo:latest</code> 更新至 <code>kubernetes-demo:v1</code>，我們來看看它的變化吧！</p>
+<br>
+<p>這是還沒更新 Pod 前的 Deployment 與 ReplicaSet：</p>
+<figure><a class="lightgallery" href="/images/K8s-advanced/DeploymentReplicaSet.png" title="/images/K8s-advanced/DeploymentReplicaSet.png" data-thumbnail="/images/K8s-advanced/DeploymentReplicaSet.png" data-sub-html="<h2>Deployment 與 ReplicaSet</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/DeploymentReplicaSet.png"
+            data-srcset="/images/K8s-advanced/DeploymentReplicaSet.png, /images/K8s-advanced/DeploymentReplicaSet.png 1.5x, /images/K8s-advanced/DeploymentReplicaSet.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/DeploymentReplicaSet.png" width="1200" />
+    </a><figcaption class="image-caption">Deployment 與 ReplicaSet</figcaption>
+    </figure>
+<br>
+<p>我們用 set 下完更新指令後，可以查看 ReplicaSet 以及 Pod 在更新過程中的變化：</p>
+<figure><a class="lightgallery" href="/images/K8s-advanced/set-1.png" title="/images/K8s-advanced/set-1.png" data-thumbnail="/images/K8s-advanced/set-1.png" data-sub-html="<h2>ReplicaSet 以及 Pod 在更新過程中的變化</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/set-1.png"
+            data-srcset="/images/K8s-advanced/set-1.png, /images/K8s-advanced/set-1.png 1.5x, /images/K8s-advanced/set-1.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/set-1.png" width="1200" />
+    </a><figcaption class="image-caption">ReplicaSet 以及 Pod 在更新過程中的變化</figcaption>
+    </figure>
+<br>
+<p>可以發現 strategy 為 RollingUpdate 的時候並不會把舊有的 Pod 移除反而會讓新舊 Pod 同時上線，以達到無停機服務的作用，但這樣在網頁中就有可能會同時出現新舊內容。</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/set-2.png" title="/images/K8s-advanced/set-2.png" data-thumbnail="/images/K8s-advanced/set-2.png" data-sub-html="<h2>因為 strategy 為 RollingUpdate，所以會同時出現新舊內容</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/set-2.png"
+            data-srcset="/images/K8s-advanced/set-2.png, /images/K8s-advanced/set-2.png 1.5x, /images/K8s-advanced/set-2.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/set-2.png" width="1200" />
+    </a><figcaption class="image-caption">因為 strategy 為 RollingUpdate，所以會同時出現新舊內容</figcaption>
+    </figure>
+<br>
+<p>最後等到新的 Pod 已經建立完成，且正常運作，ReplicaSet 就會把舊的 Pod 給移掉：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/set-3.png" title="/images/K8s-advanced/set-3.png" data-thumbnail="/images/K8s-advanced/set-3.png" data-sub-html="<h2>新的 Pod 建立成功，並刪除舊 Pod</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/set-3.png"
+            data-srcset="/images/K8s-advanced/set-3.png, /images/K8s-advanced/set-3.png 1.5x, /images/K8s-advanced/set-3.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/set-3.png" width="1200" />
+    </a><figcaption class="image-caption">新的 Pod 建立成功，並刪除舊 Pod</figcaption>
+    </figure>
+<br>
+<p>再次瀏覽就可以發現已經變成新的內容了！代表我們完成更新動作～</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/set-4.png" title="/images/K8s-advanced/set-4.png" data-thumbnail="/images/K8s-advanced/set-4.png" data-sub-html="<h2>更新至 kubernetes-demo:v1</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/set-4.png"
+            data-srcset="/images/K8s-advanced/set-4.png, /images/K8s-advanced/set-4.png 1.5x, /images/K8s-advanced/set-4.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/set-4.png" width="600" />
+    </a><figcaption class="image-caption">更新至 kubernetes-demo:v1</figcaption>
+    </figure>
+<br>
+<h3 id="deployment-回朔版本">Deployment 回朔版本</h3>
+<p>我們講完更新後，接著要講如何 rollback 回以前的版本，首先我們必須使用 <code>rollout</code> 這個參數，一樣使用 <code>kubectl rollout -h</code> 可以查看 rollout 的用法，跟 <code>set</code> 十分相似。</p>
+ <br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/rollout.png" title="/images/K8s-advanced/rollout.png" data-thumbnail="/images/K8s-advanced/rollout.png" data-sub-html="<h2>更新至 kubernetes-demo:v1</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/rollout.png"
+            data-srcset="/images/K8s-advanced/rollout.png, /images/K8s-advanced/rollout.png 1.5x, /images/K8s-advanced/rollout.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/rollout.png" width="800" />
+    </a><figcaption class="image-caption">更新至 kubernetes-demo:v1</figcaption>
+    </figure>
+<br>
+<p>由於我們這邊要 rollback ，所以 <code>SUBCOMMAND</code> 會使用 <code>undo</code>，我們上面有用 <code>--record</code> 可以查看要 rollback 的版本，所以我們這邊寫法會長像這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl rollout undo deployment/kubernetes-deployment --to-revision<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/kubernetes-deployment rolled back
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>格式是 <code>kubectl rollout undo deployment/&lt;deployment name&gt; --to-revision=&lt;--record 版本&gt;</code></p>
+<br>
+<p>就可以看到又回復成以前的柴犬囉 &gt;&lt;</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-advanced/Shiba-Inu-3.png" title="/images/K8s-advanced/Shiba-Inu-3.png" data-thumbnail="/images/K8s-advanced/Shiba-Inu-3.png" data-sub-html="<h2>成功還原柴犬</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-advanced/Shiba-Inu-3.png"
+            data-srcset="/images/K8s-advanced/Shiba-Inu-3.png, /images/K8s-advanced/Shiba-Inu-3.png 1.5x, /images/K8s-advanced/Shiba-Inu-3.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-advanced/Shiba-Inu-3.png" width="1000" />
+    </a><figcaption class="image-caption">成功還原柴犬</figcaption>
+    </figure>
+<br>  
+<h3 id="為甚麼不用-replication-controller">為甚麼不用 Replication Controller</h3>
+<p>最後要討論的是為什麼要不用  Replication Controller 而是改用 ReplicaSet + Deployment？</p>
+<p>由於實際再使用 Kubernetes 時架構會比現在練習的還要複雜，所以用 ReplicaSet 讓 selector 用更彈性的方式選取 Pod 會是比較好的做法。</p>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-service-%E7%AF%87-d19d4c6e945f" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Service 篇</a></p>
 <p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-ingress-%E7%AF%87-%E4%B8%80-92944d4bf97d" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Ingress 篇（一）</a></p>
@@ -1047,6 +1447,10 @@ kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
 <p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-stateless-%E8%88%87stateful-2c68cebdd635" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Stateless 與Stateful</a></p>
 <p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/" target="_blank" rel="noopener noreffer">kubernetes ReplicationController</a></p>
 <p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-replication-controller-5c8592d37083" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Replication Controller</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-deployment-%E8%88%87-replicaset-%E4%B8%80-406234a63d43" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Deployment 與 ReplicaSet（一）</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-deployment-%E8%88%87-replicaset-%E4%BA%8C-f60146c878e4" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Deployment 與 ReplicaSet（二）</a></p>
+<p><a href="https://medium.com/andy-blog/kubernetes-%E9%82%A3%E4%BA%9B%E4%BA%8B-deployment-%E8%88%87-replicaset-%E4%B8%89-142b2863eb94" target="_blank" rel="noopener noreffer">Kubernetes 那些事 — Deployment 與 ReplicaSet（三）</a></p>
+<p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" target="_blank" rel="noopener noreffer">kubernetes Deployments</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kubernetes/">Kubernetes</a>
                 </span><span><a href="/tags/k8s/">K8s</a>
@@ -1054,8 +1458,8 @@ kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-04&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e2963b024a78713c5d737fbdba61ce3d7a5f8dee" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;e2963b0:&nbsp;# 新增/更新 Kubernetes (K8s) 介紹 - 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>e2963b0</a></span>
+                <span>更新於 2022-05-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0365dabbfa9118b11666188be1c1e7291ff5d09a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0365dab:&nbsp;# 新增/更新 Kubernetes (K8s) 介紹 - 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>0365dab</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
