@@ -222,8 +222,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git init
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git init
+</code></pre></td></tr></table>
 </div>
 </div><p>要記得要到版本控制的資料夾目錄下才使用這個指令歐！</p>
 <br>
@@ -256,18 +256,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ tree -a -d
-</span></span><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">└── .git
-</span></span><span class="line"><span class="cl">    ├── hooks
-</span></span><span class="line"><span class="cl">    ├── info
-</span></span><span class="line"><span class="cl">    ├── objects
-</span></span><span class="line"><span class="cl">    │   ├── info
-</span></span><span class="line"><span class="cl">    │   └── pack
-</span></span><span class="line"><span class="cl">    └── refs
-</span></span><span class="line"><span class="cl">        ├── heads
-</span></span><span class="line"><span class="cl">        └── tags
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ tree -a -d
+.
+└── .git
+    ├── hooks
+    ├── info
+    ├── objects
+    │   ├── info
+    │   └── pack
+    └── refs
+        ├── heads
+        └── tags
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>回到剛剛圖片，它說明默認會使用 master 這個來作為初始分支，並記得要使用 <code>git config</code> 來做設定，那 <code>git config</code> 是要做什麼用的呢！？</p>
@@ -279,9 +279,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git config --global user.name &#34;your name&#34; 
-</span></span><span class="line"><span class="cl">$ git config --global user.email &#34;your email&#34;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git config --global user.name &#34;your name&#34; 
+$ git config --global user.email &#34;your email&#34;
+</code></pre></td></tr></table>
 </div>
 </div><p>分別設定使用者名稱以及電子郵件，這樣共同使用版本控制的人，才分的出來誰是誰！ (若只要在單個專案下設定使用者名稱及電子郵件，就不需要設定 &ndash;global 參數)</p>
 <br>
@@ -293,8 +293,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git status 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git status 
+</code></pre></td></tr></table>
 </div>
 </div><p>可以查看現在資料夾內有哪些檔案還沒加入版本控制，或是已經加入但還沒 Commit 變成新版本。</p>
 <br>
@@ -317,8 +317,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git log
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git log
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/log.png" title="/images/git/log.png" data-thumbnail="/images/git/log.png" data-sub-html="<h2>Git log</h2>">
@@ -340,8 +340,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git diff 116e 442c
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git diff 116e 442c
+</code></pre></td></tr></table>
 </div>
 </div><p>116e 代表最新的版本，442c 代表上一個版本，可以看上面 <code>log</code> 的辨識 ID，因為校驗碼很長，最少需要前4個數字跟英文，才可以知道是哪一個版本。</p>
 <br>
@@ -364,8 +364,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git reflog
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git reflog
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/reflog.png" title="/images/git/reflog.png" data-thumbnail="/images/git/reflog.png" data-sub-html="<h2>Git reflog (圖一)</h2>">
@@ -399,9 +399,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git add .
-</span></span><span class="line"><span class="cl">$ git add test.txt
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git add .
+$ git add test.txt
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>將檔案加入版本控制的暫存區。它的格式是 <code>git add [檔案名稱]</code> ，如果想要把資料夾全部檔案都加入版本控制，可以使用 <code>.</code> 來加入。</p>
@@ -413,8 +413,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;內容打這&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git commit -m <span class="s2">&#34;內容打這&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/commit.png" title="/images/git/commit.png" data-thumbnail="/images/git/commit.png" data-sub-html="<h2>Git commit</h2>">

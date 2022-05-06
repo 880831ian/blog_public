@@ -41,6 +41,13 @@
     <description><![CDATA[前情提要：本篇是 用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose) 以及 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程]]></description>
 </item>
 <item>
+    <title>【豪華露營】宜起去露營VLOG</title>
+    <link>https://pin-yi.me/glamping/</link>
+    <pubDate>Sun, 24 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/glamping/</guid>
+    <description><![CDATA[<p>與許久不見的朋友，相約去宜蘭露營，希望疫情能夠趕快結束，才可以一起去更多地方遊玩！</p>
+<p>其中片段因為GoPro有點小問題，所以導致畫面會卡卡的，請大家見諒 🥲</p>]]></description>
+</item>
+<item>
     <title>用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)</title>
     <link>https://pin-yi.me/docker-compose-redis-sentinel-haproxy/</link>
     <pubDate>Fri, 22 Apr 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-compose-redis-sentinel-haproxy/</guid>
@@ -57,12 +64,6 @@
     <link>https://pin-yi.me/git/</link>
     <pubDate>Fri, 15 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/git/</guid>
     <description><![CDATA[什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容"]]></description>
-</item>
-<item>
-    <title>用 Node.js寫一個 Repository Restful API 的留言板 (express、sequelize 套件)</title>
-    <link>https://pin-yi.me/node-restful-api-repository-messageboard/</link>
-    <pubDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/node-restful-api-repository-messageboard/</guid>
-    <description><![CDATA[本文章是使用 Node.js 來寫一個 Repository Restful API 的留言板，並且會使用 express 以及 sequelize (使用 Mysql)套件。 建議可以先觀看 Node.js 介紹 文章來簡單學習 Node 語言。 範例程式連結 點我 😘]]></description>
 </item>
 </channel>
 </rss>
