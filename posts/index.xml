@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</title>
+    <link>https://pin-yi.me/k8s-efk/</link>
+    <pubDate>Tue, 10 May 2022 15:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-efk/</guid>
+    <description><![CDATA[這是我們 Kubernetes 文章的第三篇，此文章會紀錄我將 EFK 建在 Kubernetes 上面，最後也會統整實作過程中，可能會遇到的一些問題，讓大家在學習時，可以更有效率，不用 debug 到死]]></description>
+</item>
+<item>
     <title>Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)</title>
     <link>https://pin-yi.me/k8s-advanced/</link>
     <pubDate>Tue, 03 May 2022 10:39:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-advanced/</guid>
@@ -58,12 +64,6 @@
     <link>https://pin-yi.me/docker-compose-redis-sentinel/</link>
     <pubDate>Tue, 19 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-compose-redis-sentinel/</guid>
     <description><![CDATA[什麼是 Redis 哨兵模式 (Sentinel) ? 有關 Redis 之前有寫一篇 Redis 的介紹文，有興趣可以去看看！ Redis 提供非常實用的功能來讓我們實現多機的 in-memory 資料庫： 主從複製模式 (Master-Slave Replication) 哨兵模式]]></description>
-</item>
-<item>
-    <title>Git 介紹</title>
-    <link>https://pin-yi.me/git/</link>
-    <pubDate>Fri, 15 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/git/</guid>
-    <description><![CDATA[什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容"]]></description>
 </item>
 </channel>
 </rss>

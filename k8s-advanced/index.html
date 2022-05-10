@@ -9,14 +9,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s-advanced/" /><meta property="og:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-03T10:39:00+08:00" />
-<meta property="article:modified_time" content="2022-05-06T16:33:08+08:00" />
+<meta property="article:modified_time" content="2022-05-09T15:49:58+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s-advanced/featured-image.webp"/>
 <meta name="twitter:title" content="Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)"/>
 <meta name="twitter:description" content="此文章是介紹 Kubernetes 進階，會介紹 Service、Ingress、Deployment、ReplicaSet 等等，多數是參考網路大神分享，加上自己整理自己能理解的加以介紹，歡迎大家指教 😁"/>
 <meta name="application-name" content="PinYi">
-<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/k8s-advanced/" /><link rel="prev" href="https://pin-yi.me/k8s/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/k8s-advanced/" /><link rel="prev" href="https://pin-yi.me/k8s/" /><link rel="next" href="https://pin-yi.me/k8s-efk/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/k8s-advanced\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  10646 ,
-        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-06T16:33:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  10645 ,
+        "url": "https:\/\/pin-yi.me\/k8s-advanced\/","datePublished": "2022-05-03T10:39:00+08:00","dateModified": "2022-05-09T15:49:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s-advanced/featured-image.webp"
         title="此文章是介紹 Kubernetes 進階，會介紹 Service、Ingress、Deployment、ReplicaSet 等等，多數是參考網路大神分享，加上自己整理自己能理解的加以介紹，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 10646 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-03">2022-05-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 10645 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 22 分鐘</span>&nbsp;</div>
             </div>
             
@@ -1182,7 +1182,7 @@ if (!doNotTrack) {
 <ul>
 <li>revisionHistoryLimit</li>
 </ul>
-<p>每次 Deployment 在進行更新的時候，都會產生一個新的 ReplicaSet 用來進行版本控制，在 Deployment 中這個專有名稱稱為 <code>revision</code>，所以這個設定就是要設定最多只會有多少個 <code>revision</code>，這個也是選填的設定。</p>
+<p>每次 Deployment 在進行更新的時候，都會產生一個新的 ReplicaSet 用來進行版本控制，在 Deployment 中這個專有名稱為 <code>revision</code>，所以這個設定就是要設定最多只會有多少個 <code>revision</code>，這個也是選填的設定。</p>
 <br>
 <h3 id="deployment-建立">Deployment 建立</h3>
 <p>老樣子，使用 <code>apply</code> 來建立 Deployment，我們可使用 <code>kubectl get deploy</code> 來查看是否建立成功：</p>
@@ -1800,8 +1800,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0365dabbfa9118b11666188be1c1e7291ff5d09a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0365dab:&nbsp;# 新增/更新 Kubernetes (K8s) 介紹 - 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>0365dab</a></span>
+                <span>更新於 2022-05-09&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/1903365526db61ed01865a1c30ffa2d5cf22cdac" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;1903365:&nbsp;# 新增/更新 Kubernetes (K8s) 介紹 - 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>1903365</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -1811,7 +1811,7 @@ if (!doNotTrack) {
         </div><div class="post-info-share">
             <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/k8s-advanced/" data-title="Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)" data-hashtags="Kubernetes,K8s,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/k8s-advanced/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/k8s-advanced/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/k8s-advanced/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/k8s-advanced/" data-title="Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/k8s-advanced/" data-title="Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/k8s-advanced/" data-title="Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/k8s/" class="prev" rel="prev" title="Kubernetes (K8s) 介紹 - 基本"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/k8s-efk/" class="next" rel="next" title="Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
