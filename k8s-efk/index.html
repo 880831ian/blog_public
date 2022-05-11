@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s-efk/" /><meta property="og:image" content="https://pin-yi.me/k8s-efk/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-10T15:40:00+08:00" />
-<meta property="article:modified_time" content="2022-05-10T15:40:00+08:00" />
+<meta property="article:modified_time" content="2022-05-10T17:36:32+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s-efk/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/k8s-efk\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, EFK, 實作","wordcount":  2703 ,
-        "url": "https:\/\/pin-yi.me\/k8s-efk\/","datePublished": "2022-05-10T15:40:00+08:00","dateModified": "2022-05-10T15:40:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, EFK, 實作","wordcount":  4659 ,
+        "url": "https:\/\/pin-yi.me\/k8s-efk\/","datePublished": "2022-05-10T15:40:00+08:00","dateModified": "2022-05-10T17:36:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/k8s-efk/featured-image.webp"
         title="此文章是介紹參考網路上 K8s 搭配 EFK 範例，自己實際測試後的紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-10">2022-05-10</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2703 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-10">2022-05-10</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4659 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -152,8 +152,18 @@ if (!doNotTrack) {
             <li><a href="#創建-statefulset">創建 StatefulSet</a></li>
           </ul>
         </li>
+        <li><a href="#創建-kibana-deployment-service">創建 Kibana Deployment Service</a></li>
+        <li><a href="#創建-fluentd-daemonset">創建 Fluentd DaemonSet</a>
+          <ul>
+            <li><a href="#創建-serviceaccount">創建 ServiceAccount</a></li>
+            <li><a href="#創建-clusterrole">創建 ClusterRole</a></li>
+            <li><a href="#創建-clusterrolebinding">創建 ClusterRoleBinding</a></li>
+            <li><a href="#創建-daemonset">創建 DaemonSet</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
+    <li><a href="#部署常見問題及解決辦法">部署常見問題及解決辦法</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -626,6 +636,542 @@ if (!doNotTrack) {
 </div>
 </div><p>如果像我上面一樣有跳出 ”You Know, for Search“ 就代表 Elasticsearch 已經在正常運作囉 🥳</p>
 <br>
+<h3 id="創建-kibana-deployment-service">創建 Kibana Deployment Service</h3>
+<p>要在 Kubernetes 上啟動 Kibana，我們要先創建一個名為 Service <code>kibana</code>，以及包含一個副本的 Deployment。我們先創建名為 kibana.yaml 的 yaml 檔：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-logging</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">5601</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-logging</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">kibana:8.1.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">1000m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ELASTICSEARCH_URL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">http://elasticsearch:9200</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">5601</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>一樣我們要把 <code>kibana</code> 加入 <code>kube-logging</code> 的命名空間，讓它以去調用其他服務，並賦予 <code>app: kibana</code> 標籤。並指定本機訪問 Port 為 <code>5601</code>，並使用 <code>app: kibana</code> 標籤來選擇服務的 Pod。我們在 <code>Deployment</code> 定義 1 個 Pod 副本，我們使用 <code>kibana:8.1.3</code> image，記得要跟 Elasticsearch 使用相同版本，此外我們還有設定 Pod 最少使用 0.1 個 CPU、最多使用 1 個 CPU。最後在環境變數中使用 <code>ELASTICSEARCH_URL</code> 設定 Elasticsearch 的叢集以及 Port。</p>
+<br>
+<p>都完成後，我們來開始部署：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f kibana.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">service/kibana created
+</span></span><span class="line"><span class="cl">deployment.apps/kibana created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>一樣我們用 minikube dashboard 來查看是否部署成功：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/kibana-1.png" title="/images/K8s-efk/kibana-1.png" data-thumbnail="/images/K8s-efk/kibana-1.png" data-sub-html="<h2>kibana Deployments</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/kibana-1.png"
+            data-srcset="/images/K8s-efk/kibana-1.png, /images/K8s-efk/kibana-1.png 1.5x, /images/K8s-efk/kibana-1.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/kibana-1.png" width="1200" />
+    </a><figcaption class="image-caption">kibana Deployments</figcaption>
+    </figure>
+<br>
+<p>沒有問題後，我們用 <code>port-forward</code> 將本地 Port 轉發到 Pod 上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$  kubectl port-forward kibana-75cbbfcd9c-nr4r8 5601:5601 --namespace<span class="o">=</span>kube-logging
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:5601 -&gt; <span class="m">5601</span>
+</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:5601 -&gt; <span class="m">5601</span>
+</span></span><span class="line"><span class="cl">Handling connection <span class="k">for</span> <span class="m">5601</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>開啟瀏覽器瀏覽 <code>http://localhost:5601</code>，如果可以進入 Kibana，就代表成功將 Kibana 部署到 Kubernetes 叢集中：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/kibana-2.png" title="/images/K8s-efk/kibana-2.png" data-thumbnail="/images/K8s-efk/kibana-2.png" data-sub-html="<h2>kibana Deployments</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/kibana-2.png"
+            data-srcset="/images/K8s-efk/kibana-2.png, /images/K8s-efk/kibana-2.png 1.5x, /images/K8s-efk/kibana-2.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/kibana-2.png" width="1200" />
+    </a><figcaption class="image-caption">kibana Deployments</figcaption>
+    </figure>
+<br>
+<h3 id="創建-fluentd-daemonset">創建 Fluentd DaemonSet</h3>
+<p>我們要將 Fluentd 設置成 DaemonSet，讓它在 Kubernetes 叢集中每個節點上運行 Pod 副本。用 DaemonSet 控制器，可以將叢集中每個節點部署 Fluentd Pod，詳細可以參考 <a href="https://kubernetes.io/docs/concepts/cluster-administration/logging/#using-a-node-logging-agent" target="_blank" rel="noopener noreffer">Using a node logging agent</a>。在 Kubernetes 中，容器化的應用程式會透過 stdout 將日誌 log 定向到節點上的 JSON 文件。Fluentd Pod 會追蹤這些日誌文件、過濾日誌事件、轉換日誌的數據，並發送到我們部署的 Elasticsearch 後端。</p>
+<p>除了容器的日誌，Fluentd 還會追蹤 Kubernetes 系統日誌，例如：kubelet、kube-proxy 和 Docker 日誌。</p>
+<br>
+<p>先創建一個 <code>fluentd.yaml</code> 的 yaml 檔 (因為程式長度，所以分開說明，要完整請參考 <a href="https://github.com/880831ian/Kubernetes-EFK" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>)：</p>
+<h4 id="創建-serviceaccount">創建 ServiceAccount</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-logging</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們先創建一個服務帳號 <code>fluentd</code>，Fluentd Pod 將使用它來訪問 Kubernetes API。我們在 <code>kube-logging</code> namespace 中創建它並再次賦予它 label <code>app: fluentd</code>。</p>
+<br>
+<h4 id="創建-clusterrole">創建 ClusterRole</h4>
+<p>接著&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">pods</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">namespaces</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">get</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">list</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">watch</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在這邊我們定義一個 ClusterRole <code>fluentd</code>，設定我們對叢集範圍的 Kubernetes 資源（如節點）的訪問權限，我們設定 <code>get</code>、<code>list</code>、<code>watch</code> 等權限。</p>
+<br>
+<h4 id="創建-clusterrolebinding">創建 ClusterRoleBinding</h4>
+<p>接著&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRoleBinding</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">roleRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">subjects</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-logging</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們定義一個將 ClusterRole 綁定到 ServiceAccount 的 ClusterRoleBinding 調用。</p>
+<br>
+<h4 id="創建-daemonset">創建 DaemonSet</h4>
+<p>接著&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">DaemonSet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-logging</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>定義一個可以在 <code>kube-logging</code> namespace 中調用的 DaemonSet，並給它一個 <code>app: fluentd</code> 標籤。</p>
+<br>
+<p>接著&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serviceAccount</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">fluentd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">fluent/fluentd-kubernetes-daemonset:v1.14.6-debian-elasticsearch7-1.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FLUENT_ELASTICSEARCH_HOST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;elasticsearch.kube-logging.svc.cluster.local&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FLUENT_ELASTICSEARCH_PORT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;9200&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FLUENT_ELASTICSEARCH_SCHEME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;http&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">FLUENTD_SYSTEMD_CONF</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">disable</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們先匹配 <code>.metadata.labels</code> 定義的標籤 <code>app: fluentd</code> ，然後為 DaemonSet 分配 <code>fluentd</code> Service Account。選擇 <code>app: fluentd</code> 作為這個 DaemonSet 管理的 Pod。</p>
+<p>我們定義 <code>NoSchedule</code> 容忍度來匹配 Kubernetes master node 上的等效污點。他可以確保 DaemonSet 也被部署到 Kubernetes 主服務器。</p>
+<p>接下來定義 Pod 容器，我們將名稱取為 <code>fluentd</code>，我們使用的映像檔是 <a href="https://hub.docker.com/layers/fluentd-kubernetes-daemonset/fluent/fluentd-kubernetes-daemonset/v1.14.6-debian-elasticsearch7-1.0/images/sha256-9c960d2ebf6b8ba290bafd4ff386f26427a5469767b609e8735a3d983deb64b0?context=explore" target="_blank" rel="noopener noreffer">fluent/fluentd-kubernetes-daemonset:v1.14.6-debian-elasticsearch7-1.0</a>，最後配置一些環境變數：</p>
+<ul>
+<li><code>FLUENT_ELASTICSEARCH_HOST</code>：設置我們之前定義的 Elasticsearch Headless 位址。<code>elasticsearch.kube-logging.svc.cluster.local</code> 會解析 3 個 Elasticsearch Pod 的 IP 地址列表。</li>
+<li><code>FLUENT_ELASTICSEARCH_PORT</code>：設置我們之前定義的 Elasticsearch <code>9200</code> Port。</li>
+<li><code>FLUENT_ELASTICSEARCH_SCHEME</code>：我們設置 <code>http</code>。</li>
+<li><code>FLUENTD_SYSTEMD_CONF</code>：我們將 <code>systemd</code> 在容器中設定相關的輸出設置為 <code>disable</code>。</li>
+</ul>
+<br>
+<p>接著&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">512Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">200Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">varlog</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">varlibdockercontainers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/docker/containers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">varlog</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">varlibdockercontainers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/docker/containers</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們設置 Fluentd Pod 上使用 512 MiB 的內存限制，並保證 0.1 個 CPU 跟 200 MiB 的內存。我們將 varlog <code>/var/log</code> 掛載到容器的 varlibdockercontainers <code>var/lib/docker/containers</code> 中。最後一個設定是 <code>Fluentd</code> 在收到信號 <code>terminationGracePeriodSeconds</code> 後有 30 秒的時間可以優雅的關閉。</p>
+<br>
+<p>都定義完成後，我們部署 Fluentd DaemonSet：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f fluentd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">serviceaccount/fluentd created
+</span></span><span class="line"><span class="cl">clusterrole.rbac.authorization.k8s.io/fluentd created
+</span></span><span class="line"><span class="cl">clusterrolebinding.rbac.authorization.k8s.io/fluentd created
+</span></span><span class="line"><span class="cl">daemonset.apps/fluentd created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>一樣我們用 minikube dashboard 來查看是否部署成功：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/Daemonset.png" title="/images/K8s-efk/Daemonset.png" data-thumbnail="/images/K8s-efk/Daemonset.png" data-sub-html="<h2>fluentd DaemonSet</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/Daemonset.png"
+            data-srcset="/images/K8s-efk/Daemonset.png, /images/K8s-efk/Daemonset.png 1.5x, /images/K8s-efk/Daemonset.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/Daemonset.png" width="1200" />
+    </a><figcaption class="image-caption">fluentd DaemonSet</figcaption>
+    </figure>
+<br>
+<p>我們使用剛剛的 kibana <code>port-forward</code> 將本地 Port 轉發到 Pod 上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$  kubectl port-forward kibana-75cbbfcd9c-nr4r8 5601:5601 --namespace<span class="o">=</span>kube-logging
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:5601 -&gt; <span class="m">5601</span>
+</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:5601 -&gt; <span class="m">5601</span>
+</span></span><span class="line"><span class="cl">Handling connection <span class="k">for</span> <span class="m">5601</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>開啟瀏覽器瀏覽 <code>http://localhost:5601</code>，點選 Management &gt; Stack Management：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/fluentd-1.png" title="/images/K8s-efk/fluentd-1.png" data-thumbnail="/images/K8s-efk/fluentd-1.png" data-sub-html="<h2>fluentd 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/fluentd-1.png"
+            data-srcset="/images/K8s-efk/fluentd-1.png, /images/K8s-efk/fluentd-1.png 1.5x, /images/K8s-efk/fluentd-1.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/fluentd-1.png" width="1200" />
+    </a><figcaption class="image-caption">fluentd 設定</figcaption>
+    </figure>
+<br>
+<p>點選 Kibana &gt; Data Views，會看到跳出一個視窗，有一個按鈕寫 Create data view：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/fluentd-2.png" title="/images/K8s-efk/fluentd-2.png" data-thumbnail="/images/K8s-efk/fluentd-2.png" data-sub-html="<h2>fluentd 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/fluentd-2.png"
+            data-srcset="/images/K8s-efk/fluentd-2.png, /images/K8s-efk/fluentd-2.png 1.5x, /images/K8s-efk/fluentd-2.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/fluentd-2.png" width="1200" />
+    </a><figcaption class="image-caption">fluentd 設定</figcaption>
+    </figure>
+<br>
+<p>Name 輸入 <code>logstash*</code> ，並選擇 <code>@timestamp</code> 來用時間過濾日誌，最後按下 Create date view：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/fluentd-3.png" title="/images/K8s-efk/fluentd-3.png" data-thumbnail="/images/K8s-efk/fluentd-3.png" data-sub-html="<h2>fluentd 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/fluentd-3.png"
+            data-srcset="/images/K8s-efk/fluentd-3.png, /images/K8s-efk/fluentd-3.png 1.5x, /images/K8s-efk/fluentd-3.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/fluentd-3.png" width="1200" />
+    </a><figcaption class="image-caption">fluentd 設定</figcaption>
+    </figure>
+<br>
+<p>設定好 logstash* 的 Data views，再點選左邊欄位的 Discover：</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/fluentd-4.png" title="/images/K8s-efk/fluentd-4.png" data-thumbnail="/images/K8s-efk/fluentd-4.png" data-sub-html="<h2>fluentd 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/fluentd-4.png"
+            data-srcset="/images/K8s-efk/fluentd-4.png, /images/K8s-efk/fluentd-4.png 1.5x, /images/K8s-efk/fluentd-4.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/fluentd-4.png" width="1200" />
+    </a><figcaption class="image-caption">fluentd 設定</figcaption>
+    </figure>
+<br>
+<p>就可以看到顯示容器的 log 日誌拉！</p>
+<br>
+<figure><a class="lightgallery" href="/images/K8s-efk/log.png" title="/images/K8s-efk/log.png" data-thumbnail="/images/K8s-efk/log.png" data-sub-html="<h2>顯示容器 log</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/K8s-efk/log.png"
+            data-srcset="/images/K8s-efk/log.png, /images/K8s-efk/log.png 1.5x, /images/K8s-efk/log.png 2x"
+            data-sizes="auto"
+            alt="/images/K8s-efk/log.png" width="1200" />
+    </a><figcaption class="image-caption">顯示容器 log</figcaption>
+    </figure>
+<br>
+<h2 id="部署常見問題及解決辦法">部署常見問題及解決辦法</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>常見問題<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Q1 . Elasticsearch 部署成功後會一直重新啟動？</div>
+        </div>
+    </div>
+<div class="details admonition success open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-check-circle fa-fw"></i>解決辦法<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Ans 1：原因是 Elasticsearch 從 8.x 版本後，會自動開啟 SSL 認證，我們在 <code>env</code> 環境變數設定時，如果沒有多加 SSL Key 等設定值，Elasticsearch  這個 Pod 會啟動後，一直重新啟動，導致服務無法正常使用，只需要在環境變數中加入 xpack.security.enabled ，設定為 false 就可以解決。</div>
+        </div>
+    </div>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes" target="_blank" rel="noopener noreffer">How To Set Up an Elasticsearch, Fluentd and Kibana (EFK) Logging Stack on Kubernetes</a></p>
 </div><div class="post-footer" id="post-footer">
@@ -634,7 +1180,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/efk/">EFK</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-10</span>
+                <span>更新於 2022-05-10&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/93fd332902dc9ab0eb9ecb7c1e407eb09700c1f3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;93fd332:&nbsp;# 新增 Kubernetes (K8s) 搭配 EFK 實作">
+                            <i class="fas fa-hashtag fa-fw"></i>93fd332</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-efk/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
