@@ -4,16 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Ansible 及 Jenkins 自動化 CI/CD 介紹 - PinYi</title><meta name="description" content="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁"><meta property="og:title" content="Ansible 及 Jenkins 自動化 CI/CD 介紹" />
+        <title>Jenkins 及 Ansible IT 自動化 CI/CD 介紹 - PinYi</title><meta name="description" content="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁"><meta property="og:title" content="Jenkins 及 Ansible IT 自動化 CI/CD 介紹" />
 <meta property="og:description" content="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/jenkins-ansible/" /><meta property="og:image" content="https://pin-yi.me/jenkins-ansible/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-11T15:11:30+08:00" />
-<meta property="article:modified_time" content="2022-05-11T15:11:30+08:00" />
+<meta property="article:modified_time" content="2022-05-11T17:49:14+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/jenkins-ansible/featured-image.webp"/>
-<meta name="twitter:title" content="Ansible 及 Jenkins 自動化 CI/CD 介紹"/>
+<meta name="twitter:title" content="Jenkins 及 Ansible IT 自動化 CI/CD 介紹"/>
 <meta name="twitter:description" content="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁"/>
 <meta name="application-name" content="PinYi">
 <meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/jenkins-ansible/" /><link rel="prev" href="https://pin-yi.me/k8s-efk/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Ansible 及 Jenkins 自動化 CI/CD 介紹",
+        "headline": "Jenkins 及 Ansible IT 自動化 CI/CD 介紹",
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/jenkins-ansible\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Ansible, Jenkins, CI\/CD, 介紹, 實作","wordcount":  1921 ,
-        "url": "https:\/\/pin-yi.me\/jenkins-ansible\/","datePublished": "2022-05-11T15:11:30+08:00","dateModified": "2022-05-11T15:11:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Ansible, Jenkins, CI\/CD, 介紹, 實作","wordcount":  5373 ,
+        "url": "https:\/\/pin-yi.me\/jenkins-ansible\/","datePublished": "2022-05-11T15:11:30+08:00","dateModified": "2022-05-11T17:49:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -129,10 +129,10 @@ if (!doNotTrack) {
         data-srcset="/jenkins-ansible/featured-image.webp, /jenkins-ansible/featured-image.webp 1.5x, /jenkins-ansible/featured-image.webp 2x"
         data-sizes="auto"
         alt="/jenkins-ansible/featured-image.webp"
-        title="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Ansible 及 Jenkins 自動化 CI/CD 介紹</h2><div class="post-meta">
+        title="此文章是介紹參考網路上 30 天入門 Ansible 及 Jenkins，自己實際測試後的筆記紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Jenkins 及 Ansible IT 自動化 CI/CD 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-11">2022-05-11</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1921 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-11">2022-05-11</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5373 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -142,7 +142,7 @@ if (!doNotTrack) {
                     </div>
                     <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#為什麼需要自動化-">為什麼需要自動化 ?</a></li>
+    <li><a href="#為什麼需要-it-自動化-">為什麼需要 IT 自動化 ?</a></li>
     <li><a href="#什麼是持續整合持續部署">什麼是持續整合/持續部署</a>
       <ul>
         <li><a href="#持續整合-continuous-integration">持續整合 Continuous Integration</a></li>
@@ -152,15 +152,46 @@ if (!doNotTrack) {
     <li><a href="#jenkins">Jenkins</a></li>
     <li><a href="#ansible">Ansible</a></li>
     <li><a href="#jenkins-跟-ansible-比較">Jenkins 跟 Ansible 比較</a></li>
+    <li><a href="#jenkins-安裝與實作">Jenkins 安裝與實作</a>
+      <ul>
+        <li><a href="#版本">版本</a></li>
+        <li><a href="#安裝">安裝</a></li>
+        <li><a href="#建立第一個-jenkins-job">建立第一個 Jenkins Job</a></li>
+      </ul>
+    </li>
+    <li><a href="#原始碼管理與建置觸發程序">原始碼管理與建置觸發程序</a>
+      <ul>
+        <li><a href="#安裝-yamllint">安裝 yamllint</a></li>
+        <li><a href="#建置專案">建置專案</a>
+          <ul>
+            <li><a href="#https">HTTPS</a></li>
+            <li><a href="#ssh">SSH</a></li>
+          </ul>
+        </li>
+        <li><a href="#建置觸發程序">建置觸發程序</a>
+          <ul>
+            <li><a href="#定期建置">定期建置</a></li>
+            <li><a href="#github-hook-trigger-for-gitscm-polling">GitHub hook trigger for GITScm polling</a>
+              <ul>
+                <li><a href="#新增-github-personal-access-token">新增 GitHub personal access token</a></li>
+                <li><a href="#設定-jenkins-github">設定 Jenkins GitHub</a></li>
+                <li><a href="#設定專案組態">設定專案組態</a></li>
+                <li><a href="#github-設定-jenkins">GitHub 設定 Jenkins</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
                 </div><div class="content" id="content"><p>在軟體開發領域中，IT 自動化 (automation) 及 持續整合 (Continuous Integration, CI) 、持續佈署 (Continuous Deployment,CD) 是 DevOps 精神中很重要的兩個部分，此文章是參考 <a href="https://ithelp.ithome.com.tw/users/20103346/ironman/1473" target="_blank" rel="noopener noreffer">30 天入門 Ansible 及 Jenkins</a> ，再加上自己測試後的筆記紀錄，歡迎大家可先閱讀作者原文，那我們就開始一起學習吧 👊</p>
-<p>我會分別介紹 <a href="https://www.ansible.com/" target="_blank" rel="noopener noreffer">Ansible</a> 與 <a href="https://www.jenkins.io/" target="_blank" rel="noopener noreffer">Jenkins</a> 這兩個非常熱門的開源軟體再搭配實作來讓大家更了解他們，那在之前我們先來聊聊為什麼需要自動化以及什麼是持續整合/持續部署吧 🤠</p>
+<p>我會分別介紹 <a href="https://www.ansible.com/" target="_blank" rel="noopener noreffer">Ansible</a> 與 <a href="https://www.jenkins.io/" target="_blank" rel="noopener noreffer">Jenkins</a> 這兩個非常熱門的開源軟體再搭配實作來讓大家更了解他們，那在之前我們先來聊聊為什麼需要 IT 自動化以及什麼是持續整合/持續部署吧 🤠</p>
 <br>
-<h2 id="為什麼需要自動化-">為什麼需要自動化 ?</h2>
+<h2 id="為什麼需要-it-自動化-">為什麼需要 IT 自動化 ?</h2>
 <p>當我們在開發任何軟體產品時，除了開發本身的過程需要花相當多的心力外，在產品部署的環節也是讓大家頭痛的一個部分。其環境的搭建或是參數的設定常常會因為一些小原因導致產品無法像在開發時一樣正常運作。尤其當需要部署的主機不只一台時，重複性的工作會花費我們大量的時間。再加上還會因為伺服器提供的作業環境不同、或是其他種種限制而必須做參數上的調整等等。</p>
-<p>這時候 <code>自動化</code> 就顯得十分重要，透過自動化，不但可以幫助開發人員有效減少部署產品所需時間外，還可以在有限度的修改下分別針對不同環境去做調整。</p>
+<p>這時候 <code> IT 自動化</code> 就顯得十分重要，透過自動化，不但可以幫助開發人員有效減少部署產品所需時間外，還可以在有限度的修改下分別針對不同環境去做調整。</p>
 <br>
 <figure><a class="lightgallery" href="/images/Jenkins-Ansible/automation.webp" title="/images/Jenkins-Ansible/automation.webp" data-thumbnail="/images/Jenkins-Ansible/automation.webp" data-sub-html="<h2>Best Automation Tools for DevOps</h2>">
         <img
@@ -317,10 +348,555 @@ if (!doNotTrack) {
 </tbody>
 </table>
 <br>
+<p>因為 Ansible 適用於雲上的工具，本次的實作就針對 Jenkins 來做實作與說明：</p>
+<h2 id="jenkins-安裝與實作">Jenkins 安裝與實作</h2>
+<p>我這次會使用 Docker 來進行安裝，除了 Docker 以外也有不同的安裝方式，可以參考 <a href="https://www.jenkins.io/download/" target="_blank" rel="noopener noreffer">Jenkins download and deployment</a>，本次使用的環境版本如下：</p>
+<h3 id="版本">版本</h3>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.14, build a224086</li>
+<li>Jenkins：jenkins/jenkins:lts-jdk11 (Dokcer:tag)</li>
+</ul>
+<br>
+<h3 id="安裝">安裝</h3>
+<p>我們安裝 Jenkins 使用<a href="https://hub.docker.com/layers/jenkins/jenkins/jenkins/lts-jdk11/images/sha256-ec98cb8b367b0f9426f71345efe11e001c901704cea0e61fd91beb37af34ef98?context=explore" target="_blank" rel="noopener noreffer">官方提供的 LTS 映像檔</a> ，可以參考 <a href="https://github.com/jenkinsci/docker/blob/master/README.md" target="_blank" rel="noopener noreffer">Official Jenkins Docker image</a> 官方文件，裡面有說明要如何使用：</p>
+<p>我們先下 <code>docker run</code> 指令來啟動，我順便跟大家說明指令的每一個參數：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker run -d -p 8080:8080 -p 50000:50000 --restart always --name<span class="o">=</span><span class="s2">&#34;jenkins&#34;</span> -v /Users/ian_zhuang/Desktop/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts-jdk11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">232df6cfa9b95068a515e8e0c1f8325f54f52218753a681e7d37eac96e3b4a3d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>參數說明：</p>
+<ul>
+<li><code>-d</code>：背景執行，就不會佔用一個 Terminal。</li>
+<li><code>-p 8080:8080 -p 50000:50000</code>：8080 是待會我們瀏覽儀表板會使用到的 Port，如果本機上 8080 已經被佔用，可以自行更換，50000 是 Jenkins 所使用的 Port。</li>
+<li><code>--restart always</code>：當容器停止時，會自動重新啟動容器。</li>
+<li><code>--name=&quot;jenkins&quot;</code>：容器的名稱。</li>
+<li><code>-v /Users/ian_zhuang/Desktop/jenkins_home:/var/jenkins_home</code>：掛載目錄，就算刪除容器一樣可以保留其他設定。我將我本機桌面的 jenkins_home 與容器內 /var/jenkins_home 做映射。</li>
+<li><code>jenkins/jenkins:lts-jdk11</code>：本此使用的映像檔，是使用 LTS 版本，可以較為穩定。</li>
+</ul>
+<br>
+<p>下完指令後，他就會在背景開始安裝，可以試著用瀏覽器瀏覽 <code>http://localhost:8080</code>，查看有沒有跳出下面這個畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/unlock.png" title="/images/Jenkins-Ansible/unlock.png" data-thumbnail="/images/Jenkins-Ansible/unlock.png" data-sub-html="<h2>瀏覽器訪問 http://localhost:8080</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/unlock.png"
+            data-srcset="/images/Jenkins-Ansible/unlock.png, /images/Jenkins-Ansible/unlock.png 1.5x, /images/Jenkins-Ansible/unlock.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/unlock.png" width="800" />
+    </a><figcaption class="image-caption">瀏覽器訪問 <code>http://localhost:8080</code></figcaption>
+    </figure>
+<br> 
+<p>我們看到它需要輸入一組 Administrator password，我們要使用 <code>docker logs</code> 來查看，會發現最後會有寫 Please use the following password to proceed to installation 的地方：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker logs jenkins
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Jenkins initial setup is required. An admin user has been created and a password generated.
+</span></span><span class="line"><span class="cl">Please use the following password to proceed to installation:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">70c0780f62a7441f90286be106908378
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中的 <code>70c0780f62a7441f90286be106908378</code> ，就是我們的 Administrator password，直接複製並貼到欄位後按 Continue。</p>
+<br>
+<p>我們可以看到它詢問是否要安裝套件，我們選擇左邊 Install suggested plugins 安裝推薦的套件即可：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/plugins.png" title="/images/Jenkins-Ansible/plugins.png" data-thumbnail="/images/Jenkins-Ansible/plugins.png" data-sub-html="<h2>安裝推薦的套件</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/plugins.png"
+            data-srcset="/images/Jenkins-Ansible/plugins.png, /images/Jenkins-Ansible/plugins.png 1.5x, /images/Jenkins-Ansible/plugins.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/plugins.png" width="800" />
+    </a><figcaption class="image-caption">安裝推薦的套件</figcaption>
+    </figure>
+<br> 
+<p>等待它安裝套件，安裝完後會自動跳到註冊畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/install.png" title="/images/Jenkins-Ansible/install.png" data-thumbnail="/images/Jenkins-Ansible/install.png" data-sub-html="<h2>等待安裝&hellip;</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/install.png"
+            data-srcset="/images/Jenkins-Ansible/install.png, /images/Jenkins-Ansible/install.png 1.5x, /images/Jenkins-Ansible/install.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/install.png" width="800" />
+    </a><figcaption class="image-caption">等待安裝&hellip;</figcaption>
+    </figure>
+<br> 
+<p>輸入完基本的資料後，按 Save and Continue：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/create_adminuser.png" title="/images/Jenkins-Ansible/create_adminuser.png" data-thumbnail="/images/Jenkins-Ansible/create_adminuser.png" data-sub-html="<h2>創建 Admin 使用者</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/create_adminuser.png"
+            data-srcset="/images/Jenkins-Ansible/create_adminuser.png, /images/Jenkins-Ansible/create_adminuser.png 1.5x, /images/Jenkins-Ansible/create_adminuser.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/create_adminuser.png" width="800" />
+    </a><figcaption class="image-caption">創建 Admin 使用者</figcaption>
+    </figure>
+<br> 
+<p>最後看到下面這個畫面就代表我們安裝好囉！</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/done.png" title="/images/Jenkins-Ansible/done.png" data-thumbnail="/images/Jenkins-Ansible/done.png" data-sub-html="<h2>Jenkins 儀表板</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/done.png"
+            data-srcset="/images/Jenkins-Ansible/done.png, /images/Jenkins-Ansible/done.png 1.5x, /images/Jenkins-Ansible/done.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/done.png" width="1200" />
+    </a><figcaption class="image-caption">Jenkins 儀表板</figcaption>
+    </figure>
+<br> 
+<h3 id="建立第一個-jenkins-job">建立第一個 Jenkins Job</h3>
+<p>我們已經成功安裝好並進入到 Jenkins 儀表板，我們先來建立第一個 Job，它的功用是告訴我們系統檔案的即時使用狀況，讓我們對 Jenkins 有初步的了解：</p>
+<ol>
+<li>點選儀表板的新增作業或是 Create a Job：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/create_job.png" title="/images/Jenkins-Ansible/create_job.png" data-thumbnail="/images/Jenkins-Ansible/create_job.png" data-sub-html="<h2>新增作業</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/create_job.png"
+            data-srcset="/images/Jenkins-Ansible/create_job.png, /images/Jenkins-Ansible/create_job.png 1.5x, /images/Jenkins-Ansible/create_job.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/create_job.png" width="1200" />
+    </a><figcaption class="image-caption">新增作業</figcaption>
+    </figure>
+<br> 
+<ol start="2">
+<li>輸入 Job 專案名稱並選擇建立 Free-Style 軟體專案：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/disk.png" title="/images/Jenkins-Ansible/disk.png" data-thumbnail="/images/Jenkins-Ansible/disk.png" data-sub-html="<h2>設定 Job 專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/disk.png"
+            data-srcset="/images/Jenkins-Ansible/disk.png, /images/Jenkins-Ansible/disk.png 1.5x, /images/Jenkins-Ansible/disk.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/disk.png" width="1200" />
+    </a><figcaption class="image-caption">設定 Job 專案</figcaption>
+    </figure>
+可以看到這邊有不同的專案類型可以選擇，<strong>Free-Style</strong> 以及 <strong>Pipeline</strong> 這兩種類型的專案基本上就涵蓋大部分的需求。<strong>Free-Style</strong> 類型的專案提供了非常大的彈性讓使用者來做原始碼管理以及建置。如果建置流程涉及多個專案，則可以使用 <strong>Pipeline</strong> 類型的專案來組合及定義建置邏輯。</p>
+<br> 
+<ol start="3">
+<li>接下來設定專案組態：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/describe.png" title="/images/Jenkins-Ansible/describe.png" data-thumbnail="/images/Jenkins-Ansible/describe.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/describe.png"
+            data-srcset="/images/Jenkins-Ansible/describe.png, /images/Jenkins-Ansible/describe.png 1.5x, /images/Jenkins-Ansible/describe.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/describe.png" width="1200" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+要記得幫每一個專案都加上描述，讓其他人知道該專案的用途或是使用時機等。</p>
+<br>
+<p>接著，在<strong>建置</strong>的下拉式欄位選擇 <code>選擇建置步驟 &gt; 執行 Shell</code></p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/shell.png" title="/images/Jenkins-Ansible/shell.png" data-thumbnail="/images/Jenkins-Ansible/shell.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/shell.png"
+            data-srcset="/images/Jenkins-Ansible/shell.png, /images/Jenkins-Ansible/shell.png 1.5x, /images/Jenkins-Ansible/shell.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/shell.png" width="1200" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<p>輸入 <code>df -h</code> 指令：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/df-h.png" title="/images/Jenkins-Ansible/df-h.png" data-thumbnail="/images/Jenkins-Ansible/df-h.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/df-h.png"
+            data-srcset="/images/Jenkins-Ansible/df-h.png, /images/Jenkins-Ansible/df-h.png 1.5x, /images/Jenkins-Ansible/df-h.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/df-h.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<p>我們這邊透過建置 <code>執行 Shell</code> 這個建置步驟來告訴 Jenkins，未來這個專案被建置，就會執行 <code>df -h</code> 這個指令。</p>
+<br>
+<ol start="4">
+<li>專案組態設置完後，我們點選左邊的<strong>馬上建置</strong>來建置剛剛建好的專案，如果我們設定上沒有問題，應該會在左下角的<strong>建置歷程</strong>這邊看到我們的第一個建置紀錄：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/build.png" title="/images/Jenkins-Ansible/build.png" data-thumbnail="/images/Jenkins-Ansible/build.png" data-sub-html="<h2>建置專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/build.png"
+            data-srcset="/images/Jenkins-Ansible/build.png, /images/Jenkins-Ansible/build.png 1.5x, /images/Jenkins-Ansible/build.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/build.png" width="800" />
+    </a><figcaption class="image-caption">建置專案</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>點進去後，再點 <strong>Console Output</strong>，可以看到這次建置的結果：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/console.png" title="/images/Jenkins-Ansible/console.png" data-thumbnail="/images/Jenkins-Ansible/console.png" data-sub-html="<h2>建置專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/console.png"
+            data-srcset="/images/Jenkins-Ansible/console.png, /images/Jenkins-Ansible/console.png 1.5x, /images/Jenkins-Ansible/console.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/console.png" width="800" />
+    </a><figcaption class="image-caption">建置專案</figcaption>
+    </figure>
+這樣我們的第一個 Jenkins Job 就設定完成囉！Jenkins 也確實的執行我們所設定的指令，並將系統的使用狀況呈現在終端機的輸出上。
+<br></p>
+<p>以上就是我們第一個簡單的專案建置流程，當然，Jenkins 可以做到的事情不僅如此，在後面我們會透過安裝不同的套件來強化 Jenkins，來達到完整的持續整合 😁</p>
+<br>
+<h2 id="原始碼管理與建置觸發程序">原始碼管理與建置觸發程序</h2>
+<p>上面有提到 Jenkins 作為一個持續整合的工具，與原始碼管理系統的整合尤其重要。我們這一章節，會介紹如何在 Jenkins 上透過原始碼管理 (source code management,SCM) 系統，例如從 GitHub 獲得專案的原始碼，並設置建置觸發程序 (build triggers) 來實踐持續整合。</p>
+<br>
+<p>接下來我會使用 <a href="https://github.com/880831ian/jenkins-testfile" target="_blank" rel="noopener noreffer">jenkins-testfile</a> 這個專案來作示範，大家也可以使用自己的程式碼來測試。我會利用 <a href="https://github.com/adrienverge/yamllint" target="_blank" rel="noopener noreffer">yamlint</a> 這個語法檢查工具來檢查 yaml 檔案的語法是否正確以及符合規範：</p>
+<h3 id="安裝-yamllint">安裝 yamllint</h3>
+<p>首先我們要先安裝 yamllint 到本機裡，我們這邊使用 <code>brew</code> 來做安裝，其他可以參考<a href="https://yamllint.readthedocs.io/en/stable/quickstart.html" target="_blank" rel="noopener noreffer"> yamlint 官方文件</a>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ brew install yamlint
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>安裝好後，我們可以先在本機測試一下，我測試的檔案是上次的 Kubernetes-EFK yaml 檔：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/yamllint.png" title="/images/Jenkins-Ansible/yamllint.png" data-thumbnail="/images/Jenkins-Ansible/yamllint.png" data-sub-html="<h2>yamllint 測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/yamllint.png"
+            data-srcset="/images/Jenkins-Ansible/yamllint.png, /images/Jenkins-Ansible/yamllint.png 1.5x, /images/Jenkins-Ansible/yamllint.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/yamllint.png" width="800" />
+    </a><figcaption class="image-caption">yamllint 測試</figcaption>
+    </figure>
+可以發現它有正常運作，他會檢查 yaml 檔案的格式是否正確，並且會提示你錯誤的地方。那我們現在要做的，就是從本機檢查變成檢查 GitHub 的 上的程式碼是否格式正確。
+<br></p>
+<h3 id="建置專案">建置專案</h3>
+<h4 id="https">HTTPS</h4>
+<p>接下來我們先建立一個新的 Job，這次要在原始碼管理裡面選擇 Git，在 Repositories &gt; Repository URL 裡面輸入我們這次要測試的 <a href="https://github.com/880831ian/jenkins-testfile" target="_blank" rel="noopener noreffer">repository URL</a>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/repository.png" title="/images/Jenkins-Ansible/repository.png" data-thumbnail="/images/Jenkins-Ansible/repository.png" data-sub-html="<h2>設定 Repository URL</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/repository.png"
+            data-srcset="/images/Jenkins-Ansible/repository.png, /images/Jenkins-Ansible/repository.png 1.5x, /images/Jenkins-Ansible/repository.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/repository.png" width="1000" />
+    </a><figcaption class="image-caption">設定 Repository URL</figcaption>
+    </figure>
+<br>
+<p>我們接著點選 Credentials 欄位選擇 <code>Add &gt; Jenkins</code> 後，在  <strong>Kind</strong> 欄位選擇 <strong>Username with password</strong></p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/username_password.png" title="/images/Jenkins-Ansible/username_password.png" data-thumbnail="/images/Jenkins-Ansible/username_password.png" data-sub-html="<h2>欄位選擇  Username with password</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/username_password.png"
+            data-srcset="/images/Jenkins-Ansible/username_password.png, /images/Jenkins-Ansible/username_password.png 1.5x, /images/Jenkins-Ansible/username_password.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/username_password.png" width="1000" />
+    </a><figcaption class="image-caption">欄位選擇  Username with password</figcaption>
+    </figure>
+<br>
+<h4 id="ssh">SSH</h4>
+<p>如果我們想要透過 SSH 來存取專案，我們會遇到以下狀況：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/ssh_error.png" title="/images/Jenkins-Ansible/ssh_error.png" data-thumbnail="/images/Jenkins-Ansible/ssh_error.png" data-sub-html="<h2>SSH 尚未設定錯誤訊息</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/ssh_error.png"
+            data-srcset="/images/Jenkins-Ansible/ssh_error.png, /images/Jenkins-Ansible/ssh_error.png 1.5x, /images/Jenkins-Ansible/ssh_error.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/ssh_error.png" width="1000" />
+    </a><figcaption class="image-caption">SSH 尚未設定錯誤訊息</figcaption>
+    </figure>
+會有錯誤訊息是因為我們還沒有把 Jenkins 與 GitHub 做 SSH 金鑰配對，所以 GitHub 拒絕 Jenkins 透過 SSH 存取。那要怎麼解決呢？</p>
+<p>最簡單的方法就是在 Jenkins 主機下<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener noreffer">建立 SSH 金鑰</a>，並<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/" target="_blank" rel="noopener noreffer">將公開金鑰 Key 加入到 GitHub 帳號中</a>，有需要的朋友可以再自行使用，該範例使用 HTTPS 來做設定。</p>
+<br>
+<h3 id="建置觸發程序">建置觸發程序</h3>
+<p>由於我們還沒有定義任何建置的觸發程序，所以除非我們手動去操作 Jenkins，不然 Jenkins 並不會主動幫我們進行建置。因此，在<strong>建置觸發程序</strong>這個欄位內，我們可以自由設定我們希望 Jenkins 何時自動幫我們進行建置專案。那依照專案的屬性不同，我們也可以採用不同的建置時機。那最常見的有以下兩種：</p>
+<br>
+<h4 id="定期建置">定期建置</h4>
+<p>在 Jenkins 中，我們是採用 <a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules" target="_blank" rel="noopener noreffer">Cron Format</a> 的方式來定義建置行程。Cron Format 總共五個欄位，欄位與欄位之間可用空白或 Tab 鍵做區隔：</p>
+<ol>
+<li>分 (minute)：0 - 59 分</li>
+<li>時 (hour)：0 - 23 時</li>
+<li>日 (day of month)：1 - 31 日</li>
+<li>月 (month)：1 - 12 月</li>
+<li>星期 (day of week)：星期 0 - 7 (其中 0 與 7 都代表星期天)</li>
+</ol>
+<p>假設我們希望每個 30 分鐘就建置一次當前專案，我們可以在定義規則裡面填入 <code>H/15 * * * *</code>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/cron.png" title="/images/Jenkins-Ansible/cron.png" data-thumbnail="/images/Jenkins-Ansible/cron.png" data-sub-html="<h2>定期建置</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/cron.png"
+            data-srcset="/images/Jenkins-Ansible/cron.png, /images/Jenkins-Ansible/cron.png 1.5x, /images/Jenkins-Ansible/cron.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/cron.png" width="1000" />
+    </a><figcaption class="image-caption">定期建置</figcaption>
+    </figure>
+<br>
+<h4 id="github-hook-trigger-for-gitscm-polling">GitHub hook trigger for GITScm polling</h4>
+<p>這種觸發方式在持續整合時非常實用。我們可以讓 Jenkins 自動監測當在原始碼專案有任何的 push event 發生時就進行建置。為了要使用這種方式建置，需要以下幾個步驟來設定：</p>
+<h5 id="新增-github-personal-access-token">新增 GitHub personal access token</h5>
+<ol>
+<li>進入 GitHub 首頁，點選右上角下拉選單，點選 <strong>Settings</strong>：</li>
+</ol>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_1.png" title="/images/Jenkins-Ansible/setting_1.png" data-thumbnail="/images/Jenkins-Ansible/setting_1.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_1.png"
+            data-srcset="/images/Jenkins-Ansible/setting_1.png, /images/Jenkins-Ansible/setting_1.png 1.5x, /images/Jenkins-Ansible/setting_1.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_1.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>先點選左邊的 <strong>Developer settings</strong> &gt; 點選左邊的 <strong>Personal access tokens</strong> &gt; 點選右上角的 <strong>Generate new token</strong>，輸入 token 的描述並勾選 <code>repo</code> scope 以及 <code>admin:repo_hook</code> scope ，點選 <strong>Generate token</strong>：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_2.png" title="/images/Jenkins-Ansible/setting_2.png" data-thumbnail="/images/Jenkins-Ansible/setting_2.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_2.png"
+            data-srcset="/images/Jenkins-Ansible/setting_2.png, /images/Jenkins-Ansible/setting_2.png 1.5x, /images/Jenkins-Ansible/setting_2.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_2.png" width="700" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>會產生一個 token，請先把 token 複製下來，離開這個畫面後，token 就會看不到了！(此 token 已刪除 ✌️)</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_3.png" title="/images/Jenkins-Ansible/setting_3.png" data-thumbnail="/images/Jenkins-Ansible/setting_3.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_3.png"
+            data-srcset="/images/Jenkins-Ansible/setting_3.png, /images/Jenkins-Ansible/setting_3.png 1.5x, /images/Jenkins-Ansible/setting_3.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_3.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<h5 id="設定-jenkins-github">設定 Jenkins GitHub</h5>
+<ol>
+<li>進入 Jenkins 儀表板頁面，點選左邊<strong>管理 Jenkiins</strong> &gt; System Configuration 的<strong>設定系統</strong>，往下滑找到 GitHub：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_4.png" title="/images/Jenkins-Ansible/setting_4.png" data-thumbnail="/images/Jenkins-Ansible/setting_4.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_4.png"
+            data-srcset="/images/Jenkins-Ansible/setting_4.png, /images/Jenkins-Ansible/setting_4.png 1.5x, /images/Jenkins-Ansible/setting_4.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_4.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>找到後，再 GitHub Servers 下拉欄位選擇 Add GitHub Server，會看到下面畫面，API URL 輸入 <code>https://api.github.com</code>，Credentials 點 Add：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_5.png" title="/images/Jenkins-Ansible/setting_5.png" data-thumbnail="/images/Jenkins-Ansible/setting_5.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_5.png"
+            data-srcset="/images/Jenkins-Ansible/setting_5.png, /images/Jenkins-Ansible/setting_5.png 1.5x, /images/Jenkins-Ansible/setting_5.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_5.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>Kind 選擇 Secret Text，Secret 輸入剛剛存的 Personal Access Token，Description 簡單描述一下：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_6.png" title="/images/Jenkins-Ansible/setting_6.png" data-thumbnail="/images/Jenkins-Ansible/setting_6.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_6.png"
+            data-srcset="/images/Jenkins-Ansible/setting_6.png, /images/Jenkins-Ansible/setting_6.png 1.5x, /images/Jenkins-Ansible/setting_6.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_6.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>設定完後，點選一下右邊的 <strong>Test connection</strong>，如果我顯示 <code>Credentials verified for user UserName, rate limit: xxx</code> 就代表成功囉！</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_7.png" title="/images/Jenkins-Ansible/setting_7.png" data-thumbnail="/images/Jenkins-Ansible/setting_7.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_7.png"
+            data-srcset="/images/Jenkins-Ansible/setting_7.png, /images/Jenkins-Ansible/setting_7.png 1.5x, /images/Jenkins-Ansible/setting_7.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_7.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<h5 id="設定專案組態">設定專案組態</h5>
+<ol>
+<li>接著我們跳回來剛剛的專案組態，並勾選 <strong>GitHub hook trigger for GITScm polling</strong>：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_8.png" title="/images/Jenkins-Ansible/setting_8.png" data-thumbnail="/images/Jenkins-Ansible/setting_8.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_8.png"
+            data-srcset="/images/Jenkins-Ansible/setting_8.png, /images/Jenkins-Ansible/setting_8.png 1.5x, /images/Jenkins-Ansible/setting_8.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_8.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>寫一個 Shell Script 來建置專案：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="k">for</span> file in <span class="k">$(</span>find . -type f -name <span class="s2">&#34;*yaml&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">	yamllint <span class="nv">$file</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_9.png" title="/images/Jenkins-Ansible/setting_9.png" data-thumbnail="/images/Jenkins-Ansible/setting_9.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_9.png"
+            data-srcset="/images/Jenkins-Ansible/setting_9.png, /images/Jenkins-Ansible/setting_9.png 1.5x, /images/Jenkins-Ansible/setting_9.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_9.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+這邊利用一個簡單的 Shell Script 迴圈來對所有 YAML file 進行 yamllint 的檢查，最後點選儲存離開。</p>
+<br>
+<h5 id="github-設定-jenkins">GitHub 設定 Jenkins</h5>
+<ol>
+<li>在 GitHub 上整合 Jenkins，先到 GitHub 被建置專案的頁面下點 <strong>Setting</strong> 標籤 &gt; 點選左邊的 <strong>Webhook</strong>  &gt; 點選右上角的 <strong>Add webhook</strong>  &gt; 輸入 Jenkins Hook URL 到 Payload URL &gt; 選擇 Content type 為 <strong>application/json</strong></li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_10.png" title="/images/Jenkins-Ansible/setting_10.png" data-thumbnail="/images/Jenkins-Ansible/setting_10.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_10.png"
+            data-srcset="/images/Jenkins-Ansible/setting_10.png, /images/Jenkins-Ansible/setting_10.png 1.5x, /images/Jenkins-Ansible/setting_10.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_10.png" width="800" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Jenkins Hook URL 設定<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>由於我們是將 Jenkins 運行在本機端，所以 Jenkins Hook URL <code>http://localhost:8080</code> 是 Private IP。GitHub 沒有辦法抓 Private IP，為了練習，我們可以透過 <a href="https://ngrok.com/" target="_blank" rel="noopener noreffer">ngrok</a> 這套簡單小工具來暫時將 <code>http://localhost:8080</code> 變成 Public IP。</p>
+<p><a href="https://ngrok.com/" target="_blank" rel="noopener noreffer">ngrok</a> 的使用方式很簡單，只要先下載 <code>brew install ngrok/ngrok/ngrok</code> ，並使用 <code>ngrok http 8080</code> 指令，將 Private IP 變成 Public IP：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins-Ansible/setting_11.png" title="/images/Jenkins-Ansible/setting_11.png" data-thumbnail="/images/Jenkins-Ansible/setting_11.png" data-sub-html="<h2>ngrok 將 Private IP 變成 Public IP</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins-Ansible/setting_11.png"
+            data-srcset="/images/Jenkins-Ansible/setting_11.png, /images/Jenkins-Ansible/setting_11.png 1.5x, /images/Jenkins-Ansible/setting_11.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins-Ansible/setting_11.png" width="1000" />
+    </a><figcaption class="image-caption">ngrok 將 Private IP 變成 Public IP</figcaption>
+    </figure>
+<br>
+<p>圖片中 <code>https://efd5-111-235-135-57.in.ngrok.io</code> 就是 Public 的 Jenkins Hook URL</p>
+</div>
+        </div>
+    </div>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://ithelp.ithome.com.tw/users/20103346/ironman/1473" target="_blank" rel="noopener noreffer">30 天入門 Ansible 及 Jenkins</a></p>
 <p><a href="https://ithelp.ithome.com.tw/articles/10219083" target="_blank" rel="noopener noreffer">Day12 什麼是 CICD</a></p>
 <p><a href="http://www.srcmini.com/21799.html" target="_blank" rel="noopener noreffer">Jenkins和Ansible的對比和區別</a></p>
+<p><a href="https://medium.com/@BuzonXXXX/ci-%E8%A8%AD%E5%AE%9Ajenkins%E9%80%A3%E7%B5%90github-private-repo-111c53d29047" target="_blank" rel="noopener noreffer">[CI]設定jenkins連結GitHub Private Repo by Webhook</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/ansible/">Ansible</a>
                 </span><span><a href="/tags/jenkins/">Jenkins</a>
@@ -328,7 +904,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-11</span>
+                <span>更新於 2022-05-11&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a9c57ed6db57507ebee2ee0c43cf1388a4c6c9c2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a9c57ed:&nbsp;# 新增 Ansible 及 Jenkins 自動化 CI/CD 介紹">
+                            <i class="fas fa-hashtag fa-fw"></i>a9c57ed</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/jenkins-ansible/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -336,7 +913,7 @@ if (!doNotTrack) {
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Jenkins-Ansible/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Ansible 及 Jenkins 自動化 CI/CD 介紹" data-hashtags="Ansible,Jenkins,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/jenkins-ansible/" data-hashtag="Ansible"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/jenkins-ansible/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/jenkins-ansible/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Ansible 及 Jenkins 自動化 CI/CD 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Ansible 及 Jenkins 自動化 CI/CD 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Ansible 及 Jenkins 自動化 CI/CD 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Jenkins 及 Ansible IT 自動化 CI/CD 介紹" data-hashtags="Ansible,Jenkins,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/jenkins-ansible/" data-hashtag="Ansible"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/jenkins-ansible/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/jenkins-ansible/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Jenkins 及 Ansible IT 自動化 CI/CD 介紹"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Jenkins 及 Ansible IT 自動化 CI/CD 介紹"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/jenkins-ansible/" data-title="Jenkins 及 Ansible IT 自動化 CI/CD 介紹"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/k8s-efk/" class="prev" rel="prev" title="Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
