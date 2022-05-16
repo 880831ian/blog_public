@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Ansible 介紹與實作 (Inventory、Playbooks、Module) - PinYi</title><meta name="description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"><meta property="og:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module)" />
+<meta property="og:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/ansible/" /><meta property="og:image" content="https://pin-yi.me/ansible/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-16T11:26:40+08:00" />
+<meta property="article:modified_time" content="2022-05-16T11:26:40+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/ansible/featured-image.webp"/>
+<meta name="twitter:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module)"/>
+<meta name="twitter:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/ansible/" /><link rel="prev" href="https://pin-yi.me/jenkins/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ansible 介紹與實作 (Inventory、Playbooks、Module)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/ansible\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/ansible\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Ansible, CI\/CD, 介紹, 實作","wordcount":  4763 ,
+        "url": "https:\/\/pin-yi.me\/ansible\/","datePublished": "2022-05-16T11:26:40+08:00","dateModified": "2022-05-16T11:26:40+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": "此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ansible/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ansible/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ansible/featured-image.webp"
+        data-srcset="/ansible/featured-image.webp, /ansible/featured-image.webp 1.5x, /ansible/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/ansible/featured-image.webp"
+        title="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Ansible 介紹與實作 (Inventory、Playbooks、Module)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4763 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ansible-是如何運作的">Ansible 是如何運作的？</a>
+      <ul>
+        <li><a href="#什麼是控制主機及被控節點">什麼是控制主機及被控節點？</a></li>
+        <li><a href="#什麼是-ansible-inventory">什麼是 Ansible inventory</a></li>
+        <li><a href="#什麼是-ansible-playbooks">什麼是 Ansible Playbooks</a>
+          <ul>
+            <li><a href="#ad-hoc-commands-是什麼">Ad-Hoc commands 是什麼？</a></li>
+          </ul>
+        </li>
+        <li><a href="#playbooks-是什麼">Playbooks 是什麼？</a></li>
+      </ul>
+    </li>
+    <li><a href="#ansible-安裝與實作">Ansible 安裝與實作</a>
+      <ul>
+        <li><a href="#版本">版本</a></li>
+        <li><a href="#如何安裝-ansible-在控制主機">如何安裝 Ansible 在控制主機</a></li>
+        <li><a href="#如何安裝-ansible-在被控節點">如何安裝 Ansible 在被控節點</a></li>
+        <li><a href="#如何讓-ansible-操控-docker-容器">如何讓 Ansible 操控 Docker 容器？</a></li>
+        <li><a href="#hello-world-on-managed-node">Hello World On Managed Node</a></li>
+      </ul>
+    </li>
+    <li><a href="#第一個-playbook">第一個 Playbook</a></li>
+    <li><a href="#常用的-ansible-module-有哪些">常用的 Ansible Module 有哪些？</a>
+      <ul>
+        <li><a href="#ansiblebuiltinapt"><code>ansible.builtin.apt</code></a></li>
+        <li><a href="#ansiblebuiltincommand"><code>ansible.builtin.command</code></a></li>
+        <li><a href="#ansiblebuiltincopy"><code>ansible.builtin.copy</code></a></li>
+        <li><a href="#ansiblebuiltinfile"><code>ansible.builtin.file</code></a></li>
+        <li><a href="#ansiblebuiltinlineinfile"><code>ansible.builtin.lineinfile</code></a></li>
+        <li><a href="#ansiblebuiltinservice"><code>ansible.builtin.service</code></a></li>
+        <li><a href="#ansiblebuiltinshell"><code>ansible.builtin.shell</code></a></li>
+        <li><a href="#ansiblebuiltinstat"><code>ansible.builtin.stat</code></a></li>
+        <li><a href="#其他">其他</a></li>
+      </ul>
+    </li>
+    <li><a href="#ansible-發送通知到-telegram-bot">Ansible 發送通知到 Telegram Bot</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>本篇文章是接續前面兩篇 <a href="https://pin-yi.me/jenkins-ansible/" target="_blank" rel="noopener noreffer">Jenkins 及 Ansible IT 自動化 CI/CD 介紹</a> 跟 <a href="https://pin-yi.me/jenkins/" target="_blank" rel="noopener noreffer">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</a> 文章，歡迎大家先去觀看前面兩篇文章 🤪</p>
+<br>
+<h2 id="ansible-是如何運作的">Ansible 是如何運作的？</h2>
+<p>在 Ansible 世界裡，我們會透過 <code>inventory 檔案</code> 來定義有哪些的 <code>Managed Node</code>，並藉由 <code>SSH</code> 與 <code>Python</code> 來進行溝通。那我們先來看一張圖：</p>
+<figure><a class="lightgallery" href="/images/Ansible/run.png" title="/images/Ansible/run.png" data-thumbnail="/images/Ansible/run.png" data-sub-html="<h2>Ansible 運作原理  (圖片來源：七分鐘掌握 Ansible 核心觀念)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/run.png"
+            data-srcset="/images/Ansible/run.png, /images/Ansible/run.png 1.5x, /images/Ansible/run.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/run.png" width="600" />
+    </a><figcaption class="image-caption">Ansible 運作原理  (圖片來源：<a href="https://school.soft-arch.net/courses/28546/lectures/655359" target="_blank" rel="noopener noreffer">七分鐘掌握 Ansible 核心觀念</a>)</figcaption>
+    </figure>
+<br>
+<p>誒 😱 突然多了很多新名詞，沒關係我來一一解釋，首先我們先從 <code>Managed Node</code> 是什麼，以及圖片中的 <code>Control machine</code> 開始說起吧！</p>
+<h3 id="什麼是控制主機及被控節點">什麼是控制主機及被控節點？</h3>
+<p>在 Ansible 裡，我們會把所有機器的角色做以下的區分：</p>
+<ul>
+<li>控制主機 (Control Machine)：顧名思義，這類主機可以透過運行 Ansible 的劇本 (Playbooks) 對被控節點進行部署。</li>
+<li>被控節點 (Managed Node)：也稱為遙控節點 (Remote Node)。相對於控制主機，這類節點就是我們透過 Ansible 進行部署的對象。</li>
+</ul>
+<p>所以代表我們在操作這邊就是 Control Machine，要部署的機器就是 Managed Node，透過 SSH 來做連線。但什麽是 <code>inventory</code> 跟 <code>Playbooks</code> 呢？</p>
+<br>
+<h3 id="什麼是-ansible-inventory">什麼是 Ansible inventory</h3>
+<p><code>inventory</code> 這個單子本身有<strong>詳細目錄</strong>、<strong>清單</strong>和<strong>列表</strong>的意思。在這裡我們可以把它理解成一份主機列表，可以透過它來定義每個 Managed Node 的代號、IP 位址、連線設定和群組。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim hosts
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_host：遠端 SSH 主機位址</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_port：遠端 SSH Port</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_user：遠端 SSH 使用者名稱</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_private_key_file：本機 SSH 私鑰檔案路徑</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_pass：遠端 SSH 密碼 (建議使用私鑰)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>local<span class="o">]</span>
+</span></span><span class="line"><span class="cl">server1 <span class="nv">ansible_ssh_host</span><span class="o">=</span>127.0.0.1  <span class="nv">ansible_ssh_port</span><span class="o">=</span><span class="m">55000</span> <span class="nv">ansible_ssh_pass</span><span class="o">=</span>docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以我們可以在這邊輸入很多個主機來做管理，可以把它想成一個設定檔。</p>
+<br>
+<h3 id="什麼是-ansible-playbooks">什麼是 Ansible Playbooks</h3>
+<p>再談 Ansible Playbooks 之前，先說明我們要怎麼去操作 Ansible？一般來說，我們可以使用 Ad-Hoc commands 和 Playbooks 兩種方式來操作 Ansible。</p>
+<br>
+<h4 id="ad-hoc-commands-是什麼">Ad-Hoc commands 是什麼？</h4>
+<p>Ad hoc 可以翻譯成<strong>簡短地指令</strong>，也就是我們常用的指令模式，最常見的 <code>ping</code>和<code>echo</code> 為例。</p>
+<ul>
+<li><code>ping</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m ping
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: false,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ping&#34;</span>: <span class="s2">&#34;pong&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li><code>echo</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m <span class="nb">command</span> -a <span class="s2">&#34;echo Hello World&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">Hello World
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>從上面的例子中可以看到 Ad-Hoc commands 一次只能處理一件事情，這是它與 Playbooks 最大的差異。</p>
+<br>
+<h3 id="playbooks-是什麼">Playbooks 是什麼？</h3>
+<p>Playbooks 就是字面上的意思為<strong>劇本</strong>，我們可以先透過寫好的<strong>劇本 (Playbooks)</strong> 來讓各個 Managed Node 進行指定的<strong>動作 (Plays)</strong> 和<strong>任務 (Tasks)</strong>。</p>
+<p>簡而言之，Playbooks 就是 Ansible 的腳本 (Script)，而且比傳統 Shell Script 還要強大好幾百倍的腳本！此外它是使用 <strong>YAML</strong> 格式，寫 Code 就如同寫文件一樣，簡單易讀。</p>
+<p>有關詳細的<strong>動作 (Plays)</strong> 和<strong>任務 (Tasks)</strong>，等我們實際安裝好再來說明 😆</p>
+<br>
+<h2 id="ansible-安裝與實作">Ansible 安裝與實作</h2>
+<p>安裝之前先讓大家看一下版本吧！大家要記得檢查自己的版本與教學是否相同，如果不同，記得要先查看官網是否有修改內容。</p>
+<h3 id="版本">版本</h3>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.14, build a224086</li>
+<li>Aansible：ansible [core 2.12.5]</li>
+</ul>
+<br>
+<h3 id="如何安裝-ansible-在控制主機">如何安裝 Ansible 在控制主機</h3>
+<p>由於 Ansible 是一套開源的軟體，所以在目前大部分主流作業系統上都可以透過對應的套件管理 (package manager) 進行安裝。</p>
+<p>本人使用 macOS ，所以這邊僅列出 masOS 安裝方式，其他的可以參考<a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-specific-operating-systems" target="_blank" rel="noopener noreffer">官方的安裝指南</a>。</p>
+<br>
+<p>macOS 安裝可以使用兩種方式，官方較推薦使用 <code>pip</code> 來做安裝：</p>
+<ul>
+<li><a href="https://pip.pypa.io/en/stable/#" target="_blank" rel="noopener noreffer">Pip Install Packages (pip 官方較推薦)</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ sudo pip install ansible
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li><a href="https://formulae.brew.sh/formula/ansible#default" target="_blank" rel="noopener noreffer">Homebrew (brew)</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ sudo brew install ansible
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br> 
+<p>安裝完後，可以使用 <code>--version</code> 指令來檢查是否安裝完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ ansible --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ansible [core 2.12.5]
+</span></span><span class="line"><span class="cl">  config file = None
+</span></span><span class="line"><span class="cl">  configured module search path = [&#39;/Users/ian_zhuang/.ansible/plugins/modules&#39;, &#39;/usr/share/ansible/plugins/modules&#39;]
+</span></span><span class="line"><span class="cl">  ansible python module location = /usr/local/Cellar/ansible/5.7.1/libexec/lib/python3.10/site-packages/ansible
+</span></span><span class="line"><span class="cl">  ansible collection location = /Users/ian_zhuang/.ansible/collections:/usr/share/ansible/collections
+</span></span><span class="line"><span class="cl">  executable location = /usr/local/bin/ansible
+</span></span><span class="line"><span class="cl">  python version = 3.10.4 (main, Apr 26 2022, 19:43:24) [Clang 13.0.0 (clang-1300.0.29.30)]
+</span></span><span class="line"><span class="cl">  jinja version = 3.1.2
+</span></span><span class="line"><span class="cl">  libyaml = True
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="如何安裝-ansible-在被控節點">如何安裝 Ansible 在被控節點</h3>
+<p>不需要！！！ 透過 Ansible 進行管理的被控節點完全不需要安裝 Ansible。我們只需要確保這個節點可以透過 SSH 與控制主機做溝通，並安裝 Python 2.6 以上版本就可以透過控制主機來進行部署及管理了。</p>
+<br>
+<p>那我們為了要模擬，所以我們使用 Docker 來模擬 Managed Node，首先老樣子，一樣先寫一個 Dockerfile 來建立我們的映像檔，此映像檔是微調 <a href="https://github.com/chusiang/ansible-managed-node.dockerfile/blob/master/ubuntu-14.04/Dockerfile" target="_blank" rel="noopener noreffer">chusiang/ansible-managed-node.dockerfile</a> 的內容，修改 ubuntu 版本以及內容作調整，我會把程式碼放在 <a href="https://github.com/880831ian/Ansible" target="_blank" rel="noopener noreffer">GitHub 連結</a>，以及 <a href="https://hub.docker.com/r/880831ian/ansible-ubuntu-server" target="_blank" rel="noopener noreffer">DockerHub 連結</a>，歡迎大家前去下載使用。</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> ubuntu:22.10</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Update the index of available packages.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Install the requires package.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install -y openssh-server sudo curl wget bash-completion openssl <span class="o">&amp;&amp;</span> apt-get clean<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Setting the sshd.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir /var/run/sshd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;root:root&#39;</span> <span class="p">|</span> chpasswd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s1">&#39;s/PermitRootLogin without-password/PermitRootLogin yes/&#39;</span> /etc/ssh/sshd_config<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># SSH login fix. Otherwise user is kicked off after login</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed <span class="s1">&#39;s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g&#39;</span> -i /etc/pam.d/sshd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> NOTVISIBLE <span class="s2">&#34;in users profile&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&#34;export VISIBLE=now&#34;</span> &gt;&gt; /etc/profile<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Create a new user.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">#</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># - username: docker</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># - password: docker</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> useradd --create-home --shell /bin/bash <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      --password <span class="k">$(</span>openssl passwd -1 docker<span class="k">)</span> docker<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Add sudo permission.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;docker ALL=(ALL) NOPASSWD: ALL&#39;</span> &gt;&gt; /etc/sudoers<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Setting ssh public key.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> wget https://raw.githubusercontent.com/chusiang/ansible-jupyter.dockerfile/master/files/ssh/id_rsa.pub <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -O /tmp/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      mkdir /home/docker/.ssh <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      mv /tmp/authorized_keys /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chown -R docker:docker /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chmod <span class="m">644</span> /home/docker/.ssh/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chmod <span class="m">700</span> /home/docker/.ssh<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 22</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Run ssh server daemon.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/usr/sbin/sshd&#34;</span><span class="p">,</span> <span class="s2">&#34;-D&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接下來將它包成 Image 並啟動他：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker build -t ansible-ubuntu-server . <span class="o">&amp;&amp;</span> docker run --name server1 -d -p 8888:22 ansible-ubuntu-server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">64c51235e34a7ba42c0c45e690201dd80248c9aac76c3b855c99cf63f7f0af7c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>可以用 <code>exec</code> 進入容器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it server1 /bin/bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="如何讓-ansible-操控-docker-容器">如何讓 Ansible 操控 Docker 容器？</h3>
+<p>我們在工作目錄下，新增一個 <code>ansible.cfg</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="line"><span class="cl"><span class="k">[defaults]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">inventory</span> <span class="o">=</span> <span class="s">hosts</span>
+</span></span><span class="line"><span class="cl"><span class="na">remote_user</span> <span class="o">=</span> <span class="s">docker</span>
+</span></span><span class="line"><span class="cl"><span class="na">host_key_checking</span> <span class="o">=</span> <span class="s">False</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>設定 inventory hosts：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[local]
+</span></span><span class="line"><span class="cl">server1 ansible_ssh_host=127.0.0.1  ansible_ssh_port=8888 ansible_ssh_pass=docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 8888 是我們在啟動時所開放的 Port，也可以自行更改。</p>
+<ul>
+<li><code>ansible_ssh_host</code>：設為本機的 IP。</li>
+<li><code>ansible_ssh_port</code>：設為 <code>docker ps </code>取得的 SSH Port 也就是我們的 8888。</li>
+<li><code>ansible_ssh_pass</code>：因為我們沒有連線用的金鑰，所以直接使用密碼方式做連結。(建議只用於練習環境使用)</li>
+</ul>
+<br>
+<h3 id="hello-world-on-managed-node">Hello World On Managed Node</h3>
+<p>當我們都設置完成後，就可以使用 Terminal 用 Docker 建立好的 Ansible 來練習了！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m <span class="nb">command</span> -a <span class="s1">&#39;echo Hello World on Docker.&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">Hello World on Docker.	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>ansible 安裝時常見問題<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Q1. server1 | FAILED | rc=-1 &raquo; to use the &lsquo;ssh&rsquo; connection type with passwords or pkcs11_provider, you must install the sshpass program</p>
+<br>
+<p>Q2. ~paramiko/transport.py:236: CryptographyDeprecationWarning: Blowfish has been deprecated</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition success open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-check-circle fa-fw"></i>ansible 安裝時常見問題<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Ans1. 會遇到這個問題是因為需要多安裝 sshpass，一般系統安裝 sshpass 很簡單，但在 macOS 上稍微麻煩，詳細可以參考<a href="https://stackoverflow.com/questions/32255660/how-to-install-sshpass-on-mac" target="_blank" rel="noopener noreffer">這篇文章</a>。</p>
+<br>
+<p>Ans2. 在我安裝過程中，發現上前幾天才出現這個 Bug 詳細情形可以參考 <a href="https://github.com/paramiko/paramiko/issues/2038" target="_blank" rel="noopener noreffer">GitHub issues</a>，目前解決辦法有降板或是先將錯誤訊息給註解掉，之後再等新的版本出來再更新，大家可以自行選擇，我這邊是直接把出現問題的 <code>transport.py</code> 內容註解掉，大概位於236行，可以看下方圖片。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Ansible/blowfish.png" title="/images/Ansible/blowfish.png" data-thumbnail="/images/Ansible/blowfish.png" data-sub-html="<h2>CryptographyDeprecationWarning 錯誤訊息修正</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/blowfish.png"
+            data-srcset="/images/Ansible/blowfish.png, /images/Ansible/blowfish.png 1.5x, /images/Ansible/blowfish.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/blowfish.png" width="600" />
+    </a><figcaption class="image-caption">CryptographyDeprecationWarning 錯誤訊息修正</figcaption>
+    </figure>
+</div>
+        </div>
+    </div>
+<br>
+<h2 id="第一個-playbook">第一個 Playbook</h2>
+<p>在我們都安裝好後，要來說說我們剛剛有偷偷提到的 Playbooks 的動作 (Plays) 和任務 (Tasks)。在一份 Playbooks 裡面，可以有多個 Play、多個 Task 和多個 Module：</p>
+<ul>
+<li>Play：通常為某個特定的目的，例如：
+<ul>
+<li><code>Setup a official website with Drupal</code> 藉由 Drupal 建置官網</li>
+<li><code>Restart the API Service</code> 重開 API 服務</li>
+</ul>
+</li>
+<li>Task：要實行 Play 這個目的所需做的每個步驟，例如：
+<ul>
+<li><code>Install the Nginx</code> 安裝 Nginx</li>
+<li><code>Kill the djnago process</code> 強制停止 django 的行程</li>
+</ul>
+</li>
+<li>Module：Ansible 所提供的各種操作方式，例如：
+<ul>
+<li><code>apt: name=vim state=present</code> 使用 apt 套件安裝 vim</li>
+<li><code>command: /sbin/shutdown -r now</code> 使用 shutdown 的指令關機</li>
+</ul>
+</li>
+</ul>
+<br>
+<p>有點聽不懂吧！我來舉個例子，我們最熟悉的 Hello World，先建立一個 <code>helloworld.yaml</code> 的檔案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">say &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout }}&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到這整個就是 Play，我們想要達到 say &lsquo;hello world&rsquo; 的目的，其中有兩個 name 分別代表兩個 Task，也就是達成 Play 目的所需得步驟。最後 command 與 debug 就是我們的 Module 要怎麼達成這兩個步驟的操作方式。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Ansible/playbooks.gif" title="/images/Ansible/playbooks.gif" data-thumbnail="/images/Ansible/playbooks.gif" data-sub-html="<h2>Playbooks 組成結構</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/playbooks.gif"
+            data-srcset="/images/Ansible/playbooks.gif, /images/Ansible/playbooks.gif 1.5x, /images/Ansible/playbooks.gif 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/playbooks.gif" width="800" />
+    </a><figcaption class="image-caption">Playbooks 組成結構</figcaption>
+    </figure>
+<br>
+<p>我們使用 <code>ansible-playbook</code> 執行 Playbook，在這個範例中，我們執行了１個 Play、3 個 Tasks 和 2 個 Modules：</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible-playbook helloworld.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Ansible/helloworld.png" title="/images/Ansible/helloworld.png" data-thumbnail="/images/Ansible/helloworld.png" data-sub-html="<h2>執行 Playbooks</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/helloworld.png"
+            data-srcset="/images/Ansible/helloworld.png, /images/Ansible/helloworld.png 1.5x, /images/Ansible/helloworld.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/helloworld.png" width="1000" />
+    </a><figcaption class="image-caption">執行 Playbooks</figcaption>
+    </figure>
+<br>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>我們剛剛明明只寫兩個 tasks，為什麼執行就變成 3 個 tasks？<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">這是因為 Ansible 預設會使用 <code>Setup</code> task 來取得 Managed node 的 facts。關於 facts 的詳細說明，請滑到後面 &quot;&quot; 觀看😬</div>
+        </div>
+    </div>
+<br>
+<p>那如果沒有 Ansible 時，我們是怎麼操作的？我會附上 Shell Script 的做法，我們來比較看看吧！</p>
+<br>
+<ul>
+<li><strong>Shell Script</strong> 建立 <code>helloworld.sh</code> 檔案</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#! /bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Hello World&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>執行 <code>helloworld.sh</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">./ helloworld.sh
+</span></span><span class="line"><span class="cl">Hello World
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>看起來 Shell Script 已經夠用了，為什麼還要寫 Playbook 呢？這邊整理幾個理由給大家參考：</p>
+<ol>
+<li>用 Ansible 的 Module 可以把很多複雜的指令給標準化，例如不同的 Linux 發行版本在安裝套件時需代各種不同的參數。</li>
+<li>在現有的雲原生 (cloud native) 的架構下，傳統的 Shell Script 已經不敷使用，一般而言 Shell Script 只能對一台機器 (instance) 進行操作。</li>
+</ol>
+<br>
+<h2 id="常用的-ansible-module-有哪些">常用的 Ansible Module 有哪些？</h2>
+<p>接下來簡單介紹一下比較常用到的 8 個 Module：</p>
+<h3 id="ansiblebuiltinapt"><code>ansible.builtin.apt</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html#ansible-collections-ansible-builtin-apt-module" target="_blank" rel="noopener noreffer">apt module</a> 是給 Debian, Ubuntu 等作業系統使用的套件模組 (Packing Modules)，我們可以透過它管理 apt 套件。類似的有 <code>apt-get</code>、<code>dpkg</code>等。</p>
+<br>
+<ol>
+<li>更新套件索引(快取)，等同於 <code>apt-get update</code> 指令。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update repositories cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>安裝 vim 套件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install the package &#34;vim&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">present</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>移除 nano 套件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w"> </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Remove &#34;nano&#34; package</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nano</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltincommand"><code>ansible.builtin.command</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html#ansible-collections-ansible-builtin-command-module" target="_blank" rel="noopener noreffer">command module</a> 是可以在遠端上執行指令的指令模組，但它不支援變數 (variables) 和 <code>&lt;</code>、<code>&gt;</code>、<code>|</code>、<code>;</code>、<code>&amp;</code>，若有這類需求要改用 <code>shell</code> module。</p>
+<br>
+<ol>
+<li>重新開機</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Reboot at now</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">/sbin/shutdown -r now</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>當某個檔案不存在時才執行指令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create .ssh directory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">mkdir .ssh creates=.ssh/</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>先切換目錄再執行指令。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cat /etc/passwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">cat passwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">chdir</span><span class="p">:</span><span class="w"> </span><span class="l">/etc</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltincopy"><code>ansible.builtin.copy</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html#ansible-collections-ansible-builtin-copy-module" target="_blank" rel="noopener noreffer">copy moudule</a> 是從本地複製檔案到遠端的檔案模組，若有使用變數需求，可以改用 <code>template</code>。它類似 Linux 指令的 <code>scp</code>。</p>
+<br>
+<ol>
+<li>複製 ssh public key 到遠端 (chmod 644 /target/file)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>複製 ssh public key 到遠端 (chmod u=rw,g=r,o=r /target/file)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>複製 nginx vhost 設定檔到遠端，並備份原有的檔案</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy nginx vhost and backup the original</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/ironman.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/nginx/sites-available/default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">backup</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltinfile"><code>ansible.builtin.file</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html#ansible-collections-ansible-builtin-file-module" target="_blank" rel="noopener noreffer">file module</a> 是在遠端建立和刪除檔案 (file)、目錄 (directory) 和軟連結 (symlinks) 的檔案模組。它類似的 Linux 指令為 <code>chown</code>、<code>mkdir</code> 和 <code>touch</code>。</p>
+<ol>
+<li>建立檔案 (touch)，並設定權限為 644</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch a file, and set the permissions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/motd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>建立目錄 (mkdir)，並設定檔案擁有者為 docker。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a directory, and set the permissions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">directory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;700&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>建立軟連結 (ln)。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a symlink file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/tmp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">link</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltinlineinfile"><code>ansible.builtin.lineinfile</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html" target="_blank" rel="noopener noreffer">lineinfile</a> module 是個可用正規表示法對檔案進行插入或取代文字的檔案模組。它類似的 Linux 指令是 <code>sed</code>。</p>
+<ol>
+<li>移除 docker 使用者的 sudo 權限</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">remove sudo permission of docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/sudoers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^docker&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在 /etc/hosts 檔案裡用 127.0.0.1 localhost 取代開頭為 127.0.0.1 的一行</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">set localhost as 127.0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/hosts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^127\.0\.0\.1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;127.0.0.1 localhost&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltinservice"><code>ansible.builtin.service</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html#ansible-collections-ansible-builtin-service-module" target="_blank" rel="noopener noreffer">service module</a> 是用來管理遠端系統服務的系統模組。它類似的 Linux 指令為 <code>service</code>。</p>
+<ol>
+<li>啟動 Nginx</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">start nginx service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">started</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>停止 Nginx</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">stop nginx service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">stopped</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>重開網路服務</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">restart network service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">restarted</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l">eth0</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltinshell"><code>ansible.builtin.shell</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html#ansible-collections-ansible-builtin-shell-module" target="_blank" rel="noopener noreffer">shell module</a> 是可以在遠端用 <code>/bin/sh</code> 執行指令的指令模組，支援變數 (variables) 和 <code>&lt;</code>、<code>&gt;</code>、<code>|</code>、<code>;</code> 和 <code>&amp;</code> 等運算。</p>
+<ol>
+<li>藉由 <code>ls</code> 和 <code>wc</code> 檢查檔案數量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check files number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">ls /home/docker/ | wc -l</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>把所有的 Python 行程給砍掉</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kill all python process</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">kill -9 $(ps aux | grep python | awk &#39;{ print $2 }&#39;)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="ansiblebuiltinstat"><code>ansible.builtin.stat</code></h3>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/stat_module.html#ansible-collections-ansible-builtin-stat-module" target="_blank" rel="noopener noreffer">stat module</a> 是用來檢查檔案狀態的檔案模組。其類似的 Linux 指令為 <code>stat</code>。</p>
+<ol>
+<li>檢查檔案是否存在，若不存在則建立他。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check the &#39;vimrc&#39; target exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ansible.builtin.state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc.stat.exists == false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>取的某檔案的 md5sum</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Use md5sum to calculate checksum</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">checksum_algorithm</span><span class="p">:</span><span class="w"> </span><span class="l">md5sum</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h3 id="其他">其他</h3>
+<p>其他還有很多可以使用的 Module ，詳情可以查看 <a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html" target="_blank" rel="noopener noreffer">Ansible.Builtin</a>。</p>
+<br>
+<h2 id="ansible-發送通知到-telegram-bot">Ansible 發送通知到 Telegram Bot</h2>
+<p>剛剛看了很多內建的模組，當然 Ansible 還有很多好玩的模組可以使用，我們就跟 <a href="https://pin-yi.me/jenkins/" target="_blank" rel="noopener noreffer">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章</a> 一樣，將我們取得的內容傳送到 Telegram Bot 吧！那首先我們要先創造一個 Telegram Bot，在 Telegram 找到一個機器人叫 <code>BotFather</code> 的官方機器人帳號。並使用指令 <code>/newbot</code>，會看到一下畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Ansible/telegram_1.png" title="/images/Ansible/telegram_1.png" data-thumbnail="/images/Ansible/telegram_1.png" data-sub-html="<h2>Telegram 創建機器人</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/telegram_1.png"
+            data-srcset="/images/Ansible/telegram_1.png, /images/Ansible/telegram_1.png 1.5x, /images/Ansible/telegram_1.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/telegram_1.png" width="600" />
+    </a><figcaption class="image-caption">Telegram 創建機器人</figcaption>
+    </figure>
+<br>
+<p>他詢問你要幫機器人取叫什麼名稱，可以直接在輸入欄位輸入想要取的名稱，當然不能是別人已經取過的：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Ansible/telegram_2.png" title="/images/Ansible/telegram_2.png" data-thumbnail="/images/Ansible/telegram_2.png" data-sub-html="<h2>Telegram 創建機器人</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/telegram_2.png"
+            data-srcset="/images/Ansible/telegram_2.png, /images/Ansible/telegram_2.png 1.5x, /images/Ansible/telegram_2.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/telegram_2.png" width="600" />
+    </a><figcaption class="image-caption">Telegram 創建機器人</figcaption>
+    </figure>
+<p>看到它回覆你 <code>Done!</code> 代表成功了，接下來你會拿到一組 API Token，像我的是 <code>5335968936:AAEDO_Tudhy0t577jtbF9TpgrzqOsL99h9c</code> (已更換，大家放心 😂 )，接下來開啟瀏覽器輸入以下網址 <code>https://api.telegram.org/bot{API Token}/getupdates</code>，其中的 <code>{API Token}</code> 請帶入自己的 Token，直到出現 <code>{&quot;ok&quot;:true,&quot;result&quot;:[]}</code> 代表完成。</p>
+<br>
+<p>接下來開啟你自己的 Bot ，打上 <code>/start</code> 指令，重新整理剛剛的網頁就可以看到以下這樣的文字：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;ok&#34;:true,&#34;result&#34;:[{&#34;update_id&#34;:606594112,&#34;message&#34;:{&#34;message_id&#34;:1,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:493995679,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;type&#34;:&#34;private&#34;},&#34;date&#34;:1652695148,&#34;text&#34;:&#34;/start&#34;,&#34;entities&#34;:[{&#34;offset&#34;:0,&#34;length&#34;:6,&#34;type&#34;:&#34;bot_command&#34;}]}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這是你傳訊息給 Bot 它所收到的 API，資料很多沒關係，我們找到 <code>id</code>，像我的是 <code>493995679</code>，這個就是我跟機器人的聊天室，我們就先回到 Ansible 這邊吧！</p>
+<br>
+<p>開啟一個新的檔案叫 <code>send_notify_tg.yaml</code>，打以下內容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify to Telegram</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">community.general.telegram</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;9999999:XXXXXXXXXXXXXXXXXXXXXXX&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">api_args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">chat_id</span><span class="p">:</span><span class="w"> </span><span class="m">000000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">parse_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Your precious application has been deployed: https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_web_page_preview</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_notification</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到我們使用的模組不是 Ansible 內建的，而是社群別人寫的，詳細可以參考 <a href="https://docs.ansible.com/ansible/latest/collections/community/general/telegram_module.html#ansible-collections-community-general-telegram-module" target="_blank" rel="noopener noreffer">community.general.telegram module – module for sending notifications via telegram</a>：</p>
+<br>
+<p>其中 token 就是我們剛剛在 <code>BotFather</code> 那邊所拿到的 Token，chat_id 就是我們剛剛在網頁上看到的 id，把資料都輸入進去後，我們可以修改 text 內容，改成 &ldquo;Send notify to Telegram 測試傳送通知&rdquo;，接著執行 <code>ansible-ploybook send_notify_tg.yaml</code> ，看看能不能正常收到通知！</p>
+<br>
+<figure><a class="lightgallery" href="/images/Ansible/telegram_3.png" title="/images/Ansible/telegram_3.png" data-thumbnail="/images/Ansible/telegram_3.png" data-sub-html="<h2>發送通知至 Telegram Bot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/telegram_3.png"
+            data-srcset="/images/Ansible/telegram_3.png, /images/Ansible/telegram_3.png 1.5x, /images/Ansible/telegram_3.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/telegram_3.png" width="600" />
+    </a><figcaption class="image-caption">發送通知至 Telegram Bot</figcaption>
+    </figure>
+這樣子就成功透過 Ansible Module 傳送通知給 Telegram 囉！</p>
+<br>
+<p>我們可能需要將機器人加入群組內，這時候需要更換一下 chat_id，先將機器人加入群組，再次到剛剛瀏覽器的網頁刷新，查看 chat 後面的 id 帶有 <code>-</code>，像是 <code>-540226836</code> 這樣，這個就是該群組的 ID，將 send_notify_tg.yaml 的 chat_id 修改成 <code>-540226836</code> 在測試看看，他就會在群組中發送通知囉！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;update_id&#34;:606594124,&#34;message&#34;:{&#34;message_id&#34;:14,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:-540226836,&#34;title&#34;:&#34;\u54c1\u6bc5 &amp; AnsibleSendMessageBot&#34;,&#34;type&#34;:&#34;group&#34;,&#34;all_members_are_administrators&#34;:true},&#34;date&#34;:1652696181,&#34;group_chat_created&#34;:true}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Ansible/telegram_4.png" title="/images/Ansible/telegram_4.png" data-thumbnail="/images/Ansible/telegram_4.png" data-sub-html="<h2>發送通知至 Telegram 群組 Bot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Ansible/telegram_4.png"
+            data-srcset="/images/Ansible/telegram_4.png, /images/Ansible/telegram_4.png 1.5x, /images/Ansible/telegram_4.png 2x"
+            data-sizes="auto"
+            alt="/images/Ansible/telegram_4.png" width="600" />
+    </a><figcaption class="image-caption">發送通知至 Telegram 群組 Bot</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://chusiang.gitbooks.io/automate-with-ansible/content/" target="_blank" rel="noopener noreffer">現代 IT 人一定要知道的 Ansible 自動化組態技巧</a></p>
+<p><a href="https://tso-liang-wu.gitbook.io/learn-ansible-and-jenkins-in-30-days/ansible/ansible/ansible-installation" target="_blank" rel="noopener noreffer">Ansible 安裝</a></p>
+<p><a href="https://chusiang.gitbooks.io/automate-with-ansible/content/05.how-to-practive-the-ansible-with-docker.html" target="_blank" rel="noopener noreffer">怎麼用 Docker 練習 Ansible？</a></p>
+<p><a href="https://docs.ansible.com/ansible/latest/collections/community/general/telegram_module.html#ansible-collections-community-general-telegram-module" target="_blank" rel="noopener noreffer">community.general.telegram module – module for sending notifications via telegram</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/ansible/">Ansible</a>
+                </span><span><a href="/tags/ci/cd/">CI/CD</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-05-16</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/ansible/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Ansible/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module)" data-hashtags="Ansible,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/ansible/" data-hashtag="Ansible"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/ansible/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/ansible/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/jenkins/" class="prev" rel="prev" title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
