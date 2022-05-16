@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot - PinYi</title><meta name="description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋"><meta property="og:title" content="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot" />
+<meta property="og:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/jenkins/" /><meta property="og:image" content="https://pin-yi.me/jenkins/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-16T11:05:30+08:00" />
+<meta property="article:modified_time" content="2022-05-16T11:16:43+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/jenkins/featured-image.webp"/>
+<meta name="twitter:title" content="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"/>
+<meta name="twitter:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/jenkins/" /><link rel="prev" href="https://pin-yi.me/jenkins-ansible/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/jenkins\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/jenkins\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Jenkins, CI\/CD, 介紹, 實作","wordcount":  5370 ,
+        "url": "https:\/\/pin-yi.me\/jenkins\/","datePublished": "2022-05-16T11:05:30+08:00","dateModified": "2022-05-16T11:16:43+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": "此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋"
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/jenkins/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/jenkins/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jenkins/featured-image.webp"
+        data-srcset="/jenkins/featured-image.webp, /jenkins/featured-image.webp 1.5x, /jenkins/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/jenkins/featured-image.webp"
+        title="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5370 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#jenkins-安裝與實作">Jenkins 安裝與實作</a>
+      <ul>
+        <li><a href="#版本">版本</a></li>
+        <li><a href="#安裝">安裝</a></li>
+        <li><a href="#建立第一個-jenkins-job">建立第一個 Jenkins Job</a></li>
+      </ul>
+    </li>
+    <li><a href="#原始碼管理與建置觸發程序">原始碼管理與建置觸發程序</a>
+      <ul>
+        <li><a href="#建置專案">建置專案</a>
+          <ul>
+            <li><a href="#https">HTTPS</a></li>
+            <li><a href="#ssh">SSH</a></li>
+          </ul>
+        </li>
+        <li><a href="#建置觸發程序">建置觸發程序</a>
+          <ul>
+            <li><a href="#定期建置">定期建置</a></li>
+            <li><a href="#github-hook-trigger-for-gitscm-polling">GitHub hook trigger for GITScm polling</a>
+              <ul>
+                <li><a href="#新增-github-personal-access-token">新增 GitHub personal access token</a></li>
+                <li><a href="#設定-jenkins-github">設定 Jenkins GitHub</a></li>
+                <li><a href="#設定專案組態">設定專案組態</a></li>
+                <li><a href="#github-上整合-jenkins">GitHub 上整合 Jenkins</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#測試">測試</a></li>
+        <li><a href="#建置後觸發通知">建置後觸發通知</a>
+          <ul>
+            <li><a href="#安裝設定-build-timestamp">安裝/設定 Build Timestamp</a></li>
+            <li><a href="#安裝設定-notifyevents">安裝/設定 Notify.Events</a></li>
+            <li><a href="#telegram-通知測試">Telegram 通知測試</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此文章是接續前面 <a href="https://pin-yi.me/jenkins-ansible/" target="_blank" rel="noopener noreffer">Jenkins 及 Ansible IT 自動化 CI/CD 介紹</a> 文章，此篇會實際安裝及實作 Jenkins，大家記得在學習前要先檢查自己的版本是否有新的更新！那我們開始囉 😘</p>
+<h2 id="jenkins-安裝與實作">Jenkins 安裝與實作</h2>
+<p>我這次會使用 Docker-compose 來進行安裝，除了 Docker 以外也有不同的安裝方式，可以參考 <a href="https://www.jenkins.io/download/" target="_blank" rel="noopener noreffer">Jenkins download and deployment</a>，本次使用的環境版本如下：</p>
+<h3 id="版本">版本</h3>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.14, build a224086</li>
+<li>Jenkins：jenkins/jenkins:lts-jdk11</li>
+<li>yamllint：1.26.0</li>
+</ul>
+<br>
+<h3 id="安裝">安裝</h3>
+<p>這邊會使用 Jenkins 提供的 <a href="https://hub.docker.com/layers/jenkins/jenkins/jenkins/lts-jdk11/images/sha256-ec98cb8b367b0f9426f71345efe11e001c901704cea0e61fd91beb37af34ef98?context=explore" target="_blank" rel="noopener noreffer">官方 LTS 映像檔</a> 來作為基底，因為我們要多安裝測試程式 <a href="https://yamllint.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener noreffer">yamllint</a>，所以就自己寫一個 Docker-compose：(同樣的程式碼會放在 <a href="https://github.com/880831ian/Jenkins" target="_blank" rel="noopener noreffer">GitHub</a>，也直接包成映像檔放在 <a href="https://hub.docker.com/r/880831ian/jenkins" target="_blank" rel="noopener noreffer">DockerHub</a>，歡迎大家自行取用)</p>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>yamlint<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><a href="https://github.com/adrienverge/yamllint" target="_blank" rel="noopener noreffer">yamlint</a>，它是語法檢查工具，可以用來檢查 yaml 檔案的語法是否正確以及符合規範，我們看一下實際操作的畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/yamllint.png" title="/images/Jenkins/yamllint.png" data-thumbnail="/images/Jenkins/yamllint.png" data-sub-html="<h2>yamllint 測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/yamllint.png"
+            data-srcset="/images/Jenkins/yamllint.png, /images/Jenkins/yamllint.png 1.5x, /images/Jenkins/yamllint.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/yamllint.png" width="800" />
+    </a><figcaption class="image-caption">yamllint 測試</figcaption>
+    </figure>
+可以看到如果不符合 yaml 規範就會跳出錯誤訊息。
+<br>
+</div>
+        </div>
+    </div>
+<br>
+<p>接下來先看一下整個 Docker-compose 結構以及各參數：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── Docker-compose.yaml
+</span></span><span class="line"><span class="cl">├── jenkins
+</span></span><span class="line"><span class="cl">│   └── Dockerfile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p><strong>Docker-compose.yaml</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jenkins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./jenkins/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">jenkins</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">50000</span><span class="p">:</span><span class="m">50000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./jenkins_home:/var/jenkins_home</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>參數說明：</p>
+<ul>
+<li><code>build: ./jenkins/</code>：因為要先安裝 yamllint，所以使用 Dockerfile 另外寫。</li>
+<li><code>container_name:jenkins</code>：容器的名稱。</li>
+<li><code>ports: -8080:8080 - 50000:50000</code>：8080 是待會我們瀏覽儀表板會使用到的 Port，如果本機上 8080 已經被佔用，可以自行更換，50000 是 Jenkins 所使用的 Port。</li>
+<li><code>restart: always</code>：當容器停止時，會自動重新啟動容器。</li>
+<li><code>volumes: - ./jenkins_home:/var/jenkins_home</code>：掛載目錄，就算刪除容器一樣可以保留其他設定。我將啟動 <code>Docker-compose.yaml</code> 的資料夾下多一個 jenkins_home 與容器內 /var/jenkins_home 做映射，大家可以自己去調整。</li>
+</ul>
+<br>
+<p><strong>jenkins/Dockerfile</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> jenkins/jenkins:lts-jdk11</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">USER</span><span class="s"> root</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get upgrade -y<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get update -y<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get install yamllint -y<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>參數說明：</p>
+<ul>
+<li><code>FROM</code>：我們使用 Jenkins 官方提供的 LTS 維護版本。</li>
+<li><code>USER</code>：因為要先安裝東西，所以直接給 root 權限。</li>
+<li><code>RUN</code>：先升級完後，再更新，最後再裝 <a href="https://yamllint.readthedocs.io/en/stable/index.html" target="_blank" rel="noopener noreffer">yamllint</a>。(-y 是同意所以詢問)</li>
+</ul>
+<br>
+<p>最後使用 <code>docker-compose</code> 來執行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>要在 Docker-compose.yaml 資料夾下指令才有用。</p>
+<br>
+<p>下完指令後，他就會在背景開始安裝，可以試著用瀏覽器瀏覽 <code>http://localhost:8080</code>，查看有沒有跳出下面這個畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/unlock.png" title="/images/Jenkins/unlock.png" data-thumbnail="/images/Jenkins/unlock.png" data-sub-html="<h2>瀏覽器訪問 http://localhost:8080</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/unlock.png"
+            data-srcset="/images/Jenkins/unlock.png, /images/Jenkins/unlock.png 1.5x, /images/Jenkins/unlock.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/unlock.png" width="800" />
+    </a><figcaption class="image-caption">瀏覽器訪問 <code>http://localhost:8080</code></figcaption>
+    </figure>
+<br> 
+<p>我們看到它需要輸入一組 Administrator password，我們要使用 <code>docker logs</code> 來查看，會發現最後會有寫 Please use the following password to proceed to installation 的地方：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker logs jenkins
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Jenkins initial setup is required. An admin user has been created and a password generated.
+</span></span><span class="line"><span class="cl">Please use the following password to proceed to installation:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">70c0780f62a7441f90286be106908378
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span><span class="line"><span class="cl">*************************************************************
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中的 <code>70c0780f62a7441f90286be106908378</code> ，就是我們的 Administrator password，直接複製並貼到欄位後按 Continue。</p>
+<br>
+<p>我們可以看到它詢問是否要安裝套件，我們選擇左邊 Install suggested plugins 安裝推薦的套件即可：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/plugins.png" title="/images/Jenkins/plugins.png" data-thumbnail="/images/Jenkins/plugins.png" data-sub-html="<h2>安裝推薦的套件</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/plugins.png"
+            data-srcset="/images/Jenkins/plugins.png, /images/Jenkins/plugins.png 1.5x, /images/Jenkins/plugins.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/plugins.png" width="800" />
+    </a><figcaption class="image-caption">安裝推薦的套件</figcaption>
+    </figure>
+<br> 
+<p>等待它安裝套件，安裝完後會自動跳到註冊畫面：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/install.png" title="/images/Jenkins/install.png" data-thumbnail="/images/Jenkins/install.png" data-sub-html="<h2>等待安裝&hellip;</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/install.png"
+            data-srcset="/images/Jenkins/install.png, /images/Jenkins/install.png 1.5x, /images/Jenkins/install.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/install.png" width="800" />
+    </a><figcaption class="image-caption">等待安裝&hellip;</figcaption>
+    </figure>
+<br> 
+<p>輸入完基本的資料後，按 Save and Continue：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/create_adminuser.png" title="/images/Jenkins/create_adminuser.png" data-thumbnail="/images/Jenkins/create_adminuser.png" data-sub-html="<h2>創建 Admin 使用者</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/create_adminuser.png"
+            data-srcset="/images/Jenkins/create_adminuser.png, /images/Jenkins/create_adminuser.png 1.5x, /images/Jenkins/create_adminuser.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/create_adminuser.png" width="800" />
+    </a><figcaption class="image-caption">創建 Admin 使用者</figcaption>
+    </figure>
+<br> 
+<p>最後看到下面這個畫面就代表我們安裝好囉！</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/done.png" title="/images/Jenkins/done.png" data-thumbnail="/images/Jenkins/done.png" data-sub-html="<h2>Jenkins 儀表板</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/done.png"
+            data-srcset="/images/Jenkins/done.png, /images/Jenkins/done.png 1.5x, /images/Jenkins/done.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/done.png" width="1200" />
+    </a><figcaption class="image-caption">Jenkins 儀表板</figcaption>
+    </figure>
+<br> 
+<h3 id="建立第一個-jenkins-job">建立第一個 Jenkins Job</h3>
+<p>我們已經成功安裝好並進入到 Jenkins 儀表板，我們先來建立第一個 Job，它的功用是告訴我們系統檔案的即時使用狀況，讓我們對 Jenkins 有初步的了解：</p>
+<ol>
+<li>點選儀表板的新增作業或是 Create a Job：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/create_job.png" title="/images/Jenkins/create_job.png" data-thumbnail="/images/Jenkins/create_job.png" data-sub-html="<h2>新增作業</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/create_job.png"
+            data-srcset="/images/Jenkins/create_job.png, /images/Jenkins/create_job.png 1.5x, /images/Jenkins/create_job.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/create_job.png" width="1200" />
+    </a><figcaption class="image-caption">新增作業</figcaption>
+    </figure>
+<br> 
+<ol start="2">
+<li>輸入 Job 專案名稱並選擇建立 Free-Style 軟體專案：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/disk.png" title="/images/Jenkins/disk.png" data-thumbnail="/images/Jenkins/disk.png" data-sub-html="<h2>設定 Job 專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/disk.png"
+            data-srcset="/images/Jenkins/disk.png, /images/Jenkins/disk.png 1.5x, /images/Jenkins/disk.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/disk.png" width="1200" />
+    </a><figcaption class="image-caption">設定 Job 專案</figcaption>
+    </figure>
+可以看到這邊有不同的專案類型可以選擇，<strong>Free-Style</strong> 以及 <strong>Pipeline</strong> 這兩種類型的專案基本上就涵蓋大部分的需求。<strong>Free-Style</strong> 類型的專案提供了非常大的彈性讓使用者來做原始碼管理以及建置。如果建置流程涉及多個專案，則可以使用 <strong>Pipeline</strong> 類型的專案來組合及定義建置邏輯。</p>
+<br> 
+<ol start="3">
+<li>接下來設定專案組態：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/describe.png" title="/images/Jenkins/describe.png" data-thumbnail="/images/Jenkins/describe.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/describe.png"
+            data-srcset="/images/Jenkins/describe.png, /images/Jenkins/describe.png 1.5x, /images/Jenkins/describe.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/describe.png" width="1200" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+要記得幫每一個專案都加上描述，讓其他人知道該專案的用途或是使用時機等。</p>
+<br>
+<p>接著，在<strong>建置</strong>的下拉式欄位選擇 <code>選擇建置步驟 &gt; 執行 Shell</code></p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/shell.png" title="/images/Jenkins/shell.png" data-thumbnail="/images/Jenkins/shell.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/shell.png"
+            data-srcset="/images/Jenkins/shell.png, /images/Jenkins/shell.png 1.5x, /images/Jenkins/shell.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/shell.png" width="1200" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<p>輸入 <code>df -h</code> 指令：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/df-h.png" title="/images/Jenkins/df-h.png" data-thumbnail="/images/Jenkins/df-h.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/df-h.png"
+            data-srcset="/images/Jenkins/df-h.png, /images/Jenkins/df-h.png 1.5x, /images/Jenkins/df-h.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/df-h.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<p>我們這邊透過建置 <code>執行 Shell</code> 這個建置步驟來告訴 Jenkins，未來這個專案被建置，就會執行 <code>df -h</code> 這個指令。</p>
+<br>
+<ol start="4">
+<li>專案組態設置完後，我們點選左邊的<strong>馬上建置</strong>來建置剛剛建好的專案，如果我們設定上沒有問題，應該會在左下角的<strong>建置歷程</strong>這邊看到我們的第一個建置紀錄：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/build.png" title="/images/Jenkins/build.png" data-thumbnail="/images/Jenkins/build.png" data-sub-html="<h2>建置專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/build.png"
+            data-srcset="/images/Jenkins/build.png, /images/Jenkins/build.png 1.5x, /images/Jenkins/build.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/build.png" width="800" />
+    </a><figcaption class="image-caption">建置專案</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>點進去後，再點 <strong>Console Output</strong>，可以看到這次建置的結果：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/console.png" title="/images/Jenkins/console.png" data-thumbnail="/images/Jenkins/console.png" data-sub-html="<h2>建置專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/console.png"
+            data-srcset="/images/Jenkins/console.png, /images/Jenkins/console.png 1.5x, /images/Jenkins/console.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/console.png" width="800" />
+    </a><figcaption class="image-caption">建置專案</figcaption>
+    </figure>
+這樣我們的第一個 Jenkins Job 就設定完成囉！Jenkins 也確實的執行我們所設定的指令，並將系統的使用狀況呈現在終端機的輸出上。
+<br></p>
+<p>以上就是我們第一個簡單的專案建置流程，當然，Jenkins 可以做到的事情不僅如此，在後面我們會透過安裝不同的套件來強化 Jenkins，來達到完整的持續整合 😁</p>
+<br>
+<h2 id="原始碼管理與建置觸發程序">原始碼管理與建置觸發程序</h2>
+<p>上面有提到 Jenkins 作為一個持續整合的工具，與原始碼管理系統的整合尤其重要。我們這一章節，會介紹如何在 Jenkins 上透過原始碼管理 (source code management,SCM) 系統，例如從 GitHub 獲得專案的原始碼，並設置建置觸發程序 (build triggers) 來實踐持續整合。</p>
+<br>
+<h3 id="建置專案">建置專案</h3>
+<h4 id="https">HTTPS</h4>
+<p>接下來我們先建立一個新的 Job，選擇 Free-style 模式，這次要在原始碼管理裡面選擇 Git，在 Repositories &gt; Repository URL 裡面輸入我們這次要測試的 <a href="https://github.com/880831ian/Jenkins" target="_blank" rel="noopener noreffer">repository URL</a>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/repository.png" title="/images/Jenkins/repository.png" data-thumbnail="/images/Jenkins/repository.png" data-sub-html="<h2>設定 Repository URL</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/repository.png"
+            data-srcset="/images/Jenkins/repository.png, /images/Jenkins/repository.png 1.5x, /images/Jenkins/repository.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/repository.png" width="1000" />
+    </a><figcaption class="image-caption">設定 Repository URL</figcaption>
+    </figure>
+<br>
+<h4 id="ssh">SSH</h4>
+<p>如果我們想要透過 SSH 來存取專案，我們會遇到以下狀況：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/ssh_error.png" title="/images/Jenkins/ssh_error.png" data-thumbnail="/images/Jenkins/ssh_error.png" data-sub-html="<h2>SSH 尚未設定錯誤訊息</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/ssh_error.png"
+            data-srcset="/images/Jenkins/ssh_error.png, /images/Jenkins/ssh_error.png 1.5x, /images/Jenkins/ssh_error.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/ssh_error.png" width="1000" />
+    </a><figcaption class="image-caption">SSH 尚未設定錯誤訊息</figcaption>
+    </figure>
+會有錯誤訊息是因為我們還沒有把 Jenkins 與 GitHub 做 SSH 金鑰配對，所以 GitHub 拒絕 Jenkins 透過 SSH 存取。那要怎麼解決呢？</p>
+<p>最簡單的方法就是在 Jenkins 主機下<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener noreffer">建立 SSH 金鑰</a>，並<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/" target="_blank" rel="noopener noreffer">將公開金鑰 Key 加入到 GitHub 帳號中</a>，有需要的朋友可以再自行使用，該範例使用 HTTPS 來做設定。</p>
+<br>
+<h3 id="建置觸發程序">建置觸發程序</h3>
+<p>由於我們還沒有定義任何建置的觸發程序，所以除非我們手動去操作 Jenkins，不然 Jenkins 並不會主動幫我們進行建置。因此，在<strong>建置觸發程序</strong>這個欄位內，我們可以自由設定我們希望 Jenkins 何時自動幫我們進行建置專案。那依照專案的屬性不同，我們也可以採用不同的建置時機。那最常見的有以下兩種：</p>
+<br>
+<h4 id="定期建置">定期建置</h4>
+<p>在 Jenkins 中，我們是採用 <a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules" target="_blank" rel="noopener noreffer">Cron Format</a> 的方式來定義建置行程。Cron Format 總共五個欄位，欄位與欄位之間可用空白或 Tab 鍵做區隔：</p>
+<ol>
+<li>分 (minute)：0 - 59 分</li>
+<li>時 (hour)：0 - 23 時</li>
+<li>日 (day of month)：1 - 31 日</li>
+<li>月 (month)：1 - 12 月</li>
+<li>星期 (day of week)：星期 0 - 7 (其中 0 與 7 都代表星期天)</li>
+</ol>
+<p>假設我們希望每個 30 分鐘就建置一次當前專案，我們可以在定義規則裡面填入 <code>H/15 * * * *</code>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/cron.png" title="/images/Jenkins/cron.png" data-thumbnail="/images/Jenkins/cron.png" data-sub-html="<h2>定期建置</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/cron.png"
+            data-srcset="/images/Jenkins/cron.png, /images/Jenkins/cron.png 1.5x, /images/Jenkins/cron.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/cron.png" width="1000" />
+    </a><figcaption class="image-caption">定期建置</figcaption>
+    </figure>
+<br>
+<h4 id="github-hook-trigger-for-gitscm-polling">GitHub hook trigger for GITScm polling</h4>
+<p>這種觸發方式在持續整合時非常實用。我們可以讓 Jenkins 自動監測當在原始碼專案有任何的 push event 發生時就進行建置。為了要使用這種方式建置，需要以下幾個步驟來設定：</p>
+<h5 id="新增-github-personal-access-token">新增 GitHub personal access token</h5>
+<ol>
+<li>進入 GitHub 首頁，點選右上角下拉選單，點選 <strong>Settings</strong>：</li>
+</ol>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_1.png" title="/images/Jenkins/setting_1.png" data-thumbnail="/images/Jenkins/setting_1.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_1.png"
+            data-srcset="/images/Jenkins/setting_1.png, /images/Jenkins/setting_1.png 1.5x, /images/Jenkins/setting_1.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_1.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>先點選左邊的 <strong>Developer settings</strong> &gt; 點選左邊的 <strong>Personal access tokens</strong> &gt; 點選右上角的 <strong>Generate new token</strong>，輸入 token 的描述並勾選 <code>repo</code> scope 以及 <code>admin:repo_hook</code> scope 跟 <code>admin:org_hook</code> scope，點選 <strong>Generate token</strong>：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_2.png" title="/images/Jenkins/setting_2.png" data-thumbnail="/images/Jenkins/setting_2.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_2.png"
+            data-srcset="/images/Jenkins/setting_2.png, /images/Jenkins/setting_2.png 1.5x, /images/Jenkins/setting_2.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_2.png" width="700" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>會產生一個 token，請先把 token 複製下來，離開這個畫面後，token 就會看不到了！(此 token 已刪除 ✌️)</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_3.png" title="/images/Jenkins/setting_3.png" data-thumbnail="/images/Jenkins/setting_3.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_3.png"
+            data-srcset="/images/Jenkins/setting_3.png, /images/Jenkins/setting_3.png 1.5x, /images/Jenkins/setting_3.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_3.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<h5 id="設定-jenkins-github">設定 Jenkins GitHub</h5>
+<ol>
+<li>進入 Jenkins 儀表板頁面，點選左邊<strong>管理 Jenkins</strong> &gt; System Configuration 的<strong>設定系統</strong>，往下滑找到 GitHub：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_4.png" title="/images/Jenkins/setting_4.png" data-thumbnail="/images/Jenkins/setting_4.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_4.png"
+            data-srcset="/images/Jenkins/setting_4.png, /images/Jenkins/setting_4.png 1.5x, /images/Jenkins/setting_4.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_4.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>找到後，再 GitHub Servers 下拉欄位選擇 Add GitHub Server，會看到下面畫面，API URL 輸入 <code>https://api.github.com</code>，Credentials 點 Add：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_5.png" title="/images/Jenkins/setting_5.png" data-thumbnail="/images/Jenkins/setting_5.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_5.png"
+            data-srcset="/images/Jenkins/setting_5.png, /images/Jenkins/setting_5.png 1.5x, /images/Jenkins/setting_5.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_5.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>Kind 選擇 Secret Text，Secret 輸入剛剛存的 Personal Access Token，Description 簡單描述一下：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_6.png" title="/images/Jenkins/setting_6.png" data-thumbnail="/images/Jenkins/setting_6.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_6.png"
+            data-srcset="/images/Jenkins/setting_6.png, /images/Jenkins/setting_6.png 1.5x, /images/Jenkins/setting_6.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_6.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>設定完後，點選一下右邊的 <strong>Test connection</strong>，如果我顯示 <code>Credentials verified for user UserName, rate limit: xxx</code> 就代表成功囉！</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_7.png" title="/images/Jenkins/setting_7.png" data-thumbnail="/images/Jenkins/setting_7.png" data-sub-html="<h2>GitHub hook trigger for GITScm polling 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_7.png"
+            data-srcset="/images/Jenkins/setting_7.png, /images/Jenkins/setting_7.png 1.5x, /images/Jenkins/setting_7.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_7.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub hook trigger for GITScm polling 設定</figcaption>
+    </figure>
+<br>
+<h5 id="設定專案組態">設定專案組態</h5>
+<ol>
+<li>接著我們跳回來剛剛的專案組態，並勾選 <strong>GitHub hook trigger for GITScm polling</strong>：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_8.png" title="/images/Jenkins/setting_8.png" data-thumbnail="/images/Jenkins/setting_8.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_8.png"
+            data-srcset="/images/Jenkins/setting_8.png, /images/Jenkins/setting_8.png 1.5x, /images/Jenkins/setting_8.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_8.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>寫一個 Shell Script 來建置專案：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="k">for</span> file in <span class="k">$(</span>find . -type f -name <span class="s2">&#34;*yaml&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">	yamllint <span class="nv">$file</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_9.png" title="/images/Jenkins/setting_9.png" data-thumbnail="/images/Jenkins/setting_9.png" data-sub-html="<h2>設定專案組態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_9.png"
+            data-srcset="/images/Jenkins/setting_9.png, /images/Jenkins/setting_9.png 1.5x, /images/Jenkins/setting_9.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_9.png" width="1000" />
+    </a><figcaption class="image-caption">設定專案組態</figcaption>
+    </figure>
+這邊利用一個簡單的 Shell Script 迴圈來對所有 YAML file 進行 yamllint 的檢查，最後點選儲存離開。</p>
+<br>
+<h5 id="github-上整合-jenkins">GitHub 上整合 Jenkins</h5>
+<ol>
+<li>
+<p>先到 GitHub 被建置專案的頁面下點 <strong>Setting</strong> 標籤 &gt; 點選左邊的 <strong>Webhook</strong>  &gt; 點選右上角的 <strong>Add webhook</strong>  &gt; 輸入 <strong>Jenkins Hook URL</strong> 到 Payload URL：</p>
+<p>記得 Jenkins Hook URL 後面要加 <code>/github-webhook/</code>，小弟我卡在這裡很久😢 😢</p>
+</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_10.png" title="/images/Jenkins/setting_10.png" data-thumbnail="/images/Jenkins/setting_10.png" data-sub-html="<h2>Webhooks 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_10.png"
+            data-srcset="/images/Jenkins/setting_10.png, /images/Jenkins/setting_10.png 1.5x, /images/Jenkins/setting_10.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_10.png" width="800" />
+    </a><figcaption class="image-caption">Webhooks 設定</figcaption>
+    </figure>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Jenkins Hook URL 設定<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>由於我們是將 Jenkins 運行在本機端，所以 Jenkins Hook URL <code>http://localhost:8080</code> 是 Private IP。GitHub 沒有辦法抓 Private IP，為了練習，我們可以透過 <a href="https://ngrok.com/" target="_blank" rel="noopener noreffer">ngrok</a> 這套簡單小工具來暫時將 <code>http://localhost:8080</code> 變成 Public IP。</p>
+<p><a href="https://ngrok.com/" target="_blank" rel="noopener noreffer">ngrok</a> 的使用方式很簡單，只要先下載 <code>brew install ngrok/ngrok/ngrok</code> ，並使用 <code>ngrok http 8080</code> 指令，將 Private IP 變成 Public IP：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_11.png" title="/images/Jenkins/setting_11.png" data-thumbnail="/images/Jenkins/setting_11.png" data-sub-html="<h2>ngrok 將 Private IP 變成 Public IP</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_11.png"
+            data-srcset="/images/Jenkins/setting_11.png, /images/Jenkins/setting_11.png 1.5x, /images/Jenkins/setting_11.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_11.png" width="1000" />
+    </a><figcaption class="image-caption">ngrok 將 Private IP 變成 Public IP</figcaption>
+    </figure>
+<br>
+<p>圖片中 <code>https://2063-111-235-135-57.jp.ngrok.io</code> 就是 Public 的 Jenkins Hook URL</p>
+</div>
+        </div>
+    </div>
+<br>
+<p>完成後，先點選 <strong>Recent Deliveries</strong> 檢查是否成功，底下的 Response 需要是 <font color=green>200</font>，才是對的歐！(這裡一定要先檢查，不然後面會找問題到死 XD)</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/setting_12.png" title="/images/Jenkins/setting_12.png" data-thumbnail="/images/Jenkins/setting_12.png" data-sub-html="<h2>Webhooks 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/setting_12.png"
+            data-srcset="/images/Jenkins/setting_12.png, /images/Jenkins/setting_12.png 1.5x, /images/Jenkins/setting_12.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/setting_12.png" width="1000" />
+    </a><figcaption class="image-caption">Webhooks 設定</figcaption>
+    </figure>
+<br>
+<h3 id="測試">測試</h3>
+<p>我們都設定好後，要開始來測試，我們可以直接先點選 <strong>馬上建置</strong>，來測試是否可以透過 <strong>GitHub personal access token</strong>，抓取 GitHub 的檔案。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/test_1.png" title="/images/Jenkins/test_1.png" data-thumbnail="/images/Jenkins/test_1.png" data-sub-html="<h2>馬上建置</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/test_1.png"
+            data-srcset="/images/Jenkins/test_1.png, /images/Jenkins/test_1.png 1.5x, /images/Jenkins/test_1.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/test_1.png" width="800" />
+    </a><figcaption class="image-caption">馬上建置</figcaption>
+    </figure>
+<br>
+<p>可以看到在建置流程那邊發現建置失敗，點進去可以看詳細內容，</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/test_2.png" title="/images/Jenkins/test_2.png" data-thumbnail="/images/Jenkins/test_2.png" data-sub-html="<h2>建置失敗</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/test_2.png"
+            data-srcset="/images/Jenkins/test_2.png, /images/Jenkins/test_2.png 1.5x, /images/Jenkins/test_2.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/test_2.png" width="800" />
+    </a><figcaption class="image-caption">建置失敗</figcaption>
+    </figure>
+<br>
+<p>點選左側的 <strong>Console Output</strong>，可以看到我們有成功獲取 GitHub 上得專案，並且執行我們的 Shell 來檢查 yaml 的檔案格式，發現是因為格式有錯誤，所以建置才會失敗 ❌</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/test_3.png" title="/images/Jenkins/test_3.png" data-thumbnail="/images/Jenkins/test_3.png" data-sub-html="<h2>Console Output</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/test_3.png"
+            data-srcset="/images/Jenkins/test_3.png, /images/Jenkins/test_3.png 1.5x, /images/Jenkins/test_3.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/test_3.png" width="1000" />
+    </a><figcaption class="image-caption">Console Output</figcaption>
+    </figure>
+<br>
+<p>接下來我們先修改一下 yaml 的檔案，後重新 push 到 Github 上，並觀察 Jenkins 會不會自動建置 ！(修改位置大家可以直接看 <a href="https://github.com/880831ian/Jenkins/commit/729556412ef8796477a351040604aad8c8083c05" target="_blank" rel="noopener noreffer">Commit 結果</a>)</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/test_4.png" title="/images/Jenkins/test_4.png" data-thumbnail="/images/Jenkins/test_4.png" data-sub-html="<h2>Console Output</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/test_4.png"
+            data-srcset="/images/Jenkins/test_4.png, /images/Jenkins/test_4.png 1.5x, /images/Jenkins/test_4.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/test_4.png" width="1000" />
+    </a><figcaption class="image-caption">Console Output</figcaption>
+    </figure>
+當你 push 完後，發現它會自動建置，請因為我們修改成正確格式，所以他也建置成功囉！</p>
+<br>
+<p>也可以點選左側有一個新的 <strong>GitHub Hook Log</strong> ，可以看到我們成功透過 <strong>GitHub hook trigger for GITScm polling</strong> 偵測到有新的 event，透過 WebHook 讓 Jenkins 知道。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/test_5.png" title="/images/Jenkins/test_5.png" data-thumbnail="/images/Jenkins/test_5.png" data-sub-html="<h2>GitHub Hook Log</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/test_5.png"
+            data-srcset="/images/Jenkins/test_5.png, /images/Jenkins/test_5.png 1.5x, /images/Jenkins/test_5.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/test_5.png" width="1000" />
+    </a><figcaption class="image-caption">GitHub Hook Log</figcaption>
+    </figure>
+<br>
+<h3 id="建置後觸發通知">建置後觸發通知</h3>
+<p>當我們自動建置成功當然沒什麼問題，但如果失敗有可能就會影響後續程式的上線時間，所以我們希望建置完成後，可以收到通知，通知除了可以用 email 以外，也可以使用套件去串接我們常用的平台，例如 Telegram、Slack、Line 等等，接下來我會教大家要怎麼去串接這些服務，在開始之前要請大家先安裝兩個套件：</p>
+<h4 id="安裝設定-build-timestamp">安裝/設定 Build Timestamp</h4>
+<p><a href="https://plugins.jenkins.io/build-timestamp/" target="_blank" rel="noopener noreffer">Build Timestamp</a> 這個套件可以幫我們在稍後傳送通知時加上當下的時間戳，那要怎麼安裝套件呢？先到儀表板首頁，點選左側的 <strong>管理 Jenkins</strong> &gt; 點選 <strong>管理外掛程式</strong>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_1.png" title="/images/Jenkins/trigger_1.png" data-thumbnail="/images/Jenkins/trigger_1.png" data-sub-html="<h2>管理 Jenkins &gt; 管理外掛程式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_1.png"
+            data-srcset="/images/Jenkins/trigger_1.png, /images/Jenkins/trigger_1.png 1.5x, /images/Jenkins/trigger_1.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_1.png" width="1200" />
+    </a><figcaption class="image-caption">管理 Jenkins &gt; 管理外掛程式</figcaption>
+    </figure>
+<br>
+<p>再 Plugin Manager 的 可用的裡面搜尋 Build Timestamp，選擇後點下方的 <strong>Download now and install after restart</strong>，等待他安裝後會自動重啟。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_2.png" title="/images/Jenkins/trigger_2.png" data-thumbnail="/images/Jenkins/trigger_2.png" data-sub-html="<h2>安裝 Build Timestamp</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_2.png"
+            data-srcset="/images/Jenkins/trigger_2.png, /images/Jenkins/trigger_2.png 1.5x, /images/Jenkins/trigger_2.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_2.png" width="1200" />
+    </a><figcaption class="image-caption">安裝 Build Timestamp</figcaption>
+    </figure>
+<br>
+<p>重啟後從儀表板點選左側 <strong>管理 Jenkins</strong> &gt; 點選 <strong>設定系統</strong>，找到 <strong>Build Timestamp</strong>，開啟設定，並設定 Timezone 為 <code>Asia/Taipei</code> 以及 pattern <code>yyyy-MM-dd HH:mm:ss z</code>，這樣我們待會就可以使用 <code>BUILD_TIMESTAMP</code> 參數來獲取當下時間，記得要按下儲存歐！</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_3.png" title="/images/Jenkins/trigger_3.png" data-thumbnail="/images/Jenkins/trigger_3.png" data-sub-html="<h2>設定 Build Timestamp</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_3.png"
+            data-srcset="/images/Jenkins/trigger_3.png, /images/Jenkins/trigger_3.png 1.5x, /images/Jenkins/trigger_3.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_3.png" width="1200" />
+    </a><figcaption class="image-caption">設定 Build Timestamp</figcaption>
+    </figure>
+<br>
+<h4 id="安裝設定-notifyevents">安裝/設定 Notify.Events</h4>
+<p><a href="https://plugins.jenkins.io/notify-events/" target="_blank" rel="noopener noreffer">Notify.Events</a> 這個套件可以串接很多的平台，例如 Telegram、Slack、Line 等，也可以透過它寄發郵件，是一個十分方便的套件，但缺點是他需要註冊，免費版只有每個月 300 次的訊息傳輸量，但在我們測試階段已經十分夠用。一樣我們用剛剛的方法安裝 <strong>Notify.Events</strong>。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_4.png" title="/images/Jenkins/trigger_4.png" data-thumbnail="/images/Jenkins/trigger_4.png" data-sub-html="<h2>安裝 Notify.Events</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_4.png"
+            data-srcset="/images/Jenkins/trigger_4.png, /images/Jenkins/trigger_4.png 1.5x, /images/Jenkins/trigger_4.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_4.png" width="1200" />
+    </a><figcaption class="image-caption">安裝 Notify.Events</figcaption>
+    </figure>
+<br>
+<p>安裝好後，Notify.Events 他不需要先設定，它可以依據不同的 Job 有不同的設定，所以我們開啟剛剛的 Job 組態，拉到最下面找到 <strong>建置後動作</strong> ，選擇 <strong>Notify.Events</strong>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_5.png" title="/images/Jenkins/trigger_5.png" data-thumbnail="/images/Jenkins/trigger_5.png" data-sub-html="<h2>安裝 Notify.Events</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_5.png"
+            data-srcset="/images/Jenkins/trigger_5.png, /images/Jenkins/trigger_5.png 1.5x, /images/Jenkins/trigger_5.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_5.png" width="1200" />
+    </a><figcaption class="image-caption">安裝 Notify.Events</figcaption>
+    </figure>
+可以看到這邊要先輸入 Token，那 Token 就必須去官網註冊後設定。</p>
+<br>
+<p>我們先開啟瀏覽器，搜尋 <a href="https://notify.events/en" target="_blank" rel="noopener noreffer">Notify.Events</a>，註冊帳號後，在 Channels 點選 <strong>Create</strong>，輸入一下 Title 按下 <strong>Save</strong>。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_6.png" title="/images/Jenkins/trigger_6.png" data-thumbnail="/images/Jenkins/trigger_6.png" data-sub-html="<h2>Notify.Events 官網設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_6.png"
+            data-srcset="/images/Jenkins/trigger_6.png, /images/Jenkins/trigger_6.png 1.5x, /images/Jenkins/trigger_6.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_6.png" width="1200" />
+    </a><figcaption class="image-caption">Notify.Events 官網設定</figcaption>
+    </figure>
+<br>
+<p>完成後，應該可以看到以下畫面，這邊就可以讓我們選擇來源，以及要發送到哪裡：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_7.png" title="/images/Jenkins/trigger_7.png" data-thumbnail="/images/Jenkins/trigger_7.png" data-sub-html="<h2>Notify.Events 官網設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_7.png"
+            data-srcset="/images/Jenkins/trigger_7.png, /images/Jenkins/trigger_7.png 1.5x, /images/Jenkins/trigger_7.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_7.png" width="1200" />
+    </a><figcaption class="image-caption">Notify.Events 官網設定</figcaption>
+    </figure>
+<br>
+<p>我們先選擇 Sources，點選 <strong>Add source</strong>，可以看到很多來源，選擇 <strong>CI/CD and Version control</strong> ，再選擇 <strong>Jenkins</strong>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_8.png" title="/images/Jenkins/trigger_8.png" data-thumbnail="/images/Jenkins/trigger_8.png" data-sub-html="<h2>Notify.Events 官網設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_8.png"
+            data-srcset="/images/Jenkins/trigger_8.png, /images/Jenkins/trigger_8.png 1.5x, /images/Jenkins/trigger_8.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_8.png" width="1200" />
+    </a><figcaption class="image-caption">Notify.Events 官網設定</figcaption>
+    </figure>
+<br>
+<p>點選 <strong>Next</strong>，就可以看到以下畫面，它告訴我們要將它提供的 <code>Token</code> 貼入設定檔，也就是我們剛剛在 Job 組態裡面的那個 Token：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_9.png" title="/images/Jenkins/trigger_9.png" data-thumbnail="/images/Jenkins/trigger_9.png" data-sub-html="<h2>Notify.Events 官網設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_9.png"
+            data-srcset="/images/Jenkins/trigger_9.png, /images/Jenkins/trigger_9.png 1.5x, /images/Jenkins/trigger_9.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_9.png" width="1200" />
+    </a><figcaption class="image-caption">Notify.Events 官網設定</figcaption>
+    </figure>
+<br>
+<p>設定好 Sources，接下來要設定接收方，回到剛剛 Notify.Events 的儀表板，點選 <strong>Subscribe</strong>，我們測試使用 Telegram 來當接收方，它會跳出一個視窗，告訴你要怎麼把他的機器人加成好友或是加入群組，這邊就依大家需要自行選擇，那我就將它加入群組，使用 <code>/subscribe DRr0bIZ0 @NotifyEventsBot</code> 指令來綁定</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_10.png" title="/images/Jenkins/trigger_10.png" data-thumbnail="/images/Jenkins/trigger_10.png" data-sub-html="<h2>Notify.Events 官網設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_10.png"
+            data-srcset="/images/Jenkins/trigger_10.png, /images/Jenkins/trigger_10.png 1.5x, /images/Jenkins/trigger_10.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_10.png" width="1200" />
+    </a><figcaption class="image-caption">Notify.Events 官網設定</figcaption>
+    </figure>
+<br>
+<p>這時候我們都設定好了，我們回到 Job 組態的 Notify.Events 設定位置，將 Token 貼上去，它可以自訂訊息的模板，可以全部都一樣，也可以針對建置後的狀態，產生不同的訊息模板，我們來自定義設計一下：</p>
+<p><strong>Success</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📢  Jenkins 建置通知 📣
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">時間：$BUILD_TIMESTAMP 🕐
+</span></span><span class="line"><span class="cl">名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
+</span></span><span class="line"><span class="cl">次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
+</span></span><span class="line"><span class="cl">建置狀態： 🟢 &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🟢
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------- 😍😍😍  ---------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_11.png" title="/images/Jenkins/trigger_11.png" data-thumbnail="/images/Jenkins/trigger_11.png" data-sub-html="<h2>Notify.Events Success</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_11.png"
+            data-srcset="/images/Jenkins/trigger_11.png, /images/Jenkins/trigger_11.png 1.5x, /images/Jenkins/trigger_11.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_11.png" width="1000" />
+    </a><figcaption class="image-caption">Notify.Events Success</figcaption>
+    </figure>
+<br>
+<p><strong>Failure</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📢  Jenkins 建置通知 📣
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">時間：$BUILD_TIMESTAMP 🕐
+</span></span><span class="line"><span class="cl">名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
+</span></span><span class="line"><span class="cl">次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
+</span></span><span class="line"><span class="cl">建置狀態： 🔴  &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🔴
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------- 😭😭😭  ---------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_12.png" title="/images/Jenkins/trigger_12.png" data-thumbnail="/images/Jenkins/trigger_12.png" data-sub-html="<h2>Notify.Events Failure</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_12.png"
+            data-srcset="/images/Jenkins/trigger_12.png, /images/Jenkins/trigger_12.png 1.5x, /images/Jenkins/trigger_12.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_12.png" width="1000" />
+    </a><figcaption class="image-caption">Notify.Events Failure</figcaption>
+    </figure>
+<br>
+<h4 id="telegram-通知測試">Telegram 通知測試</h4>
+<p>最後我們都設定好了，就來測試一下吧！我們先故意將程式碼格式用錯，<a href="https://github.com/880831ian/Jenkins/commit/e88d35d56f2b2d1b999682c0f748431999bb4b9e" target="_blank" rel="noopener noreffer">讓他先跳出錯誤</a>，<a href="https://github.com/880831ian/Jenkins/commit/ec0e9f9c2148cecde6f70ec391d4c775fc180029" target="_blank" rel="noopener noreffer">再修改</a>，來看看結果如何吧！(文字連結是對應的 Commit )</p>
+<br>
+<figure><a class="lightgallery" href="/images/Jenkins/trigger_13.png" title="/images/Jenkins/trigger_13.png" data-thumbnail="/images/Jenkins/trigger_13.png" data-sub-html="<h2>Telegram 通知</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Jenkins/trigger_13.png"
+            data-srcset="/images/Jenkins/trigger_13.png, /images/Jenkins/trigger_13.png 1.5x, /images/Jenkins/trigger_13.png 2x"
+            data-sizes="auto"
+            alt="/images/Jenkins/trigger_13.png" width="600" />
+    </a><figcaption class="image-caption">Telegram 通知</figcaption>
+    </figure>
+<br>
+<p>可以看到，我們分別兩次的測試，會依據我們建置後的結果，觸發不同的通知模板。</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://ithelp.ithome.com.tw/users/20103346/ironman/1473" target="_blank" rel="noopener noreffer">30 天入門 Ansible 及 Jenkins</a></p>
+<p><a href="https://medium.com/@BuzonXXXX/ci-%E8%A8%AD%E5%AE%9Ajenkins%E9%80%A3%E7%B5%90github-private-repo-111c53d29047" target="_blank" rel="noopener noreffer">[CI]設定jenkins連結GitHub Private Repo by Webhook</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/jenkins/">Jenkins</a>
+                </span><span><a href="/tags/ci/cd/">CI/CD</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-05-16&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/07e270b96068023e9b84bf83bc1c468039077644" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;07e270b:&nbsp;# 新增 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot">
+                            <i class="fas fa-hashtag fa-fw"></i>07e270b</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/jenkins/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Jenkins/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/jenkins/" data-title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot" data-hashtags="Jenkins,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/jenkins/" data-hashtag="Jenkins"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/jenkins/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/jenkins/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/jenkins/" data-title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/jenkins/" data-title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/jenkins/" data-title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/jenkins-ansible/" class="prev" rel="prev" title="Jenkins 及 Ansible IT 自動化 CI/CD 介紹"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
