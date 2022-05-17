@@ -23,7 +23,7 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
-    <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template)</title>
+    <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</title>
     <link>https://pin-yi.me/ansible/</link>
     <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/ansible/</guid>
     <description><![CDATA[本篇文章是接續前面兩篇 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 跟 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章，歡迎大家先去觀看前面兩篇文章 🤪 本篇所使用到的程式碼都會整理於]]></description>
