@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/k8s-efk/" /><meta property="og:image" content="https://pin-yi.me/k8s-efk/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-10T15:40:00+08:00" />
-<meta property="article:modified_time" content="2022-05-11T11:39:09+08:00" />
+<meta property="article:modified_time" content="2022-05-17T16:32:21+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/k8s-efk/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/k8s-efk\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, EFK, 實作","wordcount":  4659 ,
-        "url": "https:\/\/pin-yi.me\/k8s-efk\/","datePublished": "2022-05-10T15:40:00+08:00","dateModified": "2022-05-11T11:39:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, EFK, 實作","wordcount":  4662 ,
+        "url": "https:\/\/pin-yi.me\/k8s-efk\/","datePublished": "2022-05-10T15:40:00+08:00","dateModified": "2022-05-17T16:32:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s-efk/featured-image.webp"
         title="此文章是介紹參考網路上 K8s 搭配 EFK 範例，自己實際測試後的紀錄，歡迎大家可以先閱讀原文，原文會放在文章最後，歡迎大家指教 😁" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-10">2022-05-10</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4659 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-10">2022-05-10</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4662 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
             </div>
             
@@ -1036,7 +1036,7 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/docker/containers</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>我們設置 Fluentd Pod 上使用 512 MiB 的內存限制，並保證 0.1 個 CPU 跟 200 MiB 的內存。我們將 varlog <code>/var/log</code> 掛載到容器的 varlibdockercontainers <code>var/lib/docker/containers</code> 中。最後一個設定是 <code>Fluentd</code> 在收到信號 <code>terminationGracePeriodSeconds</code> 後有 30 秒的時間可以優雅的關閉。</p>
+</div><p>我們設置 Fluentd Pod 上使用 512 MiB 的內存限制，並保證 0.1 個 CPU 跟 200 MiB 的內存。我們將 varlog <code>/var/log</code> 以及 varlibdockercontainers <code>var/lib/docker/containers</code> 一併掛載進容器內。最後一個設定是 <code>Fluentd</code> 在收到信號 <code>terminationGracePeriodSeconds</code> 後有 30 秒的時間可以優雅的關閉。</p>
 <br>
 <p>都定義完成後，我們部署 Fluentd DaemonSet：</p>
 <div class="highlight"><div class="chroma">
@@ -1180,8 +1180,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/efk/">EFK</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-11&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/04f267430263f2e680c692ae356e014694bb2f83" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;04f2674:&nbsp;# 新增 Kubernetes (K8s) 搭配 EFK 實作">
-                            <i class="fas fa-hashtag fa-fw"></i>04f2674</a></span>
+                <span>更新於 2022-05-17&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e25fc02edccda2ce4b1ad3f23004e4591e917cac" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;e25fc02:&nbsp;# 更新 Kubernetes (K8s) 搭配 EFK 實作">
+                            <i class="fas fa-hashtag fa-fw"></i>e25fc02</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-efk/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
