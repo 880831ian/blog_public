@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</title>
+    <link>https://pin-yi.me/prometheus-grafana-docker/</link>
+    <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/prometheus-grafana-docker/</guid>
+    <description><![CDATA[還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應]]></description>
+</item>
+<item>
     <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</title>
     <link>https://pin-yi.me/ansible/</link>
     <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/ansible/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/k8s/</link>
     <pubDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s/</guid>
     <description><![CDATA[什麼是 Kubernetes (K8s)? Kubernetes 也可以叫 K8s，這個名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以叫 K8s 是因為 Kubernetes 的 k 到 s 中間]]></description>
-</item>
-<item>
-    <title>用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)</title>
-    <link>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</link>
-    <pubDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</guid>
-    <description><![CDATA[前情提要：本篇是 用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose) 以及 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程]]></description>
 </item>
 </channel>
 </rss>

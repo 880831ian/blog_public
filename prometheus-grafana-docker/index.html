@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇) - PinYi</title><meta name="description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"><meta property="og:title" content="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)" />
+<meta property="og:description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/prometheus-grafana-docker/" /><meta property="og:image" content="https://pin-yi.me/prometheus-grafana-docker/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-18T12:18:00+08:00" />
+<meta property="article:modified_time" content="2022-05-18T12:18:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/prometheus-grafana-docker/featured-image.webp"/>
+<meta name="twitter:title" content="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"/>
+<meta name="twitter:description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"/>
+<meta name="application-name" content="PinYi">
+<meta name="apple-mobile-web-app-title" content="PinYi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/prometheus-grafana-docker/" /><link rel="prev" href="https://pin-yi.me/ansible/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Prometheus, Grafana, Docker, 介紹, 實作","wordcount":  2372 ,
+        "url": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/","datePublished": "2022-05-18T12:18:00+08:00","dateModified": "2022-05-18T12:18:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": "此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/prometheus-grafana-docker/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/prometheus-grafana-docker/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/prometheus-grafana-docker/featured-image.webp"
+        data-srcset="/prometheus-grafana-docker/featured-image.webp, /prometheus-grafana-docker/featured-image.webp 1.5x, /prometheus-grafana-docker/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/prometheus-grafana-docker/featured-image.webp"
+        title="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-18">2022-05-18</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2372 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#版本資訊">版本資訊</a></li>
+    <li><a href="#檔案結構">檔案結構</a></li>
+    <li><a href="#實作">實作</a>
+      <ul>
+        <li><a href="#docker-composeyaml">Docker-compose.yaml</a></li>
+        <li><a href="#nginxdockerfile">nginx/Dockerfile</a></li>
+        <li><a href="#nginxstatusconf">nginx/status.conf</a></li>
+        <li><a href="#prometheusyaml">prometheus.yaml</a></li>
+        <li><a href="#testsh">test.sh</a></li>
+        <li><a href="#執行">執行</a></li>
+        <li><a href="#測試">測試</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應對處理。所以透過好的 Monitoring/Alert System 了解目前 Server 硬體系統狀況和整個 Service 的網路狀況是非常重要的一件事情。</p>
+<p>在眾多的 Monitor 工具中，<a href="https://prometheus.io/" target="_blank" rel="noopener noreffer">Prometheus</a> 是一個很方便且完善的監控預警框架 TSDB (Time Series Database) 時間序列資料庫，可以快速且容易的建立不同維度的 metrics 和整合不同的 Alert Tool 以及資訊視覺化圖表的監控工具並提供自帶的 <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/" target="_blank" rel="noopener noreffer">PromQL</a> 進行 query 查詢。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Prometheus-Grafana-Docker/prometheus.png" title="/images/Prometheus-Grafana-Docker/prometheus.png" data-thumbnail="/images/Prometheus-Grafana-Docker/prometheus.png" data-sub-html="<h2>Prometheus Logo</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Prometheus-Grafana-Docker/prometheus.png"
+            data-srcset="/images/Prometheus-Grafana-Docker/prometheus.png, /images/Prometheus-Grafana-Docker/prometheus.png 1.5x, /images/Prometheus-Grafana-Docker/prometheus.png 2x"
+            data-sizes="auto"
+            alt="/images/Prometheus-Grafana-Docker/prometheus.png" width="450" />
+    </a><figcaption class="image-caption">Prometheus Logo</figcaption>
+    </figure>
+<br>
+<p>我們先來看看 Prometheus 的架構圖，可以更了解 Prometheus 整體的定位：</p>
+<br>
+<figure><a class="lightgallery" href="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg" title="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg" data-thumbnail="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg" data-sub-html="<h2>Prometheus 架構圖 (圖片來源：使用 Prometheus 和 Grafana 打造 Flask Web App 監控預警系統)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg"
+            data-srcset="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg, /images/Prometheus-Grafana-Docker/prometheus-architecture.jpg 1.5x, /images/Prometheus-Grafana-Docker/prometheus-architecture.jpg 2x"
+            data-sizes="auto"
+            alt="/images/Prometheus-Grafana-Docker/prometheus-architecture.jpg" width="800" />
+    </a><figcaption class="image-caption">Prometheus 架構圖 (圖片來源：<a href="https://blog.techbridge.cc/2019/08/26/how-to-use-prometheus-grafana-in-flask-app/" target="_blank" rel="noopener noreffer">使用 Prometheus 和 Grafana 打造 Flask Web App 監控預警系統</a>)</figcaption>
+    </figure>
+<br>
+<ol>
+<li>
+<p>有一個 Prometheus server 主體，會去 Prometheus Client Pull 相關的 Metrics，若是短期的 Job 例如 CronJob 在還來不及 Pull 資料回來可能就已經完成任務了、清洗掉資料。所以會有一個 <code>pushgateway</code> 接收 Job Push 過來的相關資訊，Prometheus Server 再從其中拉取資料。 (圖片左半部)</p>
+</li>
+<li>
+<p>Service Discovery 可以更好的蒐集 Kubernetes 相關的資訊。 (圖片上半部)</p>
+</li>
+<li>
+<p>Prometheus Server 主體會將資料儲存在 Local On-Disk  Time Series Database 或是可以串接 Remote Storage Systems。(圖片下半部)</p>
+</li>
+<li>
+<p>Prometheus Server 資料拉回來後可以提供本身自帶的 Web UI 或是 Grafana 等其他的 Client 來呈現。(圖片右下半部)</p>
+</li>
+<li>
+<p>當抓取資料的值超過 Alert Rule 所設定的閥值 (threshold) 時，Alertmanager 就會將訊息送出，可以透過 Email、Slack 等訊息通知，提醒相關人員進行處理。(圖片右上半部)</p>
+</li>
+</ol>
+<br>
+<p>Prometheus 可能在儲存擴展上比不上其他 Time Series Database，但在整合各種第三方的 Data Source 上十分方便，且在支援雲端服務和 Container 容器相關工具也十分友好。但在圖片的表現上就相較於單薄，所以會搭配我們接下來要介紹的 Grafanac 精美儀表板工具來進行資訊視覺化和圖表的呈現。</p>
+<br>
+<figure><a class="lightgallery" href="/images/Prometheus-Grafana-Docker/grafana.jpg" title="/images/Prometheus-Grafana-Docker/grafana.jpg" data-thumbnail="/images/Prometheus-Grafana-Docker/grafana.jpg" data-sub-html="<h2>Grafana Logo</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Prometheus-Grafana-Docker/grafana.jpg"
+            data-srcset="/images/Prometheus-Grafana-Docker/grafana.jpg, /images/Prometheus-Grafana-Docker/grafana.jpg 1.5x, /images/Prometheus-Grafana-Docker/grafana.jpg 2x"
+            data-sizes="auto"
+            alt="/images/Prometheus-Grafana-Docker/grafana.jpg" width="450" />
+    </a><figcaption class="image-caption">Grafana Logo</figcaption>
+    </figure>
+<br>
+<p>Grafana 是由 Grafana Lab 經營的一個非常精美的儀表板系統，可以整合各種不同的 datasource，例如：Prometheus、Elasticsearch、MySQL、PostgreSQL等。透過不同種 metric 呈現在 dashboard 上。如果還是不太清楚，可以把 Prometheus Grafana 分別想成 Prometheus 是 EFK 的 Elasticsearch，Grafana 想成是 EFK 的 Kibana。</p>
+<br>
+<p>今天我們要透過 Docker-Compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 <a href="https://prometheus.io/" target="_blank" rel="noopener noreffer">Prometheus</a> 和 <a href="https://grafana.com/" target="_blank" rel="noopener noreffer">Grafana</a> 來建立一個 web service 監控預警系統。</p>
+<p>此文章程式碼也會同步到 Github ，需要的也可以去查看歐！要記得先確定一下自己的版本 <a href="https://github.com/880831ian/Prometheus-Grafana-Docker" target="_blank" rel="noopener noreffer">Github 程式碼連結</a> 😆</p>
+<br>
+<h2 id="版本資訊">版本資訊</h2>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.14, build a224086</li>
+<li>Nginx：<a href="https://hub.docker.com/layers/nginx/library/nginx/1.21.6/images/sha256-b495f952df67472c3598b260f4b2e2ba9b5a8b0af837575cf4369c95c8d8a215?context=explore" target="_blank" rel="noopener noreffer">1.21.6</a></li>
+<li>Prometheus：<a href="https://hub.docker.com/layers/prometheus/prom/prometheus/v2.35.0/images/sha256-4b86ad59abc67fa19a6e1618e936f3fd0f6ae13f49260da55a03eeca763a0fb5?context=explore" target="_blank" rel="noopener noreffer">v.2.35.0</a></li>
+<li>nginx-prometheus-exporter：<a href="https://hub.docker.com/layers/nginx-prometheus-exporter/nginx/nginx-prometheus-exporter/0.10/images/sha256-f2aa9848516ff4c9f4c6d5bcb758b0fab519eff644f526e4c9a17d3083b54dde?context=explore" target="_blank" rel="noopener noreffer">0.10</a></li>
+<li>Grafana：<a href="https://hub.docker.com/layers/grafana/grafana/grafana/8.2.5/images/sha256-1a154d1161ed65eaf87368d08149a8bbcf9962ac03dd5ff639a6b9d468a77a36?context=explore" target="_blank" rel="noopener noreffer">8.2.5</a> (最新版本是 8.5.2，但選擇 8.2.5，是因為 8.3.0 後 Alerting 沒有辦法附上圖片，詳細原因可以參考 <a href="https://github.com/grafana/grafana/discussions/38030" target="_blank" rel="noopener noreffer">Add &ldquo;include image&rdquo; option into Grafana Alerting</a> )</li>
+</ul>
+<br>
+<h2 id="檔案結構">檔案結構</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── docker-compose.yaml
+</span></span><span class="line"><span class="cl">├── nginx
+</span></span><span class="line"><span class="cl">│   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   └── status.conf
+</span></span><span class="line"><span class="cl">├── prometheus.yaml
+</span></span><span class="line"><span class="cl">└── test.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這是主要的結構，簡單說明一下：</p>
+<ul>
+<li>docker-compose.yaml：會放置要產生的 nginx、nginx-prometheus-exporter、prometheus、grafana 容器設定檔。</li>
+<li>nginx/Dockerfile：因為在 nginx 要使用 stub_status 需要多安裝一些設定，所以用 Dockerfile 另外寫 nginx 的映像檔。</li>
+<li>nginx/status.conf：nginx 的設定檔。</li>
+<li>prometheus.yaml：prometheus 的設定檔。</li>
+<li>test.sh：測試用	檔案(後續會教大家如何使用)。</li>
+</ul>
+<br>
+<h2 id="實作">實作</h2>
+<p>後續會依照執行的流程來跟大家說明歐！那要開始囉 😁</p>
+<p>我們要建立一個 Nginx 來模擬受監控的服務，我們要透過 nginx-prometheus-exporter 來讓 Prometheus 抓到資料最後傳給 Grafana，所以我們在 Docker-compose 裡面會有 nginx、nginx-prometheus-exporter、prometheus、grafana 幾個容器，我們先看一下程式碼，再來說明程式碼再做什麼事情吧！</p>
+<h3 id="docker-composeyaml">Docker-compose.yaml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./nginx/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx-prometheus-exporter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx/nginx-prometheus-exporter:0.10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-prometheus-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>-<span class="l">nginx.scrape-uri http://nginx:8080/stub_status</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9113</span><span class="p">:</span><span class="m">9113</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">prom/prometheus:v2.35.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./prometheus.yaml:/etc/prometheus/prometheus.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./prometheus_data:/prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;--config.file=/etc/prometheus/prometheus.yaml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;9090:9090&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">grafana/grafana:8.2.5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">grafana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./grafana_data:/var/lib/grafana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">GF_SECURITY_ADMIN_PASSWORD=pass</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;3000:3000&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>nginx：因為 Nginx 會通過 stub_status 頁面來開放對外的監控指標。所以我們要另外寫一個 Dockerfile 設定檔，先將 <code>conf</code> 放入 Nginx 中。</li>
+<li>nginx-prometheus-exporter：這裡要注意的是需要使用 command 來設定 nginx.scrapt-url，我們設定 <code>http://nginx:8080/stub_status</code>，他的預設 Port 是 <code>9113</code>，並設定依賴 <code>depends_no</code>，要 nginx 先啟動後才會執行 <code>nginx-prometheus-exporter</code>。</li>
+<li>prometheus：將 prometheus.yaml 設定檔放入 <code>/etc/prometheus/prometheus.yaml</code>，以及掛載一個 <code>/prometheus_data</code> 來永久保存 prometheus 的資料，以及 command 加入 <code>--config.file</code> 設定。</li>
+<li>grafana：一樣我們先掛載一個 <code>/grafana_data</code> 來永久保存 grafana 的設定，並設定依賴 <code>depends_on</code> ，最後設定 grafana 要呈現的畫面 Port。</li>
+</ul>
+<br>
+<h3 id="nginxdockerfile">nginx/Dockerfile</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx:1.21.6  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./status.conf /etc/nginx/conf.d/status.conf <span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>選擇我們要使用的 nginx image 版本，並將我們的設定檔，複製到容器內。</p>
+<br>
+<h3 id="nginxstatusconf">nginx/status.conf</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">    listen 8080;
+</span></span><span class="line"><span class="cl">    server_name  localhost;
+</span></span><span class="line"><span class="cl">    location /stub_status {
+</span></span><span class="line"><span class="cl">       stub_status on;
+</span></span><span class="line"><span class="cl">       access_log off;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這邊最重要的就是要設定 <code>/stub_status</code> 路徑，開啟 stub_status ，這樣才可以讓 nginx-prometheus-exporter 抓到資料！</p>
+<br>
+<h3 id="prometheusyaml">prometheus.yaml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">5s</span><span class="w"> </span><span class="c"># Server 抓取頻率</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">external_labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;my-monitor&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;localhost:9090&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx_exporter&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;nginx-prometheus-exporter:9113&#34;</span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>這邊是 prometheus 的設定檔，例如有 scrape_interval Server 每次抓取資料的頻率，或是設定 monitor 的 labels，下面的 configs，分別設定了 prometheus 它的 targets 是 <code>[&quot;localhost:9090&quot;]</code> 以及 nginx_exporter 它得 targets 是 <code>[&quot;nginx-prometheus-exporter:9113&quot;]</code>。</p>
+<br>
+<h3 id="testsh">test.sh</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">docker</span><span class="o">=</span><span class="s2">&#34;docker exec nginx&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$docker</span> curl http://nginx:8080/stub_status -s
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這個是我自己另外寫的測試程式，可以執行後他會訪問容器內部 nginx，來模擬 nginx 流量，讓我們在 Grafana 可以清楚看到資料。</p>
+<br>
+<h3 id="執行">執行</h3>
+<br>
+<h3 id="測試">測試</h3>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://blog.techbridge.cc/2019/08/26/how-to-use-prometheus-grafana-in-flask-app/" target="_blank" rel="noopener noreffer">使用 Prometheus 和 Grafana 打造 Flask Web App 監控預警系統</a></p>
+<p><a href="https://cloud.tencent.com/document/product/1416/56039" target="_blank" rel="noopener noreffer">Nginx Exporter 接入</a></p>
+<p><a href="https://maxidea.gitbook.io/k8s-testing/prometheus-he-grafana-de-dan-ji-bian-pai/tong-guo-nginxprometheusexporter-jian-kong-nginx" target="_blank" rel="noopener noreffer">通過nginx-prometheus-exporter監控nginx指標</a></p>
+<p><a href="https://www.cnblogs.com/rongfengliang/p/13580534.html" target="_blank" rel="noopener noreffer">使用nginx-prometheus-exporter 監控nginx</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/prometheus/">Prometheus</a>
+                </span><span><a href="/tags/grafana/">Grafana</a>
+                </span><span><a href="/tags/docker/">Docker</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-05-18</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/prometheus-grafana-docker/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Prometheus-Grafana-Docker/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)" data-hashtags="Prometheus,Grafana,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-hashtag="Prometheus"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/ansible/" class="prev" rel="prev" title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
