@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/git/" /><meta property="og:image" content="https://pin-yi.me/git/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-15T12:00:00+08:00" />
-<meta property="article:modified_time" content="2022-04-15T12:39:25+08:00" />
+<meta property="article:modified_time" content="2022-05-23T10:25:06+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/git/featured-image.webp"/>
@@ -31,10 +31,10 @@
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/pin-yi.me\/git\/featured-image.webp",
-                            "width":  1000 ,
-                            "height":  420 
-                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  1787 ,
-        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-04-15T12:39:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  3819 ,
+        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-05-23T10:25:06+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/git/featured-image.webp"
         title="/git/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Git 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1787 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3819 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -165,8 +165,41 @@ if (!doNotTrack) {
             <li><a href="#commit">commit</a></li>
           </ul>
         </li>
+        <li><a href="#分支類">分支類</a>
+          <ul>
+            <li><a href="#branch">branch</a></li>
+            <li><a href="#checkout">checkout</a></li>
+          </ul>
+        </li>
+        <li><a href="#遠端類">遠端類</a>
+          <ul>
+            <li><a href="#clone">clone</a></li>
+            <li><a href="#remote">remote</a></li>
+            <li><a href="#push">push</a></li>
+            <li><a href="#pull">pull</a></li>
+            <li><a href="#fetch">fetch</a></li>
+            <li><a href="#clonepullfetch-差異">clone、pull、fetch 差異</a></li>
+          </ul>
+        </li>
+        <li><a href="#合併類">合併類</a>
+          <ul>
+            <li><a href="#merge">merge</a></li>
+            <li><a href="#merge-fast-fastward">merge (fast-fastward)</a></li>
+            <li><a href="#rebase-合併">rebase (合併)</a></li>
+            <li><a href="#rebase-修改">rebase (修改)</a></li>
+            <li><a href="#cherry-pick">cherry-pick</a></li>
+          </ul>
+        </li>
+        <li><a href="#還原類">還原類</a>
+          <ul>
+            <li><a href="#reset">reset</a></li>
+            <li><a href="#revert">revert</a></li>
+            <li><a href="#reset-與-revert-差異">reset 與 revert 差異</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
+    <li><a href="#git-常見問題">Git 常見問題</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -206,7 +239,7 @@ if (!doNotTrack) {
             data-src="/images/git/gitkraken.png"
             data-srcset="/images/git/gitkraken.png, /images/git/gitkraken.png 1.5x, /images/git/gitkraken.png 2x"
             data-sizes="auto"
-            alt="/images/git/gitkraken.png" width="500" />
+            alt="/images/git/gitkraken.png" width="600" />
     </a><figcaption class="image-caption">Git GUI 工具 (Gitkraken)</figcaption>
     </figure>
 <br>
@@ -429,19 +462,457 @@ if (!doNotTrack) {
     </figure>
 <p>我們可以在雙引號內輸入我們修改的內容，方便其他人了解該版本的差異。</p>
 <br>
+<h3 id="分支類">分支類</h3>
+<h4 id="branch">branch</h4>
+<p>我們專案初始化後，一開始都只會有一個 master 分支，如果想要新增分支，可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git branch <span class="s2">&#34;分支名稱&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>會將所在分支的檔案狀態複製到新增的分支上，當該分支改動時，不會影響到原本的分支。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/branch.png" title="/images/git/branch.png" data-thumbnail="/images/git/branch.png" data-sub-html="<h2>Git branch</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/branch.png"
+            data-srcset="/images/git/branch.png, /images/git/branch.png 1.5x, /images/git/branch.png 2x"
+            data-sizes="auto"
+            alt="/images/git/branch.png" width="600" />
+    </a><figcaption class="image-caption">Git branch</figcaption>
+    </figure>
+<br>
+<h4 id="checkout">checkout</h4>
+<p>如果想要切換不同版本或是分支，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git checkout <span class="s2">&#34;分支名稱/分支ID&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>來切換不同的分支或是以前的版本。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/checkout_1.png" title="/images/git/checkout_1.png" data-thumbnail="/images/git/checkout_1.png" data-sub-html="<h2>Git checkout</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/checkout_1.png"
+            data-srcset="/images/git/checkout_1.png, /images/git/checkout_1.png 1.5x, /images/git/checkout_1.png 2x"
+            data-sizes="auto"
+            alt="/images/git/checkout_1.png" width="600" />
+    </a><figcaption class="image-caption">Git checkout</figcaption>
+    </figure>
+<br>
+<p>如果想要同時建立分支並切換，可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git chechout -b <span class="s2">&#34;分支名稱&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>-b</code> 這個參數就等於是 <code>git branch &quot;分支&quot; &amp; git checkout &quot;分支&quot;</code>。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/checkout_2.png" title="/images/git/checkout_2.png" data-thumbnail="/images/git/checkout_2.png" data-sub-html="<h2>Git checkout -b</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/checkout_2.png"
+            data-srcset="/images/git/checkout_2.png, /images/git/checkout_2.png 1.5x, /images/git/checkout_2.png 2x"
+            data-sizes="auto"
+            alt="/images/git/checkout_2.png" width="600" />
+    </a><figcaption class="image-caption">Git checkout -b</figcaption>
+    </figure>
+<br>
+<h3 id="遠端類">遠端類</h3>
+<h4 id="clone">clone</h4>
+<p>如果我們遠端上已經有版本庫，想要下載到本地端，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git clone <span class="o">[</span>遠端網址<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>會在下指令的當前路徑下，下載整個遠端的專案。</p>
+<br>
+<h4 id="remote">remote</h4>
+<p>如果要新增遠端版本庫，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git remote add <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>遠端網址<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>取一個可以代表要新增的遠端 Git 版本庫簡稱。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/remote_1.png" title="/images/git/remote_1.png" data-thumbnail="/images/git/remote_1.png" data-sub-html="<h2>Git remote</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/remote_1.png"
+            data-srcset="/images/git/remote_1.png, /images/git/remote_1.png 1.5x, /images/git/remote_1.png 2x"
+            data-sizes="auto"
+            alt="/images/git/remote_1.png" width="1000" />
+    </a><figcaption class="image-caption">Git remote</figcaption>
+    </figure>
+<br>
+<p>如果想要檢視已經設定好的遠端版本庫，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git remote
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>他會列出每個遠端本版本庫的簡稱。</p>
+<p>也可以使用 <code>git remote -v</code> 指令，會顯示 Git 用來讀寫遠端簡稱時所用的網址：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/remote_2.png" title="/images/git/remote_2.png" data-thumbnail="/images/git/remote_2.png" data-sub-html="<h2>Git remote -v</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/remote_2.png"
+            data-srcset="/images/git/remote_2.png, /images/git/remote_2.png 1.5x, /images/git/remote_2.png 2x"
+            data-sizes="auto"
+            alt="/images/git/remote_2.png" width="600" />
+    </a><figcaption class="image-caption">Git remote -v</figcaption>
+    </figure>
+<br>
+<h4 id="push">push</h4>
+<p>當我們已經設定好遠端版本庫的位址，我們如果想要將本地端的專案版本庫放到遠端，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>將本地端版本庫推到遠端的版本庫。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/push.png" title="/images/git/push.png" data-thumbnail="/images/git/push.png" data-sub-html="<h2>Git push</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/push.png"
+            data-srcset="/images/git/push.png, /images/git/push.png 1.5x, /images/git/push.png 2x"
+            data-sizes="auto"
+            alt="/images/git/push.png" width="600" />
+    </a><figcaption class="image-caption">Git push</figcaption>
+    </figure>
+上面這張圖片，就是把本地端的 <code>master</code> 分支內容，推一份到 <code>origin</code> 這個地方 (可能是 GitHub 或公司內部 Git 伺服器)，並且在 <code>origin</code> 這個地方形成同名的 <code>master</code> 分支。</p>
+<br>
+<p>但很多人不知道的是，其實 push 指令的完整型態長這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push origin master:master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>意思就是「把本地的 <code>master</code> 分支內容，推一份到 <code>origin</code> 上，並且在 <code>origin</code> 上建立一個 <code>master</code> 分支」</p>
+<br>
+<p>如果我們把指令改為：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push origin master:dog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>意思就會變成「把本地的 <code>master</code> 分支內容，推一份到 <code>origin</code> 上，並且在 <code>origin</code> 上建立一個 <code>dog</code> 分支」</p>
+<br>
+<h4 id="pull">pull</h4>
+<p>如果我們想要將遠端的專案 <strong>下載並合併</strong> 至本地端，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git pull <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>將遠端專案資料下載並合併到本地端。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/pull.png" title="/images/git/pull.png" data-thumbnail="/images/git/pull.png" data-sub-html="<h2>Git pull</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/pull.png"
+            data-srcset="/images/git/pull.png, /images/git/pull.png 1.5x, /images/git/pull.png 2x"
+            data-sizes="auto"
+            alt="/images/git/pull.png" width="600" />
+    </a><figcaption class="image-caption">Git pull</figcaption>
+    </figure>
+<br>
+<h4 id="fetch">fetch</h4>
+<p>如果我們單純只想要將遠端的專案 <strong>下載</strong> 至本地端，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git fetch <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>將遠端專案資料下載到本地端。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/fetch.png" title="/images/git/fetch.png" data-thumbnail="/images/git/fetch.png" data-sub-html="<h2>Git pull</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/fetch.png"
+            data-srcset="/images/git/fetch.png, /images/git/fetch.png 1.5x, /images/git/fetch.png 2x"
+            data-sizes="auto"
+            alt="/images/git/fetch.png" width="600" />
+    </a><figcaption class="image-caption">Git pull</figcaption>
+    </figure>
+<br>
+<h4 id="clonepullfetch-差異">clone、pull、fetch 差異</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">差異</th>
+<th style="text-align:center">clone</th>
+<th style="text-align:center">pull</th>
+<th style="text-align:center">fetch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">功能</td>
+<td style="text-align:center">會把遠端整份專案都下載到本地端</td>
+<td style="text-align:center">只會下載，並不會合併</td>
+<td style="text-align:center">會下載且合併檔案</td>
+</tr>
+<tr>
+<td style="text-align:center">補充說明</td>
+<td style="text-align:center">適用於專案一開始時使用，如果 clone 之後要再更新，通常是執行 <code>git fetch</code> or <code>git pull</code></td>
+<td style="text-align:center">假設我遠端叫 <code>orgin</code>，當執行時，Git 會比對本地端與遠端，會「下載 <code>origin</code> 上有但本地端沒有的檔案下來」</td>
+<td style="text-align:center">pull 與 fetch 做的事情差不多，多了一個進行合併的功能</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="合併類">合併類</h3>
+<h4 id="merge">merge</h4>
+<p>如果想要將不同分支內容合併，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git merge <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>像下面這張圖，我們將分支 123 合併到分支 master。(要記得先切換到要合併的主分支，才可以合併其他的分支進來)</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/merge.png" title="/images/git/merge.png" data-thumbnail="/images/git/merge.png" data-sub-html="<h2>Git pull</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/merge.png"
+            data-srcset="/images/git/merge.png, /images/git/merge.png 1.5x, /images/git/merge.png 2x"
+            data-sizes="auto"
+            alt="/images/git/merge.png" width="600" />
+    </a><figcaption class="image-caption">Git pull</figcaption>
+    </figure>
+<br>
+<h4 id="merge-fast-fastward">merge (fast-fastward)</h4>
+<p>merge 有一個參數叫做 fast-fastward，我們先看圖片再來說明：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/merge_1.gif" title="/images/git/merge_1.gif" data-thumbnail="/images/git/merge_1.gif" data-sub-html="<h2>Git merge fast-fastward 圖一 (CS Visualized: Useful Git Commands)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/merge_1.gif"
+            data-srcset="/images/git/merge_1.gif, /images/git/merge_1.gif 1.5x, /images/git/merge_1.gif 2x"
+            data-sizes="auto"
+            alt="/images/git/merge_1.gif" width="700" />
+    </a><figcaption class="image-caption">Git merge fast-fastward 圖一 (<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1#merge" target="_blank" rel="noopener noreffer">CS Visualized: Useful Git Commands</a>)</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/git/merge_2.gif" title="/images/git/merge_2.gif" data-thumbnail="/images/git/merge_2.gif" data-sub-html="<h2>Git merge no fast-fastward 圖二 (CS Visualized: Useful Git Commands)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/merge_2.gif"
+            data-srcset="/images/git/merge_2.gif, /images/git/merge_2.gif 1.5x, /images/git/merge_2.gif 2x"
+            data-sizes="auto"
+            alt="/images/git/merge_2.gif" width="700" />
+    </a><figcaption class="image-caption">Git merge no fast-fastward 圖二 (<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1#merge" target="_blank" rel="noopener noreffer">CS Visualized: Useful Git Commands</a>)</figcaption>
+    </figure>
+<br>
+<p>圖一是我們的 <code>fast-fastward</code>，也是 Git 預設的合併方式，當我們要將 dev 合併到 master，<code>fast-fastward</code> 會將 dev 分支的 commit 紀錄合併到 master 上，然而圖二是不使用 <code>fast-fastward</code> 方式，會保留 dev 分支上的 commit 紀錄，並在 master 上新增一個。</p>
+<br>
+<p><code>no fast-fastward</code> 好處是可以完整保留每個分支的 commit 紀錄，壞處是假如 commit 紀錄只有一個，合併多次就會出現很多小叉路。要怎麽使用 <code>no fast-fastward</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git merge --no-ff <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="rebase-合併">rebase (合併)</h4>
+<p>如果想要重新修改特定分支的「 基礎版本 」，要把另一個分支的變更，當成我這隻分支的基礎，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git rebase <span class="o">[</span>分支名稱<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/git/rebase_1.gif" title="/images/git/rebase_1.gif" data-thumbnail="/images/git/rebase_1.gif" data-sub-html="<h2>Git rebase (合併) (CS Visualized: Useful Git Commands)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/rebase_1.gif"
+            data-srcset="/images/git/rebase_1.gif, /images/git/rebase_1.gif 1.5x, /images/git/rebase_1.gif 2x"
+            data-sizes="auto"
+            alt="/images/git/rebase_1.gif" width="700" />
+    </a><figcaption class="image-caption">Git rebase (合併) (<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1#Rebasing" target="_blank" rel="noopener noreffer">CS Visualized: Useful Git Commands</a>)</figcaption>
+    </figure>
+<br>
+<h4 id="rebase-修改">rebase (修改)</h4>
+<p>如果想要修改特定分支上任何一個版本資訊，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git rebase -i <span class="o">[</span>HEAD~?<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但要記得，如果再使用前，要先詢問是否有人正在使用此分支，因為 rebase 會改變歷史紀錄。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/rebase_2.gif" title="/images/git/rebase_2.gif" data-thumbnail="/images/git/rebase_2.gif" data-sub-html="<h2>Git rebase (修改) (CS Visualized: Useful Git Commands)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/rebase_2.gif"
+            data-srcset="/images/git/rebase_2.gif, /images/git/rebase_2.gif 1.5x, /images/git/rebase_2.gif 2x"
+            data-sizes="auto"
+            alt="/images/git/rebase_2.gif" width="700" />
+    </a><figcaption class="image-caption">Git rebase (修改) (<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1#Rebasing" target="_blank" rel="noopener noreffer">CS Visualized: Useful Git Commands</a>)</figcaption>
+    </figure>
+<br>
+<h4 id="cherry-pick">cherry-pick</h4>
+<p>如果想要從某個分支，拉幾個 Commit 進來該分支，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git cherry-pick <span class="o">[</span>分支ID<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但做此動作，需要解決修改後的版本衝突。</p>
+<br>
+<h3 id="還原類">還原類</h3>
+<h4 id="reset">reset</h4>
+<p>如果想要還原任意 Commit，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git reset <span class="o">[</span>HEAD~?<span class="o">]</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>會還原選擇的 Commit，且檔案還是維持最新版本。</p>
+<br>
+<h4 id="revert">revert</h4>
+<p>如果想要還原任意 Commit，但又想保留在歷史紀錄，就可以使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git revert <span class="o">[</span>HEAD~?<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>會還原選擇的 Commit，檔案也會還原到舊的版本</p>
+<br>
+<h4 id="reset-與-revert-差異">reset 與 revert 差異</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">reset</th>
+<th style="text-align:center">revert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">改變歷史狀態</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">說明</td>
+<td style="text-align:center">把目前狀態設定成某個指定的 Commit 狀態，通常適用於尚未推到遠端的 Commit</td>
+<td style="text-align:center">新增一個 Commit 來取消另一個 Commit 的內容，原本的 Commit 依舊會保留在歷史紀錄中。通常適用於已經推到遠端的 Commit</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="git-常見問題">Git 常見問題</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Git 裡的 HEAD 是什麼？<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">HEAD 本身是一個指標，通常會指向某個本地端分支或是其他 Commit，所以也可以把 HEAD 當作目前所在的分支。</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>刪除合併後的分支會發生什麼事情嗎？<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">分支本身就像指標或是貼紙一樣，貼在某個 Commit 上面，分支並不是目錄或是檔案，所以當我們刪除已經合併過的分支，不會造成檔案或目錄跟著被刪除。</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>什麼是標籤 Tag？<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">通常在開發軟體有完成特定的里程碑時，軟體版號 1.0.0 或是 beta、release 之類，就很適合用標籤來標記，例如：<code>git tag 1.0.0</code>。</div>
+        </div>
+    </div>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://gitbook.tw/chapters/introduction/what-is-git" target="_blank" rel="noopener noreffer">什麼是 Git？為什麼要學習它？</a></p>
 <p><a href="https://medium.com/@tina2793778/git-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%B4%B9%E8%88%87%E6%8C%87%E4%BB%A4-d5d85607cd7d" target="_blank" rel="noopener noreffer">Git：基本概念介紹與指令</a></p>
 <p><a href="https://ithelp.ithome.com.tw/articles/10240965" target="_blank" rel="noopener noreffer">[Git] 初始設定</a></p>
 <p><a href="https://backlog.com/git-tutorial/tw/" target="_blank" rel="noopener noreffer">連猴子都能懂的Git入門指南</a></p>
 <p><a href="https://www.maxlist.xyz/2020/05/02/git-merge-rebase/" target="_blank" rel="noopener noreffer">Git教學】分支合併: merge 與 rebase 差異</a></p>
+<p><a href="https://gitbook.tw/interview" target="_blank" rel="noopener noreffer">Git 面試題</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/git/">Git</a>
                 </span><span><a href="/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">操作指令</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-15&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/21224f0da71a1aa0a8c22877fd53485dd6fcc571" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;21224f0:&nbsp;# 新增/更新 Git">
-                            <i class="fas fa-hashtag fa-fw"></i>21224f0</a></span>
+                <span>更新於 2022-05-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a5ddfb76f2c61d347af0fb4a1384fcfdbe834a3d" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a5ddfb7:&nbsp;# 更新 Git 介紹">
+                            <i class="fas fa-hashtag fa-fw"></i>a5ddfb7</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/git/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
