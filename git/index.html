@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/git/" /><meta property="og:image" content="https://pin-yi.me/git/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-15T12:00:00+08:00" />
-<meta property="article:modified_time" content="2022-05-23T10:25:06+08:00" />
+<meta property="article:modified_time" content="2022-05-23T18:04:28+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/git/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/git\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  3819 ,
-        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-05-23T10:25:06+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  4539 ,
+        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-05-23T18:04:28+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/git/featured-image.webp"
         title="/git/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Git 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3819 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4539 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -192,7 +192,13 @@ if (!doNotTrack) {
         </li>
         <li><a href="#還原類">還原類</a>
           <ul>
-            <li><a href="#reset">reset</a></li>
+            <li><a href="#reset">reset</a>
+              <ul>
+                <li><a href="#reset---mixed">reset - mixed</a></li>
+                <li><a href="#reset---soft">reset - soft</a></li>
+                <li><a href="#reset---hard">reset - hard</a></li>
+              </ul>
+            </li>
             <li><a href="#revert">revert</a></li>
             <li><a href="#reset-與-revert-差異">reset 與 revert 差異</a></li>
           </ul>
@@ -838,6 +844,125 @@ if (!doNotTrack) {
 </div>
 </div><p>會還原選擇的 Commit，且檔案還是維持最新版本。</p>
 <br>
+<p><code>reset</code> 指令可以搭配參數使用，常見到的三種參數，方別是 <code>--mixed</code>、<code>--soft</code>、<code>--hard</code>，不同的參數執行之後會有稍微不太一樣的結果。</p>
+<ul>
+<li>mixed 模式：<code>--mixed</code> 是預設的參數，如果沒有特別加其他參數，<code>got reset</code> 會使用 <code>--mix</code> 模式。這個模式會把暫存區的檔案丟掉，但不會影響到工作目錄的檔案，也就是說 Commit 拆出來的檔案會留在工作目錄(實體的檔案)，但不會留在暫存區。</li>
+<li>soft 模式：這個模式下的 reset，工作目錄跟暫存區檔案都不會被丟掉，所以看起來只有 HEAD 的移動而已。也因此，Commit 拆出來的檔案會直接放在暫存區。</li>
+<li>hard 模式：在這個模式下，不管是工作目錄以及暫存區的檔案都會丟掉。</li>
+</ul>
+<p>以下用表格在整理一次：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">mixed 模式</th>
+<th style="text-align:center">soft 模式</th>
+<th style="text-align:center">hard 模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">工作目錄(實體的檔案)</td>
+<td style="text-align:center">不變</td>
+<td style="text-align:center">不變</td>
+<td style="text-align:center">丟掉</td>
+</tr>
+<tr>
+<td style="text-align:center">暫存區</td>
+<td style="text-align:center">丟掉</td>
+<td style="text-align:center">不變</td>
+<td style="text-align:center">丟掉</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>文字說明也不太懂對吧！沒錯我也是 😂，所以我整理了三種不同的範例，我們一起做看看吧！</p>
+<p>我們先開一個新專案，在 master 上面 commit 2 次，可以參考下方圖片：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_1.png" title="/images/git/reset_1.png" data-thumbnail="/images/git/reset_1.png" data-sub-html="<h2>Git reset 示範</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_1.png"
+            data-srcset="/images/git/reset_1.png, /images/git/reset_1.png 1.5x, /images/git/reset_1.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_1.png" width="800" />
+    </a><figcaption class="image-caption">Git reset 示範</figcaption>
+    </figure>
+<br>
+<p>我們用 <code>git log</code> 來看一下記錄：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_2.png" title="/images/git/reset_2.png" data-thumbnail="/images/git/reset_2.png" data-sub-html="<h2>Git reset 示範 log 紀錄</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_2.png"
+            data-srcset="/images/git/reset_2.png, /images/git/reset_2.png 1.5x, /images/git/reset_2.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_2.png" width="800" />
+    </a><figcaption class="image-caption">Git reset 示範 log 紀錄</figcaption>
+    </figure>
+<br>
+<p>都設定好後，我們要來測試每個參數的不同之處，先以預設的 <code>--mixed</code> 來測試：</p>
+<h5 id="reset---mixed">reset - mixed</h5>
+<p>我們下 <code>git reset --minxed</code> 按 Tab 可以看要還原的 commit，我們之後的測試都是還原到 <code>24aeb0d  -- [HEAD^]   add a.txt</code> 這個，來觀察 <code>add b.txt</code> 這個 commit 的變化。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_3.png" title="/images/git/reset_3.png" data-thumbnail="/images/git/reset_3.png" data-sub-html="<h2>Git reset mixed 模式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_3.png"
+            data-srcset="/images/git/reset_3.png, /images/git/reset_3.png 1.5x, /images/git/reset_3.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_3.png" width="800" />
+    </a><figcaption class="image-caption">Git reset mixed 模式</figcaption>
+    </figure>
+<br>
+<p>所以我們的指令是 <code>git reset --mixed 24aebo4</code>，我們再來觀看看看，檔案狀態也就是 b.txt 以及暫存區狀態。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_4.png" title="/images/git/reset_4.png" data-thumbnail="/images/git/reset_4.png" data-sub-html="<h2>Git reset mixed 模式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_4.png"
+            data-srcset="/images/git/reset_4.png, /images/git/reset_4.png 1.5x, /images/git/reset_4.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_4.png" width="800" />
+    </a><figcaption class="image-caption">Git reset mixed 模式</figcaption>
+    </figure>
+可以看到使用 <code>--mixed</code> 模式，檔案 b.txt 還會存在，只是移除暫存區。</p>
+<br>
+<h5 id="reset---soft">reset - soft</h5>
+<p>我們指令是 <code>git reset --soft 24aebo4</code>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_5.png" title="/images/git/reset_5.png" data-thumbnail="/images/git/reset_5.png" data-sub-html="<h2>Git reset soft 模式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_5.png"
+            data-srcset="/images/git/reset_5.png, /images/git/reset_5.png 1.5x, /images/git/reset_5.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_5.png" width="800" />
+    </a><figcaption class="image-caption">Git reset soft 模式</figcaption>
+    </figure>
+可以看到使用 <code>--soft</code> 模式，檔案 b.txt 還會存在，且會在暫存區。</p>
+<br>
+<h5 id="reset---hard">reset - hard</h5>
+<p>我們指令是 <code>git reset --hard 24aebo4</code>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/reset_6.png" title="/images/git/reset_6.png" data-thumbnail="/images/git/reset_6.png" data-sub-html="<h2>Git reset hard 模式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/reset_6.png"
+            data-srcset="/images/git/reset_6.png, /images/git/reset_6.png 1.5x, /images/git/reset_6.png 2x"
+            data-sizes="auto"
+            alt="/images/git/reset_6.png" width="800" />
+    </a><figcaption class="image-caption">Git reset hard 模式</figcaption>
+    </figure>
+可以看到使用 <code>--hard</code> 模式，檔案 b.txt 不見了，所以也不會在暫存區。</p>
+<br>
+<br>
 <h4 id="revert">revert</h4>
 <p>如果想要還原任意 Commit，但又想保留在歷史紀錄，就可以使用：</p>
 <div class="highlight"><div class="chroma">
@@ -911,8 +1036,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">操作指令</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a5ddfb76f2c61d347af0fb4a1384fcfdbe834a3d" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a5ddfb7:&nbsp;# 更新 Git 介紹">
-                            <i class="fas fa-hashtag fa-fw"></i>a5ddfb7</a></span>
+                <span>更新於 2022-05-23&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6729f8f0387b9e950b5b6e10ab89f060d63bbfec" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6729f8f:&nbsp;# 新增/修改 Git 介紹">
+                            <i class="fas fa-hashtag fa-fw"></i>6729f8f</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/git/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
