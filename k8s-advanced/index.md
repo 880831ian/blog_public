@@ -1,4 +1,4 @@
-# Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet)
+# Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet、ConfigMap)
 
 
 前面我們在[基本篇](https://pin-yi.me/k8s)中，為了使 Pod 能夠與本機連線，使用了 `port-forward`，還有另一種方法就是今天要介紹的第一個主題：Service
@@ -1182,6 +1182,97 @@ web-0
 web-1
 ```
 可以發現 `web-0`、`web-1` 雖然重新啟動，但依舊會監聽它們主機名，因為和它們的 PersistentVolumeClaim 相關聯的 PersistentVolume 被重新掛載到了各自的 `volumeMount` 上。
+
+<br>
+
+## 什麼是 ConfigMap ?
+
+看到 Config 應該會聯想到與設定檔有關，沒錯 ConfigMap 通常都是用來存放設定檔用的，換句話來說這個物件會直接連結一個或多個檔案，而 ConfigMap 通常都是用來存放偏向部署面的設定檔，像是資料庫的初始化設定、nginx 設定檔等等，這種不用被包進去 image 內，但需要讓 container 可以使用的檔案。
+
+<br>
+
+### ConfigMap 特性
+* 一個 ConfigMap 物件可以放一個或多個設定檔：我們上面有提到它是用來存放設定檔用的，會直接連接該設定檔。
+* 無需修改程式碼，可以替換不同環境的設定檔：由於設定檔都交由 ConfigMap 管理，並不是包在 image 內，因此可以藉由修改 ConfigMap 的方式來達到不用更新 Pod 內容就可以更換設定檔的作用。
+* 統一存放所有的設定檔：一個 ConfigMap 可以連結一個以上的設定檔，因此也可以將該專案會用到的所有設定檔通通存放在同一個 ConfigMap 物件中進行管理。
+
+<br>
+
+### 如何建立 ConfigMap？
+
+由於 ConfigMap 可以直接存入設定檔，所以我們以現有設定檔為基準，接下來要用 `create` 這個參數來建立 ConfipMap 物件出來，這時可能會想，之前都是使用 `apply` 怎麼這次要改用 `create`呢！？ 雖然兩者都有建立的意思，但背後實作的技術完全不同：
+
+* `create` 使用的是 [Imperative Management](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/imperative-config/)，Imperative Management 會告訴 Kubernetes 我目前的動作要做什麼，例如：`create`、`delete`、`replace` 某個物件。
+*  `apply` 是使用 [Declarative Management](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/declarative-config/)，Declarative Management 是用宣告的方式來建立物件，更白話一點就是我希望這個物件要長怎麼樣，所以 `apply` 通常都會搭配 yaml 檔，而這份 yaml 檔就會在 `kind` 這個設定值告訴 Kubernetes 這個物件要長成什麼樣子。
+
+<br>
+
+因為我們這次要直接使用現有的設定檔來建立 ConfigMap，所以這時候不能使用 `apply` 的方式，只能使用 `create` 來建立，指令也很簡單：
+
+```sh
+$ kubectl create configmap <configmapName> --from-file=<filePath>
+```
+
+<br>
+
+{{< image src="/images/K8s-advanced/configmap.png"  width="1000" caption="建立 ConfigMap" src_s="/images/K8s-advanced/configmap.png" src_l="/images/K8s-advanced/configmap.png" >}}
+
+<br>
+
+建立完成使用 `get` 來查詢是否正確建立 ConfigMap：
+
+<br>
+
+{{< image src="/images/K8s-advanced/configmap_1.png"  width="700" caption="使用 get 查詢是否正確 ConfigMap" src_s="/images/K8s-advanced/configmap_1.png" src_l="/images/K8s-advanced/configmap_1.png" >}}
+
+<br>
+
+最後可以下 `describe` 這個參數來查看 ConfigMap 的內容，會發現裡面就是我們設定檔的完整內容：
+
+<br>
+
+{{< image src="/images/K8s-advanced/configmap_2.png"  width="800" caption="使用 describe 查看 ConfigMap 的內容" src_s="/images/K8s-advanced/configmap_2.png" src_l="/images/K8s-advanced/configmap_2.png" >}}
+
+<br>
+
+## 什麼是 Secrets ?
+
+看到 Secrets 這個名字就知道這是非常機密的物件，相較於 ConfigMap 是用來存放部署面的檔案，Secrets 通常都是用來存機密的資料，像是使用者帳號、SSL 憑證等。
+
+### Secrets 特性
+
+上面 ConfigMap 提到的特性 Secrets 一樣，比較特別的是 Secrets 會將內部的資料進行 base64 編碼。因為重新編碼所以可以確保資料相較於 ConfigMap 下安全一些，所以建議如果是機密性的資料就存在 Secrets 裡面吧！
+
+<br>
+
+### 如何建立 Secrets？
+
+我們一樣用現有的檔案來做基準作為示範，由於上面 ConfigMap 只存入一個檔案而已，所以這邊 Secrets 我們改成存入多個檔案：
+
+一樣用 `create` 的參數進行 Secrets 建立，但這邊要多加一個 `SUBCOMMAND` 叫 `generic`，generic 代表意思是從本機檔案、目錄建立 Secrets，接下來只要下：
+
+```sh
+kubectl create secret generic <secretName> --from-file=<filePath>
+```
+<br>
+
+{{< image src="/images/K8s-advanced/secret.png"  width="800" caption="建立 Secrets" src_s="/images/K8s-advanced/secret.png" src_l="/images/K8s-advanced/secret.png" >}}
+
+<br>
+
+建立完成使用 `get` 來查詢是否正確建立 Secrets：
+
+<br>
+
+{{< image src="/images/K8s-advanced/secret_1.png"  width="700" caption="使用 get 查詢是否正確 Secrets" src_s="/images/K8s-advanced/secret_1.png" src_l="/images/K8s-advanced/secret_1.png" >}}
+
+<br>
+
+最後一樣可以下 `describe` 這個參數來查看 Secrets 的內容，但因為加密所以不會顯示原本內容，只會看到的確有兩個檔案：
+
+<br>
+
+{{< image src="/images/K8s-advanced/secret_2.png"  width="800" caption="使用 describe 查看 Secrets 的內容" src_s="/images/K8s-advanced/secret_2.png" src_l="/images/K8s-advanced/secret_2.png" >}}
 
 <br>
 
