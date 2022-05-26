@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>如何從頭打造專屬的 GitLab CI/CD 全攻略 - PinYi</title><meta name="description" content="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪"><meta property="og:title" content="如何從頭打造專屬的 GitLab CI/CD 全攻略" />
+<meta property="og:description" content="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/gitlab-cicd/" /><meta property="og:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-26T10:10:00+08:00" />
+<meta property="article:modified_time" content="2022-05-26T12:28:35+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/>
+<meta name="twitter:title" content="如何從頭打造專屬的 GitLab CI/CD 全攻略"/>
+<meta name="twitter:description" content="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gitlab-cicd/" /><link rel="prev" href="https://pin-yi.me/prometheus-grafana-docker/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何從頭打造專屬的 GitLab CI/CD 全攻略",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/gitlab-cicd\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/gitlab-cicd\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GitLab, CI\/CD, 介紹, 實作","wordcount":  2003 ,
+        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T12:28:35+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": "此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪"
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gitlab-cicd/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/gitlab-cicd/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/gitlab-cicd/featured-image.webp"
+        data-srcset="/gitlab-cicd/featured-image.webp, /gitlab-cicd/featured-image.webp 1.5x, /gitlab-cicd/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/gitlab-cicd/featured-image.webp"
+        title="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何從頭打造專屬的 GitLab CI/CD 全攻略</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2003 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gitlab-cicd">GitLab CI/CD</a>
+      <ul>
+        <li><a href="#持續整合-ci">持續整合 CI</a></li>
+        <li><a href="#持續部署-cd">持續部署 CD</a></li>
+        <li><a href="#gitlab-ciyml">.gitlab-ci.yml</a></li>
+        <li><a href="#gitlab-ci-runner">GitLab CI Runner</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到，要怎麼設定我們將程式推到遠端的 Git Repo，能夠再搭配 CI/CD 去做測試，並且把程式碼自動部署到正式的服務機器設備上呢？</p>
+<br>
+<p>那我們就開始囉！此篇會複習一下 CI/CD 並且說明 GitLab CI/CD 運作的原理，關於實作部分會放到下一篇文章 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a></p>
+<p>對了工商一下，剛剛有提到的 Jenkins 及 Ansible CI/CD 總共有 3 篇文章，還沒看過的可以先飛過去看一下歐 👇👇👇</p>
+<p><a href="https://pin-yi.me/jenkins-ansible/" target="_blank" rel="noopener noreffer">Jenkins 及 Ansible IT 自動化 CI/CD 介紹</a></p>
+<p><a href="https://pin-yi.me/jenkins/" target="_blank" rel="noopener noreffer">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</a></p>
+<p><a href="https://pin-yi.me/ansible/" target="_blank" rel="noopener noreffer">Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</a></p>
+<br>
+<p>老樣子文章也會同步到 Github，會附上範例中的程式碼，有需要的也可以去查看歐！ <a href="https://github.com/880831ian/GitLab-CICD" target="_blank" rel="noopener noreffer">Github 程式碼連結</a> 💓</p>
+<br>
+<h2 id="gitlab-cicd">GitLab CI/CD</h2>
+<p>GitLab CI/CD 是 GitLab 內建強大的工具，在 GitHub 被稱為 Github Actions，這個之後有空再來介紹XD，回歸正題，GitLab CI/CD 可以讓我們持續整合和部署，且不需要使用第三方的應用程式來整合。我們來複習一下 <code>持續整合 CI</code>、<code>持續部署 CD </code> 他們是什麼吧：</p>
+<br>
+<h3 id="持續整合-ci">持續整合 CI</h3>
+<p>一個處於開發階段的專案或是軟體，它被我們放在 GitLab 的 Repository 裡，開發人員每天會推送不同的程式碼到 GitLab 上，GitLab 持續整合 CI 會在開發人員每次推送後，自動化的依照我們設定好的腳本進行建構與測試，從而減少開發中的專案發生錯誤的可能性。</p>
+<p>這種做法就被稱作持續整合，對於我們提交給專案的每一個更改、甚至是開發分支，它都是自動且持續地建構和測試，確保新加入的變動，符合我們在專案中所設計的所有測試。</p>
+<br>
+<h3 id="持續部署-cd">持續部署 CD</h3>
+<p>持續部署，讓我們不太需要手動的去部署專案服務，而是將其設置為自動化部署，完全不需要有人工去干涉，減少了人為的部署錯誤。</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/cicd.jpg" title="/images/gitlab-cicd/cicd.jpg" data-thumbnail="/images/gitlab-cicd/cicd.jpg" data-sub-html="<h2>GitLab CI/CD (圖片：GitLab Agile Planning)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/cicd.jpg"
+            data-srcset="/images/gitlab-cicd/cicd.jpg, /images/gitlab-cicd/cicd.jpg 1.5x, /images/gitlab-cicd/cicd.jpg 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/cicd.jpg" width="800" />
+    </a><figcaption class="image-caption">GitLab CI/CD (圖片：<a href="https://about.gitlab.com/solutions/agile-delivery/" target="_blank" rel="noopener noreffer">GitLab Agile Planning</a>)</figcaption>
+    </figure>
+<br>
+<p>大致了解是如何運作之後，我們接著聊聊上面有提到的 <code>設定好的腳本</code>：</p>
+<h3 id="gitlab-ciyml">.gitlab-ci.yml</h3>
+<p>GitLab CI/CD 的工作原理是，要在專案根目錄新增一個名為 <code>.gitlab-ci.yml</code> 的文件 (記得文件名稱開頭有 <code>.</code> ，我一開始忘記要加，想說怎麼都沒有反應 😅 )，也就是我們上面說的 <code>設定好的腳本</code>，可以先將所需建構、測試和部署的腳本編寫完成，以及定義很多規則，例如執行命令的先後順序、部署應用程式的位置以及指定是否自動運行或是手動觸發腳本等。</p>
+<p>將 <code>.gitlab-ci.yml</code> 文件放入 Repository 裡，就會觸發 CI，負責管理的 GitLab-CI 就會依照 <code>.gitlab-ci.yml</code> 設定檔來啟動名為 <code>GitLab Runner</code> 的工具來運行腳本，這個 <code>GitLab Runner</code> 我們放到後面來說，我們先來說說 <code>.gitlab-ci.yml</code> 這個設定檔要怎麼編寫，以及編寫後的流程。</p>
+<br>
+<p>這是一個示範的 <code>.gitlab-ci.yml</code>，選自優良的 <a href="https://docs.gitlab.com/ee/ci/quick_start/" target="_blank" rel="noopener noreffer">GitLab</a> XD，為了說明有小修改程式碼，程式碼也會放在 <a href="https://github.com/880831ian/GitLab-CICD" target="_blank" rel="noopener noreffer">GitHub</a> 上歐：</p>
+<ul>
+<li>.gitlab-ci.yml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">config/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Hello, $GITLAB_USER_LOGIN!&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something, but takes more time than test-job1.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;After the echo commands complete, it runs the sleep command for 20 seconds&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;which simulates a test that runs 20 seconds longer than test-job1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sleep 20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy-prod</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job deploys something from the $CI_COMMIT_BRANCH branch.&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>那我來簡單說明一下上面這些設定檔案的功能：</p>
+<ul>
+<li>stages：代表這個 CI 設定檔有三個 stage 要跑，一個是 build、一個 test、一個 deploy，他們的順序也決定 CI 運作的順序，由 build &gt; test &gt; deploy，假如 test 沒有通過，就不會執行 deploy。</li>
+<li>cache：我們在寫 CI 時，常常需要裝 package，但我不想每次都重新跑一次，所以可以寫一個 cache，不要讓 GitLab 每次都重新拉新的 package。</li>
+<li>build-job、test-job1、test-job2、deploy-prod：代表我有 4 個 job 要執行，每個 job 裡面有不同的任務，也是顯示在 Pipeline 的名稱。</li>
+<li>stage：他現在要執行的階段，對應到 stages。</li>
+<li>before_script：可以把它當先需要先執行的指令，後面才會執行主要的 script 指令。所以需要安裝的可以先寫在這裡面。</li>
+<li>script：主指令，在實際運行的腳本中，通常會見到多行的指令被依序執行。</li>
+<li>$CI_COMMIT_BRANC：當然 <code>.gitlab-ci.yml</code> 檔案也可以帶入參數，這個部分我們留到 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 搭配實際操作來說明。</li>
+</ul>
+<br>
+<p>當我們將 <code>.gitlab-ci.yml</code> 連同專案一起推到 GitLab 上後，我們可以看到它會開始執行我們所寫的腳本，會顯示整個執行過程：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/ci.png" title="/images/gitlab-cicd/ci.png" data-thumbnail="/images/gitlab-cicd/ci.png" data-sub-html="<h2>GitLab CI/CD 執行過程</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/ci.png"
+            data-srcset="/images/gitlab-cicd/ci.png, /images/gitlab-cicd/ci.png 1.5x, /images/gitlab-cicd/ci.png 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/ci.png" width="1000" />
+    </a><figcaption class="image-caption">GitLab CI/CD 執行過程</figcaption>
+    </figure>
+<br>
+<p>查看執行的狀態：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/status.png" title="/images/gitlab-cicd/status.png" data-thumbnail="/images/gitlab-cicd/status.png" data-sub-html="<h2>GitLab CI/CD 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/status.png"
+            data-srcset="/images/gitlab-cicd/status.png, /images/gitlab-cicd/status.png 1.5x, /images/gitlab-cicd/status.png 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/status.png" width="800" />
+    </a><figcaption class="image-caption">GitLab CI/CD 狀態</figcaption>
+    </figure>
+<br>
+<p>也可以在 GitLab Pipeline 看到執行的流程：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/pipeline.png" title="/images/gitlab-cicd/pipeline.png" data-thumbnail="/images/gitlab-cicd/pipeline.png" data-sub-html="<h2>GitLab CI/CD Pipeline</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/pipeline.png"
+            data-srcset="/images/gitlab-cicd/pipeline.png, /images/gitlab-cicd/pipeline.png 1.5x, /images/gitlab-cicd/pipeline.png 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/pipeline.png" width="800" />
+    </a><figcaption class="image-caption">GitLab CI/CD Pipeline</figcaption>
+    </figure>
+<br>
+<h3 id="gitlab-ci-runner">GitLab CI Runner</h3>
+<p>我們上面有提到，我們在 CI 跑腳本，需要一個 Server 來代替 GitLab 來讓我們執行，這個 Server 我們稱為 Runner。我們來看一下整個執行的圖片：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/gitlab-cicd.png" title="/images/gitlab-cicd/gitlab-cicd.png" data-thumbnail="/images/gitlab-cicd/gitlab-cicd.png" data-sub-html="<h2>Gitlab CI/CD 實際執行流程 (圖片來源：Gitlab-CI 入門實作教學 - 單元測試篇)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/gitlab-cicd.png"
+            data-srcset="/images/gitlab-cicd/gitlab-cicd.png, /images/gitlab-cicd/gitlab-cicd.png 1.5x, /images/gitlab-cicd/gitlab-cicd.png 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/gitlab-cicd.png" width="600" />
+    </a><figcaption class="image-caption">Gitlab CI/CD 實際執行流程 (圖片來源：<a href="https://nick-chen.medium.com/gitlab-ci-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E7%AF%87-156455e2ad9f" target="_blank" rel="noopener noreffer">Gitlab-CI 入門實作教學 - 單元測試篇</a>)</figcaption>
+    </figure>
+<br>
+<p>那這個 Runner 有分成兩種：</p>
+<ul>
+<li>共享 Runner (Shared Runners)</li>
+<li>自架 Runner (Specific Runners)</li>
+</ul>
+<p>因為我們本文章以及後續 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 文章所使用的平台是 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a>，由官方所提供，所以我們直接使用共享 Runner，可以在 repository Settings → CI / CD → Runners 中找到，有不少官方提供的共享 Runner 可以使用，也不需要做任何設定。</p>
+<br>
+<figure><a class="lightgallery" href="/images/gitlab-cicd/sharedrunners.png" title="/images/gitlab-cicd/sharedrunners.png" data-thumbnail="/images/gitlab-cicd/sharedrunners.png" data-sub-html="<h2>GitLab CI/CD 共享 Runner</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gitlab-cicd/sharedrunners.png"
+            data-srcset="/images/gitlab-cicd/sharedrunners.png, /images/gitlab-cicd/sharedrunners.png 1.5x, /images/gitlab-cicd/sharedrunners.png 2x"
+            data-sizes="auto"
+            alt="/images/gitlab-cicd/sharedrunners.png" width="800" />
+    </a><figcaption class="image-caption">GitLab CI/CD 共享 Runner</figcaption>
+    </figure>
+<br>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://docs.gitlab.com/ee/ci/quick_start/" target="_blank" rel="noopener noreffer">Get started with GitLab CI/CD</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10214114" target="_blank" rel="noopener noreffer">Best Practice for DevOps on GitLab and GCP : GitLab CI/CD - Day 6 -</a></p>
+<p><a href="https://nick-chen.medium.com/gitlab-ci-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E7%AF%87-156455e2ad9f" target="_blank" rel="noopener noreffer">Gitlab-CI 入門實作教學 - 單元測試篇</a></p>
+<p><a href="https://medium.com/@mvpdw06/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-gitlab-ci-ebf0b68ce24b" target="_blank" rel="noopener noreffer">如何使用 GitLab CI</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gitlab/">GitLab</a>
+                </span><span><a href="/tags/ci/cd/">CI/CD</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/990c23ee458082030af693e5aa3908e7c9989f4d" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;990c23e:&nbsp;# 新增 如何從頭打造專屬的 GitLab CI/CD 全攻略">
+                            <i class="fas fa-hashtag fa-fw"></i>990c23e</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/gitlab-cicd/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gitlab-cicd/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gitlab-cicd/" data-title="如何從頭打造專屬的 GitLab CI/CD 全攻略" data-hashtags="GitLab,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gitlab-cicd/" data-hashtag="GitLab"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gitlab-cicd/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gitlab-cicd/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gitlab-cicd/" data-title="如何從頭打造專屬的 GitLab CI/CD 全攻略"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gitlab-cicd/" data-title="如何從頭打造專屬的 GitLab CI/CD 全攻略"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gitlab-cicd/" data-title="如何從頭打造專屬的 GitLab CI/CD 全攻略"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/prometheus-grafana-docker/" class="prev" rel="prev" title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

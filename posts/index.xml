@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>如何從頭打造專屬的 GitLab CI/CD 全攻略</title>
+    <link>https://pin-yi.me/gitlab-cicd/</link>
+    <pubDate>Thu, 26 May 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gitlab-cicd/</guid>
+    <description><![CDATA[自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到]]></description>
+</item>
+<item>
     <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</title>
     <link>https://pin-yi.me/prometheus-grafana-docker/</link>
     <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/prometheus-grafana-docker/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/k8s-advanced/</link>
     <pubDate>Tue, 03 May 2022 10:39:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-advanced/</guid>
     <description><![CDATA[前面我們在基本篇中，為了使 Pod 能夠與本機連線，使用了 port-forward，還有另一種方法就是今天要介紹的第一個主題：Service 那我們會]]></description>
-</item>
-<item>
-    <title>Kubernetes (K8s) 介紹 - 基本</title>
-    <link>https://pin-yi.me/k8s/</link>
-    <pubDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s/</guid>
-    <description><![CDATA[什麼是 Kubernetes (K8s)? Kubernetes 也可以叫 K8s，這個名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以叫 K8s 是因為 Kubernetes 的 k 到 s 中間]]></description>
 </item>
 </channel>
 </rss>
