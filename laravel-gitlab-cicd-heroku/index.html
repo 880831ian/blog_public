@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>部署 Laravel 於 Heroku 搭配 GitLab CI/CD - PinYi</title><meta name="description" content="此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD"><meta property="og:title" content="部署 Laravel 於 Heroku 搭配 GitLab CI/CD" />
+<meta property="og:description" content="此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/" /><meta property="og:image" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-26T15:07:00+08:00" />
+<meta property="article:modified_time" content="2022-05-26T17:48:55+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/featured-image.webp"/>
+<meta name="twitter:title" content="部署 Laravel 於 Heroku 搭配 GitLab CI/CD"/>
+<meta name="twitter:description" content="此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" /><link rel="prev" href="https://pin-yi.me/gitlab-cicd/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "部署 Laravel 於 Heroku 搭配 GitLab CI/CD",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GitLab, CI\/CD, Laravel, Heroku, 介紹, 實作","wordcount":  1221 ,
+        "url": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/","datePublished": "2022-05-26T15:07:00+08:00","dateModified": "2022-05-26T17:48:55+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": "此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD"
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/laravel-gitlab-cicd-heroku/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/laravel-gitlab-cicd-heroku/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/laravel-gitlab-cicd-heroku/featured-image.webp"
+        data-srcset="/laravel-gitlab-cicd-heroku/featured-image.webp, /laravel-gitlab-cicd-heroku/featured-image.webp 1.5x, /laravel-gitlab-cicd-heroku/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/laravel-gitlab-cicd-heroku/featured-image.webp"
+        title="此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1221 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#版本資訊">版本資訊</a></li>
+    <li><a href="#建立-laravel-專案">建立 Laravel 專案</a></li>
+    <li><a href="#測試本地-unit-test">測試本地 Unit Test</a></li>
+    <li><a href="#gitlab-cicd-建置">GitLab CI/CD 建置</a>
+      <ul>
+        <li><a href="#上傳-laravel-專案">上傳 Laravel 專案</a></li>
+        <li><a href="#在-gitlab-上執行單元測試">在 GitLab 上執行單元測試</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>經過上一篇文章 <a href="https://pin-yi.me/gitlab-cicd/" target="_blank" rel="noopener noreffer">如何從頭打造專屬的 GitLab CI/CD</a> 的學習，讓我們了解到 GitLab CI/CD 的整個流程，接著我們本次要把 Laravel 給部署到 Heroku 透過 GitLab 的 CI/CD 去達成，不需要透過任何人工去測試，並上架程式到 HeroKu 上，全部都依賴 GitLab CI/CD，讓我們接著看下去吧！</p>
+<br>
+<p>當然，此文章程式碼也會同步到 Github ，需要的也可以去查看歐！要記得先確定一下自己的版本 <a href="https://github.com/880831ian/Laravel-GitLab-CICD-Heroku" target="_blank" rel="noopener noreffer">Github 程式碼連結</a> 😏</p>
+<h2 id="版本資訊">版本資訊</h2>
+<ul>
+<li>macOS：11.6</li>
+<li>Docker：Docker version 20.10.14, build a224086</li>
+<li>Laravel Installer：2.3.0</li>
+<li>Laravel Framework：9.14.1</li>
+</ul>
+<br>
+<p>首先，我們第一步驟就是先建立一個 Laravel 專案，至於為什麼要選擇用 Laravel 來當作 GitLab CI/CD 的範例呢？因為 Laravel 內建有 PHPUnit 的測試腳本，可以讓我們在 CI 測試時，更好的展現 CI 的功能！，有關於 Laravel 相關內容，這邊一樣推薦兩篇文章給大家閱讀：🤣</p>
+<ul>
+<li><a href="https://pin-yi.me/laravel/" target="_blank" rel="noopener noreffer">Laravel 介紹 (使用 Laravel 從零到有開發出一個留言板功能並搭配 RESTful API 來實現 CRUD)</a></li>
+<li><a href="https://pin-yi.me/laravel-advanced/" target="_blank" rel="noopener noreffer">Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</a></li>
+</ul>
+<p>又工商了一波 XD</p>
+<br>
+<h2 id="建立-laravel-專案">建立 Laravel 專案</h2>
+<p>請大家依照 Laravel 官方文件來建立 Laravel 環境，也可以看小弟我的文章拉 👆👆👆，請記得要先安裝好 php 以及 composer，接著按照以下步驟來建立。</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/create.png" title="/images/laravel-gitlab-cicd-heroku/create.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/create.png" data-sub-html="<h2>新建一個 Laravel 新專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/create.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/create.png, /images/laravel-gitlab-cicd-heroku/create.png 1.5x, /images/laravel-gitlab-cicd-heroku/create.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/create.png" width="900" />
+    </a><figcaption class="image-caption">新建一個 Laravel 新專案</figcaption>
+    </figure>
+<br>
+<p>這時候瀏覽 <code>http://127.0.0.1:8000</code>，如果都正確，應該會看到 Laravel 的首頁</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/laravel.png" title="/images/laravel-gitlab-cicd-heroku/laravel.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/laravel.png" data-sub-html="<h2>Laravel 首頁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/laravel.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/laravel.png, /images/laravel-gitlab-cicd-heroku/laravel.png 1.5x, /images/laravel-gitlab-cicd-heroku/laravel.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/laravel.png" width="900" />
+    </a><figcaption class="image-caption">Laravel 首頁</figcaption>
+    </figure>
+<br>
+<h2 id="測試本地-unit-test">測試本地 Unit Test</h2>
+<p>接著我們剛剛有提到選用 Laravel 的原因是 Laravel 有 PHPUnit 單元測試可以使用，所以我們現在先在本地端來測試 Unit Test，專案預設有放一個單元測試在 <code>tests/Unit/ExampleTest.php</code>。我們先再次確認環境是否有安裝好，再來執行單元測試。</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/unittest.png" title="/images/laravel-gitlab-cicd-heroku/unittest.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/unittest.png" data-sub-html="<h2>在本地端執行單元測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/unittest.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/unittest.png, /images/laravel-gitlab-cicd-heroku/unittest.png 1.5x, /images/laravel-gitlab-cicd-heroku/unittest.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/unittest.png" width="900" />
+    </a><figcaption class="image-caption">在本地端執行單元測試</figcaption>
+    </figure>
+<br>
+<p>執行後，應該都會是通過的畫面，如下圖：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/demo_test.png" title="/images/laravel-gitlab-cicd-heroku/demo_test.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/demo_test.png" data-sub-html="<h2>執行單元測試結果</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/demo_test.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/demo_test.png, /images/laravel-gitlab-cicd-heroku/demo_test.png 1.5x, /images/laravel-gitlab-cicd-heroku/demo_test.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/demo_test.png" width="900" />
+    </a><figcaption class="image-caption">執行單元測試結果</figcaption>
+    </figure>
+<br>
+<h2 id="gitlab-cicd-建置">GitLab CI/CD 建置</h2>
+<h3 id="上傳-laravel-專案">上傳 Laravel 專案</h3>
+<p>接下來我們要上傳含有 Unit Test 專案到 GitLab 上，步驟如下，如果已經熟悉如何將專案推到 GitLab，可以直接跳到 <a href="#%e5%9c%a8-gitlab-%e4%b8%8a%e5%9f%b7%e8%a1%8c%e5%96%ae%e5%85%83%e6%b8%ac%e8%a9%a6" rel="">在 GitLab 上執行單元測試</a></p>
+<ol>
+<li>在 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a> 上點選建立專案，選擇 <strong>Create blank project</strong>，也可以直接瀏覽該網址 <code>https://gitlab.com/projects/new#blank_project</code>。</li>
+<li>輸入專案名稱可以選擇 Project deployment target 為 <strong>Heroko</strong>，選擇 Public，最後按下 <strong>Create project</strong></li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab.png" title="/images/laravel-gitlab-cicd-heroku/gitlab.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab.png" data-sub-html="<h2>在 GitLab 上建立新專案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab.png, /images/laravel-gitlab-cicd-heroku/gitlab.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab.png" width="800" />
+    </a><figcaption class="image-caption">在 GitLab 上建立新專案</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>於專案資料夾下加入 remote 遠端 GitLab，並 Push 將專案推上去。</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab_push.png" title="/images/laravel-gitlab-cicd-heroku/gitlab_push.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab_push.png" data-sub-html="<h2>將 Laravel 專案推到 GitLab 上</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab_push.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab_push.png, /images/laravel-gitlab-cicd-heroku/gitlab_push.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab_push.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab_push.png" width="800" />
+    </a><figcaption class="image-caption">將 Laravel 專案推到 GitLab 上</figcaption>
+    </figure>
+<br>
+<p>成功推上去，可以到 GitLab 上，看到我們剛剛的專案！</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab_show.png" title="/images/laravel-gitlab-cicd-heroku/gitlab_show.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab_show.png" data-sub-html="<h2>成功推到 GitLab 上</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab_show.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab_show.png, /images/laravel-gitlab-cicd-heroku/gitlab_show.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab_show.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab_show.png" width="800" />
+    </a><figcaption class="image-caption">成功推到 GitLab 上</figcaption>
+    </figure>
+<br>
+<h3 id="在-gitlab-上執行單元測試">在 GitLab 上執行單元測試</h3>
+<p>要在 GitLab 上執行 CI/CD 就需要有 Runner，這次我們選擇使用 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a> 的 Shared runners，需要使用 Specific runners，可以查看上一篇 <a href="https://pin-yi.me/gitlab-cicd/#%E8%87%AA%E6%9E%B6-runner-specific-runners" target="_blank" rel="noopener noreffer">如何從頭打造專屬的 GitLab CI/CD</a> 文章</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/runner.png" title="/images/laravel-gitlab-cicd-heroku/runner.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/runner.png" data-sub-html="<h2>本次使用 Share runners</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/runner.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/runner.png, /images/laravel-gitlab-cicd-heroku/runner.png 1.5x, /images/laravel-gitlab-cicd-heroku/runner.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/runner.png" width="800" />
+    </a><figcaption class="image-caption">本次使用 Share runners</figcaption>
+    </figure>
+<br>
+<p>接下來在專案的根目錄撰寫我們的 <code>.gitlab-ci.yml</code> 檔案，之後再次上傳 GitLab，當我們根目錄有此檔案，GitLab-CI 就會讀取並依照內容啟動 Runner 來執行工作：</p>
+<ul>
+<li>.gitlab-ci.yml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Unit_test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>說明一下這個 <code>yml</code> 檔內的設定是在做什麼：</p>
+<p>待續&hellip;.明天繼續努力 &gt;&lt;</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://nick-chen.medium.com/gitlab-ci-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E7%AF%87-156455e2ad9f" target="_blank" rel="noopener noreffer">Gitlab-CI 入門實作教學 - 單元測試篇</a></p>
+<p><a href="https://medium.com/@nick03008/%E6%95%99%E5%AD%B8-gitlab-ci-%E5%85%A5%E9%96%80%E5%AF%A6%E4%BD%9C-%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E7%BD%B2%E7%AF%87-ci-cd-%E7%B3%BB%E5%88%97%E5%88%86%E4%BA%AB%E6%96%87-cbb5100a73d4" target="_blank" rel="noopener noreffer">Gitlab-CI 自動化部屬部署</a></p>
+<p><a href="https://medium.com/@vip131430g/%E9%83%A8%E7%BD%B2-laravel-%E6%96%BC-heroku-%E6%90%AD%E9%85%8D-gitlab-ci-cd-6d59a66aebdb" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 Gitlab CI/CD</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gitlab/">GitLab</a>
+                </span><span><a href="/tags/ci/cd/">CI/CD</a>
+                </span><span><a href="/tags/laravel/">Laravel</a>
+                </span><span><a href="/tags/heroku/">Heroku</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/33224a1a00db2c4df8cee35c64035bfd6f448472" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;33224a1:&nbsp;# 新增 部署 Laravel 於 Heroku 搭配 GitLab CI/CD">
+                            <i class="fas fa-hashtag fa-fw"></i>33224a1</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/laravel-gitlab-cicd-heroku/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/laravel-gitlab-cicd-heroku/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/" data-title="部署 Laravel 於 Heroku 搭配 GitLab CI/CD" data-hashtags="GitLab,CI/CD,Laravel,Heroku,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/" data-hashtag="GitLab"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/" data-title="部署 Laravel 於 Heroku 搭配 GitLab CI/CD"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/" data-title="部署 Laravel 於 Heroku 搭配 GitLab CI/CD"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/laravel-gitlab-cicd-heroku/" data-title="部署 Laravel 於 Heroku 搭配 GitLab CI/CD"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gitlab-cicd/" class="prev" rel="prev" title="如何從頭打造專屬的 GitLab CI/CD "><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
