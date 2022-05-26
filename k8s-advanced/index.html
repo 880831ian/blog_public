@@ -237,12 +237,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl port-forward kubernetes-demo-pod 3000:3000
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
-</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
-</span></span><span class="line"><span class="cl">Handling connection <span class="k">for</span> <span class="m">3000</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl port-forward kubernetes-demo-pod 3000:3000
+
+Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
+Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
+Handling connection <span class="k">for</span> <span class="m">3000</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>我們把 kubernetes-demo-pod 這個 pod，用 port-forward 設定本機 3000 port 與 pod  3000 port 做映射，當我們瀏覽 <code>http://localhost:3000</code> 就可以看到 pod 裡面的內容了！</p>
 <p>雖然很方便，可以馬上就開好要映射的 port，但缺點就是每次建立 pod 時都需要手動去打指令來設定 port，且時間久了，也會忘記本機上哪些 port 有被使用到，因此這邊推薦使用 <code>Service</code> 來取代 <code>port-forward</code>，那我們來看看 <code>Service</code> 是什麼吧。</p>
@@ -296,22 +296,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30001</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
 <p>kind</p>
@@ -332,8 +332,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f service.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/service-4.png" title="/images/K8s-advanced/service-4.png" data-thumbnail="/images/K8s-advanced/service-4.png" data-sub-html="<h2>k8s 建立 service (NodePort)</h2>">
@@ -355,10 +355,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube ip
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">192.168.64.11
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube ip
+
+192.168.64.11
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>打開瀏覽器搜尋 <code>192.168.64.11:30001</code> 就可以看到我們可愛的柴犬囉 &gt;&lt;</p>
@@ -397,21 +397,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>結構與 kubernetes-demo.yaml 相同，以下簡單說明不同之處：</p>
 <p>kind</p>
@@ -431,8 +431,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f service.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f service.yaml
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/service-1.png" title="/images/K8s-advanced/service-1.png" data-thumbnail="/images/K8s-advanced/service-1.png" data-sub-html="<h2>k8s 建立 service (LoadBalancer)</h2>">
@@ -470,14 +470,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube tunnel
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">✅  Tunnel successfully started
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">📌  NOTE: Please <span class="k">do</span> not close this terminal as this process must stay alive <span class="k">for</span> the tunnel to be accessible ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">🏃  Starting tunnel <span class="k">for</span> service kubernetes-demo-service.
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ minikube tunnel
+
+✅  Tunnel successfully started
+
+📌  NOTE: Please <span class="k">do</span> not close this terminal as this process must stay alive <span class="k">for</span> the tunnel to be accessible ...
+
+🏃  Starting tunnel <span class="k">for</span> service kubernetes-demo-service.
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>就可以看到燈號已經變成綠燈，在外部 Endpoints 多一個連結，可以直接點開</p>
@@ -576,11 +576,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim /etc/hosts
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">192.168.64.11 test.tw
-</span></span><span class="line"><span class="cl">192.168.64.11 test-test.tw
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vim /etc/hosts
+
+192.168.64.11 test.tw
+192.168.64.11 test-test.tw
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>因為有兩種方法，第一種 (設定網域以及路徑)跟第二種 (只設定路徑沒有設定網域)，所以底下也會分成兩種來說明！</p>
@@ -606,23 +606,23 @@ if (!doNotTrack) {
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;test.tw&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;test.tw&#34;</span><span class="w">
+</span><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="只設定路徑沒有設定網域">只設定路徑沒有設定網域</h3>
@@ -646,22 +646,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span><span class="w">            </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-service</span><span class="w">
+</span><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>Ingress 整體寫法與 Service 差不多，只差在 <code>spec</code> 的細部設定，我們就來說一下 spec 設定吧：</p>
@@ -744,10 +744,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl apply -f ingress.yaml 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ingress.networking.k8s.io/kubernetes-demo-ingress created
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
+
+ingress.networking.k8s.io/kubernetes-demo-ingress created
+</code></pre></td></tr></table>
 </div>
 </div><br> 
 <p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
@@ -759,11 +759,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl  get ing
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                      CLASS   HOSTS     ADDRESS         PORTS   AGE
-</span></span><span class="line"><span class="cl">kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
+
+NAME                      CLASS   HOSTS     ADDRESS         PORTS   AGE
+kubernetes-demo-ingress   nginx   test.tw   192.168.64.11   80      10m
+</code></pre></td></tr></table>
 </div>
 </div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
 <br>
@@ -806,10 +806,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl apply -f ingress.yaml 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ingress.networking.k8s.io/kubernetes-demo-ingress created
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl apply -f ingress.yaml 
+
+ingress.networking.k8s.io/kubernetes-demo-ingress created
+</code></pre></td></tr></table>
 </div>
 </div><br> 
 <p>使用 <code>kubectl get ing</code> 來查詢 Ingress 狀況：</p>
@@ -821,11 +821,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl  get ing
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                      CLASS   HOSTS   ADDRESS         PORTS   AGE
-</span></span><span class="line"><span class="cl">kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl  get ing
+
+NAME                      CLASS   HOSTS   ADDRESS         PORTS   AGE
+kubernetes-demo-ingress   nginx   *       192.168.64.11   80      5m56s
+</code></pre></td></tr></table>
 </div>
 </div><p>接下來我們分別測試寫在 /etc/host 裡面的兩個網域，使用瀏覽器搜尋 <code>test.tw</code> 跟 <code>test-test.tw</code>：</p>
 <br>
@@ -901,25 +901,25 @@ if (!doNotTrack) {
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicationController</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ReplicationController</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
+</span><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
+</span><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>這個設定檔看似複雜但其實很簡單，可以發現 <code>template</code> 區塊內的設定基本上就是 Pod 的設定，再加上一些屬於 Replication Controller 的設定。</p>
 <p>由於我們要建立的是 Replication Controller，因此在一開始的 <code>spec</code> 要填的是 Replication Controller 的設定，所以 <code>replica</code> 會擺在第一個 <code>spec</code> 內。</p>
@@ -935,10 +935,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f kubernetes-demo.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">replicationcontroller/kubernetes-demo created
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f kubernetes-demo.yaml
+
+replicationcontroller/kubernetes-demo created
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>來查看一下 Replication Controller 是否有成功建立起來，可以使用 <code>kubectl get rc</code> 來查詢：</p>
@@ -950,11 +950,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get rc
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
-</span></span><span class="line"><span class="cl">kubernetes-demo   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       28s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get rc
+
+NAME              DESIRED   CURRENT   READY   AGE
+kubernetes-demo   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       28s
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接下來可以查看 Pod 是否有出現 3 個，所以使用 <code>kubectl get po</code> 來查詢：</p>
@@ -968,13 +968,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get po
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                    READY   STATUS    RESTARTS   AGE
-</span></span><span class="line"><span class="cl">kubernetes-demo-4zkxm   1/1     Running   <span class="m">0</span>          37s
-</span></span><span class="line"><span class="cl">kubernetes-demo-cp8jt   1/1     Running   <span class="m">0</span>          37s
-</span></span><span class="line"><span class="cl">kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get po
+
+NAME                    READY   STATUS    RESTARTS   AGE
+kubernetes-demo-4zkxm   1/1     Running   <span class="m">0</span>          37s
+kubernetes-demo-cp8jt   1/1     Running   <span class="m">0</span>          37s
+kubernetes-demo-pt9px   1/1     Running   <span class="m">0</span>          37s
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到為了不要讓名稱重複，所以 Replication Controller 會在每一個 Pod 名稱後面加入亂數。</p>
 <br>
@@ -1035,10 +1035,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -1052,10 +1052,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- {<span class="nt">key: app, operator: In, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">demo, test]}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- {<span class="nt">key: app, operator: In, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">demo, test]}</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>看起來似乎很複雜但其實很容易理解，上面的示範中 Expression 翻成中文就是只要 Label 的 key 是 <code>app</code> 且值符合 <code>[demo, test]</code> 陣列中的其中一個值的 Pod 就會被選取到。</p>
 <br>
@@ -1067,10 +1067,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- {<span class="nt">key: env, operator: NotIn, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">hello, hi]}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">matchExpression</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- {<span class="nt">key: env, operator: NotIn, values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">hello, hi]}</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>我們可以得知要選取 Label 的 key 為 <code>env</code> 且值不能是 <code>[hello, hi]</code> 其中一個值的 Pod。</p>
 <br>
@@ -1138,33 +1138,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">minReadySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">revisionHistoryLimit</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
+</span><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">  </span><span class="nt">minReadySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
+</span><span class="w">  </span><span class="nt">revisionHistoryLimit</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
+</span><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
+</span><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>看到 Deployment 是不是覺得跟 Replication Controller 非常相似呢？其實 Deployment 就多了再 RollingUpdate 時的設定以及 ReplicaSet 的設定而已，下面來說明一下這些設定：</p>
@@ -1206,11 +1206,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get deploy
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-</span></span><span class="line"><span class="cl">kubernetes-deployment   3/3     <span class="m">3</span>            <span class="m">3</span>           8m31s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get deploy
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-deployment   3/3     <span class="m">3</span>            <span class="m">3</span>           8m31s
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>由於 Deployment 直接管理 ReplcaSet，因此我們可以查看 ReplcaSet 是否也有被建立起來：</p>
@@ -1222,11 +1222,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get rs
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                              DESIRED   CURRENT   READY   AGE
-</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       10m
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get rs
+
+NAME                              DESIRED   CURRENT   READY   AGE
+kubernetes-deployment-dc5c59fdb   <span class="m">3</span>         <span class="m">3</span>         <span class="m">3</span>       10m
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到 ReplcaSet 後面會自動加上一小段亂數，這邊是 Deployment 在建立 ReplicaSet 的時候加進去的，這樣之後可以更方便的利用 ReplcaSet 進行 rollback 的動作。</p>
 <br>
@@ -1241,13 +1241,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get po
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                                    READY   STATUS    RESTARTS   AGE
-</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-cjbz6   1/1     Running   <span class="m">0</span>          12m
-</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-mjvd7   1/1     Running   <span class="m">0</span>          12m
-</span></span><span class="line"><span class="cl">kubernetes-deployment-dc5c59fdb-r92zt  1/1     Running   <span class="m">0</span>          11m
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get po
+
+NAME                                    READY   STATUS    RESTARTS   AGE
+kubernetes-deployment-dc5c59fdb-cjbz6   1/1     Running   <span class="m">0</span>          12m
+kubernetes-deployment-dc5c59fdb-mjvd7   1/1     Running   <span class="m">0</span>          12m
+kubernetes-deployment-dc5c59fdb-r92zt  1/1     Running   <span class="m">0</span>          11m
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>那我們用 <code>minikube dashboard</code> 來查看一下：</p>
@@ -1286,10 +1286,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl <span class="nb">set</span> image deployment/kubernetes-deployment kubernetes-demo-container<span class="o">=</span>880831ian/kubernetes-demo:v1 --record
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">deployment.apps/kubernetes-deployment image updated
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl <span class="nb">set</span> image deployment/kubernetes-deployment kubernetes-demo-container<span class="o">=</span>880831ian/kubernetes-demo:v1 --record
+
+deployment.apps/kubernetes-deployment image updated
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>使用 set 來更新 Pod，格式是 <code>kubectl set image deployment/&lt;deployment name&gt; &lt;pod name&gt;=&lt;要更新的 image&gt;</code>，後面加上 <code>--record</code> 參數，這樣會紀錄每次更新的時候到底更新哪些內容，這樣日後要進行 rollback 也會比較容易知道要 rollback 回哪個 revision，由於要顯示差異，所以在 <a href="https://hub.docker.com/repository/docker/880831ian/kubernetes-demo" target="_blank" rel="noopener noreffer">dockerhub</a> 上又多推一個版本 <code>v1</code>，將原本柴犬的圖片改成 kubernetes logo，等於我們更新是從 <code>kubernetes-demo:latest</code> 更新至 <code>kubernetes-demo:v1</code>，我們來看看它的變化吧！</p>
@@ -1379,10 +1379,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl rollout undo deployment/kubernetes-deployment --to-revision<span class="o">=</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">deployment.apps/kubernetes-deployment rolled back
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl rollout undo deployment/kubernetes-deployment --to-revision<span class="o">=</span><span class="m">1</span>
+
+deployment.apps/kubernetes-deployment rolled back
+</code></pre></td></tr></table>
 </div>
 </div><p>格式是 <code>kubectl rollout undo deployment/&lt;deployment name&gt; --to-revision=&lt;--record 版本&gt;</code></p>
 <br>
@@ -1545,53 +1545,53 @@ if (!doNotTrack) {
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clusterIP</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">StatefulSet</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">serviceName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">k8s.gcr.io/nginx-slim:0.8</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">www</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/share/nginx/html</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumeClaimTemplates</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">www</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;ReadWriteOnce&#34;</span><span class="p">]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requests</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
+</span><span class="w">  </span><span class="nt">clusterIP</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">StatefulSet</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">serviceName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">k8s.gcr.io/nginx-slim:0.8</span><span class="w">
+</span><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">web</span><span class="w">
+</span><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">www</span><span class="w">
+</span><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/share/nginx/html</span><span class="w">
+</span><span class="w">  </span><span class="nt">volumeClaimTemplates</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">www</span><span class="w">
+</span><span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;ReadWriteOnce&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們先打開一個 Terminal 來觀察 StatefulSet 創建 Pod 的過程：</p>
@@ -1600,8 +1600,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get pods -w -l <span class="nv">app</span><span class="o">=</span>nginx
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get pods -w -l <span class="nv">app</span><span class="o">=</span>nginx
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們一樣使用 <code>kubectl apply</code> 來創建定義在 <code>web.yaml</code> 中的 Headless Service 和 StatefulSet。</p>
@@ -1610,8 +1610,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl apply -f web.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f web.yaml
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們看一下剛剛的 StatefulSet 創建 Pod 的過程，可以發現我們擁有 N 的副本的 StatefulSet ， Pod 部署時會按照 {0 &hellip;. N-1} 的序號依序創建。</p>
@@ -1628,16 +1628,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">NAME    READY   STATUS    RESTARTS   AGE
-</span></span><span class="line"><span class="cl">web-0   0/1     Pending   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-0   0/1     Pending   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-0   0/1     ContainerCreating   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-0   1/1     Running             <span class="m">0</span>          2s
-</span></span><span class="line"><span class="cl">web-1   0/1     Pending             <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   0/1     Pending             <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   0/1     ContainerCreating   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   1/1     Running             <span class="m">0</span>          3s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">NAME    READY   STATUS    RESTARTS   AGE
+web-0   0/1     Pending   <span class="m">0</span>          0s
+web-0   0/1     Pending   <span class="m">0</span>          0s
+web-0   0/1     ContainerCreating   <span class="m">0</span>          0s
+web-0   1/1     Running             <span class="m">0</span>          2s
+web-1   0/1     Pending             <span class="m">0</span>          0s
+web-1   0/1     Pending             <span class="m">0</span>          0s
+web-1   0/1     ContainerCreating   <span class="m">0</span>          0s
+web-1   1/1     Running             <span class="m">0</span>          3s
+</code></pre></td></tr></table>
 </div>
 </div><p>可以發現 web-1 Pod 是在 web-0 Pod 處在 Running 狀態才會被啟動。此外，可以發現就跟我們上面講的一樣，StatefulSet 中的 Pod 擁有一個獨一無二的身份標記，基於 StatefulSet 控制器分配給每個 Pod 的唯一順序索引。</p>
 <p>Pod 名稱的格式是 &lt; statefulset name &gt;-&lt; ordinal index &gt;，像我們 <code>web</code> 這個 StatefulSet 有兩個副本，所以它創建了兩個 Pod：<code>web-0</code>、<code>web-1</code>。</p>
@@ -1654,11 +1654,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ for i in 0 1; do kubectl exec &#34;web-$i&#34; -- sh -c &#39;hostname&#39;; done
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">web-0
-</span></span><span class="line"><span class="cl">web-1
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ for i in 0 1; do kubectl exec &#34;web-$i&#34; -- sh -c &#39;hostname&#39;; done
+
+web-0
+web-1
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>再使用 <code>kubectl run</code> 來運行一個提供 <code>nslookup</code> 命令的容器，通過對 Pod 的主機名執行 <code>nslookup</code>，我們可以檢查他在集群內部的 DNS 位置。</p>
@@ -1667,8 +1667,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl run -i --tty --image busybox:1.28 dns-test --restart<span class="o">=</span>Never --rm /bin/sh
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl run -i --tty --image busybox:1.28 dns-test --restart<span class="o">=</span>Never --rm /bin/sh
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>啟動一個新的 shell ，並運行 <code>nslookup web-0.nginx </code> 跟 <code>nslookup web-1.nginx</code>：</p>
@@ -1689,20 +1689,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">/ <span class="c1"># nslookup web-0.nginx</span>
-</span></span><span class="line"><span class="cl">Server:    10.96.0.10
-</span></span><span class="line"><span class="cl">Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Name:      web-0.nginx
-</span></span><span class="line"><span class="cl">Address 1: 172.17.0.5 web-0.nginx.default.svc.cluster.local
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/ <span class="c1"># nslookup web-1.nginx</span>
-</span></span><span class="line"><span class="cl">Server:    10.96.0.10
-</span></span><span class="line"><span class="cl">Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Name:      web-1.nginx
-</span></span><span class="line"><span class="cl">Address 1: 172.17.0.6 web-1.nginx.default.svc.cluster.local
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">/ <span class="c1"># nslookup web-0.nginx</span>
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-0.nginx
+Address 1: 172.17.0.5 web-0.nginx.default.svc.cluster.local
+
+/ <span class="c1"># nslookup web-1.nginx</span>
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-1.nginx
+Address 1: 172.17.0.6 web-1.nginx.default.svc.cluster.local
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到 Headless Service 的 CHANCE 指向 SRV 記錄 (記錄每個 Running 的 Pod)。SRV 紀錄指向一個包含 Pod IP 位址的記錄表。</p>
 <br>
@@ -1719,12 +1719,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get pvc -l <span class="nv">app</span><span class="o">=</span>nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-</span></span><span class="line"><span class="cl">www-web-0   Bound    pvc-e9a23104-d018-4d73-8cd9-89e5ea67f96c   1Gi        RWO            standard       39m
-</span></span><span class="line"><span class="cl">www-web-1   Bound    pvc-00dd6c87-6d95-4d04-9c1b-49b43441f4a1   1Gi        RWO            standard       38m
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get pvc -l <span class="nv">app</span><span class="o">=</span>nginx
+
+NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+www-web-0   Bound    pvc-e9a23104-d018-4d73-8cd9-89e5ea67f96c   1Gi        RWO            standard       39m
+www-web-1   Bound    pvc-00dd6c87-6d95-4d04-9c1b-49b43441f4a1   1Gi        RWO            standard       38m
+</code></pre></td></tr></table>
 </div>
 </div><p>StatefulSet 控制器創建兩個 PersistentVolumeClaims，綁定兩個 PersistentVolumes，因為我們配置是動態提供PersistentVolume，所有的PersistentVolume 都是自動創建和綁定的。</p>
 <p>Nginx web 服務器默認會加載位於 <code>/usr/share/nginx/html/index.html</code> 的 index 文件。因此我們在 <code>spec</code> 中的 <code>volumeMounts</code> 將 <code>/usr/share/nginx/html</code> 資料夾由一個 PersistentVolume 支持。</p>
@@ -1739,12 +1739,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ <span class="k">for</span> i in <span class="m">0</span> 1<span class="p">;</span> <span class="k">do</span> kubectl <span class="nb">exec</span> <span class="s2">&#34;web-</span><span class="nv">$i</span><span class="s2">&#34;</span> -- sh -c <span class="s1">&#39;echo &#34;$(hostname)&#34; &gt; /usr/share/nginx/html/index.html&#39;</span><span class="p">;</span> <span class="k">done</span>
-</span></span><span class="line"><span class="cl">$ <span class="k">for</span> i in <span class="m">0</span> 1<span class="p">;</span> <span class="k">do</span> kubectl <span class="nb">exec</span> -i -t <span class="s2">&#34;web-</span><span class="nv">$i</span><span class="s2">&#34;</span> -- curl http://localhost/<span class="p">;</span> <span class="k">done</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">web-0
-</span></span><span class="line"><span class="cl">web-1
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> i in <span class="m">0</span> 1<span class="p">;</span> <span class="k">do</span> kubectl <span class="nb">exec</span> <span class="s2">&#34;web-</span><span class="nv">$i</span><span class="s2">&#34;</span> -- sh -c <span class="s1">&#39;echo &#34;$(hostname)&#34; &gt; /usr/share/nginx/html/index.html&#39;</span><span class="p">;</span> <span class="k">done</span>
+$ <span class="k">for</span> i in <span class="m">0</span> 1<span class="p">;</span> <span class="k">do</span> kubectl <span class="nb">exec</span> -i -t <span class="s2">&#34;web-</span><span class="nv">$i</span><span class="s2">&#34;</span> -- curl http://localhost/<span class="p">;</span> <span class="k">done</span>
+
+web-0
+web-1
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>當我們刪除 Pod 後，如果沒有使用 PersistentVolumeClaims 去綁定 PersistentVolumes 的話，資料就會消失，那我們來看看有綁定的結果：</p>
@@ -1755,9 +1755,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">pod <span class="s2">&#34;web-0&#34;</span> deleted
-</span></span><span class="line"><span class="cl">pod <span class="s2">&#34;web-1&#34;</span> deleted
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">pod <span class="s2">&#34;web-0&#34;</span> deleted
+pod <span class="s2">&#34;web-1&#34;</span> deleted
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>再次使用 <code>kubectl get pod -w -l app=nginx</code> 來檢查 Pod 的狀態：</p>
@@ -1771,13 +1771,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">web-0   0/1     ContainerCreating   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-0   1/1     Running             <span class="m">0</span>          2s
-</span></span><span class="line"><span class="cl">web-1   0/1     Pending             <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   0/1     Pending             <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   0/1     ContainerCreating   <span class="m">0</span>          0s
-</span></span><span class="line"><span class="cl">web-1   1/1     Running             <span class="m">0</span>          1s
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">web-0   0/1     ContainerCreating   <span class="m">0</span>          0s
+web-0   1/1     Running             <span class="m">0</span>          2s
+web-1   0/1     Pending             <span class="m">0</span>          0s
+web-1   0/1     Pending             <span class="m">0</span>          0s
+web-1   0/1     ContainerCreating   <span class="m">0</span>          0s
+web-1   1/1     Running             <span class="m">0</span>          1s
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>一樣使用 <code>for i in 0 1; do kubectl exec -i -t &quot;web-$i&quot; -- curl http://localhost/; done</code> 來查看：</p>
@@ -1787,9 +1787,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">web-0
-</span></span><span class="line"><span class="cl">web-1
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">web-0
+web-1
+</code></pre></td></tr></table>
 </div>
 </div><p>可以發現 <code>web-0</code>、<code>web-1</code> 雖然重新啟動，但依舊會監聽它們主機名，因為和它們的 PersistentVolumeClaim 相關聯的 PersistentVolume 被重新掛載到了各自的 <code>volumeMount</code> 上。</p>
 <br>
@@ -1816,8 +1816,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl create configmap &lt;configmapName&gt; --from-file<span class="o">=</span>&lt;filePath&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl create configmap &lt;configmapName&gt; --from-file<span class="o">=</span>&lt;filePath&gt;
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/configmap.png" title="/images/K8s-advanced/configmap.png" data-thumbnail="/images/K8s-advanced/configmap.png" data-sub-html="<h2>建立 ConfigMap</h2>">
@@ -1870,8 +1870,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubectl create secret generic &lt;secretName&gt; --from-file<span class="o">=</span>&lt;filePath&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl create secret generic &lt;secretName&gt; --from-file<span class="o">=</span>&lt;filePath&gt;
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-advanced/secret.png" title="/images/K8s-advanced/secret.png" data-thumbnail="/images/K8s-advanced/secret.png" data-sub-html="<h2>建立 Secrets</h2>">

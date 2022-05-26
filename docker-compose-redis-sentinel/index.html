@@ -254,29 +254,29 @@ if (!doNotTrack) {
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── Docker-compose.yaml
-</span></span><span class="line"><span class="cl">├── docker-volume
-</span></span><span class="line"><span class="cl">│   ├── log
-</span></span><span class="line"><span class="cl">│   │   └── nginx
-</span></span><span class="line"><span class="cl">│   │       ├── access.log
-</span></span><span class="line"><span class="cl">│   │       └── error.log
-</span></span><span class="line"><span class="cl">│   ├── nginx
-</span></span><span class="line"><span class="cl">│   │   └── nginx.conf
-</span></span><span class="line"><span class="cl">│   ├── php
-</span></span><span class="line"><span class="cl">│   │   └── index.php
-</span></span><span class="line"><span class="cl">│   ├── redis-master
-</span></span><span class="line"><span class="cl">│   ├── redis-slave1
-</span></span><span class="line"><span class="cl">│   └── redis-slave2
-</span></span><span class="line"><span class="cl">├── redis.sh
-</span></span><span class="line"><span class="cl">├── php
-</span></span><span class="line"><span class="cl">│   └── Dockerfile
-</span></span><span class="line"><span class="cl">└── sentinel
-</span></span><span class="line"><span class="cl">    ├── Docker-compose.yaml
-</span></span><span class="line"><span class="cl">    ├── sentinel1.conf
-</span></span><span class="line"><span class="cl">    ├── sentinel2.conf
-</span></span><span class="line"><span class="cl">    └── sentinel3.conf
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── Docker-compose.yaml
+├── docker-volume
+│   ├── log
+│   │   └── nginx
+│   │       ├── access.log
+│   │       └── error.log
+│   ├── nginx
+│   │   └── nginx.conf
+│   ├── php
+│   │   └── index.php
+│   ├── redis-master
+│   ├── redis-slave1
+│   └── redis-slave2
+├── redis.sh
+├── php
+│   └── Dockerfile
+└── sentinel
+    ├── Docker-compose.yaml
+    ├── sentinel1.conf
+    ├── sentinel2.conf
+    └── sentinel3.conf
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>這是主要的結構，簡單說明一下：</p>
@@ -347,59 +347,59 @@ if (!doNotTrack) {
 </span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.20</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8888:80&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/nginx/:/etc/nginx/conf.d/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/log/nginx/:/var/log/nginx/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/php/:/var/www/html</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-master</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-master</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis-master/:/data </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-slave1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-slave1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis-slave1/:/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-slave2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-slave2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis-slave2/:/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis-slave1</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.20</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;8888:80&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/nginx/:/etc/nginx/conf.d/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/log/nginx/:/var/log/nginx/</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
+</span><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">9000</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/php/:/var/www/html</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis-master</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-master</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis-master/:/data </span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --appendonly yes</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis-slave1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-slave1</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis-slave1/:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis-slave2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-slave2</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis-slave2/:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis-slave1</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>詳細的 Docker 設定說明，可以參考 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 內有詳細設定說明。比較特別的地方是：</p>
 <p>redis-(master、slave1、slave2)</p>
@@ -439,33 +439,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
-</span></span><span class="line"><span class="cl">  listen 80;
-</span></span><span class="line"><span class="cl">  server_name default_server;
-</span></span><span class="line"><span class="cl">  return 404;
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">server {
-</span></span><span class="line"><span class="cl">  listen 80;
-</span></span><span class="line"><span class="cl">  server_name test.com;
-</span></span><span class="line"><span class="cl">  index index.php index.html;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  error_log  /var/log/nginx/error.log  warn;
-</span></span><span class="line"><span class="cl">  access_log /var/log/nginx/access.log;
-</span></span><span class="line"><span class="cl">  root /var/www/html;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  location / {
-</span></span><span class="line"><span class="cl">    try_files $uri $uri/ /index.php?$query_string;
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  location ~ \.php$ {
-</span></span><span class="line"><span class="cl">      fastcgi_pass php:9000;
-</span></span><span class="line"><span class="cl">      fastcgi_index index.php;
-</span></span><span class="line"><span class="cl">      include fastcgi_params;
-</span></span><span class="line"><span class="cl">      fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">server {
+  listen 80;
+  server_name default_server;
+  return 404;
+}
+
+server {
+  listen 80;
+  server_name test.com;
+  index index.php index.html;
+
+  error_log  /var/log/nginx/error.log  warn;
+  access_log /var/log/nginx/access.log;
+  root /var/www/html;
+
+  location / {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
+  location ~ \.php$ {
+      fastcgi_pass php:9000;
+      fastcgi_index index.php;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+  }
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>Nginx 設定檔案。</p>
 <br>
@@ -481,14 +481,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> php:7.4-fpm</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pecl install -o -f redis <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  rm -rf /tmp/pear <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;extension=redis.so&#34;</span> &gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_handler = redis&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_path = tcp://redis:6379&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini<span class="err">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> php:7.4-fpm</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pecl install -o -f redis <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  rm -rf /tmp/pear <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;extension=redis.so&#34;</span> &gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_handler = redis&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_path = tcp://redis:6379&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini<span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>因為 PHP 要使用 Redis，會需要安裝一些套件，所以我們將 PHP 分開來，使用 Dockerfile 來設定映像檔。</p>
 <br>
@@ -508,17 +508,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port 26379
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
-</span></span><span class="line"><span class="cl">sentinel monitor mymaster 192.168.176.4 6379 2
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
-</span></span><span class="line"><span class="cl">sentinel down-after-milliseconds mymaster 5000
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#failover 超過次毫秒數即代表 failover 失敗
-</span></span><span class="line"><span class="cl">sentinel failover-timeout mymaster 180000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port 26379
+
+#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
+sentinel monitor mymaster 192.168.176.4 6379 2
+
+#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
+sentinel down-after-milliseconds mymaster 5000
+
+#failover 超過次毫秒數即代表 failover 失敗
+sentinel failover-timeout mymaster 180000
+</code></pre></td></tr></table>
 </div>
 </div><p>要設定指定的 Port sentine1 是 26379、sentine2 是 26380、sentine3 是 26381。接下來要設定要監控的 Master，最後的數字代表我們前面有提到客觀下線需要達到的哨兵數。以及主觀下線的時間跟 failover 超過的時間。</p>
 <br>
@@ -561,41 +561,41 @@ if (!doNotTrack) {
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26379</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel1.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26380</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel2.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel3</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26381</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel3.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">redis_default</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-1</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26379</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel1.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-2</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26380</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel2.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-3</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26381</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel /usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel3.conf:/usr/local/etc/redis/sentinel.conf</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">redis_default</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="docker-volumephpindexphp">docker-volume/php/index.php</h3>
@@ -635,39 +635,39 @@ if (!doNotTrack) {
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$sentinel</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.4&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.5&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave1&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.6&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave2&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$sentinel</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">],</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;連線成功 &#34;</span> <span class="o">.</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;目前 master：&#34;</span> <span class="o">.</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
+
+<span class="nv">$sentinel</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.5&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave1&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.176.6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave2&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+
+<span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$sentinel</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">],</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]);</span>
+        <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+        <span class="k">echo</span> <span class="s2">&#34;連線成功 &#34;</span> <span class="o">.</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;目前 master：&#34;</span> <span class="o">.</span> <span class="nv">$value</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>為了要讓 PHP 可以知道目前的 Master 是哪一個服務器，所以寫了一個 try&hellip;catch 來做判斷，並且把3個服務內容都放到陣列中，後續再測試中會再說明。</p>
 <br>
@@ -700,31 +700,31 @@ if (!doNotTrack) {
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="nv">green</span><span class="o">=</span><span class="s2">&#34;\033[1;32m&#34;</span><span class="p">;</span><span class="nv">white</span><span class="o">=</span><span class="s2">&#34;\033[1;0m&#34;</span><span class="p">;</span><span class="nv">red</span><span class="o">=</span><span class="s2">&#34;\033[1;31m&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;master IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">master_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-master <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$master_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;slave1 IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">slave1_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-slave1 <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$slave1_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;slave2 IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">slave2_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-slave2 <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$slave2_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;master:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis-master redis-cli info Replication <span class="p">|</span> grep role
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;slave1:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis-slave1 redis-cli info Replication <span class="p">|</span> grep role
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;slave2:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis-slave2 redis-cli info Replication <span class="p">|</span> grep role
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">green</span><span class="o">=</span><span class="s2">&#34;\033[1;32m&#34;</span><span class="p">;</span><span class="nv">white</span><span class="o">=</span><span class="s2">&#34;\033[1;0m&#34;</span><span class="p">;</span><span class="nv">red</span><span class="o">=</span><span class="s2">&#34;\033[1;31m&#34;</span><span class="p">;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;master IPAddress:&#34;</span>
+<span class="nv">master_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-master <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$master_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;slave1 IPAddress:&#34;</span>
+<span class="nv">slave1_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-slave1 <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$slave1_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;slave2 IPAddress:&#34;</span>
+<span class="nv">slave2_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis-slave2 <span class="p">|</span> grep <span class="s2">&#34;IP&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$slave2_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+
+
+<span class="nb">echo</span> <span class="s2">&#34;master:&#34;</span>
+docker <span class="nb">exec</span> -it redis-master redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;slave1:&#34;</span>
+docker <span class="nb">exec</span> -it redis-slave1 redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;slave2:&#34;</span>
+docker <span class="nb">exec</span> -it redis-slave2 redis-cli info Replication <span class="p">|</span> grep role
+</code></pre></td></tr></table>
 </div>
 </div><p>這個是我自己所寫的腳本，再等等測試時，可以詳細知道目前服務的角色轉移狀況。</p>
 <br>
@@ -776,25 +776,25 @@ if (!doNotTrack) {
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$sentinel</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.4&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.5&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave1&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.6&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave2&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">),</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$sentinel</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.5&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave1&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;192.168.208.6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">6379</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;slave2&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+
+<span class="p">);</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>將各自的 IP 帶入測試的網站中。</p>
 <br>
@@ -826,17 +826,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port 26379
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
-</span></span><span class="line"><span class="cl">sentinel monitor mymaster 192.168.208.4 6379 2
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
-</span></span><span class="line"><span class="cl">sentinel down-after-milliseconds mymaster 5000
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#failover 超過次毫秒數即代表 failover 失敗
-</span></span><span class="line"><span class="cl">sentinel failover-timeout mymaster 180000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port 26379
+
+#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
+sentinel monitor mymaster 192.168.208.4 6379 2
+
+#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
+sentinel down-after-milliseconds mymaster 5000
+
+#failover 超過次毫秒數即代表 failover 失敗
+sentinel failover-timeout mymaster 180000
+</code></pre></td></tr></table>
 </div>
 </div><p>將要監控的 Master IP 帶入 sentinel monitor mymaster。</p>
 <br>
@@ -859,8 +859,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker stop redis-master
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker stop redis-master
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>下完指令後，再使用 <code>sh redis.sh</code> 來看看目前的 role 狀態：</p>

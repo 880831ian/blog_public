@@ -302,14 +302,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Unit_test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Unit_test</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
+</span><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>說明一下這個 <code>yml</code> 檔內的設定是在做什麼：</p>
 <p>待續&hellip;.明天繼續努力 &gt;&lt;</p>

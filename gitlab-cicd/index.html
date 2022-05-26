@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gitlab-cicd/" /><meta property="og:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-26T10:10:00+08:00" />
-<meta property="article:modified_time" content="2022-05-26T15:02:50+08:00" />
+<meta property="article:modified_time" content="2022-05-26T20:33:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "GitLab, CI\/CD, 介紹, 實作","wordcount":  2882 ,
-        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T15:02:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T20:33:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 </nav></div>
                 </div><div class="content" id="content"><p>自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到，要怎麼設定我們將程式推到遠端的 Git Repo，能夠再搭配 CI/CD 去做測試，並且把程式碼自動部署到正式的服務機器設備上呢？</p>
 <br>
-<p>那我們就開始囉！此篇會複習一下 CI/CD 並且說明 GitLab CI/CD 運作的原理，關於實作部分會放到下一篇文章 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a></p>
+<p>那我們就開始囉！此篇會複習一下 CI/CD 並且說明 GitLab CI/CD 運作的原理，關於實作部分會放到下一篇文章 <a href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a></p>
 <p>對了工商一下，剛剛有提到的 Jenkins 及 Ansible CI/CD 總共有 3 篇文章，還沒看過的可以先飛過去看一下歐 👇👇👇</p>
 <p><a href="https://pin-yi.me/jenkins-ansible/" target="_blank" rel="noopener noreffer">Jenkins 及 Ansible IT 自動化 CI/CD 介紹</a></p>
 <p><a href="https://pin-yi.me/jenkins/" target="_blank" rel="noopener noreffer">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</a></p>
@@ -235,39 +235,39 @@ if (!doNotTrack) {
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cache</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">config/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Hello, $GITLAB_USER_LOGIN!&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something, but takes more time than test-job1.&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;After the echo commands complete, it runs the sleep command for 20 seconds&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;which simulates a test that runs 20 seconds longer than test-job1&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sleep 20</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy-prod</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job deploys something from the $CI_COMMIT_BRANCH branch.&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span><span class="w">  </span>- <span class="l">test</span><span class="w">
+</span><span class="w">  </span>- <span class="l">deploy</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">config/</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;Hello, $GITLAB_USER_LOGIN!&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">test-job1</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job tests something&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">test-job2</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job tests something, but takes more time than test-job1.&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;After the echo commands complete, it runs the sleep command for 20 seconds&#34;</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;which simulates a test that runs 20 seconds longer than test-job1&#34;</span><span class="w">
+</span><span class="w">    </span>- <span class="l">sleep 20</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">deploy-prod</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job deploys something from the $CI_COMMIT_BRANCH branch.&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>那我來簡單說明一下上面這些設定檔案的功能：</p>
@@ -278,7 +278,7 @@ if (!doNotTrack) {
 <li>stage：他現在要執行的階段，對應到 stages。</li>
 <li>before_script：可以把它當先需要先執行的指令，後面才會執行主要的 script 指令。所以需要安裝的可以先寫在這裡面。</li>
 <li>script：主指令，在實際運行的腳本中，通常會見到多行的指令被依序執行。</li>
-<li>$CI_COMMIT_BRANC：當然 <code>.gitlab-ci.yml</code> 檔案也可以帶入參數，這個部分我們留到 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 搭配實際操作來說明。</li>
+<li>$CI_COMMIT_BRANC：當然 <code>.gitlab-ci.yml</code> 檔案也可以帶入參數，這個部分我們留到 <a href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 搭配實際操作來說明。</li>
 </ul>
 <br>
 <p>當然 <code>.gitlab-ci.yml</code> 有很多功能，上面只是簡單說明比較常用的，當你不確定自己寫的 CI 設定檔有沒有問題，沒關係就直接推上去，GitLab 還會先檢查一下設定檔是不是正確：</p>
@@ -354,7 +354,7 @@ if (!doNotTrack) {
 </ul>
 <br>
 <h4 id="共享-runner-shared-runners">共享 Runner (Shared Runners)</h4>
-<p>因為本文章以及後續 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 文章所使用的平台是 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a>，由官方所提供，所以我們直接使用共享 Runner，可以在 repository Settings → CI / CD → Runners 中找到，有不少官方提供的共享 Runner 可以使用，也不需要做任何設定。</p>
+<p>因為本文章以及後續 <a href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> 文章所使用的平台是 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a>，由官方所提供，所以我們直接使用共享 Runner，可以在 repository Settings → CI / CD → Runners 中找到，有不少官方提供的共享 Runner 可以使用，也不需要做任何設定。</p>
 <br>
 <figure><a class="lightgallery" href="/images/gitlab-cicd/sharedrunners.png" title="/images/gitlab-cicd/sharedrunners.png" data-thumbnail="/images/gitlab-cicd/sharedrunners.png" data-sub-html="<h2>GitLab CI/CD 共享 Runner</h2>">
         <img
@@ -437,11 +437,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -d --name gitlab-runner --restart always <span class="se">\ </span>                     
-</span></span><span class="line"><span class="cl">-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>gitlab/gitlab-runner:alpine-v15.0.0
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run -d --name gitlab-runner --restart always <span class="se">\ </span>                     
+-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
+</span><span class="se"></span>-v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
+</span><span class="se"></span>gitlab/gitlab-runner:alpine-v15.0.0
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -473,7 +473,7 @@ if (!doNotTrack) {
     </figure>
 <br>
 <h3 id="gitlab-cd">GitLab CD</h3>
-<p>GitLab CD 其實就是在 <code>.gitlab-ci.yml</code> 後面加上我們要部署的設定，透過 CI 整合完，我們可以設定他要部署到哪一台機器或是設備上這部分就放到下一篇文章直接用實作來告訴大家要怎麼使用吧！，請大家接續看下一篇 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> ，一起學習吧 GoGo !</p>
+<p>GitLab CD 其實就是在 <code>.gitlab-ci.yml</code> 後面加上我們要部署的設定，透過 CI 整合完，我們可以設定他要部署到哪一台機器或是設備上這部分就放到下一篇文章直接用實作來告訴大家要怎麼使用吧！，請大家接續看下一篇 <a href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> ，一起學習吧 GoGo !</p>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://docs.gitlab.com/ee/ci/quick_start/" target="_blank" rel="noopener noreffer">Get started with GitLab CI/CD</a></p>
@@ -486,8 +486,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ebbf0f0a12b2ab23984645957f8c7db559ab355a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ebbf0f0:&nbsp;# 新增/修改 如何從頭打造專屬的 GitLab CI/CD">
-                            <i class="fas fa-hashtag fa-fw"></i>ebbf0f0</a></span>
+                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/bbf5003cc7f382e3170c6b959e272c51756f5da4" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;bbf5003:&nbsp;# 修改 如何從頭打造專屬的 GitLab CI/CD">
+                            <i class="fas fa-hashtag fa-fw"></i>bbf5003</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gitlab-cicd/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
