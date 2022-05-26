@@ -25,7 +25,7 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
-    <title>如何從頭打造專屬的 GitLab CI/CD 全攻略</title>
+    <title>如何從頭打造專屬的 GitLab CI/CD </title>
     <link>https://pin-yi.me/gitlab-cicd/</link>
     <pubDate>Thu, 26 May 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gitlab-cicd/</guid>
     <description><![CDATA[自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到]]></description>
