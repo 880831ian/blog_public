@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gitlab-cicd/" /><meta property="og:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-26T10:10:00+08:00" />
-<meta property="article:modified_time" content="2022-05-26T14:46:35+08:00" />
+<meta property="article:modified_time" content="2022-05-26T15:02:50+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/gitlab-cicd\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GitLab, CI\/CD, 介紹, 實作","wordcount":  2818 ,
-        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T14:46:35+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GitLab, CI\/CD, 介紹, 實作","wordcount":  2882 ,
+        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T15:02:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/gitlab-cicd/featured-image.webp"
         title="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何從頭打造專屬的 GitLab CI/CD </h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2818 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2882 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
@@ -153,6 +153,7 @@ if (!doNotTrack) {
             <li><a href="#自架-runner-specific-runners">自架 Runner (Specific Runners)</a></li>
           </ul>
         </li>
+        <li><a href="#gitlab-cd">GitLab CD</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -178,7 +179,7 @@ if (!doNotTrack) {
 <h3 id="持續部署-cd">持續部署 CD</h3>
 <p>持續部署，讓我們不太需要手動的去部署專案服務，而是將其設置為自動化部署，完全不需要有人工去干涉，減少了人為的部署錯誤。</p>
 <br>
-<figure><a class="lightgallery" href="/images/gitlab-cicd/cicd.jpg" title="/images/gitlab-cicd/cicd.jpg" data-thumbnail="/images/gitlab-cicd/cicd.jpg" data-sub-html="<h2>GitLab CI/CD (圖片：GitLab Agile Planning)</h2>">
+<figure><a class="lightgallery" href="/images/gitlab-cicd/cicd.jpg" title="/images/gitlab-cicd/cicd.jpg" data-thumbnail="/images/gitlab-cicd/cicd.jpg" data-sub-html="<h2>GitLab CI/CD (圖片來源：GitLab Agile Planning)</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -186,7 +187,7 @@ if (!doNotTrack) {
             data-srcset="/images/gitlab-cicd/cicd.jpg, /images/gitlab-cicd/cicd.jpg 1.5x, /images/gitlab-cicd/cicd.jpg 2x"
             data-sizes="auto"
             alt="/images/gitlab-cicd/cicd.jpg" width="800" />
-    </a><figcaption class="image-caption">GitLab CI/CD (圖片：<a href="https://about.gitlab.com/solutions/agile-delivery/" target="_blank" rel="noopener noreffer">GitLab Agile Planning</a>)</figcaption>
+    </a><figcaption class="image-caption">GitLab CI/CD (圖片來源：<a href="https://about.gitlab.com/solutions/agile-delivery/" target="_blank" rel="noopener noreffer">GitLab Agile Planning</a>)</figcaption>
     </figure>
 <br>
 <p>大致了解是如何運作之後，我們接著聊聊上面有提到的 <code>設定好的腳本</code>：</p>
@@ -471,7 +472,8 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">GitLab Available specific runners</figcaption>
     </figure>
 <br>
-<p>我們已經清楚知道 GitLab CI/CD 的整個流程，那接下來請大家接續看下一篇 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> ，一起學習吧 GoGo !</p>
+<h3 id="gitlab-cd">GitLab CD</h3>
+<p>GitLab CD 其實就是在 <code>.gitlab-ci.yml</code> 後面加上我們要部署的設定，透過 CI 整合完，我們可以設定他要部署到哪一台機器或是設備上這部分就放到下一篇文章直接用實作來告訴大家要怎麼使用吧！，請大家接續看下一篇 <a href="https://pin-yi.me/laravel-heroku-gitlab-cicd" target="_blank" rel="noopener noreffer">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</a> ，一起學習吧 GoGo !</p>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://docs.gitlab.com/ee/ci/quick_start/" target="_blank" rel="noopener noreffer">Get started with GitLab CI/CD</a></p>
@@ -484,8 +486,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/c4ce2b2e0d3699c38db9fe31c09b339e9f87e59e" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;c4ce2b2:&nbsp;# 新增/修改 如何從頭打造專屬的 GitLab CI/CD">
-                            <i class="fas fa-hashtag fa-fw"></i>c4ce2b2</a></span>
+                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ebbf0f0a12b2ab23984645957f8c7db559ab355a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ebbf0f0:&nbsp;# 新增/修改 如何從頭打造專屬的 GitLab CI/CD">
+                            <i class="fas fa-hashtag fa-fw"></i>ebbf0f0</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gitlab-cicd/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

@@ -29,7 +29,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/theme-documentation-built-in-shortcodes/"
                     /></url><url>
-            <loc>https://pin-yi.me/gitlab-cicd/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/gitlab-cicd/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/prometheus-grafana-docker/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/ansible/</loc><lastmod>2022-05-17T16:01:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://pin-yi.me/jenkins/</loc><lastmod>2022-05-16T11:16:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
@@ -188,8 +188,8 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/emoji-support/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/gitlab/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/gitlab/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/"
@@ -198,7 +198,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/"
@@ -207,7 +207,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/%E4%BB%8B%E7%B4%B9/"
@@ -216,7 +216,7 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-05-26T14:46:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-05-26T15:02:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/docker/</loc><lastmod>2022-05-25T14:55:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/grafana/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://pin-yi.me/tags/prometheus/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
