@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gitlab-cicd/" /><meta property="og:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-26T10:10:00+08:00" />
-<meta property="article:modified_time" content="2022-05-26T20:33:20+08:00" />
+<meta property="article:modified_time" content="2022-05-27T17:53:27+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gitlab-cicd/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "GitLab, CI\/CD, 介紹, 實作","wordcount":  2882 ,
-        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-26T20:33:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/gitlab-cicd\/","datePublished": "2022-05-26T10:10:00+08:00","dateModified": "2022-05-27T17:53:27+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -272,7 +272,7 @@ if (!doNotTrack) {
 </div><br>
 <p>那我來簡單說明一下上面這些設定檔案的功能：</p>
 <ul>
-<li>stages：代表這個 CI 設定檔有三個 stage 要跑，一個是 build、一個 test、一個 deploy，他們的順序也決定 CI 運作的順序，由 build &gt; test &gt; deploy，假如 test 沒有通過，就不會執行 deploy。</li>
+<li>stages：代表這個 CI 設定檔有三個 stage 要跑，一個是 build、一個 test、一個 deploy，他們的順序也決定 CI 運作的順序，由 build → test → deploy，假如 test 沒有通過，就不會執行 deploy。</li>
 <li>cache：我們在寫 CI 時，常常需要裝 package，但我不想每次都重新跑一次，所以可以寫一個 cache，不要讓 GitLab 每次都重新拉新的 package。</li>
 <li>build-job、test-job1、test-job2、deploy-prod：代表我有 4 個 job 要執行，每個 job 裡面有不同的任務，也是顯示在 Pipeline 的名稱。</li>
 <li>stage：他現在要執行的階段，對應到 stages。</li>
@@ -437,8 +437,8 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -d --name gitlab-runner --restart always <span class="se">\ </span>                     
-</span></span><span class="line"><span class="cl">-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -d --name gitlab-runner --restart always <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>-v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>gitlab/gitlab-runner:alpine-v15.0.0
 </span></span></code></pre></td></tr></table>
@@ -486,8 +486,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/bbf5003cc7f382e3170c6b959e272c51756f5da4" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;bbf5003:&nbsp;# 修改 如何從頭打造專屬的 GitLab CI/CD">
-                            <i class="fas fa-hashtag fa-fw"></i>bbf5003</a></span>
+                <span>更新於 2022-05-27&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ac7e847102b0971eabd4d88dd55903aff1d44bca" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ac7e847:&nbsp;# 修改 如何從頭打造專屬的 GitLab CI/CD">
+                            <i class="fas fa-hashtag fa-fw"></i>ac7e847</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gitlab-cicd/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
