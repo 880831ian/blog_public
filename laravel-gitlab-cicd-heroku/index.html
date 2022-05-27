@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/" /><meta property="og:image" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-26T15:07:00+08:00" />
-<meta property="article:modified_time" content="2022-05-26T17:48:55+08:00" />
+<meta property="article:modified_time" content="2022-05-27T17:49:19+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/laravel-gitlab-cicd-heroku/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GitLab, CI\/CD, Laravel, Heroku, 介紹, 實作","wordcount":  1221 ,
-        "url": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/","datePublished": "2022-05-26T15:07:00+08:00","dateModified": "2022-05-26T17:48:55+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GitLab, CI\/CD, Laravel, Heroku, 介紹, 實作","wordcount":  3944 ,
+        "url": "https:\/\/pin-yi.me\/laravel-gitlab-cicd-heroku\/","datePublished": "2022-05-26T15:07:00+08:00","dateModified": "2022-05-27T17:49:19+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/laravel-gitlab-cicd-heroku/featured-image.webp"
         title="此文章會實作如何部署 Laravel 於 Heroku 搭配 GitLab CI/CD" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">部署 Laravel 於 Heroku 搭配 GitLab CI/CD</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1221 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-26">2022-05-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3944 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -145,10 +145,21 @@ if (!doNotTrack) {
     <li><a href="#版本資訊">版本資訊</a></li>
     <li><a href="#建立-laravel-專案">建立 Laravel 專案</a></li>
     <li><a href="#測試本地-unit-test">測試本地 Unit Test</a></li>
-    <li><a href="#gitlab-cicd-建置">GitLab CI/CD 建置</a>
+    <li><a href="#gitlab-ci-建置">GitLab CI 建置</a>
       <ul>
         <li><a href="#上傳-laravel-專案">上傳 Laravel 專案</a></li>
         <li><a href="#在-gitlab-上執行單元測試">在 GitLab 上執行單元測試</a></li>
+        <li><a href="#上傳-gitlab-ciyml">上傳 .gitlab-ci.yml</a></li>
+        <li><a href="#設置須通過測試才可以合併">設置須通過測試才可以合併</a></li>
+        <li><a href="#測試是否可以阻擋未成功情況">測試是否可以阻擋未成功情況</a></li>
+      </ul>
+    </li>
+    <li><a href="#gitlab-cd-建置">GitLab CD 建置</a>
+      <ul>
+        <li><a href="#創建-heroku-專案">創建 Heroku 專案</a></li>
+        <li><a href="#設定-heroku-與-gitlab-連線">設定 HeroKu 與 GitLab 連線</a></li>
+        <li><a href="#新增-heroku-識別檔案">新增 Heroku 識別檔案</a></li>
+        <li><a href="#修改-gitlab-ciyml">修改 .gitlab-ci.yml</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -163,6 +174,7 @@ if (!doNotTrack) {
 <li>Docker：Docker version 20.10.14, build a224086</li>
 <li>Laravel Installer：2.3.0</li>
 <li>Laravel Framework：9.14.1</li>
+<li>gitlab.com：GitLab Enterprise Edition 15.1.0-pre</li>
 </ul>
 <br>
 <p>首先，我們第一步驟就是先建立一個 Laravel 專案，至於為什麼要選擇用 Laravel 來當作 GitLab CI/CD 的範例呢？因為 Laravel 內建有 PHPUnit 的測試腳本，可以讓我們在 CI 測試時，更好的展現 CI 的功能！，有關於 Laravel 相關內容，這邊一樣推薦兩篇文章給大家閱讀：🤣</p>
@@ -226,7 +238,7 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">執行單元測試結果</figcaption>
     </figure>
 <br>
-<h2 id="gitlab-cicd-建置">GitLab CI/CD 建置</h2>
+<h2 id="gitlab-ci-建置">GitLab CI 建置</h2>
 <h3 id="上傳-laravel-專案">上傳 Laravel 專案</h3>
 <p>接下來我們要上傳含有 Unit Test 專案到 GitLab 上，步驟如下，如果已經熟悉如何將專案推到 GitLab，可以直接跳到 <a href="#%e5%9c%a8-gitlab-%e4%b8%8a%e5%9f%b7%e8%a1%8c%e5%96%ae%e5%85%83%e6%b8%ac%e8%a9%a6" rel="">在 GitLab 上執行單元測試</a></p>
 <ol>
@@ -274,7 +286,7 @@ if (!doNotTrack) {
     </figure>
 <br>
 <h3 id="在-gitlab-上執行單元測試">在 GitLab 上執行單元測試</h3>
-<p>要在 GitLab 上執行 CI/CD 就需要有 Runner，這次我們選擇使用 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a> 的 Shared runners，需要使用 Specific runners，可以查看上一篇 <a href="https://pin-yi.me/gitlab-cicd/#%E8%87%AA%E6%9E%B6-runner-specific-runners" target="_blank" rel="noopener noreffer">如何從頭打造專屬的 GitLab CI/CD</a> 文章</p>
+<p>要在 GitLab 上執行 CI/CD 就需要有 Runner，這次我們選擇使用 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer">gitlab.com</a> 的 Shared runners，想要使用 Specific runners，可以查看上一篇 <a href="https://pin-yi.me/gitlab-cicd/#%E8%87%AA%E6%9E%B6-runner-specific-runners" target="_blank" rel="noopener noreffer">如何從頭打造專屬的 GitLab CI/CD</a> 文章</p>
 <br>
 <figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/runner.png" title="/images/laravel-gitlab-cicd-heroku/runner.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/runner.png" data-sub-html="<h2>本次使用 Share runners</h2>">
         <img
@@ -302,17 +314,335 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Unit_test</span><span class="w">
-</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
-</span><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>說明一下這個 <code>yml</code> 檔內的設定是在做什麼：</p>
-<p>待續&hellip;.明天繼續努力 &gt;&lt;</p>
+</div><br>
+<p>說明一下這個 <code>yml</code> 檔內的設定是在做什麼：</p>
+<ul>
+<li>image：因為我們執行 CI/CD 過程中，需要有 PHP、Compose、NPM 等工具，有這些套件管理工具就可以延伸去安裝更多套件，如果一開始沒有安裝，就會很麻煩，其中一個辦法就是去 Runner 環境修改並安裝，但因為方便以及我們這次使用 Share runners，所以不能修改別人的 Runner，另一個辦法是可以使用 <code>image</code> 關鍵字，可以讓 Runner 切換到另一個環境去執行工作 (Job)，我們這邊使用 <a href="https://github.com/lorisleiva/laravel-docker" target="_blank" rel="noopener noreffer">lorisleiva/laravel-docker:latest</a> ，他裡面已經幫我們安裝好上述的工具了！</li>
+<li>Unit_test：這邊也是我們的 Job，那裡面主要是先用 composer install 去安裝我們需要的套件，最後在執行 phpunit 來做單元測試。</li>
+</ul>
+<br>
+<h3 id="上傳-gitlab-ciyml">上傳 .gitlab-ci.yml</h3>
+<p>接著我們使用以下指令將含有 <code>.gitlab-ci.yml</code> 的專案上傳到 GitLab，並回到 GitLab 選擇 CI/CD，可以查看目前的 Pipelines，會有我們剛剛所新增的 Runner。</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png" title="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png" data-sub-html="<h2>將 .gitlab-ci.yml 推到 GitLab</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png, /images/laravel-gitlab-cicd-heroku/gitlab-ci.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab-ci.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab-ci.png" width="600" />
+    </a><figcaption class="image-caption">將 <code>.gitlab-ci.yml</code> 推到 GitLab</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/pipeline.png" title="/images/laravel-gitlab-cicd-heroku/pipeline.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/pipeline.png" data-sub-html="<h2>查看 Runner 已經進行執行單元測試檢測</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/pipeline.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/pipeline.png, /images/laravel-gitlab-cicd-heroku/pipeline.png 1.5x, /images/laravel-gitlab-cicd-heroku/pipeline.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/pipeline.png" width="700" />
+    </a><figcaption class="image-caption">查看 Runner 已經進行執行單元測試檢測</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/runner-cicd.png" title="/images/laravel-gitlab-cicd-heroku/runner-cicd.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/runner-cicd.png" data-sub-html="<h2>可以看到 Runner 先安裝我們的環境，再執行單元測試的腳本</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/runner-cicd.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/runner-cicd.png, /images/laravel-gitlab-cicd-heroku/runner-cicd.png 1.5x, /images/laravel-gitlab-cicd-heroku/runner-cicd.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/runner-cicd.png" width="700" />
+    </a><figcaption class="image-caption">可以看到 Runner 先安裝我們的環境，再執行單元測試的腳本</figcaption>
+    </figure>
+<br>
+<h3 id="設置須通過測試才可以合併">設置須通過測試才可以合併</h3>
+<p>當我們有了測試還不夠，要怎麼確保每隻要上線 (合併到主分支) 的程式都有經過測試才上線呢？</p>
+<p>接下來我們可以在 GitLab 裡面做這些設定，先到專案的 Setting → General → Merge requests → Merge checks 點選 <strong>Pipelines must succeed</strong>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/mergechecks.png" title="/images/laravel-gitlab-cicd-heroku/mergechecks.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/mergechecks.png" data-sub-html="<h2>點選 Pipelines must succeed 來確保程式合併前都必須經過測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/mergechecks.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/mergechecks.png, /images/laravel-gitlab-cicd-heroku/mergechecks.png 1.5x, /images/laravel-gitlab-cicd-heroku/mergechecks.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/mergechecks.png" width="700" />
+    </a><figcaption class="image-caption">點選 <strong>Pipelines must succeed</strong> 來確保程式合併前都必須經過測試</figcaption>
+    </figure>
+<br>
+<h3 id="測試是否可以阻擋未成功情況">測試是否可以阻擋未成功情況</h3>
+<p>我們先模擬要開發新功能，所以在 master 最新 commit 下，建立一個新分支 <code>new</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git checkout -b <span class="s2">&#34;new&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接著修改單元測試，故意新增錯誤的測試，開啟專案的 <code>tests/Unit/ExampleTest.php</code>，最下面加上紅色框框程式碼：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/exampletest.png" title="/images/laravel-gitlab-cicd-heroku/exampletest.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/exampletest.png" data-sub-html="<h2>新增錯誤測試，還模擬看看是否能成功擋住</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/exampletest.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/exampletest.png, /images/laravel-gitlab-cicd-heroku/exampletest.png 1.5x, /images/laravel-gitlab-cicd-heroku/exampletest.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/exampletest.png" width="500" />
+    </a><figcaption class="image-caption">新增錯誤測試，還模擬看看是否能成功擋住</figcaption>
+    </figure>
+<code>assertEquals</code> 會檢查這兩個值是否相同，不同的話，就會跳出錯誤，所以我們故意輸入 1 和 2。
+<br></p>
+<p>並將它上傳到 GitLab，並發出 Merge Request 看看會有什麼結果！</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab-test.png" title="/images/laravel-gitlab-cicd-heroku/gitlab-test.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab-test.png" data-sub-html="<h2>將新增錯誤的 ExampleTest 加入暫存，推到 GitLab</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab-test.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab-test.png, /images/laravel-gitlab-cicd-heroku/gitlab-test.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab-test.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab-test.png" width="600" />
+    </a><figcaption class="image-caption">將新增錯誤的 ExampleTest 加入暫存，推到 GitLab</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/mergerequest.png" title="/images/laravel-gitlab-cicd-heroku/mergerequest.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/mergerequest.png" data-sub-html="<h2>並將 new 分支透過 Merge Request 來合併到 master</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/mergerequest.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/mergerequest.png, /images/laravel-gitlab-cicd-heroku/mergerequest.png 1.5x, /images/laravel-gitlab-cicd-heroku/mergerequest.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/mergerequest.png" width="1000" />
+    </a><figcaption class="image-caption">並將 new 分支透過 Merge Request 來合併到 master</figcaption>
+    </figure>
+<br>
+<p>可以看到我們合併在 Pipeline 測試時，因為 new 沒有通過測試，所以也沒有辦法進行合併！</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/mergeerror.png" title="/images/laravel-gitlab-cicd-heroku/mergeerror.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/mergeerror.png" data-sub-html="<h2>分支 new 沒有通過測試，所以沒有進行 Merge</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/mergeerror.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/mergeerror.png, /images/laravel-gitlab-cicd-heroku/mergeerror.png 1.5x, /images/laravel-gitlab-cicd-heroku/mergeerror.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/mergeerror.png" width="700" />
+    </a><figcaption class="image-caption">分支 new 沒有通過測試，所以沒有進行 Merge</figcaption>
+    </figure>
+<br>
+<h2 id="gitlab-cd-建置">GitLab CD 建置</h2>
+<p>我們玩完 CI 後，接著要把程式部署到伺服器或是雲端上，這時候我們不需要透過人工手動的方式，只需要有 CD 來幫我們自動化部署就可以拉！如果不太清楚，可以參考這張圖片：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png" title="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png" data-sub-html="<h2>GitLab CI/CD workflow (圖片來源：GitLab)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png, /images/laravel-gitlab-cicd-heroku/gitlab_workflow.png 1.5x, /images/laravel-gitlab-cicd-heroku/gitlab_workflow.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/gitlab_workflow.png" width="900" />
+    </a><figcaption class="image-caption">GitLab CI/CD workflow (圖片來源：<a href="https://docs.gitlab.com/ee/ci/introduction/" target="_blank" rel="noopener noreffer">GitLab</a>)</figcaption>
+    </figure>
+<p>當我們剛剛進行 CI 的整合測試，最後經過 Review and approve 合併到主分支，這時候如果我們有設定 CD，CD 就會幫我們部署到服務上，我把 CD 流程轉成文字步驟說明：</p>
+<br>
+<ol>
+<li>把新功能分支合併到 master 分支，代表功能已經可以上線</li>
+<li>GitLab 觸發 Gitlab-CI 執行 pipeline</li>
+<li>Gitlab-CI 執行自動化測試</li>
+<li>Gitlab-CI 測試成功後，執行部署到正式伺服器</li>
+<li>回傳執行結果至 GitLab</li>
+</ol>
+<br>
+<p>那想要達成自動化部署之前，必須能在遠端用指令下達部署更新！簡單來說有兩件事情：</p>
+<ol>
+<li>要先整理再更新專案時需要哪些指令，並將其寫成腳本</li>
+<li>需要獲得伺服器的授權，可以對伺服器下達更新專案的腳本</li>
+</ol>
+<br>
+<p>我們以現在 Laravel 專案來說，套用上面講的兩件事情：</p>
+<ol>
+<li>腳本製作：上線新版本大概要執行以下圖片的內容</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/laravel_up.png" title="/images/laravel-gitlab-cicd-heroku/laravel_up.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/laravel_up.png" data-sub-html="<h2>Laravel 專案上線前會下達的指令</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/laravel_up.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/laravel_up.png, /images/laravel-gitlab-cicd-heroku/laravel_up.png 1.5x, /images/laravel-gitlab-cicd-heroku/laravel_up.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/laravel_up.png" width="800" />
+    </a><figcaption class="image-caption">Laravel 專案上線前會下達的指令</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>對遠端伺服器下指令：通常使用 ssh 與 伺服器做溝通，所以先在伺服器產生授權金鑰給要遠端控制的電腦，如果要給 Gitlab-CI 控制的話，也需要把金鑰存在 GitLab 上，通常使用 <code>ssh user@remote.server 'git pull'</code> 來下達更新專案的指令</li>
+</ol>
+<br>
+<p>本篇我們要部署的是 PaaS 的 HeroKu，可以減少時間去架設環境，就可以達到我們想要的效果，那接著會帶大家從 Heroku 設定開始歐！先簡單介紹一下 Heroku：</p>
+<p>Heroku 是一個支援多種程式語言的雲平台即時服務(PaaS)， 是一種雲端運算服務，提供運算平台與解決方案服務，PaaS提供使用者將雲端基礎設施部署與建立至使用者端，或者藉此獲得使用程式語言、程式庫與服務。使用者不需要管理與控制雲端基礎設施（包含網路、伺服器、作業系統或儲存），但需要控制上層的應用程式部署與應用代管的環境。</p>
+<br>
+<h3 id="創建-heroku-專案">創建 Heroku 專案</h3>
+<p>那要使用 Heroku 當然需要一組帳號拉，建立帳號我應該不用再多介紹了吧 🤡  我們直接到 Heroku 頁面，右上角 New，點選 Create new app，輸入本次專案名稱，我就取叫 <code>laravel-gitlab-cicd-heroku</code> (這個不能與別人重複，因為他會生成專屬網頁)， 進去後，點選右上角有一個 <strong>Open app</strong>，就會跳出這個專案專屬的網頁：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/herokuapp.png" title="/images/laravel-gitlab-cicd-heroku/herokuapp.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/herokuapp.png" data-sub-html="<h2>Heroku 專屬網頁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/herokuapp.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/herokuapp.png, /images/laravel-gitlab-cicd-heroku/herokuapp.png 1.5x, /images/laravel-gitlab-cicd-heroku/herokuapp.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/herokuapp.png" width="1000" />
+    </a><figcaption class="image-caption">Heroku 專屬網頁</figcaption>
+    </figure>
+<br>
+<h3 id="設定-heroku-與-gitlab-連線">設定 HeroKu 與 GitLab 連線</h3>
+<p>先點選右上角個人頭像 → Account setrtings → 在 Account 往下滑 → API Key，點選 <strong>Reveal</strong> 並將該 API 記住，這是等等透過 GitLab 部署時會用到的 API Token：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/token.png" title="/images/laravel-gitlab-cicd-heroku/token.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/token.png" data-sub-html="<h2>取得部署的 API Token</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/token.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/token.png, /images/laravel-gitlab-cicd-heroku/token.png 1.5x, /images/laravel-gitlab-cicd-heroku/token.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/token.png" width="1000" />
+    </a><figcaption class="image-caption">取得部署的 API Token</figcaption>
+    </figure>
+<br>
+<p>回到 GitLab 專案底下，Settings → CI/CD → Variables，他可以將變數設定在這邊，再讓 <code>.gitlab-ci.yml</code> 來抓取變數，設定以下兩個變數：(詳細可以參考<a href="https://docs.gitlab.com/ee/ci/variables/index.html#add-a-cicd-variable-to-a-project" target="_blank" rel="noopener noreffer">官網</a>)</p>
+<ol>
+<li>Key 名稱(HEROKU_PRODUCTION_PROJECT_NAME)，Value 值(設定我們剛剛在 Heroku 部署的專案名稱，我的是 <code>laravel-gitlab-cicd-heroku</code>)</li>
+<li>Key 名稱(HEROKU_PRODUCTION_API_KEY)，Value 值(這個就是我們上面的 API Key，每個人都要用自己的歐！上面的我已經重設了 😎  )</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/variables.png" title="/images/laravel-gitlab-cicd-heroku/variables.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/variables.png" data-sub-html="<h2>GitLab 設定 Variables</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/variables.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/variables.png, /images/laravel-gitlab-cicd-heroku/variables.png 1.5x, /images/laravel-gitlab-cicd-heroku/variables.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/variables.png" width="800&#34;" />
+    </a><figcaption class="image-caption">GitLab 設定 Variables</figcaption>
+    </figure>
+<ul>
+<li>這邊要注意先把預設的 Protect variable 給關閉，他預設會只能在受保護的分支或標籤運行，但我們這此以簡單為主，所以這些設定都先關掉。</li>
+</ul>
+<br>
+<h3 id="新增-heroku-識別檔案">新增 Heroku 識別檔案</h3>
+<p>接下來我們要新增一個檔案名為 <code>Procfile</code>，它是 Heroku 部署更新時會啟動的對象，注意他沒有副檔名，我們在裡面輸入以下：(我們使用合併後的 master)</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/procfile.png" title="/images/laravel-gitlab-cicd-heroku/procfile.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/procfile.png" data-sub-html="<h2>新增 HeroKu 識別檔案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/procfile.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/procfile.png, /images/laravel-gitlab-cicd-heroku/procfile.png 1.5x, /images/laravel-gitlab-cicd-heroku/procfile.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/procfile.png" width="800&#34;" />
+    </a><figcaption class="image-caption">新增 HeroKu 識別檔案</figcaption>
+    </figure>
+<p>它代表我們網頁服務使用 apache2 指令運行並把入口指向專案資料夾中的 laravel 專案的入口資料夾。</p>
+<br>
+<h3 id="修改-gitlab-ciyml">修改 .gitlab-ci.yml</h3>
+<p>我們修改原本用來 CI 的腳本，來設定自動化部署的任務 Job 及腳本</p>
+<ul>
+<li>.gitlab-ci.yml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">image: lorisleiva/laravel-docker:latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Production_Deploy:
+</span></span><span class="line"><span class="cl">  stage: Production_Deploy
+</span></span><span class="line"><span class="cl">  before_script:
+</span></span><span class="line"><span class="cl">    - apk add ruby ruby-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler yarn ruby-rdoc &gt;&gt; /dev/null
+</span></span><span class="line"><span class="cl">    - apk update
+</span></span><span class="line"><span class="cl">    - gem install dpl &gt;&gt; /dev/null
+</span></span><span class="line"><span class="cl">  script:
+</span></span><span class="line"><span class="cl">    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_PROJECT_NAME --api-key=$HEROKU_PRODUCTION_API_KEY
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>最後上傳 GitLab 來觸發 Gitlab-CI 執行自動化部署 (上傳指令就不多說囉，想必大家都會了吧！，不會的話可以去看 <a href="https://pin-yi.me/git/" target="_blank" rel="noopener noreffer">Git 介紹</a>，裡面有詳細的介紹 😍  )</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/cd_pass.png" title="/images/laravel-gitlab-cicd-heroku/cd_pass.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/cd_pass.png" data-sub-html="<h2>觸發 Gitlab-CI 執行自動化部署</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/cd_pass.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/cd_pass.png, /images/laravel-gitlab-cicd-heroku/cd_pass.png 1.5x, /images/laravel-gitlab-cicd-heroku/cd_pass.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/cd_pass.png" width="800&#34;" />
+    </a><figcaption class="image-caption">觸發 Gitlab-CI 執行自動化部署</figcaption>
+    </figure>
+<br>
+<p>可以看到部署成功，我們也來看看 Runner 運作狀況：</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/cd_runner.png" title="/images/laravel-gitlab-cicd-heroku/cd_runner.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/cd_runner.png" data-sub-html="<h2>Runner 運作狀況</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/cd_runner.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/cd_runner.png, /images/laravel-gitlab-cicd-heroku/cd_runner.png 1.5x, /images/laravel-gitlab-cicd-heroku/cd_runner.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/cd_runner.png" width="800&#34;" />
+    </a><figcaption class="image-caption">Runner 運作狀況</figcaption>
+    </figure>
+看到他成功將服務給部署到 <code>https://laravel-gitlab-cicd-heroku.herokuapp.com/</code>。</p>
+<br>
+<p>既然已經部署好了，當然要去看一下我們的網頁啊，但當我們打開部署好的網頁，會發現跳出 500 Error，雖然他與我們 CI/CD 沒有關係，但我們還是試著解決，那這個問題會發生是因為我們沒有給環境變數的 APP_KEY，這個 Key 可以在專案的 .env 取得，拿到後開啟 Heroku → Setting → Config vars 將 APP_KEY 設定上去。</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/key.png" title="/images/laravel-gitlab-cicd-heroku/key.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/key.png" data-sub-html="<h2>Runner 運作狀況</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/key.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/key.png, /images/laravel-gitlab-cicd-heroku/key.png 1.5x, /images/laravel-gitlab-cicd-heroku/key.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/key.png" width="900&#34;" />
+    </a><figcaption class="image-caption">Runner 運作狀況</figcaption>
+    </figure>
+<br>
+<p>最後重新整理 <code>https://laravel-gitlab-cicd-heroku.herokuapp.com/</code>，就可以看到我們部署上去的網站囉！</p>
+<br>
+<figure><a class="lightgallery" href="/images/laravel-gitlab-cicd-heroku/laravel_show.png" title="/images/laravel-gitlab-cicd-heroku/laravel_show.png" data-thumbnail="/images/laravel-gitlab-cicd-heroku/laravel_show.png" data-sub-html="<h2>透過 CD 部署到 Heroku 的 Laravel 首頁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/laravel-gitlab-cicd-heroku/laravel_show.png"
+            data-srcset="/images/laravel-gitlab-cicd-heroku/laravel_show.png, /images/laravel-gitlab-cicd-heroku/laravel_show.png 1.5x, /images/laravel-gitlab-cicd-heroku/laravel_show.png 2x"
+            data-sizes="auto"
+            alt="/images/laravel-gitlab-cicd-heroku/laravel_show.png" width="1200&#34;" />
+    </a><figcaption class="image-caption">透過 CD 部署到 Heroku 的 Laravel 首頁</figcaption>
+    </figure>
+<br>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://nick-chen.medium.com/gitlab-ci-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E7%AF%87-156455e2ad9f" target="_blank" rel="noopener noreffer">Gitlab-CI 入門實作教學 - 單元測試篇</a></p>
@@ -326,8 +656,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/33224a1a00db2c4df8cee35c64035bfd6f448472" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;33224a1:&nbsp;# 新增 部署 Laravel 於 Heroku 搭配 GitLab CI/CD">
-                            <i class="fas fa-hashtag fa-fw"></i>33224a1</a></span>
+                <span>更新於 2022-05-27&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/247b1bfe3b93f9625093a6b4b957805276607da6" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;247b1bf:&nbsp;# 新增 部署 Laravel 於 Heroku 搭配 GitLab CI/CD">
+                            <i class="fas fa-hashtag fa-fw"></i>247b1bf</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel-gitlab-cicd-heroku/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
