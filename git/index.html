@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/git/" /><meta property="og:image" content="https://pin-yi.me/git/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-15T12:00:00+08:00" />
-<meta property="article:modified_time" content="2022-05-25T11:44:46+08:00" />
+<meta property="article:modified_time" content="2022-05-31T14:14:25+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/git/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/git\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  4561 ,
-        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-05-25T11:44:46+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Git, 操作指令, 介紹","wordcount":  5307 ,
+        "url": "https:\/\/pin-yi.me\/git\/","datePublished": "2022-04-15T12:00:00+08:00","dateModified": "2022-05-31T14:14:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/git/featured-image.webp"
         title="/git/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Git 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 4561 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 10 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-15">2022-04-15</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5307 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -201,6 +201,16 @@ if (!doNotTrack) {
             </li>
             <li><a href="#revert">revert</a></li>
             <li><a href="#reset-與-revert-差異">reset 與 revert 差異</a></li>
+          </ul>
+        </li>
+        <li><a href="#其他">其他</a>
+          <ul>
+            <li><a href="#tag">tag</a>
+              <ul>
+                <li><a href="#輕量標籤">輕量標籤</a></li>
+                <li><a href="#標示標籤">標示標籤</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -998,6 +1008,101 @@ if (!doNotTrack) {
 </tbody>
 </table>
 <br>
+<h3 id="其他">其他</h3>
+<h4 id="tag">tag</h4>
+<p>標籤是用於標記特定的點或是提交的歷史，通常會用來標記發佈版本的名稱或是編號，例如：<code>v1.0</code>。標籤看起來有點像是分支，但打上標籤的提交是固定的，不能隨意的變更位置。</p>
+<p>Git 中有兩種標籤類型：輕量標籤(lightweight tag)和標示標籤(annotated tag)，他們有什麼區別呢？我們分別列出他們不同之處。</p>
+<br>
+<ul>
+<li>
+<p>輕量標籤(lightweight tag)</p>
+<ul>
+<li>不可以變更的暫時標籤</li>
+<li>可以添加名稱</li>
+</ul>
+</li>
+<li>
+<p>標示標籤(annotated tag)</p>
+<ul>
+<li>可以添加打標籤者的名稱、email、日期</li>
+<li>可以添加名稱</li>
+<li>可以添加註解</li>
+<li>可以添加簽名</li>
+</ul>
+</li>
+</ul>
+<br>
+<p>一般情況下，標示標籤都會用在較為重要的提交上，如發布提交可以使用標示標籤來新增註解或簽名，另一方面，輕量標籤通常使用在本機端最為暫時性的使用或是一次性使用。</p>
+<p>我們分別來看一下要如何新增輕量標籤(lightweight tag)以及標示標籤(annotated tag)吧！</p>
+<br>
+<p>我們先隨意在分支上推一次 commit ，如下圖，讓我們等等有 commit 可以來新增標籤：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/tag.png" title="/images/git/tag.png" data-thumbnail="/images/git/tag.png" data-sub-html="<h2>在隨意的分支推一個 commit</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/tag.png"
+            data-srcset="/images/git/tag.png, /images/git/tag.png 1.5x, /images/git/tag.png 2x"
+            data-sizes="auto"
+            alt="/images/git/tag.png" width="800" />
+    </a><figcaption class="image-caption">在隨意的分支推一個 commit</figcaption>
+    </figure>
+<br>
+<h5 id="輕量標籤">輕量標籤</h5>
+<p>使用 <code>tag</code> 且不帶其他的參數來下指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git tag lightweight bc4c597
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>lightweight 是我們 tag 名稱，bc4c597 是剛剛 commit 的 SHA-1</p>
+<br>
+<p>接著我們使用 <code>git show lightweight</code> 來查看標籤：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/tag_1.png" title="/images/git/tag_1.png" data-thumbnail="/images/git/tag_1.png" data-sub-html="<h2>輕量標籤 lightweight</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/tag_1.png"
+            data-srcset="/images/git/tag_1.png, /images/git/tag_1.png 1.5x, /images/git/tag_1.png 2x"
+            data-sizes="auto"
+            alt="/images/git/tag_1.png" width="800" />
+    </a><figcaption class="image-caption">輕量標籤 lightweight</figcaption>
+    </figure>
+可以發現因為我們使用「輕量標籤」，所以沒有存任何資訊，但可以在圖片第一行最後面看到我們使用的 tag。</p>
+<br>
+<h5 id="標示標籤">標示標籤</h5>
+<p>我們一樣使用 <code>tag</code>，但後面可以加上 -a -m 參數：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git tag annotated bc4c597 -a -m <span class="s2">&#34;可以備註&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>-a</code> 參數是請 Git 幫我們建立有附註的標籤，後面的 <code>-m</code> 則是跟我們 commit 一樣可以來輸入訊息</p>
+<br>
+<p>接著我們使用 <code>git show annotated</code> 來查看標籤：</p>
+<br>
+<figure><a class="lightgallery" href="/images/git/tag_2.png" title="/images/git/tag_2.png" data-thumbnail="/images/git/tag_2.png" data-sub-html="<h2>標示標籤 annotated</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git/tag_2.png"
+            data-srcset="/images/git/tag_2.png, /images/git/tag_2.png 1.5x, /images/git/tag_2.png 2x"
+            data-sizes="auto"
+            alt="/images/git/tag_2.png" width="800" />
+    </a><figcaption class="image-caption">標示標籤 annotated</figcaption>
+    </figure>
+可以看到我們使用標示標籤，所以可以查看標籤是誰填寫、他的信箱、填寫時間以及他的備註內容。</p>
+<br>
+<p>官方文件對於這兩種標籤的說明：</p>
+<p>有標示標籤主要用來做像是軟體版號之類的用途，而輕量標籤則是來於個人使用或暫時的標記用途。簡單來說，有標示標籤的好處是有更多關於這張標籤的資訊，假設不是很在乎這些資訊，使用一般的輕量標籤也是沒有問題的！</p>
+<br>
 <h2 id="git-常見問題">Git 常見問題</h2>
 <div class="details admonition question open">
         <div class="details-summary admonition-title">
@@ -1007,7 +1112,7 @@ if (!doNotTrack) {
             <div class="admonition-content">HEAD 本身是一個指標，通常會指向某個本地端分支或是其他 Commit，所以也可以把 HEAD 當作目前所在的分支。</div>
         </div>
     </div>
-<div class="details admonition question open">
+<p><div class="details admonition question open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-question-circle fa-fw"></i>刪除合併後的分支會發生什麼事情嗎？<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
@@ -1015,15 +1120,7 @@ if (!doNotTrack) {
             <div class="admonition-content">分支本身就像指標或是貼紙一樣，貼在某個 Commit 上面，分支並不是目錄或是檔案，所以當我們刪除已經合併過的分支，不會造成檔案或目錄跟著被刪除。</div>
         </div>
     </div>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw"></i>什麼是標籤 Tag？<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">通常在開發軟體有完成特定的里程碑時，軟體版號 1.0.0 或是 beta、release 之類，就很適合用標籤來標記，例如：<code>git tag 1.0.0</code>。</div>
-        </div>
-    </div>
-<br>
+<br></p>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://gitbook.tw/chapters/introduction/what-is-git" target="_blank" rel="noopener noreffer">什麼是 Git？為什麼要學習它？</a></p>
 <p><a href="https://medium.com/@tina2793778/git-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%B4%B9%E8%88%87%E6%8C%87%E4%BB%A4-d5d85607cd7d" target="_blank" rel="noopener noreffer">Git：基本概念介紹與指令</a></p>
@@ -1037,8 +1134,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">操作指令</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-25&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0420da89d80abb2afa74d1f7cfcd3007f9f32a76" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0420da8:&nbsp;# 修改 Git 介紹">
-                            <i class="fas fa-hashtag fa-fw"></i>0420da8</a></span>
+                <span>更新於 2022-05-31&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/0360ad70637881c72c23b9c59b8826b2294f8df2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;0360ad7:&nbsp;# 新增 Git 介紹">
+                            <i class="fas fa-hashtag fa-fw"></i>0360ad7</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/git/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
