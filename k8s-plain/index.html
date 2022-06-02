@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>用大型社區來介紹 Kubernetes 元件 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="用大型社區來介紹 Kubernetes 元件" />
+<meta property="og:description" content="前陣子對於 Kubernetes 部分內容還不是很清楚，在網路上閒逛的時候發現一篇很有趣的文章，標題是 『 給行銷跟業務的 Kubernetes 101 中翻中介紹 』，點進去後才發現，作者 Phil Huang 將" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/k8s-plain/" /><meta property="og:image" content="https://pin-yi.me/k8s-plain/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-02T10:00:00+08:00" />
+<meta property="article:modified_time" content="2022-06-02T10:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/k8s-plain/featured-image.webp"/>
+<meta name="twitter:title" content="用大型社區來介紹 Kubernetes 元件"/>
+<meta name="twitter:description" content="前陣子對於 Kubernetes 部分內容還不是很清楚，在網路上閒逛的時候發現一篇很有趣的文章，標題是 『 給行銷跟業務的 Kubernetes 101 中翻中介紹 』，點進去後才發現，作者 Phil Huang 將"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/k8s-plain/" /><link rel="prev" href="https://pin-yi.me/laravel-gitlab-cicd-heroku/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "用大型社區來介紹 Kubernetes 元件",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/k8s-plain\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/k8s-plain\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, 介紹","wordcount":  2284 ,
+        "url": "https:\/\/pin-yi.me\/k8s-plain\/","datePublished": "2022-06-02T10:00:00+08:00","dateModified": "2022-06-02T10:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/k8s-plain/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/k8s-plain/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/k8s-plain/featured-image.webp"
+        data-srcset="/k8s-plain/featured-image.webp, /k8s-plain/featured-image.webp 1.5x, /k8s-plain/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/k8s-plain/featured-image.webp"
+        title="/k8s-plain/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用大型社區來介紹 Kubernetes 元件</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-02">2022-06-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2284 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-元件白話文">Kubernetes 元件白話文</a>
+      <ul>
+        <li><a href="#kubernetes-元件">Kubernetes 元件</a></li>
+        <li><a href="#常用套件">常用套件</a></li>
+      </ul>
+    </li>
+    <li><a href="#常見問題">常見問題</a>
+      <ul>
+        <li><a href="#q1為什麼-kubernetes-的最小單位是-pod-這個要怎麼理解">Q1：為什麼 Kubernetes 的最小單位是 Pod 這個要怎麼理解？</a></li>
+        <li><a href="#q2docker-在-kubernetes-的角色是什麼">Q2：Docker 在 Kubernetes 的角色是什麼？</a></li>
+        <li><a href="#q3呈上那-cricnicsi-是不是也可以替換成他的廠商">Q3：呈上，那 CRI/CNI/CSI 是不是也可以替換成他的廠商？</a></li>
+        <li><a href="#q4整個住戶社區最重要的角色是什麼">Q4：整個住戶社區最重要的角色是什麼？</a></li>
+        <li><a href="#q5kubernetesvmcontainer-的差異性">Q5：Kubernetes、VM、Container 的差異性</a></li>
+        <li><a href="#q6為什麼有人會把-container-跟-pod-混在一起講">Q6：為什麼有人會把 Container 跟 Pod 混在一起講</a></li>
+        <li><a href="#q7什麼事-node-scaling-">Q7：什麼事 Node Scaling ?</a></li>
+        <li><a href="#q8上面有提到放置計畫是什麼意思">Q8：上面有提到放置計畫是什麼意思？</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>前陣子對於 Kubernetes 部分內容還不是很清楚，在網路上閒逛的時候發現一篇很有趣的文章，標題是 『 <a href="https://blog.pichuang.com.tw/20210111-Kubernetes-for-sales-and-marketing/#%E4%B8%AD%E7%BF%BB%E4%B8%AD%E7%9A%84-Kubernetes-%E7%B5%84%E4%BB%B6%E4%BB%8B%E7%B4%B9" target="_blank" rel="noopener noreffer">給行銷跟業務的 Kubernetes 101 中翻中介紹</a> 』，點進去後才發現，作者 <a href="https://blog.pichuang.com.tw/about/" target="_blank" rel="noopener noreffer">Phil Huang</a> 將 Kubernetes 元件的內容用大型住戶社區來介紹，讓我更清楚每一個元件的意思，以下我會用我理解的以及作者的思考邏輯來去寫這篇筆記，再次感謝作者文章 😍</p>
+<br>
+<h2 id="kubernetes-元件白話文">Kubernetes 元件白話文</h2>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-plain/1.jpg" title="/images/k8s-plain/1.jpg" data-thumbnail="/images/k8s-plain/1.jpg" data-sub-html="<h2>大型社區示意圖  (圖片來源：蘋果地產)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-plain/1.jpg"
+            data-srcset="/images/k8s-plain/1.jpg, /images/k8s-plain/1.jpg 1.5x, /images/k8s-plain/1.jpg 2x"
+            data-sizes="auto"
+            alt="/images/k8s-plain/1.jpg" width="550" />
+    </a><figcaption class="image-caption">大型社區示意圖  (圖片來源：<a href="https://tw.feature.appledaily.com/house/news/article/205878" target="_blank" rel="noopener noreffer">蘋果地產</a>)</figcaption>
+    </figure>
+可以看到上面這張圖片，他是一個很典型的大型社區，我們這次的 Kubernetes 元件白話文，會以大型社區來當作現實中的元件，以社區的例子來說明 Kubernetes 。</p>
+<br>
+<p>當然，我們之前的文章也有介紹過 Kubernetes，有興趣可以先飛回去看看！</p>
+<p><a href="https://pin-yi.me/k8s/" target="_blank" rel="noopener noreffer">Kubernetes (K8s) 介紹 - 基本</a></p>
+<p><a href="https://pin-yi.me/k8s-advanced/" target="_blank" rel="noopener noreffer">Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet、ConfigMap)</a></p>
+<p><a href="https://pin-yi.me/k8s-efk/" target="_blank" rel="noopener noreffer">Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</a></p>
+<p>我們先想像一下我們建立 Kubernetes 完整的叢集服務，就好比是建立一個大型的社區，所以以下會將名詞與社區來做連結，那．．．開始囉！</p>
+<br>
+<h3 id="kubernetes-元件">Kubernetes 元件</h3>
+<ul>
+<li>Kubernetes：建立這個大型社區的藍圖，規劃的社區內的大大小小的設計。</li>
+<li>虛擬化平台、公有雲平台、實體機器：就是我們要蓋社區的地皮。(虛擬化平台：vSphere/Proxmox/VMware、公有雲平台：AWS/GCP/Azuer、實體機器：就是實體機器 😂)</li>
+<li>OS 作業系統：每棟大樓的骨架和地基。</li>
+<li>Master Node：住戶管委會所居住大樓 (真好自己有所屬的大樓ＸＤ)，為了保證他們不會吵架，所以最少需要三棟。</li>
+<li>Etcd Cluster：管委會的人，一樣為了怕一黨獨大(?，所以建議最少需要有三位管委，且互相投票出一個頭頭。</li>
+<li>Worker Node：就是偶們住戶所居住的大樓。</li>
+<li>Pod：住戶，所以我們一棟 Worker Node 大樓，可以有很多 Pod 住戶。</li>
+<li>Pod IP：每個住戶的門牌，既然是門牌，代表他也不會重複。</li>
+<li>Container Registry：包裹集中的存放中心。</li>
+<li>Container Images：還沒有被打開的包裹。</li>
+<li>Containers：已經被打開且正在使用的包裹，那每個 Pod 住戶裡面，可以有一個或很多個以上的 Containers 包裹。</li>
+<li>Service：社區裡面的社團，例如：羽球社、麻將社等等，可以集合大家的地方。</li>
+<li>Service Mesh：社團的聯絡名冊，會記住誰是哪一個社團的成員。</li>
+<li>Ingress Controller：社區的大門，可以指定讓社區成員都固定走同一個或是多個門的入口管控。</li>
+<li>Egress Controller：社區的後門，可以指定讓社區成員都固定走同一個或是多個門的出口管控。</li>
+<li>Internal DNS / Service Discovery：大樓住戶的電話簿。</li>
+<li>External DNS：指向各大樓的路標。</li>
+<li>OCI (Open Container Initiative)：制定大樓鋼筋水泥或是行李箱標準的組織。</li>
+<li>CRI (Container Runtime Interface)：大樓鋼筋水泥的廠商。</li>
+<li>CNI (Container Network Interface)：大樓水電系統的廠商。</li>
+<li>CSI (Container Storage Interface)：大樓空間規劃的廠商。</li>
+<li>Bastion：專們維護社區的工程車。</li>
+</ul>
+<br>
+<h3 id="常用套件">常用套件</h3>
+<ul>
+<li>Promethus：社區整體的監控中心 (Meterics)，一堆攝影機的管理室XD</li>
+<li>Grafana：監控中心裡面大型的 LED 儀表板。</li>
+<li>Elaticsearch：社區整體的情資中心 (Logging)，這應該是一群愛八卦的大媽吧 😏</li>
+<li>Kibana：情資中心裡面大型的 LED 訊息版。</li>
+</ul>
+<br>
+<h2 id="常見問題">常見問題</h2>
+<p>作者也有整理了一些常見的問題，我把它整理一下挑選出幾個我自己一開始也會有疑問的問題，我們一起來看看吧！一樣我會用我所理解的意思來介紹 ~</p>
+<h3 id="q1為什麼-kubernetes-的最小單位是-pod-這個要怎麼理解">Q1：為什麼 Kubernetes 的最小單位是 Pod 這個要怎麼理解？</h3>
+<p>Ans ： 試想一下，難怪管委會會管你的包裹裡面內容物放什麼嗎XD</p>
+<br>
+<h3 id="q2docker-在-kubernetes-的角色是什麼">Q2：Docker 在 Kubernetes 的角色是什麼？</h3>
+<p>Ans ： 是眾多的 CRI (Container Runtime Interface) 選擇之一，也就是大樓的鋼筋水泥廠商有很多間，有一間叫做 Docker 的廠商特別有名。</p>
+<br>
+<h3 id="q3呈上那-cricnicsi-是不是也可以替換成他的廠商">Q3：呈上，那 CRI/CNI/CSI 是不是也可以替換成他的廠商？</h3>
+<p>Ans ： 當然可以，現在可以看到越來越多廠商都開始支援 Kubernetes 就是因為這個原因，因為一般情況下，Kubernetes 並不會特別限定 <code>大樓鋼筋水泥廠商</code>、<code>大樓水電系統廠商</code>、<code>大樓空間規劃廠商</code>，只要有符合特定的標準即可，但要留意 Kubernetes 的版號也會受到這三個介面支援的分行版號所影響，要留意相容性的問題！</p>
+<br>
+<h3 id="q4整個住戶社區最重要的角色是什麼">Q4：整個住戶社區最重要的角色是什麼？</h3>
+<p>Ans ： 那三棟管委會大樓，和裡面的的三位委員，三位掛掉一位還可以維持正常運作，掛掉兩位會維持唯獨運作。</p>
+<br>
+<h3 id="q5kubernetesvmcontainer-的差異性">Q5：Kubernetes、VM、Container 的差異性</h3>
+<p>Ans ： 我們可以建立好一個大樓(VM)，隨意放置一個或是多個包裹(Containers)，必須手動管理這些包裹，如果資源不足或是這棟大樓倒了，就沒有辦法自動轉移這些包裹的內容了。</p>
+<p>但如果是 Kubernetes，我們就可以建立多個大樓(VM)，透過 Kubernetes 所規定的放置計畫 (例如：Deployment、DaemonSet)，我們將可以統一調度這些 Pod，當某棟大樓資源不夠或是這棟大樓倒時，可以根據 Kubernetes 規則來進行搬遷或是擴充大樓。</p>
+<br>
+<h3 id="q6為什麼有人會把-container-跟-pod-混在一起講">Q6：為什麼有人會把 Container 跟 Pod 混在一起講</h3>
+<p>Ans ： 因為大部分的情況下，都是一個住戶(Pod)放一個包裹(Container)，，才會導致這樣的誤會。但實際上，一個住戶(Pod)是可以放一個或多個包裹在裡面的！</p>
+<br>
+<h3 id="q7什麼事-node-scaling-">Q7：什麼事 Node Scaling ?</h3>
+<p>Ans ： 可以把它理解成，當住戶太多時，Kubernetes 會自動或手動興建大樓，來把多出來的用戶給塞進去。</p>
+<br>
+<h3 id="q8上面有提到放置計畫是什麼意思">Q8：上面有提到放置計畫是什麼意思？</h3>
+<p>Ans ： 只要你有需要將包裹放在社區內，都必須提出部署計畫(Deployment) 給管委會審核，只要通過審核，他們依照你事先聲明的計畫，盡最大可能性來放置包裹。</p>
+<p>所以當我們有任何變更計畫時，都需要重新提交一份新的部署計畫給管委會重新審核和接受。</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://blog.pichuang.com.tw/20210111-Kubernetes-for-sales-and-marketing/#%E4%B8%AD%E7%BF%BB%E4%B8%AD%E7%9A%84-Kubernetes-%E7%B5%84%E4%BB%B6%E4%BB%8B%E7%B4%B9" target="_blank" rel="noopener noreffer">給行銷跟業務的 Kubernetes 101 中翻中介紹</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kubernetes/">Kubernetes</a>
+                </span><span><a href="/tags/k8s/">K8s</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-06-02</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/k8s-plain/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/k8s-plain/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/k8s-plain/" data-title="用大型社區來介紹 Kubernetes 元件" data-hashtags="Kubernetes,K8s,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/k8s-plain/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/k8s-plain/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/k8s-plain/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/k8s-plain/" data-title="用大型社區來介紹 Kubernetes 元件"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/k8s-plain/" data-title="用大型社區來介紹 Kubernetes 元件"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/k8s-plain/" data-title="用大型社區來介紹 Kubernetes 元件"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/laravel-gitlab-cicd-heroku/" class="prev" rel="prev" title="部署 Laravel 於 Heroku 搭配 GitLab CI/CD"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
