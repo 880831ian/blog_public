@@ -314,14 +314,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">lorisleiva/laravel-docker:latest</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">Unit_test</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">./vendor/bin/phpunit --testsuit Unit --coverage-text --colors=never</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>說明一下這個 <code>yml</code> 檔內的設定是在做什麼：</p>
@@ -388,8 +388,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git checkout -b <span class="s2">&#34;new&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">git checkout -b <span class="s2">&#34;new&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接著修改單元測試，故意新增錯誤的測試，開啟專案的 <code>tests/Unit/ExampleTest.php</code>，最下面加上紅色框框程式碼：</p>
@@ -577,17 +577,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">image: lorisleiva/laravel-docker:latest
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Production_Deploy:
-</span></span><span class="line"><span class="cl">  stage: Production_Deploy
-</span></span><span class="line"><span class="cl">  before_script:
-</span></span><span class="line"><span class="cl">    - apk add ruby ruby-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler yarn ruby-rdoc &gt;&gt; /dev/null
-</span></span><span class="line"><span class="cl">    - apk update
-</span></span><span class="line"><span class="cl">    - gem install dpl &gt;&gt; /dev/null
-</span></span><span class="line"><span class="cl">  script:
-</span></span><span class="line"><span class="cl">    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_PROJECT_NAME --api-key=$HEROKU_PRODUCTION_API_KEY
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">image: lorisleiva/laravel-docker:latest
+
+Production_Deploy:
+  stage: Production_Deploy
+  before_script:
+    - apk add ruby ruby-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler yarn ruby-rdoc &gt;&gt; /dev/null
+    - apk update
+    - gem install dpl &gt;&gt; /dev/null
+  script:
+    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_PROJECT_NAME --api-key=$HEROKU_PRODUCTION_API_KEY
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>最後上傳 GitLab 來觸發 Gitlab-CI 執行自動化部署 (上傳指令就不多說囉，想必大家都會了吧！，不會的話可以去看 <a href="https://pin-yi.me/git/" target="_blank" rel="noopener noreffer">Git 介紹</a>，裡面有詳細的介紹 😍  )</p>

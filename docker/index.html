@@ -371,15 +371,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker pull mysql
-</span></span><span class="line"><span class="cl">Using default tag: latest
-</span></span><span class="line"><span class="cl">latest: Pulling from library/mysql
-</span></span><span class="line"><span class="cl">15115158dd02: Pull <span class="nb">complete</span>
-</span></span><span class="line"><span class="cl">.... 省略 ....
-</span></span><span class="line"><span class="cl">Digest: sha256:b17a66b49277a68066559416cf44a185cfee538d0e16b5624781019bc716c122
-</span></span><span class="line"><span class="cl">Status: Downloaded newer image <span class="k">for</span> mysql:latest
-</span></span><span class="line"><span class="cl">docker.io/library/mysql:latest
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+15115158dd02: Pull <span class="nb">complete</span>
+.... 省略 ....
+Digest: sha256:b17a66b49277a68066559416cf44a185cfee538d0e16b5624781019bc716c122
+Status: Downloaded newer image <span class="k">for</span> mysql:latest
+docker.io/library/mysql:latest
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>由於我們下載的沒有加任何的 <code>tag</code> ，也就是版本，所以我們都是下載最新版 latest ，如果想要下載特定版本，可以在服務名稱後面加上 <code>:{版本}</code> ，就可以下載對應的版本囉！</p>
@@ -409,12 +409,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker images
-</span></span><span class="line"><span class="cl">REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
-</span></span><span class="line"><span class="cl">php          latest    d6229b88aa29   <span class="m">3</span> days ago    484MB
-</span></span><span class="line"><span class="cl">mysql        latest    826efd84393b   <span class="m">6</span> days ago    521MB
-</span></span><span class="line"><span class="cl">nginx        latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+php          latest    d6229b88aa29   <span class="m">3</span> days ago    484MB
+mysql        latest    826efd84393b   <span class="m">6</span> days ago    521MB
+nginx        latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們來看看都列出哪些訊息吧！</p>
@@ -435,10 +435,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker save mysql &gt; mysql.tar
-</span></span><span class="line"><span class="cl">$ ls <span class="p">|</span> grep <span class="s1">&#39;mysql&#39;</span>
-</span></span><span class="line"><span class="cl">mysql.tar
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker save mysql &gt; mysql.tar
+$ ls <span class="p">|</span> grep <span class="s1">&#39;mysql&#39;</span>
+mysql.tar
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="刪除映像檔-rmi">刪除映像檔 (rmi)</h5>
@@ -450,10 +450,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker rmi demo-image
-</span></span><span class="line"><span class="cl">Untagged:demo-image:latest
-</span></span><span class="line"><span class="cl">Deleted: sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker rmi demo-image
+Untagged:demo-image:latest
+Deleted: sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37
+</code></pre></td></tr></table>
 </div>
 </div><p>想要同時刪除映像檔時，可以先用 <code>docker images -aq</code> 列出全部映像檔的 IMAGE ID，再一起刪除。</p>
 <div class="highlight"><div class="chroma">
@@ -461,8 +461,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker rmi -f <span class="k">$(</span>docker images -aq<span class="k">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker rmi -f <span class="k">$(</span>docker images -aq<span class="k">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>注意！刪除映像檔(Image)時，要先用 <code>docker rm {容器}</code> 去刪除所有依賴這個映像檔的容器。</li>
@@ -484,9 +484,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkdir demo-dockerfile
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> demo-dockerfile/
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">mkdir demo-dockerfile
+<span class="nb">cd</span> demo-dockerfile/
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>Dockerfile 結構，大致可以分為四個部分</p>
@@ -505,8 +505,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vim Dockerfile
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">vim Dockerfile
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="highlight"><div class="chroma">
@@ -528,22 +528,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 基礎映像檔資訊
-</span></span><span class="line"><span class="cl">FROM nginx:latest
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 維護者資訊
-</span></span><span class="line"><span class="cl">LABEL maintainer=&#34;880831ian@gmail.com&#34;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 映像檔操作指令
-</span></span><span class="line"><span class="cl">RUN apt-get update -y\
-</span></span><span class="line"><span class="cl">    &amp;&amp; apt-get install nginx -y
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 運行時容器提供服務的通道
-</span></span><span class="line"><span class="cl">EXPOSE 80
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 容器啟動時需執行的指令
-</span></span><span class="line"><span class="cl">CMD [&#34;nginx&#34;,&#34;-g&#34;,&#34;daemon off;&#34;]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 基礎映像檔資訊
+FROM nginx:latest
+
+# 維護者資訊
+LABEL maintainer=&#34;880831ian@gmail.com&#34;
+
+# 映像檔操作指令
+RUN apt-get update -y\
+    &amp;&amp; apt-get install nginx -y
+
+# 運行時容器提供服務的通道
+EXPOSE 80
+
+# 容器啟動時需執行的指令
+CMD [&#34;nginx&#34;,&#34;-g&#34;,&#34;daemon off;&#34;]
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p><code>FROM nginx:latest</code></p>
@@ -583,8 +583,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker build -t demo-image . 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker build -t demo-image . 
+</code></pre></td></tr></table>
 </div>
 </div><p>因為我們在 dockerfile 的目錄下，所以直接使用 “.” 來做建立動作，也可以使用 -f 來指定 dockerfile 的路徑位置。使用 -t 來設定映像檔的名稱，我們這邊取名叫 demo-image。</p>
 <div class="highlight"><div class="chroma">
@@ -604,20 +604,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 2.7s <span class="o">(</span>7/7<span class="o">)</span> <span class="nv">FINISHED</span>
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                   0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 44B                                                                                    0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                      0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                        0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/nginx:latest                                                       2.6s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>auth<span class="o">]</span> library/ubuntu:pull token <span class="k">for</span> registry-1.docker.io                                                          0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/library/nginx:latest@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f  0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>2/2<span class="o">]</span> RUN apt-get update -y    <span class="o">&amp;&amp;</span> apt-get install nginx -y                                                  0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; exporting to image                                                                                                 0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37                           0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/demo-image
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>+<span class="o">]</span> Building 2.7s <span class="o">(</span>7/7<span class="o">)</span> <span class="nv">FINISHED</span>
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                   0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 44B                                                                                    0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                      0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                        0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/nginx:latest                                                       2.6s
+ <span class="o">=</span>&gt; <span class="o">[</span>auth<span class="o">]</span> library/ubuntu:pull token <span class="k">for</span> registry-1.docker.io                                                          0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/library/nginx:latest@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f  0.0s
+ <span class="o">=</span>&gt; CACHED <span class="o">[</span>2/2<span class="o">]</span> RUN apt-get update -y    <span class="o">&amp;&amp;</span> apt-get install nginx -y                                                  0.0s
+ <span class="o">=</span>&gt; exporting to image                                                                                                 0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37                           0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/demo-image
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>完成後我們使用 <code>docker images</code> 來看看是否建立成功。</p>
@@ -631,13 +631,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker images
-</span></span><span class="line"><span class="cl">REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
-</span></span><span class="line"><span class="cl">demo-image   	   latest    1f56acbcbe9e   <span class="m">2</span> hours ago   166MB
-</span></span><span class="line"><span class="cl">php                latest    d6229b88aa29   <span class="m">4</span> days ago    484MB
-</span></span><span class="line"><span class="cl">mysql              latest    826efd84393b   <span class="m">6</span> days ago    521MB
-</span></span><span class="line"><span class="cl">nginx              latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker images
+REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
+demo-image   	   latest    1f56acbcbe9e   <span class="m">2</span> hours ago   166MB
+php                latest    d6229b88aa29   <span class="m">4</span> days ago    484MB
+mysql              latest    826efd84393b   <span class="m">6</span> days ago    521MB
+nginx              latest    c919045c4c2b   <span class="m">13</span> days ago   142MB
+</code></pre></td></tr></table>
 </div>
 </div><p>執行容器的部分，我們放到容器 (Container)的章節在介紹 ~</p>
 <br>
@@ -665,8 +665,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run <span class="o">[</span>OPTIONS<span class="o">]</span> IMAGE <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARG...<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run <span class="o">[</span>OPTIONS<span class="o">]</span> IMAGE <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARG...<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>OPTIONS 說明：</li>
@@ -721,9 +721,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker run -d -p 7777:80 --name<span class="o">=</span><span class="s2">&#34;demo-nginx&#34;</span> -v /Users/ian_zhuang/Desktop/data:/var/www/html nginx
-</span></span><span class="line"><span class="cl">31a4a4a56e3ef2fb75d538c4c9eea4914ac506a84a6ff97e1fbbb6c3213cc6b7
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -d -p 7777:80 --name<span class="o">=</span><span class="s2">&#34;demo-nginx&#34;</span> -v /Users/ian_zhuang/Desktop/data:/var/www/html nginx
+31a4a4a56e3ef2fb75d538c4c9eea4914ac506a84a6ff97e1fbbb6c3213cc6b7
+</code></pre></td></tr></table>
 </div>
 </div><p>我們將 Nginx 容器在背景執行，且將預設的80 Port 與本機的7777 Port 綁在一起，讓我們在本機瀏覽7777 Port 會直接導向容器的80Port，設定容器的名字叫做 “demo-nginx&quot; ，我們 Nginx 容器的檔案路徑映射到本地端的桌面 data 資料夾，我們就可以在本機新增檔案同步到容器中。</p>
 <br>
@@ -736,10 +736,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker ps
-</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE        COMMAND                  CREATED              STATUS              PORTS                  NAMES
-</span></span><span class="line"><span class="cl">31a4a4a56e3e   demo-image   <span class="s2">&#34;nginx -g &#39;daemon of…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:7777-&gt;80/tcp   demo-nginx
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker ps
+CONTAINER ID   IMAGE        COMMAND                  CREATED              STATUS              PORTS                  NAMES
+31a4a4a56e3e   demo-image   <span class="s2">&#34;nginx -g &#39;daemon of…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:7777-&gt;80/tcp   demo-nginx
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接著我們測試是否有把桌面 data 資料夾掛到容器的路徑，我們先在 data 新增一個 hello.html ，裡面隨意輸入，瀏覽一下 <code>http://127.0.0.1:7777/hello.html</code> ，看看是否成功。</p>
@@ -769,15 +769,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker logs demo-nginx
-</span></span><span class="line"><span class="cl">/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-</span></span><span class="line"><span class="cl">/docker-entrypoint.sh: Looking <span class="k">for</span> shell scripts in /docker-entrypoint.d/
-</span></span><span class="line"><span class="cl">/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-</span></span><span class="line"><span class="cl">... 省略 ...
-</span></span><span class="line"><span class="cl">2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">33</span>
-</span></span><span class="line"><span class="cl">2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">34</span>
-</span></span><span class="line"><span class="cl">2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">35</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker logs demo-nginx
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking <span class="k">for</span> shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+... 省略 ...
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">33</span>
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">34</span>
+2022/03/15 09:27:51 <span class="o">[</span>notice<span class="o">]</span> 1#1: start worker process <span class="m">35</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="刪除容器-rm--f">刪除容器 (rm -f)</h5>
@@ -788,9 +788,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker rm -f demo-nginx
-</span></span><span class="line"><span class="cl">demo-nginx
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker rm -f demo-nginx
+demo-nginx
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="進入容器-exec">進入容器 (exec)</h5>
@@ -805,13 +805,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker <span class="nb">exec</span> -it demo-nginx /bin/bash
-</span></span><span class="line"><span class="cl">root@31a4a4a56e3e:/# ls
-</span></span><span class="line"><span class="cl">bin  boot  dev	docker-entrypoint.d  docker-entrypoint.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-</span></span><span class="line"><span class="cl">root@31a4a4a56e3e:/# <span class="nb">cd</span> usr/bin/
-</span></span><span class="line"><span class="cl">root@31a4a4a56e3e:/usr/bin# <span class="nb">pwd</span>
-</span></span><span class="line"><span class="cl">/usr/bin
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker <span class="nb">exec</span> -it demo-nginx /bin/bash
+root@31a4a4a56e3e:/# ls
+bin  boot  dev	docker-entrypoint.d  docker-entrypoint.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@31a4a4a56e3e:/# <span class="nb">cd</span> usr/bin/
+root@31a4a4a56e3e:/usr/bin# <span class="nb">pwd</span>
+/usr/bin
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="匯出檔案-export">匯出檔案 (export)</h5>
@@ -823,10 +823,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker <span class="nb">export</span> demo-nginx &gt; demo-nginx.tar
-</span></span><span class="line"><span class="cl">$ ls <span class="p">|</span> grep <span class="s1">&#39;demo&#39;</span>
-</span></span><span class="line"><span class="cl">demo-nginx.tar
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker <span class="nb">export</span> demo-nginx &gt; demo-nginx.tar
+$ ls <span class="p">|</span> grep <span class="s1">&#39;demo&#39;</span>
+demo-nginx.tar
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="details admonition tip open">
@@ -852,13 +852,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ cat ~/Desktop/demo-nginx.tar<span class="p">|</span> docker import - import-nginx
-</span></span><span class="line"><span class="cl">sha256:7106935f0bfbdbb84f9eb20edb8cdb2c53207f5e0963f6a4e89d8267e9d98c56
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ docker images
-</span></span><span class="line"><span class="cl">REPOSITORY     TAG       IMAGE ID       CREATED          SIZE
-</span></span><span class="line"><span class="cl">import-nginx   latest    7106935f0bfb   <span class="m">19</span> seconds ago   140MB
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ cat ~/Desktop/demo-nginx.tar<span class="p">|</span> docker import - import-nginx
+sha256:7106935f0bfbdbb84f9eb20edb8cdb2c53207f5e0963f6a4e89d8267e9d98c56
+
+$ docker images
+REPOSITORY     TAG       IMAGE ID       CREATED          SIZE
+import-nginx   latest    7106935f0bfb   <span class="m">19</span> seconds ago   140MB
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="container-的狀態">Container 的狀態</h4>
@@ -884,23 +884,23 @@ if (!doNotTrack) {
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>
-</span></span><span class="line"><span class="cl">    <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RepoTags&#34;</span>: <span class="o">[</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;demo-image:latest&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">]</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RepoDigests&#34;</span>: <span class="o">[]</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Parent&#34;</span>: <span class="s2">&#34;&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Comment&#34;</span>: <span class="s2">&#34;buildkit.dockerfile.v0&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2022-03-15T03:02:26.8321887Z&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Container&#34;</span>: <span class="s2">&#34;&#34;</span>,
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ContainerConfig&#34;</span>: <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Hostname&#34;</span>: <span class="s2">&#34;&#34;</span>,
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Domainname&#34;</span>: <span class="s2">&#34;&#34;</span>,
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;User&#34;</span>: <span class="s2">&#34;&#34;</span>,
-</span></span><span class="line"><span class="cl">.... 省略 ....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;sha256:1f56acbcbe9ec613a37e26934a84d98bed73879059f424dc69754520086baa37&#34;</span>,
+        <span class="s2">&#34;RepoTags&#34;</span>: <span class="o">[</span>
+            <span class="s2">&#34;demo-image:latest&#34;</span>
+        <span class="o">]</span>,
+        <span class="s2">&#34;RepoDigests&#34;</span>: <span class="o">[]</span>,
+        <span class="s2">&#34;Parent&#34;</span>: <span class="s2">&#34;&#34;</span>,
+        <span class="s2">&#34;Comment&#34;</span>: <span class="s2">&#34;buildkit.dockerfile.v0&#34;</span>,
+        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2022-03-15T03:02:26.8321887Z&#34;</span>,
+        <span class="s2">&#34;Container&#34;</span>: <span class="s2">&#34;&#34;</span>,
+        <span class="s2">&#34;ContainerConfig&#34;</span>: <span class="o">{</span>
+            <span class="s2">&#34;Hostname&#34;</span>: <span class="s2">&#34;&#34;</span>,
+            <span class="s2">&#34;Domainname&#34;</span>: <span class="s2">&#34;&#34;</span>,
+            <span class="s2">&#34;User&#34;</span>: <span class="s2">&#34;&#34;</span>,
+.... 省略 ....
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="查看容器的cpu記憶體及網路使用-stats">查看容器的CPU、記憶體及網路使用 (stats)</h5>
@@ -911,9 +911,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
-</span></span><span class="line"><span class="cl">31a4a4a56e3e   demo-nginx   0.00%     5.797MiB / 1.939GiB   0.29%     6.29kB / 2.83kB   1.46MB / 20.5kB   <span class="m">5</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+31a4a4a56e3e   demo-nginx   0.00%     5.797MiB / 1.939GiB   0.29%     6.29kB / 2.83kB   1.46MB / 20.5kB   <span class="m">5</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="倉庫-repository-1">倉庫 (Repository)</h3>
@@ -925,10 +925,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker login
-</span></span><span class="line"><span class="cl">Authenticating with existing credentials...
-</span></span><span class="line"><span class="cl">Login Succeeded
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker login
+Authenticating with existing credentials...
+Login Succeeded
+</code></pre></td></tr></table>
 </div>
 </div><p>由於我有下載桌面版的 Docker ，所以登入時不需要再另外設定！</p>
 <br>
@@ -945,15 +945,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker images <span class="p">|</span> grep <span class="s1">&#39;demo-image&#39;</span>
-</span></span><span class="line"><span class="cl">demo-image   latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ docker tag demo-image 880831ian/demo-image
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ docker images <span class="p">|</span> grep <span class="s1">&#39;demo-image&#39;</span>
-</span></span><span class="line"><span class="cl">880831ian/demo-image   latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
-</span></span><span class="line"><span class="cl">demo-image             latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker images <span class="p">|</span> grep <span class="s1">&#39;demo-image&#39;</span>
+demo-image   latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
+
+$ docker tag demo-image 880831ian/demo-image
+
+$ docker images <span class="p">|</span> grep <span class="s1">&#39;demo-image&#39;</span>
+880831ian/demo-image   latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
+demo-image             latest    1f56acbcbe9e   <span class="m">24</span> hours ago   166MB
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接下來就使用 <code>docker push</code>，將映像檔上傳到 Docker hub 上！</p>
@@ -967,13 +967,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker push 880831ian/demo-image
-</span></span><span class="line"><span class="cl">Using default tag: latest
-</span></span><span class="line"><span class="cl">The push refers to repository <span class="o">[</span>docker.io/880831ian/demo-image<span class="o">]</span>
-</span></span><span class="line"><span class="cl">7722c88c8d69: Pushed
-</span></span><span class="line"><span class="cl">68a85fa9d77e: Mounted from library/ubuntu
-</span></span><span class="line"><span class="cl">latest: digest: sha256:814caacaf3dad3eccb43dc9bcad635d0473bd5946295d40ca1ec23d13a5f6d0f size: <span class="m">741</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker push 880831ian/demo-image
+Using default tag: latest
+The push refers to repository <span class="o">[</span>docker.io/880831ian/demo-image<span class="o">]</span>
+7722c88c8d69: Pushed
+68a85fa9d77e: Mounted from library/ubuntu
+latest: digest: sha256:814caacaf3dad3eccb43dc9bcad635d0473bd5946295d40ca1ec23d13a5f6d0f size: <span class="m">741</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們也登入 Docker hub 看一下，是不是真的上傳成功了～</p>
@@ -1016,12 +1016,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker run -it -v /Users/ian_zhuang/Desktop/data:/storage centos /bin/bash
-</span></span><span class="line"><span class="cl">latest: Pulling from library/centos
-</span></span><span class="line"><span class="cl">Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
-</span></span><span class="line"><span class="cl">Status: Downloaded newer image <span class="k">for</span> centos:latest
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@a99b41fba3ca /<span class="o">]</span><span class="c1"># </span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -it -v /Users/ian_zhuang/Desktop/data:/storage centos /bin/bash
+latest: Pulling from library/centos
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image <span class="k">for</span> centos:latest
+<span class="o">[</span>root@a99b41fba3ca /<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們在著面的 data 資料夾隨意新增檔案或是資料，再進入 Docker Container 內的 /storage (該檔案是因為使用 -v 而新增的資料夾) ，看看有沒有同步新增。</p>
@@ -1034,12 +1034,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@a99b41fba3ca /<span class="o">]</span><span class="c1"># cd storage</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@a99b41fba3ca storage<span class="o">]</span><span class="c1"># pwd</span>
-</span></span><span class="line"><span class="cl">/storage
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@a99b41fba3ca storage<span class="o">]</span><span class="c1"># ls</span>
-</span></span><span class="line"><span class="cl">1.html	2.html	3.html
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@a99b41fba3ca /<span class="o">]</span><span class="c1"># cd storage</span>
+<span class="o">[</span>root@a99b41fba3ca storage<span class="o">]</span><span class="c1"># pwd</span>
+/storage
+<span class="o">[</span>root@a99b41fba3ca storage<span class="o">]</span><span class="c1"># ls</span>
+1.html	2.html	3.html
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="dockerfile-volume-使用">Dockerfile VOLUME 使用</h4>
@@ -1057,12 +1057,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 基礎映像檔資訊</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">FROM ubuntu:latest
-</span></span><span class="line"><span class="cl">VOLUME <span class="o">[</span><span class="s2">&#34;/storage&#34;</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">.... 省略 ....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># 基礎映像檔資訊</span>
+
+FROM ubuntu:latest
+VOLUME <span class="o">[</span><span class="s2">&#34;/storage&#34;</span><span class="o">]</span>
+.... 省略 ....
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1086,21 +1086,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker build -t demo-image:v2 .
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 1.3s <span class="o">(</span>6/6<span class="o">)</span> <span class="nv">FINISHED</span>
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                                            0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 44B                                                                                                             0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                                               0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                                                 0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/ubuntu:latest                                                                                1.2s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/library/ubuntu:latest@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f9                          0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>2/2<span class="o">]</span> RUN apt-get update -y    <span class="o">&amp;&amp;</span> apt-get install nginx -y                                                                           0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; exporting to image                                                                                                                          0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                                         0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:0618bb2685ecfe200d9df4a91380d482031352d0e00cbfdf70fcd063aa8654fa                                                    0.0s
-</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo-image:v2
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker build -t demo-image:v2 .
+
+<span class="o">[</span>+<span class="o">]</span> Building 1.3s <span class="o">(</span>6/6<span class="o">)</span> <span class="nv">FINISHED</span>
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                                            0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 44B                                                                                                             0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                                               0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                                                 0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/ubuntu:latest                                                                                1.2s
+ <span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/library/ubuntu:latest@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f9                          0.0s
+ <span class="o">=</span>&gt; CACHED <span class="o">[</span>2/2<span class="o">]</span> RUN apt-get update -y    <span class="o">&amp;&amp;</span> apt-get install nginx -y                                                                           0.0s
+ <span class="o">=</span>&gt; exporting to image                                                                                                                          0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                                         0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:0618bb2685ecfe200d9df4a91380d482031352d0e00cbfdf70fcd063aa8654fa                                                    0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo-image:v2
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -1118,15 +1118,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker run -it demo-image:v2 /bin/bash
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">root@4f8712562dfe:/# <span class="nb">echo</span> <span class="s2">&#34;Hello ian&#34;</span> &gt; /storage/helloworld.txt
-</span></span><span class="line"><span class="cl">root@4f8712562dfe:/# ll /storage
-</span></span><span class="line"><span class="cl">total <span class="m">12</span>
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Mar <span class="m">16</span> 05:39 ./
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">1</span> root root <span class="m">4096</span> Mar <span class="m">16</span> 05:38 ../
-</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> root root   <span class="m">10</span> Mar <span class="m">16</span> 05:39 helloworld.txt
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -it demo-image:v2 /bin/bash
+
+root@4f8712562dfe:/# <span class="nb">echo</span> <span class="s2">&#34;Hello ian&#34;</span> &gt; /storage/helloworld.txt
+root@4f8712562dfe:/# ll /storage
+total <span class="m">12</span>
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Mar <span class="m">16</span> 05:39 ./
+drwxr-xr-x <span class="m">1</span> root root <span class="m">4096</span> Mar <span class="m">16</span> 05:38 ../
+-rw-r--r-- <span class="m">1</span> root root   <span class="m">10</span> Mar <span class="m">16</span> 05:39 helloworld.txt
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="4">
@@ -1143,14 +1143,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker inspect -f <span class="s1">&#39;{{.Mounts}}&#39;</span> 4f8712562dfe
-</span></span><span class="line"><span class="cl"><span class="o">[{</span>volume 4fe10ca3f...省略 /var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data /storage <span class="nb">local</span>  <span class="nb">true</span> <span class="o">}]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ docker run -it --privileged --pid<span class="o">=</span>host debian nsenter -t <span class="m">1</span> -m -u -n -i sh
-</span></span><span class="line"><span class="cl">/ <span class="c1"># cd /var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data</span>
-</span></span><span class="line"><span class="cl">/var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data <span class="c1"># ls</span>
-</span></span><span class="line"><span class="cl">helloworld.txt
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker inspect -f <span class="s1">&#39;{{.Mounts}}&#39;</span> 4f8712562dfe
+<span class="o">[{</span>volume 4fe10ca3f...省略 /var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data /storage <span class="nb">local</span>  <span class="nb">true</span> <span class="o">}]</span>
+
+$ docker run -it --privileged --pid<span class="o">=</span>host debian nsenter -t <span class="m">1</span> -m -u -n -i sh
+/ <span class="c1"># cd /var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data</span>
+/var/lib/docker/volumes/4fe10ca3f234633164d9b3c541893c68db1b4f98806525076a2edd5c1c7863c4/_data <span class="c1"># ls</span>
+helloworld.txt
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="details admonition tip open">
@@ -1164,8 +1164,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -it --privileged --pid<span class="o">=</span>host debian nsenter -t <span class="m">1</span> -m -u -n -i sh
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run -it --privileged --pid<span class="o">=</span>host debian nsenter -t <span class="m">1</span> -m -u -n -i sh
+</code></pre></td></tr></table>
 </div>
 </div><p>詳細內容可以參考 <a href="https://stackoverflow.com/questions/38532483/where-is-var-lib-docker-on-mac-os-x" target="_blank" rel="noopener noreffer">Where is /var/lib/docker on Mac/OS X</a>。</p>
 </div>
@@ -1183,9 +1183,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -it -v /data --name<span class="o">=</span>container1 centos /bin/bash
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@ a0307ce757ca /<span class="o">]</span><span class="c1">#</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run -it -v /data --name<span class="o">=</span>container1 centos /bin/bash
+<span class="o">[</span>root@ a0307ce757ca /<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1197,9 +1197,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -it --volumes-from container1 --name<span class="o">=</span>container2 centos /bin/bash
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@720d57983cd4 /<span class="o">]</span><span class="c1">#</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run -it --volumes-from container1 --name<span class="o">=</span>container2 centos /bin/bash
+<span class="o">[</span>root@720d57983cd4 /<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><code>--volumes-from</code> 參數指定 container1 的資料會與 container2 做共享。</li>
@@ -1214,9 +1214,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@a0307ce757ca /<span class="o">]</span><span class="c1"># cd /data/</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@a0307ce757ca data<span class="o">]</span><span class="c1"># echo &#34;ian~&#34; &gt; hello.txt</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@a0307ce757ca /<span class="o">]</span><span class="c1"># cd /data/</span>
+<span class="o">[</span>root@a0307ce757ca data<span class="o">]</span><span class="c1"># echo &#34;ian~&#34; &gt; hello.txt</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="4">
@@ -1228,9 +1228,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@720d57983cd4 /<span class="o">]</span><span class="c1"># cat /data/hello.txt</span>
-</span></span><span class="line"><span class="cl">ian~
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@720d57983cd4 /<span class="o">]</span><span class="c1"># cat /data/hello.txt</span>
+ian~
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="network-模式和比較">Network 模式和比較</h3>
@@ -1256,12 +1256,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker run -it --net<span class="o">=</span>none jonlabelle/network-tools
-</span></span><span class="line"><span class="cl"><span class="o">[</span>docker@network-tools<span class="o">]</span>$ ifconfig
-</span></span><span class="line"><span class="cl">lo        Link encap:Local Loopback
-</span></span><span class="line"><span class="cl">          inet addr:127.0.0.1  Mask:255.0.0.0
-</span></span><span class="line"><span class="cl">	    .... 省略 ....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -it --net<span class="o">=</span>none jonlabelle/network-tools
+<span class="o">[</span>docker@network-tools<span class="o">]</span>$ ifconfig
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+	    .... 省略 ....
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們使用 <code>ifconfig</code> 查詢，只有本地端的 127.0.0.1 IP，我們在使用 <code>ping</code> 來測試 google 網站吧</p>
 <div class="highlight"><div class="chroma">
@@ -1270,9 +1270,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>docker@network-tools<span class="o">]</span>$ ping www.google.com
-</span></span><span class="line"><span class="cl">ping: www.google.com: Try again
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>docker@network-tools<span class="o">]</span>$ ping www.google.com
+ping: www.google.com: Try again
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="container">container</h4>
@@ -1282,8 +1282,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name container1 -it jonlabelle/network-tools
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run --name container1 -it jonlabelle/network-tools
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>再開啟另一個 Terminal 來啟動 container2 的容器，並設定相同的 Network Namespace</p>
@@ -1292,8 +1292,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name container2 --net<span class="o">=</span>container:container1 -it jonlabelle/network-tools
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run --name container2 --net<span class="o">=</span>container:container1 -it jonlabelle/network-tools
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>一樣使用 <code>ifconfig</code> 查詢，可以發現兩個容器的 IP 都是相同的</p>
@@ -1305,11 +1305,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
-</span></span><span class="line"><span class="cl">          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
-</span></span><span class="line"><span class="cl">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-</span></span><span class="line"><span class="cl">          .... 省略 ....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          .... 省略 ....
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="host">host</h4>
@@ -1319,8 +1319,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --net<span class="o">=</span>host -it jonlabelle/network-tools
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run --net<span class="o">=</span>host -it jonlabelle/network-tools
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>可以看到 Container 的網路資訊和實體主機的網路資訊是相同的結果</p>
@@ -1335,14 +1335,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>docker@network-tools<span class="o">]</span>$ ifconfig
-</span></span><span class="line"><span class="cl">br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
-</span></span><span class="line"><span class="cl">          inet addr:172.20.0.1  Bcast:172.20.255.255  Mask:255.255.0.0
-</span></span><span class="line"><span class="cl">          UP BROADCAST MULTICAST  MTU:1500  Metric:1
-</span></span><span class="line"><span class="cl">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-</span></span><span class="line"><span class="cl">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-</span></span><span class="line"><span class="cl">          .... 省略 ....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>docker@network-tools<span class="o">]</span>$ ifconfig
+br-36a27cab1817 Link encap:Ethernet  HWaddr 02:42:20:DF:DB:FD
+          inet addr:172.20.0.1  Bcast:172.20.255.255  Mask:255.255.0.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          .... 省略 ....
+</code></pre></td></tr></table>
 </div>
 </div><figure><a class="lightgallery" href="/images/docker/host.png" title="/images/docker/host.png" data-thumbnail="/images/docker/host.png" data-sub-html="<h2>host 網路模式</h2>">
         <img
@@ -1362,8 +1362,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --net<span class="o">=</span>bridge -it jonlabelle/network-tools
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run --net<span class="o">=</span>bridge -it jonlabelle/network-tools
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>docker 會新增一個虛擬網卡作為容器網路對外的出口，預設名稱為 <code>docker0</code>，docker0 會跟本機的對外網卡(圖中的 <code>eth0</code> )相連，藉此取得對外連線的能力，也因為每一個容器都會使用一個 veth device 與 docker0 相連，所以也具備對外連線的能力。</p>
@@ -1430,18 +1430,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── Docker-compose.yml
-</span></span><span class="line"><span class="cl">├── docker-volume
-</span></span><span class="line"><span class="cl">│   └── html
-</span></span><span class="line"><span class="cl">│       ├── index.php
-</span></span><span class="line"><span class="cl">│       └── info.php
-</span></span><span class="line"><span class="cl">├── nginx
-</span></span><span class="line"><span class="cl">│   ├── Dockerfile
-</span></span><span class="line"><span class="cl">│   └── default.conf
-</span></span><span class="line"><span class="cl">└── php
-</span></span><span class="line"><span class="cl">    └── Dockerfile
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">.
+├── Docker-compose.yml
+├── docker-volume
+│   └── html
+│       ├── index.php
+│       └── info.php
+├── nginx
+│   ├── Dockerfile
+│   └── default.conf
+└── php
+    └── Dockerfile
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="highlight"><div class="chroma">
@@ -1452,11 +1452,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">省略 ....</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">省略 ....</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到一開頭，會先寫版本，這邊代表的是會使用 3.8 版本的設定檔，詳細版本對照可以參考 <a href="https://docs.docker.com/compose/compose-file/compose-versioning/" target="_blank" rel="noopener noreffer">Compose file versions and upgrading</a></p>
 <p>services 可以設定用來啟動多的容器，裡面我們總共放了三個容器，分別是 nginx、php、mysql 。</p>
@@ -1474,14 +1474,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./nginx/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">7777</span><span class="p">:</span><span class="m">80</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/log/:/var/log/nginx/</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./nginx/</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">7777</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/log/:/var/log/nginx/</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>nginx 的 <code>build</code> 就是要執行這個 nginx 容器的映像檔，還記得我們也可以使用 Dockerfile 來撰寫映像檔案嗎！?</p>
 <p>由於我們還要設定其他內容，所以特別另外拉一個 nginx 資料夾來放置，裡面放了兩個檔案，分別是 Dockerfile、default.conf。</p>
@@ -1501,14 +1501,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/html/:/var/www/html/</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php/</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
+</span><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">9000</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/html/:/var/www/html/</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>php 的 <code>build</code> 是要執行這個 php 容器的映像檔，由於我們還要設定其他內容，所以特別另外拉一個 php 資料夾來放置 Dokcerfile。</p>
 <p>Dockerfile 檔案裡面會使用 php 版本 7.4-fpm，並且在容器執行 <code>docker-php-ext-install</code>、<code>mysqli</code>。</p>
@@ -1529,17 +1529,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:8.0.28</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/mysql/:/var/lib/mysql</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">mydb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l">myuser</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">password</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:8.0.28</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/mysql/:/var/lib/mysql</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span><span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">mydb</span><span class="w">
+</span><span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l">myuser</span><span class="w">
+</span><span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">password</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>mysql 使用的映像檔是 mysql 版本是 8.0.28，我們為了要保留資料庫的資料，所以將容器的 <code>/var/lib/mysql</code> 映射到本地端 <code>./docker-volume/mysql</code> 資料夾。</p>
 <p>最後的環境變數，設定 root 帳號的登入密碼，以及要使用的資料庫、使用者的帳號、使用者的密碼。</p>

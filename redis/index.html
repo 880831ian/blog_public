@@ -242,8 +242,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ brew install redis
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ brew install redis
+</code></pre></td></tr></table>
 </div>
 </div><br>
 安裝好用 -v 檢查版本
@@ -255,11 +255,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ redis-server -v
-</span></span><span class="line"><span class="cl">Redis server <span class="nv">v</span><span class="o">=</span>6.2.6 <span class="nv">sha</span><span class="o">=</span>00000000:0 <span class="nv">malloc</span><span class="o">=</span>libc <span class="nv">bits</span><span class="o">=</span><span class="m">64</span> <span class="nv">build</span><span class="o">=</span>c6f3693d1aced7d9
-</span></span><span class="line"><span class="cl">$ redis-cli -v
-</span></span><span class="line"><span class="cl">redis-cli 6.2.6
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-server -v
+Redis server <span class="nv">v</span><span class="o">=</span>6.2.6 <span class="nv">sha</span><span class="o">=</span>00000000:0 <span class="nv">malloc</span><span class="o">=</span>libc <span class="nv">bits</span><span class="o">=</span><span class="m">64</span> <span class="nv">build</span><span class="o">=</span>c6f3693d1aced7d9
+$ redis-cli -v
+redis-cli 6.2.6
+</code></pre></td></tr></table>
 </div>
 </div><p>一個是 Server、另一個是 Cli，所以在稍後測試時，需要開啟兩個 Terminal 來執行歐！</p>
 <h3 id="執行-redis">執行 Redis</h3>
@@ -294,33 +294,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ redis-server
-</span></span><span class="line"><span class="cl">39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span>
-</span></span><span class="line"><span class="cl">39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=39403, just started</span>
-</span></span><span class="line"><span class="cl">39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 
-</span></span><span class="line"><span class="cl">39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * Increased maximum number of open files to <span class="m">10032</span> <span class="o">(</span>it was originally <span class="nb">set</span> to 256<span class="o">)</span>.
-</span></span><span class="line"><span class="cl">39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * monotonic clock: POSIX clock_gettime
-</span></span><span class="line"><span class="cl">                _._
-</span></span><span class="line"><span class="cl">           _.-<span class="sb">``</span>__ <span class="s1">&#39;&#39;</span>-._
-</span></span><span class="line"><span class="cl">      _.-<span class="sb">``</span>    <span class="sb">`</span>.  <span class="sb">`</span>_.  <span class="s1">&#39;&#39;</span>-._           Redis 6.2.6 <span class="o">(</span>00000000/0<span class="o">)</span> <span class="m">64</span> bit
-</span></span><span class="line"><span class="cl">  .-<span class="sb">``</span> .-<span class="sb">```</span>.  <span class="sb">```</span><span class="se">\/</span>    _.,_ <span class="s1">&#39;&#39;</span>-._
-</span></span><span class="line"><span class="cl"> <span class="o">(</span>    <span class="s1">&#39;      ,       .-`  | `,    )     Running in standalone mode
-</span></span></span><span class="line"><span class="cl"><span class="s1"> |`-._`-...-` __...-.``-._|&#39;</span><span class="sb">`</span> _.-<span class="s1">&#39;|     Port: 6379
-</span></span></span><span class="line"><span class="cl"><span class="s1"> |    `-._   `._    /     _.-&#39;</span>    <span class="p">|</span>     PID: <span class="m">39403</span>
-</span></span><span class="line"><span class="cl">  <span class="sb">`</span>-._    <span class="sb">`</span>-._  <span class="sb">`</span>-./  _.-<span class="s1">&#39;    _.-&#39;</span>
-</span></span><span class="line"><span class="cl"> <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
-</span></span></span><span class="line"><span class="cl"><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |           https://redis.io
-</span></span></span><span class="line"><span class="cl"><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
-</span></span><span class="line"><span class="cl"> <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
-</span></span></span><span class="line"><span class="cl"><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |
-</span></span></span><span class="line"><span class="cl"><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
-</span></span><span class="line"><span class="cl">      <span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>
-</span></span><span class="line"><span class="cl">          <span class="sb">`</span>-._        _.-<span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              `-.__.-&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 <span class="c1"># Server initialized</span>
-</span></span><span class="line"><span class="cl">39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 * Ready to accept connections
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-server
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span>
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 <span class="c1"># Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=39403, just started</span>
+39403:C <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.500 
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * Increased maximum number of open files to <span class="m">10032</span> <span class="o">(</span>it was originally <span class="nb">set</span> to 256<span class="o">)</span>.
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.501 * monotonic clock: POSIX clock_gettime
+                _._
+           _.-<span class="sb">``</span>__ <span class="s1">&#39;&#39;</span>-._
+      _.-<span class="sb">``</span>    <span class="sb">`</span>.  <span class="sb">`</span>_.  <span class="s1">&#39;&#39;</span>-._           Redis 6.2.6 <span class="o">(</span>00000000/0<span class="o">)</span> <span class="m">64</span> bit
+  .-<span class="sb">``</span> .-<span class="sb">```</span>.  <span class="sb">```</span><span class="se">\/</span>    _.,_ <span class="s1">&#39;&#39;</span>-._
+ <span class="o">(</span>    <span class="s1">&#39;      ,       .-`  | `,    )     Running in standalone mode
+</span><span class="s1"> |`-._`-...-` __...-.``-._|&#39;</span><span class="sb">`</span> _.-<span class="s1">&#39;|     Port: 6379
+</span><span class="s1"> |    `-._   `._    /     _.-&#39;</span>    <span class="p">|</span>     PID: <span class="m">39403</span>
+  <span class="sb">`</span>-._    <span class="sb">`</span>-._  <span class="sb">`</span>-./  _.-<span class="s1">&#39;    _.-&#39;</span>
+ <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
+</span><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |           https://redis.io
+</span><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+ <span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|
+</span><span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |
+</span><span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+      <span class="sb">`</span>-._    <span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>
+          <span class="sb">`</span>-._        _.-<span class="s1">&#39;
+</span><span class="s1">              `-.__.-&#39;</span>
+
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 <span class="c1"># Server initialized</span>
+39403:M <span class="m">08</span> Mar <span class="m">2022</span> 11:13:17.503 * Ready to accept connections
+</code></pre></td></tr></table>
 </div>
 </div><p>如果出現上面符號，就代表 Server 已經啟動，接下來再開另一個 Terminal 來執行 Cli。</p>
 <br>
@@ -333,10 +333,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ redis-cli
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ping
-</span></span><span class="line"><span class="cl">PONG
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ redis-cli
+127.0.0.1:6379&gt; ping
+PONG
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接下來，我們都會在 Cli 視窗做測試，會詳細介紹每一個資料型態以及其適合情境。</p>
@@ -360,11 +360,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> string hello-world
-</span></span><span class="line"><span class="cl">OK
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get string
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;hello-world&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> string hello-world
+OK
+127.0.0.1:6379&gt; get string
+<span class="s2">&#34;hello-world&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>我們先用 <code>set</code> 將 hello-world 字串存到 string 這個 key，再用 <code>get</code> 顯示 string 裡面的 value。</p>
 <br>
@@ -384,17 +384,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> num <span class="m">10</span>
-</span></span><span class="line"><span class="cl">OK
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incr num
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incr num
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; decr num
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; decr num
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> num <span class="m">10</span>
+OK
+127.0.0.1:6379&gt; incr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
+127.0.0.1:6379&gt; incr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+127.0.0.1:6379&gt; decr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
+127.0.0.1:6379&gt; decr num
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="append">append</h5>
@@ -411,15 +411,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; exists str
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; append str <span class="s2">&#34;Hello&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; append str <span class="s2">&#34; World~&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get str
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello World~&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; exists str
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+127.0.0.1:6379&gt; append str <span class="s2">&#34;Hello&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
+127.0.0.1:6379&gt; append str <span class="s2">&#34; World~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+127.0.0.1:6379&gt; get str
+<span class="s2">&#34;Hello World~&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><h5 id="getrange">getrange</h5>
 <p>可以輸入字串的開始位元與結束位元，會依照你輸入的去顯示字串。我把它理解成是陣列的 key 與 value 的關係。</p>
@@ -437,17 +437,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> a <span class="s2">&#34;This is a string&#34;</span>
-</span></span><span class="line"><span class="cl">OK
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; getrange a <span class="m">0</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;This&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; getrange a -3 -1
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;ing&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; getrange a <span class="m">0</span> -1
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;This is a string&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; getrange a <span class="m">10</span> <span class="m">100</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;string&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; <span class="nb">set</span> a <span class="s2">&#34;This is a string&#34;</span>
+OK
+127.0.0.1:6379&gt; getrange a <span class="m">0</span> <span class="m">3</span>
+<span class="s2">&#34;This&#34;</span>
+127.0.0.1:6379&gt; getrange a -3 -1
+<span class="s2">&#34;ing&#34;</span>
+127.0.0.1:6379&gt; getrange a <span class="m">0</span> -1
+<span class="s2">&#34;This is a string&#34;</span>
+127.0.0.1:6379&gt; getrange a <span class="m">10</span> <span class="m">100</span>
+<span class="s2">&#34;string&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><h5 id="mset">mset</h5>
 <p>我們也可以設定的時候，把要設定的值都一起設定，只需要使用 <code>mset</code> 就可以達成。</p>
@@ -463,15 +463,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; mset <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">OK
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;1&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get <span class="m">2</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;2&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get <span class="m">3</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; mset <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">2</span>
+OK
+127.0.0.1:6379&gt; get <span class="m">1</span>
+<span class="s2">&#34;1&#34;</span>
+127.0.0.1:6379&gt; get <span class="m">2</span>
+<span class="s2">&#34;2&#34;</span>
+127.0.0.1:6379&gt; get <span class="m">3</span>
+<span class="o">(</span>nil<span class="o">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>如果用 <code>get</code> 顯示資料，若沒有對應的 key ，會顯示 (nil)。</p>
 <br>
@@ -516,15 +516,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hget student name
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;ian&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hget student phone
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;0980123456&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hget student gender
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;M&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hget student name
+<span class="s2">&#34;ian&#34;</span>
+127.0.0.1:6379&gt; hget student phone
+<span class="s2">&#34;0980123456&#34;</span>
+127.0.0.1:6379&gt; hget student gender
+<span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>Hashes 的話要使用 <code>hset</code>、<code>hget</code> 來對 Hashes 做儲存以及讀取。</p>
 <h5 id="hgetall">hgetall</h5>
@@ -542,16 +542,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hgetall student
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
-</span></span><span class="line"><span class="cl">5<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
-</span></span><span class="line"><span class="cl">6<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><h5 id="hkeys">hkeys</h5>
 <p>想要單獨顯示 Hashes 裡面的 key ，可以使用 <code>hkeys</code> 來顯示。</p>
@@ -565,13 +565,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hkeys student
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hkeys student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;phone&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="hvals">hvals</h5>
@@ -586,13 +586,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hvals student
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hvals student
+1<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;0980123456&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="hlen">hlen</h5>
@@ -608,14 +608,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hgetall student
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hlen student
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+127.0.0.1:6379&gt; hlen student
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="hincrby">hincrby</h5>
@@ -628,11 +628,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset <span class="nb">test</span> a <span class="m">10</span> b <span class="m">20</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hincrby <span class="nb">test</span> a <span class="m">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset <span class="nb">test</span> a <span class="m">10</span> b <span class="m">20</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; hincrby <span class="nb">test</span> a <span class="m">2</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">12</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="hdel">hdel</h5>
@@ -650,16 +650,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hdel student phone
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; hgetall student
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; hset student name ian phone <span class="m">0980123456</span> gender M
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+127.0.0.1:6379&gt; hdel student phone
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; hgetall student
+1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;ian&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;gender&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;M&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="哈希型態適合場景">哈希型態適合場景</h5>
@@ -693,17 +693,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; lpush list2 a a b b c d e
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; lrange list2 <span class="m">0</span> <span class="m">10</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">5<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">6<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">7<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; lpush list2 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; lrange list2 <span class="m">0</span> <span class="m">10</span>
+1<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+7<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="rpush">rpush</h5>
@@ -722,17 +722,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; rpush list3 a a b b c d e
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">10</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">5<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">6<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
-</span></span><span class="line"><span class="cl">7<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; rpush list3 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">10</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+7<span class="o">)</span> <span class="s2">&#34;e&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="lpoprpop">lpop、rpop</h5>
@@ -747,13 +747,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; rpush list3 a a b b c d e
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; lpop list3
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; rpop list3
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;e&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; rpush list3 a a b b c d e
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">7</span>
+127.0.0.1:6379&gt; lpop list3
+<span class="s2">&#34;a&#34;</span>
+127.0.0.1:6379&gt; rpop list3
+<span class="s2">&#34;e&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="lset">lset</h5>
@@ -772,17 +772,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; lset list3 <span class="m">1</span> w
-</span></span><span class="line"><span class="cl">OK
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;w&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+127.0.0.1:6379&gt; lset list3 <span class="m">1</span> w
+OK
+127.0.0.1:6379&gt; lrange list3 <span class="m">0</span> <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;w&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="列表型態適合場景">列表型態適合場景</h5>
@@ -812,14 +812,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd set1 a b c d a a b b
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; smembers set1
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a b c d a a b b
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; smembers set1
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到他實際寫入的只有 4 筆資料。</p>
 <br>
@@ -837,15 +837,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd set1 a a b b c d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+127.0.0.1:6379&gt; spop set1 <span class="m">2</span>
+1<span class="o">)</span> <span class="s2">&#34;a&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="sismember">sismember</h5>
@@ -860,13 +860,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; sismember <span class="nb">set</span> d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; sismember <span class="nb">set</span> f
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; sismember <span class="nb">set</span> d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; sismember <span class="nb">set</span> f
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="srem">srem</h5>
@@ -882,14 +882,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; srem <span class="nb">set</span> a d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; smembers <span class="nb">set</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd <span class="nb">set</span> a b b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; srem <span class="nb">set</span> a d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; smembers <span class="nb">set</span>
+1<span class="o">)</span> <span class="s2">&#34;b&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="sdiff">sdiff</h5>
@@ -907,16 +907,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd set1 a b c d
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd set2 a b 
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; sadd set3 b 
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; sdiff set1 set2 set3
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; sadd set1 a b c d
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+127.0.0.1:6379&gt; sadd set2 a b 
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; sadd set3 b 
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; sdiff set1 set2 set3
+1<span class="o">)</span> <span class="s2">&#34;c&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;d&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="集合型態適合場景">集合型態適合場景</h5>
@@ -952,20 +952,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sortset <span class="m">10</span> <span class="s1">&#39;10&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sortset <span class="m">6</span> <span class="s1">&#39;6&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sortset <span class="m">2</span> <span class="s1">&#39;2&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sortset <span class="m">99</span> <span class="s1">&#39;99&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zrangebyscore sortset <span class="m">0</span> <span class="m">100</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;2&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;6&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;10&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;99&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd sortset <span class="m">10</span> <span class="s1">&#39;10&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">6</span> <span class="s1">&#39;6&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">2</span> <span class="s1">&#39;2&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sortset <span class="m">99</span> <span class="s1">&#39;99&#39;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zrangebyscore sortset <span class="m">0</span> <span class="m">100</span>
+1<span class="o">)</span> <span class="s2">&#34;2&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;6&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;10&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;99&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>就可以看出在顯示的時候並不是依照寫入順序，而是依照我們所設定的權重去排序的。
 <br></p>
@@ -988,20 +988,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;tom&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;2000&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;peter&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;3500&#34;</span>
-</span></span><span class="line"><span class="cl">5<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
-</span></span><span class="line"><span class="cl">6<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
+1<span class="o">)</span> <span class="s2">&#34;tom&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;2000&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;peter&#34;</span>
+4<span class="o">)</span> <span class="s2">&#34;3500&#34;</span>
+5<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
+6<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="zremrangebyscore">zremrangebyscore</h5>
@@ -1021,18 +1021,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zremrangebyscore money <span class="m">1500</span> <span class="m">3500</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd money <span class="m">2000</span> tom
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">3500</span> peter
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd money <span class="m">5000</span> jack
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zremrangebyscore money <span class="m">1500</span> <span class="m">3500</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+127.0.0.1:6379&gt; zrange money <span class="m">0</span> -1 withscores
+1<span class="o">)</span> <span class="s2">&#34;jack&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;5000&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="zcard">zcard</h5>
@@ -1051,17 +1051,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sort <span class="m">10</span> <span class="m">10</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sort <span class="m">3</span> <span class="m">3</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sort <span class="m">66</span> <span class="m">66</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zadd sort <span class="m">33</span> <span class="m">33</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; zcard sort
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; zadd sort <span class="m">10</span> <span class="m">10</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">3</span> <span class="m">3</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">66</span> <span class="m">66</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zadd sort <span class="m">33</span> <span class="m">33</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; zcard sort
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="有序集合型態適合場景">有序集合型態適合場景</h5>
@@ -1118,12 +1118,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; subscribe channel_1
-</span></span><span class="line"><span class="cl">Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; subscribe channel_1
+Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
+1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>開啟另一個 Terminal 發送訊息到 channel_1</p>
@@ -1137,13 +1137,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;Hello World~&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;ian~&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;test~&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;Hello World~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;ian~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+127.0.0.1:6379&gt; publish channel_1 <span class="s2">&#34;test~&#34;</span>
+<span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 這時候再切換回來第一個 Terminal ，就可以看到他接收到我們傳送的訊息
@@ -1165,21 +1165,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; subscribe channel_1
-</span></span><span class="line"><span class="cl">Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;Hello World~&#34;</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;ian~&#34;</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;test~&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:6379&gt; subscribe channel_1
+Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
+1<span class="o">)</span> <span class="s2">&#34;subscribe&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;Hello World~&#34;</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;ian~&#34;</span>
+1<span class="o">)</span> <span class="s2">&#34;message&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;channel_1&#34;</span>
+3<span class="o">)</span> <span class="s2">&#34;test~&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h2 id="參考資料">參考資料</h2>
