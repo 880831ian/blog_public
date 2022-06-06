@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)</title>
+    <link>https://pin-yi.me/linux-clear-swap/</link>
+    <pubDate>Mon, 06 Jun 2022 10:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/linux-clear-swap/</guid>
+    <description><![CDATA[今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀]]></description>
+</item>
+<item>
     <title>用大型社區來介紹 Kubernetes 元件</title>
     <link>https://pin-yi.me/k8s-plain/</link>
     <pubDate>Thu, 02 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-plain/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/jenkins/</link>
     <pubDate>Mon, 16 May 2022 11:05:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/jenkins/</guid>
     <description><![CDATA[此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 文章，此篇會實際安裝及實作 Jenkins，大家記得在學習前要先檢查自己的版本是否有新的更新！那我們開始囉]]></description>
-</item>
-<item>
-    <title>Jenkins 及 Ansible IT 自動化 CI/CD 介紹</title>
-    <link>https://pin-yi.me/jenkins-ansible/</link>
-    <pubDate>Wed, 11 May 2022 15:11:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/jenkins-ansible/</guid>
-    <description><![CDATA[在軟體開發領域中，IT 自動化 (automation) 及 持續整合 (Continuous Integration, CI) 、持續佈署 (Continuous Deployment,CD) 是 DevOps 精神中很重要的兩個部分，此文章是參考 30 天入門 Ansible 及 Jenkins ，再加上自己測試後的筆記紀]]></description>
 </item>
 </channel>
 </rss>

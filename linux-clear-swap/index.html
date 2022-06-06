@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)" />
+<meta property="og:description" content="今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/linux-clear-swap/" /><meta property="og:image" content="https://pin-yi.me/linux-clear-swap/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-06T10:48:00+08:00" />
+<meta property="article:modified_time" content="2022-06-06T12:32:30+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/linux-clear-swap/featured-image.webp"/>
+<meta name="twitter:title" content="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)"/>
+<meta name="twitter:description" content="今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/linux-clear-swap/" /><link rel="prev" href="https://pin-yi.me/k8s-plain/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/linux-clear-swap\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/linux-clear-swap\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Linux, Swap, Cache, Buff, 實作, 介紹","wordcount":  754 ,
+        "url": "https:\/\/pin-yi.me\/linux-clear-swap\/","datePublished": "2022-06-06T10:48:00+08:00","dateModified": "2022-06-06T12:32:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/linux-clear-swap/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/linux-clear-swap/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/linux-clear-swap/featured-image.webp"
+        data-srcset="/linux-clear-swap/featured-image.webp, /linux-clear-swap/featured-image.webp 1.5x, /linux-clear-swap/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/linux-clear-swap/featured-image.webp"
+        title="/linux-clear-swap/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-06">2022-06-06</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 754 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何查詢-linux-記憶體">如何查詢 Linux 記憶體</a>
+      <ul>
+        <li><a href="#free-第一列">free 第一列</a></li>
+        <li><a href="#free-第一行">free 第一行</a></li>
+      </ul>
+    </li>
+    <li><a href="#buff-跟-cache-以及-swap-的比較">buff 跟 cache 以及 Swap 的比較</a></li>
+    <li><a href="#free-與-available-的比較">free 與 available 的比較</a></li>
+    <li><a href="#清除-swap">清除 Swap</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀況！</p>
+<br>
+<h2 id="如何查詢-linux-記憶體">如何查詢 Linux 記憶體</h2>
+<p>在講 Swap 之前，我們先來說一下怎麼查詢 Linux 記憶體，可以使用以下指令來顯示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">free 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>下完後，格式會長這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">              total        used        free      shared  buff/cache   available
+</span></span><span class="line"><span class="cl">Mem:       <span class="m">32765564</span>     <span class="m">8499252</span>     <span class="m">1825132</span>     <span class="m">1857720</span>    <span class="m">22441180</span>    <span class="m">19693100</span>
+</span></span><span class="line"><span class="cl">Swap:      <span class="m">16776188</span>           <span class="m">0</span>    <span class="m">16776188</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>但這樣子不是很好觀察，所以我們可以加上 <code>-h</code> 來顯示大小的單位，讓我更清楚的知道每一個的大小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">              total        used        free      shared  buff/cache   available
+</span></span><span class="line"><span class="cl">Mem:            31G        8.1G        1.6G        1.8G         21G         18G
+</span></span><span class="line"><span class="cl">Swap:           15G          0B         15G
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>那我們接著先來說說使用 <code>free</code> 查詢後，所有欄位的意思吧！</p>
+<h3 id="free-第一列">free 第一列</h3>
+<ul>
+<li>Mem：記憶體的使用資訊</li>
+<li>Swap：交換空間的使用資訊</li>
+</ul>
+<br>
+<h3 id="free-第一行">free 第一行</h3>
+<ul>
+<li>total：系統總共的可用實體記憶體大小</li>
+<li>used：已被使用的實體記憶體大小</li>
+<li>free：還剩下多少可用的實體記憶體</li>
+<li>shared：被共享使用的實體記憶體大小</li>
+<li>buff/cache：被 buffer 和 cache 使用的實體記憶體大小</li>
+<li>available：可被 <strong>應用程式</strong> 使用的實體記憶體大小</li>
+</ul>
+<br>
+<h2 id="buff-跟-cache-以及-swap-的比較">buff 跟 cache 以及 Swap 的比較</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">比較</th>
+<th style="text-align:center">buff</th>
+<th style="text-align:center">cache</th>
+<th style="text-align:center">Swap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">功用</td>
+<td style="text-align:center">記憶體<strong>寫完資料</strong>會先暫存起來，等之後再定期將資料存到硬碟上</td>
+<td style="text-align:center">記憶體<strong>讀完資料</strong>後暫存起來，可以在下此查詢時快速的顯示</td>
+<td style="text-align:center">硬碟的交換分區，當 buff/cache 記憶體已經用完後，又有新的讀寫請求時，就會將部份內存的資料存入硬碟，也就是把內存的部分空間當成虛擬的記憶體來做使用</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="free-與-available-的比較">free 與 available 的比較</h2>
+<ul>
+<li>free：是真正尚未被使用的實體記憶體數量</li>
+<li>available：是<strong>應用程式</strong>認為可用的記憶體數量，可以理解成 available = free + buff/cache</li>
+</ul>
+<br>
+<p>接下來我們就要進入主題，如何清除 Swap ：</p>
+<h2 id="清除-swap">清除 Swap</h2>
+<p>首先第一步我們先使用 <code>free</code> 來查看目前的 Swap 使用狀態：</p>
+<br>
+<figure><a class="lightgallery" href="/images/linux-clear-swap/1.png" title="/images/linux-clear-swap/1.png" data-thumbnail="/images/linux-clear-swap/1.png" data-sub-html="<h2>Swap 使用狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux-clear-swap/1.png"
+            data-srcset="/images/linux-clear-swap/1.png, /images/linux-clear-swap/1.png 1.5x, /images/linux-clear-swap/1.png 2x"
+            data-sizes="auto"
+            alt="/images/linux-clear-swap/1.png" width="800" />
+    </a><figcaption class="image-caption">Swap 使用狀態</figcaption>
+    </figure>
+可以看到我們的 Swap used 是 797M，那我們設定他不能超過 5%，超過就會通知，所以我們接著要把它手動清除。
+<br></p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://os.51cto.com/article/636622.html" target="_blank" rel="noopener noreffer">Linux內存、Swap、Cache、Buffer詳細解析</a>
+<a href="https://www.796t.com/content/1545715382.html" target="_blank" rel="noopener noreffer">linux free 命令下free/available區別</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux/">Linux</a>
+                </span><span><a href="/tags/swap/">Swap</a>
+                </span><span><a href="/tags/cache/">Cache</a>
+                </span><span><a href="/tags/buff/">Buff</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-06-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/f79e5f6d9df8ceb48f61287f0c7080cf815646da" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;f79e5f6:&nbsp;# 新增 清除 Linux 機器上的 Swap (Buff、Cache、Swap 比較)">
+                            <i class="fas fa-hashtag fa-fw"></i>f79e5f6</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/linux-clear-swap/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/linux-clear-swap/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/linux-clear-swap/" data-title="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)" data-hashtags="Linux,Swap,Cache,Buff,實作,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/linux-clear-swap/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/linux-clear-swap/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/linux-clear-swap/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/linux-clear-swap/" data-title="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/linux-clear-swap/" data-title="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/linux-clear-swap/" data-title="清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/k8s-plain/" class="prev" rel="prev" title="用大型社區來介紹 Kubernetes 元件"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
