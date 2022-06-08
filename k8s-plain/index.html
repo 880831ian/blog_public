@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/k8s-plain\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, 介紹","wordcount":  2284 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, 介紹","wordcount":  2287 ,
         "url": "https:\/\/pin-yi.me\/k8s-plain\/","datePublished": "2022-06-02T10:00:00+08:00","dateModified": "2022-06-02T14:37:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s-plain/featured-image.webp"
         title="/k8s-plain/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用大型社區來介紹 Kubernetes 元件</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-02">2022-06-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2284 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-02">2022-06-02</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2287 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
@@ -156,8 +156,8 @@ if (!doNotTrack) {
         <li><a href="#q4整個住戶社區最重要的角色是什麼">Q4：整個住戶社區最重要的角色是什麼？</a></li>
         <li><a href="#q5kubernetesvmcontainer-的差異性">Q5：Kubernetes、VM、Container 的差異性</a></li>
         <li><a href="#q6為什麼有人會把-container-跟-pod-混在一起講">Q6：為什麼有人會把 Container 跟 Pod 混在一起講</a></li>
-        <li><a href="#q7什麼事-node-scaling-">Q7：什麼事 Node Scaling ?</a></li>
-        <li><a href="#q8上面有提到放置計畫是什麼意思">Q8：上面有提到放置計畫是什麼意思？</a></li>
+        <li><a href="#q7什麼是-node-scaling-">Q7：什麼是 Node Scaling ?</a></li>
+        <li><a href="#q8在-q5-有提到放置計畫是什麼意思">Q8：在 Q5 有提到放置計畫是什麼意思？</a></li>
       </ul>
     </li>
     <li><a href="#參考資料">參考資料</a></li>
@@ -190,8 +190,8 @@ if (!doNotTrack) {
 <li>Kubernetes：建立這個大型社區的藍圖，規劃的社區內的大大小小的設計。</li>
 <li>虛擬化平台、公有雲平台、實體機器：就是我們要蓋社區的地皮。(虛擬化平台：vSphere/Proxmox/VMware、公有雲平台：AWS/GCP/Azuer、實體機器：就是實體機器 😂)</li>
 <li>OS 作業系統：每棟大樓的骨架和地基。</li>
-<li>Master Node：住戶管委會所居住大樓 (真好自己有所屬的大樓ＸＤ)，為了保證他們不會吵架，所以最少需要三棟。</li>
-<li>Etcd Cluster：管委會的人，一樣為了怕一黨獨大(?，所以建議最少需要有三位管委，且互相投票出一個頭頭。</li>
+<li>Master Node：住戶管委會所居住大樓 (真好自己有所屬的大樓ＸＤ)，為了保證他們不會吵架，所以建議最少需要三棟。</li>
+<li>Etcd Cluster：管委會的人，一樣為了怕一黨獨大(?，所以建議最少需要有三位管委，且互相投票選出一個頭頭。</li>
 <li>Worker Node：就是偶們住戶所居住的大樓。</li>
 <li>Pod：住戶，所以我們一棟 Worker Node 大樓，可以有很多 Pod 住戶。</li>
 <li>Pod IP：每個住戶的門牌，既然是門牌，代表他也不會重複。</li>
@@ -208,7 +208,7 @@ if (!doNotTrack) {
 <li>CRI (Container Runtime Interface)：大樓鋼筋水泥的廠商。</li>
 <li>CNI (Container Network Interface)：大樓水電系統的廠商。</li>
 <li>CSI (Container Storage Interface)：大樓空間規劃的廠商。</li>
-<li>Bastion：專們維護社區的工程車。</li>
+<li>Bastion：專門維護社區的工程車。</li>
 </ul>
 <br>
 <h3 id="常用套件">常用套件</h3>
@@ -222,13 +222,13 @@ if (!doNotTrack) {
 <h2 id="常見問題">常見問題</h2>
 <p>作者也有整理了一些常見的問題，我把它整理一下挑選出幾個我自己一開始也會有疑問的問題，我們一起來看看吧！一樣我會用我所理解的意思來介紹 ~</p>
 <h3 id="q1為什麼-kubernetes-的最小單位是-pod-這個要怎麼理解">Q1：為什麼 Kubernetes 的最小單位是 Pod 這個要怎麼理解？</h3>
-<p>Ans ： 試想一下，難怪管委會會管你的包裹裡面內容物放什麼嗎XD</p>
+<p>Ans ： 試想一下，難道管委會會管你的包裹裡面內容物放什麼嗎XD</p>
 <br>
 <h3 id="q2docker-在-kubernetes-的角色是什麼">Q2：Docker 在 Kubernetes 的角色是什麼？</h3>
 <p>Ans ： 是眾多的 CRI (Container Runtime Interface) 選擇之一，也就是大樓的鋼筋水泥廠商有很多間，有一間叫做 Docker 的廠商特別有名。</p>
 <br>
 <h3 id="q3呈上那-cricnicsi-是不是也可以替換成他的廠商">Q3：呈上，那 CRI/CNI/CSI 是不是也可以替換成他的廠商？</h3>
-<p>Ans ： 當然可以，現在可以看到越來越多廠商都開始支援 Kubernetes 就是因為這個原因，因為一般情況下，Kubernetes 並不會特別限定 <code>大樓鋼筋水泥廠商</code>、<code>大樓水電系統廠商</code>、<code>大樓空間規劃廠商</code>，只要有符合特定的標準即可，但要留意 Kubernetes 的版號也會受到這三個介面支援的分行版號所影響，要留意相容性的問題！</p>
+<p>Ans ： 當然可以，現在可以看到越來越多廠商都開始支援 Kubernetes 就是因為這個原因，因為一般情況下，Kubernetes 並不會特別限定 <code>大樓鋼筋水泥廠商</code>、<code>大樓水電系統廠商</code>、<code>大樓空間規劃廠商</code>，只要有符合特定的標準即可，但要留意 Kubernetes 的版號也會受到這三個介面支援發行的版號所影響，要留意相容性的問題！</p>
 <br>
 <h3 id="q4整個住戶社區最重要的角色是什麼">Q4：整個住戶社區最重要的角色是什麼？</h3>
 <p>Ans ： 那三棟管委會大樓，和裡面的的三位委員，三位掛掉一位還可以維持正常運作，掛掉兩位會維持唯獨運作。</p>
@@ -240,10 +240,10 @@ if (!doNotTrack) {
 <h3 id="q6為什麼有人會把-container-跟-pod-混在一起講">Q6：為什麼有人會把 Container 跟 Pod 混在一起講</h3>
 <p>Ans ： 因為大部分的情況下，都是一個住戶(Pod)放一個包裹(Container)，，才會導致這樣的誤會。但實際上，一個住戶(Pod)是可以放一個或多個包裹在裡面的！</p>
 <br>
-<h3 id="q7什麼事-node-scaling-">Q7：什麼事 Node Scaling ?</h3>
+<h3 id="q7什麼是-node-scaling-">Q7：什麼是 Node Scaling ?</h3>
 <p>Ans ： 可以把它理解成，當住戶太多時，Kubernetes 會自動或手動興建大樓，來把多出來的用戶給塞進去。</p>
 <br>
-<h3 id="q8上面有提到放置計畫是什麼意思">Q8：上面有提到放置計畫是什麼意思？</h3>
+<h3 id="q8在-q5-有提到放置計畫是什麼意思">Q8：在 Q5 有提到放置計畫是什麼意思？</h3>
 <p>Ans ： 只要你有需要將包裹放在社區內，都必須提出部署計畫(Deployment) 給管委會審核，只要通過審核，他們依照你事先聲明的計畫，盡最大可能性來放置包裹。</p>
 <p>所以當我們有任何變更計畫時，都需要重新提交一份新的部署計畫給管委會重新審核和接受。</p>
 <br>
