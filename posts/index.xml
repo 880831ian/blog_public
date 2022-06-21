@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>如何合併多個 commit，且推到遠端呢？</title>
+    <link>https://pin-yi.me/git-merge-multiple-commit/</link>
+    <pubDate>Tue, 21 Jun 2022 10:23:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/git-merge-multiple-commit/</guid>
+    <description><![CDATA[當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大]]></description>
+</item>
+<item>
     <title>Linux 常用指令</title>
     <link>https://pin-yi.me/linux/</link>
     <pubDate>Fri, 17 Jun 2022 15:26:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/linux/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/prometheus-grafana-docker/</link>
     <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/prometheus-grafana-docker/</guid>
     <description><![CDATA[還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應]]></description>
-</item>
-<item>
-    <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</title>
-    <link>https://pin-yi.me/ansible/</link>
-    <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/ansible/</guid>
-    <description><![CDATA[本篇文章是接續前面兩篇 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 跟 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章，歡迎大家先去觀看前面兩篇文章 🤪 本篇所使用到的程式碼都會整理於]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>如何合併多個 commit，且推到遠端呢？ - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="如何合併多個 commit，且推到遠端呢？" />
+<meta property="og:description" content="當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/git-merge-multiple-commit/" /><meta property="og:image" content="https://pin-yi.me/git-merge-multiple-commit/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-21T10:23:00+08:00" />
+<meta property="article:modified_time" content="2022-06-21T10:23:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/git-merge-multiple-commit/featured-image.webp"/>
+<meta name="twitter:title" content="如何合併多個 commit，且推到遠端呢？"/>
+<meta name="twitter:description" content="當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/git-merge-multiple-commit/" /><link rel="prev" href="https://pin-yi.me/linux/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何合併多個 commit，且推到遠端呢？",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/git-merge-multiple-commit\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/git-merge-multiple-commit\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Git, 指令, 介紹","wordcount":  934 ,
+        "url": "https:\/\/pin-yi.me\/git-merge-multiple-commit\/","datePublished": "2022-06-21T10:23:00+08:00","dateModified": "2022-06-21T10:23:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/git-merge-multiple-commit/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/git-merge-multiple-commit/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/git-merge-multiple-commit/featured-image.webp"
+        data-srcset="/git-merge-multiple-commit/featured-image.webp, /git-merge-multiple-commit/featured-image.webp 1.5x, /git-merge-multiple-commit/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/git-merge-multiple-commit/featured-image.webp"
+        title="/git-merge-multiple-commit/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何合併多個 commit，且推到遠端呢？</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-21">2022-06-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 934 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#合併本地端-commit">合併本地端 commit</a></li>
+    <li><a href="#合併遠端-commit">合併遠端 commit</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。</p>
+<br>
+<p>大家可以使用這個檔案來做練習：<a href="https://github.com/880831ian/git-merge-multiple-commit" target="_blank" rel="noopener noreffer">點我 GoGo</a> 😉</p>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/1.png" title="/images/git-merge-multiple-commit/1.png" data-thumbnail="/images/git-merge-multiple-commit/1.png" data-sub-html="<h2>git commit</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/1.png"
+            data-srcset="/images/git-merge-multiple-commit/1.png, /images/git-merge-multiple-commit/1.png 1.5x, /images/git-merge-multiple-commit/1.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/1.png" width="450" />
+    </a><figcaption class="image-caption">git commit</figcaption>
+    </figure>
+<p>可以看到上面這張圖，這個與<a href="https://github.com/880831ian/git-merge-multiple-commit" target="_blank" rel="noopener noreffer">範例檔案</a>的 commit 相似(不同專案，所以 SHA-1 也會不同，為了模擬所以 commit 相同而已)，我們模擬在同一個分支底下，有很多的 commit，那我們試著把他給合併起來。先說明一下目前的 commit 狀況，我們在 master 分支上有 3 個 commit，且已經推到遠端上。所以我們本地修改後，還要讓遠端的也合併，這個步驟要怎麼做呢？大家可以先想想看，後面會告訴大家答案 🥰</p>
+<br>
+<h2 id="合併本地端-commit">合併本地端 commit</h2>
+<p>首先我們目的是想要讓 add 2.txt 與 add 3.txt 的 commit 合併成 add txt，可以先使用以下指令來找到他的 commit 的 SHA-1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/2.png" title="/images/git-merge-multiple-commit/2.png" data-thumbnail="/images/git-merge-multiple-commit/2.png" data-sub-html="<h2>git log 查看 commit 的 SHA-1</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/2.png"
+            data-srcset="/images/git-merge-multiple-commit/2.png, /images/git-merge-multiple-commit/2.png 1.5x, /images/git-merge-multiple-commit/2.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/2.png" width="600" />
+    </a><figcaption class="image-caption">git log 查看 commit 的 SHA-1</figcaption>
+    </figure>
+<br>
+<p>要怎麼合併呢？我們先使用 rebase 到不會變動的 commit，也就是 add 1.txt 這個 commit：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase -i 3b5bab9d5fb65b965ae55236734103b178f9daf2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/3.png" title="/images/git-merge-multiple-commit/3.png" data-thumbnail="/images/git-merge-multiple-commit/3.png" data-sub-html="<h2>git rebase</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/3.png"
+            data-srcset="/images/git-merge-multiple-commit/3.png, /images/git-merge-multiple-commit/3.png 1.5x, /images/git-merge-multiple-commit/3.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/3.png" width="600" />
+    </a><figcaption class="image-caption">git rebase</figcaption>
+    </figure>
+<br>
+<p>下完後，會跳出上面圖片內容，可以看到上面是 rebase interactive (-i) 要執行的指令，下面是每個指令的簡單說明，我們本次會使用的只有 <code>pick</code> 以及 <code>squash</code>，分別的意思是：</p>
+<ul>
+<li>pick：會執行該 commit。</li>
+<li>squash：會把這個版本的 commit 合併到前一個 commit。</li>
+</ul>
+<br>
+<p>所以我們要將它改成以下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pick f8e5882 add 2.txt
+</span></span><span class="line"><span class="cl">squash 3eb0ef4 add 3.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>也就是將 3eb0ef4 這個版本的 commit 合併到 f8e5882 的 commit，對應我們的例子，將 add 3.txt 合併到 add 2.txt 這個 commit。</p>
+<p>儲存離開後，會跳出以下的畫面，他會告訴你原本兩個的 commit message 分別是 add 2.txt 以及 add 3.txt，這時候我們要輸入新的 commit message，也就是 add txt，建議可以把原本的訊息註解掉。</p>
+<br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/4.png" title="/images/git-merge-multiple-commit/4.png" data-thumbnail="/images/git-merge-multiple-commit/4.png" data-sub-html="<h2>輸入新的 commit</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/4.png"
+            data-srcset="/images/git-merge-multiple-commit/4.png, /images/git-merge-multiple-commit/4.png 1.5x, /images/git-merge-multiple-commit/4.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/4.png" width="600" />
+    </a><figcaption class="image-caption">輸入新的 commit</figcaption>
+    </figure>
+<br>
+<p>儲存後，我們查看 <code>git log</code>，就可以看到我們將 add 2.txt 跟 add 3.txt 合併成 add txt 😝</p>
+<br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/5.png" title="/images/git-merge-multiple-commit/5.png" data-thumbnail="/images/git-merge-multiple-commit/5.png" data-sub-html="<h2>查看目前合併狀態的 git log</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/5.png"
+            data-srcset="/images/git-merge-multiple-commit/5.png, /images/git-merge-multiple-commit/5.png 1.5x, /images/git-merge-multiple-commit/5.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/5.png" width="600" />
+    </a><figcaption class="image-caption">查看目前合併狀態的 git log</figcaption>
+    </figure>
+<br>
+<h2 id="合併遠端-commit">合併遠端 commit</h2>
+<p>可以看到下方是我們已經將本機端的 commit 給合併，但遠端還是一樣有 3 個 commit，如果我們就這樣直接推上去，只會多一次的 commit，所以我們該怎辦呢 ?</p>
+<br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/6.png" title="/images/git-merge-multiple-commit/6.png" data-thumbnail="/images/git-merge-multiple-commit/6.png" data-sub-html="<h2>遠端與本地端的 commit 不同</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/6.png"
+            data-srcset="/images/git-merge-multiple-commit/6.png, /images/git-merge-multiple-commit/6.png 1.5x, /images/git-merge-multiple-commit/6.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/6.png" width="450" />
+    </a><figcaption class="image-caption">遠端與本地端的 commit 不同</figcaption>
+    </figure>
+<br>
+<p>我們就是要使用大家都害怕的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push -f 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>強制覆蓋掉分支上的內容，但<strong>切記切記</strong>，這個只適用於自己的分支上歐～不然會直接大爆炸 💣</p>
+<br>
+<figure><a class="lightgallery" href="/images/git-merge-multiple-commit/7.png" title="/images/git-merge-multiple-commit/7.png" data-thumbnail="/images/git-merge-multiple-commit/7.png" data-sub-html="<h2>使用 git push -f 後的 commit</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/git-merge-multiple-commit/7.png"
+            data-srcset="/images/git-merge-multiple-commit/7.png, /images/git-merge-multiple-commit/7.png 1.5x, /images/git-merge-multiple-commit/7.png 2x"
+            data-sizes="auto"
+            alt="/images/git-merge-multiple-commit/7.png" width="450" />
+    </a><figcaption class="image-caption">使用 git push -f 後的 commit</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://zerodie.github.io/blog/2012/01/19/git-rebase-i/" target="_blank" rel="noopener noreffer">如何合併多個commits</a></p>
+<p><a href="https://gitbook.tw/chapters/github/using-force-push" target="_blank" rel="noopener noreffer">【狀況題】聽說 git push -f 這個指令很可怕，什麼情況可以使用它呢？</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/git/">Git</a>
+                </span><span><a href="/tags/%E6%8C%87%E4%BB%A4/">指令</a>
+                </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-06-21</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/git-merge-multiple-commit/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/git-merge-multiple-commit/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/git-merge-multiple-commit/" data-title="如何合併多個 commit，且推到遠端呢？" data-hashtags="Git,指令,介紹"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/git-merge-multiple-commit/" data-hashtag="Git"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/git-merge-multiple-commit/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/git-merge-multiple-commit/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/git-merge-multiple-commit/" data-title="如何合併多個 commit，且推到遠端呢？"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/git-merge-multiple-commit/" data-title="如何合併多個 commit，且推到遠端呢？"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/git-merge-multiple-commit/" data-title="如何合併多個 commit，且推到遠端呢？"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/linux/" class="prev" rel="prev" title="Linux 常用指令"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
