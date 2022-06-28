@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</title>
+    <link>https://pin-yi.me/gcp-introduce/</link>
+    <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-introduce/</guid>
+    <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
+</item>
+<item>
     <title>如何合併多個 commit，且推到遠端呢？</title>
     <link>https://pin-yi.me/git-merge-multiple-commit/</link>
     <pubDate>Tue, 21 Jun 2022 10:23:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/git-merge-multiple-commit/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/gitlab-cicd/</link>
     <pubDate>Thu, 26 May 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gitlab-cicd/</guid>
     <description><![CDATA[自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到]]></description>
-</item>
-<item>
-    <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</title>
-    <link>https://pin-yi.me/prometheus-grafana-docker/</link>
-    <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/prometheus-grafana-docker/</guid>
-    <description><![CDATA[還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應]]></description>
 </item>
 </channel>
 </rss>
