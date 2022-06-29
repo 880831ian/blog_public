@@ -4,37 +4,37 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ] - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]" />
-<meta property="og:description" content="哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶" />
+        <title>Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ] - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]" />
+<meta property="og:description" content="本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://pin-yi.me/gcp-introduce/" /><meta property="og:image" content="https://pin-yi.me/gcp-introduce/featured-image.webp"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-06-28T15:00:00+08:00" />
-<meta property="article:modified_time" content="2022-06-28T16:29:16+08:00" />
+<meta property="og:url" content="https://pin-yi.me/gcp-iam/" /><meta property="og:image" content="https://pin-yi.me/gcp-iam/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T10:00:00+08:00" />
+<meta property="article:modified_time" content="2022-06-29T10:00:00+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://pin-yi.me/gcp-introduce/featured-image.webp"/>
-<meta name="twitter:title" content="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]"/>
-<meta name="twitter:description" content="哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶"/>
+<meta name="twitter:image" content="https://pin-yi.me/gcp-iam/featured-image.webp"/>
+<meta name="twitter:title" content="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]"/>
+<meta name="twitter:description" content="本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資"/>
 <meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-introduce/" /><link rel="prev" href="https://pin-yi.me/git-merge-multiple-commit/" /><link rel="next" href="https://pin-yi.me/gcp-iam/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-iam/" /><link rel="prev" href="https://pin-yi.me/gcp-introduce/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]",
+        "headline": "Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]",
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/pin-yi.me\/gcp-introduce\/"
+            "@id": "https:\/\/pin-yi.me\/gcp-iam\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/pin-yi.me\/gcp-introduce\/featured-image.webp",
+                            "url": "https:\/\/pin-yi.me\/gcp-iam\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GCP, GKE, K8s","wordcount":  474 ,
-        "url": "https:\/\/pin-yi.me\/gcp-introduce\/","datePublished": "2022-06-28T15:00:00+08:00","dateModified": "2022-06-28T16:29:16+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GCP, GKE, K8s","wordcount":  670 ,
+        "url": "https:\/\/pin-yi.me\/gcp-iam\/","datePublished": "2022-06-29T10:00:00+08:00","dateModified": "2022-06-29T10:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -61,7 +61,7 @@ if (!doNotTrack) {
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
-                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gcp-introduce/" selected>繁體中文</option></select>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gcp-iam/" selected>繁體中文</option></select>
                     </span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
                         <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
@@ -110,7 +110,7 @@ if (!doNotTrack) {
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
             </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/gcp-introduce/" selected>繁體中文</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/gcp-iam/" selected>繁體中文</option></select>
                 </span></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -125,14 +125,14 @@ if (!doNotTrack) {
         </div><article class="page single" data-toc="enable"><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/gcp-introduce/featured-image.webp"
-        data-srcset="/gcp-introduce/featured-image.webp, /gcp-introduce/featured-image.webp 1.5x, /gcp-introduce/featured-image.webp 2x"
+        data-src="/gcp-iam/featured-image.webp"
+        data-srcset="/gcp-iam/featured-image.webp, /gcp-iam/featured-image.webp 1.5x, /gcp-iam/featured-image.webp 2x"
         data-sizes="auto"
-        alt="/gcp-introduce/featured-image.webp"
-        title="/gcp-introduce/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</h2><div class="post-meta">
+        alt="/gcp-iam/featured-image.webp"
+        title="/gcp-iam/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-28">2022-06-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 474 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 1 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 670 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -142,52 +142,75 @@ if (!doNotTrack) {
                     </div>
                     <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#文章連結">文章連結</a></li>
+    <li><a href="#iam-的工作原理">IAM 的工作原理</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶領大家到雲端的世界，本次要介紹的就是 <a href="https://cloud.google.com/?hl=zh-tw" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) </a>，是 Google 在雲端上提供的一組產品與服務，讓您能夠在雲端上使用與 Google 相同的技術和基礎架構，預先準備好各式服務的基本元件，讓您能夠快速上手開發及使用。</p>
+                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到<a href="https://pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資訊的 <strong>精細</strong> 訪問權限，並防止對其他資源的訪問。疑！？為什麼是精細？我們接著看下去，我們可以採用最小權限安全原則，該原則要求任何人都不應擁有超出時間所需數量的權限。</p>
 <br>
-<figure><a class="lightgallery" href="/images/gcp-introduce/gcp.png" title="/images/gcp-introduce/gcp.png" data-thumbnail="/images/gcp-introduce/gcp.png" data-sub-html="<h2>Google Cloud Platform (GCP) Logo</h2>">
+<h2 id="iam-的工作原理">IAM 的工作原理</h2>
+<p>首先我們先來了解一下 IAM 的工作原理，藉由 IAM，我們可以定義誰 (哪一個身份) 對哪些資源去有哪種的訪問權限 (角色) 來管理訪問權限控制。什麼是資源？例如， Compute Engine 虛擬機實例、Google Kubernetes Engine (GKE) 集群和Cloud Storage 存儲分區都是Google Cloud 資源，我們用於整理資源的組織或資料夾、項目等也都是資源</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-iam/logo.png" title="/images/gcp-iam/logo.png" data-thumbnail="/images/gcp-iam/logo.png" data-sub-html="<h2>GCP IAM Logo</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/gcp-introduce/gcp.png"
-            data-srcset="/images/gcp-introduce/gcp.png, /images/gcp-introduce/gcp.png 1.5x, /images/gcp-introduce/gcp.png 2x"
+            data-src="/images/gcp-iam/logo.png"
+            data-srcset="/images/gcp-iam/logo.png, /images/gcp-iam/logo.png 1.5x, /images/gcp-iam/logo.png 2x"
             data-sizes="auto"
-            alt="/images/gcp-introduce/gcp.png" width="450" />
-    </a><figcaption class="image-caption">Google Cloud Platform (GCP) Logo</figcaption>
+            alt="/images/gcp-iam/logo.png" width="250" />
+    </a><figcaption class="image-caption">GCP IAM Logo</figcaption>
     </figure>
 <br>
-<p>提一個他最大的優點就是彈性，你隨時隨地想要幾台機器，GCP 都可以立即開給你。</p>
-<p>可以試想一下，假設明天遊戲公司要推出新遊戲，預估有200萬人要上線，那我們要預先準備幾台機器呢？</p>
-<p>再來，如果準備好支援200萬人的機器，結果來了500萬人，要怎麼辦呢？或是只有20萬人上線，其他多餘的機器要怎麼辦？
-等等的問題，GCP 都可以透過他的自動擴充來依照目前使用量自動調整機器的數量，流量大時自動加開，流量小自動縮減機器。很酷吧 😁</p>
+<p>我們可以把它理解成</p>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>引用<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">什麼 『 人 』，可以對什麼『 資源 』，做什麼『 事情 』</div>
+        </div>
+    </div>
 <br>
-<p>接下來的文章，會介紹常見在 GCP 中的工具以及實作內容，該文章下方會不定期更新所有文章連結，歡迎大家可以關注此篇文章呦！😍</p>
+<p>IAM 不會直接向用戶授與資源的訪問權限，而是將權限分成多個角色，然後將這些角色授與經過身份驗證的主帳號。(以前 IAM 會將主帳號稱為成員，目前部分 API 仍然使用此術語。)</p>
 <br>
-<h2 id="文章連結">文章連結</h2>
-<p><a href="https://pin-yi.me/gcp-iam/" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) 百科全書 - IAM 與管理 [ EP.1 ]</a></p>
+<figure><a class="lightgallery" href="/images/gcp-iam/iam-overview-basics.png" title="/images/gcp-iam/iam-overview-basics.png" data-thumbnail="/images/gcp-iam/iam-overview-basics.png" data-sub-html="<h2>IAM 中的權限管理</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-iam/iam-overview-basics.png"
+            data-srcset="/images/gcp-iam/iam-overview-basics.png, /images/gcp-iam/iam-overview-basics.png 1.5x, /images/gcp-iam/iam-overview-basics.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-iam/iam-overview-basics.png" width="800" />
+    </a><figcaption class="image-caption">IAM 中的權限管理</figcaption>
+    </figure>
+<br>
+<p>可以看到這張圖片，訪問權限管理主要包含三個部分：</p>
+<ul>
+<li>主帳號 (Principal)：主帳號可以是 Google 帳號 (針對用戶)、服務帳號 (針對應用和計算工作負載)、Google 群組或Google Workspace 帳號或可以訪問資源的Cloud Identity 網域等等。</li>
+<li>角色 (Role)：一個角色對應一組權限，權限決定了可以對資源執行的操作。向主帳號授與某個腳色， 代表授與該角色包含的所有權限給主帳號。</li>
+<li>政策 (Policy)：允許政策 (Allow Policy) 是將一個或多個主體綁定在各個角色，當想要定義誰</li>
+</ul>
 <br>
 <h2 id="參考資料">參考資料</h2>
-<p><a href="https://www.accupass.com/event/2009180320185645465010" target="_blank" rel="noopener noreffer">一堂課了解 Google 雲端全貌 - GCP 是什麼</a></p>
+<p><a href="https://cloud.google.com/iam/docs/overview" target="_blank" rel="noopener noreffer">IAM 概覽</a></p>
+<p><a href="https://blog.cloud-ace.tw/identity-security/what-is-cloud-iam/" target="_blank" rel="noopener noreffer">什麼是 Cloud IAM？GCP 權限管理服務介紹</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
                 </span><span><a href="/tags/gke/">GKE</a>
                 </span><span><a href="/tags/k8s/">K8s</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-06-28&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/94fdaa9fa002fa1ac1fcfc39d09153965bd925d6" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;94fdaa9:&nbsp;# 新增 Google Cloud Platform (GCP) 百科全書 - 介紹與開頭 [ EP.0 ]">
-                            <i class="fas fa-hashtag fa-fw"></i>94fdaa9</a></span>
+                <span>更新於 2022-06-29</span>
             </div><div class="post-info-mod"><span>
-                            <a class="link-to-markdown" href="/gcp-introduce/index.md" target="_blank">閱讀原始文檔</a>
+                            <a class="link-to-markdown" href="/gcp-iam/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
                         &nbsp;|&nbsp;
-                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gcp-introduce/index.zh-tw.md" target="_blank">Improve Article</a>
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gcp-iam/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-introduce/" data-title="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]" data-hashtags="GCP,GKE,K8s"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-introduce/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-introduce/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-introduce/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-introduce/" data-title="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-introduce/" data-title="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-introduce/" data-title="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]"><i class="fab fa-skype fa-fw"></i></a></span>
-        </div></div><div class="post-nav"><a href="/git-merge-multiple-commit/" class="prev" rel="prev" title="如何合併多個 commit，且推到遠端呢？"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/gcp-iam/" class="next" rel="next" title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-iam/" data-title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]" data-hashtags="GCP,GKE,K8s"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-iam/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-iam/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-iam/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-iam/" data-title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-iam/" data-title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-iam/" data-title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gcp-introduce/" class="prev" rel="prev" title="Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
