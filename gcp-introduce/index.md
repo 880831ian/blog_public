@@ -28,6 +28,8 @@
 
 [Google Cloud Platform (GCP) 百科全書 - Compute Engine [ EP.2 ]](https://pin-yi.me/gcp-gce/)
 
+[Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]](https://pin-yi.me/gcp-gcsr/)
+
 
 <br>
 
