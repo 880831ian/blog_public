@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ] - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]" />
+<meta property="og:description" content="本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/gcp-gce/" /><meta property="og:image" content="https://pin-yi.me/gcp-gce/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T10:00:00+08:00" />
+<meta property="article:modified_time" content="2022-06-29T10:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/gcp-gce/featured-image.webp"/>
+<meta name="twitter:title" content="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]"/>
+<meta name="twitter:description" content="本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-gce/" /><link rel="prev" href="https://pin-yi.me/gcp-iam/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/gcp-gce\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/gcp-gce\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GCP, GCE","wordcount":  1589 ,
+        "url": "https:\/\/pin-yi.me\/gcp-gce\/","datePublished": "2022-06-29T10:00:00+08:00","dateModified": "2022-06-29T10:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gcp-gce/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/gcp-gce/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/gcp-gce/featured-image.webp"
+        data-srcset="/gcp-gce/featured-image.webp, /gcp-gce/featured-image.webp 1.5x, /gcp-gce/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/gcp-gce/featured-image.webp"
+        title="/gcp-gce/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1589 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#google-compute-engine-特色">Google Compute Engine 特色</a>
+      <ul>
+        <li><a href="#穩健的網路功能">穩健的網路功能</a></li>
+        <li><a href="#自訂網路與預設網路">自訂網路與預設網路</a></li>
+        <li><a href="#防火牆規則">防火牆規則</a></li>
+        <li><a href="#各區域的-https-的負載平衡">各區域的 HTTP(S) 的負載平衡</a></li>
+        <li><a href="#網路的負載平衡">網路的負載平衡</a></li>
+        <li><a href="#子網路">子網路</a></li>
+      </ul>
+    </li>
+    <li><a href="#google-compute-engine-測試">Google Compute Engine 測試</a>
+      <ul>
+        <li><a href="#新增新的-vm-實例">新增新的 VM 實例</a></li>
+        <li><a href="#安裝-nginx-web-服務器">安裝 NGINX Web 服務器</a></li>
+        <li><a href="#使用-gcloud-創建一個新實例">使用 gcloud 創建一個新實例</a></li>
+      </ul>
+    </li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到<a href="https://pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架構服務 (IaaS)，該平台可以提供大規模的虛擬機器以及相關的基礎建設 (包含硬碟、網路、附載平衡器&hellip; 等等)來建置及運作您的服務，那我們可以將 GCE 服務的主要功能劃分成以下幾點：</p>
+<br>
+<h2 id="google-compute-engine-特色">Google Compute Engine 特色</h2>
+<h3 id="穩健的網路功能">穩健的網路功能</h3>
+<p>提供使用者擁有穩健的網路功能，以運行各項應用程式及服務。</p>
+<br>
+<h3 id="自訂網路與預設網路">自訂網路與預設網路</h3>
+<p>GCE 包含內部與外部的網路連線能力，讓使用者可以透過自訂規劃來建置屬於自己服務適用的網路，而在 GCE 服務開通當下，也提供預設的 default network，內建常用的路由與防火牆設定 (例如：SSH、RDP、ICMP&hellip; 等)，供入門使用者直接使用。</p>
+<br>
+<h3 id="防火牆規則">防火牆規則</h3>
+<p>除了預設防火牆規則外，使用者也可以透過自建防火牆來開放可以連入的 IP。</p>
+<br>
+<h3 id="各區域的-https-的負載平衡">各區域的 HTTP(S) 的負載平衡</h3>
+<p>為 Layer 7 的負載平衡設備，透過設定可以串連多台主機或是主機群組，讓服務不再只是依賴於單點存在的伺服器。Layer 7 的負載平衡更可以識別路由規劃，進一步可以提供不同路由的重導規則設定，也可以提供 CDN 的 Cache 功能。</p>
+<br>
+<h3 id="網路的負載平衡">網路的負載平衡</h3>
+<p>為 Layer4 的負載平衡設備，可以透過 Protocol 與 Port 的方式來重導外部流量到 GCE 主機或主機群，並可以透過 Health Check 的方式，讓流量僅通過健康的主機，避免服務中斷。</p>
+<br>
+<h3 id="子網路">子網路</h3>
+<p>透過 CIDR 的方式設定 GCE Network 中的各子網路範圍，並可以透過路由的方式串接各子網路中間的通訊，讓 GCE 網路的設計規劃可以更有彈性，也可以讓子網路的規劃來實作更安全的雲端網路架構。</p>
+<br>
+<h2 id="google-compute-engine-測試">Google Compute Engine 測試</h2>
+<p>首先我們使用 cloudskillsboost 提供的 <a href="https://www.cloudskillsboost.google/focuses/3563?locale=zh_TW&amp;parent=catalog" target="_blank" rel="noopener noreffer">Creating a Virtual Machine </a> 來做練習，打開後，請先登入自己的 Google 帳號，接著點選左上角的 <strong>Start Lab</strong>，會跳出與下面圖片類似的內容：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/1.png" title="/images/gcp-gce/1.png" data-thumbnail="/images/gcp-gce/1.png" data-sub-html="<h2>測試用的帳號密碼</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/1.png"
+            data-srcset="/images/gcp-gce/1.png, /images/gcp-gce/1.png 1.5x, /images/gcp-gce/1.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/1.png" width="250" />
+    </a><figcaption class="image-caption">測試用的帳號密碼</figcaption>
+    </figure>
+<br>
+<h3 id="新增新的-vm-實例">新增新的 VM 實例</h3>
+<ol>
+<li>點選 <strong>Open Google Console</strong> 按鈕來開啟 GCP 主控台</li>
+<li>登入帳號就使用上面圖片所提供的帳號密碼來進行登入</li>
+<li>登入成功會進入 GCP 主控台，點選左側的 menu &gt; <strong>Compute Engine</strong> &gt; <strong>VM Instances</strong>，可以參考下方圖片</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/2.png" title="/images/gcp-gce/2.png" data-thumbnail="/images/gcp-gce/2.png" data-sub-html="<h2>新增 VM 實例</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/2.png"
+            data-srcset="/images/gcp-gce/2.png, /images/gcp-gce/2.png 1.5x, /images/gcp-gce/2.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/2.png" width="600" />
+    </a><figcaption class="image-caption">新增 VM 實例</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>點選 <strong>CREATE INSTANCE</strong>，請依照下方表格來進行設定：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">標題</th>
+<th style="text-align:center">設定值</th>
+<th style="text-align:center">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Name</td>
+<td style="text-align:center">gcelab</td>
+<td style="text-align:center">虛擬機實例的名稱</td>
+</tr>
+<tr>
+<td style="text-align:center">Region</td>
+<td style="text-align:center">us-central1（愛荷華州）</td>
+<td style="text-align:center">有關區域的更多信息，請參閱 Compute Engine 指南 <a href="https://cloud.google.com/compute/docs/regions-zones" target="_blank" rel="noopener noreffer">Regions and zones</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Zone</td>
+<td style="text-align:center">us-central1-f</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Series</td>
+<td style="text-align:center">N1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Machine type</td>
+<td style="text-align:center">n1-standard-2</td>
+<td style="text-align:center">這是一個 2 vCPU、7.5 GB RAM 實例</td>
+</tr>
+<tr>
+<td style="text-align:center">Boot disk</td>
+<td style="text-align:center">New balanced persistent disk/10 GB/Debian GNU/Linux 10</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">Firewall</td>
+<td style="text-align:center">Allow HTTP taffic</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/3.png" title="/images/gcp-gce/3.png" data-thumbnail="/images/gcp-gce/3.png" data-sub-html="<h2>VM 實例 (Name、Region、Zone、Series)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/3.png"
+            data-srcset="/images/gcp-gce/3.png, /images/gcp-gce/3.png 1.5x, /images/gcp-gce/3.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/3.png" width="800" />
+    </a><figcaption class="image-caption">VM 實例 (Name、Region、Zone、Series)</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/4.png" title="/images/gcp-gce/4.png" data-thumbnail="/images/gcp-gce/4.png" data-sub-html="<h2>VM 實例 (Machine type、Boot disk、Firewall)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/4.png"
+            data-srcset="/images/gcp-gce/4.png, /images/gcp-gce/4.png 1.5x, /images/gcp-gce/4.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/4.png" width="800" />
+    </a><figcaption class="image-caption">VM 實例 (Machine type、Boot disk、Firewall)</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>新增完後，大約需要等待一分鐘，新的虛擬機就會列在 <strong>VM Instances</strong> 頁面上。</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/5.png" title="/images/gcp-gce/5.png" data-thumbnail="/images/gcp-gce/5.png" data-sub-html="<h2>VM 實例</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/5.png"
+            data-srcset="/images/gcp-gce/5.png, /images/gcp-gce/5.png 1.5x, /images/gcp-gce/5.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/5.png" width="1000" />
+    </a><figcaption class="image-caption">VM 實例</figcaption>
+    </figure>
+<br>
+<h3 id="安裝-nginx-web-服務器">安裝 NGINX Web 服務器</h3>
+<ol>
+<li>點擊 VM instances 實例最後的 SSH，會開啟 SSH 用戶端</li>
+<li>在 SSH 終端，要先獲得 <code>root</code> 訪問權限，才更方便的進行後續的動作，請先使用一下指令：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo su -
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ol start="3">
+<li>利用 <code>root</code> 用戶，來更新操作系統：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt-get update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/gcp-gce/6.png" title="/images/gcp-gce/6.png" data-thumbnail="/images/gcp-gce/6.png" data-sub-html="<h2>更新操作系統</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/6.png"
+            data-srcset="/images/gcp-gce/6.png, /images/gcp-gce/6.png 1.5x, /images/gcp-gce/6.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/6.png" width="1000" />
+    </a><figcaption class="image-caption">更新操作系統</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>安裝 NGINX：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt-get nginx -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/gcp-gce/7.png" title="/images/gcp-gce/7.png" data-thumbnail="/images/gcp-gce/7.png" data-sub-html="<h2>安裝 NGINX</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/7.png"
+            data-srcset="/images/gcp-gce/7.png, /images/gcp-gce/7.png 1.5x, /images/gcp-gce/7.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/7.png" width="1000" />
+    </a><figcaption class="image-caption">安裝 NGINX</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>最後確認 NGINX 是否運行：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ps auwx | grep nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/gcp-gce/8.png" title="/images/gcp-gce/8.png" data-thumbnail="/images/gcp-gce/8.png" data-sub-html="<h2>確認 NGINX 是否運行</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/8.png"
+            data-srcset="/images/gcp-gce/8.png, /images/gcp-gce/8.png 1.5x, /images/gcp-gce/8.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/8.png" width="1000" />
+    </a><figcaption class="image-caption">確認 NGINX 是否運行</figcaption>
+    </figure>
+<br>
+<ol start="6">
+<li>可以打開瀏覽器瀏覽 <code>http://外部 IP/</code> 或是使用 <code>curl 外部IP</code>，外部 IP 會在跟剛剛 VM 實例的 External IP 欄位呦～</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/9.png" title="/images/gcp-gce/9.png" data-thumbnail="/images/gcp-gce/9.png" data-sub-html="<h2>curl 外部 IP</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/9.png"
+            data-srcset="/images/gcp-gce/9.png, /images/gcp-gce/9.png 1.5x, /images/gcp-gce/9.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/9.png" width="700" />
+    </a><figcaption class="image-caption">curl 外部 IP</figcaption>
+    </figure>
+<p><br></p>
+<ol start="7">
+<li>完成後，記得可以點選 <strong>Check my progress</strong> 來檢查進度吧！</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/10.png" title="/images/gcp-gce/10.png" data-thumbnail="/images/gcp-gce/10.png" data-sub-html="<h2>Check my progress</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/10.png"
+            data-srcset="/images/gcp-gce/10.png, /images/gcp-gce/10.png 1.5x, /images/gcp-gce/10.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/10.png" width="500" />
+    </a><figcaption class="image-caption">Check my progress</figcaption>
+    </figure>
+<p><br></p>
+<h3 id="使用-gcloud-創建一個新實例">使用 gcloud 創建一個新實例</h3>
+<p>我們剛剛是使用網頁版來新增，當然也可以使用 gcloud 指令來新增，這個工具有預先裝在 <a href="https://cloud.google.com/shell#how_do_i_get_started" target="_blank" rel="noopener noreffer">Google Cloud Shell</a> 中。Cloud Shell 是一個基於 Debian 的虛擬機，包含了常用的開發工具 (<code>gcloud</code>、<code>git</code> 等工具)，另外你也可以將 gcloud 下載至本機上來做使用，請閱讀<a href="https://cloud.google.com/sdk/gcloud/" target="_blank" rel="noopener noreffer"> gcloud 命令行工具指南</a></p>
+<br>
+<ol>
+<li>在 Cloud Shell 中，使用 <code>gcloud</code> 來新增新的虛擬機實例：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就會跳出以下圖片的內容，過一陣子去查看 VM Instances 也可以看到我們所新增的虛擬機實例歐～</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gce/11.png" title="/images/gcp-gce/11.png" data-thumbnail="/images/gcp-gce/11.png" data-sub-html="<h2>Check my progress</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gce/11.png"
+            data-srcset="/images/gcp-gce/11.png, /images/gcp-gce/11.png 1.5x, /images/gcp-gce/11.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gce/11.png" width="1000" />
+    </a><figcaption class="image-caption">Check my progress</figcaption>
+    </figure>
+<p><br></p>
+<p>到這邊就完成了我們 Google Compute Engine 測試囉～我們知道可以新增 GCE 將實體主機的內容，移植到雲端上囉！希望大家會喜歡今天的文章 🥰</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://gdgcloud-taipei.gitbook.io/google-cloud-platform-in-practice/google-cloud-shang-de-yun-suan-fu-wu/compute-engine/compute-engine-ji-ben-jie-shao" target="_blank" rel="noopener noreffer">Compute Engine基本介紹</a></p>
+<p><a href="https://www.cloudskillsboost.google/focuses/3563?locale=zh_TW&amp;parent=catalog" target="_blank" rel="noopener noreffer">Creating a Virtual Machine</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/gce/">GCE</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-06-29</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/gcp-gce/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gcp-gce/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-gce/" data-title="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]" data-hashtags="GCP,GCE"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-gce/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-gce/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-gce/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-gce/" data-title="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-gce/" data-title="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-gce/" data-title="Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gcp-iam/" class="prev" rel="prev" title="Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

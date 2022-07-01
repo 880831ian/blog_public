@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Google Compute Engine [ EP.2 ]</title>
+    <link>https://pin-yi.me/gcp-gce/</link>
+    <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gce/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架]]></description>
+</item>
+<item>
     <title>Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]</title>
     <link>https://pin-yi.me/gcp-iam/</link>
     <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-iam/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/k8s-plain/</link>
     <pubDate>Thu, 02 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-plain/</guid>
     <description><![CDATA[前陣子對於 Kubernetes 部分內容還不是很清楚，在網路上閒逛的時候發現一篇很有趣的文章，標題是 『 給行銷跟業務的 Kubernetes 101 中翻中介紹 』，點進去後才發現，作者 Phil Huang 將]]></description>
-</item>
-<item>
-    <title>部署 Laravel 於 Heroku 搭配 GitLab CI/CD</title>
-    <link>https://pin-yi.me/laravel-gitlab-cicd-heroku/</link>
-    <pubDate>Thu, 26 May 2022 15:07:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/laravel-gitlab-cicd-heroku/</guid>
-    <description><![CDATA[經過上一篇文章 如何從頭打造專屬的 GitLab CI/CD 的學習，讓我們了解到 GitLab CI/CD 的整個流程，接著我們本次要把 Laravel 給部署到 Heroku 透過 GitLab 的 CI/CD 去達成，不需要透過任何人工去測]]></description>
 </item>
 </channel>
 </rss>
