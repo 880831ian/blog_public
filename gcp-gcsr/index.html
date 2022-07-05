@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gcp-gcsr/" /><meta property="og:image" content="https://pin-yi.me/gcp-gcsr/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-01T17:02:00+08:00" />
-<meta property="article:modified_time" content="2022-07-01T17:02:00+08:00" />
+<meta property="article:modified_time" content="2022-07-01T17:50:31+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gcp-gcsr/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/gcp-gcsr\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GCP, Source Repositories, git","wordcount":  709 ,
-        "url": "https:\/\/pin-yi.me\/gcp-gcsr\/","datePublished": "2022-07-01T17:02:00+08:00","dateModified": "2022-07-01T17:02:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GCP, Source Repositories, git","wordcount":  1290 ,
+        "url": "https:\/\/pin-yi.me\/gcp-gcsr\/","datePublished": "2022-07-01T17:02:00+08:00","dateModified": "2022-07-01T17:50:31+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/gcp-gcsr/featured-image.webp"
         title="/gcp-gcsr/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-01">2022-07-01</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 709 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-01">2022-07-01</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1290 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -146,9 +146,10 @@ if (!doNotTrack) {
       <ul>
         <li><a href="#建立-gitlab-project">建立 GitLab Project</a></li>
         <li><a href="#使用-gcloud-指令建立-source-repo">使用 gcloud 指令建立 Source Repo</a></li>
+        <li><a href="#將程式碼新增至存放區中">將程式碼新增至存放區中</a></li>
+        <li><a href="#到-gitlab-mirror-設定鏡像">到 GitLab Mirror 設定鏡像</a></li>
       </ul>
     </li>
-    <li><a href="#將程式碼新增至存放區中">將程式碼新增至存放區中</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -254,7 +255,7 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">成功建立 Source Repositories</figcaption>
     </figure>
 <br>
-<h2 id="將程式碼新增至存放區中">將程式碼新增至存放區中</h2>
+<h3 id="將程式碼新增至存放區中">將程式碼新增至存放區中</h3>
 <ol>
 <li>我們要在這一步來設定鏡像 (mirror)，首先我們看剛剛上面建立好的 Source Repositories，其中有一個<strong>手動產生的憑證</strong>，點選 <strong>產生及儲存 Git 憑證</strong></li>
 </ol>
@@ -288,6 +289,173 @@ if (!doNotTrack) {
 <ol start="3">
 <li>接著把藍色框框內的輸入到終端機內</li>
 </ol>
+<p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/7.png" title="/images/gcp-gcsr/7.png" data-thumbnail="/images/gcp-gcsr/7.png" data-sub-html="<h2>Configure Git</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/7.png"
+            data-srcset="/images/gcp-gcsr/7.png, /images/gcp-gcsr/7.png 1.5x, /images/gcp-gcsr/7.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/7.png" width="800" />
+    </a><figcaption class="image-caption">Configure Git</figcaption>
+    </figure>
+<p><br></p>
+<ol start="4">
+<li>接著請複製以下指令貼到終端機內，會生成憑證密碼：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">grep <span class="s1">&#39;source.developers.google.com&#39;</span> ~/.gitcookies <span class="p">|</span> tail -1 <span class="p">|</span> cut -d<span class="o">=</span> -f2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/8.png" title="/images/gcp-gcsr/8.png" data-thumbnail="/images/gcp-gcsr/8.png" data-sub-html="<h2>生成憑證密碼</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/8.png"
+            data-srcset="/images/gcp-gcsr/8.png, /images/gcp-gcsr/8.png 1.5x, /images/gcp-gcsr/8.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/8.png" width="800" />
+    </a><figcaption class="image-caption">生成憑證密碼</figcaption>
+    </figure>
+<p><br></p>
+<ol start="5">
+<li>接著請複製以下指令貼到終端機內，將用戶名存儲在 CSR_USER 環境變量中：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">CSR_USER</span><span class="o">=</span><span class="k">$(</span>grep <span class="s1">&#39;source.developers.google.com&#39;</span> ~/.gitcookies <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    tail -1 <span class="p">|</span> cut -d<span class="s1">$&#39;\t&#39;</span> -f7 <span class="p">|</span> cut -d<span class="o">=</span> -f1<span class="k">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/9.png" title="/images/gcp-gcsr/9.png" data-thumbnail="/images/gcp-gcsr/9.png" data-sub-html="<h2>用戶名存儲在 CSR_USER 環境變量中</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/9.png"
+            data-srcset="/images/gcp-gcsr/9.png, /images/gcp-gcsr/9.png 1.5x, /images/gcp-gcsr/9.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/9.png" width="800" />
+    </a><figcaption class="image-caption">用戶名存儲在 CSR_USER 環境變量中</figcaption>
+    </figure>
+<p><br></p>
+<ol start="6">
+<li>接著請複製以下指令貼到終端機內，將 GCP 存儲庫的 URL 存儲在 CSR_REPO 環境變量中 (repo name 要改成你在 gcp 上面的 repo)：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">CSR_REPO</span><span class="o">=</span><span class="k">$(</span>gcloud <span class="nb">source</span> repos describe &lt;repo name&gt; --format<span class="o">=</span><span class="s2">&#34;value(url)&#34;</span><span class="k">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/10.png" title="/images/gcp-gcsr/10.png" data-thumbnail="/images/gcp-gcsr/10.png" data-sub-html="<h2>將 GCP 存儲庫的 URL 存儲在 CSR_REPO 環境變量中</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/10.png"
+            data-srcset="/images/gcp-gcsr/10.png, /images/gcp-gcsr/10.png 1.5x, /images/gcp-gcsr/10.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/10.png" width="800" />
+    </a><figcaption class="image-caption">將 GCP 存儲庫的 URL 存儲在 CSR_REPO 環境變量中</figcaption>
+    </figure>
+<p><br></p>
+<ol start="7">
+<li>接著請複製以下指令貼到終端機內，將存儲庫的 URL（包括用戶名）印到終端機上：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$CSR_REPO</span> <span class="p">|</span> sed <span class="s2">&#34;s/:\/\//:\/\/</span><span class="si">${</span><span class="nv">CSR_USER</span><span class="si">}</span><span class="s2">@/&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/11.png" title="/images/gcp-gcsr/11.png" data-thumbnail="/images/gcp-gcsr/11.png" data-sub-html="<h2>存儲庫的 URL（包括用戶名）印到終端機上</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/11.png"
+            data-srcset="/images/gcp-gcsr/11.png, /images/gcp-gcsr/11.png 1.5x, /images/gcp-gcsr/11.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/11.png" width="800" />
+    </a><figcaption class="image-caption">存儲庫的 URL（包括用戶名）印到終端機上</figcaption>
+    </figure>
+<br>
+<p>經過上面操作，我們可以在第 4 步驟拿到密碼，以及在第 7 步驟拿到完整的 GCP URL，接著我們要到 GItLab Mirror 來設定鏡像。</p>
+<br>
+<h3 id="到-gitlab-mirror-設定鏡像">到 GitLab Mirror 設定鏡像</h3>
+<ol>
+<li>先從右側 muen &gt; 選擇 <strong>Settings</strong> &gt; 點選 <strong>Repository</strong>，找到 <strong>Mirroring repositories</strong></li>
+</ol>
+<p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/12.png" title="/images/gcp-gcsr/12.png" data-thumbnail="/images/gcp-gcsr/12.png" data-sub-html="<h2>GitLab Mirror 設定鏡像</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/12.png"
+            data-srcset="/images/gcp-gcsr/12.png, /images/gcp-gcsr/12.png 1.5x, /images/gcp-gcsr/12.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/12.png" width="800" />
+    </a><figcaption class="image-caption">GitLab Mirror 設定鏡像</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>將剛剛拿到的 URL 以及密碼各別輸入 Git repository URL 以及 Password，記得要選擇 Mirror direction，因為我們是要將 gitlab 的鏡像到 GCP 的 Cloud Source Repositories，所以我們要選擇 <strong>PUSH</strong>，最後按下 <strong>Mirror repository</strong>：</li>
+</ol>
+<p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/13.png" title="/images/gcp-gcsr/13.png" data-thumbnail="/images/gcp-gcsr/13.png" data-sub-html="<h2>GitLab Mirror 設定鏡像</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/13.png"
+            data-srcset="/images/gcp-gcsr/13.png, /images/gcp-gcsr/13.png 1.5x, /images/gcp-gcsr/13.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/13.png" width="800" />
+    </a><figcaption class="image-caption">GitLab Mirror 設定鏡像</figcaption>
+    </figure>
+<br>
+<p>如果沒有跳出錯誤，基本上是沒有問題了！</p>
+<p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/14.png" title="/images/gcp-gcsr/14.png" data-thumbnail="/images/gcp-gcsr/14.png" data-sub-html="<h2>GitLab Mirror 檢查</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/14.png"
+            data-srcset="/images/gcp-gcsr/14.png, /images/gcp-gcsr/14.png 1.5x, /images/gcp-gcsr/14.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/14.png" width="800" />
+    </a><figcaption class="image-caption">GitLab Mirror 檢查</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>就可以試著在 gitlab 上面推程式，看看有沒有跑到 Cloud Source Repositories 上面囉！</li>
+</ol>
+<p><br></p>
+<figure><a class="lightgallery" href="/images/gcp-gcsr/15.png" title="/images/gcp-gcsr/15.png" data-thumbnail="/images/gcp-gcsr/15.png" data-sub-html="<h2>GitLab 推程式測試</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcsr/15.png"
+            data-srcset="/images/gcp-gcsr/15.png, /images/gcp-gcsr/15.png 1.5x, /images/gcp-gcsr/15.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcsr/15.png" width="800" />
+    </a><figcaption class="image-caption">GitLab 推程式測試</figcaption>
+    </figure>
+<br>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://cloud.google.com/source-repositories/docs" target="_blank" rel="noopener noreffer">Cloud Source Repositories documentation</a></p>
@@ -297,7 +465,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/git/">git</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-01</span>
+                <span>更新於 2022-07-01&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/12aae7dc9b0c52eadea0f90178ce5d584f11032e" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;12aae7d:&nbsp;# 新增 Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories">
+                            <i class="fas fa-hashtag fa-fw"></i>12aae7d</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gcsr/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
