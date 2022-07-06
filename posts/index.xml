@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.4 ]</title>
+    <link>https://pin-yi.me/gcp-gcb/</link>
+    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gcb/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
+</item>
+<item>
     <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
     <link>https://pin-yi.me/gcp-gcsr/</link>
     <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gcsr/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/linux/</link>
     <pubDate>Fri, 17 Jun 2022 15:26:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/linux/</guid>
     <description><![CDATA[因為最近在管理機器時，常常會使用各式各樣的指令來協助管理，所以把常用的指令依照不同類別整理在底下呦 😘 會定期更新該文章呦 ~ 網路類 查詢遠端 Port 是否]]></description>
-</item>
-<item>
-    <title>清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)</title>
-    <link>https://pin-yi.me/linux-clear-swap/</link>
-    <pubDate>Mon, 06 Jun 2022 10:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/linux-clear-swap/</guid>
-    <description><![CDATA[今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀]]></description>
 </item>
 </channel>
 </rss>
