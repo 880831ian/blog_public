@@ -30,6 +30,8 @@
 
 [Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]](https://pin-yi.me/gcp-gcsr/)
 
+[Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.4 ]
+](https://pin-yi.me/gcp-gcb/)
 
 <br>
 
