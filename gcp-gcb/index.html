@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gcp-gcb/" /><meta property="og:image" content="https://pin-yi.me/gcp-gcb/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-06T17:02:00+08:00" />
-<meta property="article:modified_time" content="2022-07-07T12:22:47+08:00" />
+<meta property="article:modified_time" content="2022-07-07T15:45:21+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gcp-gcb/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/pin-yi.me\/gcp-gcb\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GCP, Cloud Build, Source Repositories, GCE","wordcount":  953 ,
-        "url": "https:\/\/pin-yi.me\/gcp-gcb\/","datePublished": "2022-07-06T17:02:00+08:00","dateModified": "2022-07-07T12:22:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GCP, Cloud Build, GCE, Source Repositories, Container Registry","wordcount":  1958 ,
+        "url": "https:\/\/pin-yi.me\/gcp-gcb\/","datePublished": "2022-07-06T17:02:00+08:00","dateModified": "2022-07-07T15:45:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/gcp-gcb/featured-image.webp"
         title="/gcp-gcb/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-06">2022-07-06</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 953 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-06">2022-07-06</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1958 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -142,8 +142,14 @@ if (!doNotTrack) {
                     </div>
                     <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#cloud-source-repositories-測試">Cloud Source Repositories 測試</a></li>
-    <li><a href="#撰寫-cloudbuildyaml-設定檔">撰寫 cloudbuild.yaml 設定檔</a></li>
+    <li><a href="#cloud-source-repositories-測試">Cloud Source Repositories 測試</a>
+      <ul>
+        <li><a href="#撰寫-cloudbuildyaml-設定檔">撰寫 cloudbuild.yaml 設定檔</a></li>
+        <li><a href="#撰寫-dockerfile">撰寫 Dockerfile</a></li>
+        <li><a href="#撰寫測試-indexhtml">撰寫測試 index.html</a></li>
+        <li><a href="#commit-到-gitlab">Commit 到 GitLab</a></li>
+      </ul>
+    </li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -163,14 +169,14 @@ if (!doNotTrack) {
     </figure>
 <p><br></p>
 <h2 id="cloud-source-repositories-測試">Cloud Source Repositories 測試</h2>
-<p>前面 GitLab 鏡像設定，請先參考上一篇 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]</a>，上一篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續上一篇的內容，繼續往下開始學習吧～</p>
+<p>前面 GitLab 鏡像設定，請先參考上上篇 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]</a>，上上篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續之前的內容，繼續往下開始學習吧～</p>
 <br>
 <ol>
 <li>開啟 GCP，選擇左側的 menu &gt; 點擊 <strong>Cloud Build</strong> &gt; 選擇 <strong>觸發條件</strong>，點擊 <strong>建立觸發條件</strong> 按鈕。</li>
 </ol>
 <br>
 <ol start="2">
-<li>輸入觸發條件的名稱，事件可以設定我們要怎麼進行觸發，我們這邊先選擇 <strong>推送至分支的版本</strong> 來觸發，在來源選擇上一篇建立好的 Cloud Source Repositories 存放區，分支版本我們先使用預設的 master，也就是推程式到 master 他會就觸發 Cloud Build：</li>
+<li>輸入觸發條件的名稱，事件可以設定我們要怎麼進行觸發，我們這邊先選擇 <strong>推送至分支的版本</strong> 來觸發，在來源選擇上上篇建立好的 Cloud Source Repositories 存放區，分支版本我們先使用預設的 master，也就是推程式到 master 他會就觸發 Cloud Build：</li>
 </ol>
 <br>
 <figure><a class="lightgallery" href="/images/gcp-gcb/2.png" title="/images/gcp-gcb/2.png" data-thumbnail="/images/gcp-gcb/2.png" data-sub-html="<h2>建立觸發條件 1</h2>">
@@ -180,7 +186,7 @@ if (!doNotTrack) {
             data-src="/images/gcp-gcb/2.png"
             data-srcset="/images/gcp-gcb/2.png, /images/gcp-gcb/2.png 1.5x, /images/gcp-gcb/2.png 2x"
             data-sizes="auto"
-            alt="/images/gcp-gcb/2.png" width="1000" />
+            alt="/images/gcp-gcb/2.png" width="900" />
     </a><figcaption class="image-caption">建立觸發條件 1</figcaption>
     </figure>
 <br>
@@ -195,11 +201,11 @@ if (!doNotTrack) {
             data-src="/images/gcp-gcb/3.png"
             data-srcset="/images/gcp-gcb/3.png, /images/gcp-gcb/3.png 1.5x, /images/gcp-gcb/3.png 2x"
             data-sizes="auto"
-            alt="/images/gcp-gcb/3.png" width="1000" />
+            alt="/images/gcp-gcb/3.png" width="900" />
     </a><figcaption class="image-caption">建立觸發條件 2</figcaption>
     </figure>
 <br>
-<h2 id="撰寫-cloudbuildyaml-設定檔">撰寫 cloudbuild.yaml 設定檔</h2>
+<h3 id="撰寫-cloudbuildyaml-設定檔">撰寫 cloudbuild.yaml 設定檔</h3>
 <p>在開始建立檔案前，先來跟大家說說檔案內有哪些設定吧：</p>
 <br>
 <p>首先 Cloud Build 建構器是裝有常用的程式語言和工具的容器映像。我們可以配置 Cloud Build，讓建構器中運行特定命令，我舉個例子讓大家了解：</p>
@@ -251,29 +257,219 @@ if (!doNotTrack) {
 </tbody>
 </table>
 <br>
-<p>接著我們來試著寫一個 cloudbuild.yaml 來建構我們的 nginx 服務，並部署到 GCE 上。</p>
+<p>接著我們來試著寫一個 cloudbuild.yaml 來建構我們的 nginx 服務，並部署到 Compute Engine 上。</p>
 <br>
-<ol>
-<li>我們先回到 Gitlab 該專案下的目錄，新增 cloudbuild.yaml 檔案，將複製以下內容：</li>
-</ol>
+<p>我們先回到 Gitlab 該專案下的目錄，新增 cloudbuild.yaml 檔案，將複製以下內容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">steps:
+</span></span><span class="line"><span class="cl">  # Docker Build
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/cloud-builders/docker&#34;
+</span></span><span class="line"><span class="cl">    args: [&#34;build&#34;, &#34;-t&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;, &#34;.&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  # Docker Push
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/cloud-builders/docker&#34;
+</span></span><span class="line"><span class="cl">    args: [&#34;push&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  # Build VM
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/google.com/cloudsdktool/cloud-sdk&#34;
+</span></span><span class="line"><span class="cl">    entrypoint: &#34;gcloud&#34;
+</span></span><span class="line"><span class="cl">    args:
+</span></span><span class="line"><span class="cl">      [
+</span></span><span class="line"><span class="cl">        &#34;compute&#34;,
+</span></span><span class="line"><span class="cl">        &#34;instances&#34;,
+</span></span><span class="line"><span class="cl">        &#34;create-with-container&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ian-test-vm&#34;,
+</span></span><span class="line"><span class="cl">        &#34;--container-image&#34;,
+</span></span><span class="line"><span class="cl">        &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;,
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    env:
+</span></span><span class="line"><span class="cl">      - &#34;CLOUDSDK_COMPUTE_REGION=asia-east1&#34;
+</span></span><span class="line"><span class="cl">      - &#34;CLOUDSDK_COMPUTE_ZONE=asia-east1-b&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我們一個一個來說說的這個 cloudbuild.yaml 裡面的設定吧！(我以前面的註解來區分)</p>
+<ul>
+<li>Docker Build：這邊的 <code>name</code> 我們用 <code>gcr.io/cloud-builders/docker</code>，代表我們將使用 docker 建構器，<code>args</code> 這邊下的意思是要把與 cloudbuild.yaml 放在一起的 Dokcerfile 給 build 起來，並改名為 gcr.io/$PROJECT_ID/ian-test:ian-nginx-test。</li>
+<li>Docker Push：這邊一樣使用 <code>gcr.io/cloud-builders/docker</code>，<code>args</code> 指令部分變成我們要把他 push 到 gcr.io/$PROJECT_ID/ian-test 這個 Cloud Source Repositories，其中這個映像檔案的 tag 為 ian-nginx-test。</li>
+<li>Build VM：這邊我們使用 <code>gcr.io/google.com/cloudsdktool/cloud-sdk</code>，可以透過它來建立 VM，並且執行 tag 名為 ian-nginx-test 的映像檔，後面環境變數是來設定 VM 的區域等等。</li>
+</ul>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>小提醒<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>ian-test</code> 是 Container Registry 資料夾名稱，<code>ian-nginx-test</code> 是 Container Registry 映像檔的 tag，<code>ian-test-vm</code> 是我們建立 VM 的名字，所以要記得改成自己的命名歐！</div>
+        </div>
+    </div>
+<br>
+<h3 id="撰寫-dockerfile">撰寫 Dockerfile</h3>
+<p>接下來剛剛有提到 Docker Build 會將我們放在一起的 Dockerfile 給 build 起來，所以我們也要先寫好要用的 Dockerfile：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx:latest</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./index.html /usr/share/nginx/html/<span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
+<p>我們的 Dockerfile 很簡單，簡單寫了要使用的映像檔，以及將我們等等要測試的 index 複製到裡面</p>
+<br>
+<h3 id="撰寫測試-indexhtml">撰寫測試 index.html</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;IE=edge&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>測試測試測試<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    我是測試檔案
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>這個測試檔案，會蓋過 nginx 的預設畫面，當我們成功將 VM 建立後，瀏覽 80 Port 時，應該會跳出這個測試的網頁。</p>
+<br>
+<h3 id="commit-到-gitlab">Commit 到 GitLab</h3>
+<p>當我們都新增好檔案後，我們就將程式推到我們前幾篇的 Cloud Source Repositories 已經鏡像的 GitLab 中，接著就是等待見證奇蹟的時候了ＸＤ</p>
+<ol>
+<li>當我們推送後，我們先檢查 Cloud Source Repositories 是否有成功從 GitLab 鏡像過來：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcb/4.png" title="/images/gcp-gcb/4.png" data-thumbnail="/images/gcp-gcb/4.png" data-sub-html="<h2>Cloud Source Repositories</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcb/4.png"
+            data-srcset="/images/gcp-gcb/4.png, /images/gcp-gcb/4.png 1.5x, /images/gcp-gcb/4.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcb/4.png" width="700" />
+    </a><figcaption class="image-caption">Cloud Source Repositories</figcaption>
+    </figure>
+<br>
+<ol start="2">
+<li>檢查看看 Container Registry 是否多了名為 <code>ian-test</code> 的資料夾，且裡面有一個 tag 為 <code>ian-nginx-test</code> 的映像檔：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcb/5.png" title="/images/gcp-gcb/5.png" data-thumbnail="/images/gcp-gcb/5.png" data-sub-html="<h2>Container Registry</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcb/5.png"
+            data-srcset="/images/gcp-gcb/5.png, /images/gcp-gcb/5.png 1.5x, /images/gcp-gcb/5.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcb/5.png" width="1200" />
+    </a><figcaption class="image-caption">Container Registry</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>檢查一下 Cloud Build 的觸發條件是不是在運作，最後成功可以看到類似下方圖片內容：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcb/6.png" title="/images/gcp-gcb/6.png" data-thumbnail="/images/gcp-gcb/6.png" data-sub-html="<h2>Cloud Build 的觸發條件</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcb/6.png"
+            data-srcset="/images/gcp-gcb/6.png, /images/gcp-gcb/6.png 1.5x, /images/gcp-gcb/6.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcb/6.png" width="1200" />
+    </a><figcaption class="image-caption">Cloud Build 的觸發條件</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>檢查 Compute Engine 的 VM 是否有成功被建立：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcb/7.png" title="/images/gcp-gcb/7.png" data-thumbnail="/images/gcp-gcb/7.png" data-sub-html="<h2>Compute Engine</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcb/7.png"
+            data-srcset="/images/gcp-gcb/7.png, /images/gcp-gcb/7.png 1.5x, /images/gcp-gcb/7.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcb/7.png" width="1200" />
+    </a><figcaption class="image-caption">Compute Engine</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>最後就是測試這個映像檔案，是不是我們所 Build 的，測試方法很簡單，我們剛剛在 Dockerfile 有複製我們自己寫的 index.html 檔案，去蓋掉原本 nginx 的預設檔，所以我們可以瀏覽上面圖片的外部 IP，就可以看到我們所改的頁面囉！</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcb/8.png" title="/images/gcp-gcb/8.png" data-thumbnail="/images/gcp-gcb/8.png" data-sub-html="<h2>測試用 index.html</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcb/8.png"
+            data-srcset="/images/gcp-gcb/8.png, /images/gcp-gcb/8.png 1.5x, /images/gcp-gcb/8.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcb/8.png" width="800" />
+    </a><figcaption class="image-caption">測試用 index.html</figcaption>
+    </figure>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://cloud.google.com/build/docs/cloud-builders" target="_blank" rel="noopener noreffer">Cloud Builder</a></p>
 <p><a href="https://ithelp.ithome.com.tw/articles/10224727" target="_blank" rel="noopener noreffer">Day27 - 用 Cloud Build 實作 CI 部分</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
                 </span><span><a href="/tags/cloud-build/">Cloud Build</a>
-                </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/gce/">GCE</a>
+                </span><span><a href="/tags/source-repositories/">Source Repositories</a>
+                </span><span><a href="/tags/container-registry/">Container Registry</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4ea456d699e64e31320929b81aa8725ba37b3f7f" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;4ea456d:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
-                            <i class="fas fa-hashtag fa-fw"></i>4ea456d</a></span>
+                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/077a515277b50bed3611d22dfd1cc120a828b6fc" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;077a515:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>077a515</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gcb/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -281,7 +477,7 @@ if (!doNotTrack) {
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gcp-gcb/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]" data-hashtags="GCP,Cloud Build,Source Repositories,GCE"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-gcb/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-gcb/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-gcb/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]" data-hashtags="GCP,Cloud Build,GCE,Source Repositories,Container Registry"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-gcb/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-gcb/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-gcb/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-gcb/" data-title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/gcp-gcr/" class="prev" rel="prev" title="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
