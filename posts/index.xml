@@ -23,10 +23,10 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.4 ]</title>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</title>
     <link>https://pin-yi.me/gcp-gcb/</link>
-    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gcb/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
+    <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gcb/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
 </item>
 <item>
     <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
