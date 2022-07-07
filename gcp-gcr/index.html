@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ] - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]" />
+<meta property="og:description" content="本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pin-yi.me/gcp-gcr/" /><meta property="og:image" content="https://pin-yi.me/gcp-gcr/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-03T17:02:00+08:00" />
+<meta property="article:modified_time" content="2022-07-07T14:29:32+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pin-yi.me/gcp-gcr/featured-image.webp"/>
+<meta name="twitter:title" content="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]"/>
+<meta name="twitter:description" content="本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管"/>
+<meta name="application-name" content="PinYi 小天地">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-gcr/" /><link rel="prev" href="https://pin-yi.me/gcp-gcsr/" /><link rel="next" href="https://pin-yi.me/gcp-gcb/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pin-yi.me\/gcp-gcr\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/pin-yi.me\/gcp-gcr\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GCP, Container Registry","wordcount":  1173 ,
+        "url": "https:\/\/pin-yi.me\/gcp-gcr\/","datePublished": "2022-07-03T17:02:00+08:00","dateModified": "2022-07-07T14:29:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi">PinYi 小天地</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="/about/"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gcp-gcr/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi">PinYi 小天地</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="/about/" title="">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/gcp-gcr/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/gcp-gcr/featured-image.webp"
+        data-srcset="/gcp-gcr/featured-image.webp, /gcp-gcr/featured-image.webp 1.5x, /gcp-gcr/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/gcp-gcr/featured-image.webp"
+        title="/gcp-gcr/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-03">2022-07-03</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1173 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#container-registry-特點">Container Registry 特點</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到<a href="https://pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管理和保護 Docker 容器映像檔的存放區，可以讓團隊透過同一項服務服務集中管理 Docker 映像檔、也可以執行安全漏洞分析，還能透過精密的存取權管理機制，來決定誰可以存取哪些內容。簡單來說他就是一個讓我們存放 Docker 映像檔的地方，他有以下幾個特點：</p>
+<br>
+<h2 id="container-registry-特點">Container Registry 特點</h2>
+<ol>
+<li>安全的私人 Docker 註冊資料庫：只需要幾分鐘的時間，即可開始在 Google Cloud Platform 中使用安全的私人 Docker 映像檔儲存空間，控管能夠存取、檢視或下載映像檔的人員，並在受到 Google 安全防護機制保護的基礎架構上穩定執行。</li>
+</ol>
+<br>
+<ol start="2">
+<li>自動建立及部署映像檔：在您修訂 Cloud Source Repositories 中的程式碼時，系統會自動建立映像檔並推送至私人註冊資料庫。您可以輕鬆設定持續整合/持續推送軟體更新管道，並整合至 Cloud Build，或是直接將管道部署至 Google Kubernetes Engine、App Engine、Cloud Functions 或 Firebase。(這個就是我們在<a href="https://pin-yi.me/gcp-gcb/" target="_blank" rel="noopener noreffer">下一篇文章</a>會使用到的功能)</li>
+</ol>
+<br>
+<ol start="3">
+<li>深度安全漏洞掃描：在軟體部署週期的早期階段找出安全漏洞，藉此確保您可以安全地部署容器映像檔。資料庫會持續重新整理，讓您的安全漏洞掃描作業取得最新型惡意軟體的相關資訊。</li>
+</ol>
+<br>
+<ol start="4">
+<li>鎖定有風險的映像檔：運用二進位授權的原生整合功能來定義政策，避免部署與所設定政策相衝突的映像檔。您可以觸發容器映像檔的自動鎖定功能，禁止將有風險的映像檔部署至 Google Kubernetes Engine。</li>
+</ol>
+<br>
+<ol start="5">
+<li>原生支援 Docker：您不僅可以視需求定義多個註冊資料庫，也能使用標準的 Docker 指令列介面，將 Docker 映像檔推送和提取到您的私人 Container Registry。Docker 提供依據名稱和標記搜尋映像檔的功能，讓您可以順暢使用。</li>
+</ol>
+<br>
+<ol start="6">
+<li>快速的高可用性存取能力：您可使用我們遍布全球的區域性私人存放區，於全世界皆能享有最快速的回應時間。您可以就近將映像檔儲存在位於歐洲、亞洲或美國的運算執行個體中，並透過 Google 的高效能全球網路快速完成部署作業。</li>
+</ol>
+<br>
+<p>上面有提到 Container Registry 其中一個特點就是掃描映像檔，會檢查有沒有奇怪的內容或是錯誤，讓我們在部署前可以先做檢查，底下是整個的流程圖：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcr/1.webp" title="/images/gcp-gcr/1.webp" data-thumbnail="/images/gcp-gcr/1.webp" data-sub-html="<h2>Container Registry 掃描流程圖</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcr/1.webp"
+            data-srcset="/images/gcp-gcr/1.webp, /images/gcp-gcr/1.webp 1.5x, /images/gcp-gcr/1.webp 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcr/1.webp" width="800" />
+    </a><figcaption class="image-caption">Container Registry 掃描流程圖</figcaption>
+    </figure>
+<br>
+<p>我們可以延續上一篇文章 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Cloud Source Repositories</a> 來說明上面圖片，一開始先 commit 到 GCP 上，也可以把它當成 Cloud Source Repositories，就著透過會透過<a href="https://pin-yi.me/gcp-gcb" target="_blank" rel="noopener noreffer">下一篇要講的 Cloud Build</a> 來建置，並且掃描，如果沒有問題就會 Pubish 到 Container Registry 存放囉～</p>
+<br>
+<p>我們就簡單說明要怎麼查看我們的 Container Registry，點選則左側的 menu &gt; 選擇 <strong>Container Registry</strong> &gt; 點擊 <strong>映像檔</strong>：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcr/2.png" title="/images/gcp-gcr/2.png" data-thumbnail="/images/gcp-gcr/2.png" data-sub-html="<h2>Container Registry</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcr/2.png"
+            data-srcset="/images/gcp-gcr/2.png, /images/gcp-gcr/2.png 1.5x, /images/gcp-gcr/2.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcr/2.png" width="350" />
+    </a><figcaption class="image-caption">Container Registry</figcaption>
+    </figure>
+<br>
+<p>一開始可能沒有任何的資料夾，之後當我們 Build 時，可以新增特定的資料夾來放我們的映像檔，可以參考下方圖片：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcr/3.png" title="/images/gcp-gcr/3.png" data-thumbnail="/images/gcp-gcr/3.png" data-sub-html="<h2>Container Registry 資料夾</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcr/3.png"
+            data-srcset="/images/gcp-gcr/3.png, /images/gcp-gcr/3.png 1.5x, /images/gcp-gcr/3.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcr/3.png" width="750" />
+    </a><figcaption class="image-caption">Container Registry 資料夾</figcaption>
+    </figure>
+<br>
+<p>進入該資料夾後，就可以看到裡面的映像檔案：</p>
+<br>
+<figure><a class="lightgallery" href="/images/gcp-gcr/4.png" title="/images/gcp-gcr/4.png" data-thumbnail="/images/gcp-gcr/4.png" data-sub-html="<h2>Container Registry 映像檔</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gcp-gcr/4.png"
+            data-srcset="/images/gcp-gcr/4.png, /images/gcp-gcr/4.png 1.5x, /images/gcp-gcr/4.png 2x"
+            data-sizes="auto"
+            alt="/images/gcp-gcr/4.png" width="1000" />
+    </a><figcaption class="image-caption">Container Registry 映像檔</figcaption>
+    </figure>
+<br>
+<p>那我們下一篇會整合 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Cloud Source Repositories</a> 、<a href="https://pin-yi.me/gcp-gce/" target="_blank" rel="noopener noreffer">Compute Engine</a>、<a href="https://pin-yi.me/gcp-gcr/" target="_blank" rel="noopener noreffer">Container Registry</a>，大家可以期待一下 🥰</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://cloud.google.com/build/docs/cloud-builders" target="_blank" rel="noopener noreffer">Cloud Builder</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10224727" target="_blank" rel="noopener noreffer">Day27 - 用 Cloud Build 實作 CI 部分</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/container-registry/">Container Registry</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e4a6ad5ae3c5f4e28eb06915a3b4bb4905987858" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;e4a6ad5:&nbsp;# 新增 Google Cloud Platform (GCP) 百科全書 - Container Registry [ EP.4 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>e4a6ad5</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/gcp-gcr/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gcp-gcr/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-gcr/" data-title="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]" data-hashtags="GCP,Container Registry"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-gcr/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-gcr/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-gcr/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-gcr/" data-title="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-gcr/" data-title="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-gcr/" data-title="Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gcp-gcsr/" class="prev" rel="prev" title="Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/gcp-gcb/" class="next" rel="next" title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Registered');
+        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
