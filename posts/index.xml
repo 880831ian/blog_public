@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
+    <link>https://pin-yi.me/gcp-gke/</link>
+    <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gke/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
+</item>
+<item>
     <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</title>
     <link>https://pin-yi.me/gcp-gcb/</link>
     <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gcb/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/gcp-introduce/</link>
     <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-introduce/</guid>
     <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
-</item>
-<item>
-    <title>如何合併多個 commit，且推到遠端呢？</title>
-    <link>https://pin-yi.me/git-merge-multiple-commit/</link>
-    <pubDate>Tue, 21 Jun 2022 10:23:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/git-merge-multiple-commit/</guid>
-    <description><![CDATA[當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大]]></description>
 </item>
 </channel>
 </rss>
