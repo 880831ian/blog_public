@@ -4,7 +4,7 @@
         <link>https://pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的小天地</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</lastBuildDate>
             <atom:link href="https://pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</title>
+    <link>https://pin-yi.me/k8s-hpa/</link>
+    <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-hpa/</guid>
+    <description><![CDATA[此篇是要介紹 HorizontalPodAutoscaler (HPA) 的原理以及實作內容，那我們先來說明一下 HorizontalPodAutoscaler 是什麼吧！ HorizontalPodAutoscaler 原理 HorizontalPodAutoscaler (HPA) 中文可以叫水平 Pod 自動擴縮，他會自動更新工作負載資源 (Deployment 或 State]]></description>
 </item>
 <item>
     <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
@@ -59,12 +65,6 @@
     <link>https://pin-yi.me/gcp-iam/</link>
     <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-iam/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</title>
-    <link>https://pin-yi.me/gcp-introduce/</link>
-    <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-introduce/</guid>
-    <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
 </item>
 </channel>
 </rss>

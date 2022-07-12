@@ -9,14 +9,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://pin-yi.me/gcp-gke/" /><meta property="og:image" content="https://pin-yi.me/gcp-gke/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-07T16:57:00+08:00" />
-<meta property="article:modified_time" content="2022-07-07T16:57:00+08:00" />
+<meta property="article:modified_time" content="2022-07-07T17:47:34+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://pin-yi.me/gcp-gke/featured-image.webp"/>
 <meta name="twitter:title" content="Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]"/>
 <meta name="twitter:description" content="本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移"/>
 <meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-gke/" /><link rel="prev" href="https://pin-yi.me/gcp-gcb/" /><link rel="next" href="https://pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/gcp-gke/" /><link rel="prev" href="https://pin-yi.me/gcp-gcb/" /><link rel="next" href="https://pin-yi.me/k8s-hpa/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "GCP, GKE, Cloud Build, Source Repositories, Container Registry","wordcount":  216 ,
-        "url": "https:\/\/pin-yi.me\/gcp-gke\/","datePublished": "2022-07-07T16:57:00+08:00","dateModified": "2022-07-07T16:57:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/pin-yi.me\/gcp-gke\/","datePublished": "2022-07-07T16:57:00+08:00","dateModified": "2022-07-07T17:47:34+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -170,7 +170,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/container-registry/">Container Registry</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-07</span>
+                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a6a1f81378a52dac17865d91a7e1a3cb5e1f5e66" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a6a1f81:&nbsp;# 新增 Google Cloud Platform (GCP) 百科全書 - Kubernetes Engine [ EP.6 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>a6a1f81</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gke/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -180,7 +181,7 @@ if (!doNotTrack) {
         </div><div class="post-info-share">
             <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/gcp-gke/" data-title="Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]" data-hashtags="GCP,GKE,Cloud Build,Source Repositories,Container Registry"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/gcp-gke/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/gcp-gke/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/gcp-gke/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/gcp-gke/" data-title="Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/gcp-gke/" data-title="Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/gcp-gke/" data-title="Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/gcp-gcb/" class="prev" rel="prev" title="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/k8s-hpa/" class="next" rel="next" title="Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
