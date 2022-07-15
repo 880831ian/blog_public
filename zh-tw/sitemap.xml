@@ -30,17 +30,17 @@
                     href="https://pin-yi.me/theme-documentation-built-in-shortcodes/"
                     /></url><url>
             <loc>https://pin-yi.me/k8s-hpa/</loc><lastmod>2022-07-12T17:10:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/gcp-gke/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/gcp-gcb/</loc><lastmod>2022-07-07T15:45:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/gcp-gcr/</loc><lastmod>2022-07-07T14:29:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/gcp-gcsr/</loc><lastmod>2022-07-05T17:51:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/gcp-gce/</loc><lastmod>2022-07-01T16:55:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://pin-yi.me/gcp-iam/</loc><lastmod>2022-07-01T15:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://pin-yi.me/gcp-introduce/</loc><lastmod>2022-07-07T14:34:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://pin-yi.me/gcp-gke/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/gcp-gcb/</loc><lastmod>2022-07-07T15:45:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/gcp-gcr/</loc><lastmod>2022-07-07T14:29:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/gcp-gcsr/</loc><lastmod>2022-07-05T17:51:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/gcp-gce/</loc><lastmod>2022-07-01T16:55:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/gcp-iam/</loc><lastmod>2022-07-01T15:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/gcp-introduce/</loc><lastmod>2022-07-07T14:34:08&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://pin-yi.me/git-merge-multiple-commit/</loc><lastmod>2022-06-21T12:17:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://pin-yi.me/linux/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/linux/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/linux-clear-swap/</loc><lastmod>2022-06-06T14:11:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://pin-yi.me/k8s-plain/</loc><lastmod>2022-06-08T17:51:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://pin-yi.me/k8s-plain/</loc><lastmod>2022-06-08T17:51:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/laravel-gitlab-cicd-heroku/</loc><lastmod>2022-05-27T17:49:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/gitlab-cicd/</loc><lastmod>2022-05-27T17:53:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/prometheus-grafana-docker/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -49,7 +49,7 @@
             <loc>https://pin-yi.me/jenkins-ansible/</loc><lastmod>2022-05-17T16:06:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/k8s-efk/</loc><lastmod>2022-05-25T14:58:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/k8s-advanced/</loc><lastmod>2022-05-25T14:55:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://pin-yi.me/k8s/</loc><lastmod>2022-06-08T17:39:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://pin-yi.me/k8s/</loc><lastmod>2022-06-08T17:39:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/glamping/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/docker-compose-redis-sentinel-haproxy/</loc><lastmod>2022-04-22T17:35:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -223,15 +223,15 @@
                     href="https://pin-yi.me/tags/"
                     /></url><url>
             <loc>https://pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-07-12T17:10:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/cloud-build/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/container-registry/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/gcp/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/gke/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/source-repositories/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/gce/</loc><lastmod>2022-07-07T15:45:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/git/</loc><lastmod>2022-07-05T17:51:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://pin-yi.me/tags/iam/</loc><lastmod>2022-07-01T15:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
+            <loc>https://pin-yi.me/tags/cloud-build/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/container-registry/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/gcp/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/gke/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/source-repositories/</loc><lastmod>2022-07-07T17:47:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/gce/</loc><lastmod>2022-07-07T15:45:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/git/</loc><lastmod>2022-07-05T17:51:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/iam/</loc><lastmod>2022-07-01T15:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://pin-yi.me/en/tags/%E4%BB%8B%E7%B4%B9/"
@@ -240,15 +240,15 @@
                     hreflang="zh-tw"
                     href="https://pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/"
                     /></url><url>
-            <loc>https://pin-yi.me/tags/%E6%8C%87%E4%BB%A4/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://pin-yi.me/tags/linux/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://pin-yi.me/tags/%E6%8C%87%E4%BB%A4/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://pin-yi.me/tags/linux/</loc><lastmod>2022-06-30T15:53:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>https://pin-yi.me/tags/buff/</loc><lastmod>2022-06-06T14:11:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/cache/</loc><lastmod>2022-06-06T14:11:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/swap/</loc><lastmod>2022-06-06T14:11:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/gitlab/</loc><lastmod>2022-05-27T17:53:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/heroku/</loc><lastmod>2022-05-27T17:49:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/laravel/</loc><lastmod>2022-05-27T17:49:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://pin-yi.me/tags/docker/</loc><lastmod>2022-06-08T17:39:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://pin-yi.me/tags/docker/</loc><lastmod>2022-06-08T17:39:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/grafana/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/prometheus/</loc><lastmod>2022-05-19T15:48:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://pin-yi.me/tags/ansible/</loc><lastmod>2022-05-17T16:06:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

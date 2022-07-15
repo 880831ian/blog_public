@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/linux\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Linux, 指令, 介紹","wordcount":  1030 ,
+                        }],"genre": "posts","keywords": "Linux, 指令, 介紹","wordcount":  1159 ,
         "url": "https:\/\/pin-yi.me\/linux\/","datePublished": "2022-06-17T15:26:00+08:00","dateModified": "2022-06-30T15:53:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/linux/featured-image.webp"
         title="/linux/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Linux 常用指令</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-17">2022-06-17</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1030 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-06-17">2022-06-17</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1159 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
             </div>
             
@@ -163,6 +163,13 @@ if (!doNotTrack) {
         <li><a href="#刪除執行中的進程">刪除執行中的進程</a>
           <ul>
             <li><a href="#kill">kill</a></li>
+          </ul>
+        </li>
+        <li><a href="#顯示系統開機紀錄">顯示系統開機紀錄</a>
+          <ul>
+            <li><a href="#who">who</a></li>
+            <li><a href="#top">top</a></li>
+            <li><a href="#uptime">uptime</a></li>
           </ul>
         </li>
       </ul>
@@ -415,6 +422,39 @@ if (!doNotTrack) {
 <li>9 (KILL)：刪除一個進程</li>
 <li>15 (TERM)：正常停止一個進程</li>
 </ul>
+<br>
+<h3 id="顯示系統開機紀錄">顯示系統開機紀錄</h3>
+<h4 id="who">who</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">who [參數]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-b：查看最後一次(上次)系統啟動時間</li>
+<li>-r：查看最後一次(上次)系統啟動時間及運行級別</li>
+</ul>
+<br>
+<h4 id="top">top</h4>
+<p>up 後面代表系統到目前運行的時間，所以反推就可以知道啟動時間</p>
+<br>
+<h4 id="uptime">uptime</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">uptime
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">17:44  up 2 days,  8:48, 3 users, load averages: 3.48 3.37 3.56
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一樣會顯示到目前已經啟動多久，跟是幾點啟動等資訊</p>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://www.ltsplus.com/linux/3-ways-check-remote-server-open-port" target="_blank" rel="noopener noreffer">3 種檢查遠端埠號是否開啟的方法</a></p>
