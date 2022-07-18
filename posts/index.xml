@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
+    <link>https://pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
+    <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
+    <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
+</item>
+<item>
     <title>Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</title>
     <link>https://pin-yi.me/k8s-hpa/</link>
     <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/k8s-hpa/</guid>
@@ -57,12 +63,6 @@
     <link>https://pin-yi.me/gcp-gce/</link>
     <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-gce/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]</title>
-    <link>https://pin-yi.me/gcp-iam/</link>
-    <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://pin-yi.me/gcp-iam/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資]]></description>
 </item>
 </channel>
 </rss>
