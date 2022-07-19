@@ -7,16 +7,16 @@
         <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇) - PinYi</title><meta name="description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"><meta property="og:title" content="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)" />
 <meta property="og:description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://pin-yi.me/prometheus-grafana-docker/" /><meta property="og:image" content="https://pin-yi.me/prometheus-grafana-docker/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.pin-yi.me/prometheus-grafana-docker/" /><meta property="og:image" content="https://blog.pin-yi.me/prometheus-grafana-docker/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-18T12:18:00+08:00" />
 <meta property="article:modified_time" content="2022-05-19T15:48:22+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://pin-yi.me/prometheus-grafana-docker/featured-image.webp"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/prometheus-grafana-docker/featured-image.webp"/>
 <meta name="twitter:title" content="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"/>
 <meta name="twitter:description" content="此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"/>
 <meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/prometheus-grafana-docker/" /><link rel="prev" href="https://pin-yi.me/ansible/" /><link rel="next" href="https://pin-yi.me/gitlab-cicd/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/prometheus-grafana-docker/" /><link rel="prev" href="https://blog.pin-yi.me/ansible/" /><link rel="next" href="https://blog.pin-yi.me/gitlab-cicd/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -27,16 +27,16 @@
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/"
+            "@id": "https:\/\/blog.pin-yi.me\/prometheus-grafana-docker\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/featured-image.webp",
+                            "url": "https:\/\/blog.pin-yi.me\/prometheus-grafana-docker\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "Prometheus, Grafana, Docker, 介紹, 實作","wordcount":  5028 ,
-        "url": "https:\/\/pin-yi.me\/prometheus-grafana-docker\/","datePublished": "2022-05-18T12:18:00+08:00","dateModified": "2022-05-19T15:48:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/blog.pin-yi.me\/prometheus-grafana-docker\/","datePublished": "2022-05-18T12:18:00+08:00","dateModified": "2022-05-19T15:48:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
-            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
                 "name": "PinYi"
             },"description": "此文章是透過 Docker-compose 搭配 Nginx 實作一個簡單的 web service 範例，並整合 Prometheus 和 Grafana"
@@ -834,7 +834,7 @@ if (!doNotTrack) {
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Prometheus-Grafana-Docker/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)" data-hashtags="Prometheus,Grafana,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-hashtag="Prometheus"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)" data-hashtags="Prometheus,Grafana,Docker,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/" data-hashtag="Prometheus"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/prometheus-grafana-docker/" data-title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/ansible/" class="prev" rel="prev" title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/gitlab-cicd/" class="next" rel="next" title="如何從頭打造專屬的 GitLab CI/CD ">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>

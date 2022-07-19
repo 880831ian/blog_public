@@ -7,16 +7,16 @@
         <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers) - PinYi</title><meta name="description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"><meta property="og:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)" />
 <meta property="og:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://pin-yi.me/ansible/" /><meta property="og:image" content="https://pin-yi.me/ansible/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.pin-yi.me/ansible/" /><meta property="og:image" content="https://blog.pin-yi.me/ansible/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-16T11:26:40+08:00" />
 <meta property="article:modified_time" content="2022-05-17T16:01:58+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://pin-yi.me/ansible/featured-image.webp"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/ansible/featured-image.webp"/>
 <meta name="twitter:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"/>
 <meta name="twitter:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"/>
 <meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pin-yi.me/ansible/" /><link rel="prev" href="https://pin-yi.me/jenkins/" /><link rel="next" href="https://pin-yi.me/prometheus-grafana-docker/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/ansible/" /><link rel="prev" href="https://blog.pin-yi.me/jenkins/" /><link rel="next" href="https://blog.pin-yi.me/prometheus-grafana-docker/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -27,16 +27,16 @@
         "inLanguage": "zh-tw",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/pin-yi.me\/ansible\/"
+            "@id": "https:\/\/blog.pin-yi.me\/ansible\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/pin-yi.me\/ansible\/featured-image.webp",
+                            "url": "https:\/\/blog.pin-yi.me\/ansible\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "Ansible, CI\/CD, 介紹, 實作","wordcount":  7463 ,
-        "url": "https:\/\/pin-yi.me\/ansible\/","datePublished": "2022-05-16T11:26:40+08:00","dateModified": "2022-05-17T16:01:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/blog.pin-yi.me\/ansible\/","datePublished": "2022-05-16T11:26:40+08:00","dateModified": "2022-05-17T16:01:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
-            "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
                 "name": "PinYi"
             },"description": "此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"
@@ -2084,7 +2084,7 @@ if (!doNotTrack) {
                         <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/Ansible/index.zh-tw.md" target="_blank">Improve Article</a>
                     </span></div>
         </div><div class="post-info-share">
-            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)" data-hashtags="Ansible,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pin-yi.me/ansible/" data-hashtag="Ansible"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://pin-yi.me/ansible/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://pin-yi.me/ansible/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-skype fa-fw"></i></a></span>
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)" data-hashtags="Ansible,CI/CD,介紹,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/ansible/" data-hashtag="Ansible"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/ansible/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/ansible/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/ansible/" data-title="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/jenkins/" class="prev" rel="prev" title="使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
             <a href="/prometheus-grafana-docker/" class="next" rel="next" title="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
