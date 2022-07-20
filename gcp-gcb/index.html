@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/gcp-gcb/" /><meta property="og:image" content="https://blog.pin-yi.me/gcp-gcb/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-06T17:02:00+08:00" />
-<meta property="article:modified_time" content="2022-07-07T15:45:21+08:00" />
+<meta property="article:modified_time" content="2022-07-20T11:46:39+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/gcp-gcb/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "GCP, Cloud Build, GCE, Source Repositories, Container Registry","wordcount":  1958 ,
-        "url": "https:\/\/blog.pin-yi.me\/gcp-gcb\/","datePublished": "2022-07-06T17:02:00+08:00","dateModified": "2022-07-07T15:45:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/blog.pin-yi.me\/gcp-gcb\/","datePublished": "2022-07-06T17:02:00+08:00","dateModified": "2022-07-20T11:46:39+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -153,9 +153,9 @@ if (!doNotTrack) {
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到<a href="https://pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測試和部署，我們可以把它想成簡易版的 Jenkins，從整個映像檔案打包到部署，也就幾分鐘的事情，且內建許多指令。</p>
+                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到<a href="https://blog.pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測試和部署，我們可以把它想成簡易版的 Jenkins，從整個映像檔案打包到部署，也就幾分鐘的事情，且內建許多指令。</p>
 <br>
-<p>我們今天文章，需要使用前幾天提到的 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Cloud Source Repositories</a> 、<a href="https://pin-yi.me/gcp-gce/" target="_blank" rel="noopener noreffer">Compute Engine</a>、<a href="https://pin-yi.me/gcp-gcr/" target="_blank" rel="noopener noreffer">Container Registry</a>，我們需要先透過 GitLab 將程式鏡像到 Cloud Source Repositories，再透過 Cloud Build 觸發將 GitLab 上面的 Dockerfile 建置到 Container Registry 中，再部署到 Compute Engine VM 上。大家可以參考流程圖，會更清楚今天的流程！那我們就開始囉 🥸</p>
+<p>我們今天文章，需要使用前幾天提到的 <a href="https://blog.pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Cloud Source Repositories</a> 、<a href="https://blog.pin-yi.me/gcp-gce/" target="_blank" rel="noopener noreffer">Compute Engine</a>、<a href="https://blog.pin-yi.me/gcp-gcr/" target="_blank" rel="noopener noreffer">Container Registry</a>，我們需要先透過 GitLab 將程式鏡像到 Cloud Source Repositories，再透過 Cloud Build 觸發將 GitLab 上面的 Dockerfile 建置到 Container Registry 中，再部署到 Compute Engine VM 上。大家可以參考流程圖，會更清楚今天的流程！那我們就開始囉 🥸</p>
 <br>
 <figure><a class="lightgallery" href="/images/gcp-gcb/1.png" title="/images/gcp-gcb/1.png" data-thumbnail="/images/gcp-gcb/1.png" data-sub-html="<h2>流程圖</h2>">
         <img
@@ -169,7 +169,7 @@ if (!doNotTrack) {
     </figure>
 <p><br></p>
 <h2 id="cloud-source-repositories-測試">Cloud Source Repositories 測試</h2>
-<p>前面 GitLab 鏡像設定，請先參考上上篇 <a href="https://pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]</a>，上上篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續之前的內容，繼續往下開始學習吧～</p>
+<p>前面 GitLab 鏡像設定，請先參考上上篇 <a href="https://blog.pin-yi.me/gcp-gcsr/" target="_blank" rel="noopener noreffer">Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]</a>，上上篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續之前的內容，繼續往下開始學習吧～</p>
 <br>
 <ol>
 <li>開啟 GCP，選擇左側的 menu &gt; 點擊 <strong>Cloud Build</strong> &gt; 選擇 <strong>觸發條件</strong>，點擊 <strong>建立觸發條件</strong> 按鈕。</li>
@@ -468,8 +468,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/container-registry/">Container Registry</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/077a515277b50bed3611d22dfd1cc120a828b6fc" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;077a515:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
-                            <i class="fas fa-hashtag fa-fw"></i>077a515</a></span>
+                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6fba856331094e3edbf112bae47d4f20fea5b7de" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6fba856:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>6fba856</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gcb/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

@@ -1,11 +1,11 @@
 # Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]
 
 
-本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到[這一篇查看](https://pin-yi.me/gcp-introduce/) ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測試和部署，我們可以把它想成簡易版的 Jenkins，從整個映像檔案打包到部署，也就幾分鐘的事情，且內建許多指令。
+本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到[這一篇查看](https://blog.pin-yi.me/gcp-introduce/) ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測試和部署，我們可以把它想成簡易版的 Jenkins，從整個映像檔案打包到部署，也就幾分鐘的事情，且內建許多指令。
 
 <br>
 
-我們今天文章，需要使用前幾天提到的 [Cloud Source Repositories](https://pin-yi.me/gcp-gcsr/) 、[Compute Engine](https://pin-yi.me/gcp-gce/)、[Container Registry](https://pin-yi.me/gcp-gcr/)，我們需要先透過 GitLab 將程式鏡像到 Cloud Source Repositories，再透過 Cloud Build 觸發將 GitLab 上面的 Dockerfile 建置到 Container Registry 中，再部署到 Compute Engine VM 上。大家可以參考流程圖，會更清楚今天的流程！那我們就開始囉 🥸
+我們今天文章，需要使用前幾天提到的 [Cloud Source Repositories](https://blog.pin-yi.me/gcp-gcsr/) 、[Compute Engine](https://blog.pin-yi.me/gcp-gce/)、[Container Registry](https://blog.pin-yi.me/gcp-gcr/)，我們需要先透過 GitLab 將程式鏡像到 Cloud Source Repositories，再透過 Cloud Build 觸發將 GitLab 上面的 Dockerfile 建置到 Container Registry 中，再部署到 Compute Engine VM 上。大家可以參考流程圖，會更清楚今天的流程！那我們就開始囉 🥸
 
 <br>
 
@@ -16,7 +16,7 @@
 
 ## Cloud Source Repositories 測試
 
-前面 GitLab 鏡像設定，請先參考上上篇 [Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]](https://pin-yi.me/gcp-gcsr/)，上上篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續之前的內容，繼續往下開始學習吧～
+前面 GitLab 鏡像設定，請先參考上上篇 [Google Cloud Platform (GCP) 百科全書 - Cloud Source Repositories [ EP.3 ]](https://blog.pin-yi.me/gcp-gcsr/)，上上篇會帶大家從 GitLab 鏡像到 Cloud Source Repositories，所以我們就接續之前的內容，繼續往下開始學習吧～
 
 <br>
 
