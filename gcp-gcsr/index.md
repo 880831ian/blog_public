@@ -1,7 +1,7 @@
 # Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]
 
 
-本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到[這一篇查看](https://pin-yi.me/gcp-introduce/) ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟什麼東西很像呀，沒錯，就跟我們的 GitHub or GitLab 一樣，可以用來存放我們的程式碼的儲存庫，我們來看看官方怎麼介紹他吧：
+本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到[這一篇查看](https://blog.pin-yi.me/gcp-introduce/) ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟什麼東西很像呀，沒錯，就跟我們的 GitHub or GitLab 一樣，可以用來存放我們的程式碼的儲存庫，我們來看看官方怎麼介紹他吧：
 
 <br>
 
