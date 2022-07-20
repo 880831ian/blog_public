@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/gcp-gke/" /><meta property="og:image" content="https://blog.pin-yi.me/gcp-gke/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-07T16:57:00+08:00" />
-<meta property="article:modified_time" content="2022-07-07T17:47:34+08:00" />
+<meta property="article:modified_time" content="2022-07-20T11:44:46+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/gcp-gke/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "GCP, GKE, Cloud Build, Source Repositories, Container Registry","wordcount":  216 ,
-        "url": "https:\/\/blog.pin-yi.me\/gcp-gke\/","datePublished": "2022-07-07T16:57:00+08:00","dateModified": "2022-07-07T17:47:34+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/blog.pin-yi.me\/gcp-gke\/","datePublished": "2022-07-07T16:57:00+08:00","dateModified": "2022-07-20T11:44:46+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -145,7 +145,7 @@ if (!doNotTrack) {
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到<a href="https://pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移到 GCP 上面的一個服務，可以輕鬆的自動部署、伸縮和管理 Kubernetes。詳細的 kubernetes 介紹可以參考 <a href="https://pin-yi.me/k8s/" target="_blank" rel="noopener noreffer">Kubernetes (K8s) 介紹 - 基本</a>。</p>
+                </div><div class="content" id="content"><p>本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到<a href="https://blog.pin-yi.me/gcp-introduce/" target="_blank" rel="noopener noreffer">這一篇查看</a> ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移到 GCP 上面的一個服務，可以輕鬆的自動部署、伸縮和管理 Kubernetes。詳細的 kubernetes 介紹可以參考 <a href="https://blog.pin-yi.me/k8s/" target="_blank" rel="noopener noreffer">Kubernetes (K8s) 介紹 - 基本</a>。</p>
 <br>
 <p>我們今天文章，也跟上一篇一樣，會使用到之前我們所介紹到的每一個服務，我們一樣會透過 GitLab Mirror 到 Cloud Source Repo，再透過觸發 Cloud Build 來創建 image 到 Container Registry 最後部署至 Google Kubernetes Engine (GKE) 上。</p>
 <br>
@@ -170,8 +170,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/container-registry/">Container Registry</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-07&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a6a1f81378a52dac17865d91a7e1a3cb5e1f5e66" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a6a1f81:&nbsp;# 新增 Google Cloud Platform (GCP) 百科全書 - Kubernetes Engine [ EP.6 ]">
-                            <i class="fas fa-hashtag fa-fw"></i>a6a1f81</a></span>
+                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/cde7eb68c289969f91f01816bd8975f1014c0de0" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;cde7eb6:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Kubernetes Engine [ EP.6 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>cde7eb6</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gke/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
