@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Linux 常用指令 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Linux 常用指令" />
+        <title>Linux 常用指令 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Linux 常用指令" />
 <meta property="og:description" content="因為最近在管理機器時，常常會使用各式各樣的指令來協助管理，所以把常用的指令依照不同類別整理在底下呦 😘 會定期更新該文章呦 ~ 網路類 查詢遠端 Port 是否" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/linux/" /><meta property="og:image" content="https://blog.pin-yi.me/linux/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -15,8 +15,8 @@
 <meta name="twitter:image" content="https://blog.pin-yi.me/linux/featured-image.webp"/>
 <meta name="twitter:title" content="Linux 常用指令"/>
 <meta name="twitter:description" content="因為最近在管理機器時，常常會使用各式各樣的指令來協助管理，所以把常用的指令依照不同類別整理在底下呦 😘 會定期更新該文章呦 ~ 網路類 查詢遠端 Port 是否"/>
-<meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/linux/" /><link rel="prev" href="https://blog.pin-yi.me/linux-clear-swap/" /><link rel="next" href="https://blog.pin-yi.me/git-merge-multiple-commit/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/linux/" /><link rel="prev" href="https://blog.pin-yi.me/linux-clear-swap/" /><link rel="next" href="https://blog.pin-yi.me/git-merge-multiple-commit/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 小天地</a>
+            <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 小天地</a>
+                <a href="/" title="PinYi">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -190,8 +190,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install nc
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install nc
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -200,8 +200,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc -zvw3 &lt;IP:Port&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">nc -zvw3 &lt;IP:Port&gt;
+</code></pre></td></tr></table>
 </div>
 </div><p><code>-z</code> 只進行掃描，不進行任何的資料傳輸</p>
 <p><code>-v</code> 顯示掃描訊息</p>
@@ -215,10 +215,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Ncat: Version 7.50 ( https://nmap.org/ncat )
-</span></span><span class="line"><span class="cl">Ncat: Connected to &lt;IP:Port&gt;.
-</span></span><span class="line"><span class="cl">Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ncat: Version 7.50 ( https://nmap.org/ncat )
+Ncat: Connected to &lt;IP:Port&gt;.
+Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -227,8 +227,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Ncat: No route to host.
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ncat: No route to host.
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="nmap">nmap</h4>
@@ -238,8 +238,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install nmap
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install nmap
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -248,8 +248,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nmap &lt;IP&gt; -p &lt;Port&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">nmap &lt;IP&gt; -p &lt;Port&gt;
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果 Port 有開放，會回傳以下內容：</p>
@@ -265,15 +265,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
-</span></span><span class="line"><span class="cl">Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
-</span></span><span class="line"><span class="cl">Host is up (0.0039s latency).
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">PORT   STATE SERVICE
-</span></span><span class="line"><span class="cl">80/tcp open  http
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
+Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
+Host is up (0.0039s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -289,15 +289,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
-</span></span><span class="line"><span class="cl">Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
-</span></span><span class="line"><span class="cl">Host is up (0.0039s latency).
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">PORT   STATE SERVICE
-</span></span><span class="line"><span class="cl">80/tcp filtered  http
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
+Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
+Host is up (0.0039s latency).
+
+PORT   STATE SERVICE
+80/tcp filtered  http
+
+Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="telnet">Telnet</h4>
@@ -307,8 +307,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install telnet
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install telnet
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -317,8 +317,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">telnet &lt;IP&gt; &lt;Port&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">telnet &lt;IP&gt; &lt;Port&gt;
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果 Port 有開放，會回傳以下內容：</p>
@@ -330,11 +330,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Trying &lt;IP&gt;…
-</span></span><span class="line"><span class="cl">Connected to &lt;IP&gt;.
-</span></span><span class="line"><span class="cl">Escape character is ‘^]’.
-</span></span><span class="line"><span class="cl">^CConnection closed by foreign host.
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Trying &lt;IP&gt;…
+Connected to &lt;IP&gt;.
+Escape character is ‘^]’.
+^CConnection closed by foreign host.
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -344,9 +344,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Trying &lt;IP&gt;…
-</span></span><span class="line"><span class="cl">telnet: Unable to connect to remote host: Connection refused
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Trying &lt;IP&gt;…
+telnet: Unable to connect to remote host: Connection refused
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h2 id="系統類">系統類</h2>
@@ -357,8 +357,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ps [參數]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ps [參數]
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-A 列出所有的進程</li>
@@ -373,8 +373,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>USER：行程的擁有者</li>
@@ -408,8 +408,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kill [-s &lt;訊息名稱或編號&gt;] [程序] or [-l &lt;訊息編號&gt;]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kill [-s &lt;訊息名稱或編號&gt;] [程序] or [-l &lt;訊息編號&gt;]
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-l &lt;訊息編號&gt;：若不加 &lt;訊息編號&gt;選項，-l 會列出全部的訊息名稱</li>
@@ -430,8 +430,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">who [參數]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">who [參數]
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-b：查看最後一次(上次)系統啟動時間</li>
@@ -449,10 +449,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">uptime
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">17:44  up 2 days,  8:48, 3 users, load averages: 3.48 3.37 3.56
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">uptime
+
+17:44  up 2 days,  8:48, 3 users, load averages: 3.48 3.37 3.56
+</code></pre></td></tr></table>
 </div>
 </div><p>一樣會顯示到目前已經啟動多久，跟是幾點啟動等資訊</p>
 <br>

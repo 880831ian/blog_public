@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>如何合併多個 commit，且推到遠端呢？ - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="如何合併多個 commit，且推到遠端呢？" />
+        <title>如何合併多個 commit，且推到遠端呢？ - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="如何合併多個 commit，且推到遠端呢？" />
 <meta property="og:description" content="當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/git-merge-multiple-commit/" /><meta property="og:image" content="https://blog.pin-yi.me/git-merge-multiple-commit/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -15,8 +15,8 @@
 <meta name="twitter:image" content="https://blog.pin-yi.me/git-merge-multiple-commit/featured-image.webp"/>
 <meta name="twitter:title" content="如何合併多個 commit，且推到遠端呢？"/>
 <meta name="twitter:description" content="當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大"/>
-<meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/git-merge-multiple-commit/" /><link rel="prev" href="https://blog.pin-yi.me/linux/" /><link rel="next" href="https://blog.pin-yi.me/gcp-introduce/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/git-merge-multiple-commit/" /><link rel="prev" href="https://blog.pin-yi.me/linux/" /><link rel="next" href="https://blog.pin-yi.me/gcp-introduce/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 小天地</a>
+            <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 小天地</a>
+                <a href="/" title="PinYi">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -169,8 +169,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git log
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git log
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git-merge-multiple-commit/2.png" title="/images/git-merge-multiple-commit/2.png" data-thumbnail="/images/git-merge-multiple-commit/2.png" data-sub-html="<h2>git log 查看 commit 的 SHA-1</h2>">
@@ -190,8 +190,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase -i 3b5bab9d5fb65b965ae55236734103b178f9daf2
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase -i 3b5bab9d5fb65b965ae55236734103b178f9daf2
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git-merge-multiple-commit/3.png" title="/images/git-merge-multiple-commit/3.png" data-thumbnail="/images/git-merge-multiple-commit/3.png" data-sub-html="<h2>git rebase</h2>">
@@ -218,9 +218,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pick f8e5882 add 2.txt
-</span></span><span class="line"><span class="cl">squash 3eb0ef4 add 3.txt
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pick f8e5882 add 2.txt
+squash 3eb0ef4 add 3.txt
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>也就是將 3eb0ef4 這個版本的 commit 合併到 f8e5882 的 commit，對應我們的例子，將 add 3.txt 合併到 add 2.txt 這個 commit。</p>
@@ -270,8 +270,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push -f 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git push -f 
+</code></pre></td></tr></table>
 </div>
 </div><p>強制覆蓋掉分支上的內容，但<strong>切記切記</strong>，這個只適用於自己的分支上歐～不然會直接大爆炸 💣</p>
 <br>

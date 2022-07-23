@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Git 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的小天地"><meta property="og:title" content="Git 介紹" />
+        <title>Git 介紹 - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Git 介紹" />
 <meta property="og:description" content="什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容&#34;" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/git/" /><meta property="og:image" content="https://blog.pin-yi.me/git/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -15,8 +15,8 @@
 <meta name="twitter:image" content="https://blog.pin-yi.me/git/featured-image.webp"/>
 <meta name="twitter:title" content="Git 介紹"/>
 <meta name="twitter:description" content="什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容&#34;"/>
-<meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/git/" /><link rel="prev" href="https://blog.pin-yi.me/node-restful-api-repository-messageboard/" /><link rel="next" href="https://blog.pin-yi.me/docker-compose-redis-sentinel/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/git/" /><link rel="prev" href="https://blog.pin-yi.me/node-restful-api-repository-messageboard/" /><link rel="next" href="https://blog.pin-yi.me/docker-compose-redis-sentinel/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 小天地</a>
+            <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 小天地</a>
+                <a href="/" title="PinYi">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -271,8 +271,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git init
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git init
+</code></pre></td></tr></table>
 </div>
 </div><p>要記得要到版本控制的資料夾目錄下才使用這個指令歐！</p>
 <br>
@@ -305,18 +305,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ tree -a -d
-</span></span><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">└── .git
-</span></span><span class="line"><span class="cl">    ├── hooks
-</span></span><span class="line"><span class="cl">    ├── info
-</span></span><span class="line"><span class="cl">    ├── objects
-</span></span><span class="line"><span class="cl">    │   ├── info
-</span></span><span class="line"><span class="cl">    │   └── pack
-</span></span><span class="line"><span class="cl">    └── refs
-</span></span><span class="line"><span class="cl">        ├── heads
-</span></span><span class="line"><span class="cl">        └── tags
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ tree -a -d
+.
+└── .git
+    ├── hooks
+    ├── info
+    ├── objects
+    │   ├── info
+    │   └── pack
+    └── refs
+        ├── heads
+        └── tags
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>回到剛剛圖片，它說明默認會使用 master 這個來作為初始分支，並記得要使用 <code>git config</code> 來做設定，那 <code>git config</code> 是要做什麼用的呢！？</p>
@@ -328,9 +328,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git config --global user.name &#34;your name&#34; 
-</span></span><span class="line"><span class="cl">$ git config --global user.email &#34;your email&#34;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git config --global user.name &#34;your name&#34; 
+$ git config --global user.email &#34;your email&#34;
+</code></pre></td></tr></table>
 </div>
 </div><p>分別設定使用者名稱以及電子郵件，這樣共同使用版本控制的人，才分的出來誰是誰！ (若只要在單個專案下設定使用者名稱及電子郵件，就不需要設定 &ndash;global 參數)</p>
 <br>
@@ -342,8 +342,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git status 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git status 
+</code></pre></td></tr></table>
 </div>
 </div><p>可以查看現在資料夾內有哪些檔案還沒加入版本控制，或是已經加入但還沒 Commit 變成新版本。</p>
 <br>
@@ -366,8 +366,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git log
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git log
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/log.png" title="/images/git/log.png" data-thumbnail="/images/git/log.png" data-sub-html="<h2>Git log</h2>">
@@ -389,8 +389,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git diff 116e 442c
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git diff 116e 442c
+</code></pre></td></tr></table>
 </div>
 </div><p>116e 代表最新的版本，442c 代表上一個版本，可以看上面 <code>log</code> 的辨識 ID，因為校驗碼很長，最少需要前4個數字跟英文，才可以知道是哪一個版本。</p>
 <br>
@@ -413,8 +413,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git reflog
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git reflog
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/reflog.png" title="/images/git/reflog.png" data-thumbnail="/images/git/reflog.png" data-sub-html="<h2>Git reflog (圖一)</h2>">
@@ -448,9 +448,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git add .
-</span></span><span class="line"><span class="cl">$ git add test.txt
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git add .
+$ git add test.txt
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>將檔案加入版本控制的暫存區。它的格式是 <code>git add [檔案名稱]</code> ，如果想要把資料夾全部檔案都加入版本控制，可以使用 <code>.</code> 來加入。</p>
@@ -462,8 +462,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;內容打這&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git commit -m <span class="s2">&#34;內容打這&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/commit.png" title="/images/git/commit.png" data-thumbnail="/images/git/commit.png" data-sub-html="<h2>Git commit</h2>">
@@ -486,8 +486,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git branch <span class="s2">&#34;分支名稱&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git branch <span class="s2">&#34;分支名稱&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>會將所在分支的檔案狀態複製到新增的分支上，當該分支改動時，不會影響到原本的分支。</p>
 <br>
@@ -509,8 +509,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git checkout <span class="s2">&#34;分支名稱/分支ID&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git checkout <span class="s2">&#34;分支名稱/分支ID&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>來切換不同的分支或是以前的版本。</p>
 <br>
@@ -531,8 +531,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git chechout -b <span class="s2">&#34;分支名稱&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git chechout -b <span class="s2">&#34;分支名稱&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><code>-b</code> 這個參數就等於是 <code>git branch &quot;分支&quot; &amp; git checkout &quot;分支&quot;</code>。</p>
 <br>
@@ -555,8 +555,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git clone <span class="o">[</span>遠端網址<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git clone <span class="o">[</span>遠端網址<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>會在下指令的當前路徑下，下載整個遠端的專案。</p>
 <br>
@@ -567,8 +567,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git remote add <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>遠端網址<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git remote add <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>遠端網址<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>取一個可以代表要新增的遠端 Git 版本庫簡稱。</p>
 <br>
@@ -589,8 +589,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git remote
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git remote
+</code></pre></td></tr></table>
 </div>
 </div><p>他會列出每個遠端本版本庫的簡稱。</p>
 <p>也可以使用 <code>git remote -v</code> 指令，會顯示 Git 用來讀寫遠端簡稱時所用的網址：</p>
@@ -613,8 +613,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git push <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>將本地端版本庫推到遠端的版本庫。</p>
 <br>
@@ -636,8 +636,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push origin master:master
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git push origin master:master
+</code></pre></td></tr></table>
 </div>
 </div><p>意思就是「把本地的 <code>master</code> 分支內容，推一份到 <code>origin</code> 上，並且在 <code>origin</code> 上建立一個 <code>master</code> 分支」</p>
 <br>
@@ -647,8 +647,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git push origin master:dog
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git push origin master:dog
+</code></pre></td></tr></table>
 </div>
 </div><p>意思就會變成「把本地的 <code>master</code> 分支內容，推一份到 <code>origin</code> 上，並且在 <code>origin</code> 上建立一個 <code>dog</code> 分支」</p>
 <br>
@@ -659,8 +659,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git pull <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git pull <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>將遠端專案資料下載並合併到本地端。</p>
 <br>
@@ -682,8 +682,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git fetch <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git fetch <span class="o">[</span>簡稱<span class="o">]</span> <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>將遠端專案資料下載到本地端。</p>
 <br>
@@ -732,8 +732,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git merge <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git merge <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>像下面這張圖，我們將分支 123 合併到分支 master。(要記得先切換到要合併的主分支，才可以合併其他的分支進來)</p>
 <br>
@@ -780,8 +780,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git merge --no-ff <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git merge --no-ff <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="rebase-合併">rebase (合併)</h4>
@@ -791,8 +791,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git rebase <span class="o">[</span>分支名稱<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git rebase <span class="o">[</span>分支名稱<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/git/rebase_1.gif" title="/images/git/rebase_1.gif" data-thumbnail="/images/git/rebase_1.gif" data-sub-html="<h2>Git rebase (合併) (CS Visualized: Useful Git Commands)</h2>">
@@ -813,8 +813,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git rebase -i <span class="o">[</span>HEAD~?<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git rebase -i <span class="o">[</span>HEAD~?<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>但要記得，如果再使用前，要先詢問是否有人正在使用此分支，因為 rebase 會改變歷史紀錄。</p>
 <br>
@@ -836,8 +836,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git cherry-pick <span class="o">[</span>分支ID<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git cherry-pick <span class="o">[</span>分支ID<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>但做此動作，需要解決修改後的版本衝突。</p>
 <br>
@@ -849,8 +849,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git reset <span class="o">[</span>HEAD~?<span class="o">]</span> 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git reset <span class="o">[</span>HEAD~?<span class="o">]</span> 
+</code></pre></td></tr></table>
 </div>
 </div><p>會還原選擇的 Commit，且檔案還是維持最新版本。</p>
 <br>
@@ -980,8 +980,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git revert <span class="o">[</span>HEAD~?<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git revert <span class="o">[</span>HEAD~?<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>會還原選擇的 Commit，檔案也會還原到舊的版本</p>
 <br>
@@ -1055,8 +1055,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git tag lightweight bc4c597
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git tag lightweight bc4c597
+</code></pre></td></tr></table>
 </div>
 </div><p>lightweight 是我們 tag 名稱，bc4c597 是剛剛 commit 的 SHA-1</p>
 <br>
@@ -1081,8 +1081,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ git tag annotated bc4c597 -a -m <span class="s2">&#34;可以備註&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ git tag annotated bc4c597 -a -m <span class="s2">&#34;可以備註&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><code>-a</code> 參數是請 Git 幫我們建立有附註的標籤，後面的 <code>-m</code> 則是跟我們 commit 一樣可以來輸入訊息</p>
 <br>

@@ -15,8 +15,8 @@
 <meta name="twitter:image" content="https://blog.pin-yi.me/gitlab-cicd/featured-image.webp"/>
 <meta name="twitter:title" content="如何從頭打造專屬的 GitLab CI/CD "/>
 <meta name="twitter:description" content="此文章是介紹 GitLab CI/CD 的一些概念，並解搭配圖片來做説明💪"/>
-<meta name="application-name" content="PinYi 小天地">
-<meta name="apple-mobile-web-app-title" content="PinYi 小天地"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gitlab-cicd/" /><link rel="prev" href="https://blog.pin-yi.me/prometheus-grafana-docker/" /><link rel="next" href="https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gitlab-cicd/" /><link rel="prev" href="https://blog.pin-yi.me/prometheus-grafana-docker/" /><link rel="next" href="https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 小天地</a>
+            <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 小天地</a>
+                <a href="/" title="PinYi">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -235,39 +235,39 @@ if (!doNotTrack) {
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cache</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">config/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Hello, $GITLAB_USER_LOGIN!&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test-job2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job tests something, but takes more time than test-job1.&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;After the echo commands complete, it runs the sleep command for 20 seconds&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;which simulates a test that runs 20 seconds longer than test-job1&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sleep 20</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy-prod</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job deploys something from the $CI_COMMIT_BRANCH branch.&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span><span class="w">  </span>- <span class="l">test</span><span class="w">
+</span><span class="w">  </span>- <span class="l">deploy</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">config/</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;Hello, $GITLAB_USER_LOGIN!&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">test-job1</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job tests something&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">test-job2</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job tests something, but takes more time than test-job1.&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;After the echo commands complete, it runs the sleep command for 20 seconds&#34;</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;which simulates a test that runs 20 seconds longer than test-job1&#34;</span><span class="w">
+</span><span class="w">    </span>- <span class="l">sleep 20</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">deploy-prod</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">echo &#34;This job deploys something from the $CI_COMMIT_BRANCH branch.&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>那我來簡單說明一下上面這些設定檔案的功能：</p>
@@ -437,11 +437,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run -d --name gitlab-runner --restart always <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>gitlab/gitlab-runner:alpine-v15.0.0
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker run -d --name gitlab-runner --restart always <span class="se">\
+</span><span class="se"></span>-v ~/Shared/gitlab-runner/config:/etc/gitlab-runner <span class="se">\
+</span><span class="se"></span>-v /var/run/docker.sock:/var/run/docker.sock <span class="se">\
+</span><span class="se"></span>gitlab/gitlab-runner:alpine-v15.0.0
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
