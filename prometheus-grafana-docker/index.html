@@ -250,14 +250,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">.
-├── docker-compose.yaml
-├── nginx
-│   ├── Dockerfile
-│   └── status.conf
-├── prometheus.yaml
-└── test.sh
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── docker-compose.yaml
+</span></span><span class="line"><span class="cl">├── nginx
+</span></span><span class="line"><span class="cl">│   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   └── status.conf
+</span></span><span class="line"><span class="cl">├── prometheus.yaml
+</span></span><span class="line"><span class="cl">└── test.sh
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這是主要的結構，簡單說明一下：</p>
 <ul>
@@ -326,57 +326,57 @@ if (!doNotTrack) {
 </span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./nginx/</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">nginx-prometheus-exporter</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx/nginx-prometheus-exporter:0.10</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-prometheus-exporter</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>-<span class="l">nginx.scrape-uri http://nginx:8080/stub_status</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">9113</span><span class="p">:</span><span class="m">9113</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">nginx</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">prom/prometheus:v2.35.0</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./prometheus.yaml:/etc/prometheus/prometheus.yaml</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./prometheus_data:/prometheus</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s1">&#39;--config.file=/etc/prometheus/prometheus.yaml&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s1">&#39;9090:9090&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">grafana/grafana-image-renderer:3.4.2</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">BROWSER_TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Taipei</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s1">&#39;8081:8081&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">grafana/grafana:8.2.5</span><span class="w">
-</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">grafana</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./grafana_data:/var/lib/grafana</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">GF_SECURITY_ADMIN_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">pass</span><span class="w">
-</span><span class="w">      </span><span class="nt">GF_RENDERING_SERVER_URL</span><span class="p">:</span><span class="w"> </span><span class="l">http://renderer:8081/render</span><span class="w">
-</span><span class="w">      </span><span class="nt">GF_RENDERING_CALLBACK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">http://grafana:3000/</span><span class="w">
-</span><span class="w">      </span><span class="nt">GF_LOG_FILTERS</span><span class="p">:</span><span class="w"> </span><span class="l">rendering:debug</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">prometheus</span><span class="w">
-</span><span class="w">      </span>- <span class="l">renderer</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s1">&#39;3000:3000&#39;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./nginx/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx-prometheus-exporter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx/nginx-prometheus-exporter:0.10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-prometheus-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>-<span class="l">nginx.scrape-uri http://nginx:8080/stub_status</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9113</span><span class="p">:</span><span class="m">9113</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">prom/prometheus:v2.35.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./prometheus.yaml:/etc/prometheus/prometheus.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./prometheus_data:/prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;--config.file=/etc/prometheus/prometheus.yaml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;9090:9090&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">grafana/grafana-image-renderer:3.4.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">BROWSER_TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Taipei</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;8081:8081&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">grafana/grafana:8.2.5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">grafana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./grafana_data:/var/lib/grafana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GF_SECURITY_ADMIN_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">pass</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GF_RENDERING_SERVER_URL</span><span class="p">:</span><span class="w"> </span><span class="l">http://renderer:8081/render</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GF_RENDERING_CALLBACK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">http://grafana:3000/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GF_LOG_FILTERS</span><span class="p">:</span><span class="w"> </span><span class="l">rendering:debug</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">renderer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;3000:3000&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>nginx：因為 Nginx 會通過 stub_status 頁面來開放對外的監控指標。所以我們要另外寫一個 Dockerfile 設定檔，先將 <code>conf</code> 放入 Nginx 中。</li>
@@ -393,9 +393,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> nginx:1.21.6  </span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> ./status.conf /etc/nginx/conf.d/status.conf <span class="err">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx:1.21.6  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./status.conf /etc/nginx/conf.d/status.conf <span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>選擇我們要使用的 nginx image 版本，並將我們的設定檔，複製到容器內。</p>
 <br>
@@ -412,15 +412,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">server {
-    listen 8080;
-    server_name  localhost;
-    location /stub_status {
-       stub_status on;
-       access_log off;
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">    listen 8080;
+</span></span><span class="line"><span class="cl">    server_name  localhost;
+</span></span><span class="line"><span class="cl">    location /stub_status {
+</span></span><span class="line"><span class="cl">       stub_status on;
+</span></span><span class="line"><span class="cl">       access_log off;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這邊最重要的就是要設定 <code>/stub_status</code> 路徑，並開啟 stub_status ，這樣才可以讓 nginx-prometheus-exporter 抓到資料！(要怎麼知道 Nginx 是否開啟 <code>stub_status</code>，可以使用 <code>nginx -V 2&gt;&amp;1 | grep -o with-http_stub_status_module</code> 指令檢查，我們這次裝的 Image 已經有幫我們啟動)</p>
 <br>
@@ -440,18 +440,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">global</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">5s</span><span class="w"> </span><span class="c"># Server 抓取頻率</span><span class="w">
-</span><span class="w">  </span><span class="nt">external_labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;my-monitor&#34;</span><span class="w">
-</span><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;localhost:9090&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx_exporter&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;nginx-prometheus-exporter:9113&#34;</span><span class="p">]</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">5s</span><span class="w"> </span><span class="c"># Server 抓取頻率</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">external_labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;my-monitor&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;localhost:9090&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx_exporter&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;nginx-prometheus-exporter:9113&#34;</span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>這邊是 prometheus 的設定檔，例如有 scrape_interval 代表 Server 每次抓取資料的頻率，或是設定 monitor 的 labels，下面的 configs，分別設定了 prometheus 它的 targets 是 <code>[&quot;localhost:9090&quot;]</code> 以及 nginx_exporter 它的 targets 是 <code>[&quot;nginx-prometheus-exporter:9113&quot;]</code>。</p>
 <br>
@@ -468,15 +468,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="nv">docker</span><span class="o">=</span><span class="s2">&#34;docker exec nginx&#34;</span>
-
-<span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span>
-<span class="k">do</span>
-	<span class="nv">$docker</span> curl http://nginx:8080/stub_status -s
-<span class="k">done</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">docker</span><span class="o">=</span><span class="s2">&#34;docker exec nginx&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$docker</span> curl http://nginx:8080/stub_status -s
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這個是我自己另外寫的測試程式，在本機執行後他會訪問 nginx 容器內部，並模擬 nginx 流量，讓我們在 Grafana 可以清楚看到資料。</p>
 <br>
@@ -825,8 +825,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-19&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4b8794aa7317e19dc3dd8e3209c9e91f2aa45002" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;4b8794a:&nbsp;# 新增/更新 使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)">
-                            <i class="fas fa-hashtag fa-fw"></i>4b8794a</a></span>
+                <span>更新於 2022-05-19&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4b8794aa7317e19dc3dd8e3209c9e91f2aa45002" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;4b8794aa:&nbsp;# 新增/更新 使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)">
+                            <i class="fas fa-hashtag fa-fw"></i>4b8794aa</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/prometheus-grafana-docker/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

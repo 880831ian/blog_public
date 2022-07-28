@@ -33,7 +33,7 @@
                             "url": "https:\/\/pin-yi.me\/redis-sentinel-docker\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Redis, Docker, Sentinel, 哨兵模式, 實作","wordcount":  3528 ,
+                        }],"genre": "posts","keywords": "Redis, Docker, Sentinel, 哨兵模式, 實作","wordcount":  3651 ,
         "url": "https:\/\/pin-yi.me\/redis-sentinel-docker\/","datePublished": "2022-04-19T12:00:00+08:00","dateModified": "2022-04-19T15:37:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/redis-sentinel-docker/featured-image.webp"
         title="/redis-sentinel-docker/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Redis 哨兵模式 (Sentinel) 搭配 Docker 實作</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3528 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3651 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
@@ -343,6 +343,8 @@ if (!doNotTrack) {
 </span><span class="lnt">48
 </span><span class="lnt">49
 </span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
@@ -369,9 +371,11 @@ if (!doNotTrack) {
 </span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-master</span><span class="w">
 </span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./docker-volume/redis-master/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis-master/:/data </span><span class="w">
 </span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --appendonly yes</span><span class="w">
+</span><span class="w">
 </span><span class="w">
 </span><span class="w">  </span><span class="nt">redis-slave1</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
@@ -380,7 +384,7 @@ if (!doNotTrack) {
 </span><span class="w">      </span>- <span class="l">./docker-volume/redis-slave1/:/data</span><span class="w">
 </span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
 </span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
 </span><span class="w">
@@ -391,7 +395,7 @@ if (!doNotTrack) {
 </span><span class="w">      </span>- <span class="l">./docker-volume/redis-slave2/:/data</span><span class="w">
 </span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server --slaveof redis-master 6379  --appendonly yes</span><span class="w">
 </span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="l">redis-master</span><span class="w">
 </span><span class="w">      </span>- <span class="l">redis-slave1</span><span class="w">
@@ -964,6 +968,27 @@ sentinel failover-timeout mymaster 180000
     </a><figcaption class="image-caption">連線 master</figcaption>
     </figure>
 <p>會發現因為該啟動 master，所以他還認為他是 master，但過一下下，在查看就正常顯示 slave1 為 master，舊的 master 就變成 slave。</p>
+<br>
+<div class="details admonition bug open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-bug fa-fw"></i>Redis 常見錯誤問題<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>在學習的時候，有發現啟動 sentinel 的時候，會跳出 <code>WARNING: Sentinel was not able to save the new configuration on disk!!!: Permission denied</code> 錯誤訊息，後來再去翻 redis github 的 issus 才發現作者也有發現這個問題，且已經修復了，主要是權限的問題，以及要掛載目錄而非 conf 檔案。</p>
+<br>
+<figure><a class="lightgallery" href="/images/redis-sentinel-docker/bug.png" title="/images/redis-sentinel-docker/bug.png" data-thumbnail="/images/redis-sentinel-docker/bug.png" data-sub-html="<h2>redis WARNING 錯誤訊息 github issus</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/redis-sentinel-docker/bug.png"
+            data-srcset="/images/redis-sentinel-docker/bug.png, /images/redis-sentinel-docker/bug.png 1.5x, /images/redis-sentinel-docker/bug.png 2x"
+            data-sizes="auto"
+            alt="/images/redis-sentinel-docker/bug.png" width="700" />
+    </a><figcaption class="image-caption">redis WARNING 錯誤訊息 <a href="https://github.com/redis/redis/issues/8172" target="_blank" rel="noopener noreffer">github issus</a></figcaption>
+    </figure>
+</div>
+        </div>
+    </div>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://blog.tienyulin.com/redis-master-slave-replication-sentinel-cluster/" target="_blank" rel="noopener noreffer">Redis (六) - 主從複製、哨兵與叢集模式</a></p>

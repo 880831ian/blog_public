@@ -29,16 +29,16 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/k8s-hpa/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-gke/</loc><lastmod>2022-07-20T11:44:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-gcb/</loc><lastmod>2022-07-20T11:46:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-gcr/</loc><lastmod>2022-07-20T11:50:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-gcsr/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-gce/</loc><lastmod>2022-07-20T11:53:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-iam/</loc><lastmod>2022-07-20T11:55:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/gcp-introduce/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/git-merge-multiple-commit/</loc><lastmod>2022-06-21T12:17:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/k8s-hpa/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-gke/</loc><lastmod>2022-07-20T11:44:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-gcb/</loc><lastmod>2022-07-20T11:46:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-gcr/</loc><lastmod>2022-07-20T11:50:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-gcsr/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-gce/</loc><lastmod>2022-07-20T11:53:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-iam/</loc><lastmod>2022-07-20T11:55:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/gcp-introduce/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/git-merge-multiple-commit/</loc><lastmod>2022-06-21T12:17:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/linux/</loc><lastmod>2022-07-15T17:46:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://blog.pin-yi.me/linux-clear-swap/</loc><lastmod>2022-06-06T14:11:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/k8s-plain/</loc><lastmod>2022-06-08T17:51:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -121,15 +121,6 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/hualien-part2/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/resume/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/resume/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/resume/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/interview/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -138,6 +129,15 @@
                     rel="alternate"
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/interview/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/resume/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/resume/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/resume/"
                     /></url><url>
             <loc>https://blog.pin-yi.me/asp.net-core/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -202,12 +202,12 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/emoji-support/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/gcp/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/hpa/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/k8s/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/kubernetes/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/php/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://blog.pin-yi.me/tags/gcp/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/hpa/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/k8s/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/kubernetes/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/php/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://blog.pin-yi.me/en/"
@@ -216,7 +216,7 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://blog.pin-yi.me/tags/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://blog.pin-yi.me/en/tags/"
@@ -225,15 +225,15 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/tags/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E8%87%AA%E5%AE%9A%E7%BE%A9%E5%8C%96/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/cloud-build/</loc><lastmod>2022-07-20T11:46:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/container-registry/</loc><lastmod>2022-07-20T11:50:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/gke/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/source-repositories/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/gce/</loc><lastmod>2022-07-20T11:53:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/git/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/iam/</loc><lastmod>2022-07-20T11:55:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E8%87%AA%E5%AE%9A%E7%BE%A9%E5%8C%96/</loc><lastmod>2022-07-20T11:39:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</loc><lastmod>2022-07-20T11:42:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/cloud-build/</loc><lastmod>2022-07-20T11:46:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/container-registry/</loc><lastmod>2022-07-20T11:50:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/gke/</loc><lastmod>2022-07-20T11:57:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/source-repositories/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/gce/</loc><lastmod>2022-07-20T11:53:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/git/</loc><lastmod>2022-07-20T11:51:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/iam/</loc><lastmod>2022-07-20T11:55:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/%E4%BB%8B%E7%B4%B9/</loc><lastmod>2022-07-15T17:46:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -260,8 +260,8 @@
             <loc>https://blog.pin-yi.me/tags/haproxy/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/redis/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/sentinel/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/%E8%B2%A0%E8%BC%89%E5%B9%B3%E8%A1%A1/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/</loc><lastmod>2022-04-28T11:30:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/youtube/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -271,15 +271,6 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/tags/youtube/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E6%97%85%E9%81%8A/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/tags/%E6%97%85%E9%81%8A/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/tags/%E6%97%85%E9%81%8A/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/tags/%E6%9C%8B%E5%8F%8B/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -288,6 +279,15 @@
                     rel="alternate"
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/tags/%E6%9C%8B%E5%8F%8B/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E6%97%85%E9%81%8A/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/tags/%E6%97%85%E9%81%8A/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/tags/%E6%97%85%E9%81%8A/"
                     /></url><url>
             <loc>https://blog.pin-yi.me/tags/%E9%9C%B2%E7%87%9F/</loc><lastmod>2022-05-07T02:44:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -309,18 +309,9 @@
             <loc>https://blog.pin-yi.me/tags/%E6%A1%86%E6%9E%B6/</loc><lastmod>2022-04-04T11:18:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B/</loc><lastmod>2022-03-05T14:05:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/nginx/</loc><lastmod>2022-03-01T18:20:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/php-%E8%A1%A8%E5%96%AE/</loc><lastmod>2022-03-04T18:36:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/php-%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95/</loc><lastmod>2022-03-04T18:36:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/php-%E5%B8%B8%E7%94%A8%E5%87%BD%E5%BC%8F/</loc><lastmod>2022-03-04T18:36:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/php-%E8%A1%A8%E5%96%AE/</loc><lastmod>2022-03-04T18:36:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://blog.pin-yi.me/about/</loc><lastmod>2022-06-02T09:23:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/about/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/about/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/tags/pwa/</loc><lastmod>2022-03-26T16:50:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -393,15 +384,6 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/tags/longstay/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E5%B1%A5%E6%AD%B7/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/tags/%E5%B1%A5%E6%AD%B7/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/tags/%E5%B1%A5%E6%AD%B7/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/tags/%E6%B1%82%E8%81%B7/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -419,6 +401,15 @@
                     rel="alternate"
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/tags/%E9%9D%A2%E8%A9%A6/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E5%B1%A5%E6%AD%B7/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/tags/%E5%B1%A5%E6%AD%B7/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/tags/%E5%B1%A5%E6%AD%B7/"
                     /></url><url>
             <loc>https://blog.pin-yi.me/tags/asp.net-core/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -494,15 +485,6 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/youtube/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/sideproject/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/sideproject/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/sideproject/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/tags/content/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -521,15 +503,6 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/categories/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/tags/installation/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/tags/installation/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/tags/installation/"
-                    /></url><url>
             <loc>https://blog.pin-yi.me/posts/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -539,14 +512,23 @@
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/posts/"
                     /></url><url>
-            <loc>https://blog.pin-yi.me/categories/codenotes/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://blog.pin-yi.me/tags/installation/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://blog.pin-yi.me/en/categories/codenotes/"
+                        href="https://blog.pin-yi.me/en/tags/installation/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/categories/codenotes/"
+                    href="https://blog.pin-yi.me/tags/installation/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/sideproject/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/sideproject/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/sideproject/"
                     /></url><url>
             <loc>https://blog.pin-yi.me/categories/documentation/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -556,6 +538,24 @@
                     rel="alternate"
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/categories/documentation/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/tags/configuration/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/tags/configuration/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/tags/configuration/"
+                    /></url><url>
+            <loc>https://blog.pin-yi.me/categories/codenotes/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://blog.pin-yi.me/en/categories/codenotes/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-tw"
+                    href="https://blog.pin-yi.me/categories/codenotes/"
                     /></url><url>
             <loc>https://blog.pin-yi.me/categories/experience/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -574,13 +574,4 @@
                     rel="alternate"
                     hreflang="zh-tw"
                     href="https://blog.pin-yi.me/categories/network/"
-                    /></url><url>
-            <loc>https://blog.pin-yi.me/tags/configuration/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://blog.pin-yi.me/en/tags/configuration/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-tw"
-                    href="https://blog.pin-yi.me/tags/configuration/"
                     /></url></urlset>

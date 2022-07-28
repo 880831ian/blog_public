@@ -190,8 +190,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install nc
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install nc
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -200,8 +200,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">nc -zvw3 &lt;IP:Port&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc -zvw3 &lt;IP:Port&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>-z</code> 只進行掃描，不進行任何的資料傳輸</p>
 <p><code>-v</code> 顯示掃描訊息</p>
@@ -215,10 +215,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ncat: Version 7.50 ( https://nmap.org/ncat )
-Ncat: Connected to &lt;IP:Port&gt;.
-Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Ncat: Version 7.50 ( https://nmap.org/ncat )
+</span></span><span class="line"><span class="cl">Ncat: Connected to &lt;IP:Port&gt;.
+</span></span><span class="line"><span class="cl">Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -227,8 +227,8 @@ Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ncat: No route to host.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Ncat: No route to host.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="nmap">nmap</h4>
@@ -238,8 +238,8 @@ Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install nmap
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install nmap
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -248,8 +248,8 @@ Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">nmap &lt;IP&gt; -p &lt;Port&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nmap &lt;IP&gt; -p &lt;Port&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果 Port 有開放，會回傳以下內容：</p>
@@ -265,15 +265,15 @@ Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
-Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
-Host is up (0.0039s latency).
-
-PORT   STATE SERVICE
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
+</span></span><span class="line"><span class="cl">Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
+</span></span><span class="line"><span class="cl">Host is up (0.0039s latency).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT   STATE SERVICE
+</span></span><span class="line"><span class="cl">80/tcp open  http
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -289,15 +289,15 @@ Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
-Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
-Host is up (0.0039s latency).
-
-PORT   STATE SERVICE
-80/tcp filtered  http
-
-Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-17 16:06 CST
+</span></span><span class="line"><span class="cl">Nmap scan report for&lt;Domain&gt; (&lt;IP&gt;)
+</span></span><span class="line"><span class="cl">Host is up (0.0039s latency).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT   STATE SERVICE
+</span></span><span class="line"><span class="cl">80/tcp filtered  http
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="telnet">Telnet</h4>
@@ -307,8 +307,8 @@ Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yum install telnet
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">yum install telnet
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>檢查 Port 是否有開放，可以用以下指令來查詢：</p>
@@ -317,8 +317,8 @@ Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">telnet &lt;IP&gt; &lt;Port&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">telnet &lt;IP&gt; &lt;Port&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果 Port 有開放，會回傳以下內容：</p>
@@ -330,11 +330,11 @@ Nmap done: 1 IP address (1 host up) scanned in 1.09 seconds
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Trying &lt;IP&gt;…
-Connected to &lt;IP&gt;.
-Escape character is ‘^]’.
-^CConnection closed by foreign host.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Trying &lt;IP&gt;…
+</span></span><span class="line"><span class="cl">Connected to &lt;IP&gt;.
+</span></span><span class="line"><span class="cl">Escape character is ‘^]’.
+</span></span><span class="line"><span class="cl">^CConnection closed by foreign host.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>如果沒有開放，會回傳以下內容：</p>
@@ -344,9 +344,9 @@ Escape character is ‘^]’.
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Trying &lt;IP&gt;…
-telnet: Unable to connect to remote host: Connection refused
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Trying &lt;IP&gt;…
+</span></span><span class="line"><span class="cl">telnet: Unable to connect to remote host: Connection refused
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h2 id="系統類">系統類</h2>
@@ -357,8 +357,8 @@ telnet: Unable to connect to remote host: Connection refused
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ps [參數]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ps [參數]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-A 列出所有的進程</li>
@@ -373,8 +373,8 @@ telnet: Unable to connect to remote host: Connection refused
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>USER：行程的擁有者</li>
@@ -408,8 +408,8 @@ telnet: Unable to connect to remote host: Connection refused
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kill [-s &lt;訊息名稱或編號&gt;] [程序] or [-l &lt;訊息編號&gt;]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kill [-s &lt;訊息名稱或編號&gt;] [程序] or [-l &lt;訊息編號&gt;]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-l &lt;訊息編號&gt;：若不加 &lt;訊息編號&gt;選項，-l 會列出全部的訊息名稱</li>
@@ -430,8 +430,8 @@ telnet: Unable to connect to remote host: Connection refused
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">who [參數]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">who [參數]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>-b：查看最後一次(上次)系統啟動時間</li>
@@ -449,10 +449,10 @@ telnet: Unable to connect to remote host: Connection refused
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">uptime
-
-17:44  up 2 days,  8:48, 3 users, load averages: 3.48 3.37 3.56
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">uptime
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">17:44  up 2 days,  8:48, 3 users, load averages: 3.48 3.37 3.56
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一樣會顯示到目前已經啟動多久，跟是幾點啟動等資訊</p>
 <br>
@@ -463,8 +463,8 @@ telnet: Unable to connect to remote host: Connection refused
                 </span><span><a href="/tags/%E6%8C%87%E4%BB%A4/">指令</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-15&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/5dcd9fbf18b73e515a9af62aac55d57d674fb251" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;5dcd9fb:&nbsp;# 更新 Linux 常用指令">
-                            <i class="fas fa-hashtag fa-fw"></i>5dcd9fb</a></span>
+                <span>更新於 2022-07-15&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/5dcd9fbf18b73e515a9af62aac55d57d674fb251" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;5dcd9fbf:&nbsp;# 更新 Linux 常用指令">
+                            <i class="fas fa-hashtag fa-fw"></i>5dcd9fbf</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/linux/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

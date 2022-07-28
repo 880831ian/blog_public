@@ -169,8 +169,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">free 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">free 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>下完後，格式會長這樣：</p>
@@ -181,10 +181,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">              total        used        free      shared  buff/cache   available
-Mem:       <span class="m">32765564</span>     <span class="m">8499252</span>     <span class="m">1825132</span>     <span class="m">1857720</span>    <span class="m">22441180</span>    <span class="m">19693100</span>
-Swap:      <span class="m">16776188</span>           <span class="m">0</span>    <span class="m">16776188</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">              total        used        free      shared  buff/cache   available
+</span></span><span class="line"><span class="cl">Mem:       <span class="m">32765564</span>     <span class="m">8499252</span>     <span class="m">1825132</span>     <span class="m">1857720</span>    <span class="m">22441180</span>    <span class="m">19693100</span>
+</span></span><span class="line"><span class="cl">Swap:      <span class="m">16776188</span>           <span class="m">0</span>    <span class="m">16776188</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>但這樣子不是很好觀察，所以我們可以加上 <code>-h</code> 來顯示大小的單位，讓我更清楚的知道每一個的大小：</p>
@@ -195,10 +195,10 @@ Swap:      <span class="m">16776188</span>           <span class="m">0</span>   
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">              total        used        free      shared  buff/cache   available
-Mem:            31G        8.1G        1.6G        1.8G         21G         18G
-Swap:           15G          0B         15G
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">              total        used        free      shared  buff/cache   available
+</span></span><span class="line"><span class="cl">Mem:            31G        8.1G        1.6G        1.8G         21G         18G
+</span></span><span class="line"><span class="cl">Swap:           15G          0B         15G
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>那我們接著先來說說使用 <code>free</code> 查詢後，所有欄位的意思吧！</p>
@@ -270,8 +270,8 @@ Swap:           15G          0B         15G
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">sync
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sync
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這個指令就是將存於暫存的資料強制寫入到硬碟中，來確保清除時導致資料遺失。</p>
 <h3 id="關閉-swap再打開-swap">關閉 Swap，再打開 Swap</h3>
@@ -281,8 +281,8 @@ Swap:           15G          0B         15G
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">swapoff -a <span class="o">&amp;&amp;</span> swapon -a
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">swapoff -a <span class="o">&amp;&amp;</span> swapon -a
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>確認都沒問題後，我們就使用 <code>free</code> 來重新查看記憶體狀態：</p>
@@ -320,8 +320,8 @@ Swap:           15G          0B         15G
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-06-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/d57ff0167766a22557a06084f1d2306d089afba3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;d57ff01:&nbsp;# 新增/更新 清除 Linux 機器上的 Swap (Buff、Cache、Swap 比較)">
-                            <i class="fas fa-hashtag fa-fw"></i>d57ff01</a></span>
+                <span>更新於 2022-06-06&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/d57ff0167766a22557a06084f1d2306d089afba3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;d57ff016:&nbsp;# 新增/更新 清除 Linux 機器上的 Swap (Buff、Cache、Swap 比較)">
+                            <i class="fas fa-hashtag fa-fw"></i>d57ff016</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/linux-clear-swap/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
