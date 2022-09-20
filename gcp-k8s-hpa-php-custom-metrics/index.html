@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標"/>
 <meta name="twitter:description" content="此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先"/>
 <meta name="application-name" content="PinYi 部落格">
-<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" /><link rel="prev" href="https://blog.pin-yi.me/k8s-hpa/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" /><link rel="prev" href="https://blog.pin-yi.me/k8s-hpa/" /><link rel="next" href="https://blog.pin-yi.me/snyk/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/gcp-k8s-hpa-php-custom-metrics\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, GCP, 自定義化, PHP, 實作","wordcount":  1658 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, GCP, 自定義化, PHP, 實作","wordcount":  1623 ,
         "url": "https:\/\/blog.pin-yi.me\/gcp-k8s-hpa-php-custom-metrics\/","datePublished": "2022-07-18T11:08:00+08:00","dateModified": "2022-07-20T11:39:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -60,7 +60,7 @@ if (!doNotTrack) {
             <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
                         <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/gcp-k8s-hpa-php-custom-metrics/" selected>繁體中文</option></select>
                     </span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
@@ -105,7 +105,7 @@ if (!doNotTrack) {
                     <a href="#" class="search-cancel" id="search-cancel-mobile">
                         取消
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
                 <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/gcp-k8s-hpa-php-custom-metrics/featured-image.webp"
         title="/gcp-k8s-hpa-php-custom-metrics/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1658 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1623 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
@@ -675,7 +675,7 @@ if (!doNotTrack) {
         </div><div class="post-info-share">
             <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" data-title="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標" data-hashtags="Kubernetes,K8s,HPA,GCP,自定義化,PHP,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" data-title="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" data-title="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" data-title="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/k8s-hpa/" class="prev" rel="prev" title="Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/snyk/" class="next" rel="next" title="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>

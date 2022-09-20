@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/go\/featured-image.webp",
                             "width":  790 ,
                             "height":  260 
-                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  9874 ,
+                        }],"genre": "posts","keywords": "Go, 實作, 介紹","wordcount":  9673 ,
         "url": "https:\/\/blog.pin-yi.me\/go\/","datePublished": "2022-03-21T11:33:25+08:00","dateModified": "2022-03-29T12:27:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -60,7 +60,7 @@ if (!doNotTrack) {
             <a href="/" title="PinYi">PinYi 部落格</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 分類 </a><a class="menu-item" href="/tags/"> 標籤 </a><a class="menu-item" href="/sideproject/"> 作品集 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
                         <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/go/" selected>繁體中文</option></select>
                     </span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
@@ -105,7 +105,7 @@ if (!doNotTrack) {
                     <a href="#" class="search-cancel" id="search-cancel-mobile">
                         取消
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">分類</a><a class="menu-item" href="/tags/" title="">標籤</a><a class="menu-item" href="/sideproject/" title="">作品集</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
                 <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/go/featured-image.webp"
         title="/go/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Go 介紹</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9874 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 9673 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 20 分鐘</span>&nbsp;</div>
             </div>
             
@@ -389,8 +389,8 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ go mod init helloworld
-</span></span><span class="line"><span class="cl">go: creating new go.mod: module helloworld
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="err">$</span> <span class="k">go</span> <span class="nv">mod</span> <span class="nv">init</span> <span class="nv">helloworld</span>
+</span></span><span class="line"><span class="cl"><span class="k">go</span><span class="p">:</span> <span class="nv">creating</span> <span class="nv">new</span> <span class="k">go</span><span class="p">.</span><span class="nv">mod</span><span class="p">:</span> <span class="kn">module</span> <span class="nv">helloworld</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><br>
@@ -403,10 +403,10 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat go.mod
-</span></span><span class="line"><span class="cl">module helloworld
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="err">$</span> <span class="nv">cat</span> <span class="k">go</span><span class="p">.</span><span class="nv">mod</span>
+</span></span><span class="line"><span class="cl"><span class="kn">module</span> <span class="nv">helloworld</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">go 1.18
+</span></span><span class="line"><span class="cl"><span class="k">go</span> <span class="mf">1.18</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>go.mod 是用來定義 module 的文件，用來標示此 module 的名稱、所使用的 go 版本以及相依的 Go module。</p>
@@ -649,17 +649,17 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">module github.com/880831ian/go/helloworld
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="o">/</span><span class="mi">880831</span><span class="nv">ian</span><span class="o">/</span><span class="k">go</span><span class="o">/</span><span class="nv">helloworld</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">go 1.18
+</span></span><span class="line"><span class="cl"><span class="k">go</span> <span class="mf">1.18</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">require github.com/fatih/color v1.13.0
+</span></span><span class="line"><span class="cl"><span class="nv">require</span> <span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="o">/</span><span class="nv">fatih</span><span class="o">/</span><span class="nv">color</span> <span class="nv">v1</span><span class="mf">.13.0</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">require (
-</span></span><span class="line"><span class="cl">	github.com/mattn/go-colorable v0.1.12 // indirect
-</span></span><span class="line"><span class="cl">	github.com/mattn/go-isatty v0.0.14 // indirect
-</span></span><span class="line"><span class="cl">	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
-</span></span><span class="line"><span class="cl">)
+</span></span><span class="line"><span class="cl"><span class="nv">require</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="o">/</span><span class="nv">mattn</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nv">colorable</span> <span class="nv">v0</span><span class="mf">.1.12</span> <span class="c1">// indirect
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="o">/</span><span class="nv">mattn</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nv">isatty</span> <span class="nv">v0</span><span class="mf">.0.14</span> <span class="c1">// indirect
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">golang</span><span class="p">.</span><span class="nv">org</span><span class="o">/</span><span class="nv">x</span><span class="o">/</span><span class="nv">sys</span> <span class="nv">v0</span><span class="mf">.0.0</span><span class="o">-</span><span class="mi">20220319134239</span><span class="o">-</span><span class="nv">a9b59b0215f8</span> <span class="c1">// indirect
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>會多了下面這些 <code>require github.com/fatih/color v1.13.0</code> 代表目前專案使用 v1.13.0 版本的 <code>github.com/fatih/color</code></p>
