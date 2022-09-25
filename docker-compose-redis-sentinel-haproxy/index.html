@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/docker-compose-redis-sentinel-haproxy\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "HAProxy, Redis, Docker, Sentinel, 負載平衡, 哨兵模式, 實作","wordcount":  3794 ,
+                        }],"genre": "posts","keywords": "HAProxy, Redis, Docker, Sentinel, 負載平衡, 哨兵模式, 實作","wordcount":  3678 ,
         "url": "https:\/\/blog.pin-yi.me\/docker-compose-redis-sentinel-haproxy\/","datePublished": "2022-04-22T14:00:00+08:00","dateModified": "2022-04-22T17:35:56+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/docker-compose-redis-sentinel-haproxy/featured-image.webp"
         title="/docker-compose-redis-sentinel-haproxy/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-22">2022-04-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3794 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-22">2022-04-22</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3678 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
@@ -224,34 +224,34 @@ if (!doNotTrack) {
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── Docker-compose.yaml
-</span></span><span class="line"><span class="cl">├── docker-volume
-</span></span><span class="line"><span class="cl">│   ├── haproxy
-</span></span><span class="line"><span class="cl">│   │   └── haproxy.cfg
-</span></span><span class="line"><span class="cl">│   ├── nginx
-</span></span><span class="line"><span class="cl">│   │   └── nginx.conf
-</span></span><span class="line"><span class="cl">│   ├── php
-</span></span><span class="line"><span class="cl">│   │   ├── info.php
-</span></span><span class="line"><span class="cl">│   │   ├── r.php
-</span></span><span class="line"><span class="cl">│   │   └── rw.php
-</span></span><span class="line"><span class="cl">│   └── redis
-</span></span><span class="line"><span class="cl">│       ├── redis.conf
-</span></span><span class="line"><span class="cl">│       ├── redis1
-</span></span><span class="line"><span class="cl">│       ├── redis2
-</span></span><span class="line"><span class="cl">│       └── redis3
-</span></span><span class="line"><span class="cl">├── php
-</span></span><span class="line"><span class="cl">│   └── Dockerfile
-</span></span><span class="line"><span class="cl">├── redis.sh
-</span></span><span class="line"><span class="cl">└── sentinel
-</span></span><span class="line"><span class="cl">    ├── Docker-compose.yaml
-</span></span><span class="line"><span class="cl">    ├── sentinel1
-</span></span><span class="line"><span class="cl">    │   └── sentinel.conf
-</span></span><span class="line"><span class="cl">    ├── sentinel2
-</span></span><span class="line"><span class="cl">    │   └── sentinel.conf
-</span></span><span class="line"><span class="cl">    └── sentinel3
-</span></span><span class="line"><span class="cl">        └── sentinel.conf
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── Docker-compose.yaml
+├── docker-volume
+│   ├── haproxy
+│   │   └── haproxy.cfg
+│   ├── nginx
+│   │   └── nginx.conf
+│   ├── php
+│   │   ├── info.php
+│   │   ├── r.php
+│   │   └── rw.php
+│   └── redis
+│       ├── redis.conf
+│       ├── redis1
+│       ├── redis2
+│       └── redis3
+├── php
+│   └── Dockerfile
+├── redis.sh
+└── sentinel
+    ├── Docker-compose.yaml
+    ├── sentinel1
+    │   └── sentinel.conf
+    ├── sentinel2
+    │   └── sentinel.conf
+    └── sentinel3
+        └── sentinel.conf
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>這是主要的結構，簡單說明一下：</p>
@@ -361,94 +361,94 @@ if (!doNotTrack) {
 </span><span class="lnt">87
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.20</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8888:80&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/nginx/:/etc/nginx/conf.d/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./log/nginx/:/var/log/nginx/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/php/:/var/www/html</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/redis1/:/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./log/redis1:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.11</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/redis2/:/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./log/redis2:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis3</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/redis3/:/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./log/redis3:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.13</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.0</span><span class="l">/16</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.1</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.20</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;8888:80&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/nginx/:/etc/nginx/conf.d/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/nginx/:/var/log/nginx/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">php</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./php</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">php</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">expose</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">9000</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/php/:/var/www/html</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis1</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis1/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis1:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.11</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis2</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis2/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis2:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.12</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6380</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis1</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis3</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/redis.conf --slaveof redis1 6379 --appendonly yes</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/redis3/:/data</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./docker-volume/redis/:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./log/redis3:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.13</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">6381</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis1</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis2</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.0</span><span class="l">/16</span><span class="w">
+</span><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.1</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>一樣詳細的 Docker 設定說明，可以參考 <a href="https://pin-yi.me/docker" target="_blank" rel="noopener noreffer">Docker 介紹</a> 內有詳細設定說明。其他比較特別的地方是：</p>
 <ul>
@@ -504,49 +504,49 @@ if (!doNotTrack) {
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="line"><span class="cl"><span class="na">global</span>
-</span></span><span class="line"><span class="cl">  <span class="na">log stdout format raw local0 info</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">defaults</span>
-</span></span><span class="line"><span class="cl">  <span class="na">mode http # 默認模式 { tcp | http | health }，tcp 是4層，http 是7層，health 只會返回 OK</span>
-</span></span><span class="line"><span class="cl">  <span class="na">timeout client 10s  # 客戶端超時</span>
-</span></span><span class="line"><span class="cl">  <span class="na">timeout connect 5s  # 連接超時</span>
-</span></span><span class="line"><span class="cl">  <span class="na">timeout server 10s # 伺服器超時</span>
-</span></span><span class="line"><span class="cl">  <span class="na">timeout http-request 10s</span>
-</span></span><span class="line"><span class="cl">  <span class="na">log global</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">listen admin_status</span>
-</span></span><span class="line"><span class="cl">  <span class="na">bind 0.0.0.0:8404</span>
-</span></span><span class="line"><span class="cl">  <span class="na">mode http</span>
-</span></span><span class="line"><span class="cl">  <span class="na">stats enable</span>
-</span></span><span class="line"><span class="cl">  <span class="na">stats uri /redis</span>
-</span></span><span class="line"><span class="cl">  <span class="na">stats realm Global\ statistics</span>
-</span></span><span class="line"><span class="cl">  <span class="na">stats refresh 1s</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">listen rw-redis # 判斷是否為 master 並可讀可寫</span>
-</span></span><span class="line"><span class="cl">  <span class="na">bind 0.0.0.0:16379</span>
-</span></span><span class="line"><span class="cl">  <span class="na">mode tcp</span>
-</span></span><span class="line"><span class="cl">  <span class="na">balance roundrobin</span>
-</span></span><span class="line"><span class="cl">  <span class="na">option tcp-check # redis 健康检查，確保是 master</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check connect   </span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check send PING\r\n</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check expect string +PONG</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check send info\ replication\r\n</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check expect string role:master</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check send QUIT\r\n</span>
-</span></span><span class="line"><span class="cl">  <span class="na">tcp-check expect string +OK</span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis3 redis3:6379 check inter 2000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">listen r-redis  # 判斷是否為 master、slave 並可讀</span>
-</span></span><span class="line"><span class="cl">  <span class="na">bind 0.0.0.0:16380</span>
-</span></span><span class="line"><span class="cl">  <span class="na">mode tcp</span>
-</span></span><span class="line"><span class="cl">  <span class="na">balance roundrobin</span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
-</span></span><span class="line"><span class="cl">  <span class="na">server redis3 redis3:6379 check inter 2000</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="na">global</span>
+  <span class="na">log stdout format raw local0 info</span>
+
+<span class="na">defaults</span>
+  <span class="na">mode http # 默認模式 { tcp | http | health }，tcp 是4層，http 是7層，health 只會返回 OK</span>
+  <span class="na">timeout client 10s  # 客戶端超時</span>
+  <span class="na">timeout connect 5s  # 連接超時</span>
+  <span class="na">timeout server 10s # 伺服器超時</span>
+  <span class="na">timeout http-request 10s</span>
+  <span class="na">log global</span>
+
+<span class="na">listen admin_status</span>
+  <span class="na">bind 0.0.0.0:8404</span>
+  <span class="na">mode http</span>
+  <span class="na">stats enable</span>
+  <span class="na">stats uri /redis</span>
+  <span class="na">stats realm Global\ statistics</span>
+  <span class="na">stats refresh 1s</span>
+
+<span class="na">listen rw-redis # 判斷是否為 master 並可讀可寫</span>
+  <span class="na">bind 0.0.0.0:16379</span>
+  <span class="na">mode tcp</span>
+  <span class="na">balance roundrobin</span>
+  <span class="na">option tcp-check # redis 健康检查，確保是 master</span>
+  <span class="na">tcp-check connect   </span>
+  <span class="na">tcp-check send PING\r\n</span>
+  <span class="na">tcp-check expect string +PONG</span>
+  <span class="na">tcp-check send info\ replication\r\n</span>
+  <span class="na">tcp-check expect string role:master</span>
+  <span class="na">tcp-check send QUIT\r\n</span>
+  <span class="na">tcp-check expect string +OK</span>
+  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
+  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
+  <span class="na">server redis3 redis3:6379 check inter 2000</span>
+
+<span class="na">listen r-redis  # 判斷是否為 master、slave 並可讀</span>
+  <span class="na">bind 0.0.0.0:16380</span>
+  <span class="na">mode tcp</span>
+  <span class="na">balance roundrobin</span>
+  <span class="na">server redis1 redis1:6379 check inter 2000 </span>
+  <span class="na">server redis2 redis2:6379 check inter 2000 </span>
+  <span class="na">server redis3 redis3:6379 check inter 2000</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>這裡是本章的重點，我們會在這邊設定好 haproxy，詳細說明請看：</p>
 <p>defaults：
@@ -576,15 +576,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">option tcp-check # redis 健康检查，確保是 master
-</span></span><span class="line"><span class="cl">  tcp-check connect   
-</span></span><span class="line"><span class="cl">  tcp-check send PING\r\n
-</span></span><span class="line"><span class="cl">  tcp-check expect string +PONG
-</span></span><span class="line"><span class="cl">  tcp-check send info\ replication\r\n
-</span></span><span class="line"><span class="cl">  tcp-check expect string role:master
-</span></span><span class="line"><span class="cl">  tcp-check send QUIT\r\n
-</span></span><span class="line"><span class="cl">  tcp-check expect string +OK
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">option tcp-check # redis 健康检查，確保是 master
+  tcp-check connect   
+  tcp-check send PING\r\n
+  tcp-check expect string +PONG
+  tcp-check send info\ replication\r\n
+  tcp-check expect string role:master
+  tcp-check send QUIT\r\n
+  tcp-check expect string +OK
+</code></pre></td></tr></table>
 </div>
 </div><p>上面這些是用來判斷角色是不是 master。</p>
 <p>最後放我們 3 個 redis 服務：</p>
@@ -595,10 +595,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> server redis1 redis1:6379 check inter 2000 
-</span></span><span class="line"><span class="cl"> server redis2 redis2:6379 check inter 2000 
-</span></span><span class="line"><span class="cl"> server redis3 redis3:6379 check inter 2000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> server redis1 redis1:6379 check inter 2000 
+ server redis2 redis2:6379 check inter 2000 
+ server redis3 redis3:6379 check inter 2000
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>check：開啟健康偵測。</li>
@@ -636,33 +636,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
-</span></span><span class="line"><span class="cl">  listen 80;
-</span></span><span class="line"><span class="cl">  server_name default_server;
-</span></span><span class="line"><span class="cl">  return 404;
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">server {
-</span></span><span class="line"><span class="cl">  listen 80;
-</span></span><span class="line"><span class="cl">  server_name test.com;
-</span></span><span class="line"><span class="cl">  index index.php index.html;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  error_log  /var/log/nginx/error.log  warn;
-</span></span><span class="line"><span class="cl">  access_log /var/log/nginx/access.log;
-</span></span><span class="line"><span class="cl">  root /var/www/html;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  location / {
-</span></span><span class="line"><span class="cl">    try_files $uri $uri/ /index.php?$query_string;
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  location ~ \.php$ {
-</span></span><span class="line"><span class="cl">      fastcgi_pass php:9000;
-</span></span><span class="line"><span class="cl">      fastcgi_index index.php;
-</span></span><span class="line"><span class="cl">      include fastcgi_params;
-</span></span><span class="line"><span class="cl">      fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">server {
+  listen 80;
+  server_name default_server;
+  return 404;
+}
+
+server {
+  listen 80;
+  server_name test.com;
+  index index.php index.html;
+
+  error_log  /var/log/nginx/error.log  warn;
+  access_log /var/log/nginx/access.log;
+  root /var/www/html;
+
+  location / {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
+  location ~ \.php$ {
+      fastcgi_pass php:9000;
+      fastcgi_index index.php;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+  }
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>Nginx 設定檔案。</p>
 <br>
@@ -680,16 +680,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16379</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
+<span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16379</span><span class="p">);</span>
+<span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
+
+<span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>跟 <code>r.php</code> 比較不同的是，使用 16379 Port，我們在 <code>haproxy.cfg</code> 有設定 rw-redis，來判斷是不是 master 並且是可讀可寫。</p>
 <br>
@@ -707,16 +707,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16380</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$redis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">();</span>
+<span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;172.20.0.20&#39;</span><span class="p">,</span> <span class="mi">16380</span><span class="p">);</span>
+<span class="nv">$r</span> <span class="o">=</span> <span class="nv">$redis</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">();</span>
+
+<span class="k">echo</span>  <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;run_id&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&#39;</span> <span class="o">.</span> <span class="nv">$r</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;&lt;br&gt;&lt;br&gt;&#39;</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">,</span> <span class="nx">print_r</span><span class="p">(</span><span class="nv">$r</span><span class="p">),</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>使用 16380 Port，在 <code>haproxy.cfg</code> 有設定 r-redis，來顯示是不是 master、slave 且可讀。</p>
 <br>
@@ -732,14 +732,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> php:7.4-fpm</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pecl install -o -f redis <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  rm -rf /tmp/pear <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;extension=redis.so&#34;</span> &gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_handler = redis&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_path = tcp://redis:6379&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini<span class="err">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> php:7.4-fpm</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pecl install -o -f redis <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  rm -rf /tmp/pear <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;extension=redis.so&#34;</span> &gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_handler = redis&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini <span class="se">\
+</span><span class="se"></span><span class="o">&amp;&amp;</span>  <span class="nb">echo</span> <span class="s2">&#34;session.save_path = tcp://redis:6379&#34;</span> &gt;&gt; /usr/local/etc/php/conf.d/redis.ini<span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>因為 PHP 要使用 Redis，會需要安裝一些套件，所以我們將 PHP 分開來，使用 Dockerfile 來設定映像檔。</p>
 <br>
@@ -775,34 +775,34 @@ if (!doNotTrack) {
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="nv">green</span><span class="o">=</span><span class="s2">&#34;\033[1;32m&#34;</span><span class="p">;</span><span class="nv">white</span><span class="o">=</span><span class="s2">&#34;\033[1;0m&#34;</span><span class="p">;</span><span class="nv">red</span><span class="o">=</span><span class="s2">&#34;\033[1;31m&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis1 IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">redis1_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis1 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$redis1_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis2 IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">redis2_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis2 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$redis2_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis3 IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">redis3_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis3 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$redis3_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;haproxy IPAddress:&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">haproxy_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect haproxy <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$haproxy_ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis1:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis1 redis-cli info Replication <span class="p">|</span> grep role
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis2:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis2 redis-cli info Replication <span class="p">|</span> grep role
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;redis3:&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it redis3 redis-cli info Replication <span class="p">|</span> grep role
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">green</span><span class="o">=</span><span class="s2">&#34;\033[1;32m&#34;</span><span class="p">;</span><span class="nv">white</span><span class="o">=</span><span class="s2">&#34;\033[1;0m&#34;</span><span class="p">;</span><span class="nv">red</span><span class="o">=</span><span class="s2">&#34;\033[1;31m&#34;</span><span class="p">;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;redis1 IPAddress:&#34;</span>
+<span class="nv">redis1_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis1 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis1_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;redis2 IPAddress:&#34;</span>
+<span class="nv">redis2_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis2 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis2_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;redis3 IPAddress:&#34;</span>
+<span class="nv">redis3_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect redis3 <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$redis3_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;haproxy IPAddress:&#34;</span>
+<span class="nv">haproxy_ip</span><span class="o">=</span><span class="sb">`</span>docker inspect haproxy <span class="p">|</span> grep <span class="s2">&#34;IPv4&#34;</span> <span class="p">|</span> egrep -o <span class="s2">&#34;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}&#34;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$haproxy_ip</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">&#34;------------------------------&#34;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;redis1:&#34;</span>
+docker <span class="nb">exec</span> -it redis1 redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;redis2:&#34;</span>
+docker <span class="nb">exec</span> -it redis2 redis-cli info Replication <span class="p">|</span> grep role
+<span class="nb">echo</span> <span class="s2">&#34;redis3:&#34;</span>
+docker <span class="nb">exec</span> -it redis3 redis-cli info Replication <span class="p">|</span> grep role
+</code></pre></td></tr></table>
 </div>
 </div><p>這個是我自己所寫的腳本，可以詳細知道目前服務的角色轉移狀況。</p>
 <br>
@@ -874,70 +874,70 @@ if (!doNotTrack) {
 </span><span class="lnt">63
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">haproxy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">../docker-volume/haproxy/:/usr/local/etc/haproxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.20</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">16379</span><span class="p">:</span><span class="m">6379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8404</span><span class="p">:</span><span class="m">8404</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel1</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26379</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel1:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">../log/sentinel1:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel2</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26380</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel2:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">../log/sentinel2:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sentinel3</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">26381</span><span class="p">:</span><span class="m">26379</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./sentinel3:/usr/local/etc/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">../log/sentinel3:/var/log/redis/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">haproxy</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../docker-volume/haproxy/:/usr/local/etc/haproxy</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.20</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">16379</span><span class="p">:</span><span class="m">6379</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8404</span><span class="p">:</span><span class="m">8404</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-1</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26379</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel1:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel1:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-2</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26380</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel2:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel2:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">sentinel3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-sentinel-3</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">26381</span><span class="p">:</span><span class="m">26379</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">redis-server /usr/local/etc/redis/sentinel.conf --sentinel</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./sentinel3:/usr/local/etc/redis/</span><span class="w">
+</span><span class="w">      </span>- <span class="l">../log/sentinel3:/var/log/redis/</span><span class="w">
+</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">TZ=Asia/Taipei</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">HAProxy_Redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">HAProxy_Redis</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="sentinelsentineconf">sentinel/sentine.conf</h3>
@@ -957,18 +957,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port 26379
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">logfile &#34;/var/log/redis/redis-sentinel.log&#34;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">protected-mode no
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
-</span></span><span class="line"><span class="cl">sentinel monitor mymaster 172.20.0.11 6379 2
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
-</span></span><span class="line"><span class="cl">sentinel down-after-milliseconds mymaster 5000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port 26379
+
+logfile &#34;/var/log/redis/redis-sentinel.log&#34;
+
+protected-mode no
+
+#設定要監控的 Master，最後的 2 代表判定客觀下線所需的哨兵數
+sentinel monitor mymaster 172.20.0.11 6379 2
+
+#哨兵 Ping 不到 Master 超過此毫秒數會認定主觀下線
+sentinel down-after-milliseconds mymaster 5000
+</code></pre></td></tr></table>
 </div>
 </div><p>要設定指定的 Port sentine1 是 26379、sentine2 是 26380、sentine3 是 26381。接下來要設定要監控的 Master，最後的數字代表我們前面有提到客觀下線需要達到的哨兵數。以及主觀下線的時間跟 failover 超過的時間。</p>
 <br>
@@ -1088,27 +1088,27 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ sh redis.sh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">redis1 IPAddress:
-</span></span><span class="line"><span class="cl">172.20.0.11
-</span></span><span class="line"><span class="cl">------------------------------
-</span></span><span class="line"><span class="cl">redis2 IPAddress:
-</span></span><span class="line"><span class="cl">172.20.0.12
-</span></span><span class="line"><span class="cl">------------------------------
-</span></span><span class="line"><span class="cl">redis3 IPAddress:
-</span></span><span class="line"><span class="cl">172.20.0.13
-</span></span><span class="line"><span class="cl">------------------------------
-</span></span><span class="line"><span class="cl">haproxy IPAddress:
-</span></span><span class="line"><span class="cl">172.20.0.20
-</span></span><span class="line"><span class="cl">------------------------------
-</span></span><span class="line"><span class="cl">redis1:
-</span></span><span class="line"><span class="cl">role:master
-</span></span><span class="line"><span class="cl">redis2:
-</span></span><span class="line"><span class="cl">role:slave
-</span></span><span class="line"><span class="cl">redis3:
-</span></span><span class="line"><span class="cl">role:slave
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ sh redis.sh
+
+redis1 IPAddress:
+172.20.0.11
+------------------------------
+redis2 IPAddress:
+172.20.0.12
+------------------------------
+redis3 IPAddress:
+172.20.0.13
+------------------------------
+haproxy IPAddress:
+172.20.0.20
+------------------------------
+redis1:
+role:master
+redis2:
+role:slave
+redis3:
+role:slave
+</code></pre></td></tr></table>
 </div>
 </div><p>就會顯示三個 redis 的 IP 以及 haproxy 的 IP，這些都是已經寫在 Docker-compose.yaml 檔案內的，如果忘記的可以再往前看 ↑</p>
 <p>接下來我們可以先一直 F5 <code>test.com:8888/r.php</code>，來模擬大量的讀取請求，如果發現網站內容一直在更換，就代表我們成功透過 HAProxy 做到負載平衡了，可以將讀取的需求分給三個服務做處理！那因為 <code>test.com:8888/rw.php</code> 他只會抓 master，所以刷新還是同一個 master。</p>
@@ -1122,10 +1122,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker stop redis1 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">redis1
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker stop redis1 
+
+redis1
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到 <code>test.com:8404/redis</code> 原本綠色的 redis1 開始變成黃色，最後變成紅色：</p>
 <br>
@@ -1206,8 +1206,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">哨兵模式</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-22&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/59196ed0f911bdb33bcde731563e61c6baa29d05" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;59196ed0:&nbsp;# 新增 HAProxy Redis 哨兵模式 搭配 Docker-compose">
-                            <i class="fas fa-hashtag fa-fw"></i>59196ed0</a></span>
+                <span>更新於 2022-04-22&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/59196ed0f911bdb33bcde731563e61c6baa29d05" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;59196ed:&nbsp;# 新增 HAProxy Redis 哨兵模式 搭配 Docker-compose">
+                            <i class="fas fa-hashtag fa-fw"></i>59196ed</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/docker-compose-redis-sentinel-haproxy/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/gcp-k8s-hpa-php-custom-metrics\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, GCP, 自定義化, PHP, 實作","wordcount":  1623 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, GCP, 自定義化, PHP, 實作","wordcount":  1658 ,
         "url": "https:\/\/blog.pin-yi.me\/gcp-k8s-hpa-php-custom-metrics\/","datePublished": "2022-07-18T11:08:00+08:00","dateModified": "2022-07-20T11:39:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/gcp-k8s-hpa-php-custom-metrics/featured-image.webp"
         title="/gcp-k8s-hpa-php-custom-metrics/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1623 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1658 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
@@ -186,8 +186,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-stackdriver/master/custom-metrics-stackdriver-adapter/deploy/production/adapter_new_resource_model.yaml
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="deployment">Deployment</h3>
@@ -290,102 +290,102 @@ if (!doNotTrack) {
 </span><span class="lnt">95
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: apps/v1
-</span></span><span class="line"><span class="cl">kind: Deployment
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: demo
-</span></span><span class="line"><span class="cl">  labels:
-</span></span><span class="line"><span class="cl">    app: demo
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  replicas: 1
-</span></span><span class="line"><span class="cl">  selector:
-</span></span><span class="line"><span class="cl">    matchLabels:
-</span></span><span class="line"><span class="cl">      app: demo
-</span></span><span class="line"><span class="cl">  template:
-</span></span><span class="line"><span class="cl">    metadata:
-</span></span><span class="line"><span class="cl">      labels:
-</span></span><span class="line"><span class="cl">        app: demo
-</span></span><span class="line"><span class="cl">    spec:
-</span></span><span class="line"><span class="cl">      containers:
-</span></span><span class="line"><span class="cl">        - name: php-fpm
-</span></span><span class="line"><span class="cl">          image: php:fpm
-</span></span><span class="line"><span class="cl">          workingDir: /var/www/service
-</span></span><span class="line"><span class="cl">          ports:
-</span></span><span class="line"><span class="cl">            - containerPort: 9000
-</span></span><span class="line"><span class="cl">          resources:
-</span></span><span class="line"><span class="cl">            requests:
-</span></span><span class="line"><span class="cl">              cpu: 100m
-</span></span><span class="line"><span class="cl">              memory: 1G
-</span></span><span class="line"><span class="cl">            limits:
-</span></span><span class="line"><span class="cl">              cpu: 100m
-</span></span><span class="line"><span class="cl">              memory: 1G
-</span></span><span class="line"><span class="cl">          volumeMounts:
-</span></span><span class="line"><span class="cl">            - name: application
-</span></span><span class="line"><span class="cl">              mountPath: /var/www/service/
-</span></span><span class="line"><span class="cl">            - name: php-fpm-config
-</span></span><span class="line"><span class="cl">              mountPath: /usr/local/etc/php-fpm.d/www.conf
-</span></span><span class="line"><span class="cl">              subPath: www.conf
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: nginx
-</span></span><span class="line"><span class="cl">          image: nginx:alpine
-</span></span><span class="line"><span class="cl">          workingDir: /var/www/service
-</span></span><span class="line"><span class="cl">          ports:
-</span></span><span class="line"><span class="cl">            - containerPort: 80
-</span></span><span class="line"><span class="cl">          volumeMounts:
-</span></span><span class="line"><span class="cl">            - name: application
-</span></span><span class="line"><span class="cl">              mountPath: /var/www/service/
-</span></span><span class="line"><span class="cl">            - name: nginx-config
-</span></span><span class="line"><span class="cl">              mountPath: /etc/nginx/conf.d/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: phpfpm-exporter
-</span></span><span class="line"><span class="cl">          image: hipages/php-fpm_exporter:latest
-</span></span><span class="line"><span class="cl">          env:
-</span></span><span class="line"><span class="cl">            - name: PHP_FPM_SCRAPE_URI
-</span></span><span class="line"><span class="cl">              value: &#34;tcp://localhost:9000/status&#34;
-</span></span><span class="line"><span class="cl">            - name: PHP_FPM_FIX_PROCESS_COUNT
-</span></span><span class="line"><span class="cl">              value: &#34;true&#34;
-</span></span><span class="line"><span class="cl">          resources:
-</span></span><span class="line"><span class="cl">            requests:
-</span></span><span class="line"><span class="cl">              cpu: 10m
-</span></span><span class="line"><span class="cl">            limits:
-</span></span><span class="line"><span class="cl">              cpu: 10m
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: prometheus-to-sd
-</span></span><span class="line"><span class="cl">          image: gcr.io/google-containers/prometheus-to-sd:v0.9.0
-</span></span><span class="line"><span class="cl">          ports:
-</span></span><span class="line"><span class="cl">            - containerPort: 6060
-</span></span><span class="line"><span class="cl">              protocol: TCP
-</span></span><span class="line"><span class="cl">          command:
-</span></span><span class="line"><span class="cl">            - /monitor
-</span></span><span class="line"><span class="cl">            - --stackdriver-prefix=custom.googleapis.com
-</span></span><span class="line"><span class="cl">            - --monitored-resource-type-prefix=k8s_
-</span></span><span class="line"><span class="cl">            - --source=:http://localhost:9253
-</span></span><span class="line"><span class="cl">            - --pod-id=$(POD_NAME)
-</span></span><span class="line"><span class="cl">            - --namespace-id=$(POD_NAMESPACE)
-</span></span><span class="line"><span class="cl">          resources:
-</span></span><span class="line"><span class="cl">            requests:
-</span></span><span class="line"><span class="cl">              cpu: 10m
-</span></span><span class="line"><span class="cl">            limits:
-</span></span><span class="line"><span class="cl">              cpu: 10m
-</span></span><span class="line"><span class="cl">          env:
-</span></span><span class="line"><span class="cl">            - name: POD_NAME
-</span></span><span class="line"><span class="cl">              valueFrom:
-</span></span><span class="line"><span class="cl">                fieldRef:
-</span></span><span class="line"><span class="cl">                  fieldPath: metadata.name
-</span></span><span class="line"><span class="cl">            - name: POD_NAMESPACE
-</span></span><span class="line"><span class="cl">              valueFrom:
-</span></span><span class="line"><span class="cl">                fieldRef:
-</span></span><span class="line"><span class="cl">                  fieldPath: metadata.namespace
-</span></span><span class="line"><span class="cl">      volumes:
-</span></span><span class="line"><span class="cl">        - name: application
-</span></span><span class="line"><span class="cl">          emptyDir: {}
-</span></span><span class="line"><span class="cl">        - name: php-fpm-config
-</span></span><span class="line"><span class="cl">          configMap:
-</span></span><span class="line"><span class="cl">            name: php-fpm-conf
-</span></span><span class="line"><span class="cl">        - name: nginx-config
-</span></span><span class="line"><span class="cl">          configMap:
-</span></span><span class="line"><span class="cl">            name: nginx-conf
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    app: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+        - name: php-fpm
+          image: php:fpm
+          workingDir: /var/www/service
+          ports:
+            - containerPort: 9000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1G
+            limits:
+              cpu: 100m
+              memory: 1G
+          volumeMounts:
+            - name: application
+              mountPath: /var/www/service/
+            - name: php-fpm-config
+              mountPath: /usr/local/etc/php-fpm.d/www.conf
+              subPath: www.conf
+
+        - name: nginx
+          image: nginx:alpine
+          workingDir: /var/www/service
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: application
+              mountPath: /var/www/service/
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/
+
+        - name: phpfpm-exporter
+          image: hipages/php-fpm_exporter:latest
+          env:
+            - name: PHP_FPM_SCRAPE_URI
+              value: &#34;tcp://localhost:9000/status&#34;
+            - name: PHP_FPM_FIX_PROCESS_COUNT
+              value: &#34;true&#34;
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              cpu: 10m
+
+        - name: prometheus-to-sd
+          image: gcr.io/google-containers/prometheus-to-sd:v0.9.0
+          ports:
+            - containerPort: 6060
+              protocol: TCP
+          command:
+            - /monitor
+            - --stackdriver-prefix=custom.googleapis.com
+            - --monitored-resource-type-prefix=k8s_
+            - --source=:http://localhost:9253
+            - --pod-id=$(POD_NAME)
+            - --namespace-id=$(POD_NAMESPACE)
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              cpu: 10m
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      volumes:
+        - name: application
+          emptyDir: {}
+        - name: php-fpm-config
+          configMap:
+            name: php-fpm-conf
+        - name: nginx-config
+          configMap:
+            name: nginx-conf
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我來簡單說明一下，這是一個 Deployment，我們在每一個 Pod 裡面都放 4 個 Container，分別是 <code>php-fpm</code>、<code>nginx</code>、<code>phpfpm-exporter</code>、<code>prometheus-to-sd</code></p>
@@ -462,60 +462,60 @@ if (!doNotTrack) {
 </span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: v1
-</span></span><span class="line"><span class="cl">kind: ConfigMap
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: php-fpm-conf
-</span></span><span class="line"><span class="cl">data:
-</span></span><span class="line"><span class="cl">  www.conf: |
-</span></span><span class="line"><span class="cl">    [www]
-</span></span><span class="line"><span class="cl">    user = 900
-</span></span><span class="line"><span class="cl">    group = 900
-</span></span><span class="line"><span class="cl">    listen = 9000
-</span></span><span class="line"><span class="cl">    listen.owner = 900
-</span></span><span class="line"><span class="cl">    listen.group = 900
-</span></span><span class="line"><span class="cl">    listen.mode = 0660
-</span></span><span class="line"><span class="cl">    pm = dynamic
-</span></span><span class="line"><span class="cl">    pm.max_children = 150
-</span></span><span class="line"><span class="cl">    pm.max_requests = 300
-</span></span><span class="line"><span class="cl">    pm.start_servers = 24
-</span></span><span class="line"><span class="cl">    pm.min_spare_servers = 24
-</span></span><span class="line"><span class="cl">    pm.max_spare_servers = 126
-</span></span><span class="line"><span class="cl">    pm.status_path = /status
-</span></span><span class="line"><span class="cl">    ping.path = /ping
-</span></span><span class="line"><span class="cl">    ping.response = OK
-</span></span><span class="line"><span class="cl">    catch_workers_output = yes
-</span></span><span class="line"><span class="cl">    request_terminate_timeout = 300
-</span></span><span class="line"><span class="cl">    clear_env = no
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">apiVersion: v1
-</span></span><span class="line"><span class="cl">kind: ConfigMap
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: nginx-conf
-</span></span><span class="line"><span class="cl">  namespace: ian
-</span></span><span class="line"><span class="cl">data:
-</span></span><span class="line"><span class="cl">  nginx.conf: |
-</span></span><span class="line"><span class="cl">    server {
-</span></span><span class="line"><span class="cl">      listen 80;
-</span></span><span class="line"><span class="cl">      listen [::]:80;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      server_name _;
-</span></span><span class="line"><span class="cl">      root /var/www/service/;
-</span></span><span class="line"><span class="cl">      index index.php;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      location / {
-</span></span><span class="line"><span class="cl">        try_files $uri $uri/ /index.php$is_args$args;
-</span></span><span class="line"><span class="cl">      }      
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      location ~ ^/(status|ping)$ {
-</span></span><span class="line"><span class="cl">        fastcgi_pass                  127.0.0.1:9000;
-</span></span><span class="line"><span class="cl">        fastcgi_index                 index.php;
-</span></span><span class="line"><span class="cl">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-</span></span><span class="line"><span class="cl">        include                       fastcgi_params;
-</span></span><span class="line"><span class="cl">      }
-</span></span><span class="line"><span class="cl">    }
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: php-fpm-conf
+data:
+  www.conf: |
+    [www]
+    user = 900
+    group = 900
+    listen = 9000
+    listen.owner = 900
+    listen.group = 900
+    listen.mode = 0660
+    pm = dynamic
+    pm.max_children = 150
+    pm.max_requests = 300
+    pm.start_servers = 24
+    pm.min_spare_servers = 24
+    pm.max_spare_servers = 126
+    pm.status_path = /status
+    ping.path = /ping
+    ping.response = OK
+    catch_workers_output = yes
+    request_terminate_timeout = 300
+    clear_env = no
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: ian
+data:
+  nginx.conf: |
+    server {
+      listen 80;
+      listen [::]:80;
+
+      server_name _;
+      root /var/www/service/;
+      index index.php;
+
+      location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+      }      
+
+      location ~ ^/(status|ping)$ {
+        fastcgi_pass                  127.0.0.1:9000;
+        fastcgi_index                 index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include                       fastcgi_params;
+      }
+    }
+</code></pre></td></tr></table>
 </div>
 </div><p>這份 ConfigMap.yaml 檔案裡面分成 php-fpm-conf 來放 www.conf，以及 nginx-conf 來放 nginx.conf 檔案，這邊要注意的是 www.conf 記得要加上 <code>pm.status_path = /status</code>，phpfpm-exporter 是透過這個頁面來獲得 Process 數量。</p>
 <br>
@@ -564,47 +564,47 @@ if (!doNotTrack) {
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: autoscaling/v2beta2
-</span></span><span class="line"><span class="cl">kind: HorizontalPodAutoscaler
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: demo-hpa
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  scaleTargetRef:
-</span></span><span class="line"><span class="cl">    apiVersion: apps/v1
-</span></span><span class="line"><span class="cl">    kind: Deployment
-</span></span><span class="line"><span class="cl">    name: demo
-</span></span><span class="line"><span class="cl">  minReplicas: 1
-</span></span><span class="line"><span class="cl">  maxReplicas: 10
-</span></span><span class="line"><span class="cl">  metrics:
-</span></span><span class="line"><span class="cl">    - type: Pods
-</span></span><span class="line"><span class="cl">      pods:
-</span></span><span class="line"><span class="cl">        metric:
-</span></span><span class="line"><span class="cl">          name: phpfpm_active_processes
-</span></span><span class="line"><span class="cl">        target:
-</span></span><span class="line"><span class="cl">          averageValue: 50
-</span></span><span class="line"><span class="cl">          type: AverageValue
-</span></span><span class="line"><span class="cl">    - type: Pods
-</span></span><span class="line"><span class="cl">      pods:
-</span></span><span class="line"><span class="cl">        metric:
-</span></span><span class="line"><span class="cl">          name: phpfpm_idle_processes
-</span></span><span class="line"><span class="cl">        target:
-</span></span><span class="line"><span class="cl">          averageValue: 50
-</span></span><span class="line"><span class="cl">          type: AverageValue
-</span></span><span class="line"><span class="cl">    - type: Pods
-</span></span><span class="line"><span class="cl">      pods:
-</span></span><span class="line"><span class="cl">        metric:
-</span></span><span class="line"><span class="cl">          name: phpfpm_total_processes
-</span></span><span class="line"><span class="cl">        target:
-</span></span><span class="line"><span class="cl">          averageValue: 50
-</span></span><span class="line"><span class="cl">          type: AverageValue
-</span></span><span class="line"><span class="cl">    - type: Pods
-</span></span><span class="line"><span class="cl">      pods:
-</span></span><span class="line"><span class="cl">        metric:
-</span></span><span class="line"><span class="cl">          name: phpfpm_accepted_connections
-</span></span><span class="line"><span class="cl">        target:
-</span></span><span class="line"><span class="cl">          averageValue: 50
-</span></span><span class="line"><span class="cl">          type: AverageValue
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: demo-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: demo
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Pods
+      pods:
+        metric:
+          name: phpfpm_active_processes
+        target:
+          averageValue: 50
+          type: AverageValue
+    - type: Pods
+      pods:
+        metric:
+          name: phpfpm_idle_processes
+        target:
+          averageValue: 50
+          type: AverageValue
+    - type: Pods
+      pods:
+        metric:
+          name: phpfpm_total_processes
+        target:
+          averageValue: 50
+          type: AverageValue
+    - type: Pods
+      pods:
+        metric:
+          name: phpfpm_accepted_connections
+        target:
+          averageValue: 50
+          type: AverageValue
+</code></pre></td></tr></table>
 </div>
 </div><p>這份 HorizontalPodAutoscaler 我們使用的版本是 <code>autoscaling/v2beta2</code>， v2beta1 跟 v2beta2 的設定檔語法有些不同！</p>
 <p>可以看到我們 <code>metrics.pods.metric.name</code>  分別是 <code>phpfpm_active_processes (活動的進程個數)</code>、<code>phpfpm_idle_processes (空閒的進程個數)</code>、<code>phpfpm_total_processes (總共的進程個數)</code>、<code>phpfpm_accepted_connections (當前的連接數量)</code>，如果超過我們所設定的 target 值，HPA 就會作動。</p>
@@ -664,8 +664,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/php/">PHP</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e3e9db9c37cbb8ca36279298480acc2fb61f4f69" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;e3e9db9c:&nbsp;# 更新 Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標">
-                            <i class="fas fa-hashtag fa-fw"></i>e3e9db9c</a></span>
+                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e3e9db9c37cbb8ca36279298480acc2fb61f4f69" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;e3e9db9:&nbsp;# 更新 Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標">
+                            <i class="fas fa-hashtag fa-fw"></i>e3e9db9</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-k8s-hpa-php-custom-metrics/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

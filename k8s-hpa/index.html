@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/k8s-hpa\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, 實作","wordcount":  2710 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, HPA, 實作","wordcount":  2777 ,
         "url": "https:\/\/blog.pin-yi.me\/k8s-hpa\/","datePublished": "2022-07-12T09:12:00+08:00","dateModified": "2022-07-20T11:42:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s-hpa/featured-image.webp"
         title="/k8s-hpa/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-12">2022-07-12</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2710 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-12">2022-07-12</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2777 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
@@ -210,8 +210,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">minikube start --vm-driver=docker
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">minikube start --vm-driver=docker
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-hpa/2.png" title="/images/K8s-hpa/2.png" data-thumbnail="/images/K8s-hpa/2.png" data-sub-html="<h2>啟動 Minikube</h2>">
@@ -350,43 +350,43 @@ if (!doNotTrack) {
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: apps/v1
-</span></span><span class="line"><span class="cl">kind: Deployment
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: php-apache
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  selector:
-</span></span><span class="line"><span class="cl">    matchLabels:
-</span></span><span class="line"><span class="cl">      run: php-apache
-</span></span><span class="line"><span class="cl">  replicas: 1
-</span></span><span class="line"><span class="cl">  template:
-</span></span><span class="line"><span class="cl">    metadata:
-</span></span><span class="line"><span class="cl">      labels:
-</span></span><span class="line"><span class="cl">        run: php-apache
-</span></span><span class="line"><span class="cl">    spec:
-</span></span><span class="line"><span class="cl">      containers:
-</span></span><span class="line"><span class="cl">        - name: php-apache
-</span></span><span class="line"><span class="cl">          image: 880831ian/php-apache
-</span></span><span class="line"><span class="cl">          ports:
-</span></span><span class="line"><span class="cl">            - containerPort: 80
-</span></span><span class="line"><span class="cl">          resources:
-</span></span><span class="line"><span class="cl">            limits:
-</span></span><span class="line"><span class="cl">              cpu: 500m
-</span></span><span class="line"><span class="cl">            requests:
-</span></span><span class="line"><span class="cl">              cpu: 200m
-</span></span><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">apiVersion: v1
-</span></span><span class="line"><span class="cl">kind: Service
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: php-apache
-</span></span><span class="line"><span class="cl">  labels:
-</span></span><span class="line"><span class="cl">    run: php-apache
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  ports:
-</span></span><span class="line"><span class="cl">    - port: 80
-</span></span><span class="line"><span class="cl">  selector:
-</span></span><span class="line"><span class="cl">    run: php-apache
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: php-apache
+    spec:
+      containers:
+        - name: php-apache
+          image: 880831ian/php-apache
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-apache
+  labels:
+    run: php-apache
+spec:
+  ports:
+    - port: 80
+  selector:
+    run: php-apache
+</code></pre></td></tr></table>
 </div>
 </div><p>這邊大家可以先記得我們在 containers.resources 有設定 cpu 的 requests 為 200m。後續在計算副本數時會再提到 😬</p>
 <br>
@@ -413,8 +413,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="details admonition success open">
@@ -471,30 +471,30 @@ if (!doNotTrack) {
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: autoscaling/v2
-</span></span><span class="line"><span class="cl">kind: HorizontalPodAutoscaler
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  creationTimestamp: &#34;2022-07-12T03:16:11Z&#34;
-</span></span><span class="line"><span class="cl">  name: php-apache
-</span></span><span class="line"><span class="cl">  namespace: default
-</span></span><span class="line"><span class="cl">  resourceVersion: &#34;19454&#34;
-</span></span><span class="line"><span class="cl">  uid: dde68e68-9b6e-46a8-b50f-5525b8ec3bdf
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  maxReplicas: 10
-</span></span><span class="line"><span class="cl">  metrics:
-</span></span><span class="line"><span class="cl">  - resource:
-</span></span><span class="line"><span class="cl">      name: cpu
-</span></span><span class="line"><span class="cl">      target:
-</span></span><span class="line"><span class="cl">        averageUtilization: 50
-</span></span><span class="line"><span class="cl">        type: Utilization
-</span></span><span class="line"><span class="cl">    type: Resource
-</span></span><span class="line"><span class="cl">  minReplicas: 1
-</span></span><span class="line"><span class="cl">  scaleTargetRef:
-</span></span><span class="line"><span class="cl">    apiVersion: apps/v1
-</span></span><span class="line"><span class="cl">    kind: Deployment
-</span></span><span class="line"><span class="cl">    name: php-apache
-</span></span><span class="line"><span class="cl">後面狀態省略....
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  creationTimestamp: &#34;2022-07-12T03:16:11Z&#34;
+  name: php-apache
+  namespace: default
+  resourceVersion: &#34;19454&#34;
+  uid: dde68e68-9b6e-46a8-b50f-5525b8ec3bdf
+spec:
+  maxReplicas: 10
+  metrics:
+  - resource:
+      name: cpu
+      target:
+        averageUtilization: 50
+        type: Utilization
+    type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+後面狀態省略....
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>apiVersion：要記得使用 <code>autoscaling/v2</code></li>
@@ -517,11 +517,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get hpa php-apache --watch
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
-</span></span><span class="line"><span class="cl">php-apache   Deployment/php-apache   0%/50%    1         10        1          4h40m
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kubectl get hpa php-apache --watch
+
+NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+php-apache   Deployment/php-apache   0%/50%    1         10        1          4h40m
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -532,8 +532,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c &#34;while sleep 0.01; do wget -q -O- http://php-apache; done&#34;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c &#34;while sleep 0.01; do wget -q -O- http://php-apache; done&#34;
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s-hpa/10.png" title="/images/K8s-hpa/10.png" data-thumbnail="/images/K8s-hpa/10.png" data-sub-html="<h2>模擬增加負載</h2>">
@@ -643,8 +643,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/hpa/">HPA</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6ad5c33418549a95a9a5eec24e4317db8bad8655" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6ad5c334:&nbsp;# 更新 Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作">
-                            <i class="fas fa-hashtag fa-fw"></i>6ad5c334</a></span>
+                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6ad5c33418549a95a9a5eec24e4317db8bad8655" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6ad5c33:&nbsp;# 更新 Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作">
+                            <i class="fas fa-hashtag fa-fw"></i>6ad5c33</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s-hpa/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

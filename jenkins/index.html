@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/jenkins\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Jenkins, CI\/CD, 介紹, 實作","wordcount":  5113 ,
+                        }],"genre": "posts","keywords": "Jenkins, CI\/CD, 介紹, 實作","wordcount":  5371 ,
         "url": "https:\/\/blog.pin-yi.me\/jenkins\/","datePublished": "2022-05-16T11:05:30+08:00","dateModified": "2022-05-30T10:32:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/jenkins/featured-image.webp"
         title="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹，歡迎大家先去觀看前面的文章 😋" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5113 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5371 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
             </div>
             
@@ -229,11 +229,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── Docker-compose.yaml
-</span></span><span class="line"><span class="cl">├── jenkins
-</span></span><span class="line"><span class="cl">│   └── Dockerfile
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">.
+├── Docker-compose.yaml
+├── jenkins
+│   └── Dockerfile
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <p><strong>Docker-compose.yaml</strong></p>
@@ -253,19 +253,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jenkins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./jenkins/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">jenkins</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">50000</span><span class="p">:</span><span class="m">50000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./jenkins_home:/var/jenkins_home</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">jenkins</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./jenkins/</span><span class="w">
+</span><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">jenkins</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span><span class="w">      </span>- <span class="m">50000</span><span class="p">:</span><span class="m">50000</span><span class="w">
+</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./jenkins_home:/var/jenkins_home</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>參數說明：</p>
 <ul>
@@ -290,16 +290,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> jenkins/jenkins:lts-jdk11</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">USER</span><span class="s"> root</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get upgrade -y<span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get update -y<span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get install yamllint -y<span class="err">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> jenkins/jenkins:lts-jdk11</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">USER</span><span class="s"> root</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> apt-get upgrade -y<span class="se">\
+</span><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get update -y<span class="se">\
+</span><span class="se"></span>    <span class="o">&amp;&amp;</span> apt-get install yamllint -y<span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>參數說明：</p>
 <ul>
@@ -314,8 +314,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker-compose up -d
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker-compose up -d
+</code></pre></td></tr></table>
 </div>
 </div><p>要在 Docker-compose.yaml 資料夾下指令才有用。</p>
 <br>
@@ -353,23 +353,23 @@ if (!doNotTrack) {
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker logs jenkins
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Jenkins initial setup is required. An admin user has been created and a password generated.
-</span></span><span class="line"><span class="cl">Please use the following password to proceed to installation:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">70c0780f62a7441f90286be106908378
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span><span class="line"><span class="cl">*************************************************************
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker logs jenkins
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+70c0780f62a7441f90286be106908378
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+</code></pre></td></tr></table>
 </div>
 </div><p>其中的 <code>70c0780f62a7441f90286be106908378</code> ，就是我們的 Administrator password，直接複製並貼到欄位後按 Continue。</p>
 <br>
@@ -729,11 +729,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="k">for</span> file in <span class="k">$(</span>find . -type f -name <span class="s2">&#34;*yaml&#34;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">do</span>
-</span></span><span class="line"><span class="cl">	yamllint <span class="nv">$file</span>
-</span></span><span class="line"><span class="cl"><span class="k">done</span>	
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="k">for</span> file in <span class="k">$(</span>find . -type f -name <span class="s2">&#34;*yaml&#34;</span><span class="k">)</span>
+<span class="k">do</span>
+	yamllint <span class="nv">$file</span>
+<span class="k">done</span>	
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Jenkins/setting_9.png" title="/images/Jenkins/setting_9.png" data-thumbnail="/images/Jenkins/setting_9.png" data-sub-html="<h2>設定專案組態</h2>">
@@ -1022,17 +1022,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📢  Jenkins 建置通知 📣
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">時間：$BUILD_TIMESTAMP 🕐
-</span></span><span class="line"><span class="cl">名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
-</span></span><span class="line"><span class="cl">次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
-</span></span><span class="line"><span class="cl">建置狀態： 🟢 &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🟢
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">--------- 😍😍😍  ---------
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">📢  Jenkins 建置通知 📣
+
+時間：$BUILD_TIMESTAMP 🕐
+名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
+次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
+建置狀態： 🟢 &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🟢
+
+&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
+
+--------- 😍😍😍  ---------
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Jenkins/trigger_11.png" title="/images/Jenkins/trigger_11.png" data-thumbnail="/images/Jenkins/trigger_11.png" data-sub-html="<h2>Notify.Events Success</h2>">
@@ -1061,17 +1061,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📢  Jenkins 建置通知 📣
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">時間：$BUILD_TIMESTAMP 🕐
-</span></span><span class="line"><span class="cl">名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
-</span></span><span class="line"><span class="cl">次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
-</span></span><span class="line"><span class="cl">建置狀態： 🔴  &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🔴
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">--------- 😭😭😭  ---------
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">📢  Jenkins 建置通知 📣
+
+時間：$BUILD_TIMESTAMP 🕐
+名稱： &lt;a href=&#34;$PROJECT_URL&#34;&gt;$PROJECT_NAME&lt;/a&gt;
+次數： &lt;a href=&#34;$BUILD_URL&#34;&gt;#$BUILD_NUMBER&lt;/a&gt;
+建置狀態： 🔴  &lt;b&gt;$BUILD_STATUS&lt;/b&gt; 🔴
+
+&lt;a href=&#34;$BUILD_URL/console&#34;&gt;建置日誌連結&lt;/a&gt;
+
+--------- 😭😭😭  ---------
+</code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Jenkins/trigger_12.png" title="/images/Jenkins/trigger_12.png" data-thumbnail="/images/Jenkins/trigger_12.png" data-sub-html="<h2>Notify.Events Failure</h2>">
@@ -1110,8 +1110,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/69b7a2d31dae4a42850229fb00be4e50b161e8e4" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;69b7a2d3:&nbsp;# 更新 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot">
-                            <i class="fas fa-hashtag fa-fw"></i>69b7a2d3</a></span>
+                <span>更新於 2022-05-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/69b7a2d31dae4a42850229fb00be4e50b161e8e4" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;69b7a2d:&nbsp;# 更新 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot">
+                            <i class="fas fa-hashtag fa-fw"></i>69b7a2d</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/jenkins/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
