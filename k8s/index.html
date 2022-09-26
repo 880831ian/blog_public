@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Kubernetes (K8s) 介紹 - 基本 - PinYi</title><meta name="description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"><meta property="og:title" content="Kubernetes (K8s) 介紹 - 基本" />
+        <title>Kubernetes (K8s) 介紹 - 基本 - PinYi 部落格</title><meta name="description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎"><meta property="og:title" content="Kubernetes (K8s) 介紹 - 基本" />
 <meta property="og:description" content="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/k8s/" /><meta property="og:image" content="https://blog.pin-yi.me/k8s/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/k8s\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  5093 ,
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, Docker, 介紹, 實作","wordcount":  5087 ,
         "url": "https:\/\/blog.pin-yi.me\/k8s\/","datePublished": "2022-04-28T18:17:00+08:00","dateModified": "2022-06-08T17:39:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 部落格</a>
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 部落格</a>
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/k8s/featured-image.webp"
         title="此文章是介紹 Kubernetes 以及如何建立第一個 Pod，文章內容大多參考其他網路大神，並加入自己了解的思路與語氣，文章純屬個人筆記性質，無營利之用途，參考資料也附在文章最後，有興趣的朋友也可以先去了解看看歐 😎" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Kubernetes (K8s) 介紹 - 基本</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5093 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-28">2022-04-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 5087 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 11 分鐘</span>&nbsp;</div>
             </div>
             
@@ -417,19 +417,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-pod</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
-</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
-</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian/kubernetes-demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>apiVersion</p>
 <p>該元件的版本號，必須依照 Server 上 K8s 版本來做設定 (想要知道k8s 版本，可以使用 <code>kubectl version</code> 指令來查詢，會顯示 client 跟 server 的版本訊息，client 代表 kubectl 版本訊息，server 代表的是 master node 的 k8s 版本訊息)，目前 k8s 都使用 1.23 版本以上，所以 <code>apiVersion</code> 直接寫 <code>v1</code> 即可。</p>
@@ -461,10 +461,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl create -f kubernetes-demo.yaml
-
-kubectl apply -f kubernetes-demo.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubectl create -f kubernetes-demo.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f kubernetes-demo.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>可以使用 <code>create</code> or <code>apply</code> 來建立 Pod ，那這兩個的差異是什麼呢？</p>
@@ -501,8 +501,8 @@ kubectl apply -f kubernetes-demo.yaml
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl get pods
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubectl get pods
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以查看我們運行中的 Pod：</p>
 <div class="highlight"><div class="chroma">
@@ -511,9 +511,9 @@ kubectl apply -f kubernetes-demo.yaml
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">NAME                  READY   STATUS    RESTARTS   AGE
-kubernetes-demo-pod   1/1     Running   <span class="m">0</span>          3m5s
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">NAME                  READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">kubernetes-demo-pod   1/1     Running   <span class="m">0</span>          3m5s
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="details admonition tip open">
@@ -540,13 +540,13 @@ kubernetes-demo-pod   1/1     Running   <span class="m">0</span>          3m5s
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">minikube dashboard --url
-
-🤔  Verifying dashboard health ...
-🚀  Launching proxy ...
-🤔  Verifying proxy health ...
-http://127.0.0.1:55991/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">minikube dashboard --url
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">🤔  Verifying dashboard health ...
+</span></span><span class="line"><span class="cl">🚀  Launching proxy ...
+</span></span><span class="line"><span class="cl">🤔  Verifying proxy health ...
+</span></span><span class="line"><span class="cl">http://127.0.0.1:55991/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/K8s/minikube-k8s.png" title="/images/K8s/minikube-k8s.png" data-thumbnail="/images/K8s/minikube-k8s.png" data-sub-html="<h2>minikube dashboard</h2>">
@@ -571,12 +571,12 @@ http://127.0.0.1:55991/api/v1/namespaces/kubernetes-dashboard/services/http:kube
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl port-forward kubernetes-demo-pod 3000:3000
-
-Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
-Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
-Handling connection <span class="k">for</span> <span class="m">3000</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubectl port-forward kubernetes-demo-pod 3000:3000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:3000 -&gt; <span class="m">3000</span>
+</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:3000 -&gt; <span class="m">3000</span>
+</span></span><span class="line"><span class="cl">Handling connection <span class="k">for</span> <span class="m">3000</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我們在此瀏覽 <code>localhost:3000</code>，就會看到可愛的柴犬囉！</p>
 <br>
@@ -605,9 +605,9 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">selectors</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">selectors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>那選取後有什麼功用呢！請看 <a href="https://pin-yi.me/k8s-advanced/#%E4%BB%80%E9%BA%BC%E6%98%AF-service-" target="_blank" rel="noopener noreffer">Kubernetes - 進階 - Service</a></p>
 <br>
@@ -624,10 +624,10 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l">Pin-YI</span><span class="w">
-</span><span class="w">  </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian@gmail.com</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l">Pin-YI</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian@gmail.com</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>一樣也是定義一組具有辨識度的 key/value ，我們這邊就先放 author、contact</p>
 <br>
@@ -644,14 +644,14 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-pod</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
-</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l">Pin-YI</span><span class="w">
-</span><span class="w">    </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian@gmail.com</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes-demo-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l">Pin-YI</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l">880831ian@gmail.com</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h2 id="參考資料">參考資料</h2>
@@ -669,8 +669,8 @@ Handling connection <span class="k">for</span> <span class="m">3000</span>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-06-08&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/3af50b9de7264fb9a974ecf9a815c137c0117a89" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;3af50b9:&nbsp;# 更新 Kubernetes (K8s) 介紹 - 基本">
-                            <i class="fas fa-hashtag fa-fw"></i>3af50b9</a></span>
+                <span>更新於 2022-06-08&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/3af50b9de7264fb9a974ecf9a815c137c0117a89" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;3af50b9d:&nbsp;# 更新 Kubernetes (K8s) 介紹 - 基本">
+                            <i class="fas fa-hashtag fa-fw"></i>3af50b9d</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/k8s/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -692,13 +692,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers) - PinYi</title><meta name="description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"><meta property="og:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)" />
+        <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers) - PinYi 部落格</title><meta name="description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋"><meta property="og:title" content="Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)" />
 <meta property="og:description" content="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/ansible/" /><meta property="og:image" content="https://blog.pin-yi.me/ansible/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/ansible\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Ansible, CI\/CD, 介紹, 實作","wordcount":  7463 ,
+                        }],"genre": "posts","keywords": "Ansible, CI\/CD, 介紹, 實作","wordcount":  7773 ,
         "url": "https:\/\/blog.pin-yi.me\/ansible\/","datePublished": "2022-05-16T11:26:40+08:00","dateModified": "2022-05-17T16:01:58+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 部落格</a>
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 部落格</a>
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/ansible/featured-image.webp"
         title="此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹、使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot，歡迎大家先去觀看前面兩篇文章 😋" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7463 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 15 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-16">2022-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7773 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 16 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -238,16 +238,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vim hosts
-<span class="c1"># ansible_ssh_host：遠端 SSH 主機位址</span>
-<span class="c1"># ansible_ssh_port：遠端 SSH Port</span>
-<span class="c1"># ansible_ssh_user：遠端 SSH 使用者名稱</span>
-<span class="c1"># ansible_ssh_private_key_file：本機 SSH 私鑰檔案路徑</span>
-<span class="c1"># ansible_ssh_pass：遠端 SSH 密碼 (建議使用私鑰)</span>
-
-<span class="o">[</span>local<span class="o">]</span>
-server1 <span class="nv">ansible_ssh_host</span><span class="o">=</span>127.0.0.1  <span class="nv">ansible_ssh_port</span><span class="o">=</span><span class="m">55000</span> <span class="nv">ansible_ssh_pass</span><span class="o">=</span>docker
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim hosts
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_host：遠端 SSH 主機位址</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_port：遠端 SSH Port</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_user：遠端 SSH 使用者名稱</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_private_key_file：本機 SSH 私鑰檔案路徑</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ansible_ssh_pass：遠端 SSH 密碼 (建議使用私鑰)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>local<span class="o">]</span>
+</span></span><span class="line"><span class="cl">server1 <span class="nv">ansible_ssh_host</span><span class="o">=</span>127.0.0.1  <span class="nv">ansible_ssh_port</span><span class="o">=</span><span class="m">55000</span> <span class="nv">ansible_ssh_pass</span><span class="o">=</span>docker
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以我們可以在這邊輸入很多個主機來做管理，可以把它想成一個設定檔。</p>
 <br>
@@ -272,16 +272,16 @@ server1 <span class="nv">ansible_ssh_host</span><span class="o">=</span>127.0.0.
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m ping
-
-server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
-    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
-        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python&#34;</span>
-    <span class="o">}</span>,
-    <span class="s2">&#34;changed&#34;</span>: false,
-    <span class="s2">&#34;ping&#34;</span>: <span class="s2">&#34;pong&#34;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m ping
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: false,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ping&#34;</span>: <span class="s2">&#34;pong&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -295,11 +295,11 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m <span class="nb">command</span> -a <span class="s2">&#34;echo Hello World&#34;</span>
-
-server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
-Hello World
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m <span class="nb">command</span> -a <span class="s2">&#34;echo Hello World&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">Hello World
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>從上面的例子中可以看到 Ad-Hoc Commands 一次只能處理一件事情，這是它與 Playbooks 最大的差異。</p>
 <br>
@@ -330,8 +330,8 @@ Hello World
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ sudo pip install ansible
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ sudo pip install ansible
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -342,8 +342,8 @@ Hello World
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ sudo brew install ansible
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ sudo brew install ansible
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br> 
 <p>安裝完後，可以使用 <code>--version</code> 指令來檢查是否安裝完成：</p>
@@ -362,18 +362,18 @@ Hello World
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ ansible --version
-
-ansible [core 2.12.5]
-  config file = None
-  configured module search path = [&#39;/Users/ian_zhuang/.ansible/plugins/modules&#39;, &#39;/usr/share/ansible/plugins/modules&#39;]
-  ansible python module location = /usr/local/Cellar/ansible/5.7.1/libexec/lib/python3.10/site-packages/ansible
-  ansible collection location = /Users/ian_zhuang/.ansible/collections:/usr/share/ansible/collections
-  executable location = /usr/local/bin/ansible
-  python version = 3.10.4 (main, Apr 26 2022, 19:43:24) [Clang 13.0.0 (clang-1300.0.29.30)]
-  jinja version = 3.1.2
-  libyaml = True
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="err">$</span> <span class="nv">ansible</span> <span class="o">--</span><span class="nv">version</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">ansible</span> <span class="p">[</span><span class="na">core</span> <span class="na">2</span><span class="err">.</span><span class="na">12</span><span class="err">.</span><span class="na">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">config</span> <span class="nv">file</span> <span class="o">=</span> <span class="nc">None</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">configured</span> <span class="kn">module</span> <span class="nv">search</span> <span class="nv">path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/Users/ian_zhuang/.ansible/plugins/modules&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/share/ansible/plugins/modules&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">ansible</span> <span class="nv">python</span> <span class="kn">module</span> <span class="nv">location</span> <span class="o">=</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">local</span><span class="o">/</span><span class="nc">Cellar</span><span class="o">/</span><span class="nv">ansible</span><span class="o">/</span><span class="mf">5.7.1</span><span class="o">/</span><span class="nv">libexec</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">python3</span><span class="mf">.10</span><span class="o">/</span><span class="nv">site</span><span class="o">-</span><span class="nv">packages</span><span class="o">/</span><span class="nv">ansible</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">ansible</span> <span class="nv">collection</span> <span class="nv">location</span> <span class="o">=</span> <span class="o">/</span><span class="nc">Users</span><span class="o">/</span><span class="nv">ian_zhuang</span><span class="o">/</span><span class="p">.</span><span class="nv">ansible</span><span class="o">/</span><span class="nv">collections</span><span class="p">:</span><span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">ansible</span><span class="o">/</span><span class="nv">collections</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">executable</span> <span class="nv">location</span> <span class="o">=</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">local</span><span class="o">/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">ansible</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">python</span> <span class="nv">version</span> <span class="o">=</span> <span class="mf">3.10.4</span> <span class="p">(</span><span class="nv">main</span><span class="p">,</span> <span class="nc">Apr</span> <span class="mi">26</span> <span class="mi">2022</span><span class="p">,</span> <span class="mi">19</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mi">24</span><span class="p">)</span> <span class="p">[</span><span class="nc">Clang</span> <span class="mf">13.0.0</span> <span class="p">(</span><span class="nv">clang</span><span class="o">-</span><span class="mf">1300.0.29.30</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">jinja</span> <span class="nv">version</span> <span class="o">=</span> <span class="mf">3.1.2</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">libyaml</span> <span class="o">=</span> <span class="nc">True</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="如何安裝-ansible-在被控節點">如何安裝 Ansible 在被控節點</h3>
@@ -429,51 +429,51 @@ ansible [core 2.12.5]
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> ubuntu:22.10</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Update the index of available packages.</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Install the requires package.</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> apt-get install -y openssh-server sudo curl wget bash-completion openssl <span class="o">&amp;&amp;</span> apt-get clean<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Setting the sshd.</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> mkdir /var/run/sshd<span class="err">
-</span><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;root:root&#39;</span> <span class="p">|</span> chpasswd<span class="err">
-</span><span class="err"></span><span class="k">RUN</span> sed -i <span class="s1">&#39;s/PermitRootLogin without-password/PermitRootLogin yes/&#39;</span> /etc/ssh/sshd_config<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># SSH login fix. Otherwise user is kicked off after login</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> sed <span class="s1">&#39;s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g&#39;</span> -i /etc/pam.d/sshd<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">ENV</span> NOTVISIBLE <span class="s2">&#34;in users profile&#34;</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&#34;export VISIBLE=now&#34;</span> &gt;&gt; /etc/profile<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Create a new user.</span><span class="err">
-</span><span class="err"></span><span class="c">#</span><span class="err">
-</span><span class="err"></span><span class="c"># - username: docker</span><span class="err">
-</span><span class="err"></span><span class="c"># - password: docker</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> useradd --create-home --shell /bin/bash <span class="se">\
-</span><span class="se"></span>      --password <span class="k">$(</span>openssl passwd -1 docker<span class="k">)</span> docker<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Add sudo permission.</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;docker ALL=(ALL) NOPASSWD: ALL&#39;</span> &gt;&gt; /etc/sudoers<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Setting ssh public key.</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> wget https://raw.githubusercontent.com/chusiang/ansible-jupyter.dockerfile/master/files/ssh/id_rsa.pub <span class="se">\
-</span><span class="se"></span>      -O /tmp/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>      mkdir /home/docker/.ssh <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>      mv /tmp/authorized_keys /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>      chown -R docker:docker /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>      chmod <span class="m">644</span> /home/docker/.ssh/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>      chmod <span class="m">700</span> /home/docker/.ssh<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 22</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="c"># Run ssh server daemon.</span><span class="err">
-</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/usr/sbin/sshd&#34;</span><span class="p">,</span> <span class="s2">&#34;-D&#34;</span><span class="p">]</span><span class="err">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> ubuntu:22.10</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Update the index of available packages.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Install the requires package.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install -y openssh-server sudo curl wget bash-completion openssl <span class="o">&amp;&amp;</span> apt-get clean<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Setting the sshd.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir /var/run/sshd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;root:root&#39;</span> <span class="p">|</span> chpasswd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s1">&#39;s/PermitRootLogin without-password/PermitRootLogin yes/&#39;</span> /etc/ssh/sshd_config<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># SSH login fix. Otherwise user is kicked off after login</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed <span class="s1">&#39;s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g&#39;</span> -i /etc/pam.d/sshd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> NOTVISIBLE <span class="s2">&#34;in users profile&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&#34;export VISIBLE=now&#34;</span> &gt;&gt; /etc/profile<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Create a new user.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">#</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># - username: docker</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># - password: docker</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> useradd --create-home --shell /bin/bash <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      --password <span class="k">$(</span>openssl passwd -1 docker<span class="k">)</span> docker<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Add sudo permission.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;docker ALL=(ALL) NOPASSWD: ALL&#39;</span> &gt;&gt; /etc/sudoers<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Setting ssh public key.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> wget https://raw.githubusercontent.com/chusiang/ansible-jupyter.dockerfile/master/files/ssh/id_rsa.pub <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -O /tmp/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      mkdir /home/docker/.ssh <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      mv /tmp/authorized_keys /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chown -R docker:docker /home/docker/.ssh/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chmod <span class="m">644</span> /home/docker/.ssh/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      chmod <span class="m">700</span> /home/docker/.ssh<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 22</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Run ssh server daemon.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/usr/sbin/sshd&#34;</span><span class="p">,</span> <span class="s2">&#34;-D&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接下來將它包成 Image 並啟動他：</p>
@@ -484,10 +484,10 @@ ansible [core 2.12.5]
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker build -t ansible-ubuntu-server . <span class="o">&amp;&amp;</span> docker run --name server1 -d -p 8888:22 ansible-ubuntu-server
-
-64c51235e34a7ba42c0c45e690201dd80248c9aac76c3b855c99cf63f7f0af7c
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker build -t ansible-ubuntu-server . <span class="o">&amp;&amp;</span> docker run --name server1 -d -p 8888:22 ansible-ubuntu-server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">64c51235e34a7ba42c0c45e690201dd80248c9aac76c3b855c99cf63f7f0af7c
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>可以用 <code>exec</code> 進入容器：</p>
@@ -496,8 +496,8 @@ ansible [core 2.12.5]
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">docker <span class="nb">exec</span> -it server1 /bin/bash
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it server1 /bin/bash
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="如何讓-ansible-操控-docker-容器">如何讓 Ansible 操控 Docker 容器？</h3>
@@ -511,12 +511,12 @@ ansible [core 2.12.5]
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="k">[defaults]</span>
-
-<span class="na">inventory</span> <span class="o">=</span> <span class="s">hosts</span>
-<span class="na">remote_user</span> <span class="o">=</span> <span class="s">docker</span>
-<span class="na">host_key_checking</span> <span class="o">=</span> <span class="s">False</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cfg" data-lang="cfg"><span class="line"><span class="cl"><span class="k">[defaults]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">inventory</span> <span class="o">=</span> <span class="s">hosts</span>
+</span></span><span class="line"><span class="cl"><span class="na">remote_user</span> <span class="o">=</span> <span class="s">docker</span>
+</span></span><span class="line"><span class="cl"><span class="na">host_key_checking</span> <span class="o">=</span> <span class="s">False</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>設定 inventory hosts：</p>
@@ -526,9 +526,9 @@ ansible [core 2.12.5]
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[local]
-server1 ansible_ssh_host=127.0.0.1  ansible_ssh_port=8888 ansible_ssh_pass=docker
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[local]
+</span></span><span class="line"><span class="cl">server1 ansible_ssh_host=127.0.0.1  ansible_ssh_port=8888 ansible_ssh_pass=docker
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中 8888 是我們在啟動時所開放的 Port，也可以自行更改。</p>
 <ul>
@@ -547,11 +547,11 @@ server1 ansible_ssh_host=127.0.0.1  ansible_ssh_port=8888 ansible_ssh_pass=docke
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m <span class="nb">command</span> -a <span class="s1">&#39;echo Hello World on Docker.&#39;</span>
-
-server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
-Hello World on Docker.	
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m <span class="nb">command</span> -a <span class="s1">&#39;echo Hello World on Docker.&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">Hello World on Docker.	
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <div class="details admonition question open">
@@ -629,20 +629,20 @@ Hello World on Docker.
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">say &#39;hello world&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
-</span><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
-</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
-</span><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout }}&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">say &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;hello world&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout }}&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到這整個就是 Play，我們想要達到 say &lsquo;hello world&rsquo; 的目的，其中有兩個 name 分別代表兩個 Task，也就是達成 Play 目的所需得步驟。最後 command 與 debug 就是我們的 Module 要怎麼達成這兩個步驟的操作方式。</p>
 <br>
@@ -664,8 +664,8 @@ Hello World on Docker.
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible-playbook helloworld.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible-playbook helloworld.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Ansible/helloworld.png" title="/images/Ansible/helloworld.png" data-thumbnail="/images/Ansible/helloworld.png" data-sub-html="<h2>執行 Playbooks</h2>">
@@ -699,9 +699,9 @@ Hello World on Docker.
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#! /bin/bash
-</span><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Hello World&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#! /bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Hello World&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -713,9 +713,9 @@ Hello World on Docker.
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">./ helloworld.sh
-Hello World
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">./ helloworld.sh
+</span></span><span class="line"><span class="cl">Hello World
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>看起來 Shell Script 已經夠用了，為什麼還要寫 Playbook 呢？這邊整理幾個理由給大家參考：</p>
@@ -738,10 +738,10 @@ Hello World
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update repositories cache</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update repositories cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -755,11 +755,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install the package &#34;vim&#34;</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vim</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">present</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install the package &#34;vim&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">present</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -773,11 +773,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w"> </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Remove &#34;nano&#34; package</span><span class="w">
-</span><span class="w">   </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
-</span><span class="w">     </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nano</span><span class="w">
-</span><span class="w">     </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w"> </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Remove &#34;nano&#34; package</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nano</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltincommand"><code>ansible.builtin.command</code></h3>
@@ -791,9 +791,9 @@ Hello World
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Reboot at now</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">/sbin/shutdown -r now</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Reboot at now</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">/sbin/shutdown -r now</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -805,9 +805,9 @@ Hello World
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create .ssh directory</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">mkdir .ssh creates=.ssh/</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create .ssh directory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">mkdir .ssh creates=.ssh/</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -821,11 +821,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cat /etc/passwd</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">cat passwd</span><span class="w">
-</span><span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">chdir</span><span class="p">:</span><span class="w"> </span><span class="l">/etc</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cat /etc/passwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.command</span><span class="p">:</span><span class="w"> </span><span class="l">cat passwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">chdir</span><span class="p">:</span><span class="w"> </span><span class="l">/etc</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltincopy"><code>ansible.builtin.copy</code></h3>
@@ -844,14 +844,14 @@ Hello World
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
-</span><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
-</span><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -868,14 +868,14 @@ Hello World
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
-</span><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
-</span><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy ssh public key to remote node</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/id_rsa.pub</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/authorized_keys</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -893,15 +893,15 @@ Hello World
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy nginx vhost and backup the original</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/ironman.conf</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/nginx/sites-available/default</span><span class="w">
-</span><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
-</span><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
-</span><span class="w">    </span><span class="nt">backup</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">copy nginx vhost and backup the original</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">files/ironman.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/nginx/sites-available/default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">backup</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltinfile"><code>ansible.builtin.file</code></h3>
@@ -918,12 +918,12 @@ Hello World
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch a file, and set the permissions</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/motd</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch a file, and set the permissions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/motd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -939,13 +939,13 @@ Hello World
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a directory, and set the permissions</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">directory</span><span class="w">
-</span><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;700&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a directory, and set the permissions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.ssh/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">directory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;700&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -960,12 +960,12 @@ Hello World
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a symlink file</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/tmp</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">link</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">create a symlink file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/tmp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">link</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltinlineinfile"><code>ansible.builtin.lineinfile</code></h3>
@@ -982,12 +982,12 @@ Hello World
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">remove sudo permission of docker</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/sudoers</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
-</span><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^docker&#39;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">remove sudo permission of docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/sudoers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">absent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^docker&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1005,15 +1005,15 @@ Hello World
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">set localhost as 127.0.0.1</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/hosts</span><span class="w">
-</span><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^127\.0\.0\.1&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;127.0.0.1 localhost&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
-</span><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
-</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">set localhost as 127.0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/hosts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;^127\.0\.0\.1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;127.0.0.1 localhost&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0644</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltinservice"><code>ansible.builtin.service</code></h3>
@@ -1029,11 +1029,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">start nginx service</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">started</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">start nginx service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">started</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1047,11 +1047,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">stop nginx service</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">stopped</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">stop nginx service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">stopped</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -1066,12 +1066,12 @@ Hello World
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">restart network service</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">network</span><span class="w">
-</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">restarted</span><span class="w">
-</span><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l">eth0</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">restart network service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">restarted</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l">eth0</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltinshell"><code>ansible.builtin.shell</code></h3>
@@ -1085,9 +1085,9 @@ Hello World
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check files number</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">ls /home/docker/ | wc -l</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check files number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">ls /home/docker/ | wc -l</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1099,9 +1099,9 @@ Hello World
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kill all python process</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">kill -9 $(ps aux | grep python | awk &#39;{ print $2 }&#39;)</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kill all python process</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l">kill -9 $(ps aux | grep python | awk &#39;{ print $2 }&#39;)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="ansiblebuiltinstat"><code>ansible.builtin.stat</code></h3>
@@ -1124,18 +1124,18 @@ Hello World
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check the &#39;vimrc&#39; target exists</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
-</span><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch vimrc</span><span class="w">
-</span><span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
-</span><span class="w">    </span><span class="nt">ansible.builtin.state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
-</span><span class="w">          </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
-</span><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc.stat.exists == false</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">check the &#39;vimrc&#39; target exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">touch vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/docker/.vimrc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ansible.builtin.state</span><span class="p">:</span><span class="w"> </span><span class="l">touch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;u=rw,g=r,o=r&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">stat_vimrc.stat.exists == false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1149,11 +1149,11 @@ Hello World
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Use md5sum to calculate checksum</span><span class="w">
-</span><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
-</span><span class="w">    </span><span class="nt">checksum_algorithm</span><span class="p">:</span><span class="w"> </span><span class="l">md5sum</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Use md5sum to calculate checksum</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ansible.builtin.stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">checksum_algorithm</span><span class="p">:</span><span class="w"> </span><span class="l">md5sum</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="其他">其他</h3>
@@ -1193,8 +1193,8 @@ Hello World
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{&#34;ok&#34;:true,&#34;result&#34;:[{&#34;update_id&#34;:606594112,&#34;message&#34;:{&#34;message_id&#34;:1,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:493995679,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;type&#34;:&#34;private&#34;},&#34;date&#34;:1652695148,&#34;text&#34;:&#34;/start&#34;,&#34;entities&#34;:[{&#34;offset&#34;:0,&#34;length&#34;:6,&#34;type&#34;:&#34;bot_command&#34;}]}}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;ok&#34;:true,&#34;result&#34;:[{&#34;update_id&#34;:606594112,&#34;message&#34;:{&#34;message_id&#34;:1,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:493995679,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;type&#34;:&#34;private&#34;},&#34;date&#34;:1652695148,&#34;text&#34;:&#34;/start&#34;,&#34;entities&#34;:[{&#34;offset&#34;:0,&#34;length&#34;:6,&#34;type&#34;:&#34;bot_command&#34;}]}}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這是你傳訊息給 Bot 它所收到的 API，資料很多沒關係，我們找到 <code>id</code>，像我的是 <code>493995679</code>，這個就是我跟機器人的聊天室，我們就先回到 Ansible 這邊吧！</p>
 <br>
@@ -1216,20 +1216,20 @@ Hello World
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify to Telegram</span><span class="w">
-</span><span class="w">      </span><span class="nt">community.general.telegram</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;9999999:XXXXXXXXXXXXXXXXXXXXXXX&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">api_args</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="nt">chat_id</span><span class="p">:</span><span class="w"> </span><span class="m">000000</span><span class="w">
-</span><span class="w">          </span><span class="nt">parse_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span><span class="w">
-</span><span class="w">          </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Your precious application has been deployed: https://example.com&#34;</span><span class="w">
-</span><span class="w">          </span><span class="nt">disable_web_page_preview</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
-</span><span class="w">          </span><span class="nt">disable_notification</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify to Telegram</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">community.general.telegram</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;9999999:XXXXXXXXXXXXXXXXXXXXXXX&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">api_args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">chat_id</span><span class="p">:</span><span class="w"> </span><span class="m">000000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">parse_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Your precious application has been deployed: https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_web_page_preview</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_notification</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們使用的模組不是 Ansible 內建的，而是社群別人寫的，詳細可以參考 <a href="https://docs.ansible.com/ansible/latest/collections/community/general/telegram_module.html#ansible-collections-community-general-telegram-module" target="_blank" rel="noopener noreffer">community.general.telegram module – module for sending notifications via telegram</a>：</p>
 <br>
@@ -1253,8 +1253,8 @@ Hello World
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{&#34;update_id&#34;:606594124,&#34;message&#34;:{&#34;message_id&#34;:14,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:-540226836,&#34;title&#34;:&#34;\u54c1\u6bc5 &amp; AnsibleSendMessageBot&#34;,&#34;type&#34;:&#34;group&#34;,&#34;all_members_are_administrators&#34;:true},&#34;date&#34;:1652696181,&#34;group_chat_created&#34;:true}}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;update_id&#34;:606594124,&#34;message&#34;:{&#34;message_id&#34;:14,&#34;from&#34;:{&#34;id&#34;:493995679,&#34;is_bot&#34;:false,&#34;first_name&#34;:&#34;\u54c1\u6bc5&#34;,&#34;last_name&#34;:&#34;Ian&#34;,&#34;username&#34;:&#34;pinyichuchu&#34;,&#34;language_code&#34;:&#34;zh-hans&#34;},&#34;chat&#34;:{&#34;id&#34;:-540226836,&#34;title&#34;:&#34;\u54c1\u6bc5 &amp; AnsibleSendMessageBot&#34;,&#34;type&#34;:&#34;group&#34;,&#34;all_members_are_administrators&#34;:true},&#34;date&#34;:1652696181,&#34;group_chat_created&#34;:true}}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Ansible/telegram_4.png" title="/images/Ansible/telegram_4.png" data-thumbnail="/images/Ansible/telegram_4.png" data-sub-html="<h2>發送通知至 Telegram 群組 Bot</h2>">
@@ -1296,23 +1296,23 @@ Hello World
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m setup <span class="p">|</span> less
-
-server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
-    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
-        <span class="s2">&#34;ansible_apparmor&#34;</span>: <span class="o">{</span>
-            <span class="s2">&#34;status&#34;</span>: <span class="s2">&#34;disabled&#34;</span>
-        <span class="o">}</span>,
-        <span class="s2">&#34;ansible_architecture&#34;</span>: <span class="s2">&#34;x86_64&#34;</span>,
-        <span class="s2">&#34;ansible_bios_date&#34;</span>: <span class="s2">&#34;03/14/2014&#34;</span>,
-        <span class="s2">&#34;ansible_bios_vendor&#34;</span>: <span class="s2">&#34;BHYVE&#34;</span>,
-        <span class="s2">&#34;ansible_bios_version&#34;</span>: <span class="s2">&#34;1.00&#34;</span>,
-        <span class="s2">&#34;ansible_board_asset_tag&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
-        <span class="s2">&#34;ansible_board_name&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
-        <span class="s2">&#34;ansible_board_serial&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
-        <span class="s2">&#34;ansible_board_vendor&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
-        <span class="s2">&#34;ansible_board_version&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m setup <span class="p">|</span> less
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_apparmor&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;status&#34;</span>: <span class="s2">&#34;disabled&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_architecture&#34;</span>: <span class="s2">&#34;x86_64&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_bios_date&#34;</span>: <span class="s2">&#34;03/14/2014&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_bios_vendor&#34;</span>: <span class="s2">&#34;BHYVE&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_bios_version&#34;</span>: <span class="s2">&#34;1.00&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_board_asset_tag&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_board_name&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_board_serial&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_board_vendor&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_board_version&#34;</span>: <span class="s2">&#34;NA&#34;</span>,
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -1337,22 +1337,22 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m setup -a <span class="s2">&#34;filter=ansible_distribution*&#34;</span>
-
-server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
-    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
-        <span class="s2">&#34;ansible_distribution&#34;</span>: <span class="s2">&#34;Ubuntu&#34;</span>,
-        <span class="s2">&#34;ansible_distribution_file_parsed&#34;</span>: true,
-        <span class="s2">&#34;ansible_distribution_file_path&#34;</span>: <span class="s2">&#34;/etc/os-release&#34;</span>,
-        <span class="s2">&#34;ansible_distribution_file_variety&#34;</span>: <span class="s2">&#34;Debian&#34;</span>,
-        <span class="s2">&#34;ansible_distribution_major_version&#34;</span>: <span class="s2">&#34;22&#34;</span>,
-        <span class="s2">&#34;ansible_distribution_release&#34;</span>: <span class="s2">&#34;kinetic&#34;</span>,
-        <span class="s2">&#34;ansible_distribution_version&#34;</span>: <span class="s2">&#34;22.10&#34;</span>,
-        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python3&#34;</span>
-    <span class="o">}</span>,
-    <span class="s2">&#34;changed&#34;</span>: <span class="nb">false</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m setup -a <span class="s2">&#34;filter=ansible_distribution*&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution&#34;</span>: <span class="s2">&#34;Ubuntu&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_file_parsed&#34;</span>: true,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_file_path&#34;</span>: <span class="s2">&#34;/etc/os-release&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_file_variety&#34;</span>: <span class="s2">&#34;Debian&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_major_version&#34;</span>: <span class="s2">&#34;22&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_release&#34;</span>: <span class="s2">&#34;kinetic&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_distribution_version&#34;</span>: <span class="s2">&#34;22.10&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -1371,16 +1371,16 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ ansible all -m setup -a <span class="s2">&#34;filter=ansible_pkg_mgr&#34;</span>
-
-server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
-    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
-        <span class="s2">&#34;ansible_pkg_mgr&#34;</span>: <span class="s2">&#34;apt&#34;</span>,
-        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python3&#34;</span>
-    <span class="o">}</span>,
-    <span class="s2">&#34;changed&#34;</span>: <span class="nb">false</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ansible all -m setup -a <span class="s2">&#34;filter=ansible_pkg_mgr&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_pkg_mgr&#34;</span>: <span class="s2">&#34;apt&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h3 id="轉寫-playbooks">轉寫 Playbooks</h3>
@@ -1400,16 +1400,16 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Filter rsa_public &amp; Send notify</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Filter setup rsa_public key</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.setup</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span>- <span class="s2">&#34;ansible_ssh_host_key_rsa_public&#34;</span><span class="w">
-</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Filter rsa_public &amp; Send notify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Filter setup rsa_public key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.setup</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">filter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="s2">&#34;ansible_ssh_host_key_rsa_public&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們將 filter setup 從 Ad-Hoc 轉成 Playbooks，並使用 result 來存在找到的公鑰。</p>
 <br>
@@ -1429,16 +1429,16 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify to Telegram</span><span class="w">
-</span><span class="w">      </span><span class="nt">community.general.telegram</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;5335968936:AAFhxxMRJy-rucGKgSE80Xss7qPq2iOHWlc&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">api_args</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="nt">chat_id</span><span class="p">:</span><span class="w"> </span>-<span class="m">540226836</span><span class="w">
-</span><span class="w">          </span><span class="nt">parse_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span><span class="w">
-</span><span class="w">          </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result }}&#34;</span><span class="w">
-</span><span class="w">          </span><span class="nt">disable_web_page_preview</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
-</span><span class="w">          </span><span class="nt">disable_notification</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Send notify to Telegram</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">community.general.telegram</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;5335968936:AAFhxxMRJy-rucGKgSE80Xss7qPq2iOHWlc&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">api_args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">chat_id</span><span class="p">:</span><span class="w"> </span>-<span class="m">540226836</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">parse_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_web_page_preview</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">disable_notification</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>老樣子，我們就使用上次 <code>send_notify_tg.yaml</code> 內的 Send notify to Telegram 任務來傳送通知。</p>
 <br>
@@ -1468,9 +1468,9 @@ server1 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o"
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ vim hello_world.txt.j2
-Hello &#34;{{ dynamic_word }}&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ vim hello_world.txt.j2
+</span></span><span class="line"><span class="cl">Hello &#34;{{ dynamic_word }}&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>由於 Ansible 是就由 <a href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank" rel="noopener noreffer">Jinja2</a> 來實作 template 系統，所以需要使用 <code>*.j2</code> 的副檔名。</li>
@@ -1502,25 +1502,25 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Play the template module</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
-</span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">dynamic_word</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;World&#34;</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generation the hello_world.txt file</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world.txt.j2</span><span class="w">
-</span><span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/hello_world.txt</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">show file context</span><span class="w">
-</span><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">cat /tmp/hello_world.txt</span><span class="w">
-</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
-</span><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout_lines }}&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Play the template module</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dynamic_word</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;World&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generation the hello_world.txt file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world.txt.j2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/hello_world.txt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">show file context</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">cat /tmp/hello_world.txt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout_lines }}&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>在第 5 行，我們幫 <code>dynamic_word</code> 變數設了一個預設值 <code>World</code>。</li>
@@ -1550,8 +1550,8 @@ Hello &#34;{{ dynamic_word }}&#34;
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"> $ ansible-playbook template_demo.yaml -e <span class="s2">&#34;dynamic_word=ansible&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"> $ ansible-playbook template_demo.yaml -e <span class="s2">&#34;dynamic_word=ansible&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/Ansible/template_1.png" title="/images/Ansible/template_1.png" data-thumbnail="/images/Ansible/template_1.png" data-sub-html="<h2>Template Module 使用 -e 覆寫參數</h2>">
@@ -1595,29 +1595,29 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Play the template module</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
-</span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;development&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">vars_files</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="l">vars/{{ env }}.yml</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generation the hello_world.txt file</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world.txt.j2</span><span class="w">
-</span><span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/hello_world.txt</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">show file context</span><span class="w">
-</span><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">cat /tmp/hello_world.txt</span><span class="w">
-</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
-</span><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout_lines }}&#34;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Play the template module</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;development&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vars_files</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">vars/{{ env }}.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generation the hello_world.txt file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">hello_world.txt.j2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/hello_world.txt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">show file context</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">cat /tmp/hello_world.txt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print stdout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ result.stdout_lines }}&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到上面例子中第 7 行，就是我們使用 <code>vars_files</code> 來 include 其他的變數檔。</p>
 <br>
@@ -1633,9 +1633,9 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"> $ vim vars/development.yaml
- dynamic_word: <span class="s2">&#34;development&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"> $ vim vars/development.yaml
+</span></span><span class="line"><span class="cl"> dynamic_word: <span class="s2">&#34;development&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Test</li>
@@ -1646,9 +1646,9 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"> $ vim vars/test.yaml
- dynamic_word: <span class="s2">&#34;test&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"> $ vim vars/test.yaml
+</span></span><span class="line"><span class="cl"> dynamic_word: <span class="s2">&#34;test&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Production</li>
@@ -1659,9 +1659,9 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"> $ vim vars/production.yaml
- dynamic_word: <span class="s2">&#34;production&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"> $ vim vars/production.yaml
+</span></span><span class="line"><span class="cl"> dynamic_word: <span class="s2">&#34;production&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -1741,56 +1741,56 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup the nginx</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span><span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;PinYi&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">mail</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">blog</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://pin-yi.me&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># 執行 &#39;apt-get update&#39; 指令。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">update apt repo cache</span><span class="w">
-</span><span class="w">      </span><span class="nt">apt</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx update_cache=yes</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c"># 執行 &#39;apt-get install nginx&#39; 指令。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">install nginx with apt</span><span class="w">
-</span><span class="w">      </span><span class="nt">apt</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx state=present</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c"># 於網頁根目錄 (DocumentRoot) 編輯 index.html。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">modify index.html</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w"> </span><span class="l">src=templates/index.html.j2</span><span class="w">
-</span><span class="w">        </span><span class="l">dest=/var/www/html/index.html</span><span class="w">
-</span><span class="w">        </span><span class="l">owner=www-data</span><span class="w">
-</span><span class="w">        </span><span class="l">group=www-data</span><span class="w">
-</span><span class="w">        </span><span class="l">mode=&#34;644&#34;</span><span class="w">
-</span><span class="w">        </span><span class="l">backup=yes</span><span class="w">
-</span><span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l">restart nginx</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c"># handlers</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># * 當確認事件有被觸發才會動作。</span><span class="w">
-</span><span class="w">  </span><span class="c"># * 一個 handler 可被多個 task 通知 (notify)，並於 tasks 跑完才會執行。</span><span class="w">
-</span><span class="w">  </span><span class="nt">handlers</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># 執行 &#39;sudo service nginx restart&#39; 指令。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">restart nginx</span><span class="w">
-</span><span class="w">      </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx enabled=yes state=restarted</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c"># post_tasks:</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># 在 tasks 之後執行的 tasks。</span><span class="w">
-</span><span class="w">  </span><span class="nt">post_tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># 檢查網頁內容。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">review http state</span><span class="w">
-</span><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;curl -s http://localhost&#34;</span><span class="w">
-</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">web_context</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c"># 印出檢查結果。</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print http state</span><span class="w">
-</span><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l">msg={{ web_context.stdout_lines }}</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup the nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;PinYi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mail</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;880831ian@gmail.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">blog</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://pin-yi.me&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 執行 &#39;apt-get update&#39; 指令。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">update apt repo cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">apt</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx update_cache=yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 執行 &#39;apt-get install nginx&#39; 指令。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">install nginx with apt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">apt</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx state=present</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 於網頁根目錄 (DocumentRoot) 編輯 index.html。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">modify index.html</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.template</span><span class="p">:</span><span class="w"> </span><span class="l">src=templates/index.html.j2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">dest=/var/www/html/index.html</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">owner=www-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">group=www-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">mode=&#34;644&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">backup=yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l">restart nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># handlers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># * 當確認事件有被觸發才會動作。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># * 一個 handler 可被多個 task 通知 (notify)，並於 tasks 跑完才會執行。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">handlers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 執行 &#39;sudo service nginx restart&#39; 指令。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">restart nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">name=nginx enabled=yes state=restarted</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># post_tasks:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 在 tasks 之後執行的 tasks。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">post_tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 檢查網頁內容。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">review http state</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;curl -s http://localhost&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">web_context</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 印出檢查結果。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print http state</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l">msg={{ web_context.stdout_lines }}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>來說明一下上面這個 yaml 檔案：</p>
 <ul>
@@ -1821,21 +1821,21 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w"> </span><span class="l">_____________________________________</span><span class="w">
-</span><span class="w"></span><span class="l">/ This is a ansible-playbook demo for \</span><span class="w">
-</span><span class="w"></span><span class="l">\ automate-with-ansible at 2022/05/17./</span><span class="w">
-</span><span class="w"> </span>-------------------------------------<span class="w">
-</span><span class="w">        </span><span class="l">\   ^__^</span><span class="w">
-</span><span class="w">         </span><span class="l">\  (oo)\_______</span><span class="w">
-</span><span class="w">            </span><span class="l">(__)\       )\/\</span><span class="w">
-</span><span class="w">                </span><span class="l">||----w |</span><span class="w">
-</span><span class="w">                </span><span class="l">||     ||</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$ cat .profile</span><span class="w">
-</span><span class="w"></span>- {{<span class="w"> </span><span class="l">mail }}</span><span class="w">
-</span><span class="w"></span>- {{<span class="w"> </span><span class="l">blog }}</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w"> </span><span class="l">_____________________________________</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">/ This is a ansible-playbook demo for \</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">\ automate-with-ansible at 2022/05/17./</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>-------------------------------------<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">\   ^__^</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="l">\  (oo)\_______</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="l">(__)\       )\/\</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="l">||----w |</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="l">||     ||</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="w"> </span>{{<span class="w"> </span><span class="l">username }}@automate-with-ansible ~ ]$ cat .profile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- {{<span class="w"> </span><span class="l">mail }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- {{<span class="w"> </span><span class="l">blog }}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="3">
@@ -1890,13 +1890,13 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ vim bash_loop.sh
-
-<span class="c1">#!/bin/bash</span>
-<span class="k">for</span> x in <span class="m">0</span> <span class="m">1</span> 2<span class="p">;</span> <span class="k">do</span>
-        <span class="nb">echo</span> Loop <span class="nv">$x</span>
-<span class="k">done</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim bash_loop.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> x in <span class="m">0</span> <span class="m">1</span> 2<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> Loop <span class="nv">$x</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>在第 4 行，我們用 <code>for</code>，並代入 0,1,2 三個值到 <code>$x</code> 變數</li>
@@ -1916,13 +1916,13 @@ Hello &#34;{{ dynamic_word }}&#34;
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ chmod a+x bash_loop.sh
-$ ./bash_loop.sh
-
-Loop <span class="m">0</span>
-Loop <span class="m">1</span>
-Loop <span class="m">2</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ chmod a+x bash_loop.sh
+</span></span><span class="line"><span class="cl">$ ./bash_loop.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Loop <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Loop <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Loop <span class="m">2</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -1947,18 +1947,18 @@ Loop <span class="m">2</span>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">a basic loop with playbook</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print loop message</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Loop {{ item }}&#34;</span><span class="w">
-</span><span class="w">      </span><span class="nt">with_items</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="m">0</span><span class="w">
-</span><span class="w">        </span>- <span class="m">1</span><span class="w">
-</span><span class="w">        </span>- <span class="m">2</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">a basic loop with playbook</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print loop message</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Loop {{ item }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">with_items</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="m">2</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>在第 6、7 行裡，我們用 <code>debug</code> module 來印出訊息，並定義 <code>item</code></li>
@@ -1982,17 +1982,17 @@ Loop <span class="m">2</span>
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">TASK [print loop message] *************************************************************************************************************</span><span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=0) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 0&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=1) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 1&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=2) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 2&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">TASK [print loop message] *************************************************************************************************************</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=0) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=1) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=2) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>另一種 在 Ansible 新增的 <code>loop</code></p>
@@ -2016,20 +2016,20 @@ Loop <span class="m">2</span>
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">a basic loop with playbook</span><span class="w">
-</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
-</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print loop message</span><span class="w">
-</span><span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ item }} {{ my_idx }}&#34;</span><span class="w">
-</span><span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="l">Loop</span><span class="w">
-</span><span class="w">        </span>- <span class="l">Loop</span><span class="w">
-</span><span class="w">        </span>- <span class="l">Loop</span><span class="w">
-</span><span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">index_var</span><span class="p">:</span><span class="w"> </span><span class="l">my_idx</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">a basic loop with playbook</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">print loop message</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ item }} {{ my_idx }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">index_var</span><span class="p">:</span><span class="w"> </span><span class="l">my_idx</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ol start="2">
@@ -2049,17 +2049,17 @@ Loop <span class="m">2</span>
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">TASK [print loop message] *************************************************************************************************************</span><span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=0) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 0&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=1) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 1&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=2) =&gt; {</span><span class="w">
-</span><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 2&#34;</span><span class="w">
-</span><span class="w"></span>}<span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">TASK [print loop message] *************************************************************************************************************</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=0) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=1) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ok</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">server1] =&gt; (item=2) =&gt; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;msg&#34;: </span><span class="s2">&#34;Loop 2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>會使用 Loop 就可以減少我們在寫重複的程式碼，當然上面的只是簡單的範例，詳細請參考 <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#query-vs-lookup" target="_blank" rel="noopener noreffer">Loops - Ansible Documentation</a>。</p>
@@ -2075,8 +2075,8 @@ Loop <span class="m">2</span>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-17&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/02d1a437db7b3a49ac4ac3c2dda34931d86cf66b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;02d1a43:&nbsp;# 新增/修改 Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)">
-                            <i class="fas fa-hashtag fa-fw"></i>02d1a43</a></span>
+                <span>更新於 2022-05-17&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/02d1a437db7b3a49ac4ac3c2dda34931d86cf66b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;02d1a437:&nbsp;# 新增/修改 Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)">
+                            <i class="fas fa-hashtag fa-fw"></i>02d1a437</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/ansible/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -2098,13 +2098,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

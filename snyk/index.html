@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>找出程式碼、開源套件、容器的安全漏洞工具 - Snyk - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk" />
+        <title>找出程式碼、開源套件、容器的安全漏洞工具 - Snyk - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk" />
 <meta property="og:description" content="前幾天有機會可以去參加 DevOpsDays Taipei 2022 活動，聽到了一門有關於如何將 Security 加入 DevOps - GitLab CI/CD with Snyk 的講座，覺得蠻有趣的，想說順便紀錄一下這幾天去聽的內容，文章底下有" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/snyk/" /><meta property="og:image" content="https://blog.pin-yi.me/snyk/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk"/>
 <meta name="twitter:description" content="前幾天有機會可以去參加 DevOpsDays Taipei 2022 活動，聽到了一門有關於如何將 Security 加入 DevOps - GitLab CI/CD with Snyk 的講座，覺得蠻有趣的，想說順便紀錄一下這幾天去聽的內容，文章底下有"/>
 <meta name="application-name" content="PinYi 部落格">
-<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/snyk/" /><link rel="prev" href="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/snyk/" /><link rel="prev" href="https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/" /><link rel="next" href="https://blog.pin-yi.me/terraform/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <script type="application/ld+json">
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/snyk\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Snyk, 安全性, DevOps, Sec, DevSecOps","wordcount":  1767 ,
+                        }],"genre": "posts","keywords": "Snyk, 安全性, DevOps, Sec, DevSecOps","wordcount":  1677 ,
         "url": "https:\/\/blog.pin-yi.me\/snyk\/","datePublished": "2022-09-20T14:58:00+08:00","dateModified": "2022-09-21T17:35:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 部落格</a>
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 部落格</a>
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/snyk/featured-image.webp"
         title="/snyk/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">找出程式碼、開源套件、容器的安全漏洞工具 - Snyk</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-20">2022-09-20</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1767 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-20">2022-09-20</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1677 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
@@ -276,9 +276,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">brew tap snyk/tap
-brew install snyk
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">brew tap snyk/tap
+</span></span><span class="line"><span class="cl">brew install snyk
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>當然除了 Homebrew 以外還有其他的安裝方式，例如：curl下載執行檔、npm、yarn、docker 執行等等，詳細可以參考以下<a href="https://docs.snyk.io/snyk-cli/install-the-snyk-cli" target="_blank" rel="noopener noreffer">安裝連結</a>。</p>
 <br>
@@ -344,8 +344,8 @@ brew install snyk
                 </span><span><a href="/tags/sec/">Sec</a>
                 </span><span><a href="/tags/devsecops/">DevSecOps</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-09-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/afbab81e207e5b67b0fe36478e96bf81900e0325" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;afbab81:&nbsp;# 更新 找出程式碼、開源套件、容器的安全漏洞工具 - Snyk">
-                            <i class="fas fa-hashtag fa-fw"></i>afbab81</a></span>
+                <span>更新於 2022-09-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/afbab81e207e5b67b0fe36478e96bf81900e0325" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;afbab81e:&nbsp;# 更新 找出程式碼、開源套件、容器的安全漏洞工具 - Snyk">
+                            <i class="fas fa-hashtag fa-fw"></i>afbab81e</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/snyk/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -355,7 +355,7 @@ brew install snyk
         </div><div class="post-info-share">
             <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/snyk/" data-title="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk" data-hashtags="Snyk,安全性,DevOps,Sec,DevSecOps"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/snyk/" data-hashtag="Snyk"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/snyk/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/snyk/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/snyk/" data-title="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/snyk/" data-title="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/snyk/" data-title="找出程式碼、開源套件、容器的安全漏洞工具 - Snyk"><i class="fab fa-skype fa-fw"></i></a></span>
         </div></div><div class="post-nav"><a href="/gcp-k8s-hpa-php-custom-metrics/" class="prev" rel="prev" title="Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
-            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+            <a href="/terraform/" class="next" rel="next" title="什麼是 IaC ? Terraform 又是什麼？">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
 </div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
@@ -367,13 +367,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

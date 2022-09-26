@@ -1,6 +1,6 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>PinYi</title>
+        <title>PinYi 部落格</title>
         <link>https://blog.pin-yi.me/en/</link>
         <description>Here&#39;s a little world about a rookie engineer and Youtuber</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>

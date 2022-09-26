@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式) - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)" />
+        <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式) - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)" />
 <meta property="og:description" content="本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (可以從這裡下載最後程式碼！) Laravel 內建會員系統 Laravel 這個框架，很" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/laravel-advanced/" /><meta property="og:image" content="https://blog.pin-yi.me/laravel-advanced/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/laravel-advanced\/featured-image.webp",
                             "width":  2520 ,
                             "height":  896 
-                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7866 ,
+                        }],"genre": "posts","keywords": "PHP, 框架, Laravel, RESTful API, Repository, 實作, 介紹","wordcount":  7783 ,
         "url": "https:\/\/blog.pin-yi.me\/laravel-advanced\/","datePublished": "2022-03-08T09:00:59+08:00","dateModified": "2022-04-04T11:18:41+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 部落格</a>
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 部落格</a>
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/laravel-advanced/featured-image.webp"
         title="/laravel-advanced/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7866 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 7783 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 16 分鐘</span>&nbsp;</div>
             </div>
             
@@ -205,8 +205,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ php artisan make:auth
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ php artisan make:auth
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>主要會產生</p>
@@ -222,15 +222,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">	new file:   app/Http/Controllers/HomeController.php
-	new file:   resources/views/auth/login.blade.php
-	new file:   resources/views/auth/passwords/email.blade.php
-	new file:   resources/views/auth/passwords/reset.blade.php
-	new file:   resources/views/auth/register.blade.php
-	new file:   resources/views/home.blade.php
-	new file:   resources/views/layouts/app.blade.php
-	modified:   routes/web.php
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">	new file:   app/Http/Controllers/HomeController.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/auth/login.blade.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/auth/passwords/email.blade.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/auth/passwords/reset.blade.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/auth/register.blade.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/home.blade.php
+</span></span><span class="line"><span class="cl">	new file:   resources/views/layouts/app.blade.php
+</span></span><span class="line"><span class="cl">	modified:   routes/web.php
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>其中 <code>routes/web.php</code> 多了：</p>
@@ -241,10 +241,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">();</span>
-
-<span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="s1">&#39;HomeController@index&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">);</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Auth</span><span class="o">::</span><span class="na">routes</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="s1">&#39;HomeController@index&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>views 底下放的就是顯示的畫面，所以現在可以瀏覽</p>
@@ -280,28 +280,28 @@ if (!doNotTrack) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Reverse the migrations.
-</span><span class="sd">     *
-</span><span class="sd">     * @return void
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Reverse the migrations.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return void
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>簡單看一下，他會建立一個名叫 <code>users</code> 的資料表，欄位分別有自動累加(id)、字串(name)、唯一字串(email)、字串(密碼)、rememberToken()、timestamps()。</p>
 <br>
@@ -330,27 +330,27 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Reverse the migrations.
-</span><span class="sd">     *
-</span><span class="sd">     * @return void
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">rememberToken</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Reverse the migrations.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return void
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">dropIfExists</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>設定 username 欄位為唯一值，移除掉 email ，再加入一個 api_token 用於後續的 RESTful API 驗證。</p>
 <br>
@@ -375,20 +375,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group{{ $errors-&gt;has(&#39;username&#39;) ? &#39; has-error&#39; : &#39;&#39; }}&#34;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-4 control-label&#34;</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-6&#34;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="na">required</span> <span class="na">autofocus</span><span class="p">&gt;</span>
-                               
-    @if ($errors-&gt;has(&#39;username&#39;))
-           <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;help-block&#34;</span><span class="p">&gt;</span>
-                   <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ $errors-&gt;first(&#39;username&#39;) }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
-           <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-    @endif
- <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group{{ $errors-&gt;has(&#39;username&#39;) ? &#39; has-error&#39; : &#39;&#39; }}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-4 control-label&#34;</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-6&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="na">required</span> <span class="na">autofocus</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                               
+</span></span><span class="line"><span class="cl">    @if ($errors-&gt;has(&#39;username&#39;))
+</span></span><span class="line"><span class="cl">           <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;help-block&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ $errors-&gt;first(&#39;username&#39;) }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    @endif
+</span></span><span class="line"><span class="cl"> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h5 id="registerblade">Register.blade</h5>
@@ -409,20 +409,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group{{ $errors-&gt;has(&#39;username&#39;) ? &#39; has-error&#39; : &#39;&#39; }}&#34;</span><span class="p">&gt;</span>
- <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-4 control-label&#34;</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-
- <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-6&#34;</span><span class="p">&gt;</span>
-  	<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="na">required</span><span class="p">&gt;</span>
-
-     @if ($errors-&gt;has(&#39;username&#39;))
-            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;help-block&#34;</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ $errors-&gt;first(&#39;username&#39;) }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-     @endif
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group{{ $errors-&gt;has(&#39;username&#39;) ? &#39; has-error&#39; : &#39;&#39; }}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-4 control-label&#34;</span><span class="p">&gt;</span>Username<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-md-6&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  	<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="na">required</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     @if ($errors-&gt;has(&#39;username&#39;))
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;help-block&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ $errors-&gt;first(&#39;username&#39;) }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">     @endif
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div> <br>
 <h4 id="model">Model</h4>
@@ -441,12 +441,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-            <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;eloquent&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
-</span><span class="c1"></span>        <span class="p">],</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;eloquent&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">],</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -461,12 +461,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="s1">&#39;stripe&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
-</span><span class="c1"></span>        <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_KEY&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_SECRET&#39;</span><span class="p">),</span>
-    <span class="p">],</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="s1">&#39;stripe&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="c1">//修改片段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_KEY&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;STRIPE_SECRET&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -486,17 +486,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Faker\Generator</span> <span class="nv">$faker</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//修改片段
-</span><span class="c1"></span>    <span class="k">static</span> <span class="nv">$password</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span>
-        <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">safeEmail</span><span class="p">,</span>
-        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span> <span class="o">?:</span> <span class="nv">$password</span> <span class="o">=</span> <span class="nx">bcrypt</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;remember_token&#39;</span> <span class="o">=&gt;</span> <span class="nx">str_random</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
-    <span class="p">];</span>
-<span class="p">});</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="nx">App\Models\User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Faker\Generator</span> <span class="nv">$faker</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//修改片段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="nv">$password</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">unique</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">safeEmail</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span> <span class="o">?:</span> <span class="nv">$password</span> <span class="o">=</span> <span class="nx">bcrypt</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;remember_token&#39;</span> <span class="o">=&gt;</span> <span class="nx">str_random</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <ul>
@@ -507,8 +507,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>都修改好了，我們就繼續來修改 <code>User</code> 這個 model ，將原本的 name、email ，修改成以下</p>
@@ -544,35 +544,35 @@ if (!doNotTrack) {
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Notifications\Notifiable</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
-<span class="p">{</span>
-   <span class="k">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
-
-   <span class="sd">/**
-</span><span class="sd">    * The attributes that are mass assignable.
-</span><span class="sd">    *
-</span><span class="sd">    * @var array
-</span><span class="sd">    */</span>
-   <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
-       <span class="s1">&#39;username&#39;</span><span class="p">,</span>  <span class="s1">&#39;password&#39;</span><span class="p">,</span>
-   <span class="p">];</span>
-
-   <span class="sd">/**
-</span><span class="sd">    * The attributes that should be hidden for arrays.
-</span><span class="sd">    *
-</span><span class="sd">    * @var array
-</span><span class="sd">    */</span>
-   <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
-       <span class="s1">&#39;password&#39;</span><span class="p">,</span>  <span class="s1">&#39;remember_token&#39;</span><span class="p">,</span>
-   <span class="p">];</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Notifications\Notifiable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">use</span> <span class="nx">Notifiable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">    * The attributes that are mass assignable.
+</span></span></span><span class="line"><span class="cl"><span class="sd">    *
+</span></span></span><span class="line"><span class="cl"><span class="sd">    * @var array
+</span></span></span><span class="line"><span class="cl"><span class="sd">    */</span>
+</span></span><span class="line"><span class="cl">   <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">       <span class="s1">&#39;username&#39;</span><span class="p">,</span>  <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">    * The attributes that should be hidden for arrays.
+</span></span></span><span class="line"><span class="cl"><span class="sd">    *
+</span></span></span><span class="line"><span class="cl"><span class="sd">    * @var array
+</span></span></span><span class="line"><span class="cl"><span class="sd">    */</span>
+</span></span><span class="line"><span class="cl">   <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">       <span class="s1">&#39;password&#39;</span><span class="p">,</span>  <span class="s1">&#39;remember_token&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div> <br>
 <p>裡面有一個是 <code>fillable</code> 跟 <code>hiddem</code> ，順便解釋一下這兩個是在做什麼</p>
@@ -589,8 +589,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">protected</span> <span class="nv">$guarded</span> <span class="o">=</span> <span class="p">[];</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$guarded</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <h4 id="controller">Controller</h4>
@@ -625,30 +625,30 @@ if (!doNotTrack) {
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">    protected <span class="k">function</span> validator<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
-    <span class="o">{</span>
-        <span class="k">return</span> Validator::make<span class="o">(</span><span class="nv">$data</span>, <span class="o">[</span>
-            <span class="s1">&#39;name&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|max:255&#39;</span>,
-            <span class="s1">&#39;email&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|email|max:255|unique:users&#39;</span>,
-            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|min:6|confirmed&#39;</span>,
-        <span class="o">])</span><span class="p">;</span>
-    <span class="o">}</span>
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  <span class="nv">$data</span>
-     * @return <span class="se">\A</span>pp<span class="se">\U</span>ser
-     */
-    protected <span class="k">function</span> create<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
-    <span class="o">{</span>
-        <span class="k">return</span> User::create<span class="o">([</span>
-            <span class="s1">&#39;name&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>,
-            <span class="s1">&#39;email&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span>,
-            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; bcrypt<span class="o">(</span><span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">])</span>,
-        <span class="o">])</span><span class="p">;</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">    protected <span class="k">function</span> validator<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> Validator::make<span class="o">(</span><span class="nv">$data</span>, <span class="o">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;name&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|max:255&#39;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;email&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|email|max:255|unique:users&#39;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|min:6|confirmed&#39;</span>,
+</span></span><span class="line"><span class="cl">        <span class="o">])</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * Create a new user instance after a valid registration.
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param  array  <span class="nv">$data</span>
+</span></span><span class="line"><span class="cl">     * @return <span class="se">\A</span>pp<span class="se">\U</span>ser
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    protected <span class="k">function</span> create<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> User::create<span class="o">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;name&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;email&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; bcrypt<span class="o">(</span><span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">])</span>,
+</span></span><span class="line"><span class="cl">        <span class="o">])</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到在 <code>validator()</code> 就是在驗證註冊時的欄位，以 email 來說明，他需要符合必填(required)、字串(string)、email格式(email)、最大長度(max:255)、在 users 資料表中唯一(unique:users) 才可以註冊，另外兩個也是如此。</p>
 <p>那 <code>create()</code> 就是會建立註冊的資料到資料表中，就是這麼簡單XD，詳細可以參考 <a href="https://laravel.com/docs/5.4/validation#form-request-validation" target="_blank" rel="noopener noreffer">Laravel 官網 Form Request Validation</a></p>
@@ -679,28 +679,28 @@ if (!doNotTrack) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">    protected <span class="k">function</span> validator<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
-    <span class="o">{</span>
-        <span class="k">return</span> Validator::make<span class="o">(</span><span class="nv">$data</span>, <span class="o">[</span>
-            <span class="s1">&#39;username&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|max:255|unique:users&#39;</span>,
-            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|min:6|confirmed&#39;</span>,
-        <span class="o">])</span><span class="p">;</span>
-    <span class="o">}</span>
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  <span class="nv">$data</span>
-     * @return <span class="se">\A</span>pp<span class="se">\M</span>odels<span class="se">\U</span>ser
-     */
-    protected <span class="k">function</span> create<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
-    <span class="o">{</span>
-        <span class="k">return</span> User::create<span class="o">([</span>
-            <span class="s1">&#39;username&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;username&#39;</span><span class="o">]</span>,
-            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; bcrypt<span class="o">(</span><span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">])</span>,
-        <span class="o">])</span><span class="p">;</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">    protected <span class="k">function</span> validator<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> Validator::make<span class="o">(</span><span class="nv">$data</span>, <span class="o">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;username&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|max:255|unique:users&#39;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;required|string|min:6|confirmed&#39;</span>,
+</span></span><span class="line"><span class="cl">        <span class="o">])</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * Create a new user instance after a valid registration.
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param  array  <span class="nv">$data</span>
+</span></span><span class="line"><span class="cl">     * @return <span class="se">\A</span>pp<span class="se">\M</span>odels<span class="se">\U</span>ser
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    protected <span class="k">function</span> create<span class="o">(</span>array <span class="nv">$data</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> User::create<span class="o">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;username&#39;</span> <span class="o">=</span>&gt; <span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;username&#39;</span><span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=</span>&gt; bcrypt<span class="o">(</span><span class="nv">$data</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">])</span>,
+</span></span><span class="line"><span class="cl">        <span class="o">])</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由於我們刪除 email ，所以要把 unique:users 設定在 username。</p>
 <br>
@@ -728,25 +728,25 @@ if (!doNotTrack) {
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">use</span> <span class="nx">AuthenticatesUsers</span><span class="p">;</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Where to redirect users after login.
-</span><span class="sd">     *
-</span><span class="sd">     * @var string
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="nv">$redirectTo</span> <span class="o">=</span> <span class="s1">&#39;/home&#39;</span><span class="p">;</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Create a new controller instance.
-</span><span class="sd">     *
-</span><span class="sd">     * @return void
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;guest&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">except</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">AuthenticatesUsers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Where to redirect users after login.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @var string
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$redirectTo</span> <span class="o">=</span> <span class="s1">&#39;/home&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Create a new controller instance.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return void
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;guest&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">except</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>因為 Laravel 框架內建了驗證登入功能，所以只需要使用 <code>use AuthenticatesUsers;</code> 就可以達到驗證效果，登入成功就會使用 <code>redirectTo</code> 導向到 <code>/home</code>，那問題來了，因為 <code>AuthenticatesUsers</code> 預設是使用 email 來做登入驗證，但我們改成 username，我們要怎麼修改呢！？ 一起來看看吧</p>
 <div class="highlight"><div class="chroma">
@@ -758,12 +758,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">//由於判斷是用 AuthenticatesUsers 這個內建的 trait 來實作，其中 username() 這個方法就是來指定登入要用的欄位
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">username</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="s1">&#39;username&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">//由於判斷是用 AuthenticatesUsers 這個內建的 trait 來實作，其中 username() 這個方法就是來指定登入要用的欄位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">username</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;username&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面有說因為使用了 <code>AuthenticatesUsers</code>  來做驗證，我們盡量不去修改框架內的檔案，當然 Laravel 也有配套措施，只要使用 <code>username()</code> 這個方法就可以指定登入要驗證的欄位，因為筆者在學習這段時也找了很久，這邊附上<a href="https://laravel.com/api/6.x/Illuminate/Foundation/Auth/AuthenticatesUsers.html" target="_blank" rel="noopener noreffer"> Laravel API</a> 可以去查看一下。</p>
 <p>我們這時就可以使用 <code>http://127.0.0.1:8000/login</code> 來登入囉！試試看吧～</p>
@@ -812,19 +812,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span> <span class="c1">//留言板編號
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">();</span> <span class="c1">//留言者ID
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">//留言板內容
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span> <span class="c1">//留言板建立以及編輯的時間
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">softDeletes</span><span class="p">();</span> <span class="c1">//軟刪除時間
-</span><span class="c1"></span>        <span class="p">});</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span> <span class="c1">//留言板編號
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">();</span> <span class="c1">//留言者ID
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">//留言板內容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span> <span class="c1">//留言板建立以及編輯的時間
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">softDeletes</span><span class="p">();</span> <span class="c1">//軟刪除時間
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們將資料庫的名稱從 <code>messsages</code> 改為 <code>message</code> ，後續程式部分也都會修改，大家要在注意一下 ～</p>
 <p>我們這次加入了留言者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、按讚者 ID (使用外鍵連接 <code>users</code> 的 <code>id</code>)、留言板樂觀鎖、softDeletes軟刪除的欄位(軟刪除後續會提到)，並且因為我們同樣的資料不要重複儲存，所以刪除 <code>name</code> 要查詢就使用 join 來做查詢。</p>
@@ -845,19 +845,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">bigIncrements</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span> <span class="c1">//按讚紀錄編號
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;message_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span> <span class="c1">//文章編號
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;message_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span> <span class="c1">//帳號編號
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
-            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">dateTime</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">);</span> <span class="c1">//按讚紀錄建立時間
-</span><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">softDeletes</span><span class="p">();</span> <span class="c1">//軟刪除時間
-</span><span class="c1"></span>        <span class="p">});</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">bigIncrements</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span> <span class="c1">//按讚紀錄編號
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;message_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span> <span class="c1">//文章編號
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;message_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span> <span class="c1">//帳號編號
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">foreign</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">references</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">dateTime</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">);</span> <span class="c1">//按讚紀錄建立時間
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">softDeletes</span><span class="p">();</span> <span class="c1">//軟刪除時間
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>會存放文章的編號並且使用外鍵連接 <code>message </code> 的 <code>id</code>，以及按讚者的 ID 也使用外鍵連接 <code>users </code> 的 <code>id</code>。</p>
 <br>
@@ -953,41 +953,41 @@ if (!doNotTrack) {
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Validator</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">LoginController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required&#39;</span>
-        <span class="p">];</span>
-        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;格式錯誤&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">([</span>
-            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span>
-            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">password</span>
-        <span class="p">]))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入失敗&#34;</span><span class="p">],</span> <span class="mi">401</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nx">Auth</span><span class="o">::</span><span class="na">logout</span><span class="p">();</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登出成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Validator</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LoginController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;格式錯誤&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">password</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入失敗&#34;</span><span class="p">],</span> <span class="mi">401</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登入成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Auth</span><span class="o">::</span><span class="na">logout</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;登出成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這邊的 Login 會先驗證格式是否正確，在使用 <code>Auth:attempt</code> 來檢查是否有註冊過，並且回傳相對應的訊息， Logout 就使用 <code>Auth::logout</code> 即可。</p>
 <p>好了後我們先到 routes/api.php 新增登入跟登出 API 的路徑</p>
@@ -997,9 +997,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="s1">&#39;LoginController@login&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">,</span> <span class="s1">&#39;LoginController@logout&#39;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="s1">&#39;LoginController@login&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">,</span> <span class="s1">&#39;LoginController@logout&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們接下來設定 Middleware ，什麼是 Middleware 呢！？</p>
@@ -1015,12 +1015,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">某天早上你去圖書館看書，
-下午去公園畫畫，
-晚上去KTV 唱歌，
-等到要準備回家的時候發現學生證不見了，
-你會去哪裡找? (假設學生證就掉在這3個地方)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">某天早上你去圖書館看書，
+</span></span><span class="line"><span class="cl">下午去公園畫畫，
+</span></span><span class="line"><span class="cl">晚上去KTV 唱歌，
+</span></span><span class="line"><span class="cl">等到要準備回家的時候發現學生證不見了，
+</span></span><span class="line"><span class="cl">你會去哪裡找? (假設學生證就掉在這3個地方)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>對於記憶不好的人來說，會按照 KTV &gt; 公園 &gt; 圖書館的路線去尋找。</p>
 <p>假設在公園找到學生證，就不會再去圖書館了，由於這條路是死巷，所以只能返回走去KTV的路，這個就是 <strong>Middleware</strong> 的運作原理。</p>
@@ -1034,9 +1034,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$  php artisan make:middleware ApiAuth
-Middleware created successfully.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$  php artisan make:middleware ApiAuth
+</span></span><span class="line"><span class="cl">Middleware created successfully.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>接著要把剛剛生成的 <code>ApiAuth</code> 檔案放置在 <code>app/Http/Kernel.php</code> 檔案中</p>
@@ -1053,16 +1053,16 @@ Middleware created successfully.
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">protected</span> <span class="nv">$routeMiddleware</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\Authenticate</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;auth.basic&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\AuthenticateWithBasicAuth</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;bindings&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Routing\Middleware\SubstituteBindings</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;can&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\Authorize</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;guest&#39;</span> <span class="o">=&gt;</span> <span class="nx">\App\Http\Middleware\RedirectIfAuthenticated</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;throttle&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Routing\Middleware\ThrottleRequests</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-        <span class="s1">&#39;api.auth&#39;</span> <span class="o">=&gt;</span> <span class="nx">\App\Http\Middleware\ApiAuth</span><span class="o">::</span><span class="na">class</span> <span class="c1">// 這邊
-</span><span class="c1"></span>    <span class="p">];</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$routeMiddleware</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\Authenticate</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;auth.basic&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\AuthenticateWithBasicAuth</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;bindings&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Routing\Middleware\SubstituteBindings</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;can&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Auth\Middleware\Authorize</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;guest&#39;</span> <span class="o">=&gt;</span> <span class="nx">\App\Http\Middleware\RedirectIfAuthenticated</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;throttle&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Illuminate\Routing\Middleware\ThrottleRequests</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;api.auth&#39;</span> <span class="o">=&gt;</span> <span class="nx">\App\Http\Middleware\ApiAuth</span><span class="o">::</span><span class="na">class</span> <span class="c1">// 這邊
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">];</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下來我們就可以開始撰寫 <code>ApiAuth</code> 檔案的內容了</p>
 <div class="highlight"><div class="chroma">
@@ -1076,14 +1076,14 @@ Middleware created successfully.
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Auth</span><span class="o">::</span><span class="na">check</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">([</span><span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用戶需要認證&#39;</span><span class="p">],</span> <span class="mi">401</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Auth</span><span class="o">::</span><span class="na">check</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">([</span><span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用戶需要認證&#39;</span><span class="p">],</span> <span class="mi">401</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>這邊的意思是指，在 request 的時候，我們使用內建的 <code>Auth::check</code> 來檢查，如果登入就可以繼續使用，如果沒有登入會回傳用戶需要認證以及 401 的 status code。</p>
 <br>
@@ -1099,13 +1099,13 @@ Middleware created successfully.
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@getAll&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@get&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@create&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@update&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">patch</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@like&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@delete&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@getAll&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@get&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@create&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@update&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">patch</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@like&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;message/{id}&#39;</span><span class="p">,</span> <span class="s1">&#39;MessageController@delete&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">&#39;api.auth&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到跟我們上一篇的 route 設定的差不多，只是將 <code>MessageController</code> 後面的方法做了一點變化，簡化名稱(這與我們後面講到的 Repository 設計模式有關)，以及加上 <code>like</code> 這個方法來當作我們的按讚功能，後面將我們需要登入驗證才可以使用的功能，加入 <code>middleware('api.auth');</code></p>
 <br>
@@ -1133,24 +1133,24 @@ Middleware created successfully.
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">Model</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">SoftDeletes</span><span class="p">;</span>
-
-    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;Message&#39;</span><span class="p">;</span>
-    <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span>
-    <span class="p">];</span>
-    <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;deleted_at&#39;</span>
-    <span class="p">];</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">Model</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">SoftDeletes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;Message&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$hidden</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;deleted_at&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們還多引用 SoftDeletes ，它叫軟刪除，一般來說我們在設計資料庫時，不會真正意義上的把資料刪掉，還記得我們再新增 message 跟 like 資料表時，有多了一個  <code>softDeletes()</code> 欄位嗎，這個欄位就是當我們刪除時，他會記錄刪除時間，但在查詢時就不會顯示這筆資料，讓使用者覺得資料已經真正刪除了，但實際上資料還是存在在資料庫中。</p>
 <br>
@@ -1172,20 +1172,20 @@ Middleware created successfully.
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Like</span> <span class="k">extends</span> <span class="nx">Model</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">SoftDeletes</span><span class="p">;</span>
-
-    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;like&#39;</span><span class="p">;</span>
-    <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;message_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span>
-    <span class="p">];</span>
-    <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\SoftDeletes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Like</span> <span class="k">extends</span> <span class="nx">Model</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">SoftDeletes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;like&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;message_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們還多引用 SoftDeletes ，它叫軟刪除，一般來說我們在設計資料庫時，不會真正意義上的把資料刪掉，還記得我們再新增 message 跟 like 資料表時，有多了一個  <code>softDeletes()</code> 欄位嗎，這個欄位就是當我們刪除時，他會記錄刪除時間，但在查詢時就不會顯示這筆資料，讓使用者覺得資料已經真正刪除了，但實際上資料還是存在在資料庫中。</p>
 <br>
@@ -1203,11 +1203,11 @@ Middleware created successfully.
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Repositories</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">App\Models\Message</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">App\Models\Like</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Repositories</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\Message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\Like</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p><strong>查詢留言資料讀取</strong></p>
@@ -1251,43 +1251,43 @@ Middleware created successfully.
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getAllMessage</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
-            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
-            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
-            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.updated_at&#39;</span>
-        <span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
-            <span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
-            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
-            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
-            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;message.updated_at&#39;</span>
-        <span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
-            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getAllMessage</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.updated_at&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.id&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;users.username as name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.version&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.created_at&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message.updated_at&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;message.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;like.message_id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">leftjoin</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;message.user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;users.id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">selectRaw</span><span class="p">(</span><span class="s1">&#39;count(like.id) as like_count&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>回傳全部的留言資料 <code>getAllMessage()</code>，由於我們想要顯示留言者 id，只能一個一個把我們想要的 select 出來，不能透過 model 來顯示，使用 leftjoin 來查詢，最後多一個來顯示各個文章的總數。</p>
 <p>回傳{id}留言資料 <code>getMessage($id)</code>，一樣跟回傳全部的留言資料一樣，只是多一個 where 來顯示輸出的 id 留言資料。</p>
@@ -1304,14 +1304,14 @@ Middleware created successfully.
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">createMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nx">Message</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
-            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
-            <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">createMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Message</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用 create 來新增資料，將 user_id 帶入傳值進來的 <code>$id</code>，content 帶入 <code>$content</code>。</p>
 <br>
@@ -1330,17 +1330,17 @@ Middleware created successfully.
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span>
-                <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
-                <span class="s1">&#39;version&#39;</span> <span class="o">=&gt;</span> <span class="nv">$version</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="p">]);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">,</span> <span class="nv">$content</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nv">$version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;version&#39;</span> <span class="o">=&gt;</span> <span class="nv">$version</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>先使用 where 來檢查樂觀鎖 version ，在查詢此 id 是否存在，以及編輯者是否為發文者，最後用 update 來更新資料表，分別更新 user_id、content、version(樂觀鎖每次加1) 等欄位。</p>
 <br>
@@ -1357,15 +1357,15 @@ Middleware created successfully.
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">likeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nx">Like</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
-            <span class="s1">&#39;message_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
-            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user_id</span><span class="p">,</span>
-            <span class="s1">&#39;created_at&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Carbon\Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">likeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Like</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;message_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;created_at&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Carbon\Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>按讚我們會在 like 的資料表中來新增紀錄，所以也是使用 create 來新增，新增 message_id、user_id、created_at 。</p>
 <br>
@@ -1380,13 +1380,13 @@ Middleware created successfully.
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">Message</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="nv">$user_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>刪除功能因為我們使用軟刪除，所以不用顧慮 FK 外鍵，所以可以直接刪除 message。</p>
 <br>
@@ -1402,13 +1402,13 @@ Middleware created successfully.
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">App\Repositories\MessageRepository</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Validator</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Repositories\MessageRepository</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Validator</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我們在商業邏輯上會處理 Request 內容，以及使用 MessageRepository 來對資料庫做存取、Auth 取的登入者的資訊等等功能，所以要記得先把他引用進來歐。</p>
 <br>
@@ -1431,21 +1431,21 @@ Middleware created successfully.
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 查詢全部的留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAll</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getAllMessage</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 查詢id留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nv">$message</span><span class="p">;</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">// 查詢全部的留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAll</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getAllMessage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 查詢id留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><font color='red'>由於我們 MessageRepository 都只有單純與資料庫進行交握，所有的判斷以及回傳都會在 controller 來做處理</font>，<code>getAll()</code> 會使用到 <code>MessageRepository::getAllMessage()</code> 的查詢並回傳顯示查詢的資料。</p>
 <p><code>get(id)</code> 會先用 MessageRepository::getMessage($id) 來檢查 id 是否存在，如果不存在就會回傳找不到留言 404 的 status code，如果存在就回傳存在變數 <code>message</code> 的 <code>MessageRepository::getMessage($id)</code> 資料。</p>
@@ -1469,21 +1469,21 @@ Middleware created successfully.
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 新增留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
-
-        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|max:20&#39;</span><span class="p">];</span>
-        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;新增紀錄成功&#34;</span><span class="p">],</span> <span class="mi">201</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">// 新增留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|max:20&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">createMessage</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;新增紀錄成功&#34;</span><span class="p">],</span> <span class="mi">201</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我們先使用 <code>Auth::user()</code> 將登入的使用者資料存在 <code>$user</code> 中，在檢查輸入的 request 內容是否有超過 20 的字元，如果有就回傳內容長度超過20個字元 400。接著就用 MessageRepository::createMessage 將要新增的資料帶入，最後回傳新增紀錄成功 201 。</p>
 <br>
@@ -1512,27 +1512,27 @@ Middleware created successfully.
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 更新id留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|max:20&#39;</span><span class="p">];</span>
-        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">,</span> <span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;更新留言失敗&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;修改成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">// 更新id留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span> <span class="o">=</span> <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|max:20&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;沒有輸入內容或長度超過20個字元&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">updateMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">,</span> <span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;更新留言失敗&#34;</span><span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;修改成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一樣先把登入的使用者存入 <code>$user</code>，檢查是否有這個 id ，沒有就回傳找不到留言 404，接下來檢查輸入的內容長度，如果超過，就回傳內容長度超過20個字元 400，再檢查要修改留言的與留言者是不是同一個使用者，如果不是就回傳權限不正確 403，最後就將資料透過 <code>MessageRepository::updateMessage</code> 來做更新，並回傳修改成功 200。</p>
 <br>
@@ -1553,19 +1553,19 @@ Middleware created successfully.
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 按讚id留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">like</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">likeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;按讚成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">// 按讚id留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">like</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">getMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">MessageRepository</span><span class="o">::</span><span class="na">likeMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;按讚成功&#34;</span><span class="p">],</span> <span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，接著就使用 <code>MessageRepository::likeMessage</code> 來記錄按讚留言，並回傳按讚成功 404。</p>
 <br>
@@ -1584,17 +1584,17 @@ Middleware created successfully.
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">    <span class="c1">// 刪除id留言
-</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;刪除成功,沒有返回任何內容&#34;</span><span class="p">],</span> <span class="mi">204</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">    <span class="c1">// 刪除id留言
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MessageRepository</span><span class="o">::</span><span class="na">deleteMessage</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;找不到留言&#34;</span><span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s2">&#34;message&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;刪除成功,沒有返回任何內容&#34;</span><span class="p">],</span> <span class="mi">204</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一樣先把登入的使用者存入 <code>$user</code>，先檢查是否有這個留言，沒有就回傳找不到留言 404，在檢查文章權限，錯誤就回傳權限不正確 403，最後檢查是否有被按讚，有的話要先刪除 like 裡面的按讚紀錄，最後再刪除文章(所有的刪除，因為我們在 model 裡面有使用 softdelete 軟刪除，所以不會真的刪除，而是在欄位的 deleted_at 加入刪除時間，來讓查詢時以為他被刪除了！)</p>
 <br>
@@ -1768,8 +1768,8 @@ Middleware created successfully.
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-04&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4ec1dae28f535a82d233c11b4203ef3b3448e8a1" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;4ec1dae:&nbsp;# 修改 Laravel 進階">
-                            <i class="fas fa-hashtag fa-fw"></i>4ec1dae</a></span>
+                <span>更新於 2022-04-04&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4ec1dae28f535a82d233c11b4203ef3b3448e8a1" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;4ec1dae2:&nbsp;# 修改 Laravel 進階">
+                            <i class="fas fa-hashtag fa-fw"></i>4ec1dae2</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/laravel-advanced/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -1791,13 +1791,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

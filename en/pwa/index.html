@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>PWA(Progressive Web App) Introduction and actual installation - PinYi</title><meta name="description" content="Here&#39;s a little world about a rookie engineer and Youtuber"><meta property="og:title" content="PWA(Progressive Web App) Introduction and actual installation" />
+        <title>PWA(Progressive Web App) Introduction and actual installation - PinYi 部落格</title><meta name="description" content="Here&#39;s a little world about a rookie engineer and Youtuber"><meta property="og:title" content="PWA(Progressive Web App) Introduction and actual installation" />
 <meta property="og:description" content="The full name of PWA is Progressive Web App, which is a progressive website application. It gradually optimizes the website to have the advantages of an APP. It has the following characteristics." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/en/pwa/" /><meta property="og:image" content="https://blog.pin-yi.me/en/pwa/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/en\/pwa\/featured-image.webp",
                             "width":  1400 ,
                             "height":  425 
-                        }],"genre": "posts","keywords": "PWA, 設定教學","wordcount":  1102 ,
+                        }],"genre": "posts","keywords": "PWA, 設定教學","wordcount":  1092 ,
         "url": "https:\/\/blog.pin-yi.me\/en\/pwa\/","datePublished": "2022-02-19T19:34:11+08:00","dateModified": "2022-03-26T16:50:05+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/en/" title="PinYi">PinYi 部落格</a>
+            <a href="/en/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/en/posts/"> All Posts </a><a class="menu-item" href="/en/categories/"> Categories </a><a class="menu-item" href="/en/tags/"> Tags </a><a class="menu-item" href="/en/categories/youtube/"> YouTube Video </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> About Me </a><span class="menu-item delimiter"></span><span class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/en/" title="PinYi">PinYi 部落格</a>
+                <a href="/en/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/en/pwa/featured-image.webp"
         title="/en/pwa/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">PWA(Progressive Web App) Introduction and actual installation</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">published in <a href="/en/categories/codenotes/"><i class="far fa-folder fa-fw"></i>Code Notes</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-19">2022-02-19</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1102 words</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-19">2022-02-19</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1092 words</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;6 minutes</span>&nbsp;</div>
             </div>
             
@@ -218,30 +218,30 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-          <span class="nt">&#34;background_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;display&#34;</span><span class="p">:</span> <span class="s2">&#34;standalone&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;orientation&#34;</span><span class="p">:</span><span class="s2">&#34;portrait&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;theme_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;short_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Short Name&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;name&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Description&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;lang&#34;</span><span class="p">:</span> <span class="s2">&#34;zh-TW&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;icons&#34;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="p">{</span>
-            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
-          <span class="p">}</span>
-          <span class="p">],</span>
-          <span class="nt">&#34;start_url&#34;</span><span class="p">:</span> <span class="s2">&#34;./index.php&#34;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;background_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;display&#34;</span><span class="p">:</span> <span class="s2">&#34;standalone&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;orientation&#34;</span><span class="p">:</span><span class="s2">&#34;portrait&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;theme_color&#34;</span><span class="p">:</span> <span class="s2">&#34;#fff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;short_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Short Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Description&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;lang&#34;</span><span class="p">:</span> <span class="s2">&#34;zh-TW&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;icons&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">],</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;start_url&#34;</span><span class="p">:</span> <span class="s2">&#34;./index.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>background_color background color</li>
@@ -252,8 +252,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">	<span class="s2">&#34;background_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">	<span class="s2">&#34;background_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>display background color</li>
@@ -264,8 +264,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;display&#34;</span><span class="err">:</span> <span class="s2">&#34;standalone&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;display&#34;</span><span class="err">:</span> <span class="s2">&#34;standalone&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Be</p>
 <table>
@@ -303,8 +303,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;orientation&#34;</span><span class="err">:</span> <span class="s2">&#34;portrait&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;orientation&#34;</span><span class="err">:</span> <span class="s2">&#34;portrait&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>theme_color website background color</li>
@@ -315,8 +315,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;theme_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;theme_color&#34;</span><span class="err">:</span> <span class="s2">&#34;#fff&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>short_name shortens the name</li>
@@ -327,8 +327,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;short_name&#34;</span><span class="err">:</span> <span class="s2">&#34;Short Name&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;short_name&#34;</span><span class="err">:</span> <span class="s2">&#34;Short Name&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>name name</li>
@@ -339,8 +339,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;name&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;name&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>name name</li>
@@ -351,8 +351,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;name&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;name&#34;</span><span class="err">:</span> <span class="s2">&#34;name&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>description description</li>
@@ -363,8 +363,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;description&#34;</span><span class="err">:</span> <span class="s2">&#34;Description&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;description&#34;</span><span class="err">:</span> <span class="s2">&#34;Description&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>lang language</li>
@@ -375,8 +375,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;lang&#34;</span><span class="err">:</span> <span class="s2">&#34;zh-TW&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;lang&#34;</span><span class="err">:</span> <span class="s2">&#34;zh-TW&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>icons icon</li>
@@ -398,19 +398,19 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;icons&#34;</span><span class="err">:</span> <span class="p">[</span>
-           <span class="p">{</span>
-             <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
-             <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
-             <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
-           <span class="p">},</span>
-           <span class="p">{</span>
-             <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
-             <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
-             <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
-           <span class="p">}</span>
-           <span class="p">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;icons&#34;</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">           <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo180.ico&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;180x180&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+</span></span><span class="line"><span class="cl">           <span class="p">},</span>
+</span></span><span class="line"><span class="cl">           <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;src&#34;</span><span class="p">:</span> <span class="s2">&#34;images/logo/logo48.ico&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;sizes&#34;</span><span class="p">:</span> <span class="s2">&#34;48x48&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;image/png&#34;</span>
+</span></span><span class="line"><span class="cl">           <span class="p">}</span>
+</span></span><span class="line"><span class="cl">           <span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>start_url start URL</li>
@@ -421,8 +421,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;start_url&#34;</span><span class="err">:</span> <span class="s2">&#34;./index.php&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;start_url&#34;</span><span class="err">:</span> <span class="s2">&#34;./index.php&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>service-worker.js</li>
@@ -469,45 +469,45 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// This event is fired when the service worker is in the &#34;installation phase&#34;
-</span><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Installing Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// This event is fired when the service worker is in the &#34;activation phase&#34;
-</span><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Activating Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span> <span class="c1">// This line is added to ensure that the service worker is loaded and activated correctly, or not
-</span><span class="c1"></span><span class="p">});</span>
-<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Fetch something ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
-    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">));</span>
-<span class="p">});</span>
-<span class="kd">let</span> <span class="nx">deferredPrompt</span><span class="p">;</span>
-
-<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt fired&#39;</span><span class="p">);</span>
-    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Cancel the default direct jump notification setting
-</span><span class="c1"></span>    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span> <span class="c1">// Pass the monitored install banner event to the deferredPrompt variable
-</span><span class="c1"></span>
-    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="k">if</span><span class="p">(</span><span class="nx">deferredPrompt</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Make sure we have &#34;intercepted&#34; the install banner event from chrome
-</span><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">prompt</span><span class="p">();</span> <span class="c1">// decide to jump out of the notification
-</span><span class="c1"></span>
-    <span class="c1">// Different processing is performed according to the user&#39;s choice, here I will print out the log results
-</span><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">userChoice</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span><span class="p">);</span>
-
-      <span class="k">if</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span> <span class="o">===</span> <span class="s1">&#39;dismissed&#39;</span><span class="p">){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User cancelled installation&#39;</span><span class="p">);</span>
-      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User added to home screen&#39;</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// Once the user allows to join, no further notifications will appear
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// This event is fired when the service worker is in the &#34;installation phase&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Installing Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// This event is fired when the service worker is in the &#34;activation phase&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Activating Service Worker ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span> <span class="c1">// This line is added to ensure that the service worker is loaded and activated correctly, or not
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[Service Worker] Fetch something ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">deferredPrompt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;beforeinstallprompt fired&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Cancel the default direct jump notification setting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span> <span class="c1">// Pass the monitored install banner event to the deferredPrompt variable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">deferredPrompt</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Make sure we have &#34;intercepted&#34; the install banner event from chrome
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">prompt</span><span class="p">();</span> <span class="c1">// decide to jump out of the notification
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Different processing is performed according to the user&#39;s choice, here I will print out the log results
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">deferredPrompt</span><span class="p">.</span><span class="nx">userChoice</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="nx">choiceResult</span><span class="p">.</span><span class="nx">outcome</span> <span class="o">===</span> <span class="s1">&#39;dismissed&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User cancelled installation&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User added to home screen&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">deferredPrompt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// Once the user allows to join, no further notifications will appear
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="how-to-use">How to use</h2>
 <p>First, change the above information in manifest.json to the settings you want, put manifest.json and service-worker.js in the root directory of the webpage, and open the webpage you want to support. The following uses my [personal page](https:/ /pin-yi.com
@@ -520,8 +520,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;manifest&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;./manifest.json&#34;</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;manifest&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;./manifest.json&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/pwa/1GveueD.png" title="/images/pwa/1GveueD.png" data-thumbnail="/images/pwa/1GveueD.png" data-sub-html="<h2>Example page</h2>">
@@ -551,17 +551,17 @@ There are two files in it, manifest.json and service-worker.js, which are introd
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-          <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span>
-          <span class="p">{</span>
-          <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;./service-worker.js&#39;</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Service Worker Registered, Cheers to PWA Fire!&#34;</span><span class="p">);</span> <span class="p">});</span>
-          <span class="p">}</span>
-          <span class="p">);</span>
-        <span class="p">}</span>
-    <span class="o">&lt;</span><span class="err">/script&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;./service-worker.js&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Service Worker Registered, Cheers to PWA Fire!&#34;</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <figure><a class="lightgallery" href="/images/pwa/U4gQDWr.png" title="/images/pwa/U4gQDWr.png" data-thumbnail="/images/pwa/U4gQDWr.png" data-sub-html="<h2>Example page</h2>">
@@ -650,8 +650,8 @@ There are two files in it, manifest.json and service-worker.js, which are introd
     <div class="post-info"><div class="post-info-tag"><span><a href="/en/tags/pwa/">PWA</a>
                 </span><span><a href="/en/tags/%E8%A8%AD%E5%AE%9A%E6%95%99%E5%AD%B8/">設定教學</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>Updated on 2022-03-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/bda9f7ede1944b76521382eb0eaef35abe5d1460" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;bda9f7e:&nbsp;# 修改 PWA">
-                            <i class="fas fa-hashtag fa-fw"></i>bda9f7e</a></span>
+                <span>Updated on 2022-03-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/bda9f7ede1944b76521382eb0eaef35abe5d1460" target="_blank" title="committed&nbsp;by&nbsp;PinYi(880831ian@gmail.com)&nbsp;bda9f7ed:&nbsp;# 修改 PWA">
+                            <i class="fas fa-hashtag fa-fw"></i>bda9f7ed</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/en/pwa/index.md" target="_blank">Read Markdown</a>
                         </span><span>
@@ -673,13 +673,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

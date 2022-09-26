@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>System Documentation - Category - PinYi</title>
+        <title>System Documentation - Category - PinYi 部落格</title>
         <link>https://blog.pin-yi.me/en/categories/documentation/</link>
-        <description>System Documentation - Category - PinYi</description>
+        <description>System Documentation - Category - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/en/categories/documentation/" rel="self" type="application/rss+xml" /><item>
     <title>Theme Documentation - Basics</title>

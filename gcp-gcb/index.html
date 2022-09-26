@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ] - PinYi</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]" />
+        <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ] - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]" />
 <meta property="og:description" content="本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/gcp-gcb/" /><meta property="og:image" content="https://blog.pin-yi.me/gcp-gcb/featured-image.webp"/><meta property="article:section" content="posts" />
@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/gcp-gcb\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GCP, Cloud Build, GCE, Source Repositories, Container Registry","wordcount":  1958 ,
+                        }],"genre": "posts","keywords": "GCP, Cloud Build, GCE, Source Repositories, Container Registry","wordcount":  1923 ,
         "url": "https:\/\/blog.pin-yi.me\/gcp-gcb\/","datePublished": "2022-07-06T17:02:00+08:00","dateModified": "2022-07-20T11:46:39+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -57,7 +57,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="PinYi">PinYi 部落格</a>
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
@@ -83,7 +83,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="PinYi">PinYi 部落格</a>
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/gcp-gcb/featured-image.webp"
         title="/gcp-gcb/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-06">2022-07-06</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1958 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-06">2022-07-06</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1923 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
@@ -217,10 +217,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">steps:
-- name: &#39;ubuntu&#39;
-  args: [&#39;echo&#39;, &#39;hello world&#39;]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">steps:
+</span></span><span class="line"><span class="cl">- name: &#39;ubuntu&#39;
+</span></span><span class="line"><span class="cl">  args: [&#39;echo&#39;, &#39;hello world&#39;]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到我們配置文件中 <code>steps</code> 參數是指我們要建構的步驟， <code>name</code> 字段指定 Docker 映像檔的位置，以及 <code>args</code> 字段中是指定映像檔運行的命令。</p>
 <p>我們的 Cloud Build 一樣會需要用 <code>name</code> 來指定建構容器的映像檔，以及使用 <code>args</code> 來執行我們映像檔所要運行的命令。</p>
@@ -288,31 +288,31 @@ if (!doNotTrack) {
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">steps:
-  # Docker Build
-  - name: &#34;gcr.io/cloud-builders/docker&#34;
-    args: [&#34;build&#34;, &#34;-t&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;, &#34;.&#34;]
-
-  # Docker Push
-  - name: &#34;gcr.io/cloud-builders/docker&#34;
-    args: [&#34;push&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;]
-
-  # Build VM
-  - name: &#34;gcr.io/google.com/cloudsdktool/cloud-sdk&#34;
-    entrypoint: &#34;gcloud&#34;
-    args:
-      [
-        &#34;compute&#34;,
-        &#34;instances&#34;,
-        &#34;create-with-container&#34;,
-        &#34;ian-test-vm&#34;,
-        &#34;--container-image&#34;,
-        &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;,
-      ]
-    env:
-      - &#34;CLOUDSDK_COMPUTE_REGION=asia-east1&#34;
-      - &#34;CLOUDSDK_COMPUTE_ZONE=asia-east1-b&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">steps:
+</span></span><span class="line"><span class="cl">  # Docker Build
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/cloud-builders/docker&#34;
+</span></span><span class="line"><span class="cl">    args: [&#34;build&#34;, &#34;-t&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;, &#34;.&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  # Docker Push
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/cloud-builders/docker&#34;
+</span></span><span class="line"><span class="cl">    args: [&#34;push&#34;, &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  # Build VM
+</span></span><span class="line"><span class="cl">  - name: &#34;gcr.io/google.com/cloudsdktool/cloud-sdk&#34;
+</span></span><span class="line"><span class="cl">    entrypoint: &#34;gcloud&#34;
+</span></span><span class="line"><span class="cl">    args:
+</span></span><span class="line"><span class="cl">      [
+</span></span><span class="line"><span class="cl">        &#34;compute&#34;,
+</span></span><span class="line"><span class="cl">        &#34;instances&#34;,
+</span></span><span class="line"><span class="cl">        &#34;create-with-container&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ian-test-vm&#34;,
+</span></span><span class="line"><span class="cl">        &#34;--container-image&#34;,
+</span></span><span class="line"><span class="cl">        &#34;gcr.io/$PROJECT_ID/ian-test:ian-nginx-test&#34;,
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    env:
+</span></span><span class="line"><span class="cl">      - &#34;CLOUDSDK_COMPUTE_REGION=asia-east1&#34;
+</span></span><span class="line"><span class="cl">      - &#34;CLOUDSDK_COMPUTE_ZONE=asia-east1-b&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我們一個一個來說說的這個 cloudbuild.yaml 裡面的設定吧！(我以前面的註解來區分)</p>
 <ul>
@@ -339,10 +339,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> nginx:latest</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> ./index.html /usr/share/nginx/html/<span class="err">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx:latest</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./index.html /usr/share/nginx/html/<span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>我們的 Dockerfile 很簡單，簡單寫了要使用的映像檔，以及將我們等等要測試的 index 複製到裡面</p>
@@ -364,19 +364,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;IE=edge&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>測試測試測試<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    我是測試檔案
-  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;IE=edge&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>測試測試測試<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    我是測試檔案
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><br>
 <p>這個測試檔案，會蓋過 nginx 的預設畫面，當我們成功將 VM 建立後，瀏覽 80 Port 時，應該會跳出這個測試的網頁。</p>
@@ -468,8 +468,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/source-repositories/">Source Repositories</a>
                 </span><span><a href="/tags/container-registry/">Container Registry</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6fba856331094e3edbf112bae47d4f20fea5b7de" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6fba856:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
-                            <i class="fas fa-hashtag fa-fw"></i>6fba856</a></span>
+                <span>更新於 2022-07-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6fba856331094e3edbf112bae47d4f20fea5b7de" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6fba8563:&nbsp;# 更新 Google Cloud Platform (GCP) 百科全書 - Cloud Build [ EP.5 ]">
+                            <i class="fas fa-hashtag fa-fw"></i>6fba8563</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/gcp-gcb/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
@@ -491,13 +491,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.min.js?version=1.0.1', { scope: '/' })
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Registered');
-        }, err => console.error('PinYi\u00A0Service Worker registration failed: ', err));
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
 
     navigator.serviceWorker
         .ready
         .then(() => {
-            console.info('PinYi\u00A0Service Worker Ready');
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
         });
 }
 </script>

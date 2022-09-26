@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>shortcodes - Tag - PinYi</title>
+        <title>shortcodes - Tag - PinYi 部落格</title>
         <link>https://blog.pin-yi.me/en/tags/shortcodes/</link>
-        <description>shortcodes - Tag - PinYi</description>
+        <description>shortcodes - Tag - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 04 Mar 2020 16:29:41 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/en/tags/shortcodes/" rel="self" type="application/rss+xml" /><item>
     <title>Theme Documentation - Built-in Shortcodes</title>
