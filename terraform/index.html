@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/terraform/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-26T15:58:00+08:00" />
-<meta property="article:modified_time" content="2022-09-26T17:52:56+08:00" />
+<meta property="article:modified_time" content="2022-09-27T10:26:30+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/terraform/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  1202 ,
-        "url": "https:\/\/blog.pin-yi.me\/terraform\/","datePublished": "2022-09-26T15:58:00+08:00","dateModified": "2022-09-26T17:52:56+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  2361 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform\/","datePublished": "2022-09-26T15:58:00+08:00","dateModified": "2022-09-27T10:26:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/terraform/featured-image.webp"
         title="/terraform/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">什麼是 IaC ? Terraform 又是什麼？</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1202 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2361 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -156,6 +156,7 @@ if (!doNotTrack) {
         <li><a href="#快速入門">快速入門</a></li>
       </ul>
     </li>
+    <li><a href="#後續文章">後續文章</a></li>
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
@@ -191,11 +192,11 @@ if (!doNotTrack) {
 <ol>
 <li>Terraform 可以管理多個雲平台上的基礎架構</li>
 <li>使用人類可讀的配置語言來幫助我們快速編寫基礎架構代碼</li>
-<li>可以將配置提交給版本控制，以安全地在基礎架構上進行協作</li>
+<li>可以將配置提交給版本控制，安全地在基礎架構上進行協作</li>
 </ol>
 <br>
 <h3 id="管理任何基礎設施">管理任何基礎設施</h3>
-<p>Terraform 提供插件讓 Terraform 可以通過其 API 與雲平台和其他服務進行交互。HashiCorp 和 Terraform 社區編寫了 1,000 多個提供商來管理像 AWS、Azure、GCP、Kubernetes、Helm、GitHub 等資源，可以到 <a href="https://registry.terraform.io/browse/providers?_gl=1*a2tlfj*_ga*MTc0NDA4ODQ5MC4xNjYzOTI0ODI5*_ga_P7S46ZYEKW*MTY2NDE4MjM4NC40LjEuMTY2NDE4Mjc5Ny4wLjAuMA.." target="_blank" rel="noopener noreffer">Terraform Registry</a> 查看更多平台或服務的提供者，當然如果沒有找到想要的提供者，也可以自己編寫自己的套件。</p>
+<p>Terraform 提供插件讓 Terraform 可以通過其 API 與雲平台和其他服務進行交互。HashiCorp 和 Terraform 社區編寫了 2,500 多個提供商來管理像 AWS、Azure、GCP、Kubernetes、Helm、GitHub 等資源，可以到 <a href="https://registry.terraform.io/browse/providers?_gl=1*a2tlfj*_ga*MTc0NDA4ODQ5MC4xNjYzOTI0ODI5*_ga_P7S46ZYEKW*MTY2NDE4MjM4NC40LjEuMTY2NDE4Mjc5Ny4wLjAuMA.." target="_blank" rel="noopener noreffer">Terraform Registry</a> 查看更多平台或服務的提供者，當然如果沒有找到想要的提供者，也可以自己編寫自己的套件。</p>
 <br>
 <h3 id="標準化部署工作流程">標準化部署工作流程</h3>
 <p>提供商會將基礎設施的每個單元 (例如建立 VM 或是 VPC) 定義為資源。你可以將來自不同提供者的資源組合，稱為模塊，讓我們可以用一致的語言和工作流程去管理他們。</p>
@@ -256,15 +257,212 @@ if (!doNotTrack) {
 <h3 id="快速入門">快速入門</h3>
 <p>當我們安裝好，想要最快的了解 Terraform ，當然是自己動手做一次，我們依照官網的教學，可以在一分鐘內使用 Docker 配置好 NGINX 伺服器，那我們開始囉！</p>
 <br>
+<ol>
+<li>首先，我們必須要先安裝好 Docker，下載 <a href="https://docs.docker.com/desktop/install/mac-install/" target="_blank" rel="noopener noreffer">Mac 版 Docker 桌面</a></li>
+<li>建立一個資料夾，並進入該資料夾內</li>
+<li>將以下 Terraform 配置文件貼到檔案中，並取名 <code>main.tf</code> (<a href="https://github.com/880831ian/terraform/tree/master/docker_nginx" target="_blank" rel="noopener noreffer">同步到 GitHub 需要程式碼的可以前往查看</a>)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">terraform {
+</span></span><span class="line"><span class="cl">  required_providers {
+</span></span><span class="line"><span class="cl">    docker = {
+</span></span><span class="line"><span class="cl">      source  = &#34;kreuzwerker/docker&#34;
+</span></span><span class="line"><span class="cl">      version = &#34;~&gt; 2.13.0&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">provider &#34;docker&#34; {}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource &#34;docker_image&#34; &#34;nginx&#34; {
+</span></span><span class="line"><span class="cl">  name         = &#34;nginx:1.23&#34;
+</span></span><span class="line"><span class="cl">  keep_locally = false
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource &#34;docker_container&#34; &#34;nginx&#34; {
+</span></span><span class="line"><span class="cl">  image = docker_image.nginx.name
+</span></span><span class="line"><span class="cl">  name  = &#34;nginx&#34;
+</span></span><span class="line"><span class="cl">  ports {
+</span></span><span class="line"><span class="cl">    internal = 80
+</span></span><span class="line"><span class="cl">    external = 8000
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>(以上程式碼來自官網 <a href="https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started#quick-start-tutorial" target="_blank" rel="noopener noreffer">安裝 Terraform#快速入門</a> 加上小修改)</p>
+<br>
+<p>先來簡單說明一下 Terraform 程式碼格式，Terraform 的檔案副檔名是 <code>*.tf</code>，而基本的一個 Terraform 配置是透過叫做 HCL 語言撰寫。</p>
+<p><code>provider</code> 是決定要對哪一個平台或是提供商進行操作，<code>resource</code> 的欄位我們用下方程式來做說明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">resource 雲端資源名稱 自定義的名稱 {
+</span></span><span class="line"><span class="cl"> 	 屬性 = 值
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這邊的雲端資源名稱是固定的，所以不能隨意更改，要依照你要使用的提供商所給的資源來做設定！</p>
+<br>
+<p>所以我們已上面的 Docker 配置好 NGINX 伺服器為例，provider 我們這次使用的是 <code>docker</code>， resource 我們可以拆開來寫，</p>
+<p>像是第一個 resource <code>docker_image</code> 我們幫他取叫 nginx，裡面就是放有關 image 的設定，詳細的 image 設定可以參考 <a href="https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image" target="_blank" rel="noopener noreffer">Resource (docker_image)</a>，</p>
+<p>第二個 resource <code>docker_container</code> 一樣叫 nginx，裡面用的 image 是拿前面的 docker_image resource name 來使用，一樣詳細可以參考 <a href="https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container" target="_blank" rel="noopener noreffer">Resource (docker_container)</a>。</p>
+<br>
+<p>接著有幾個指令要帶大家認識：</p>
+<ul>
+<li><code>terraform init</code>：初始化項目，下載 tf 檔案中所需要的外掛套件</li>
+<li><code>terraform plan</code>：會產生一份執行計劃。上面會寫著它將會做哪些事，你可以驗證是否符合你預期的設計</li>
+<li><code>terraform apply</code>：實際運作，把基礎架構建置完成。在完成之後，會把目前的狀態儲存到一份檔案中</li>
+<li><code>terraform destroy</code>：會銷毀用 Terraform 起的服務</li>
+</ul>
+<p>附上懶人指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">alias ti=&#39;terraform init&#39;
+</span></span><span class="line"><span class="cl">alias ta=&#39;terraform apply&#39;
+</span></span><span class="line"><span class="cl">alias tp=&#39;terraform plan&#39;
+</span></span><span class="line"><span class="cl">alias td=&#39;terraform destroy&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>有上面的指令後，我們來實際操作看看：</p>
+<br>
+<ol>
+<li>首先到該 <code>main.tf</code> 檔案目錄下，使用 <code>terraform apply</code> 來運作看看：</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/2.png" title="/images/terraform/2.png" data-thumbnail="/images/terraform/2.png" data-sub-html="<h2>無法直接執行 apply</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/2.png"
+            data-srcset="/images/terraform/2.png, /images/terraform/2.png 1.5x, /images/terraform/2.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/2.png" width="900" />
+    </a><figcaption class="image-caption">無法直接執行 apply</figcaption>
+    </figure>
+<br>
+<p>會發現沒有辦法直接用 <code>terraform apply</code> 指令來建置服務，我們看一下他提示的說明，他說需要先進行初始化才可以執行！所以我們的建置流程是先 init &ndash;&gt; apply</p>
+<br>
+<ol start="2">
+<li>我們先執行 <code>terraform init</code>，可以看到他會下載 tf 檔案中所需要的外掛套件 (docker)</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/3.png" title="/images/terraform/3.png" data-thumbnail="/images/terraform/3.png" data-sub-html="<h2>terraform init</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/3.png"
+            data-srcset="/images/terraform/3.png, /images/terraform/3.png 1.5x, /images/terraform/3.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/3.png" width="800" />
+    </a><figcaption class="image-caption">terraform init</figcaption>
+    </figure>
+<br>
+<ol start="3">
+<li>接著我們使用 <code>terraform plan</code> 來查看我們的計劃，可以看到他會列出我們所寫的 tf 裡面有用到的 resource，除了我們有設定的屬性，其他的屬性也會顯示出來，可以更方便地讓我們知道這個 resource 有哪些屬性可以設定</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/4.png" title="/images/terraform/4.png" data-thumbnail="/images/terraform/4.png" data-sub-html="<h2>terraform plan</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/4.png"
+            data-srcset="/images/terraform/4.png, /images/terraform/4.png 1.5x, /images/terraform/4.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/4.png" width="700" />
+    </a><figcaption class="image-caption">terraform plan</figcaption>
+    </figure>
+<br>
+<ol start="4">
+<li>最後我們檢查都沒有問題，就可以使用 <code>terraform apply</code> 來建置，apply 其實跟 plan 一樣都會先讓我們看一下計劃，但會跳出詢問是否要執行，除非你輸入 <code>yes</code>，否則就跟 plan 單純顯示計劃內容，最後我們就可以看到他成功在 docker 上面建立 nginx 服務</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/5.png" title="/images/terraform/5.png" data-thumbnail="/images/terraform/5.png" data-sub-html="<h2>terraform apply</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/5.png"
+            data-srcset="/images/terraform/5.png, /images/terraform/5.png 1.5x, /images/terraform/5.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/5.png" width="800" />
+    </a><figcaption class="image-caption">terraform apply</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/terraform/6.png" title="/images/terraform/6.png" data-thumbnail="/images/terraform/6.png" data-sub-html="<h2>查看 docker nginx 以及檢查其服務</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/6.png"
+            data-srcset="/images/terraform/6.png, /images/terraform/6.png 1.5x, /images/terraform/6.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/6.png" width="800" />
+    </a><figcaption class="image-caption">查看 docker nginx 以及檢查其服務</figcaption>
+    </figure>
+<br>
+<ol start="5">
+<li>另外，當你想要移除服務時，可以使用 <code>terraform destroy</code> 來將服務給移除</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/7.png" title="/images/terraform/7.png" data-thumbnail="/images/terraform/7.png" data-sub-html="<h2>terraform destroy</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/7.png"
+            data-srcset="/images/terraform/7.png, /images/terraform/7.png 1.5x, /images/terraform/7.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/7.png" width="700" />
+    </a><figcaption class="image-caption">terraform destroy</figcaption>
+    </figure>
+<br>
+<h2 id="後續文章">後續文章</h2>
+<p>經過上面的步驟，了解 IaC Infrastructure as Code (基礎設施即代碼) 以及實際去使用 Terraform 去建置 docker 的 nginx 服務，之後還會更新有關 Terraform 的文章，會不定時更新此篇文章的後續文章連結區，大家有興趣可以多留意歐！</p>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://blog.wu-boy.com/2021/02/introduction-to-infrastructure-as-code-terraform-vs-pulumi/" target="_blank" rel="noopener noreffer">初探 Infrastructure as Code 工具 Terraform vs Pulumi</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10233759" target="_blank" rel="noopener noreffer">今晚我想認識 Terraform</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/iac/">IaC</a>
                 </span><span><a href="/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/">基礎設施即代碼</a>
                 </span><span><a href="/tags/terraform/">Terraform</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-09-26&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/f77e06b1d0f7129df45204b35de07defdb2cb868" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;f77e06b1:&nbsp;# 新增 什麼是 IaC ? Terraform 又是什麼？">
-                            <i class="fas fa-hashtag fa-fw"></i>f77e06b1</a></span>
+                <span>更新於 2022-09-27&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/8fbac503eb8f25baec48337d1976b6568524586d" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;8fbac503:&nbsp;# 更新 什麼是 IaC ? Terraform 又是什麼？">
+                            <i class="fas fa-hashtag fa-fw"></i>8fbac503</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/terraform/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
