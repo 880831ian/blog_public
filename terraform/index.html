@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  2441 ,
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  2443 ,
         "url": "https:\/\/blog.pin-yi.me\/terraform\/","datePublished": "2022-09-26T15:58:00+08:00","dateModified": "2022-09-29T17:50:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -131,7 +131,7 @@ if (!doNotTrack) {
         alt="/terraform/featured-image.webp"
         title="/terraform/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">什麼是 IaC ? Terraform 又是什麼？</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2441 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2443 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
@@ -165,12 +165,12 @@ if (!doNotTrack) {
 <p>目前打算寫本篇介紹 IaC 以及 Terraform 以外，之後還想寫另外兩篇用 Terraform 建立 GCE 以及 GKE。大家可以持續關注此篇文章，最後會附上連結 😍</p>
 <br>
 <h2 id="什麼是-iac-">什麼是 IaC ?</h2>
-<p>Iac 全名是  Infrastructure as Code (基礎設施即代碼)，從字面意思就可以略知一二，也就是把基礎設施變成程式碼，在還沒有這些 IaC 工具之前，大家都是土法煉鋼的去機器內，或是開啟 WEB UI 畫面來進行建置或設定，雖然使用 UI 點一點就建好了，但這些步驟都沒有被紀錄下來 (git)，也沒有辦法透過其他人一起 Review 的方式來避免人為操作錯誤。因此有了 IaC 這些工具，可以將實際的操作流程，轉換成程式碼或是其他像是 JSON、Yaml 的方式給紀錄下來，以下是導入 IaC 帶來的好處：</p>
+<p>IaC 全名是  Infrastructure as Code (基礎設施即代碼)，從字面意思就可以略知一二，也就是把基礎設施變成程式碼，在還沒有這些 IaC 工具之前，大家都是土法煉鋼的去機器內，或是開啟 WEB UI 畫面來進行建置或設定，雖然使用 UI 點一點就建好了，但這些步驟都沒有被紀錄下來 (git)，也沒有辦法透過其他人一起 Review 的方式來避免人為操作錯誤。因此有了 IaC 這些工具，可以將實際的操作流程，轉換成程式碼或是其他像是 JSON、Yaml 的方式給紀錄下來，以下是導入 IaC 帶來的好處：</p>
 <br>
 <ol>
 <li>建置 CI/CD 自動化 (不需要再仰賴 UI 進行操作)</li>
 <li>版本控制 (大家可以一起 Review 避免出現人為錯誤)</li>
-<li>重複使用 (可以將常用的參數挖洞，減少建置時間)</li>
+<li>重複使用 (可以將常用的變成參數代入，減少建置時間)</li>
 <li>環境一致性</li>
 </ol>
 <br>
