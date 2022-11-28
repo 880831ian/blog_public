@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>使用 Terraform 建立 Google Compute Engine - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="使用 Terraform 建立 Google Compute Engine" />
+<meta property="og:description" content="嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/terraform-gce/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-gce/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-28T11:40:00+08:00" />
+<meta property="article:modified_time" content="2022-11-28T11:40:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/terraform-gce/featured-image.webp"/>
+<meta name="twitter:title" content="使用 Terraform 建立 Google Compute Engine"/>
+<meta name="twitter:description" content="嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/terraform-gce/" /><link rel="prev" href="https://blog.pin-yi.me/terraform/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Terraform 建立 Google Compute Engine",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/terraform-gce\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/terraform-gce\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GCE","wordcount":  1825 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform-gce\/","datePublished": "2022-11-28T11:40:00+08:00","dateModified": "2022-11-28T11:40:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/terraform-gce/" selected>繁體中文</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="選擇語言">繁體中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/terraform-gce/" selected>繁體中文</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/terraform-gce/featured-image.webp"
+        data-srcset="/terraform-gce/featured-image.webp, /terraform-gce/featured-image.webp 1.5x, /terraform-gce/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/terraform-gce/featured-image.webp"
+        title="/terraform-gce/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Terraform 建立 Google Compute Engine</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1825 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#撰寫-google-compute-engine-tf-檔案">撰寫 Google Compute Engine tf 檔案</a>
+      <ul>
+        <li><a href="#選擇供應者以及對應的專案">選擇供應者以及對應的專案</a></li>
+        <li><a href="#resource-設定">resource 設定</a>
+          <ul>
+            <li><a href="#基本設定">基本設定</a></li>
+            <li><a href="#啟動-disk-設定">啟動 disk 設定</a></li>
+            <li><a href="#網路設定">網路設定</a></li>
+            <li><a href="#權限設定">權限設定</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#建立-google-compute-engine">建立 Google Compute Engine</a></li>
+    <li><a href="#修改-google-compute-engine">修改 Google Compute Engine</a></li>
+    <li><a href="#刪除-google-compute-engine">刪除 Google Compute Engine</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立 Google Compute Engine 的機器，想知道要怎麼用一段程式碼就可以建立、修改、刪除 Google Compute Engine 的機器一定要來看這一篇～我們開始囉 🧑‍💻</p>
+<br>
+<h2 id="撰寫-google-compute-engine-tf-檔案">撰寫 Google Compute Engine tf 檔案</h2>
+<p>相信大家有先看完上一篇 <a href="https://blog.pin-yi.me/terraform/" target="_blank" rel="noopener noreffer">什麼是 IaC ? Terraform 又是什麼？</a> 才來看這一篇的對吧 😎，對於 Terraform 的程式架構及指令，我們這邊就不多做介紹，我們直接來看程式要怎麼寫～(程式碼主要是參考<a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance" target="_blank" rel="noopener noreffer">官方文件</a>，加上一些其他的設定來做介紹，程式碼也會同步到 Github ，需要的也可以去 Clone 來使用歐！ <a href="https://github.com/880831ian/terraform-gce" target="_blank" rel="noopener noreffer">Github 程式碼連結</a> )</p>
+<br>
+<p>小提醒：由於程式碼較長，我將他拆開來說明 💖</p>
+<br>
+<h3 id="選擇供應者以及對應的專案">選擇供應者以及對應的專案</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">provider &#34;google&#34; {
+</span></span><span class="line"><span class="cl">  project = &#34;gcp-20210526-001&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由於我們要建立的 Google Compute Engine 是由 Google 所提供的 api 來建立的，所以一開始要先設定好提供者的名稱 google 以及我們要在哪一個 GCP 的專案 ID</p>
+<br>
+<h3 id="resource-設定">resource 設定</h3>
+<p>接下來的設定都會放在以下的 google_compute_instance resource 內，為了方便介紹，就不會標明 google_compute_instance，詳細完整程式碼請參考 GitLab <a href="https://github.com/880831ian/terraform-gce" target="_blank" rel="noopener noreffer">Github 程式碼連結</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">resource &#34;google_compute_instance&#34; &#34;default&#34; {
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<h4 id="基本設定">基本設定</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  name        = &#34;test&#34;
+</span></span><span class="line"><span class="cl">  description = &#34;我是 test 機器&#34;
+</span></span><span class="line"><span class="cl">  machine_type = &#34;n2-standard-8&#34;
+</span></span><span class="line"><span class="cl">  zone = &#34;asia-east1-b&#34;
+</span></span><span class="line"><span class="cl">  tags = [&#34;test&#34;]
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  labels = {
+</span></span><span class="line"><span class="cl">    env  = &#34;test&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  deletion_protection = &#34;true&#34;   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>name：GCE 要求資源的唯一名稱。如果有更改此項會直接強制創建的新資源 <font color='red'>(必填)</font></li>
+<li>description：對此資源的簡單說明 <font color='blue'>(選填)</font></li>
+<li>machine_type：要創建的機器類型 <font color='red'>(必填)</font></li>
+<li>zone：創建機器的所在區域，若沒有填寫，則會使用提供者的區域 <font color='blue'>(選填)</font></li>
+<li>tags：附加到實體的網路標籤列表 <font color='blue'>(選填)</font></li>
+<li>labels：一組分配給 disk 的 key/value 標籤 <font color='blue'>(選填)</font></li>
+<li>deletion_protection：刪除保護，預設是 <code>false</code>，當我們使用 <code>terraform destroy</code> 刪除 GCE 時，必須先改成 <code>false</code>，才可以刪除，否則會無法刪除且 Terraform 運行也會失敗，算是一個保護機制，後面再刪除 Google Compute Engine 時會測試畫面 <font color='blue'>(選填)</font></li>
+</ul>
+<br>
+<h4 id="啟動-disk-設定">啟動 disk 設定</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  boot_disk {
+</span></span><span class="line"><span class="cl">    initialize_params {
+</span></span><span class="line"><span class="cl">      image = &#34;debian-cloud/debian-10-buster-v20210512&#34;
+</span></span><span class="line"><span class="cl">      type = &#34;pd-balanced&#34;
+</span></span><span class="line"><span class="cl">      size = &#34;50&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  } 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>image：初始化此 disk 的 image <font color='blue'>(選填)</font></li>
+<li>type：GCE disk 類型 <font color='blue'>(選填)</font></li>
+<li>size：image 大小，已 <code>GB</code> 為單位，如果未指定，將會繼承其初始化 disk 的 image 大小 <font color='blue'>(選填)</font></li>
+</ul>
+<br>
+<h4 id="網路設定">網路設定</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  network_interface {
+</span></span><span class="line"><span class="cl">    network = &#34;projects/rd-gateway/global/networks/rd-common&#34;
+</span></span><span class="line"><span class="cl">    subnetwork = &#34;projects/rd-gateway/regions/asia-east1/subnetworks/rd-common-asia-east1-pid-cicd&#34;     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    access_config {
+</span></span><span class="line"><span class="cl">      nat_ip = &#34;&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>network：設定附加到的網路名稱或是 self_link <font color='blue'>(選填)</font></li>
+<li>subnetwork：設定附加到的子網路名稱或是 self_link <font color='blue'>(選填)</font></li>
+<li>nat_ip：如果想要有外網的 ip，必須加上此參數，才會產生一組外網 ip <font color='blue'>(選填)</font></li>
+</ul>
+<br>
+<h4 id="權限設定">權限設定</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  service_account {
+</span></span><span class="line"><span class="cl">    email  = &#34;676962704505-compute@developer.gserviceaccount.com&#34;
+</span></span><span class="line"><span class="cl">    scopes = [&#34;storage-rw&#34;, &#34;logging-write&#34;, &#34;monitoring-write&#34;, &#34;service-control&#34;, &#34;service-management&#34;, &#34;trace&#34;]
+</span></span><span class="line"><span class="cl">  }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>email：服務帳戶電子郵件地址。如果未提供，則使用預設的 Google Compute Engine 服務帳戶 <font color='blue'>(選填)</font></li>
+<li>scopes：服務範圍列表，可以<a href="https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instances/set-scopes#--scopes" target="_blank" rel="noopener noreffer">點我查看範圍</a>的完整列表 <font color='red'>(必填)</font></li>
+</ul>
+<br>
+<p>以上只是我在建立 Google Compute Engine 最簡單的設定，當然還有很多其他的設定，可以參考 <a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance" target="_blank" rel="noopener noreffer">registry.terraform.io/providers (google_compute_instance)</a> 裡面有更多的 resource 設定，有需要的就自己來看看吧 🧐</p>
+<br>
+<h2 id="建立-google-compute-engine">建立 Google Compute Engine</h2>
+<p>當我們寫好 Google Compute Engine tf 檔案後，我們接著把他建立，建立前要先使用 <code>terraform init</code> 來做初始化</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/1.png" title="/images/terraform-gce/1.png" data-thumbnail="/images/terraform-gce/1.png" data-sub-html="<h2>terraform init</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/1.png"
+            data-srcset="/images/terraform-gce/1.png, /images/terraform-gce/1.png 1.5x, /images/terraform-gce/1.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/1.png" width="700" />
+    </a><figcaption class="image-caption">terraform init</figcaption>
+    </figure>
+<br>
+<p>接著可以先使用 <code>terraform plan</code> 來查看我們的設定是否是我們想要的，或是直接用 <code>terraform apply</code> 來建立 Google Compute Engine</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/2.png" title="/images/terraform-gce/2.png" data-thumbnail="/images/terraform-gce/2.png" data-sub-html="<h2>terraform apply</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/2.png"
+            data-srcset="/images/terraform-gce/2.png, /images/terraform-gce/2.png 1.5x, /images/terraform-gce/2.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/2.png" width="700" />
+    </a><figcaption class="image-caption">terraform apply</figcaption>
+    </figure>
+<br>
+<p>可以看到成功建立我們的 test Google Compute Engine（也可以看到因為我們有開 nat_ip 所以有外部 IP）</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/3.png" title="/images/terraform-gce/3.png" data-thumbnail="/images/terraform-gce/3.png" data-sub-html="<h2>GCP Google Compute Engine</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/3.png"
+            data-srcset="/images/terraform-gce/3.png, /images/terraform-gce/3.png 1.5x, /images/terraform-gce/3.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/3.png" width="700" />
+    </a><figcaption class="image-caption">GCP Google Compute Engine</figcaption>
+    </figure>
+<br>
+<h2 id="修改-google-compute-engine">修改 Google Compute Engine</h2>
+<p>當我們發現我們建立的  Google Compute Engine 參數有錯，想要修改時，我們只需要修改程式碼部分，並重新下一次 <code>terraform apply</code> 來修改 Google Compute Engine，就會看到以下畫面 (有些設定檔是不能修改的，若修改他會重新創建一個新的機器，像是 name 之類的，使用時要小心一點 😉)</p>
+<p>我們拿剛剛提到的 nat_ip，我們先把它註解掉，再下 <code>terraform apply</code>  看看機器有什麼變化～</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/4.png" title="/images/terraform-gce/4.png" data-thumbnail="/images/terraform-gce/4.png" data-sub-html="<h2>terraform changed</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/4.png"
+            data-srcset="/images/terraform-gce/4.png, /images/terraform-gce/4.png 1.5x, /images/terraform-gce/4.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/4.png" width="700" />
+    </a><figcaption class="image-caption">terraform changed</figcaption>
+    </figure>
+<br>
+<p>可以看到他會提示說，他會改變 network_interface，也移除 access_config 的設定，執行後的 Resources 也會從剛剛的 added 變成 changed，我們看一下 GCP 有沒有改變：</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/5.png" title="/images/terraform-gce/5.png" data-thumbnail="/images/terraform-gce/5.png" data-sub-html="<h2>terraform changed</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/5.png"
+            data-srcset="/images/terraform-gce/5.png, /images/terraform-gce/5.png 1.5x, /images/terraform-gce/5.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/5.png" width="700" />
+    </a><figcaption class="image-caption">terraform changed</figcaption>
+    </figure>
+<br>
+<p>可以看到原本的外部 IP 位置被改掉了～ <font color='red'>最後提醒</font>：如果有使用 terraform 來修改資源設定，不能動到特定的項目，不然他的流程是先把原本的給刪掉，再重新建立一個新的，原本的機器沒有備份，東西就會不見歐～</p>
+<br>
+<h2 id="刪除-google-compute-engine">刪除 Google Compute Engine</h2>
+<p>最後假如我們要刪除 Google Compute Engine，也可以使用 terraform 的指令來刪除，我們順便來測試一下上面有設定的 deletion_protection 刪除保護機制是不是正常～</p>
+<p>目前 deletion_protection 還是 <code>true</code>，我們直接下 <code>terraform destroy</code>，看看是否可以刪除 Google Compute Engine</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/6.png" title="/images/terraform-gce/6.png" data-thumbnail="/images/terraform-gce/6.png" data-sub-html="<h2>terraform destroy</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/6.png"
+            data-srcset="/images/terraform-gce/6.png, /images/terraform-gce/6.png 1.5x, /images/terraform-gce/6.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/6.png" width="900" />
+    </a><figcaption class="image-caption">terraform destroy</figcaption>
+    </figure>
+<br>
+<p>可以看到他會提醒你說 Deletion Protection is enabled，必須先把他改成 <code>false</code> terraform apply 後才可以刪除～</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/7.png" title="/images/terraform-gce/7.png" data-thumbnail="/images/terraform-gce/7.png" data-sub-html="<h2>改成 false 在下 terraform apply</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/7.png"
+            data-srcset="/images/terraform-gce/7.png, /images/terraform-gce/7.png 1.5x, /images/terraform-gce/7.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/7.png" width="900" />
+    </a><figcaption class="image-caption">改成 false 在下 terraform apply</figcaption>
+    </figure>
+<br>
+<p>現在 deletion_protection 是 <code>false</code>，我們就可以下 <code>terraform destroy</code> 來刪除 Google Compute Engine 🔪</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/8.png" title="/images/terraform-gce/8.png" data-thumbnail="/images/terraform-gce/8.png" data-sub-html="<h2>terraform destroy</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/8.png"
+            data-srcset="/images/terraform-gce/8.png, /images/terraform-gce/8.png 1.5x, /images/terraform-gce/8.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/8.png" width="700" />
+    </a><figcaption class="image-caption">terraform destroy</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-gce/9.png" title="/images/terraform-gce/9.png" data-thumbnail="/images/terraform-gce/9.png" data-sub-html="<h2>Google Compute Engine 刪除中&hellip;</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-gce/9.png"
+            data-srcset="/images/terraform-gce/9.png, /images/terraform-gce/9.png 1.5x, /images/terraform-gce/9.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-gce/9.png" width="500" />
+    </a><figcaption class="image-caption">Google Compute Engine 刪除中&hellip;</figcaption>
+    </figure>
+<br>
+<p>以上就是簡單的使用 Terraform 建立 Google Compute Engine 介紹囉～歡迎大家留言指教，明天的文章是介紹如何使用 Terraform 建立 GKE 💕</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance" target="_blank" rel="noopener noreffer">registry.terraform.io/providers (google_compute_instance)</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/iac/">IaC</a>
+                </span><span><a href="/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/">基礎設施即代碼</a>
+                </span><span><a href="/tags/terraform/">Terraform</a>
+                </span><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/gce/">GCE</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-11-28</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/terraform-gce/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/terraform-gce/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/terraform-gce/" data-title="使用 Terraform 建立 Google Compute Engine" data-hashtags="IaC,基礎設施即代碼,Terraform,GCP,GCE"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/terraform-gce/" data-hashtag="IaC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/terraform-gce/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/terraform-gce/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/terraform-gce/" data-title="使用 Terraform 建立 Google Compute Engine"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/terraform-gce/" data-title="使用 Terraform 建立 Google Compute Engine"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/terraform-gce/" data-title="使用 Terraform 建立 Google Compute Engine"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/terraform/" class="prev" rel="prev" title="什麼是 IaC ? Terraform 又是什麼？"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>使用 Terraform 建立 Google Compute Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gce/</link>
+    <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
+    <description><![CDATA[嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立]]></description>
+</item>
+<item>
     <title>什麼是 IaC ? Terraform 又是什麼？</title>
     <link>https://blog.pin-yi.me/terraform/</link>
     <pubDate>Mon, 26 Sep 2022 15:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gcp-gcb/</link>
     <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcb/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]</title>
-    <link>https://blog.pin-yi.me/gcp-gcr/</link>
-    <pubDate>Sun, 03 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcr/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管]]></description>
 </item>
 </channel>
 </rss>
