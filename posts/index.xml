@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>使用 Terraform 建立 Google Kubernetes Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gke/</link>
+    <pubDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gke/</guid>
+    <description><![CDATA[我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚裡，那我這邊就不]]></description>
+</item>
+<item>
     <title>使用 Terraform 建立 Google Compute Engine</title>
     <link>https://blog.pin-yi.me/terraform-gce/</link>
     <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gcp-gke/</link>
     <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gke/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</title>
-    <link>https://blog.pin-yi.me/gcp-gcb/</link>
-    <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcb/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
 </item>
 </channel>
 </rss>
