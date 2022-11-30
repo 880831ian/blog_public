@@ -5,16 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>使用 Terraform 建立 Google Kubernetes Engine - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="使用 Terraform 建立 Google Kubernetes Engine" />
-<meta property="og:description" content="我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚裡，那我這邊就不" />
+<meta property="og:description" content="我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/terraform-gke/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-gke/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-29T10:10:00+08:00" />
-<meta property="article:modified_time" content="2022-11-29T10:10:00+08:00" />
+<meta property="article:modified_time" content="2022-11-29T17:51:57+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/terraform-gke/featured-image.webp"/>
 <meta name="twitter:title" content="使用 Terraform 建立 Google Kubernetes Engine"/>
-<meta name="twitter:description" content="我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚裡，那我這邊就不"/>
+<meta name="twitter:description" content="我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文"/>
 <meta name="application-name" content="PinYi 部落格">
 <meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/terraform-gke/" /><link rel="prev" href="https://blog.pin-yi.me/terraform-gce/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
         <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GKE","wordcount":  1867 ,
-        "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/","datePublished": "2022-11-29T10:10:00+08:00","dateModified": "2022-11-29T10:10:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GKE","wordcount":  2144 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/","datePublished": "2022-11-29T10:10:00+08:00","dateModified": "2022-11-29T17:51:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -131,8 +131,8 @@ if (!doNotTrack) {
         alt="/terraform-gke/featured-image.webp"
         title="/terraform-gke/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Terraform 建立 Google Kubernetes Engine</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1867 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2144 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -156,7 +156,7 @@ if (!doNotTrack) {
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚裡，那我這邊就不在多說，我們直接來介紹一下要怎麼撰寫 Google Kubernetes Engine tf 檔案 😏</p>
+                </div><div class="content" id="content"><p>我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文章就不在多說，直接來介紹一下要怎麼撰寫 Google Kubernetes Engine tf 檔案 😏</p>
 <br>
 <h2 id="撰寫-google-kubernetes-engine-tf-檔案">撰寫 Google Kubernetes Engine tf 檔案</h2>
 <p>程式碼會同步到 Github ，需要的也可以去 Clone 來使用歐！ <a href="https://github.com/880831ian/terraform-gke" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>，小提醒：由於程式碼較長，我將他拆開來說明 💖</p>
@@ -320,17 +320,17 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="na">master_ipv4_cidr_block</span> = <span class="s2">&#34;172.16.0.0/28&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">logging_config</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="na">enable_components</span> = <span class="p">[</span><span class="s2">&#34;SYSTEM_COMPONENTS&#34;</span><span class="p">,</span> <span class="s2">&#34;WORKLOADS&#34;</span><span class="p">]</span><span class="c1"> # 啟用系統元件和工作負載的日誌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">enable_components</span> = <span class="p">[</span><span class="s2">&#34;SYSTEM_COMPONENTS&#34;</span><span class="p">,</span> <span class="s2">&#34;WORKLOADS&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">monitoring_config</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="na">enable_components</span> = <span class="p">[</span><span class="s2">&#34;SYSTEM_COMPONENTS&#34;</span><span class="p">]</span><span class="c1"> # 啟用系統元件的監控
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">enable_components</span> = <span class="p">[</span><span class="s2">&#34;SYSTEM_COMPONENTS&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">node_config</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="na">machine_type</span> = <span class="s2">&#34;e2-medium&#34;</span><span class="c1"> # 機器類型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="na">disk_size_gb</span> = <span class="m">100</span><span class="c1"> # 磁碟大小
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="na">disk_type</span>    = <span class="s2">&#34;pd-standard&#34;</span><span class="c1"> # 磁碟類型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="na">image_type</span>   = <span class="s2">&#34;COS_CONTAINERD&#34;</span><span class="c1"> # 長期支援的 Container-Optimized OS (COS) Containerd
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="na">oauth_scopes</span>    = <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="na">machine_type</span> = <span class="s2">&#34;e2-medium&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">disk_size_gb</span> = <span class="m">100</span>
+</span></span><span class="line"><span class="cl">    <span class="na">disk_type</span>    = <span class="s2">&#34;pd-standard&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">image_type</span>   = <span class="s2">&#34;COS_CONTAINERD&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">oauth_scopes</span>    = <span class="p">[</span>
 </span></span><span class="line"><span class="cl">      <span class="s2">&#34;https://www.googleapis.com/auth/devstorage.read_only&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s2">&#34;https://www.googleapis.com/auth/logging.write&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s2">&#34;https://www.googleapis.com/auth/monitoring&#34;</span><span class="p">,</span>
@@ -350,9 +350,9 @@ if (!doNotTrack) {
 <li>min_master_version：master 的最低版本 <font color='blue'>(選填)</font></li>
 <li>network：叢集連接到的 Google Compute Engine 網絡的名稱或 self_link <font color='blue'>(選填)</font></li>
 <li>subnetwork：啟動叢集的 Google Compute Engine 子網的名稱或 self_link <font color='blue'>(選填)</font></li>
-<li>default_max_pods_per_node：此叢集中每個節點的默認最大 pod 數 <font color='blue'>(選填)</font></li>
+<li>default_max_pods_per_node：此叢集中每個節點的預設最大 pod 數 <font color='blue'>(選填)</font></li>
 <li>remove_default_node_pool：如果設定為 <code>true</code>，則在創建叢集時會幫我們刪除預設的節點池。會使用到這個的原因是因為 terraform 沒辦法修改預設節點池的名稱，所以我的做法是，會新增要的節點池，在使用這個參數把預設的給刪掉<font color='blue'>(選填)</font></li>
-<li>initial_node_count：要在此叢集的默認節點池中創建的節點數 <font color='blue'>(選填)</font></li>
+<li>initial_node_count：要在此叢集的預設節點池中創建的節點數 <font color='blue'>(選填)</font></li>
 <li>enable_intranode_visibility：是否為此叢集啟用了節點內可見性 <font color='blue'>(選填)</font></li>
 <li>ip_allocation_policy：為 VPC 原生叢集分配叢集 IP  <font color='blue'>(選填)</font></li>
 <li>resource_labels：應用於叢集的 GCE 資源標籤 key/value <font color='blue'>(選填)</font></li>
@@ -377,12 +377,22 @@ if (!doNotTrack) {
 </li>
 <li>logging_config：叢集的日誌記錄配置
 <ul>
-<li>enable_components (公開日誌的 GKE 組件) 設定，包含：SYSTEM_COMPONENTS、APISERVER、CONTROLLER_MANAGER、SCHEDULER、WORKLOADS <font color='red'>(必填)</font></li>
+<li>enable_components (公開日誌的 GKE 組件) 設定，包含：<code>SYSTEM_COMPONENTS</code>、<code>APISERVER</code>、<code>CONTROLLER_MANAGER</code>、<code>SCHEDULER</code>、<code>WORKLOADS</code> <font color='red'>(必填)</font></li>
 </ul>
 </li>
 <li>monitoring_config：叢集的監控配置
 <ul>
-<li>enable_components (GKE 組件公開指標) 設定，包含：SYSTEM_COMPONENTS、APISERVER、CONTROLLER_MANAGER、SCHEDULER <font color='blue'>(選填)</font></li>
+<li>enable_components (GKE 組件公開指標) 設定，包含：<code>SYSTEM_COMPONENTS</code>、<code>APISERVER</code>、<code>CONTROLLER_MANAGER</code>、<code>SCHEDULER</code> <font color='blue'>(選填)</font></li>
+</ul>
+</li>
+<li>node_config：創建預設節點池參數
+<ul>
+<li>machine_type：Google Compute Engine 機器類型，預設為 <code>e2-medium</code> <font color='blue'>(選填)</font></li>
+<li>disk_size_gb：每個節點的 disk 大小，以 GB 為單位。允許最小為 10 GB，預設為 100 GB <font color='blue'>(選填)</font></li>
+<li>disk_type：連接到每個節點的 disk 類型，有 <code>pd-standard</code>、<code>pd-balanced</code> 或 <code>pd-ssd</code>，預設為 <code>pd-standard</code> <font color='blue'>(選填)</font></li>
+<li>image_type：創建新節點池後 NAP 使用的預設 image 類型。該值必須是 [<code>COS_CONTAINERD</code>、<code>COS</code>、<code>UBUNTU_CONTAINERD</code>、<code>UBUNTU</code>] 之一。<code>COS</code> 和 <code>UBUNTU</code> 已於 GKE 1.24 棄用 <font color='blue'>(選填)</font></li>
+<li>oauth_scopes：在預設服務帳戶下的所有節點虛擬機上可用的一組 Google API 範圍。 <font color='blue'>(選填)</font></li>
+<li>metadata：分配給叢集中實例的 key/value <font color='blue'>(選填)</font></li>
 </ul>
 </li>
 </ul>
@@ -396,7 +406,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/gcp/">GCP</a>
                 </span><span><a href="/tags/gke/">GKE</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-11-29</span>
+                <span>更新於 2022-11-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/804bc5af375341c58aa977460f32fd69da5867ce" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;804bc5af:&nbsp;# 新增 使用 Terraform 建立 Google Kubernetes Engine">
+                            <i class="fas fa-hashtag fa-fw"></i>804bc5af</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/terraform-gke/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
