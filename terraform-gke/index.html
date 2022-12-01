@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/terraform-gke/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-gke/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-29T10:10:00+08:00" />
-<meta property="article:modified_time" content="2022-11-30T18:12:50+08:00" />
+<meta property="article:modified_time" content="2022-12-01T14:32:50+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/terraform-gke/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GKE","wordcount":  2144 ,
-        "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/","datePublished": "2022-11-29T10:10:00+08:00","dateModified": "2022-11-30T18:12:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GKE","wordcount":  2585 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform-gke\/","datePublished": "2022-11-29T10:10:00+08:00","dateModified": "2022-12-01T14:32:50+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -127,8 +127,8 @@ if (!doNotTrack) {
         alt="/terraform-gke/featured-image.webp"
         title="/terraform-gke/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">使用 Terraform 建立 Google Kubernetes Engine</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2144 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2585 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 6 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -145,6 +145,7 @@ if (!doNotTrack) {
         <li><a href="#resource-設定">resource 設定</a>
           <ul>
             <li><a href="#google_container_cluster">google_container_cluster</a></li>
+            <li><a href="#google_container_node_pool">google_container_node_pool</a></li>
           </ul>
         </li>
       </ul>
@@ -156,11 +157,10 @@ if (!doNotTrack) {
 <br>
 <h2 id="撰寫-google-kubernetes-engine-tf-檔案">撰寫 Google Kubernetes Engine tf 檔案</h2>
 <p>程式碼會同步到 Github ，需要的也可以去 Clone 來使用歐！ <a href="https://github.com/880831ian/terraform-gke" target="_blank" rel="noopener noreffer">Github 程式碼連結</a>，小提醒：由於程式碼較長，我將他拆開來說明 💖</p>
-<p>由於等等程式碼較長，所以我在前面這邊先做說明，GKE 的結構是 叢集(cluster) &gt; 節點池(node_pool) &gt; 節點(node)，本次的介紹範例，會有一個叢集裡面有兩個節點池，每個節點池裡面的節點數量也不同，範例裡面會加上我比較常用到的一些設定，以及</p>
+<p>由於等等程式碼較長，所以我在前面這邊先做說明，GKE 的結構是 叢集(cluster) &gt; 節點池(node_pool) &gt; 節點(node)，本次的介紹範例，會有一個叢集裡面有一個節點池，節點池裡面有 6 個節點數量，範例裡面會加上我比較常用到的一些設定，以及一些文件裡面的用法，大家可以依照自己的需求來使用參數：</p>
 <br>
 <h3 id="限制使用的版本">限制使用的版本</h3>
-<p>在上一篇 <a href="https://blog.pin-yi.me/terraform-gce/" target="_blank" rel="noopener noreffer">使用 Terraform 建立 Google Compute Engine</a>，我們知道 Terraform 其實就是對應的提供商，提供對應的 api 來讓我們可以用 terraform 去建置很多 Iac，但供應商提供的 api 會隨著版本而有所更動，可能換了一個版本，原本可以使用的 resource 參數就會有所不同，所以我們可以在一開始，先設定好這隻 tf 要使用的供應商及對應的版本，可以參考以下程式碼：</p>
-<br>
+<p>在上一篇 <a href="https://blog.pin-yi.me/terraform-gce/" target="_blank" rel="noopener noreffer">使用 Terraform 建立 Google Compute Engine</a>，我們知道 Terraform 其實就是對應的提供商，提供對應的 api 來讓我們可以用 terraform 去建置很多 IaC，但供應商提供的 api 會隨著版本而有所更動，可能換了一個版本，原本可以使用的 resource 參數就會有所不同，所以我們可以在一開始，先設定好這隻 tf 要使用的供應商及對應的版本，可以參考以下程式碼：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -202,18 +202,6 @@ if (!doNotTrack) {
 <br>
 <h3 id="resource-設定">resource 設定</h3>
 <h4 id="google_container_cluster">google_container_cluster</h4>
-<p>接下來的設定都會放在以下的 google_container_cluster resource 內，為了方便介紹，就不會標明 google_container_cluster，詳細完整程式碼請參考 GitLab <a href="https://github.com/880831ian/terraform-gke" target="_blank" rel="noopener noreffer">Github 程式碼連結</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;google_container_cluster&#34;</span> <span class="s2">&#34;cluster&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><br>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -276,9 +264,12 @@ if (!doNotTrack) {
 </span><span class="lnt">58
 </span><span class="lnt">59
 </span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl">  <span class="na">name</span>     = <span class="s2">&#34;test&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;google_container_cluster&#34;</span> <span class="s2">&#34;cluster&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>     = <span class="s2">&#34;test&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="na">location</span> = <span class="s2">&#34;asia-southeast1-b&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="na">min_master_version</span> = <span class="s2">&#34;1.22.12-gke.300&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="na">network</span> = <span class="s2">&#34;projects/gcp-202011216-001/global/networks/XXXX&#34;</span>
@@ -337,7 +328,8 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="na">metadata</span> = <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">disable</span><span class="o">-</span><span class="nx">legacy</span><span class="o">-</span><span class="na">endpoints</span> = <span class="s2">&#34;true&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>      
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -393,8 +385,81 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br>
+<h4 id="google_container_node_pool">google_container_node_pool</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;google_container_node_pool&#34;</span> <span class="s2">&#34;aaa&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>       = <span class="s2">&#34;aaa&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">project</span>    = <span class="s2">&#34;project&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>   = <span class="nx">google_container_cluster</span><span class="p">.</span><span class="nx">cluster</span><span class="p">.</span><span class="nx">location</span>
+</span></span><span class="line"><span class="cl">  <span class="na">cluster</span>    = <span class="nx">google_container_cluster</span><span class="p">.</span><span class="nx">cluster</span><span class="p">.</span><span class="nx">name</span>
+</span></span><span class="line"><span class="cl">  <span class="na">node_count</span> = <span class="m">6</span>
+</span></span><span class="line"><span class="cl">  <span class="na">node_locations</span> = <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">google_container_cluster</span><span class="p">.</span><span class="nx">cluster</span><span class="p">.</span><span class="nx">location</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">node_config</span> <span class="p">{</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">	# 省略 ... 與上面的 google_container_cluster 相同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">management</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">auto_repair</span>  = <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="na">auto_upgrade</span> = <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">upgrade_settings</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">max_surge</span>       = <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    <span class="na">max_unavailable</span> = <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>name：節點池名稱 <font color='blue'>(選填)</font></li>
+<li>project：創建節點池的項目ID <font color='blue'>(選填)</font></li>
+<li>location：叢集所在位置，可以使用資源名稱 (google_container_node_pool) +命名 (cluster) + 參數 (location) 來代表 <font color='blue'>(選填)</font></li>
+<li>cluster：叢集名稱，可以使用資源名稱 (google_container_node_pool) +命名 (cluster) + 參數 (name) 來代表 <font color='blue'>(選填)</font></li>
+<li>node_count：節點數量 <font color='blue'>(選填)</font></li>
+<li>node_locations：節點區域 <font color='blue'>(選填)</font></li>
+<li>management：節點管理配置
+<ul>
+<li>auto_repair：是否要自動修復 <font color='blue'>(選填)</font></li>
+<li>auto_upgrade：是否要自動升級 <font color='blue'>(選填)</font></li>
+</ul>
+</li>
+<li>upgrade_settings：指定節點升級設定及方式
+<ul>
+<li>max_surge：升級期間可以添加到節點池的額外節點數 <font color='blue'>(選填)</font></li>
+<li>max_unavailable：升級期間可以同時不可用的節點數 <font color='blue'>(選填)</font></li>
+</ul>
+</li>
+</ul>
+<br>
+<p>可以看到有很多設定都是選填的，所以不需要像我範例一樣，把所有的都打出來，可以參考官方文件，將自己想要的設定寫出來，並注意其他參數的預設值是多少，就可以打造屬於自己的 Terraform 建立 Google Kubernetes Engine IaC 程式囉～</p>
+<br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster" target="_blank" rel="noopener noreffer">registry.terraform.io/providers (google_container_cluster)</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool" target="_blank" rel="noopener noreffer">registry.terraform.io/providers (google_container_node_pool)</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info"><div class="post-info-tag"><span><a href="/tags/iac/">IaC</a>
                 </span><span><a href="/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/">基礎設施即代碼</a>
@@ -402,8 +467,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/gcp/">GCP</a>
                 </span><span><a href="/tags/gke/">GKE</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-11-30&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6f494fe197571b9bb4b427971ae6915fc30224c0" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6f494fe1:&nbsp;# 修改 使用 Terraform 建立 Google Kubernetes Engine">
-                            <i class="fas fa-hashtag fa-fw"></i>6f494fe1</a></span>
+                <span>更新於 2022-12-01&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6b4bb39042f401b2254b873ccb280de69aed0201" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;6b4bb390:&nbsp;# 修改 使用 Terraform 建立 Google Kubernetes Engine">
+                            <i class="fas fa-hashtag fa-fw"></i>6b4bb390</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/terraform-gke/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
