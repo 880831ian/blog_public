@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/terraform-gce/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-gce/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-28T11:40:00+08:00" />
-<meta property="article:modified_time" content="2022-11-28T17:56:47+08:00" />
+<meta property="article:modified_time" content="2022-12-01T14:39:24+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/terraform-gce/featured-image.webp"/>
@@ -34,7 +34,7 @@
                             "width":  1280 ,
                             "height":  300 
                         }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, GCP, GCE","wordcount":  1825 ,
-        "url": "https:\/\/blog.pin-yi.me\/terraform-gce\/","datePublished": "2022-11-28T11:40:00+08:00","dateModified": "2022-11-28T17:56:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/blog.pin-yi.me\/terraform-gce\/","datePublished": "2022-11-28T11:40:00+08:00","dateModified": "2022-12-01T14:39:24+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -172,9 +172,9 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">provider &#34;google&#34; {
-</span></span><span class="line"><span class="cl">  project = &#34;gcp-20210526-001&#34;
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl"><span class="kr">provider</span> <span class="s2">&#34;google&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">project</span> = <span class="s2">&#34;gcp-20210526-001&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>由於我們要建立的 Google Compute Engine 是由 Google 所提供的 api 來建立的，所以一開始要先設定好提供者的名稱 google 以及我們要在哪一個 GCP 的專案 ID</p>
@@ -187,8 +187,8 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">resource &#34;google_compute_instance&#34; &#34;default&#34; {
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;google_compute_instance&#34;</span> <span class="s2">&#34;default&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><br>
@@ -208,17 +208,17 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  name        = &#34;test&#34;
-</span></span><span class="line"><span class="cl">  description = &#34;我是 test 機器&#34;
-</span></span><span class="line"><span class="cl">  machine_type = &#34;n2-standard-8&#34;
-</span></span><span class="line"><span class="cl">  zone = &#34;asia-east1-b&#34;
-</span></span><span class="line"><span class="cl">  tags = [&#34;test&#34;]
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl">  <span class="na">name</span>        = <span class="s2">&#34;test&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">description</span> = <span class="s2">&#34;我是 test 機器&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">machine_type</span> = <span class="s2">&#34;n2-standard-8&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">zone</span> = <span class="s2">&#34;asia-east1-b&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">tags</span> = <span class="p">[</span><span class="s2">&#34;test&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  labels = {
-</span></span><span class="line"><span class="cl">    env  = &#34;test&#34;
-</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  <span class="na">labels</span> = <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">env</span>  = <span class="s2">&#34;test&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  deletion_protection = &#34;true&#34;   
+</span></span><span class="line"><span class="cl">  <span class="na">deletion_protection</span> = <span class="s2">&#34;true&#34;</span>   
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -243,13 +243,13 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  boot_disk {
-</span></span><span class="line"><span class="cl">    initialize_params {
-</span></span><span class="line"><span class="cl">      image = &#34;debian-cloud/debian-10-buster-v20210512&#34;
-</span></span><span class="line"><span class="cl">      type = &#34;pd-balanced&#34;
-</span></span><span class="line"><span class="cl">      size = &#34;50&#34;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">  } 
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl">  <span class="nx">boot_disk</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">initialize_params</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="na">image</span> = <span class="s2">&#34;debian-cloud/debian-10-buster-v20210512&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">type</span> = <span class="s2">&#34;pd-balanced&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">size</span> = <span class="s2">&#34;50&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -272,15 +272,15 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  network_interface {
-</span></span><span class="line"><span class="cl">    network = &#34;projects/rd-gateway/global/networks/rd-common&#34;
-</span></span><span class="line"><span class="cl">    subnetwork = &#34;projects/rd-gateway/regions/asia-east1/subnetworks/rd-common-asia-east1-pid-cicd&#34;     
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl">  <span class="nx">network_interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">network</span> = <span class="s2">&#34;projects/rd-gateway/global/networks/rd-common&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">subnetwork</span> = <span class="s2">&#34;projects/rd-gateway/regions/asia-east1/subnetworks/rd-common-asia-east1-pid-cicd&#34;</span>     
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    access_config {
-</span></span><span class="line"><span class="cl">      nat_ip = &#34;&#34;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="nx">access_config</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="na">nat_ip</span> = <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -298,10 +298,10 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  service_account {
-</span></span><span class="line"><span class="cl">    email  = &#34;676962704505-compute@developer.gserviceaccount.com&#34;
-</span></span><span class="line"><span class="cl">    scopes = [&#34;storage-rw&#34;, &#34;logging-write&#34;, &#34;monitoring-write&#34;, &#34;service-control&#34;, &#34;service-management&#34;, &#34;trace&#34;]
-</span></span><span class="line"><span class="cl">  }
+<pre tabindex="0" class="chroma"><code class="language-tf" data-lang="tf"><span class="line"><span class="cl">  <span class="nx">service_account</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">email</span>  = <span class="s2">&#34;676962704505-compute@developer.gserviceaccount.com&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">scopes</span> = <span class="p">[</span><span class="s2">&#34;storage-rw&#34;</span><span class="p">,</span> <span class="s2">&#34;logging-write&#34;</span><span class="p">,</span> <span class="s2">&#34;monitoring-write&#34;</span><span class="p">,</span> <span class="s2">&#34;service-control&#34;</span><span class="p">,</span> <span class="s2">&#34;service-management&#34;</span><span class="p">,</span> <span class="s2">&#34;trace&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -444,8 +444,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/gcp/">GCP</a>
                 </span><span><a href="/tags/gce/">GCE</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-11-28&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/a442e6054cf61279fcad8840ad58fb2d95bfa0b4" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;a442e605:&nbsp;# 新增 使用 Terraform 建立 Google Compute Engine">
-                            <i class="fas fa-hashtag fa-fw"></i>a442e605</a></span>
+                <span>更新於 2022-12-01&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/34a2cdc48e293000e8f7bc6facbad888533e4819" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;34a2cdc4:&nbsp;# 更新 使用 Terraform 建立 Google Compute Engine">
+                            <i class="fas fa-hashtag fa-fw"></i>34a2cdc4</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/terraform-gce/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
