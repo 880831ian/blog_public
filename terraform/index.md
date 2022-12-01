@@ -257,6 +257,9 @@ alias td='terraform destroy'
 
 [使用 Terraform 建立 Google Compute Engine](https://blog.pin-yi.me/terraform/)
 
+[使用 Terraform 建立 Google Kubernetes Engine](https://blog.pin-yi.me/terraform-gke/)
+
+
 <br>
 
 ## 參考資料
