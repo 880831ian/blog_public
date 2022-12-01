@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>IAM - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/iam/</link>
+        <description>IAM - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/iam/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]</title>
+    <link>https://blog.pin-yi.me/gcp-iam/</link>
+    <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-iam/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資]]></description>
+</item>
+</channel>
+</rss>

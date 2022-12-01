@@ -1,0 +1,44 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>系統文檔 - 分類 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/categories/documentation/</link>
+        <description>系統文檔 - 分類 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/documentation/" rel="self" type="application/rss+xml" /><item>
+    <title>主題文檔 - 基本概念</title>
+    <link>https://blog.pin-yi.me/theme-documentation-basics/</link>
+    <pubDate>Fri, 06 Mar 2020 21:40:32 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-basics/</guid>
+    <description><![CDATA[<p>探索 Hugo - <strong>FeelIt</strong> 主題的全部內容和背後的核心概念.</p>]]></description>
+</item>
+<item>
+    <title>主題文檔 - 內容</title>
+    <link>https://blog.pin-yi.me/theme-documentation-content/</link>
+    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-content/</guid>
+    <description><![CDATA[<p>了解如何在 <strong>FeelIt</strong> 主題中快速, 直觀地創建和組織內容.</p>]]></description>
+</item>
+<item>
+    <title>主題文檔 - 內置 Shortcodes</title>
+    <link>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</link>
+    <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
+    <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>主題文檔 - 擴展 Shortcodes</title>
+    <link>https://blog.pin-yi.me/theme-documentation-extended-shortcodes/</link>
+    <pubDate>Tue, 03 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-extended-shortcodes/</guid>
+    <description><![CDATA[<p><strong>FeelIt</strong> 主題在 Hugo 內置的 shortcode 的基礎上提供多個擴展的 shortcode.</p>]]></description>
+</item>
+<item>
+    <title>Markdown 基本語法</title>
+    <link>https://blog.pin-yi.me/basic-markdown-syntax/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/basic-markdown-syntax/</guid>
+    <description><![CDATA[<p>這篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 語法示例.</p>]]></description>
+</item>
+<item>
+    <title>Emoji 支持</title>
+    <link>https://blog.pin-yi.me/emoji-support/</link>
+    <pubDate>Tue, 01 Oct 2019 17:55:28 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/emoji-support/</guid>
+    <description><![CDATA[<p>Emoji 可以通過多種方式在 Hugo 項目中啟用.</p>]]></description>
+</item>
+</channel>
+</rss>

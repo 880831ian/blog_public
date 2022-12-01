@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>PHP 基礎語法 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/php-%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95/</link>
+        <description>PHP 基礎語法 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/php-%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>PHP 介紹</title>
+    <link>https://blog.pin-yi.me/php/</link>
+    <pubDate>Tue, 22 Feb 2022 22:22:22 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/php/</guid>
+    <description><![CDATA[1. PHP 是什麼 PHP 全名是超文本前處理器(Hypertext Preprocessor)，是一種開源的通用電腦手稿語言 根據W3Techs的報告，截至2]]></description>
+</item>
+</channel>
+</rss>

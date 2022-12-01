@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>基礎設施即代碼 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/</link>
+        <description>基礎設施即代碼 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/" rel="self" type="application/rss+xml" /><item>
+    <title>使用 Terraform 建立 Google Kubernetes Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gke/</link>
+    <pubDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gke/</guid>
+    <description><![CDATA[我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文]]></description>
+</item>
+<item>
+    <title>使用 Terraform 建立 Google Compute Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gce/</link>
+    <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
+    <description><![CDATA[嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立]]></description>
+</item>
+<item>
+    <title>什麼是 IaC ? Terraform 又是什麼？</title>
+    <link>https://blog.pin-yi.me/terraform/</link>
+    <pubDate>Mon, 26 Sep 2022 15:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform/</guid>
+    <description><![CDATA[跟上一篇 Snyk 一樣，本系列也是去參加 DevOpsDay Taipei 2022 活動聽到各位產業大佬目前在使用的名詞以及技術，想說回家也充實一下自己，了解一下在 DevOpsDay 最常出現的 IaC 是什麼？]]></description>
+</item>
+</channel>
+</rss>

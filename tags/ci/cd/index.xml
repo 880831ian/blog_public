@@ -1,0 +1,38 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>CI/CD - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/ci/cd/</link>
+        <description>CI/CD - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/tags/ci/cd/" rel="self" type="application/rss+xml" /><item>
+    <title>部署 Laravel 於 Heroku 搭配 GitLab CI/CD</title>
+    <link>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</link>
+    <pubDate>Thu, 26 May 2022 15:07:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</guid>
+    <description><![CDATA[經過上一篇文章 如何從頭打造專屬的 GitLab CI/CD 的學習，讓我們了解到 GitLab CI/CD 的整個流程，接著我們本次要把 Laravel 給部署到 Heroku 透過 GitLab 的 CI/CD 去達成，不需要透過任何人工去測]]></description>
+</item>
+<item>
+    <title>如何從頭打造專屬的 GitLab CI/CD </title>
+    <link>https://blog.pin-yi.me/gitlab-cicd/</link>
+    <pubDate>Thu, 26 May 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-cicd/</guid>
+    <description><![CDATA[自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到]]></description>
+</item>
+<item>
+    <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</title>
+    <link>https://blog.pin-yi.me/ansible/</link>
+    <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/ansible/</guid>
+    <description><![CDATA[本篇文章是接續前面兩篇 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 跟 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章，歡迎大家先去觀看前面兩篇文章 🤪 本篇所使用到的程式碼都會整理於]]></description>
+</item>
+<item>
+    <title>使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</title>
+    <link>https://blog.pin-yi.me/jenkins/</link>
+    <pubDate>Mon, 16 May 2022 11:05:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins/</guid>
+    <description><![CDATA[此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 文章，此篇會實際安裝及實作 Jenkins，大家記得在學習前要先檢查自己的版本是否有新的更新！那我們開始囉]]></description>
+</item>
+<item>
+    <title>Jenkins 及 Ansible IT 自動化 CI/CD 介紹</title>
+    <link>https://blog.pin-yi.me/jenkins-ansible/</link>
+    <pubDate>Wed, 11 May 2022 15:11:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins-ansible/</guid>
+    <description><![CDATA[在軟體開發領域中，IT 自動化 (automation) 及 持續整合 (Continuous Integration, CI) 、持續佈署 (Continuous Deployment,CD) 是 DevOps 精神中很重要的兩個部分，此文章是參考 30 天入門 Ansible 及 Jenkins ，再加上自己測試後的筆記紀]]></description>
+</item>
+</channel>
+</rss>

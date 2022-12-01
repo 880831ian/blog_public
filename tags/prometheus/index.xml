@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Prometheus - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/prometheus/</link>
+        <description>Prometheus - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 18 May 2022 12:18:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/prometheus/" rel="self" type="application/rss+xml" /><item>
+    <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</title>
+    <link>https://blog.pin-yi.me/prometheus-grafana-docker/</link>
+    <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/prometheus-grafana-docker/</guid>
+    <description><![CDATA[還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應]]></description>
+</item>
+</channel>
+</rss>

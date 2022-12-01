@@ -1,0 +1,68 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>實作 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</link>
+        <description>實作 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
+    <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
+    <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
+    <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</title>
+    <link>https://blog.pin-yi.me/k8s-hpa/</link>
+    <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-hpa/</guid>
+    <description><![CDATA[此篇是要介紹 HorizontalPodAutoscaler (HPA) 的原理以及實作內容，那我們先來說明一下 HorizontalPodAutoscaler 是什麼吧！ HorizontalPodAutoscaler 原理 HorizontalPodAutoscaler (HPA) 中文可以叫水平 Pod 自動擴縮，他會自動更新工作負載資源 (Deployment 或 State]]></description>
+</item>
+<item>
+    <title>清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)</title>
+    <link>https://blog.pin-yi.me/linux-clear-swap/</link>
+    <pubDate>Mon, 06 Jun 2022 10:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/linux-clear-swap/</guid>
+    <description><![CDATA[今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀]]></description>
+</item>
+<item>
+    <title>部署 Laravel 於 Heroku 搭配 GitLab CI/CD</title>
+    <link>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</link>
+    <pubDate>Thu, 26 May 2022 15:07:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</guid>
+    <description><![CDATA[經過上一篇文章 如何從頭打造專屬的 GitLab CI/CD 的學習，讓我們了解到 GitLab CI/CD 的整個流程，接著我們本次要把 Laravel 給部署到 Heroku 透過 GitLab 的 CI/CD 去達成，不需要透過任何人工去測]]></description>
+</item>
+<item>
+    <title>如何從頭打造專屬的 GitLab CI/CD </title>
+    <link>https://blog.pin-yi.me/gitlab-cicd/</link>
+    <pubDate>Thu, 26 May 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-cicd/</guid>
+    <description><![CDATA[自從上次學完 Jenkins 及 Ansible CI/CD，就覺得 CI/CD 實在太酷了！能夠自動化的去持續整合 (Continuous Integration, CI) 以及持續佈署 (Continuous Deployment,CD) 專案，再加上這幾天複習了 Git 的使用方法，突然想到]]></description>
+</item>
+<item>
+    <title>使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)</title>
+    <link>https://blog.pin-yi.me/prometheus-grafana-docker/</link>
+    <pubDate>Wed, 18 May 2022 12:18:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/prometheus-grafana-docker/</guid>
+    <description><![CDATA[還記得我們上次架設 EFK 來獲得容器的日誌嗎！？身為一個 SRE 除了收集日誌外，還需要監控每個系統或是服務的運行狀況，並在警急情況即時通知相關人員作為應]]></description>
+</item>
+<item>
+    <title>Ansible 介紹與實作 (Inventory、Playbooks、Module、Template、Handlers)</title>
+    <link>https://blog.pin-yi.me/ansible/</link>
+    <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/ansible/</guid>
+    <description><![CDATA[本篇文章是接續前面兩篇 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 跟 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章，歡迎大家先去觀看前面兩篇文章 🤪 本篇所使用到的程式碼都會整理於]]></description>
+</item>
+<item>
+    <title>使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</title>
+    <link>https://blog.pin-yi.me/jenkins/</link>
+    <pubDate>Mon, 16 May 2022 11:05:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins/</guid>
+    <description><![CDATA[此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 文章，此篇會實際安裝及實作 Jenkins，大家記得在學習前要先檢查自己的版本是否有新的更新！那我們開始囉]]></description>
+</item>
+<item>
+    <title>Jenkins 及 Ansible IT 自動化 CI/CD 介紹</title>
+    <link>https://blog.pin-yi.me/jenkins-ansible/</link>
+    <pubDate>Wed, 11 May 2022 15:11:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins-ansible/</guid>
+    <description><![CDATA[在軟體開發領域中，IT 自動化 (automation) 及 持續整合 (Continuous Integration, CI) 、持續佈署 (Continuous Deployment,CD) 是 DevOps 精神中很重要的兩個部分，此文章是參考 30 天入門 Ansible 及 Jenkins ，再加上自己測試後的筆記紀]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</title>
+    <link>https://blog.pin-yi.me/k8s-efk/</link>
+    <pubDate>Tue, 10 May 2022 15:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-efk/</guid>
+    <description><![CDATA[這是我們 Kubernetes 文章的第三篇，此文章會紀錄我將 EFK 建在 Kubernetes 上面，最後也會統整實作過程中，可能會遇到的一些問題，讓大家在學習時，可以更有效率，不用 debug 到死]]></description>
+</item>
+</channel>
+</rss>

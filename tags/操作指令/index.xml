@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>操作指令 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/</link>
+        <description>操作指令 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 12:00:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" rel="self" type="application/rss+xml" /><item>
+    <title>Git 介紹</title>
+    <link>https://blog.pin-yi.me/git/</link>
+    <pubDate>Fri, 15 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/git/</guid>
+    <description><![CDATA[什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容 這]]></description>
+</item>
+</channel>
+</rss>

@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://blog.pin-yi.me/en/sitemap.xml
+Sitemap: https://blog.pin-yi.me/sitemap.xml

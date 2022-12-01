@@ -1,0 +1,50 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>K8s - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/k8s/</link>
+        <description>K8s - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
+    <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
+    <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
+    <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</title>
+    <link>https://blog.pin-yi.me/k8s-hpa/</link>
+    <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-hpa/</guid>
+    <description><![CDATA[此篇是要介紹 HorizontalPodAutoscaler (HPA) 的原理以及實作內容，那我們先來說明一下 HorizontalPodAutoscaler 是什麼吧！ HorizontalPodAutoscaler 原理 HorizontalPodAutoscaler (HPA) 中文可以叫水平 Pod 自動擴縮，他會自動更新工作負載資源 (Deployment 或 State]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</title>
+    <link>https://blog.pin-yi.me/gcp-introduce/</link>
+    <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-introduce/</guid>
+    <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
+</item>
+<item>
+    <title>用大型社區來介紹 Kubernetes 元件</title>
+    <link>https://blog.pin-yi.me/k8s-plain/</link>
+    <pubDate>Thu, 02 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-plain/</guid>
+    <description><![CDATA[前陣子對於 Kubernetes 部分內容還不是很清楚，在網路上閒逛的時候發現一篇很有趣的文章，標題是 『 給行銷跟業務的 Kubernetes 101 中翻中介紹 』，點進去後才發現，作者 Phil Huang 將]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</title>
+    <link>https://blog.pin-yi.me/k8s-efk/</link>
+    <pubDate>Tue, 10 May 2022 15:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-efk/</guid>
+    <description><![CDATA[這是我們 Kubernetes 文章的第三篇，此文章會紀錄我將 EFK 建在 Kubernetes 上面，最後也會統整實作過程中，可能會遇到的一些問題，讓大家在學習時，可以更有效率，不用 debug 到死]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 介紹 - 進階 (Service、Ingress、StatefulSet、Deployment、ReplicaSet、ConfigMap)</title>
+    <link>https://blog.pin-yi.me/k8s-advanced/</link>
+    <pubDate>Tue, 03 May 2022 10:39:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-advanced/</guid>
+    <description><![CDATA[前面我們在基本篇中，為了使 Pod 能夠與本機連線，使用了 port-forward，還有另一種方法就是今天要介紹的第一個主題：Service 那我們會]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 介紹 - 基本</title>
+    <link>https://blog.pin-yi.me/k8s/</link>
+    <pubDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s/</guid>
+    <description><![CDATA[什麼是 Kubernetes (K8s)? Kubernetes 也可以叫 K8s，這個名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以叫 K8s 是因為 Kubernetes 的 k 到 s 中間]]></description>
+</item>
+</channel>
+</rss>

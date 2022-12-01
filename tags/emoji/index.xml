@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>emoji - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/emoji/</link>
+        <description>emoji - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 01 Oct 2019 17:55:28 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/emoji/" rel="self" type="application/rss+xml" /><item>
+    <title>Emoji 支持</title>
+    <link>https://blog.pin-yi.me/emoji-support/</link>
+    <pubDate>Tue, 01 Oct 2019 17:55:28 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/emoji-support/</guid>
+    <description><![CDATA[<p>Emoji 可以通過多種方式在 Hugo 項目中啟用.</p>]]></description>
+</item>
+</channel>
+</rss>

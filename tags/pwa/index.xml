@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>PWA - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/pwa/</link>
+        <description>PWA - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 19 Feb 2022 19:34:11 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/pwa/" rel="self" type="application/rss+xml" /><item>
+    <title>PWA(Progressive Web App) 介紹與實際安裝</title>
+    <link>https://blog.pin-yi.me/pwa/</link>
+    <pubDate>Sat, 19 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/pwa/</guid>
+    <description><![CDATA[<p>PWA 全名是 Progressive Web App，也就是漸進式的網站應用程式，逐步的將網站漸進優化為具備 APP 的優點，其有以下幾點特性。</p>]]></description>
+</item>
+</channel>
+</rss>

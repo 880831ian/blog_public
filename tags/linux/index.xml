@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/linux/</link>
+        <description>Linux - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 17 Jun 2022 15:26:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux 常用指令</title>
+    <link>https://blog.pin-yi.me/linux/</link>
+    <pubDate>Fri, 17 Jun 2022 15:26:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/linux/</guid>
+    <description><![CDATA[因為最近在管理機器時，常常會使用各式各樣的指令來協助管理，所以把常用的指令依照不同類別整理在底下呦 😘 會定期更新該文章呦 ~ 網路類 查詢遠端 Port 是否]]></description>
+</item>
+<item>
+    <title>清除 Linux 機器上的 Swap  (Buff、Cache、Swap 比較)</title>
+    <link>https://blog.pin-yi.me/linux-clear-swap/</link>
+    <pubDate>Mon, 06 Jun 2022 10:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/linux-clear-swap/</guid>
+    <description><![CDATA[今天在工作時，遇到機器的 Swap 超過預警值，需要手動去清除 Swap，那剛好就由這次機會來介紹要如何清除 Linux 機器上的 Swap，以及查詢 Linux 記憶體的使用狀]]></description>
+</item>
+</channel>
+</rss>

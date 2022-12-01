@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>GKE - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/gke/</link>
+        <description>GKE - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gke/" rel="self" type="application/rss+xml" /><item>
+    <title>使用 Terraform 建立 Google Kubernetes Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gke/</link>
+    <pubDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gke/</guid>
+    <description><![CDATA[我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gke/</link>
+    <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gke/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</title>
+    <link>https://blog.pin-yi.me/gcp-introduce/</link>
+    <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-introduce/</guid>
+    <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
+</item>
+</channel>
+</rss>

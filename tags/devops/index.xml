@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DevOps - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/devops/</link>
+        <description>DevOps - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 20 Sep 2022 14:58:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>找出程式碼、開源套件、容器的安全漏洞工具 - Snyk</title>
+    <link>https://blog.pin-yi.me/snyk/</link>
+    <pubDate>Tue, 20 Sep 2022 14:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/snyk/</guid>
+    <description><![CDATA[前幾天有機會可以去參加 DevOpsDays Taipei 2022 活動，聽到了一門有關於如何將 Security 加入 DevOps - GitLab CI/CD with Snyk 的講座，覺得蠻有趣的，想說順便紀錄一下這幾天去聽的內容，文章底下有]]></description>
+</item>
+</channel>
+</rss>

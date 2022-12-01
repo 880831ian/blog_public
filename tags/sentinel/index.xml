@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Sentinel - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/sentinel/</link>
+        <description>Sentinel - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/sentinel/" rel="self" type="application/rss+xml" /><item>
+    <title>用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)</title>
+    <link>https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</link>
+    <pubDate>Thu, 28 Apr 2022 09:06:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/</guid>
+    <description><![CDATA[前情提要：本篇是 用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose) 以及 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程]]></description>
+</item>
+<item>
+    <title>用 HAProxy 對 Redis 做負載平衡 (Redis Sentinel、Docker-compose)</title>
+    <link>https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy/</link>
+    <pubDate>Fri, 22 Apr 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy/</guid>
+    <description><![CDATA[前情提要：本篇是 Redis 哨兵模式 (Sentinel) 搭配 Docker-compose 實作 的後續文章，主要會優化原本的程式碼，並加上 HAProxy 來做負載平衡！ 什麼是 HAProxy 以及負載均衡 ? HAProxy 是一個使用 C 語言編寫]]></description>
+</item>
+<item>
+    <title>Redis 哨兵模式 (Sentinel) 搭配 Docker 實作</title>
+    <link>https://blog.pin-yi.me/docker-compose-redis-sentinel/</link>
+    <pubDate>Tue, 19 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/docker-compose-redis-sentinel/</guid>
+    <description><![CDATA[什麼是 Redis 哨兵模式 (Sentinel) ? 有關 Redis 之前有寫一篇 Redis 的介紹文，有興趣可以去看看！ Redis 提供非常實用的功能來讓我們實現多機的 in-memory 資料庫： 主從複製模式 (Master-Slave Replication) 哨兵模式]]></description>
+</item>
+</channel>
+</rss>

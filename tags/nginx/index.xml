@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Nginx - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/nginx/</link>
+        <description>Nginx - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+    <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
+    <link>https://blog.pin-yi.me/php-restful-api/</link>
+    <pubDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/php-restful-api/</guid>
+    <description><![CDATA[<p>由於網路上文章幾乎都是使用 Apache 來實作第一個 PHP RESTful API，也比較沒有中文的介紹，剛好這次也還在學習，所以把學習的紀錄分享給大家，這次會搭配實作留言板來說明，那本次教學內容採用的是</p>]]></description>
+</item>
+</channel>
+</rss>

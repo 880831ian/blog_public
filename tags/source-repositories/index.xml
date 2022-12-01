@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Source Repositories - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/source-repositories/</link>
+        <description>Source Repositories - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/source-repositories/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gke/</link>
+    <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gke/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcb/</link>
+    <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcb/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcsr/</link>
+    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcsr/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟]]></description>
+</item>
+</channel>
+</rss>

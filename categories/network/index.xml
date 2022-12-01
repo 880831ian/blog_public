@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>網路 - 分類 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/categories/network/</link>
+        <description>網路 - 分類 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/network/" rel="self" type="application/rss+xml" /><item>
+    <title>TCP和UDP的差異</title>
+    <link>https://blog.pin-yi.me/tcp-udp-difference/</link>
+    <pubDate>Fri, 18 Feb 2022 19:34:11 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tcp-udp-difference/</guid>
+    <description><![CDATA[<p>TCP 與 UDP 都是常見的網路通訊協定，這兩種協定能確保網際網路資料傳輸的快速以及完整性，它們的運作方式不太一樣，TCP 較為可靠，UDP 較為快速。
+我們來慢慢分析兩種不同的網路通訊協定，有什麼特別之處!?</p>]]></description>
+</item>
+</channel>
+</rss>

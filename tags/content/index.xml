@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>内容 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/content/</link>
+        <description>内容 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/tags/content/" rel="self" type="application/rss+xml" /><item>
+    <title>主題文檔 - 內容</title>
+    <link>https://blog.pin-yi.me/theme-documentation-content/</link>
+    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-content/</guid>
+    <description><![CDATA[<p>了解如何在 <strong>FeelIt</strong> 主題中快速, 直觀地創建和組織內容.</p>]]></description>
+</item>
+</channel>
+</rss>

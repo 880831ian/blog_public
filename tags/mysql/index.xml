@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Mysql - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/mysql/</link>
+        <description>Mysql - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/mysql/" rel="self" type="application/rss+xml" /><item>
+    <title>用 Node.js寫一個 Repository Restful API 的留言板 (express、sequelize 套件)</title>
+    <link>https://blog.pin-yi.me/node-restful-api-repository-messageboard/</link>
+    <pubDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/node-restful-api-repository-messageboard/</guid>
+    <description><![CDATA[本文章是使用 Node.js 來寫一個 Repository Restful API 的留言板，並且會使用 express 以及 sequelize (使用 Mysql)套件。 建議可以先觀看 Node.js 介紹 文章來簡單學習 Node 語言。 範例程式連結 點我 😘]]></description>
+</item>
+<item>
+    <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
+    <link>https://blog.pin-yi.me/go-restful-api-repository-messageboard/</link>
+    <pubDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/go-restful-api-repository-messageboard/</guid>
+    <description><![CDATA[本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘]]></description>
+</item>
+</channel>
+</rss>

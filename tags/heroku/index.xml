@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Heroku - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/heroku/</link>
+        <description>Heroku - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 26 May 2022 15:07:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/heroku/" rel="self" type="application/rss+xml" /><item>
+    <title>部署 Laravel 於 Heroku 搭配 GitLab CI/CD</title>
+    <link>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</link>
+    <pubDate>Thu, 26 May 2022 15:07:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/laravel-gitlab-cicd-heroku/</guid>
+    <description><![CDATA[經過上一篇文章 如何從頭打造專屬的 GitLab CI/CD 的學習，讓我們了解到 GitLab CI/CD 的整個流程，接著我們本次要把 Laravel 給部署到 Heroku 透過 GitLab 的 CI/CD 去達成，不需要透過任何人工去測]]></description>
+</item>
+</channel>
+</rss>

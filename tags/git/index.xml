@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>git - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/git/</link>
+        <description>git - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcsr/</link>
+    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcsr/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟]]></description>
+</item>
+<item>
+    <title>如何合併多個 commit，且推到遠端呢？</title>
+    <link>https://blog.pin-yi.me/git-merge-multiple-commit/</link>
+    <pubDate>Tue, 21 Jun 2022 10:23:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/git-merge-multiple-commit/</guid>
+    <description><![CDATA[當我們在使用 Git 時，常常修改完內容後，會推 commit 到 github or gitlab，在一個分支上開發久了， commit 會累積很多，很雜且很亂，所以我們可以試著將 commit 給合併。 大]]></description>
+</item>
+<item>
+    <title>Git 介紹</title>
+    <link>https://blog.pin-yi.me/git/</link>
+    <pubDate>Fri, 15 Apr 2022 12:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/git/</guid>
+    <description><![CDATA[什麼是 Git ? 不管是不是工程師，只要常常需要使用電腦工作，每天一定都會新增、修改、刪除許多檔案，我們看到這張圖： 很多人的電腦裡面都有這樣的內容 這]]></description>
+</item>
+</channel>
+</rss>

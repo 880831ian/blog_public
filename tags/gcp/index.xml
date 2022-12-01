@@ -1,0 +1,68 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>GCP - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/gcp/</link>
+        <description>GCP - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gcp/" rel="self" type="application/rss+xml" /><item>
+    <title>使用 Terraform 建立 Google Kubernetes Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gke/</link>
+    <pubDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gke/</guid>
+    <description><![CDATA[我們接續昨天的建立 Google Kubernetes Engine 文章，今天要來介紹的是如何用 Terraform 建立 Google Kubernetes Engine，由於使用 terraform 去建立、修改、刪除的指令大家應該都清楚了，那我今天的文]]></description>
+</item>
+<item>
+    <title>使用 Terraform 建立 Google Compute Engine</title>
+    <link>https://blog.pin-yi.me/terraform-gce/</link>
+    <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
+    <description><![CDATA[嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立]]></description>
+</item>
+<item>
+    <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
+    <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
+    <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
+    <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gke/</link>
+    <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gke/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Build [ EP.5 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcb/</link>
+    <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcb/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcr/</link>
+    <pubDate>Sun, 03 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcr/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gcsr/</link>
+    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcsr/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - Compute Engine [ EP.2 ]</title>
+    <link>https://blog.pin-yi.me/gcp-gce/</link>
+    <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gce/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第二篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Google Compute Engine(GCE)，GCE 是 Google Cloud 上的基礎架]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - IAM 與管理 [ EP.1 ]</title>
+    <link>https://blog.pin-yi.me/gcp-iam/</link>
+    <pubDate>Wed, 29 Jun 2022 10:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-iam/</guid>
+    <description><![CDATA[本篇是我們進入 GCP 的第一篇文章，詳細的文章列表大家可以到這一篇查看 ～ IAM 的全名是 Identity and Access Management，當我們藉由 IAM，可以授與特定 Google Cloud 資]]></description>
+</item>
+<item>
+    <title>Google Cloud Platform (GCP) 百科全書  - 介紹與開頭 [ EP.0 ]</title>
+    <link>https://blog.pin-yi.me/gcp-introduce/</link>
+    <pubDate>Tue, 28 Jun 2022 15:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-introduce/</guid>
+    <description><![CDATA[哈囉大家好，我們在之前的文章有講到 Docker、K8s 等等，我們都是在本機來測試，但實際上，現在很多公司或服務都遷移到雲端上，那我們這次要帶]]></description>
+</item>
+</channel>
+</rss>

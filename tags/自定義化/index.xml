@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>自定義化 - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/%E8%87%AA%E5%AE%9A%E7%BE%A9%E5%8C%96/</link>
+        <description>自定義化 - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E8%87%AA%E5%AE%9A%E7%BE%A9%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
+    <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
+    <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
+    <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
+</item>
+</channel>
+</rss>

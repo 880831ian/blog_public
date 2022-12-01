@@ -1,0 +1,38 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>RESTful API - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/restful-api/</link>
+        <description>RESTful API - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/restful-api/" rel="self" type="application/rss+xml" /><item>
+    <title>用 Node.js寫一個 Repository Restful API 的留言板 (express、sequelize 套件)</title>
+    <link>https://blog.pin-yi.me/node-restful-api-repository-messageboard/</link>
+    <pubDate>Mon, 11 Apr 2022 11:37:10 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/node-restful-api-repository-messageboard/</guid>
+    <description><![CDATA[本文章是使用 Node.js 來寫一個 Repository Restful API 的留言板，並且會使用 express 以及 sequelize (使用 Mysql)套件。 建議可以先觀看 Node.js 介紹 文章來簡單學習 Node 語言。 範例程式連結 點我 😘]]></description>
+</item>
+<item>
+    <title>用 Go 寫一個 Repository Restful API 的留言板 (gin、gorm 套件)</title>
+    <link>https://blog.pin-yi.me/go-restful-api-repository-messageboard/</link>
+    <pubDate>Sun, 27 Mar 2022 21:27:19 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/go-restful-api-repository-messageboard/</guid>
+    <description><![CDATA[本文章是使用 Go 來寫一個 Repository Restful API 的留言板，並且會使用 gin 以及 gorm (使用 Mysql)套件。 建議可以先觀看 Go 介紹 文章來簡單學習 Go 語言。 範例程式連結 點我 😘]]></description>
+</item>
+<item>
+    <title>Laravel 進階 (內建會員系統、驗證 RESTful API 是否登入、使用 Repository 設計模式)</title>
+    <link>https://blog.pin-yi.me/laravel-advanced/</link>
+    <pubDate>Tue, 08 Mar 2022 09:00:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/laravel-advanced/</guid>
+    <description><![CDATA[本篇是 Laravel 介紹 的進階篇，由於有些說明介紹會沿用上一篇的內容，建議要先瀏覽過上一篇呦～ (可以從這裡下載最後程式碼！) Laravel 內建會員系統 Laravel 這個框架，很]]></description>
+</item>
+<item>
+    <title>Laravel 介紹 (使用 Laravel 從零到有開發出一個留言板功能並搭配 RESTful API 來實現 CRUD) </title>
+    <link>https://blog.pin-yi.me/laravel/</link>
+    <pubDate>Wed, 02 Mar 2022 10:33:45 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/laravel/</guid>
+    <description><![CDATA[<p>本文章會介紹什麼是 Laravel ，以及它有什麼特別之處，可以讓它在2015年被評為最受歡迎的 PHP  框架第一名，並說明為什麼要使用框架，最後實作一個留言板功能搭配 RESTful API 來實現 CRUD。</p>]]></description>
+</item>
+<item>
+    <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
+    <link>https://blog.pin-yi.me/php-restful-api/</link>
+    <pubDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/php-restful-api/</guid>
+    <description><![CDATA[<p>由於網路上文章幾乎都是使用 Apache 來實作第一個 PHP RESTful API，也比較沒有中文的介紹，剛好這次也還在學習，所以把學習的紀錄分享給大家，這次會搭配實作留言板來說明，那本次教學內容採用的是</p>]]></description>
+</item>
+</channel>
+</rss>
