@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kibana - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/kibana/</link>
+        <description>Kibana - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/kibana/" rel="self" type="application/rss+xml" /><item>
+    <title>Kibana 新增 index 索引時一直轉圈圈以及顯示 forbidden</title>
+    <link>https://blog.pin-yi.me/kibana-create-index-forbidden/</link>
+    <pubDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/kibana-create-index-forbidden/</guid>
+    <description><![CDATA[前幾天在工作使用 Kibana 時，想要新增一個新的索引，發現選擇索引並按下新增的按鈕，會一直轉圈圈，等了一陣子，使用開發工具 F12 查看，跳出了 forbidd]]></description>
+</item>
+</channel>
+</rss>

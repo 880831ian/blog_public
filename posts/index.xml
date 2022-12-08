@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Kibana 新增 index 索引時一直轉圈圈以及顯示 forbidden</title>
+    <link>https://blog.pin-yi.me/kibana-create-index-forbidden/</link>
+    <pubDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/kibana-create-index-forbidden/</guid>
+    <description><![CDATA[前幾天在工作使用 Kibana 時，想要新增一個新的索引，發現選擇索引並按下新增的按鈕，會一直轉圈圈，等了一陣子，使用開發工具 F12 查看，跳出了 forbidd]]></description>
+</item>
+<item>
     <title>使用 Terraform 建立 Google Kubernetes Engine</title>
     <link>https://blog.pin-yi.me/terraform-gke/</link>
     <pubDate>Tue, 29 Nov 2022 10:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gke/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/k8s-hpa/</link>
     <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-hpa/</guid>
     <description><![CDATA[此篇是要介紹 HorizontalPodAutoscaler (HPA) 的原理以及實作內容，那我們先來說明一下 HorizontalPodAutoscaler 是什麼吧！ HorizontalPodAutoscaler 原理 HorizontalPodAutoscaler (HPA) 中文可以叫水平 Pod 自動擴縮，他會自動更新工作負載資源 (Deployment 或 State]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Kubernetes Engine [ EP.6 ]</title>
-    <link>https://blog.pin-yi.me/gcp-gke/</link>
-    <pubDate>Thu, 07 Jul 2022 16:57:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gke/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第六篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Kubernetes Engine，Kubernetes Engine 也就是將 kubernetes 移]]></description>
 </item>
 </channel>
 </rss>
