@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決 - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決" />
+<meta property="og:description" content="先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" /><meta property="og:image" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-12T14:00:00+08:00" />
+<meta property="article:modified_time" content="2022-12-12T14:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"/>
+<meta name="twitter:title" content="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決"/>
+<meta name="twitter:description" content="先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" /><link rel="prev" href="https://blog.pin-yi.me/kibana-create-index-forbidden/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Kibana, Elasticsearch, Fluentd-Server, Fluentd-Bit","wordcount":  720 ,
+        "url": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/","datePublished": "2022-12-12T14:00:00+08:00","dateModified": "2022-12-12T14:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"
+        data-srcset="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp, /fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp 1.5x, /fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"
+        title="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-12-12">2022-12-12</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 720 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#efk-結構">EFK 結構</a></li>
+    <li><a href="#問題的出現">問題的出現</a></li>
+    <li><a href="#如何解決問題">如何解決問題</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>先說結論  &hellip; <del>EFK 真的好多雷 😆</del>  我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說，我在抽 Log 的時候發現有部分的 Log 送不到 Kibana，檢查 Fluentd-Server 發現 Server 的 Log 裡面有 <code>Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch</code> 的錯誤訊息，到底這個 Error 400 是什麼咧，就跟著我一起重溫找問題的苦難吧 XD</p>
+<br>
+<h2 id="efk-結構">EFK 結構</h2>
+<p>在開始之前我先簡單說一下我現在的 EFK 結構：</p>
+<figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png" data-sub-html="<h2>EFK 結構</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png"
+            data-srcset="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png 1.5x, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png 2x"
+            data-sizes="auto"
+            alt="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/1.png" width="1000" />
+    </a><figcaption class="image-caption">EFK 結構</figcaption>
+    </figure>
+<p>現在的 EFK 結構如上圖，我在要抽 Log 的 Pod 中多塞一個 fluentd-bit container，將 fluentd-bit 與服務(例如 nginx) 的 log 掛相同路徑，讓 fluentd-bit 可以抽到服務 log，接著就透過 fluentd-server-svc 打到 fluentd-server pod，後面就是常見的 EFK 結構，就不多做說明。</p>
+<br>
+<h2 id="問題的出現">問題的出現</h2>
+<p>我們就像平常一樣寫好整個 EFK 的 yaml，run 的時候也正常，可以收到 log，但很奇怪的是我們先送 <code>log_false</code> 的 log 可以正常收到，但再接著送 <code>log_true </code> 就收不到，我們也嘗試反過來送，先送 <code>log_true</code>，再送 <code>log_false</code>，發現換收不到 <code>log_false</code> 的 log</p>
+<br>
+<ul>
+<li>log_false</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;result&#34;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;message&#34;</span><span class="p">:</span><span class="s2">&#34;我是馬賽克&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;code&#34;</span><span class="p">:</span><span class="mi">11223344</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;data&#34;</span><span class="p">:{</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;end_at&#34;</span><span class="p">:</span><span class="s2">&#34;2022-12-19 04:09:00&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;response_code&#34;</span><span class="p">:</span><span class="s2">&#34;326dgf241geh1596489&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;job_name&#34;</span><span class="p">:</span><span class="s2">&#34;叮叮噹噹聖誕節&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;method&#34;</span><span class="p">:</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;url&#34;</span><span class="p">:</span><span class="s2">&#34;url.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>log_true</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;result&#34;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;data&#34;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&#34;response_code&#34;</span><span class="p">:</span><span class="s2">&#34;wkCJl1dfr45671607965&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>接著在 Fluentd-Server Log 中發現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤</p>
+<br>
+<figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-sub-html="<h2>fluentd-server image 內安裝 fluent-plugin-elasticsearch</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png"
+            data-srcset="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png 1.5x, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png 2x"
+            data-sizes="auto"
+            alt="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" width="1000" />
+    </a><figcaption class="image-caption">fluentd-server image 內安裝 fluent-plugin-elasticsearch</figcaption>
+    </figure>
+<br>
+<p>接著我到網路上搜尋，看看有沒有人有遇到跟我一樣的問題，發現在 <a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/467" target="_blank" rel="noopener noreffer">uken/fluent-plugin-elasticsearch</a> 也有些人有遇到同樣的問題</p>
+<br>
+<figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" data-sub-html="<h2>uken/fluent-plugin-elasticsearch issus 詢問</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png"
+            data-srcset="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png 1.5x, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png 2x"
+            data-sizes="auto"
+            alt="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" width="1000" />
+    </a><figcaption class="image-caption">uken/fluent-plugin-elasticsearch issus 詢問</figcaption>
+    </figure>
+<p>有人說可能是 elasticsearch 滿了，也有人說是 fluent-plugin-elasticsearch 版本有問題，或是將 elasticsearch 跟 kibana index 刪除就可以</p>
+<p>一開始以為是 <code>log_false</code> 跟 <code>log_true</code> 的欄位不同，所以才會有這個問題發生（你看就知道我跟 EFK 不熟吧ＸＤ），所以有另外倒一些其他服務的 log 進去測試，發現是可以正常抽到，且 kibana 那邊會依照 es 提供的欄位自動新增，所以也不是欄位的問題，那最後的問題是什麼呢？</p>
+<br>
+<h2 id="如何解決問題">如何解決問題</h2>
+<p>明天待續 &hellip;</p>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/467" target="_blank" rel="noopener noreffer">Elasticsearch 400 error #467
+</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kibana/">Kibana</a>
+                </span><span><a href="/tags/elasticsearch/">Elasticsearch</a>
+                </span><span><a href="/tags/fluentd-server/">Fluentd-Server</a>
+                </span><span><a href="/tags/fluentd-bit/">Fluentd-Bit</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2022-12-12</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/fluentd-server-show-fluent-plugin-elasticsearch-error400/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/fluentd-server-show-fluent-plugin-elasticsearch-error400/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" data-title="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決" data-hashtags="Kibana,Elasticsearch,Fluentd-Server,Fluentd-Bit"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" data-hashtag="Kibana"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" data-title="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" data-title="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" data-title="Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/kibana-create-index-forbidden/" class="prev" rel="prev" title="Kibana 新增 index 索引時一直轉圈圈以及顯示 HTTP 403 Forbidden"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

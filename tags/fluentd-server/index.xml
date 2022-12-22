@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Fluentd-Server - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/fluentd-server/</link>
+        <description>Fluentd-Server - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/fluentd-server/" rel="self" type="application/rss+xml" /><item>
+    <title>Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決</title>
+    <link>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</link>
+    <pubDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</guid>
+    <description><![CDATA[先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說]]></description>
+</item>
+</channel>
+</rss>

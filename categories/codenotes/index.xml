@@ -5,6 +5,12 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決</title>
+    <link>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</link>
+    <pubDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</guid>
+    <description><![CDATA[先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說]]></description>
+</item>
+<item>
     <title>Kibana 新增 index 索引時一直轉圈圈以及顯示 HTTP 403 Forbidden</title>
     <link>https://blog.pin-yi.me/kibana-create-index-forbidden/</link>
     <pubDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/kibana-create-index-forbidden/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gcp-gcb/</link>
     <pubDate>Wed, 06 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcb/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第五篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Build，Cloud Build 可以幫我們做持續建構、測]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Container Registry [ EP.4 ]</title>
-    <link>https://blog.pin-yi.me/gcp-gcr/</link>
-    <pubDate>Sun, 03 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcr/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管]]></description>
 </item>
 </channel>
 </rss>
