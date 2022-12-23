@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/" /><meta property="og:image" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-12-12T14:00:00+08:00" />
-<meta property="article:modified_time" content="2022-12-12T14:00:00+08:00" />
+<meta property="article:modified_time" content="2022-12-22T18:06:01+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "Kibana, Elasticsearch, Fluentd-Server, Fluentd-Bit","wordcount":  720 ,
-        "url": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/","datePublished": "2022-12-12T14:00:00+08:00","dateModified": "2022-12-12T14:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "Kibana, Elasticsearch, Fluentd-Server, Fluentd-Bit","wordcount":  912 ,
+        "url": "https:\/\/blog.pin-yi.me\/fluentd-server-show-fluent-plugin-elasticsearch-error400\/","datePublished": "2022-12-12T14:00:00+08:00","dateModified": "2022-12-22T18:06:01+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -127,7 +127,7 @@ if (!doNotTrack) {
         alt="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp"
         title="/fluentd-server-show-fluent-plugin-elasticsearch-error400/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-12-12">2022-12-12</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 720 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-12-12">2022-12-12</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 912 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
             </div>
             
@@ -144,7 +144,7 @@ if (!doNotTrack) {
     <li><a href="#參考資料">參考資料</a></li>
   </ul>
 </nav></div>
-                </div><div class="content" id="content"><p>先說結論  &hellip; <del>EFK 真的好多雷 😆</del>  我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說，我在抽 Log 的時候發現有部分的 Log 送不到 Kibana，檢查 Fluentd-Server 發現 Server 的 Log 裡面有 <code>Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch</code> 的錯誤訊息，到底這個 Error 400 是什麼咧，就跟著我一起重溫找問題的苦難吧 XD</p>
+                </div><div class="content" id="content"><p>先說結論  &hellip; <del>EFK 真的好多雷 😆</del>  我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說，我在抽 Log 的時候發現有部分的 Log 送不到 Kibana，檢查 Fluentd-Server 的 Log 發現裡面有 <code>Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch</code> 的錯誤訊息，到底這個 Error 400 是什麼咧，就跟著我一起重溫找問題的苦難吧 XD</p>
 <br>
 <h2 id="efk-結構">EFK 結構</h2>
 <p>在開始之前我先簡單說一下我現在的 EFK 結構：</p>
@@ -187,7 +187,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">	<span class="nt">&#34;message&#34;</span><span class="p">:</span><span class="s2">&#34;我是馬賽克&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">	<span class="nt">&#34;code&#34;</span><span class="p">:</span><span class="mi">11223344</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">	<span class="nt">&#34;data&#34;</span><span class="p">:{</span>
-</span></span><span class="line"><span class="cl">	<span class="nt">&#34;end_at&#34;</span><span class="p">:</span><span class="s2">&#34;2022-12-19 04:09:00&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&#34;end_at&#34;</span><span class="p">:</span><span class="s2">&#34;2022-12-19 04:09:00&#34;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">},</span>
 </span></span><span class="line"><span class="cl">	<span class="nt">&#34;response_code&#34;</span><span class="p">:</span><span class="s2">&#34;326dgf241geh1596489&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">	<span class="nt">&#34;job_name&#34;</span><span class="p">:</span><span class="s2">&#34;叮叮噹噹聖誕節&#34;</span><span class="p">,</span>
@@ -219,7 +219,7 @@ if (!doNotTrack) {
 </div><br>
 <p>接著在 Fluentd-Server Log 中發現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤</p>
 <br>
-<figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-sub-html="<h2>fluentd-server image 內安裝 fluent-plugin-elasticsearch</h2>">
+<figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" data-sub-html="<h2>fluentd-server 跳出錯誤 LOG</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -227,10 +227,10 @@ if (!doNotTrack) {
             data-srcset="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png 1.5x, /images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png 2x"
             data-sizes="auto"
             alt="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/2.png" width="1000" />
-    </a><figcaption class="image-caption">fluentd-server image 內安裝 fluent-plugin-elasticsearch</figcaption>
+    </a><figcaption class="image-caption">fluentd-server 跳出錯誤 LOG</figcaption>
     </figure>
 <br>
-<p>接著我到網路上搜尋，看看有沒有人有遇到跟我一樣的問題，發現在 <a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/467" target="_blank" rel="noopener noreffer">uken/fluent-plugin-elasticsearch</a> 也有些人有遇到同樣的問題</p>
+<p>我到網路上搜尋，看看有沒有人有遇到跟我一樣的問題，發現在 <a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/467" target="_blank" rel="noopener noreffer">uken/fluent-plugin-elasticsearch</a> 也有其他人有遇到同樣的問題</p>
 <br>
 <figure><a class="lightgallery" href="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" title="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" data-thumbnail="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" data-sub-html="<h2>uken/fluent-plugin-elasticsearch issus 詢問</h2>">
         <img
@@ -242,11 +242,12 @@ if (!doNotTrack) {
             alt="/images/fluentd-server-show-fluent-plugin-elasticsearch-error400/3.png" width="1000" />
     </a><figcaption class="image-caption">uken/fluent-plugin-elasticsearch issus 詢問</figcaption>
     </figure>
-<p>有人說可能是 elasticsearch 滿了，也有人說是 fluent-plugin-elasticsearch 版本有問題，或是將 elasticsearch 跟 kibana index 刪除就可以</p>
-<p>一開始以為是 <code>log_false</code> 跟 <code>log_true</code> 的欄位不同，所以才會有這個問題發生（你看就知道我跟 EFK 不熟吧ＸＤ），所以有另外倒一些其他服務的 log 進去測試，發現是可以正常抽到，且 kibana 那邊會依照 es 提供的欄位自動新增，所以也不是欄位的問題，那最後的問題是什麼呢？</p>
+<p>有人說可能是 Elasticsearch 的 disk 滿了，也有人說是裝在 Fluentd-Server 的套件 fluent-plugin-elasticsearch 版本有問題，或是將 Elasticsearch 跟 Kibana index 刪除就可以，我有砍掉 index 再重新倒入 Log，還是會有問題。</p>
+<p>一開始以為是 <code>log_false</code> 跟 <code>log_true</code> 的欄位不同，所以才會有這個問題發生（你看就知道我跟 EFK 不熟吧ＸＤ），所以有另外倒一些其他服務(欄位也不同)的 log 進去測試，發現是可以正常抽到，且 kibana 那邊會依照 es 提供的欄位自動新增，所以也不是欄位的問題，那最後的問題是什麼呢？</p>
 <br>
 <h2 id="如何解決問題">如何解決問題</h2>
-<p>明天待續 &hellip;</p>
+<p>最後在我們仔細檢查後發現，<code>log_false</code> 跟 <code>log_true</code> 的欄位其中一樣存的資料型態不太一樣，發現其中的 <code>data</code> 欄位在 <code>log_false</code> 的資料型態是 array，在 <code>log_true</code> 存的時候是字串，所以導致當其中一個 log 寫入後，另一個 log 就會因為同欄位的資料型態有所不同，而無法寫入 log，且在 Fluentd-Server 會出現標題的 Error 400 原因拉～</p>
+<p>最後重新調整欄位的資料型態，就順利解決此次問題 ✌️✌️✌️</p>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/467" target="_blank" rel="noopener noreffer">Elasticsearch 400 error #467
@@ -257,7 +258,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/fluentd-server/">Fluentd-Server</a>
                 </span><span><a href="/tags/fluentd-bit/">Fluentd-Bit</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-12-12</span>
+                <span>更新於 2022-12-22&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/9d98bd9ca835514cf1f05e0994078b84bf3e68c8" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;9d98bd9c:&nbsp;# 新增 Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決">
+                            <i class="fas fa-hashtag fa-fw"></i>9d98bd9c</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/fluentd-server-show-fluent-plugin-elasticsearch-error400/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
