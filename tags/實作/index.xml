@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</link>
         <description>實作 - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>如何啟用 GitLab 的 Package Registry 以及將儲存庫改到 GCS 上</title>
+    <link>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</link>
+    <pubDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</guid>
+    <description><![CDATA[今天接到一個案子，之後 RD 部門想要使用 GitLab 的 Package Registry 功能來發布套件，且不想要把它存在 GitLab 伺服器上，希望可以直接存到 GCP 的 Google Cloud Storage 上，所以才有了此篇的筆記來]]></description>
+</item>
+<item>
     <title>Kubernetes (K8s) 自定義 PHP HorizontalPodAutoscaler 指標</title>
     <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
     <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/jenkins-ansible/</link>
     <pubDate>Wed, 11 May 2022 15:11:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins-ansible/</guid>
     <description><![CDATA[在軟體開發領域中，IT 自動化 (automation) 及 持續整合 (Continuous Integration, CI) 、持續佈署 (Continuous Deployment,CD) 是 DevOps 精神中很重要的兩個部分，此文章是參考 30 天入門 Ansible 及 Jenkins ，再加上自己測試後的筆記紀]]></description>
-</item>
-<item>
-    <title>Kubernetes (K8s) 搭配 EFK 實作 (Deployment、StatefulSet、DaemonSet)</title>
-    <link>https://blog.pin-yi.me/k8s-efk/</link>
-    <pubDate>Tue, 10 May 2022 15:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-efk/</guid>
-    <description><![CDATA[這是我們 Kubernetes 文章的第三篇，此文章會紀錄我將 EFK 建在 Kubernetes 上面，最後也會統整實作過程中，可能會遇到的一些問題，讓大家在學習時，可以更有效率，不用 debug 到死]]></description>
 </item>
 </channel>
 </rss>
