@@ -5,10 +5,10 @@
         <description>Package Registry - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/package-registry/" rel="self" type="application/rss+xml" /><item>
-    <title>如何啟用 GitLab 的 Package Registry 以及將儲存庫改到 GCS 上</title>
+    <title>如何啟用 GitLab 的 Package Registry 以及將儲存位置從伺服器改到 GCS 上</title>
     <link>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</link>
     <pubDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</guid>
-    <description><![CDATA[今天接到一個案子，之後 RD 部門想要使用 GitLab 的 Package Registry 功能來發布套件，且不想要把它存在 GitLab 伺服器上，希望可以直接存到 GCP 的 Google Cloud Storage 上，所以才有了此篇的筆記來]]></description>
+    <description><![CDATA[今天接到一個案子，RD 部門之後想要使用 GitLab 的 Package Registry 功能來發布套件，且不想把它存在 GitLab 伺服器上，希望可以直接存到 GCP 的 Google Cloud Storage 上，所以才會有了此篇筆記來]]></description>
 </item>
 </channel>
 </rss>
