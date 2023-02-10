@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決] - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]" />
+<meta property="og:description" content="前陣子公司建立在 Google Kubernetes Engine 叢集上的 CronJob 服務會有短暫時間沒有執行 Job。先前情提要一下，此 CronJob 的設定是每分鐘都會執行 (圖一)，所以理當來說 Log 應該要可以" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/gke-cronjob-not-working/" /><meta property="og:image" content="https://blog.pin-yi.me/gke-cronjob-not-working/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-10T14:14:00+08:00" />
+<meta property="article:modified_time" content="2023-02-10T14:14:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/gke-cronjob-not-working/featured-image.webp"/>
+<meta name="twitter:title" content="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]"/>
+<meta name="twitter:description" content="前陣子公司建立在 Google Kubernetes Engine 叢集上的 CronJob 服務會有短暫時間沒有執行 Job。先前情提要一下，此 CronJob 的設定是每分鐘都會執行 (圖一)，所以理當來說 Log 應該要可以"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gke-cronjob-not-working/" /><link rel="prev" href="https://blog.pin-yi.me/gitlab-package-registry-to-gcs/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/gke-cronjob-not-working\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/gke-cronjob-not-working\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GCP, GKE, CronJob, 實作","wordcount":  938 ,
+        "url": "https:\/\/blog.pin-yi.me\/gke-cronjob-not-working\/","datePublished": "2023-02-10T14:14:00+08:00","dateModified": "2023-02-10T14:14:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/gke-cronjob-not-working/featured-image.webp"
+        data-srcset="/gke-cronjob-not-working/featured-image.webp, /gke-cronjob-not-working/featured-image.webp 1.5x, /gke-cronjob-not-working/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/gke-cronjob-not-working/featured-image.webp"
+        title="/gke-cronjob-not-working/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-10">2023-02-10</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 938 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 2 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#問題發生以及問題原因">問題發生以及問題原因</a></li>
+    <li><a href="#解決問題">解決問題</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>前陣子公司建立在 Google Kubernetes Engine 叢集上的 CronJob 服務會有短暫時間沒有執行 Job。先前情提要一下，此 CronJob 的設定是每分鐘都會執行 (圖一)，所以理當來說 Log 應該要可以看到每分鐘都有此 CronJob 的紀錄，但有時候會發生 CronJob 短暫時間都沒有執行的狀況，找了一陣子都沒有找到原因，最後開支援單請 Google 那邊協助查看，終於找到原因拉 😍。那就跟我一起看一下發生的過程，以及 Google 幫我們找到的原因，以及要如何解決等等～</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/1.png" title="/images/gke-cronjob-not-working/1.png" data-thumbnail="/images/gke-cronjob-not-working/1.png" data-sub-html="<h2>(圖一) CronJob schedule 時間為每分鐘執行</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/1.png"
+            data-srcset="/images/gke-cronjob-not-working/1.png, /images/gke-cronjob-not-working/1.png 1.5x, /images/gke-cronjob-not-working/1.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/1.png" width="600" />
+    </a><figcaption class="image-caption">(圖一) CronJob schedule 時間為每分鐘執行</figcaption>
+    </figure>
+<br>
+<h2 id="問題發生以及問題原因">問題發生以及問題原因</h2>
+<p>我們使用 Google Cloud Platform 裡面的記錄功能，可以看到 (圖二)，在每分鐘執行的 Log 中，有短暫時間沒有執行 Job，但這個時間除了 CronJob 以外，其他的服務都是好的。</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/2.png" title="/images/gke-cronjob-not-working/2.png" data-thumbnail="/images/gke-cronjob-not-working/2.png" data-sub-html="<h2>(圖二) Google Cloud Platform 記錄有短暫沒有執行</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/2.png"
+            data-srcset="/images/gke-cronjob-not-working/2.png, /images/gke-cronjob-not-working/2.png 1.5x, /images/gke-cronjob-not-working/2.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/2.png" width="700" />
+    </a><figcaption class="image-caption">(圖二) Google Cloud Platform 記錄有短暫沒有執行</figcaption>
+    </figure>
+<br>
+<p>找了一陣子都沒有找到原因，於是我們開支援單請 Google 那邊協助查看，Google 那邊找了一陣子後終於找到原因拉！！！我們一起來看看吧 (圖三)</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/3.png" title="/images/gke-cronjob-not-working/3.png" data-thumbnail="/images/gke-cronjob-not-working/3.png" data-sub-html="<h2>(圖三) Google 支援單回覆</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/3.png"
+            data-srcset="/images/gke-cronjob-not-working/3.png, /images/gke-cronjob-not-working/3.png 1.5x, /images/gke-cronjob-not-working/3.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/3.png" width="700" />
+    </a><figcaption class="image-caption">(圖三) Google 支援單回覆</figcaption>
+    </figure>
+<br>
+<p>就如同 Google 所說，使用提供的指令參數來查詢，叢集在該時段有發生 master control plane 的升級，如 (圖四)，再加上我們建的這個 cluster 是使用 zonal cluster (圖五)，所以叢集只有一個 control plane，當 control plane 在更新時，會無法部署新的 workload，導致該 CronJob 沒有執行 Job。參考資料 [1]</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/4.png" title="/images/gke-cronjob-not-working/4.png" data-thumbnail="/images/gke-cronjob-not-working/4.png" data-sub-html="<h2>(圖四) 發生 master control plane 的升級</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/4.png"
+            data-srcset="/images/gke-cronjob-not-working/4.png, /images/gke-cronjob-not-working/4.png 1.5x, /images/gke-cronjob-not-working/4.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/4.png" width="700" />
+    </a><figcaption class="image-caption">(圖四) 發生 master control plane 的升級</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/5.png" title="/images/gke-cronjob-not-working/5.png" data-thumbnail="/images/gke-cronjob-not-working/5.png" data-sub-html="<h2>(圖五) 有問題的叢集位置類型</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/5.png"
+            data-srcset="/images/gke-cronjob-not-working/5.png, /images/gke-cronjob-not-working/5.png 1.5x, /images/gke-cronjob-not-working/5.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/5.png" width="450" />
+    </a><figcaption class="image-caption">(圖五) 有問題的叢集位置類型</figcaption>
+    </figure>
+<br>
+<p>Google 的建議是可以考慮使用另一個 regional cluster，讓 master node 在更新時不會只在單一地區，或是一樣使用舊的 zonal cluster，透過設定 Maintenance window 或者 Maintenance exclusions 來降低服務受到 workload 的影響。參考資料 [2]</p>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>技巧<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>就算把 node_pool 裡面的自動升級給停掉，也沒有辦法解決此問題！因為此 master control plane (也就是 master node) 的升級，不是 worker node 的 node pool 升級，是由 GKE 負責維護的，所以他們會定期升級 control plane，也沒辦法停止此類的升級。</p>
+</li>
+<li>
+<p>若已經建立好 zonal cluster 後，想要改成 regional cluster ，是沒有辦法使用修改的方式，一定只能重建 cluster，所以大家在建立時要注意～</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<br>
+<h2 id="解決問題">解決問題</h2>
+<p>最後我們選擇將叢集給整個重建，來確保 CronJob 不會有沒有執行到的狀況發生，重建叢集跟搬服務的過程很辛苦的 😰 希望大家不要發生QQ，最後我們來看一下重建完後，在 master control plane 更新的時候，還會不會有 CronJob 沒有執行的情況發生。</p>
+<br>
+<p>新叢集使用 regional cluster 來建立，在 2/1 也有 master control plane 的升級。 (圖六)</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/6.png" title="/images/gke-cronjob-not-working/6.png" data-thumbnail="/images/gke-cronjob-not-working/6.png" data-sub-html="<h2>(圖六) 發生 master control plane 的升級</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/6.png"
+            data-srcset="/images/gke-cronjob-not-working/6.png, /images/gke-cronjob-not-working/6.png 1.5x, /images/gke-cronjob-not-working/6.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/6.png" width="700" />
+    </a><figcaption class="image-caption">(圖六) 發生 master control plane 的升級</figcaption>
+    </figure>
+<br>
+<p>查看 CronJob 執行的紀錄可以發現並沒有 Job 沒有執行的情況發生。 (圖七)</p>
+<br>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/7.png" title="/images/gke-cronjob-not-working/7.png" data-thumbnail="/images/gke-cronjob-not-working/7.png" data-sub-html="<h2>(圖七) 叢集位置類型</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/7.png"
+            data-srcset="/images/gke-cronjob-not-working/7.png, /images/gke-cronjob-not-working/7.png 1.5x, /images/gke-cronjob-not-working/7.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/7.png" width="700" />
+    </a><figcaption class="image-caption">(圖七) 叢集位置類型</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/gke-cronjob-not-working/8.png" title="/images/gke-cronjob-not-working/8.png" data-thumbnail="/images/gke-cronjob-not-working/8.png" data-sub-html="<h2>(圖八) 新叢集位置類型</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-cronjob-not-working/8.png"
+            data-srcset="/images/gke-cronjob-not-working/8.png, /images/gke-cronjob-not-working/8.png 1.5x, /images/gke-cronjob-not-working/8.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-cronjob-not-working/8.png" width="450" />
+    </a><figcaption class="image-caption">(圖八) 新叢集位置類型</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades" target="_blank" rel="noopener noreffer"> [1] Standard cluster upgrades</a></p>
+<p><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions" target="_blank" rel="noopener noreffer"> [2] maintenance-windows-and-exclusions</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/gke/">GKE</a>
+                </span><span><a href="/tags/cronjob/">CronJob</a>
+                </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-02-10</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/gke-cronjob-not-working/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gke-cronjob-not-working/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/" data-title="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]" data-hashtags="GCP,GKE,CronJob,實作"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/" data-title="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/" data-title="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/gke-cronjob-not-working/" data-title="Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gitlab-package-registry-to-gcs/" class="prev" rel="prev" title="如何啟用 GitLab 的 Package Registry 以及將儲存位置從伺服器改到 GCS 上"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
