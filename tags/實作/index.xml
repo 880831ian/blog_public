@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/</link>
         <description>實作 - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/%E5%AF%A6%E4%BD%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
+    <link>https://blog.pin-yi.me/bookstack/</link>
+    <pubDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
+    <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
+</item>
+<item>
     <title>Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]</title>
     <link>https://blog.pin-yi.me/gke-cronjob-not-working/</link>
     <pubDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-cronjob-not-working/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/ansible/</link>
     <pubDate>Mon, 16 May 2022 11:26:40 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/ansible/</guid>
     <description><![CDATA[本篇文章是接續前面兩篇 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 跟 使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot 文章，歡迎大家先去觀看前面兩篇文章 🤪 本篇所使用到的程式碼都會整理於]]></description>
-</item>
-<item>
-    <title>使用 Jenkins 設定 GitHub 觸發程序並通知 Telegram Bot</title>
-    <link>https://blog.pin-yi.me/jenkins/</link>
-    <pubDate>Mon, 16 May 2022 11:05:30 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/jenkins/</guid>
-    <description><![CDATA[此文章是接續前面 Jenkins 及 Ansible IT 自動化 CI/CD 介紹 文章，此篇會實際安裝及實作 Jenkins，大家記得在學習前要先檢查自己的版本是否有新的更新！那我們開始囉]]></description>
 </item>
 </channel>
 </rss>

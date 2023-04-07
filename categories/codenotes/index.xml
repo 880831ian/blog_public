@@ -5,6 +5,12 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
+    <link>https://blog.pin-yi.me/bookstack/</link>
+    <pubDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
+    <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
+</item>
+<item>
     <title>Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]</title>
     <link>https://blog.pin-yi.me/gke-cronjob-not-working/</link>
     <pubDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-cronjob-not-working/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</link>
     <pubDate>Mon, 18 Jul 2022 11:08:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-k8s-hpa-php-custom-metrics/</guid>
     <description><![CDATA[此篇要介紹 HorizontalPodAutoscaler 的自定義指標，K8s 內建的指標 (metrics) 只支援 CPU 以及 Memory，如果我們今天想要使用其他的指標來讓 HPA 擴縮呢！？ 不知道什麼是 HorizontalPodAutoscaler 嗎？可以先]]></description>
-</item>
-<item>
-    <title>Kubernetes (K8s) HorizontalPodAutoscaler (HPA) 原理與實作</title>
-    <link>https://blog.pin-yi.me/k8s-hpa/</link>
-    <pubDate>Tue, 12 Jul 2022 09:12:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-hpa/</guid>
-    <description><![CDATA[此篇是要介紹 HorizontalPodAutoscaler (HPA) 的原理以及實作內容，那我們先來說明一下 HorizontalPodAutoscaler 是什麼吧！ HorizontalPodAutoscaler 原理 HorizontalPodAutoscaler (HPA) 中文可以叫水平 Pod 自動擴縮，他會自動更新工作負載資源 (Deployment 或 State]]></description>
 </item>
 </channel>
 </rss>

@@ -4,7 +4,7 @@
         <link>https://blog.pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</lastBuildDate>
             <atom:link href="https://blog.pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
+    <link>https://blog.pin-yi.me/bookstack/</link>
+    <pubDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
+    <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
 </item>
 <item>
     <title>Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]</title>
@@ -59,12 +65,6 @@
     <link>https://blog.pin-yi.me/terraform-gce/</link>
     <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
     <description><![CDATA[嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立]]></description>
-</item>
-<item>
-    <title>什麼是 IaC ? Terraform 又是什麼？</title>
-    <link>https://blog.pin-yi.me/terraform/</link>
-    <pubDate>Mon, 26 Sep 2022 15:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform/</guid>
-    <description><![CDATA[跟上一篇 Snyk 一樣，本系列也是去參加 DevOpsDay Taipei 2022 活動聽到各位產業大佬目前在使用的名詞以及技術，想說回家也充實一下自己，了解一下在 DevOpsDay 最常出現的 IaC 是什麼？]]></description>
 </item>
 </channel>
 </rss>
