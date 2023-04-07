@@ -4,10 +4,10 @@
         <link>https://blog.pin-yi.me/tags/k8s/</link>
         <description>K8s - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
     <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
     <link>https://blog.pin-yi.me/bookstack/</link>
-    <pubDate>Thu, 30 Mar 2023 13:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
+    <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
     <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
 </item>
 <item>

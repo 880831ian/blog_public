@@ -8,7 +8,7 @@
 <meta property="og:description" content="最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/bookstack/" /><meta property="og:image" content="https://blog.pin-yi.me/bookstack/featured-image.webp"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-03-30T13:58:00+08:00" />
+<meta property="article:published_time" content="2023-04-07T16:42:00+08:00" />
 <meta property="article:modified_time" content="2023-04-07T16:31:44+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/bookstack\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "K8s, Kubernetes, Docker, 實作, 介紹, 設定教學","wordcount":  1713 ,
-        "url": "https:\/\/blog.pin-yi.me\/bookstack\/","datePublished": "2023-03-30T13:58:00+08:00","dateModified": "2023-04-07T16:31:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "K8s, Kubernetes, Docker, 實作, 介紹, 設定教學","wordcount":  1720 ,
+        "url": "https:\/\/blog.pin-yi.me\/bookstack\/","datePublished": "2023-04-07T16:42:00+08:00","dateModified": "2023-04-07T16:31:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -127,7 +127,7 @@ if (!doNotTrack) {
         alt="/bookstack/featured-image.webp"
         title="/bookstack/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-30">2023-03-30</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1713 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-04-07">2023-04-07</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1720 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
             </div>
             
@@ -211,15 +211,15 @@ if (!doNotTrack) {
 <h3 id="畫圖功能">畫圖功能</h3>
 <p>在討論系統或是程式的架構，最好的方式就是用畫圖的來表示。在以往都是使用 <a href="https://app.diagrams.net/" target="_blank" rel="noopener noreffer">Draw.io</a> 來畫圖，當畫完圖後需要匯出畫好的圖以外，如果怕畫圖的原檔消失，還需要再另外下載原檔來保留，很不方便，又怕忘記下載，而 Bookstack 內建可直接編輯的功能，當畫完圖後有問題，可以直接點擊圖片來編輯，而這些功能還會搭配內建的版控，若有問題還可以還原到正確的圖片版本。</p>
 <br>
-<figure><a class="lightgallery" href="/images/bookstack/6.gif" title="/images/bookstack/6.gif" data-thumbnail="/images/bookstack/6.gif" data-sub-html="<h2>搜尋功能</h2>">
+<figure><a class="lightgallery" href="/images/bookstack/5.gif" title="/images/bookstack/5.gif" data-thumbnail="/images/bookstack/5.gif" data-sub-html="<h2>畫圖功能</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/bookstack/6.gif"
-            data-srcset="/images/bookstack/6.gif, /images/bookstack/6.gif 1.5x, /images/bookstack/6.gif 2x"
+            data-src="/images/bookstack/5.gif"
+            data-srcset="/images/bookstack/5.gif, /images/bookstack/5.gif 1.5x, /images/bookstack/5.gif 2x"
             data-sizes="auto"
-            alt="/images/bookstack/6.gif" width="1000" />
-    </a><figcaption class="image-caption">搜尋功能</figcaption>
+            alt="/images/bookstack/5.gif" width="1000" />
+    </a><figcaption class="image-caption">畫圖功能</figcaption>
     </figure>
 <br>
 <h2 id="安裝說明">安裝說明</h2>
@@ -555,6 +555,17 @@ if (!doNotTrack) {
 <p>docker 的部分就更簡單了，一樣是把 <strong>&laquo;更換此處&raquo;</strong> 換成對應的內容即可，env 的部分可以參考官方文件，這邊比較特別的是我們有多使用 Google  來 Oauth 登入，Bookstack 支援多種的 Oauth 登入方式，可以參考 <a href="https://www.bookstackapp.com/docs/admin/third-party-auth/" target="_blank" rel="noopener noreffer">Third Party Authentication</a>。</p>
 <br>
 <p>架設好 Bookstack 就可以開始寫部門或是組織內的筆記拉～ 如果有開放外網連線，要記得修改預設的管理員帳號，以及用管理員帳號登入，到功能與安全的公開存取給取消，這樣就必須要登入才可以瀏覽筆記了！那就交給大家自己去玩這個好用的筆記工具囉～～😍</p>
+<br>
+<figure><a class="lightgallery" href="/images/bookstack/6.png" title="/images/bookstack/6.png" data-thumbnail="/images/bookstack/6.png" data-sub-html="<h2>功能與安全設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/bookstack/6.png"
+            data-srcset="/images/bookstack/6.png, /images/bookstack/6.png 1.5x, /images/bookstack/6.png 2x"
+            data-sizes="auto"
+            alt="/images/bookstack/6.png" width="850" />
+    </a><figcaption class="image-caption">功能與安全設定</figcaption>
+    </figure>
 <br>
 <h2 id="參考資料">參考資料</h2>
 <p><a href="https://docs.ossii.com.tw/books/bookstack/page/bookstack" target="_blank" rel="noopener noreffer">BookStack 簡介</a></p>
