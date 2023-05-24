@@ -33,7 +33,7 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  3770 ,
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform","wordcount":  3966 ,
         "url": "https:\/\/blog.pin-yi.me\/terraform\/","datePublished": "2022-09-26T15:58:00+08:00","dateModified": "2023-05-24T10:28:31+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
@@ -127,7 +127,7 @@ if (!doNotTrack) {
         alt="/terraform/featured-image.webp"
         title="/terraform/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">什麼是 IaC ? Terraform 又是什麼？</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3770 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-26">2022-09-26</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 3966 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 8 分鐘</span>&nbsp;</div>
             </div>
             
@@ -371,6 +371,7 @@ if (!doNotTrack) {
 </div><p>(以上程式碼來自官網 <a href="https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started#quick-start-tutorial" target="_blank" rel="noopener noreffer">安裝 Terraform#快速入門</a> 加上小修改)</p>
 <br>
 <p>先來簡單說明一下 Terraform 程式碼格式，Terraform 的檔案副檔名是 <code>*.tf</code>，採用名為 HCL (HashiCorp Configuration Language) 的組態語言來描述基礎架構。</p>
+<p>(補充說明：只要是同一個目錄下有 .tf 檔案結尾的，Terraform 都會去執行，所以檔案名稱可以自己取名，但為了方便管理都會使用 main、provider、backend、output 的檔案來放置對應的內容)</p>
 <p>HCL 是一種宣告式的語言，讓你直接寫下期望的基礎架構，而不是寫下過程的每一個步驟。</p>
 <br>
 <h4 id="檔案介紹">檔案介紹</h4>
@@ -668,6 +669,19 @@ if (!doNotTrack) {
             data-sizes="auto"
             alt="/images/terraform/14.png" width="700" />
     </a><figcaption class="image-caption">terraform show 將 terraform.tfstate 轉成 tf</figcaption>
+    </figure>
+<br>
+<p>如果透過上述的方式來轉成 tf，會發現在重新 apply 時，會出現錯誤，這邊以 gce 的當範例，轉完的 tf 設定，有些是 tf 不支援的參數，只會顯示在 tfstate，所以還需要手動刪除。</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform/15.png" title="/images/terraform/15.png" data-thumbnail="/images/terraform/15.png" data-sub-html="<h2>轉換後還需將不用的設定給移除</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform/15.png"
+            data-srcset="/images/terraform/15.png, /images/terraform/15.png 1.5x, /images/terraform/15.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform/15.png" width="700" />
+    </a><figcaption class="image-caption">轉換後還需將不用的設定給移除</figcaption>
     </figure>
 <br>
 <h2 id="後續文章">後續文章</h2>
