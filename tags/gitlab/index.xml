@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/gitlab/</link>
         <description>GitLab - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gitlab/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 29 May 2023 14:36:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gitlab/" rel="self" type="application/rss+xml" /><item>
+    <title>Terraform 如何多人共同開發 (將 tfstate 存在後端)</title>
+    <link>https://blog.pin-yi.me/terraform-tfstate/</link>
+    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
+    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存]]></description>
+</item>
+<item>
     <title>如何啟用 GitLab 的 Package Registry 以及將儲存位置從伺服器改到 GCS 上</title>
     <link>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</link>
     <pubDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</guid>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Terraform 如何多人共同開發 (將 tfstate 存在後端) - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Terraform 如何多人共同開發 (將 tfstate 存在後端)" />
+<meta property="og:description" content="此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/terraform-tfstate/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-tfstate/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-29T14:36:00+08:00" />
+<meta property="article:modified_time" content="2023-05-29T15:24:34+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/terraform-tfstate/featured-image.webp"/>
+<meta name="twitter:title" content="Terraform 如何多人共同開發 (將 tfstate 存在後端)"/>
+<meta name="twitter:description" content="此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/terraform-tfstate/" /><link rel="prev" href="https://blog.pin-yi.me/bookstack/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Terraform 如何多人共同開發 (將 tfstate 存在後端)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, tfstate, gitlab, gcs","wordcount":  1997 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/","datePublished": "2023-05-29T14:36:00+08:00","dateModified": "2023-05-29T15:24:34+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/terraform-tfstate/featured-image.webp"
+        data-srcset="/terraform-tfstate/featured-image.webp, /terraform-tfstate/featured-image.webp 1.5x, /terraform-tfstate/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/terraform-tfstate/featured-image.webp"
+        title="/terraform-tfstate/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Terraform 如何多人共同開發 (將 tfstate 存在後端)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1997 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gitlab">gitlab</a>
+      <ul>
+        <li><a href="#lock">Lock</a></li>
+      </ul>
+    </li>
+    <li><a href="#gcs">gcs</a>
+      <ul>
+        <li><a href="#lock-1">Lock</a></li>
+      </ul>
+    </li>
+    <li><a href="#後續文章">後續文章</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此篇是接續上一篇 <a href="https://blog.pin-yi.me/terraform/" target="_blank" rel="noopener noreffer">什麼是 IaC ? Terraform 又是什麼？</a>的 Terraform 文章，我們在上一篇有提到 <code>terraform apply</code> 完後，會多一個檔案 <code>terraform.tfstate</code>，這個檔案是用來存放服務狀態的檔案，它包含基礎架構的狀態和資源的詳細信息。假設大家都在自己的本地去 apply 同一個服務，會導致每個人的 .tfstate 檔案內容不同，有可能去覆蓋掉其他人已經調整的內容，因此我們必須將此狀態檔案存放在一個地方，讓大家去使用同一份檔案。</p>
+<br>
+<p>我們常用的儲存方式會將 <code>.tfstate</code> 存在 <code>gitlab</code> 或 <code>gcs</code> (gcp 架構為例)，以下會簡單說明要如何把 tfstate 存到後端以及各頁面的功能：</p>
+<br>
+<h2 id="gitlab">gitlab</h2>
+<p>那我們要怎麼把 <code>.tfstate</code> 給存到 gitlab 呢？首先跟之前一樣，先新增 <code>provider.tf</code> 來放供應商來源以及版本，以及 <code>main.tf</code> 來放 gce 相關設定，最後還要多一個 <code>backend.tf</code> 來放我們要儲存的位置設定，如下：</p>
+<p>(這次範例會使用 gce，此項會需要 gitlab 先啟用 Infrastructure 功能以及建立自己的 gitlab token)</p>
+<br>
+<ul>
+<li>provider.tf</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">terraform {
+</span></span><span class="line"><span class="cl">  required_providers {
+</span></span><span class="line"><span class="cl">    google = {
+</span></span><span class="line"><span class="cl">      source = &#34;hashicorp/google&#34;
+</span></span><span class="line"><span class="cl">      version = &#34;~&gt; 4.48.0&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>main.tf</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">provider &#34;google&#34; {
+</span></span><span class="line"><span class="cl">  project = &#34;XXXXX&#34;
+</span></span><span class="line"><span class="cl">  zone    = &#34;asia-east1-b&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource &#34;google_compute_instance&#34; &#34;instance&#34; {
+</span></span><span class="line"><span class="cl">  name         = &#34;test&#34;
+</span></span><span class="line"><span class="cl">  machine_type = &#34;e2-small&#34;
+</span></span><span class="line"><span class="cl">  zone         = &#34;asia-east1-b&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  labels = {
+</span></span><span class="line"><span class="cl">    env = &#34;11&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  boot_disk {
+</span></span><span class="line"><span class="cl">    initialize_params {
+</span></span><span class="line"><span class="cl">      image = &#34;debian-cloud/debian-10&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  network_interface {
+</span></span><span class="line"><span class="cl">    network = &#34;projects/XXXX/global/networks/test&#34;
+</span></span><span class="line"><span class="cl">    subnetwork = &#34;projects/XXXX/regions/asia-east1/subnetworks/testtest&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ul>
+<li>backend.tf &laquo; 新的</li>
+</ul>
+<p>專案 ID 要寫我們想要放 terraform state 的 gitlab project id，服務名稱是指顯示在 gitlab terraform state 的名稱</p>
+<p>gitlab 個人 token 是指<a href="https://gitlab-pid.vir000.com/-/profile/personal_access_tokens" target="_blank" rel="noopener noreffer">個人存取權杖</a>，大家再依照自己的來做設定</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">terraform {
+</span></span><span class="line"><span class="cl">  backend &#34;http&#34; {
+</span></span><span class="line"><span class="cl">    address = &#34;[Gitlab 網址]/api/v4/projects/[專案ID]/terraform/state/[服務名稱]&#34;
+</span></span><span class="line"><span class="cl">    lock_address = &#34;[Gitlab 網址]/api/v4/projects/[專案ID]/terraform/state/[服務名稱]/lock&#34;
+</span></span><span class="line"><span class="cl">    unlock_address = &#34;[Gitlab 網址]/api/v4/projects/[專案ID]/terraform/state/[服務名稱]/lock&#34;
+</span></span><span class="line"><span class="cl">    username = &#34;[Gitlab 帳號]&#34;
+</span></span><span class="line"><span class="cl">    password = &#34;[Gitlab 個人 token]&#34;
+</span></span><span class="line"><span class="cl">    lock_method = &#34;POST&#34;
+</span></span><span class="line"><span class="cl">    unlock_method = &#34;DELETE&#34;
+</span></span><span class="line"><span class="cl">    retry_wait_min = 5
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>當我們新增好後，就跟之前步驟一樣，先 init &gt; plan &gt; apply 來做測試，在 init 時會發現，與之前不太一樣的是，在 Initializing the backend 的下方有多了綠色的成功設定後端字樣，代表他也會將後端的相關資訊存進 .terraform 資料夾中，所以有變更後端儲存位置，要記得重新 init 歐</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/1.png" title="/images/terraform-tfstate/1.png" data-thumbnail="/images/terraform-tfstate/1.png" data-sub-html="<h2>init 初始化後，會將後端資訊也存到 .terraform 資料夾</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/1.png"
+            data-srcset="/images/terraform-tfstate/1.png, /images/terraform-tfstate/1.png 1.5x, /images/terraform-tfstate/1.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/1.png" width="700" />
+    </a><figcaption class="image-caption">init 初始化後，會將後端資訊也存到 .terraform 資料夾</figcaption>
+    </figure>
+<br>
+<p>當我們 plan &gt; apply 完成後，可以觀察一下，發現原本會產生的 terraform.tfstate 檔案沒有出現在該目錄下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/2.png" title="/images/terraform-tfstate/2.png" data-thumbnail="/images/terraform-tfstate/2.png" data-sub-html="<h2>apply 完，沒有在本地產生 .tfstate 檔案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/2.png"
+            data-srcset="/images/terraform-tfstate/2.png, /images/terraform-tfstate/2.png 1.5x, /images/terraform-tfstate/2.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/2.png" width="700" />
+    </a><figcaption class="image-caption">apply 完，沒有在本地產生 .tfstate 檔案</figcaption>
+    </figure>
+<br>
+<p>這時候，我們可以到剛剛在上面設定的專案 ID 內的有一個 Infrastructure / Terraform，裡面就會存放 Terraform state 檔案，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/3.png" title="/images/terraform-tfstate/3.png" data-thumbnail="/images/terraform-tfstate/3.png" data-sub-html="<h2>gitlab/Infrastructure/Terraform</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/3.png"
+            data-srcset="/images/terraform-tfstate/3.png, /images/terraform-tfstate/3.png 1.5x, /images/terraform-tfstate/3.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/3.png" width="600" />
+    </a><figcaption class="image-caption">gitlab/Infrastructure/Terraform</figcaption>
+    </figure>
+<br>
+<p>會顯示狀態名稱、更新資訊、以及 Actions 等欄位：</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/4.png" title="/images/terraform-tfstate/4.png" data-thumbnail="/images/terraform-tfstate/4.png" data-sub-html="<h2>gitlab terraform tfstate 網頁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/4.png"
+            data-srcset="/images/terraform-tfstate/4.png, /images/terraform-tfstate/4.png 1.5x, /images/terraform-tfstate/4.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/4.png" width="1000" />
+    </a><figcaption class="image-caption">gitlab terraform tfstate 網頁</figcaption>
+    </figure>
+<br>
+<p>功能部分可以看後面的 Actions 欄位底下有三個點點，可以下載對應的 tfstate 檔案、Lock 讓其他人不能對此進行 apply，或是刪除此 tfstate 檔案等</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/5.png" title="/images/terraform-tfstate/5.png" data-thumbnail="/images/terraform-tfstate/5.png" data-sub-html="<h2>gitlab terraform tfstate 功能說明</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/5.png"
+            data-srcset="/images/terraform-tfstate/5.png, /images/terraform-tfstate/5.png 1.5x, /images/terraform-tfstate/5.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/5.png" width="500" />
+    </a><figcaption class="image-caption">gitlab terraform tfstate 功能說明</figcaption>
+    </figure>
+<br>
+<p>這樣我們就可以透過同一份的 tfstate 檔案來做管理，但有個前提是，之後對該資源的變更都只能使用 tf，如果還有用 WEB UI 去調整，就會遇到線上服務與 tfstate 儲存狀態不同的問題。</p>
+<br>
+<h3 id="lock">Lock</h3>
+<p>那當我們已經有了共同儲存的地方，也溝通好，不會使用 WEB UI 去調整，但如果有兩個人同時去下 apply 的話，第一個人的 apply 還在執行，後面那個人的 apply 是不是就會蓋掉前一個人的設定呢？</p>
+<p>所以 Terraform 在 0.14 版本推出了 Lock 功能，當有人在 plan or apply 的時候，我們去查看 gitlab Terraform state，會看到我們的 tfstate 檔案會被 Lock 起來</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/6.png" title="/images/terraform-tfstate/6.png" data-thumbnail="/images/terraform-tfstate/6.png" data-sub-html="<h2>GitLab Lock 鎖住</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/6.png"
+            data-srcset="/images/terraform-tfstate/6.png, /images/terraform-tfstate/6.png 1.5x, /images/terraform-tfstate/6.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/6.png" width="1000" />
+    </a><figcaption class="image-caption">GitLab Lock 鎖住</figcaption>
+    </figure>
+<br>
+<p>此時除了第一個操作者，其他人再去 plan or apply 就會出現錯誤，可以看到是誰正在使用，以及操作的動作是 plan or apply</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/7.png" title="/images/terraform-tfstate/7.png" data-thumbnail="/images/terraform-tfstate/7.png" data-sub-html="<h2>在 Lock 下，其他人沒辦法去 plan or apply</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/7.png"
+            data-srcset="/images/terraform-tfstate/7.png, /images/terraform-tfstate/7.png 1.5x, /images/terraform-tfstate/7.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/7.png" width="700" />
+    </a><figcaption class="image-caption">在 Lock 下，其他人沒辦法去 plan or apply</figcaption>
+    </figure>
+<br>
+<p>在 CI 時，需要在 plan 時就將它給 lock，避免第一個人 plan 完，沒有及時的去執行 apply，後來有其他人比第一個人先調整了資源，第一個人再來執行 apply，就會導致第一個人 apply 的內容與自己原先看 plan 的內容會不同，也有可能會將上一個人調整的設定給覆蓋，當第一個操作者結束動作後，該 Lock 才會被解鎖。</p>
+<br>
+<p>其他 gitlab terraform state 詳細內容可以參考：<a href="https://docs.gitlab.com/ee/user/infrastructure/iac/terraform_state.html" target="_blank" rel="noopener noreffer">https://docs.gitlab.com/ee/user/infrastructure/iac/terraform_state.html</a></p>
+<br>
+<h2 id="gcs">gcs</h2>
+<p>gcs 儲存比較簡單一點，因為他就是一個 bucket，所以頁面就跟一般的 gcs 一樣，會顯示檔案名稱、大小、類型等，如果需要查看 tfstate，可以點擊最後的下載按鈕來查看</p>
+<p>那我們接著使用上面 gitlab 的範例檔案，只是要將 backend.tf 內容改為以下：</p>
+<br>
+<ul>
+<li>backend.tf</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">terraform {
+</span></span><span class="line"><span class="cl">  backend &#34;gcs&#34; {
+</span></span><span class="line"><span class="cl">    bucket      = &#34;pid-terraform-state&#34;
+</span></span><span class="line"><span class="cl">    prefix      = &#34;/aaa&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>上面的設定是指，我們將 backend 後端設定改成 gcs，並且選擇名為 pid-terraform-state 的 bucket (因為 bucket 名稱是全域不重複，所以不需要特別設定其 project_id，只要有權限正確都可以跨專案使用)，以及我們要將此 tfstate 存在 aaa 資料夾內。</p>
+<br>
+<p>接著我們重新刪除剛剛 gitlab 已產生的 .terraform/ 跟 .terraform.lock.hcl 檔案，重新下 init，就可以到 gcs 對應資料夾下，新增了 defaulte.tfstate 檔案。</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/8.png" title="/images/terraform-tfstate/8.png" data-thumbnail="/images/terraform-tfstate/8.png" data-sub-html="<h2>產生 defaulte.tfstate</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/8.png"
+            data-srcset="/images/terraform-tfstate/8.png, /images/terraform-tfstate/8.png 1.5x, /images/terraform-tfstate/8.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/8.png" width="700" />
+    </a><figcaption class="image-caption">產生 defaulte.tfstate</figcaption>
+    </figure>
+<br>
+<h3 id="lock-1">Lock</h3>
+<p>我們一樣來看一下 gcs 的 lock 會怎什麼樣子，gcs lock 會產生一個 default.tflock 檔案，由他去判斷現在是否是 Lock 狀態</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/9.png" title="/images/terraform-tfstate/9.png" data-thumbnail="/images/terraform-tfstate/9.png" data-sub-html="<h2>gcs Lock 會出現 .tflock 檔案</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/9.png"
+            data-srcset="/images/terraform-tfstate/9.png, /images/terraform-tfstate/9.png 1.5x, /images/terraform-tfstate/9.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/9.png" width="700" />
+    </a><figcaption class="image-caption">gcs Lock 會出現 .tflock 檔案</figcaption>
+    </figure>
+<br>
+<p>當有其他人也執行 plan or apply 後，就會顯示以下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/terraform-tfstate/10.png" title="/images/terraform-tfstate/10.png" data-thumbnail="/images/terraform-tfstate/10.png" data-sub-html="<h2>gcs Lock 其他人不能操作</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/terraform-tfstate/10.png"
+            data-srcset="/images/terraform-tfstate/10.png, /images/terraform-tfstate/10.png 1.5x, /images/terraform-tfstate/10.png 2x"
+            data-sizes="auto"
+            alt="/images/terraform-tfstate/10.png" width="700" />
+    </a><figcaption class="image-caption">gcs Lock 其他人不能操作</figcaption>
+    </figure>
+<br>
+<h2 id="後續文章">後續文章</h2>
+<p>經過上面的說明，了解如何將 .tfstate 檔案，存放在 gitlab or gcs 上，讓多人去管理 IaC 資源，那我們下一篇要來說怎麼把 terraform 改成 module，避免需要重複調整 IaC 資源。</p>
+<p><a href="https://blog.pin-yi.me/terraform-gce/" target="_blank" rel="noopener noreffer">使用 Terraform 建立 Google Compute Engine</a></p>
+<p><a href="https://blog.pin-yi.me/terraform-gke/" target="_blank" rel="noopener noreffer">使用 Terraform 建立 Google Kubernetes Engine</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/iac/">IaC</a>
+                </span><span><a href="/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/">基礎設施即代碼</a>
+                </span><span><a href="/tags/terraform/">Terraform</a>
+                </span><span><a href="/tags/tfstate/">tfstate</a>
+                </span><span><a href="/tags/gitlab/">GitLab</a>
+                </span><span><a href="/tags/gcs/">GCS</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-05-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/b06a04c8a94100170a58753b364fb5cdb91ba2f2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;b06a04c8:&nbsp;# 新增 Terraform 如何多人共同開發 (將 tfstate 存在後端)">
+                            <i class="fas fa-hashtag fa-fw"></i>b06a04c8</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/terraform-tfstate/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/terraform-tfstate/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/terraform-tfstate/" data-title="Terraform 如何多人共同開發 (將 tfstate 存在後端)" data-hashtags="IaC,基礎設施即代碼,Terraform,tfstate,gitlab,gcs"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/terraform-tfstate/" data-hashtag="IaC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/terraform-tfstate/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/terraform-tfstate/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/terraform-tfstate/" data-title="Terraform 如何多人共同開發 (將 tfstate 存在後端)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/terraform-tfstate/" data-title="Terraform 如何多人共同開發 (將 tfstate 存在後端)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/terraform-tfstate/" data-title="Terraform 如何多人共同開發 (將 tfstate 存在後端)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/bookstack/" class="prev" rel="prev" title="Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

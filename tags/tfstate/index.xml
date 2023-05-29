@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>tfstate - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/tfstate/</link>
+        <description>tfstate - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 29 May 2023 14:36:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/tfstate/" rel="self" type="application/rss+xml" /><item>
+    <title>Terraform 如何多人共同開發 (將 tfstate 存在後端)</title>
+    <link>https://blog.pin-yi.me/terraform-tfstate/</link>
+    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
+    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存]]></description>
+</item>
+</channel>
+</rss>
