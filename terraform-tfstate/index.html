@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/terraform-tfstate/" /><meta property="og:image" content="https://blog.pin-yi.me/terraform-tfstate/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-29T14:36:00+08:00" />
-<meta property="article:modified_time" content="2023-05-29T15:24:34+08:00" />
+<meta property="article:modified_time" content="2023-05-29T15:36:25+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/terraform-tfstate/featured-image.webp"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, tfstate, gitlab, gcs","wordcount":  1997 ,
-        "url": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/","datePublished": "2023-05-29T14:36:00+08:00","dateModified": "2023-05-29T15:24:34+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "IaC, 基礎設施即代碼, Terraform, tfstate, gitlab, gcs","wordcount":  2015 ,
+        "url": "https:\/\/blog.pin-yi.me\/terraform-tfstate\/","datePublished": "2023-05-29T14:36:00+08:00","dateModified": "2023-05-29T15:36:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -127,8 +127,8 @@ if (!doNotTrack) {
         alt="/terraform-tfstate/featured-image.webp"
         title="/terraform-tfstate/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Terraform 如何多人共同開發 (將 tfstate 存在後端)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1997 字</span>&nbsp;
-                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2015 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
             </div>
             
             <hr><div class="details toc" id="toc-static"  data-kept="">
@@ -156,7 +156,7 @@ if (!doNotTrack) {
 <p>我們常用的儲存方式會將 <code>.tfstate</code> 存在 <code>gitlab</code> 或 <code>gcs</code> (gcp 架構為例)，以下會簡單說明要如何把 tfstate 存到後端以及各頁面的功能：</p>
 <br>
 <h2 id="gitlab">gitlab</h2>
-<p>那我們要怎麼把 <code>.tfstate</code> 給存到 gitlab 呢？首先跟之前一樣，先新增 <code>provider.tf</code> 來放供應商來源以及版本，以及 <code>main.tf</code> 來放 gce 相關設定，最後還要多一個 <code>backend.tf</code> 來放我們要儲存的位置設定，如下：</p>
+<p>那我們要怎麼把 <code>.tfstate</code> 給存到 gitlab 呢？首先跟之前一樣，先新增 <code>provider.tf</code> 來放供應商來源以及版本，以及 <code>main.tf</code> 來放 gce 相關設定，最後還要多一個 <code>backend.tf</code> 來放我們要儲存的位置設定，如下：(<a href="https://github.com/880831ian/terraform-tfstate" target="_blank" rel="noopener noreffer">同步到 GitHub 需要程式碼的可以前往查看</a>)</p>
 <p>(這次範例會使用 gce，此項會需要 gitlab 先啟用 Infrastructure 功能以及建立自己的 gitlab token)</p>
 <br>
 <ul>
@@ -460,8 +460,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/gitlab/">GitLab</a>
                 </span><span><a href="/tags/gcs/">GCS</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2023-05-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/b06a04c8a94100170a58753b364fb5cdb91ba2f2" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;b06a04c8:&nbsp;# 新增 Terraform 如何多人共同開發 (將 tfstate 存在後端)">
-                            <i class="fas fa-hashtag fa-fw"></i>b06a04c8</a></span>
+                <span>更新於 2023-05-29&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/ee3e5067f200fb6eba386042005f4d2f5ec5907a" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;ee3e5067:&nbsp;# 更新 Terraform 如何多人共同開發 (將 tfstate 存在後端)">
+                            <i class="fas fa-hashtag fa-fw"></i>ee3e5067</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/terraform-tfstate/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
