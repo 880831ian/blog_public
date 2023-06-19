@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Module - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/module/</link>
+        <description>Module - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/module/" rel="self" type="application/rss+xml" /><item>
+    <title>如何將 Terraform 改寫成 module ?</title>
+    <link>https://blog.pin-yi.me/terraform-module/</link>
+    <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
+    <description><![CDATA[當我們要管理的資源越來越多後，會產生很多的 tf 檔案，假設我們現在有三個 gce 服務，會在以下三個不同環境上面運作，每個環境都會有我們之前學會的基本 tf]]></description>
+</item>
+</channel>
+</rss>

@@ -5,10 +5,16 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>如何將 Terraform 改寫成 module ?</title>
+    <link>https://blog.pin-yi.me/terraform-module/</link>
+    <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
+    <description><![CDATA[當我們要管理的資源越來越多後，會產生很多的 tf 檔案，假設我們現在有三個 gce 服務，會在以下三個不同環境上面運作，每個環境都會有我們之前學會的基本 tf]]></description>
+</item>
+<item>
     <title>Terraform 如何多人共同開發 (將 tfstate 存在後端)</title>
     <link>https://blog.pin-yi.me/terraform-tfstate/</link>
     <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
-    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存]]></description>
+    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 *.tfstate，這個檔案是用來存放服務狀態的檔案]]></description>
 </item>
 <item>
     <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/terraform/</link>
     <pubDate>Mon, 26 Sep 2022 15:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform/</guid>
     <description><![CDATA[跟上一篇 Snyk 一樣，本系列也是去參加 DevOpsDay Taipei 2022 活動聽到各位產業大佬目前在使用的名詞以及技術，想說回家也充實一下自己，了解一下在 DevOpsDay 最常出現的 IaC 是什麼？]]></description>
-</item>
-<item>
-    <title>找出程式碼、開源套件、容器的安全漏洞工具 - Snyk</title>
-    <link>https://blog.pin-yi.me/snyk/</link>
-    <pubDate>Tue, 20 Sep 2022 14:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/snyk/</guid>
-    <description><![CDATA[前幾天有機會可以去參加 DevOpsDays Taipei 2022 活動，聽到了一門有關於如何將 Security 加入 DevOps - GitLab CI/CD with Snyk 的講座，覺得蠻有趣的，想說順便紀錄一下這幾天去聽的內容，文章底下有]]></description>
 </item>
 </channel>
 </rss>

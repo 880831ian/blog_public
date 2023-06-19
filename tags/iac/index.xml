@@ -4,11 +4,17 @@
         <link>https://blog.pin-yi.me/tags/iac/</link>
         <description>IaC - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 29 May 2023 14:36:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/iac/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/iac/" rel="self" type="application/rss+xml" /><item>
+    <title>如何將 Terraform 改寫成 module ?</title>
+    <link>https://blog.pin-yi.me/terraform-module/</link>
+    <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
+    <description><![CDATA[當我們要管理的資源越來越多後，會產生很多的 tf 檔案，假設我們現在有三個 gce 服務，會在以下三個不同環境上面運作，每個環境都會有我們之前學會的基本 tf]]></description>
+</item>
+<item>
     <title>Terraform 如何多人共同開發 (將 tfstate 存在後端)</title>
     <link>https://blog.pin-yi.me/terraform-tfstate/</link>
     <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
-    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 terraform.tfstate，這個檔案是用來存]]></description>
+    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 *.tfstate，這個檔案是用來存放服務狀態的檔案]]></description>
 </item>
 <item>
     <title>使用 Terraform 建立 Google Kubernetes Engine</title>
