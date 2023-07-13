@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Terragrunt - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/terragrunt/</link>
+        <description>Terragrunt - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/terragrunt/" rel="self" type="application/rss+xml" /><item>
+    <title>如何導入 Terragrunt，Terragrunt 好處是什麼？</title>
+    <link>https://blog.pin-yi.me/terragrunt/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
+    <description><![CDATA[我們接續上一篇的 如何將 Terraform 改寫成 module ? ，我們已經將 Terraform 改成 module 的方式來進行管理，但當我們要管理的資源越來越多，且有分不同的專案時，整個服務架構會長的]]></description>
+</item>
+</channel>
+</rss>

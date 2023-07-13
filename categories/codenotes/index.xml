@@ -5,6 +5,12 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>如何導入 Terragrunt，Terragrunt 好處是什麼？</title>
+    <link>https://blog.pin-yi.me/terragrunt/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
+    <description><![CDATA[我們接續上一篇的 如何將 Terraform 改寫成 module ? ，我們已經將 Terraform 改成 module 的方式來進行管理，但當我們要管理的資源越來越多，且有分不同的專案時，整個服務架構會長的]]></description>
+</item>
+<item>
     <title>如何將 Terraform 改寫成 module ?</title>
     <link>https://blog.pin-yi.me/terraform-module/</link>
     <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/terraform-gce/</link>
     <pubDate>Mon, 28 Nov 2022 11:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-gce/</guid>
     <description><![CDATA[嗨嗨大家好，距離上一篇筆記又隔了 3 個月，最近公司有專案在忙，沒時間把上次提到的 Terraform 應用筆記寫完，現在他來拉～～～ 😂 我們這次的主題是使用 Terraform 來建立]]></description>
-</item>
-<item>
-    <title>什麼是 IaC ? Terraform 又是什麼？</title>
-    <link>https://blog.pin-yi.me/terraform/</link>
-    <pubDate>Mon, 26 Sep 2022 15:58:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform/</guid>
-    <description><![CDATA[跟上一篇 Snyk 一樣，本系列也是去參加 DevOpsDay Taipei 2022 活動聽到各位產業大佬目前在使用的名詞以及技術，想說回家也充實一下自己，了解一下在 DevOpsDay 最常出現的 IaC 是什麼？]]></description>
 </item>
 </channel>
 </rss>

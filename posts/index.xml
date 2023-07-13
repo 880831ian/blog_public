@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>如何導入 Terragrunt，Terragrunt 好處是什麼？</title>
+    <link>https://blog.pin-yi.me/terragrunt/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
+    <description><![CDATA[我們接續上一篇的 如何將 Terraform 改寫成 module ? ，我們已經將 Terraform 改成 module 的方式來進行管理，但當我們要管理的資源越來越多，且有分不同的專案時，整個服務架構會長的]]></description>
+</item>
+<item>
     <title>如何將 Terraform 改寫成 module ?</title>
     <link>https://blog.pin-yi.me/terraform-module/</link>
     <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</link>
     <pubDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</guid>
     <description><![CDATA[先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說]]></description>
-</item>
-<item>
-    <title>Kibana 新增 index 索引時一直轉圈圈以及顯示 HTTP 403 Forbidden</title>
-    <link>https://blog.pin-yi.me/kibana-create-index-forbidden/</link>
-    <pubDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/kibana-create-index-forbidden/</guid>
-    <description><![CDATA[前幾天在工作使用 Kibana 時，想要新增一個新的索引，發現選擇索引並按下新增的按鈕，會一直轉圈圈，等了一陣子，使用開發工具 F12 查看，跳出了 HTTP 403 Forbi]]></description>
 </item>
 </channel>
 </rss>
