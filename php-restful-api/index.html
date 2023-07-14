@@ -10,7 +10,6 @@
 <meta property="og:url" content="https://blog.pin-yi.me/php-restful-api/" /><meta property="og:image" content="https://blog.pin-yi.me/php-restful-api/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-24T22:24:24+08:00" />
 <meta property="article:modified_time" content="2022-03-01T18:20:59+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/php-restful-api/featured-image.webp"/>
 <meta name="twitter:title" content="如何在 Nginx 下實作第一個 PHP 留言板 RESTful API"/>
@@ -385,26 +384,26 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    server {
-</span></span><span class="line"><span class="cl">        listen       80;
-</span></span><span class="line"><span class="cl">        server_name  localhost;
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl">    <span class="nv">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">listen</span>       <span class="nv">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">server_name</span>  <span class="nv">localhost</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        #charset koi8-r;
+</span></span><span class="line"><span class="cl">        <span class="c">#charset koi8-r;
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl">        <span class="c">#access_log  logs/host.access.log  main;
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl">        <span class="nv">location</span> <span class="err">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">root</span>   <span class="nv">html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">index</span>  <span class="nv">index.html</span> <span class="nv">index.htm</span> <span class="nv">index.php</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        #access_log  logs/host.access.log  main;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        location / {
-</span></span><span class="line"><span class="cl">            root   html;
-</span></span><span class="line"><span class="cl">            index  index.html index.htm index.php;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		location = /api/messages {
-</span></span><span class="line"><span class="cl">		  rewrite ^(.*)$ /api/index.php?messages=all;
-</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">		<span class="nv">location</span> <span class="o">=</span> <span class="err">/</span><span class="nv">api</span><span class="err">/</span><span class="nv">messages</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		  <span class="nv">rewrite</span> <span class="err">^(</span><span class="nv">.</span><span class="err">*</span><span class="p">)</span><span class="err">$</span> <span class="err">/</span><span class="nv">api</span><span class="err">/</span><span class="nv">index.php</span><span class="err">?</span><span class="nv">messages</span><span class="o">=</span><span class="nv">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">		location /api {
-</span></span><span class="line"><span class="cl">		  rewrite ^/api/messages/(\d+)$ /api/index.php?messages=$1;
-</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">		<span class="nv">location</span> <span class="err">/</span><span class="nv">api</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		  <span class="nv">rewrite</span> <span class="err">^/</span><span class="nv">api</span><span class="err">/</span><span class="nv">messages</span><span class="err">/(\</span><span class="nv">d</span><span class="err">+</span><span class="p">)</span><span class="err">$</span> <span class="err">/</span><span class="nv">api</span><span class="err">/</span><span class="nv">index.php</span><span class="err">?</span><span class="nv">messages</span><span class="o">=</span><span class="err">$</span><span class="nv">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>他的意思代表的我們網址路徑是在 /api/messages ，我們讓原本 /api/index.php?messages 這段變成 /api/messages/ 的設定，設定好記得先下  <code>sh sudo nginx -t </code> 指令來檢查一下Nginx.conf檔案是不是都正確，再用 <code>sh sudo nginx -s reload </code> 指令重新啟動 Nginx  (是否成功，後面會帶到如何做測試，就繼續一起往下看吧！)</p>
@@ -441,8 +440,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-03-01&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e525acd70ce4a11d72630654ccb45cb2e52fba4b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(ian_zhuang@mail.chungyo.net)&nbsp;e525acd7:&nbsp;v1.0.9">
-                            <i class="fas fa-hashtag fa-fw"></i>e525acd7</a></span>
+                <span>更新於 2022-03-01&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/e525acd70ce4a11d72630654ccb45cb2e52fba4b" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(ian_zhuang@mail.chungyo.net)&nbsp;e525acd:&nbsp;v1.0.9">
+                            <i class="fas fa-hashtag fa-fw"></i>e525acd</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/php-restful-api/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

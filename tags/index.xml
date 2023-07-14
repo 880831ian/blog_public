@@ -1,0 +1,68 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/</link>
+        <description>Tags - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>IaC</title>
+    <link>https://blog.pin-yi.me/tags/iac/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/iac/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Terraform</title>
+    <link>https://blog.pin-yi.me/tags/terraform/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/terraform/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Terragrunt</title>
+    <link>https://blog.pin-yi.me/tags/terragrunt/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/terragrunt/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>基礎設施即代碼</title>
+    <link>https://blog.pin-yi.me/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/</link>
+    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E5%8D%B3%E4%BB%A3%E7%A2%BC/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Module</title>
+    <link>https://blog.pin-yi.me/tags/module/</link>
+    <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/module/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>GCS</title>
+    <link>https://blog.pin-yi.me/tags/gcs/</link>
+    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/gcs/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>GitLab</title>
+    <link>https://blog.pin-yi.me/tags/gitlab/</link>
+    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/gitlab/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>tfstate</title>
+    <link>https://blog.pin-yi.me/tags/tfstate/</link>
+    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/tfstate/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Docker</title>
+    <link>https://blog.pin-yi.me/tags/docker/</link>
+    <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>K8s</title>
+    <link>https://blog.pin-yi.me/tags/k8s/</link>
+    <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/k8s/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

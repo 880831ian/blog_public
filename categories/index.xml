@@ -1,0 +1,38 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>分類 - 分類 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/categories/</link>
+        <description>分類 - 分類 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>YouTube 影片</title>
+    <link>https://blog.pin-yi.me/categories/youtube/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/categories/youtube/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>系統文檔</title>
+    <link>https://blog.pin-yi.me/categories/documentation/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/categories/documentation/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>程式筆記</title>
+    <link>https://blog.pin-yi.me/categories/codenotes/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/categories/codenotes/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>經驗</title>
+    <link>https://blog.pin-yi.me/categories/experience/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/categories/experience/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>網路</title>
+    <link>https://blog.pin-yi.me/categories/network/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/categories/network/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

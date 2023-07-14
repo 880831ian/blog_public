@@ -10,7 +10,6 @@
 <meta property="og:url" content="https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/" /><meta property="og:image" content="https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-28T09:06:00+08:00" />
 <meta property="article:modified_time" content="2022-04-28T11:30:07+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/docker-compose-redis-sentinel-haproxy-efk/featured-image.webp"/>
 <meta name="twitter:title" content="用 EFK 收集容器日誌 (HAProxy、Redis Sentinel、Docker-compose)"/>
@@ -329,32 +328,32 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;source&gt;
-</span></span><span class="line"><span class="cl">  @type forward
-</span></span><span class="line"><span class="cl">  bind 0.0.0.0
-</span></span><span class="line"><span class="cl">  port 24224
-</span></span><span class="line"><span class="cl">&lt;/source&gt;
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="err">&lt;</span><span class="nv">source</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="nv">type</span> <span class="nv">forward</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">bind</span> <span class="mf">0.0.0.0</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">port</span> <span class="nv">24224</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;/</span><span class="nv">source</span><span class="err">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">&lt;match *.**&gt;
-</span></span><span class="line"><span class="cl">  @type copy
+</span></span><span class="line"><span class="cl"><span class="err">&lt;</span><span class="k">match</span> <span class="err">*</span><span class="nv">.</span><span class="err">**&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="nv">type</span> <span class="nv">copy</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  &lt;store&gt;
-</span></span><span class="line"><span class="cl">    @type elasticsearch
-</span></span><span class="line"><span class="cl">    host elasticsearch
-</span></span><span class="line"><span class="cl">    port 9200
-</span></span><span class="line"><span class="cl">    logstash_format true
-</span></span><span class="line"><span class="cl">    logstash_prefix fluentd
-</span></span><span class="line"><span class="cl">    logstash_dateformat %Y%m%d
-</span></span><span class="line"><span class="cl">    include_tag_key true
-</span></span><span class="line"><span class="cl">    type_name access_log
-</span></span><span class="line"><span class="cl">    tag_key @log_name
-</span></span><span class="line"><span class="cl">    flush_interval 1s
-</span></span><span class="line"><span class="cl">  &lt;/store&gt;
+</span></span><span class="line"><span class="cl">  <span class="err">&lt;</span><span class="nv">store</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="nv">type</span> <span class="nv">elasticsearch</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">host</span> <span class="nv">elasticsearch</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">port</span> <span class="nv">9200</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">logstash_format</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">logstash_prefix</span> <span class="nv">fluentd</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">logstash_dateformat</span> <span class="err">%</span><span class="nv">Y</span><span class="err">%</span><span class="nv">m</span><span class="err">%</span><span class="nv">d</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">include_tag_key</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">type_name</span> <span class="nv">access_log</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">tag_key</span> <span class="err">@</span><span class="nv">log_name</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">flush_interval</span> <span class="nv">1s</span>
+</span></span><span class="line"><span class="cl">  <span class="err">&lt;/</span><span class="nv">store</span><span class="err">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  &lt;store&gt;
-</span></span><span class="line"><span class="cl">    @type stdout
-</span></span><span class="line"><span class="cl">  &lt;/store&gt;
-</span></span><span class="line"><span class="cl">&lt;/match&gt;
+</span></span><span class="line"><span class="cl">  <span class="err">&lt;</span><span class="nv">store</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="nv">type</span> <span class="nv">stdout</span>
+</span></span><span class="line"><span class="cl">  <span class="err">&lt;/</span><span class="nv">store</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;/</span><span class="k">match</span><span class="err">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>這是 fluent 的設定檔，可以在這邊做自訂的設定，例如 host、port、預設日期、tag_key 等等。</p>
@@ -1005,8 +1004,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">哨兵模式</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-04-28&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/983e290152e5b1ca3377ea54076ed157ca6de9c3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;983e2901:&nbsp;# 新增 EFK">
-                            <i class="fas fa-hashtag fa-fw"></i>983e2901</a></span>
+                <span>更新於 2022-04-28&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/983e290152e5b1ca3377ea54076ed157ca6de9c3" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;983e290:&nbsp;# 新增 EFK">
+                            <i class="fas fa-hashtag fa-fw"></i>983e290</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/docker-compose-redis-sentinel-haproxy-efk/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>

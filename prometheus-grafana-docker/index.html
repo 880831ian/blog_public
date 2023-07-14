@@ -10,7 +10,6 @@
 <meta property="og:url" content="https://blog.pin-yi.me/prometheus-grafana-docker/" /><meta property="og:image" content="https://blog.pin-yi.me/prometheus-grafana-docker/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-18T12:18:00+08:00" />
 <meta property="article:modified_time" content="2022-05-19T15:48:22+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/prometheus-grafana-docker/featured-image.webp"/>
 <meta name="twitter:title" content="使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)"/>
@@ -408,14 +407,14 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
-</span></span><span class="line"><span class="cl">    listen 8080;
-</span></span><span class="line"><span class="cl">    server_name  localhost;
-</span></span><span class="line"><span class="cl">    location /stub_status {
-</span></span><span class="line"><span class="cl">       stub_status on;
-</span></span><span class="line"><span class="cl">       access_log off;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">listen</span> <span class="nv">8080</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">server_name</span>  <span class="nv">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">location</span> <span class="err">/</span><span class="nv">stub_status</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">stub_status</span> <span class="kc">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="nv">access_log</span> <span class="kc">off</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>這邊最重要的就是要設定 <code>/stub_status</code> 路徑，並開啟 stub_status ，這樣才可以讓 nginx-prometheus-exporter 抓到資料！(要怎麼知道 Nginx 是否開啟 <code>stub_status</code>，可以使用 <code>nginx -V 2&gt;&amp;1 | grep -o with-http_stub_status_module</code> 指令檢查，我們這次裝的 Image 已經有幫我們啟動)</p>
@@ -821,8 +820,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/%E4%BB%8B%E7%B4%B9/">介紹</a>
                 </span><span><a href="/tags/%E5%AF%A6%E4%BD%9C/">實作</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2022-05-19&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4b8794aa7317e19dc3dd8e3209c9e91f2aa45002" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;4b8794aa:&nbsp;# 新增/更新 使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)">
-                            <i class="fas fa-hashtag fa-fw"></i>4b8794aa</a></span>
+                <span>更新於 2022-05-19&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/4b8794aa7317e19dc3dd8e3209c9e91f2aa45002" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;4b8794a:&nbsp;# 新增/更新 使用 Prometheus 和 Grafana 打造監控預警系統 (Docker 篇)">
+                            <i class="fas fa-hashtag fa-fw"></i>4b8794a</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/prometheus-grafana-docker/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
