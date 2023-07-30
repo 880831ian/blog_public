@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>如何過濾 GCP LOG，減少 Cloud Logging API 的花費</title>
+    <link>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</link>
+    <pubDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</guid>
+    <description><![CDATA[當我們使用 GCP 的 Cloud Logging 服務來查看 Log 時，有時候會有一些我們不需要顯示出來的，或是從來都不會去查詢的 Log，再者是 GCP 本身的錯誤導致大量噴錯的 Log ，這些]]></description>
+</item>
+<item>
     <title>如何導入 Terragrunt，Terragrunt 好處是什麼？</title>
     <link>https://blog.pin-yi.me/terragrunt/</link>
     <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</link>
     <pubDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</guid>
     <description><![CDATA[今天接到一個案子，RD 部門之後想要使用 GitLab 的 Package Registry 功能來發布套件，且不想把它存在 GitLab 伺服器上，希望可以直接存到 GCP 的 Google Cloud Storage 上，所以才會有了此篇筆記來]]></description>
-</item>
-<item>
-    <title>Fluentd-Server 出現 Fluent::Plugin::Elasticsearch Error 400 - Rejected by Elasticsearch 錯誤解決</title>
-    <link>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</link>
-    <pubDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</guid>
-    <description><![CDATA[先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說]]></description>
 </item>
 </channel>
 </rss>

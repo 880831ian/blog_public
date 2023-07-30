@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Cloud Logging - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/cloud-logging/</link>
+        <description>Cloud Logging - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/cloud-logging/" rel="self" type="application/rss+xml" /><item>
+    <title>如何過濾 GCP LOG，減少 Cloud Logging API 的花費</title>
+    <link>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</link>
+    <pubDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</guid>
+    <description><![CDATA[當我們使用 GCP 的 Cloud Logging 服務來查看 Log 時，有時候會有一些我們不需要顯示出來的，或是從來都不會去查詢的 Log，再者是 GCP 本身的錯誤導致大量噴錯的 Log ，這些]]></description>
+</item>
+</channel>
+</rss>
