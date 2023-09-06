@@ -4,7 +4,25 @@
         <link>https://blog.pin-yi.me/tags/</link>
         <description>Tags - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Observability</title>
+    <link>https://blog.pin-yi.me/tags/observability/</link>
+    <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/observability/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Opentelemetry</title>
+    <link>https://blog.pin-yi.me/tags/opentelemetry/</link>
+    <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/opentelemetry/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>可觀測性</title>
+    <link>https://blog.pin-yi.me/tags/%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%80%A7/</link>
+    <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%80%A7/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Cloud Logging</title>
     <link>https://blog.pin-yi.me/tags/cloud-logging/</link>
     <pubDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/cloud-logging/</guid>
@@ -44,24 +62,6 @@
     <title>Module</title>
     <link>https://blog.pin-yi.me/tags/module/</link>
     <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/module/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>GCS</title>
-    <link>https://blog.pin-yi.me/tags/gcs/</link>
-    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/gcs/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>GitLab</title>
-    <link>https://blog.pin-yi.me/tags/gitlab/</link>
-    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/gitlab/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>tfstate</title>
-    <link>https://blog.pin-yi.me/tags/tfstate/</link>
-    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/tfstate/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

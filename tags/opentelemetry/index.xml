@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Opentelemetry - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/opentelemetry/</link>
+        <description>Opentelemetry - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/opentelemetry/" rel="self" type="application/rss+xml" /><item>
+    <title>什麼是 Opentelemetry？可觀測性 (Observability) 又是什麼？</title>
+    <link>https://blog.pin-yi.me/opentelemetry-observability/</link>
+    <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/opentelemetry-observability/</guid>
+    <description><![CDATA[在介紹 Opentelemetry 之前，我們要先了解一下目前軟體架構以及基礎設施的演進： 軟體架構以及基礎設施的演進 第一階段在軟體架構設計上較為簡單，不會有什麼特別需要]]></description>
+</item>
+</channel>
+</rss>

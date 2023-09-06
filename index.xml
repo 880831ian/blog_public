@@ -4,7 +4,7 @@
         <link>https://blog.pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</lastBuildDate>
             <atom:link href="https://blog.pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>什麼是 Opentelemetry？可觀測性 (Observability) 又是什麼？</title>
+    <link>https://blog.pin-yi.me/opentelemetry-observability/</link>
+    <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/opentelemetry-observability/</guid>
+    <description><![CDATA[在介紹 Opentelemetry 之前，我們要先了解一下目前軟體架構以及基礎設施的演進： 軟體架構以及基礎設施的演進 第一階段在軟體架構設計上較為簡單，不會有什麼特別需要]]></description>
 </item>
 <item>
     <title>如何過濾 GCP LOG，減少 Cloud Logging API 的花費</title>
@@ -59,12 +65,6 @@
     <link>https://blog.pin-yi.me/gke-cronjob-not-working/</link>
     <pubDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-cronjob-not-working/</guid>
     <description><![CDATA[前陣子公司建立在 Google Kubernetes Engine 叢集上的 CronJob 服務會有短暫時間沒有執行 Job。先前情提要一下，此 CronJob 的設定是每分鐘都會執行 (圖一)，所以理當來說 Log 應該要可以]]></description>
-</item>
-<item>
-    <title>如何啟用 GitLab 的 Package Registry 以及將儲存位置從伺服器改到 GCS 上</title>
-    <link>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</link>
-    <pubDate>Thu, 29 Dec 2022 17:40:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gitlab-package-registry-to-gcs/</guid>
-    <description><![CDATA[今天接到一個案子，RD 部門之後想要使用 GitLab 的 Package Registry 功能來發布套件，且不想把它存在 GitLab 伺服器上，希望可以直接存到 GCP 的 Google Cloud Storage 上，所以才會有了此篇筆記來]]></description>
 </item>
 </channel>
 </rss>
