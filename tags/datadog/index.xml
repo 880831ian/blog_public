@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Datadog - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/datadog/</link>
+        <description>Datadog - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/datadog/" rel="self" type="application/rss+xml" /><item>
+    <title>如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上</title>
+    <link>https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/</link>
+    <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/</guid>
+    <description><![CDATA[由於最近公司想要導入 Datadog，在測試過程中順便導入 OpenTelemetry 來收集 Metrics 與 Traces 並送到 Datadog 上 ～ 🔥 這個範例比較特別，因為 Datadog 有提供 Ingress Nginx Controller 的 integrati]]></description>
+</item>
+</channel>
+</rss>

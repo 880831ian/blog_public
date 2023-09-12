@@ -5,6 +5,12 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上</title>
+    <link>https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/</link>
+    <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/</guid>
+    <description><![CDATA[由於最近公司想要導入 Datadog，在測試過程中順便導入 OpenTelemetry 來收集 Metrics 與 Traces 並送到 Datadog 上 ～ 🔥 這個範例比較特別，因為 Datadog 有提供 Ingress Nginx Controller 的 integrati]]></description>
+</item>
+<item>
     <title>什麼是 Opentelemetry？可觀測性 (Observability) 又是什麼？</title>
     <link>https://blog.pin-yi.me/opentelemetry-observability/</link>
     <pubDate>Wed, 06 Sep 2023 14:15:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/opentelemetry-observability/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</link>
     <pubDate>Mon, 12 Dec 2022 14:00:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/fluentd-server-show-fluent-plugin-elasticsearch-error400/</guid>
     <description><![CDATA[先說結論 &hellip; EFK 真的好多雷 😆 我們今天又再度踩雷拉，這次又是炸的分身碎骨，花了 4 個多小時才找到原因，也有可能是小弟我跟 EFK 不是很熟 XD。就如標題所說]]></description>
-</item>
-<item>
-    <title>Kibana 新增 index 索引時一直轉圈圈以及顯示 HTTP 403 Forbidden</title>
-    <link>https://blog.pin-yi.me/kibana-create-index-forbidden/</link>
-    <pubDate>Thu, 08 Dec 2022 16:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/kibana-create-index-forbidden/</guid>
-    <description><![CDATA[前幾天在工作使用 Kibana 時，想要新增一個新的索引，發現選擇索引並按下新增的按鈕，會一直轉圈圈，等了一陣子，使用開發工具 F12 查看，跳出了 HTTP 403 Forbi]]></description>
 </item>
 </channel>
 </rss>

@@ -5,6 +5,7 @@
             <loc>https://blog.pin-yi.me/theme-documentation-basics/</loc><lastmod>2022-02-23T22:28:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/theme-documentation-content/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://blog.pin-yi.me/opentelemetry-observability/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</loc><lastmod>2023-07-31T00:00:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/terragrunt/</loc><lastmod>2023-07-13T14:56:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -72,11 +73,13 @@
             <loc>https://blog.pin-yi.me/theme-documentation-extended-shortcodes/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/basic-markdown-syntax/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/emoji-support/</loc><lastmod>2022-02-20T19:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/observability/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/opentelemetry/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://blog.pin-yi.me/tags/%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%80%A7/</loc><lastmod>2023-09-06T14:19:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/datadog/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/ingress-nginx-controller/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/observability/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/opentelemetry/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://blog.pin-yi.me/tags/%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%80%A7/</loc><lastmod>2023-09-13T01:11:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/cloud-logging/</loc><lastmod>2023-07-31T00:00:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/gcp/</loc><lastmod>2023-07-31T00:00:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://blog.pin-yi.me/tags/iac/</loc><lastmod>2023-07-13T14:56:07&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

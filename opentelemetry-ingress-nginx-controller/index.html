@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上 - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上" />
+<meta property="og:description" content="由於最近公司想要導入 Datadog，在測試過程中順便導入 OpenTelemetry 來收集 Metrics 與 Traces 並送到 Datadog 上 ～ 🔥 這個範例比較特別，因為 Datadog 有提供 Ingress Nginx Controller 的 integrati" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" /><meta property="og:image" content="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-13T00:33:00+08:00" />
+<meta property="article:modified_time" content="2023-09-13T01:11:19+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/featured-image.webp"/>
+<meta name="twitter:title" content="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上"/>
+<meta name="twitter:description" content="由於最近公司想要導入 Datadog，在測試過程中順便導入 OpenTelemetry 來收集 Metrics 與 Traces 並送到 Datadog 上 ～ 🔥 這個範例比較特別，因為 Datadog 有提供 Ingress Nginx Controller 的 integrati"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" /><link rel="prev" href="https://blog.pin-yi.me/opentelemetry-observability/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/opentelemetry-ingress-nginx-controller\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/opentelemetry-ingress-nginx-controller\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Opentelemetry, Observability, 可觀測性, Ingress Nginx Controller, Datadog","wordcount":  1221 ,
+        "url": "https:\/\/blog.pin-yi.me\/opentelemetry-ingress-nginx-controller\/","datePublished": "2023-09-13T00:33:00+08:00","dateModified": "2023-09-13T01:11:19+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/opentelemetry-ingress-nginx-controller/featured-image.webp"
+        data-srcset="/opentelemetry-ingress-nginx-controller/featured-image.webp, /opentelemetry-ingress-nginx-controller/featured-image.webp 1.5x, /opentelemetry-ingress-nginx-controller/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/opentelemetry-ingress-nginx-controller/featured-image.webp"
+        title="/opentelemetry-ingress-nginx-controller/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-13">2023-09-13</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1221 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#檔案說明">檔案說明</a></li>
+    <li><a href="#執行步驟">執行步驟</a></li>
+    <li><a href="#測試">測試</a></li>
+    <li><a href="#結論">結論</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>由於最近公司想要導入 Datadog，在測試過程中順便導入 OpenTelemetry 來收集 Metrics 與 Traces 並送到 Datadog 上 ～</p>
+<br>
+<p>🔥 這個範例比較特別，因為 Datadog 有提供 Ingress Nginx Controller 的 integrations，可以透過 Datadog Agent 來收集 Metrics，不需要透過 OpenTelemetry Collector 來收集。
+( Datadog Agent 請參考：https://docs.datadoghq.com/containers/kubernetes/)</p>
+<p>程式部分也同步上傳到 github 上，<a href="https://github.com/880831ian/opentelemetry-ingress-nginx-controller" target="_blank" rel="noopener noreffer">可以點我前往</a></p>
+<br>
+<h2 id="檔案說明">檔案說明</h2>
+<ul>
+<li>
+<p>otel-collector.yaml：
+OpenTelemetry Collector 的設定檔，主要是設定要收集哪些 metrics、traces，並且要送到哪個 exporter，要注意的是 exporters 的 datadog 需要設定 site、api_key，以及 image 要記得用 otel/opentelemetry-collector-contrib，才會有 datadog 的 exporter。</p>
+</li>
+<li>
+<p>ingress-nginx-values.yaml：
+Ingress Nginx Controller 的設定檔，這邊的 podAnnotations 是為了讓 Ingress Nginx Controller 的 Pod 能夠透過 Datadog agent 收集 metrics 到 Datadog 才加上的。</p>
+<p>config 裡面的設定有很多，主要都是 openTelemetry 的設定，要注意的是 enable-opentelemetry 要設為 true，另外 otlp-collector-host 以及 otlp-collector-port 要送到哪個 collector 等等也要記得設定。
+另外如果想要將 LOG 與 Trace 串再一起，記得要把 log-format 設為 json，並且帶入，trace_id 與 span_id ( 這邊有多帶 dd.trace_id 是為了讓 datadog 可以自動串接 LOG &amp; Trace )。</p>
+</li>
+<li>
+<p>nginx.yaml：
+一個簡單的 Nginx 整套服務 (Deployment、Service、Ingress)，要注意的是 Ingress 需要設定 annotations kubernetes.io/ingress.class: nginx (這個是 Ingress Nginx Controller 的預設 class name)，才會被 Ingress Nginx Controller 接管 (才會有 Load Balancer 的 IP)</p>
+</li>
+</ul>
+<br>
+<h2 id="執行步驟">執行步驟</h2>
+<ol>
+<li>
+<p>先 clone 這個 repo (廢話 xD)</p>
+</li>
+<li>
+<p>先建立 OpenTelemetry Collector，執行以下指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade collector <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> opentelemetry-collector <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --repo https://open-telemetry.github.io/opentelemetry-helm-charts <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --create-namespace <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --namespace opentelemetry <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> -f <span class="s2">&#34;otel-collector.yaml&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>再建立 Ingress Nginx Controller，執行以下指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade ingress-nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> ingress-nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --repo https://kubernetes.github.io/ingress-nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --create-namespace <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --namespace ingress-nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> -f <span class="s2">&#34;ingress-nginx-values.yaml&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>接著建立測試用 Nginx 服務，執行以下指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f nginx.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<br>
+<h2 id="測試">測試</h2>
+<p>當你執行完上面的步驟後，你會發現有產生兩個 namespace，一個是 ingress-nginx，另一個是 opentelemetry，並且會有 OpenTelemetry Collector、Ingress Nginx Controller、Nginx 等服務，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/opentelemetry-ingress-nginx-controller/1.png" title="/images/opentelemetry-ingress-nginx-controller/1.png" data-thumbnail="/images/opentelemetry-ingress-nginx-controller/1.png" data-sub-html="<h2>啟動服務</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/opentelemetry-ingress-nginx-controller/1.png"
+            data-srcset="/images/opentelemetry-ingress-nginx-controller/1.png, /images/opentelemetry-ingress-nginx-controller/1.png 1.5x, /images/opentelemetry-ingress-nginx-controller/1.png 2x"
+            data-sizes="auto"
+            alt="/images/opentelemetry-ingress-nginx-controller/1.png" width="700" />
+    </a><figcaption class="image-caption">啟動服務</figcaption>
+    </figure>
+<br>
+<p>我們試著打 <code>http://nginx.example.com/</code> (測試網址，需要先在 /etc/hosts 綁定 Ingress Nginx Controller 咬住的 Load Balancer IP)，查看一下 Datadog 的 LOG，看看是否有收到 Nginx 的 LOG (此收集 LOG 的方式是透過在 cluster 上安裝 Datadog 的 agent)，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/opentelemetry-ingress-nginx-controller/2.png" title="/images/opentelemetry-ingress-nginx-controller/2.png" data-thumbnail="/images/opentelemetry-ingress-nginx-controller/2.png" data-sub-html="<h2>Datadog LOG</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/opentelemetry-ingress-nginx-controller/2.png"
+            data-srcset="/images/opentelemetry-ingress-nginx-controller/2.png, /images/opentelemetry-ingress-nginx-controller/2.png 1.5x, /images/opentelemetry-ingress-nginx-controller/2.png 2x"
+            data-sizes="auto"
+            alt="/images/opentelemetry-ingress-nginx-controller/2.png" width="700" />
+    </a><figcaption class="image-caption">Datadog LOG</figcaption>
+    </figure>
+<br></p>
+<p>接著查看 Datadog APM 的 trace，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/opentelemetry-ingress-nginx-controller/3.png" title="/images/opentelemetry-ingress-nginx-controller/3.png" data-thumbnail="/images/opentelemetry-ingress-nginx-controller/3.png" data-sub-html="<h2>Datadog APM</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/opentelemetry-ingress-nginx-controller/3.png"
+            data-srcset="/images/opentelemetry-ingress-nginx-controller/3.png, /images/opentelemetry-ingress-nginx-controller/3.png 1.5x, /images/opentelemetry-ingress-nginx-controller/3.png 2x"
+            data-sizes="auto"
+            alt="/images/opentelemetry-ingress-nginx-controller/3.png" width="700" />
+    </a><figcaption class="image-caption">Datadog APM</figcaption>
+    </figure>
+<br>
+<p>由於我們在後面目前沒有串其他服務，所以只有一個 span，之後還有另外兩篇文章是介紹如何串其他服務 (會增加服務以及部分設定)，可以參考看看：<a href="https://github.com/880831ian/opentelemetry-roadrunner" target="_blank" rel="noopener noreffer">opentelemetry-roadrunner</a>、<a href="https://github.com/880831ian/opentelemetry-nodejs" target="_blank" rel="noopener noreffer">opentelemetry-nodejs</a></p>
+<br>
+<p>順便看一下透過 Datadog Agent 收集的 Ingress Nginx Controller 的 Metrics，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/opentelemetry-ingress-nginx-controller/4.png" title="/images/opentelemetry-ingress-nginx-controller/4.png" data-thumbnail="/images/opentelemetry-ingress-nginx-controller/4.png" data-sub-html="<h2>Datadog Ingress Nginx Controller 的 Metrics</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/opentelemetry-ingress-nginx-controller/4.png"
+            data-srcset="/images/opentelemetry-ingress-nginx-controller/4.png, /images/opentelemetry-ingress-nginx-controller/4.png 1.5x, /images/opentelemetry-ingress-nginx-controller/4.png 2x"
+            data-sizes="auto"
+            alt="/images/opentelemetry-ingress-nginx-controller/4.png" width="700" />
+    </a><figcaption class="image-caption">Datadog Ingress Nginx Controller 的 Metrics</figcaption>
+    </figure>
+<br>
+<p>可以用這些 Metrics 來做 Dashboard，如下：</p>
+<br>
+<figure><a class="lightgallery" href="/images/opentelemetry-ingress-nginx-controller/5.png" title="/images/opentelemetry-ingress-nginx-controller/5.png" data-thumbnail="/images/opentelemetry-ingress-nginx-controller/5.png" data-sub-html="<h2>Datadog Dashboard</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/opentelemetry-ingress-nginx-controller/5.png"
+            data-srcset="/images/opentelemetry-ingress-nginx-controller/5.png, /images/opentelemetry-ingress-nginx-controller/5.png 1.5x, /images/opentelemetry-ingress-nginx-controller/5.png 2x"
+            data-sizes="auto"
+            alt="/images/opentelemetry-ingress-nginx-controller/5.png" width="700" />
+    </a><figcaption class="image-caption">Datadog Dashboard</figcaption>
+    </figure>
+<br>
+<h2 id="結論">結論</h2>
+<p>透過 OpenTelemetry Collector 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上，這樣就可以透過 Ingress Nginx Controller 的 Metrics 來做監控了，對於 RD 再開發上，有 Traces 也更方便 RD 他們找到程式的瓶頸 (有可能是服務導致的)。</p>
+<br>
+<h2 id="參考">參考</h2>
+<p><a href="https://dev.to/bzon/send-gke-nginx-ingress-controller-logs-to-stackdriver-2ih4" target="_blank" rel="noopener noreffer">Configure Nginx Ingress Controller to use JSON log format</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10290703" target="_blank" rel="noopener noreffer">淺談 OpenTelemetry - Collector Compoents</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/opentelemetry/">Opentelemetry</a>
+                </span><span><a href="/tags/observability/">Observability</a>
+                </span><span><a href="/tags/%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%80%A7/">可觀測性</a>
+                </span><span><a href="/tags/ingress-nginx-controller/">Ingress Nginx Controller</a>
+                </span><span><a href="/tags/datadog/">Datadog</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-09-13&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/8e0e355128c692f4fe7feec8fdadc7cb2140b348" target="_blank" title="committed&nbsp;by&nbsp;ian_zhuang(880831ian@gmail.com)&nbsp;8e0e355:&nbsp;# 新增 如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上">
+                            <i class="fas fa-hashtag fa-fw"></i>8e0e355</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/opentelemetry-ingress-nginx-controller/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/opentelemetry-ingress-nginx-controller/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" data-title="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上" data-hashtags="Opentelemetry,Observability,可觀測性,Ingress Nginx Controller,Datadog"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" data-hashtag="Opentelemetry"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" data-title="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" data-title="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" data-title="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/opentelemetry-observability/" class="prev" rel="prev" title="什麼是 Opentelemetry？可觀測性 (Observability) 又是什麼？"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
