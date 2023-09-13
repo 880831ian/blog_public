@@ -4,7 +4,7 @@
         <link>https://blog.pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</lastBuildDate>
             <atom:link href="https://blog.pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤</title>
+    <link>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</link>
+    <pubDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</guid>
+    <description><![CDATA[此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法： 簡單列出正式站當下服]]></description>
 </item>
 <item>
     <title>如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上</title>
@@ -59,12 +65,6 @@
     <link>https://blog.pin-yi.me/terraform-tfstate/</link>
     <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
     <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 *.tfstate，這個檔案是用來存放服務狀態的檔案]]></description>
-</item>
-<item>
-    <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
-    <link>https://blog.pin-yi.me/bookstack/</link>
-    <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
-    <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
 </item>
 </channel>
 </rss>

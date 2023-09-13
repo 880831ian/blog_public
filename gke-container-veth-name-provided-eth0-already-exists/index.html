@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤 - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤" />
+<meta property="og:description" content="此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法： 簡單列出正式站當下服" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" /><meta property="og:image" content="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-13T11:48:00+08:00" />
+<meta property="article:modified_time" content="2023-09-13T16:08:25+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp"/>
+<meta name="twitter:title" content="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤"/>
+<meta name="twitter:description" content="此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法： 簡單列出正式站當下服"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" /><link rel="prev" href="https://blog.pin-yi.me/opentelemetry-ingress-nginx-controller/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/gke-container-veth-name-provided-eth0-already-exists\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/gke-container-veth-name-provided-eth0-already-exists\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GCP, K8s, GKE","wordcount":  1305 ,
+        "url": "https:\/\/blog.pin-yi.me\/gke-container-veth-name-provided-eth0-already-exists\/","datePublished": "2023-09-13T11:48:00+08:00","dateModified": "2023-09-13T16:08:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp"
+        data-srcset="/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp, /gke-container-veth-name-provided-eth0-already-exists/featured-image.webp 1.5x, /gke-container-veth-name-provided-eth0-already-exists/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp"
+        title="/gke-container-veth-name-provided-eth0-already-exists/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-13">2023-09-13</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1305 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#事情發生的經過">事情發生的經過</a></li>
+    <li><a href="#與-google-support-討論內容">與 Google Support 討論內容</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法：</p>
+<br>
+<p>簡單列出正式站當下服務環境：</p>
+<ul>
+<li>gke master version：1.25.10-gke.2700</li>
+<li>gke node version：1.25.8-gke.1000</li>
+<li>該問題發生的 node pool 有設定 taint</li>
+<li>發生問題的 Pod 是用 Statefulset 建立的服務</li>
+</ul>
+<br>
+<h2 id="事情發生的經過">事情發生的經過</h2>
+<ol>
+<li>RD 同仁反應，發現使用 Statefulset 建立的排程服務有問題，下 <code>kubectl delete</code> 指令想要刪除 Pod，讓 Pod 重新長，卻卡在 Terminating，等待一段時間後，決定下 <code>kubectl delete --force --grace-period=0</code> 來強制刪除 Pod，這時候狀態會卡在 ContainerCreating，使用 Describe 查看，會出現以下錯誤：</li>
+</ol>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Warning
+</span></span><span class="line"><span class="cl">(combined from similar events): Failed to create pod sandbox: rpo error: code = Unknown desc = failed to setup network for sandbox
+</span></span><span class="line"><span class="cl">&#34;14fe0cd3d688aed4ffed4c36ffab1a145230449881bcbe4cac6478a63412b0c*: plugin type=*gke&#34; failed (add): container veth name provided (etho) already exists
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<ol start="2">
+<li>我們 SRE 協助查看後，也有嘗試去下 <code>kubectl delete --force --grace-period=0</code> 來刪除 Pod，但還是一樣卡在 ContainerCreating，最後是先開一個新的 Node 並讓該 Pod 建立到新的 Node 上，才解決問題。為了方便 google support 協助檢查出問題的 Node，先將 Node 設定成 cordon，避免其他 Pod 被調度到該問題 node 上。</li>
+</ol>
+<br>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Node 設定成 cordon<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Node 可以設定 cordon、drain 和 delete 三個指定都會使 Node 停止被調度，只是每個的操作暴力程度不同：</p>
+<p>cordon：影響最小，只會將 Node 標示為 SchedulingDisabled 不可調度狀態，但不會影響到已經在該 Node 上的 Pod，使用 <code>kubectl cordon [node name]</code> 來停止調度，使用 <code>kubectl uncordon [node name]</code> 來恢復調度。</p>
+<p>drain：會先驅逐在 Node 上的 Pod，再將 Node 標示為 SchedulingDisabled 不可調度狀態，使用 <code>kubectl drain [node name]  --ignore-daemonsets --delete-local-data</code> 來停止調度，使用 <code>kubectl uncordon [node name]</code> 來恢復調度。</p>
+<p>delete：會先驅逐 Node 上的 Pod，再刪除 Node 節點，它是一種暴力刪除 Node 的作法，在驅逐 Pod 時，會強制 Kill 容器進程，沒辦法優雅的終止 Pod。</p>
+</div>
+        </div>
+    </div>
+<br>
+<ol start="3">
+<li>我們隨後開單詢問 goolge support。</li>
+</ol>
+<br>
+<h2 id="與-google-support-討論內容">與 Google Support 討論內容</h2>
+<p>Google Support 經過查詢後，回覆說：這個問題是因為 Pod 被強制刪除導致，強制刪除是一種危險的操作，不建議這樣處理，下面有詳細討論。</p>
+<br>
+<ol>
+<li>
+<p>一開始卡在 Terminating 狀態，我們也有請 RD 說明一下當下遇到的問題以及處理動作：RD 當時想要刪除 Pod 是因為該程式當下有 Bug，將 redis 與 db 連線給關閉，程式找不到就會一直 retry，導致相關進程無法結束，再加上 terminationGracePeriodSeconds 我們設定 14400，也就是 4 小時，才會卡在 Terminating 狀態。
+(terminationGracePeriodSeconds 設定這麼久是希望如果有被 on call，工程師上來時，可以查看該 Pod 的錯誤原因)</p>
+</li>
+<li>
+<p>因為卡在 Terminating 太久，RD 有執行 <code>kubectl delete --force</code>，就是因為下了 <code>--force</code> 才造成相關資源問題 (例如 container proccess, sandbox, 以及網路資源)沒有刪乾淨。所以引起了此次的報錯 &ldquo;container veth name provided (eth0) already exists&rdquo;。
+(因為我們服務使用 Statefulset，Pod 名稱相同，導致 eth0 這個網路資源名稱重複，所以造成錯誤，可以用 deployment 來改善這個問題，只是資源如果沒有清理乾淨會佔用 IP，所以單純調整成 deployment 也不是最佳解)</p>
+</li>
+<li>
+<p>Google 產品團隊建議，如果 Pod 處於 Running 狀態時，想要快速刪除 Pod 時，一開始就先使用 <code>kubectl delete pod --grace-period=number[秒數]</code> 來刪除，如果已經是 Terminating 狀態則無效。(SRE 同仁已測試過，與 Google Support 說明相同)</p>
+</li>
+<li>
+<p>那如果已經處於 Terminating 狀態，要怎麽讓 Pod 被順利刪除，這部分 Google Support 後續會在測試並給出建議，目前的想法是：刪除 container 主進程、刪除 pod 主進程。</p>
+</li>
+</ol>
+<br>
+<figure><a class="lightgallery" href="/images/gke-container-veth-name-provided-eth0-already-exists/1.png" title="/images/gke-container-veth-name-provided-eth0-already-exists/1.png" data-thumbnail="/images/gke-container-veth-name-provided-eth0-already-exists/1.png" data-sub-html="<h2>Google Support 回覆</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/gke-container-veth-name-provided-eth0-already-exists/1.png"
+            data-srcset="/images/gke-container-veth-name-provided-eth0-already-exists/1.png, /images/gke-container-veth-name-provided-eth0-already-exists/1.png 1.5x, /images/gke-container-veth-name-provided-eth0-already-exists/1.png 2x"
+            data-sizes="auto"
+            alt="/images/gke-container-veth-name-provided-eth0-already-exists/1.png" width="700" />
+    </a><figcaption class="image-caption">Google Support 回覆</figcaption>
+    </figure>
+<br>
+<br>
+<h2 id="參考">參考</h2>
+<p><a href="https://www.cnblogs.com/kevingrace/p/14412254.html" target="_blank" rel="noopener noreffer">Node 節點禁止調度（平滑維護）方式- cordon，drain，delete</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/k8s/">K8s</a>
+                </span><span><a href="/tags/gke/">GKE</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-09-13&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/2970fd0c6ed3bc0b2291c92ce9db6f71e340c528" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;2970fd0:&nbsp;# 新增 部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤">
+                            <i class="fas fa-hashtag fa-fw"></i>2970fd0</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/gke-container-veth-name-provided-eth0-already-exists/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/gke-container-veth-name-provided-eth0-already-exists/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" data-title="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤" data-hashtags="GCP,K8s,GKE"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" data-title="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" data-title="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" data-title="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/opentelemetry-ingress-nginx-controller/" class="prev" rel="prev" title="如何透過 OpenTelemetry 來收集 Ingress Nginx Controller 的 Metrics 與 Traces 並送到 Datadog 上"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

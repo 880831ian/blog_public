@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/k8s/</link>
         <description>K8s - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤</title>
+    <link>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</link>
+    <pubDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</guid>
+    <description><![CDATA[此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法： 簡單列出正式站當下服]]></description>
+</item>
+<item>
     <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
     <link>https://blog.pin-yi.me/bookstack/</link>
     <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>

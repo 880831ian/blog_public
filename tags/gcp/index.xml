@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/gcp/</link>
         <description>GCP - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gcp/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/gcp/" rel="self" type="application/rss+xml" /><item>
+    <title>部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤</title>
+    <link>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</link>
+    <pubDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</guid>
+    <description><![CDATA[此文章要來記錄一下公司同事在正式服務上遇到的問題，會詳細說明遇到事情的經過，以及開單詢問 google support 最後討論出的暫時解決的辦法： 簡單列出正式站當下服]]></description>
+</item>
+<item>
     <title>如何過濾 GCP LOG，減少 Cloud Logging API 的花費</title>
     <link>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</link>
     <pubDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/gcp-gcr/</link>
     <pubDate>Sun, 03 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcr/</guid>
     <description><![CDATA[本篇是我們進入 GCP 的第四篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Container Registry，Container Registry 是儲存、管]]></description>
-</item>
-<item>
-    <title>Google Cloud Platform (GCP) 百科全書  - Cloud Source Repositories [ EP.3 ]</title>
-    <link>https://blog.pin-yi.me/gcp-gcsr/</link>
-    <pubDate>Fri, 01 Jul 2022 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-gcsr/</guid>
-    <description><![CDATA[本篇是我們進入 GCP 的第三篇文章，詳細的文章列表大家可以到這一篇查看 ～ 跟大家介紹一下今天的主題 Cloud Source Repositories，聽到 Source Repositories 是不是感覺跟]]></description>
 </item>
 </channel>
 </rss>
