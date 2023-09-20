@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</title>
+    <link>https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/</link>
+    <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/</guid>
+    <description><![CDATA[此文章要來記錄一下 RD 同仁前陣子有反應使用 Soketi 這個 WebSocket Server 會不定時在 LOG 出現 502 error 錯誤訊息以及 connect() failed (111: Connection refused) while connecting to upstream，雖然說服務使用上不會影響]]></description>
+</item>
+<item>
     <title>部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤</title>
     <link>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</link>
     <pubDate>Wed, 13 Sep 2023 11:48:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/terraform-module/</link>
     <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
     <description><![CDATA[當我們要管理的資源越來越多後，會產生很多的 tf 檔案，假設我們現在有三個 gce 服務，會在以下三個不同環境上面運作，每個環境都會有我們之前學會的基本 tf]]></description>
-</item>
-<item>
-    <title>Terraform 如何多人共同開發 (將 tfstate 存在後端)</title>
-    <link>https://blog.pin-yi.me/terraform-tfstate/</link>
-    <pubDate>Mon, 29 May 2023 14:36:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-tfstate/</guid>
-    <description><![CDATA[此篇是接續上一篇 什麼是 IaC ? Terraform 又是什麼？的 Terraform 文章，我們在上一篇有提到 terraform apply 完後，會多一個檔案 *.tfstate，這個檔案是用來存放服務狀態的檔案]]></description>
 </item>
 </channel>
 </rss>
