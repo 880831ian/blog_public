@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/" /><meta property="og:image" content="https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/featured-image.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-20T07:21:00+08:00" />
-<meta property="article:modified_time" content="2023-09-20T19:11:40+08:00" />
+<meta property="article:modified_time" content="2023-09-21T14:43:52+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/featured-image.webp"/>
 <meta name="twitter:title" content="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/blog.pin-yi.me\/soketi-websocket-server-log-502-error-and-111-connection-refused\/featured-image.webp",
                             "width":  1280 ,
                             "height":  300 
-                        }],"genre": "posts","keywords": "GCP, K8s, GKE","wordcount":  1050 ,
-        "url": "https:\/\/blog.pin-yi.me\/soketi-websocket-server-log-502-error-and-111-connection-refused\/","datePublished": "2023-09-20T07:21:00+08:00","dateModified": "2023-09-20T19:11:40+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "GCP, K8s, GKE","wordcount":  1499 ,
+        "url": "https:\/\/blog.pin-yi.me\/soketi-websocket-server-log-502-error-and-111-connection-refused\/","datePublished": "2023-09-20T07:21:00+08:00","dateModified": "2023-09-21T14:43:52+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
                 "@type": "Person",
@@ -126,7 +126,7 @@ if (!doNotTrack) {
         alt="/soketi-websocket-server-log-502-error-and-111-connection-refused/featured-image.webp"
         title="/soketi-websocket-server-log-502-error-and-111-connection-refused/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</h2><div class="post-meta">
                 <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
-                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-20">2023-09-20</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1050 字</span>&nbsp;
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-20">2023-09-20</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1499 字</span>&nbsp;
                     <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
             </div>
             
@@ -138,6 +138,7 @@ if (!doNotTrack) {
                     <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#解決過程">解決過程</a></li>
+    <li><a href="#壓測">壓測</a></li>
     <li><a href="#參考">參考</a></li>
   </ul>
 </nav></div>
@@ -173,6 +174,9 @@ if (!doNotTrack) {
 <br>
 <p>然後會出現 <code>connect() failed (111: Connection refused) while connecting to upstream</code> 的錯誤訊息，代表我們的 Nginx 設定少了一個重要的一行設定，就是 <code>proxy_http_version 1.1;</code>，這個設定要讓 Nginx 作為 proxy 可以和 upstream 的後端服務也是用 keepalive，必須使用 http 1.1，但如果沒有設定預設是 1.0，也要記得設定 <code>proxy_set_header Upgrade</code>、<code>proxy_set_header Connection</code>。調整過後就變成：</p>
 <br>
+<ul>
+<li>ws.conf</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -223,6 +227,9 @@ if (!doNotTrack) {
 <p>解決完 <code>connect() failed (111: Connection refused)</code> 這個問題後，接下來就是要解決 <code>502 error</code> 這個問題，會導致 502 代表 Nginx 這個 proxy server 連不上後端的 Soketi WebSocket Server，再觀察 LOG 以及測試後發現，當 Pod 自動重啟，或是手動重啟 Deployment 的時候，就會有 502 的錯誤，代表 Nginx 在 proxy 到後面的 Soketi svc 再到 Pod 的時候，有一段時間是連不上的，所以就會出現 502 的錯誤，可以推測是流量進到正在關閉的 Pod 或是進到還沒有啟動好的 Pod 才導致的。</p>
 <p>那我們先來看一下 Soketi WebSocket Server 的服務 yaml 檔案：</p>
 <br>
+<ul>
+<li>deployment.yaml</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -274,6 +281,9 @@ if (!doNotTrack) {
 </div><br>
 <p>可以看到原來的設定只有 <code>livenessProbe</code> 而已，因此我們為了要避免流量進到正在關閉的 Pod 或是進到還沒有啟動好的 Pod，所以我們需要加上 <code>readinessProbe</code> 以及 <code>preStop</code>，讓 Pod 確定啟動完畢，或是等待 Service 的 endpoint list 中移除 Pod，才開始接收流量，這樣就可以避免出現 502 的錯誤。</p>
 <br>
+<ul>
+<li>deployment.yaml</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -364,6 +374,98 @@ if (!doNotTrack) {
     </a><figcaption class="image-caption">Pod 終止的過程</figcaption>
     </figure>
 <br>
+<h2 id="壓測">壓測</h2>
+<p>最後調整完，我們來測試看看是否在 Pod 自動重啟 or 更新 Deployment 的時候(並且有大量連線時)還會噴 502 error 或是 <code>connect() failed (111: Connection refused)</code>，我們這邊使用 k6 來做 websocket 服務的壓測，有簡單寫一個壓測程式如下：</p>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>k6 壓測<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>k6 是一個開源的壓測工具，可以用來測試 API、WebSocket、gRPC 等服務，可以到它的<a href="https://k6.io/" target="_blank" rel="noopener noreffer">官網</a>查看更多資訊。</p>
+<p>MacOS 安裝方式：brew install k6</p>
+</div>
+        </div>
+    </div>
+<br>
+<ul>
+<li>websocket.js</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import ws from &#34;k6/ws&#34;;
+</span></span><span class="line"><span class="cl">import { check } from &#34;k6&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export const options = {
+</span></span><span class="line"><span class="cl">  vus: 1000,
+</span></span><span class="line"><span class="cl">  duration: &#34;30s&#34;,
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export default function () {
+</span></span><span class="line"><span class="cl">  const url =
+</span></span><span class="line"><span class="cl">    &#34;wss://socket.XXX.com/app/hex-ws?protocol=7&amp;client=js&amp;version=7.4.1&amp;flash=false&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  const res = ws.connect(url, function (socket) {
+</span></span><span class="line"><span class="cl">    socket.on(&#34;open&#34;, () =&gt; console.log(&#34;connected&#34;));
+</span></span><span class="line"><span class="cl">    socket.on(&#34;message&#34;, (data) =&gt; console.log(&#34;Message received: &#34;, data));
+</span></span><span class="line"><span class="cl">    socket.on(&#34;close&#34;, () =&gt; console.log(&#34;disconnected&#34;));
+</span></span><span class="line"><span class="cl">  });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  check(res, { &#34;status is 101&#34;: (r) =&gt; r &amp;&amp; r.status === 101 });
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>簡單說明一下上面程式在寫什麼，我們在 const 設定 vus 代表有 1000 個虛擬使用者，會在 duration 30s 內完成測試，下面的 default 就是測試連線 ws 以及 message 跟 close 等動作，最後需要回傳 101 (ws 交握)</p>
+<br>
+<p>執行 <code>k6 run websocket.js</code> 後，就會開始壓測，可以看到會開始執行剛剛在上面提到 default 的動作：</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png" title="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png" data-thumbnail="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png" data-sub-html="<h2>k6 壓測過程</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png"
+            data-srcset="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png, /images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png 1.5x, /images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/4.png" width="800" />
+    </a><figcaption class="image-caption">k6 壓測過程</figcaption>
+    </figure>
+<br>
+<p>等到跑完，就會告訴你 1000 筆裡面有多少的 http 101，這邊顯示 status is 101，就代表都是 101，代表都有連線成功，沒有出現 502 error 或是 <code>connect() failed (111: Connection refused)</code> 的錯誤，這樣就代表我們的問題解決了。</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png" title="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png" data-thumbnail="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png" data-sub-html="<h2>k6 壓測結果</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png"
+            data-srcset="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png, /images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png 1.5x, /images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-websocket-server-log-502-error-and-111-connection-refused/5.png" width="800" />
+    </a><figcaption class="image-caption">k6 壓測結果</figcaption>
+    </figure>
+<br>
 <h2 id="參考">參考</h2>
 <p><a href="https://wshs0713.github.io/posts/8c1276a7/" target="_blank" rel="noopener noreffer">[Nginx] 解決 connect() failed (111: Connection refused) while connecting to upstream</a></p>
 <p><a href="http://nginx.org/en/docs/http/websocket.html" target="_blank" rel="noopener noreffer">WebSocket proxying</a></p>
@@ -373,8 +475,8 @@ if (!doNotTrack) {
                 </span><span><a href="/tags/k8s/">K8s</a>
                 </span><span><a href="/tags/gke/">GKE</a>
                 </span></div><div class="post-info-line"><div class="post-info-mod">
-                <span>更新於 2023-09-20&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/fe9334148876ae66e89ea96dbbecd8af58117d41" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;fe93341:&nbsp;# 新增 Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)">
-                            <i class="fas fa-hashtag fa-fw"></i>fe93341</a></span>
+                <span>更新於 2023-09-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/1aaa8a01effa0f6b0bb097421f7c99b073980df8" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;1aaa8a0:&nbsp;# 更新 Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)">
+                            <i class="fas fa-hashtag fa-fw"></i>1aaa8a0</a></span>
             </div><div class="post-info-mod"><span>
                             <a class="link-to-markdown" href="/soketi-websocket-server-log-502-error-and-111-connection-refused/index.md" target="_blank">閱讀原始文檔</a>
                         </span><span>
