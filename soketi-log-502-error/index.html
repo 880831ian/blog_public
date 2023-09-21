@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused) - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)" />
+<meta property="og:description" content="此文章要來記錄一下 RD 同仁前陣子有反應使用 Soketi 這個 WebSocket Server 會不定時在 LOG 出現 502 error 錯誤訊息以及 connect() failed (111: Connection refused) while connecting to upstream，雖然說服務使用上不會影響" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/soketi-log-502-error/" /><meta property="og:image" content="https://blog.pin-yi.me/soketi-log-502-error/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-20T07:21:00+08:00" />
+<meta property="article:modified_time" content="2023-09-21T14:49:06+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/soketi-log-502-error/featured-image.webp"/>
+<meta name="twitter:title" content="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"/>
+<meta name="twitter:description" content="此文章要來記錄一下 RD 同仁前陣子有反應使用 Soketi 這個 WebSocket Server 會不定時在 LOG 出現 502 error 錯誤訊息以及 connect() failed (111: Connection refused) while connecting to upstream，雖然說服務使用上不會影響"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/soketi-log-502-error/" /><link rel="prev" href="https://blog.pin-yi.me/gke-container-veth-name-provided-eth0-already-exists/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/soketi-log-502-error\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/soketi-log-502-error\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "GCP, K8s, GKE","wordcount":  1516 ,
+        "url": "https:\/\/blog.pin-yi.me\/soketi-log-502-error\/","datePublished": "2023-09-20T07:21:00+08:00","dateModified": "2023-09-21T14:49:06+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/soketi-log-502-error/featured-image.webp"
+        data-srcset="/soketi-log-502-error/featured-image.webp, /soketi-log-502-error/featured-image.webp 1.5x, /soketi-log-502-error/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/soketi-log-502-error/featured-image.webp"
+        title="/soketi-log-502-error/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-20">2023-09-20</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1516 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 4 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#解決過程">解決過程</a></li>
+    <li><a href="#壓測">壓測</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此文章要來記錄一下 RD 同仁前陣子有反應使用 Soketi 這個 WebSocket Server 會不定時在 LOG 出現 502 error 錯誤訊息以及 connect() failed (111: Connection refused) while connecting to upstream，雖然說服務使用上不會影響很大，但還是希望我們可以協助找出 502 的原因。</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-log-502-error/1.png" title="/images/soketi-log-502-error/1.png" data-thumbnail="/images/soketi-log-502-error/1.png" data-sub-html="<h2>出錯的 LOG</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-log-502-error/1.png"
+            data-srcset="/images/soketi-log-502-error/1.png, /images/soketi-log-502-error/1.png 1.5x, /images/soketi-log-502-error/1.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-log-502-error/1.png" width="950" />
+    </a><figcaption class="image-caption">出錯的 LOG</figcaption>
+    </figure>
+<br>
+<p>在開始找問題前，先簡單介紹一下 Soketi 是什麼東西好了，根據官網的說明，他是簡單、快速且有彈性的開源 WebSockets server，想要了解更多的可以到它<a href="https://docs.soketi.app/" target="_blank" rel="noopener noreffer">官網</a>去查看。</p>
+<p>另外會把程式碼相關放到 GitHub &raquo; <a href="https://github.com/880831ian/soketi-log-502-error" target="_blank" rel="noopener noreffer">點我前往</a></p>
+<br>
+<h2 id="解決過程">解決過程</h2>
+<p>我們可以看到上方錯誤 LOG 中，發現有出現 502 error 以及 connect() failed (111: Connection refused) while connecting to upstream，這兩個錯誤都是由 Nginx 所產生的，那我們先來理解一下，Nginx 與 Soketi 之間的關係。</p>
+<p>在使用上，RD 的程式會打 Soketi 專用的 Subdomain 來使用這個 WebSocket 服務，而在我們的架構上，這個 Subdomain 會經過用 nginx proxy server，來轉發到 Soketi WebSocket Server (走 k8s svc)，設定檔如下圖：</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-log-502-error/2.png" title="/images/soketi-log-502-error/2.png" data-thumbnail="/images/soketi-log-502-error/2.png" data-sub-html="<h2>入口 nginx 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-log-502-error/2.png"
+            data-srcset="/images/soketi-log-502-error/2.png, /images/soketi-log-502-error/2.png 1.5x, /images/soketi-log-502-error/2.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-log-502-error/2.png" width="700" />
+    </a><figcaption class="image-caption">入口 nginx 設定</figcaption>
+    </figure>
+<br>
+<p>然後會出現 <code>connect() failed (111: Connection refused) while connecting to upstream</code> 的錯誤訊息，代表我們的 Nginx 設定少了一個重要的一行設定，就是 <code>proxy_http_version 1.1;</code>，這個設定要讓 Nginx 作為 proxy 可以和 upstream 的後端服務也是用 keepalive，必須使用 http 1.1，但如果沒有設定預設是 1.0，也要記得設定 <code>proxy_set_header Upgrade</code>、<code>proxy_set_header Connection</code>。調整過後就變成：</p>
+<br>
+<ul>
+<li>ws.conf</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">  server_name socket.XXX.com;
+</span></span><span class="line"><span class="cl">  listen 80 ;
+</span></span><span class="line"><span class="cl">  listen [::]:80 ;
+</span></span><span class="line"><span class="cl">  listen 443 ssl;
+</span></span><span class="line"><span class="cl">  listen [::]:443 ssl;
+</span></span><span class="line"><span class="cl">  ssl_certificate /etc/nginx/ingress.gcp.cert;
+</span></span><span class="line"><span class="cl">  ssl_certificate_key /etc/nginx/ingress.gcp.key;
+</span></span><span class="line"><span class="cl">  access_log /var/log/nginx/access.log main;
+</span></span><span class="line"><span class="cl">  location / {
+</span></span><span class="line"><span class="cl">    proxy_pass http://soketi-ws-ci:6001;
+</span></span><span class="line"><span class="cl">    proxy_connect_timeout 10s;
+</span></span><span class="line"><span class="cl">    proxy_read_timeout 1800s;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">    proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">    proxy_set_header Connection &#34;Upgrade&#34;;
+</span></span><span class="line"><span class="cl">    proxy_set_header X-Real-IP $remote_addr;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>解決完 <code>connect() failed (111: Connection refused)</code> 這個問題後，接下來就是要解決 <code>502 error</code> 這個問題，會導致 502 代表 Nginx 這個 proxy server 連不上後端的 Soketi WebSocket Server，再觀察 LOG 以及測試後發現，當 Pod 自動重啟，或是手動重啟 Deployment 的時候，就會有 502 的錯誤，代表 Nginx 在 proxy 到後面的 Soketi svc 再到 Pod 的時候，有一段時間是連不上的，所以就會出現 502 的錯誤，可以推測是流量進到正在關閉的 Pod 或是進到還沒有啟動好的 Pod 才導致的。</p>
+<p>那我們先來看一下 Soketi WebSocket Server 的服務 yaml 檔案：</p>
+<br>
+<ul>
+<li>deployment.yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">securityContext</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">soketi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">securityContext</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;quay.io/soketi/soketi::1.6.0-16-alpine&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">... 省略 (可以到 github 看 code)...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">httpHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">X-Kube-Healthcheck</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Yes&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">6001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">successThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>可以看到原來的設定只有 <code>livenessProbe</code> 而已，因此我們為了要避免流量進到正在關閉的 Pod 或是進到還沒有啟動好的 Pod，所以我們需要加上 <code>readinessProbe</code> 以及 <code>preStop</code>，讓 Pod 確定啟動完畢，或是等待 Service 的 endpoint list 中移除 Pod，才開始接收流量，這樣就可以避免出現 502 的錯誤。</p>
+<br>
+<ul>
+<li>deployment.yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">securityContext</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">soketi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">securityContext</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;quay.io/soketi/soketi::1.6.0-16-alpine&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">... 省略 (可以到 github 看 code)...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">httpHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">X-Kube-Healthcheck</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Yes&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">6001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">successThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">httpHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">X-Kube-Healthcheck</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Yes&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/ready</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">6001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">successThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">lifecycle</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">preStop</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">exec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;sleep 20&#34;</span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<figure><a class="lightgallery" href="/images/soketi-log-502-error/3.png" title="/images/soketi-log-502-error/3.png" data-thumbnail="/images/soketi-log-502-error/3.png" data-sub-html="<h2>Pod 終止的過程</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-log-502-error/3.png"
+            data-srcset="/images/soketi-log-502-error/3.png, /images/soketi-log-502-error/3.png 1.5x, /images/soketi-log-502-error/3.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-log-502-error/3.png" width="600" />
+    </a><figcaption class="image-caption">Pod 終止的過程</figcaption>
+    </figure>
+<br>
+<h2 id="壓測">壓測</h2>
+<p>最後調整完，我們來測試看看是否在 Pod 自動重啟 or 更新 Deployment 的時候(並且有大量連線時)還會噴 502 error 或是 <code>connect() failed (111: Connection refused)</code>，我們這邊使用 k6 來做 websocket 服務的壓測，有簡單寫一個壓測程式如下：</p>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>k6 壓測<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>k6 是一個開源的壓測工具，可以用來測試 API、WebSocket、gRPC 等服務，可以到它的<a href="https://k6.io/" target="_blank" rel="noopener noreffer">官網</a>查看更多資訊。</p>
+<p>MacOS 安裝方式：brew install k6</p>
+</div>
+        </div>
+    </div>
+<br>
+<ul>
+<li>websocket.js</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import ws from &#34;k6/ws&#34;;
+</span></span><span class="line"><span class="cl">import { check } from &#34;k6&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export const options = {
+</span></span><span class="line"><span class="cl">  vus: 1000,
+</span></span><span class="line"><span class="cl">  duration: &#34;30s&#34;,
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export default function () {
+</span></span><span class="line"><span class="cl">  const url =
+</span></span><span class="line"><span class="cl">    &#34;wss://socket.XXX.com/app/hex-ws?protocol=7&amp;client=js&amp;version=7.4.1&amp;flash=false&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  const res = ws.connect(url, function (socket) {
+</span></span><span class="line"><span class="cl">    socket.on(&#34;open&#34;, () =&gt; console.log(&#34;connected&#34;));
+</span></span><span class="line"><span class="cl">    socket.on(&#34;message&#34;, (data) =&gt; console.log(&#34;Message received: &#34;, data));
+</span></span><span class="line"><span class="cl">    socket.on(&#34;close&#34;, () =&gt; console.log(&#34;disconnected&#34;));
+</span></span><span class="line"><span class="cl">  });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  check(res, { &#34;status is 101&#34;: (r) =&gt; r &amp;&amp; r.status === 101 });
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>簡單說明一下上面程式在寫什麼，我們在 const 設定 vus 代表有 1000 個虛擬使用者，會在 duration 30s 內完成測試，下面的 default 就是測試連線 ws 以及 message 跟 close 等動作，最後需要回傳 101 (ws 交握)</p>
+<br>
+<p>執行 <code>k6 run websocket.js</code> 後，就會開始壓測，可以看到會開始執行剛剛在上面提到 default 的動作：</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-log-502-error/4.png" title="/images/soketi-log-502-error/4.png" data-thumbnail="/images/soketi-log-502-error/4.png" data-sub-html="<h2>k6 壓測過程</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-log-502-error/4.png"
+            data-srcset="/images/soketi-log-502-error/4.png, /images/soketi-log-502-error/4.png 1.5x, /images/soketi-log-502-error/4.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-log-502-error/4.png" width="800" />
+    </a><figcaption class="image-caption">k6 壓測過程</figcaption>
+    </figure>
+<br>
+<p>等到跑完，就會告訴你 1000 筆裡面有多少的 http 101，這邊顯示 status is 101，就代表都是 101，代表都有連線成功，沒有出現 502 error 或是 <code>connect() failed (111: Connection refused)</code> 的錯誤，這樣就代表我們的問題解決了。</p>
+<br>
+<figure><a class="lightgallery" href="/images/soketi-log-502-error/5.png" title="/images/soketi-log-502-error/5.png" data-thumbnail="/images/soketi-log-502-error/5.png" data-sub-html="<h2>k6 壓測結果</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/soketi-log-502-error/5.png"
+            data-srcset="/images/soketi-log-502-error/5.png, /images/soketi-log-502-error/5.png 1.5x, /images/soketi-log-502-error/5.png 2x"
+            data-sizes="auto"
+            alt="/images/soketi-log-502-error/5.png" width="800" />
+    </a><figcaption class="image-caption">k6 壓測結果</figcaption>
+    </figure>
+<br>
+<h2 id="參考">參考</h2>
+<p><a href="https://wshs0713.github.io/posts/8c1276a7/" target="_blank" rel="noopener noreffer">[Nginx] 解決 connect() failed (111: Connection refused) while connecting to upstream</a></p>
+<p><a href="http://nginx.org/en/docs/http/websocket.html" target="_blank" rel="noopener noreffer">WebSocket proxying</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10236314" target="_blank" rel="noopener noreffer">day 10 Pod(3)-生命週期, 容器探測</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/gcp/">GCP</a>
+                </span><span><a href="/tags/k8s/">K8s</a>
+                </span><span><a href="/tags/gke/">GKE</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-09-21&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/58c3a599979095e3d75aeabd9033c66bb3dac9e2" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;58c3a59:&nbsp;# 更新 Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)">
+                            <i class="fas fa-hashtag fa-fw"></i>58c3a59</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/soketi-log-502-error/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/soketi-log-502-error/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/soketi-log-502-error/" data-title="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)" data-hashtags="GCP,K8s,GKE"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/soketi-log-502-error/" data-hashtag="GCP"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/soketi-log-502-error/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/soketi-log-502-error/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/soketi-log-502-error/" data-title="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/soketi-log-502-error/" data-title="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/soketi-log-502-error/" data-title="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/gke-container-veth-name-provided-eth0-already-exists/" class="prev" rel="prev" title="部署 Pod 遇到 container veth name provided (eth0) already exists 錯誤"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

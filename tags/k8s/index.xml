@@ -6,8 +6,8 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
     <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</title>
-    <link>https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/</link>
-    <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-websocket-server-log-502-error-and-111-connection-refused/</guid>
+    <link>https://blog.pin-yi.me/soketi-log-502-error/</link>
+    <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-log-502-error/</guid>
     <description><![CDATA[此文章要來記錄一下 RD 同仁前陣子有反應使用 Soketi 這個 WebSocket Server 會不定時在 LOG 出現 502 error 錯誤訊息以及 connect() failed (111: Connection refused) while connecting to upstream，雖然說服務使用上不會影響]]></description>
 </item>
 <item>
