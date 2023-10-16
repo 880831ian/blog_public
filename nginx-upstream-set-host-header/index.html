@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？ - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？" />
+<meta property="og:description" content="此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/nginx-upstream-set-host-header/" /><meta property="og:image" content="https://blog.pin-yi.me/nginx-upstream-set-host-header/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-16T10:46:00+08:00" />
+<meta property="article:modified_time" content="2023-10-16T12:13:18+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/nginx-upstream-set-host-header/featured-image.webp"/>
+<meta name="twitter:title" content="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？"/>
+<meta name="twitter:description" content="此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/nginx-upstream-set-host-header/" /><link rel="prev" href="https://blog.pin-yi.me/soketi-log-502-error/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/nginx-upstream-set-host-header\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/nginx-upstream-set-host-header\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Nginx, upstream, header","wordcount":  1427 ,
+        "url": "https:\/\/blog.pin-yi.me\/nginx-upstream-set-host-header\/","datePublished": "2023-10-16T10:46:00+08:00","dateModified": "2023-10-16T12:13:18+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/nginx-upstream-set-host-header/featured-image.webp"
+        data-srcset="/nginx-upstream-set-host-header/featured-image.webp, /nginx-upstream-set-host-header/featured-image.webp 1.5x, /nginx-upstream-set-host-header/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/nginx-upstream-set-host-header/featured-image.webp"
+        title="/nginx-upstream-set-host-header/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-16">2023-10-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 1427 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 3 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#問題">問題</a></li>
+    <li><a href="#解決">解決</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是 servername 導到對應的後端程式，或是外部的服務上(例如 AWS cloudfront.net)，本篇要測試的是如果使用要同時使用 upstream 到外部服務，且需要帶 host header 該怎麼做。</p>
+<br>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Nginx 的 upstream 是什麼？<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>通常我們 proxy_pass 的寫法會是這樣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">location</span> <span class="s">/aaa</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://aaa.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>當 Nginx 收到的 request 是 <code>/aaa</code> 時，就會將 request 轉發到 <code>http://aaa.example.com</code>。</p>
+<br>
+<p>但假如後端有多台機器或是服務，可以處理同一種 request，這時候就可以使用 upstream 來處理：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">upstream</span> <span class="s">backend_hosts</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">server</span> <span class="s">aaa.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">server</span> <span class="s">bbb.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">server</span> <span class="s">ccc.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">location</span> <span class="s">/aaa</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">proxy_pass</span> <span class="s">http://backend_hosts</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>這樣子的好處是可以有多個機器或是後端服務可以分散請求，做到負載平衡的效果。</p>
+</div>
+        </div>
+    </div>
+<br>
+<h2 id="問題">問題</h2>
+<p>那如果我們使用 Nginx upstream 時，還想要同時帶 host 的 header 到後端該怎麼做呢？我們先來看一下目前的寫法：</p>
+<p>( 測試範例是使用 docker 來模擬，可以參考程式碼 &gt; <a href="https://github.com/880831ian/nginx-upstream-set-host-header" target="_blank" rel="noopener noreffer">點我前往 github</a>，會有三個 nginx，其中一個是負責 proxy 的 nginx 名為 proxy，另外兩台是 upstream 後的服務，名為 upstream_server1、upstream_server2 )</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">    <span class="k">upstream</span> <span class="s">upstream_server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="s">upstream_server1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="s">upstream_server2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/upstream_server/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_pass</span> <span class="s">http://upstream_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">&#34;upstream_server1&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">&#34;upstream_server2&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span> <span class="s">upstream_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>可以看到我們希望 Nginx 收到 request 是 <code>/upstream_server</code> 時，將 request 轉發到 <code>http://upstream_server</code>，而 <code>upstream_server</code> 後面有兩個 server，並且在 proxy 時，帶入兩個不同的 host header。但如果真的這樣寫，可以達到我們想要得效果嗎？我們實際跑看看程式 (範例可以使用 nginx-old.conf)：</p>
+<br>
+<figure><a class="lightgallery" href="/images/nginx-upstream-set-host-header/1.png" title="/images/nginx-upstream-set-host-header/1.png" data-thumbnail="/images/nginx-upstream-set-host-header/1.png" data-sub-html="<h2>nginx 原本寫法</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/nginx-upstream-set-host-header/1.png"
+            data-srcset="/images/nginx-upstream-set-host-header/1.png, /images/nginx-upstream-set-host-header/1.png 1.5x, /images/nginx-upstream-set-host-header/1.png 2x"
+            data-sizes="auto"
+            alt="/images/nginx-upstream-set-host-header/1.png" width="900" />
+    </a><figcaption class="image-caption">nginx 原本寫法</figcaption>
+    </figure>
+<br>
+<p>從上面的 LOG 可以發現，我們 call <code>/upstream_server</code> 時，後端的 upstream_server1、upstream_server2 收到的 host 只會收到第一個設定的 Host，且服務會出現 400 Bad Request，查了一下網路文章，發現出現 400 Bad Request，可能跟 header 送太多資訊過去，詳細可以參考 <a href="https://tools.wingzero.tw/article/sn/534" target="_blank" rel="noopener noreffer">解決網站出現 400 Bad Request 狀態的方法</a>。</p>
+<p>這邊推測應該是後端如果也是用 nginx 直接接收才會遇到 400 的問題，還好目前公司服務還是正常的 xDD，檢查一下後發現，其實後端根本沒有要求對應 header 才能接收(應該是對方忘記加上此限制)。</p>
+<br>
+<h2 id="解決">解決</h2>
+<p>好，不管是否需要對應 header，我們還是找看看有沒有辦法同時使用 upstream，並帶入對應 host 的方法呢？</p>
+<p>最後參考網路上的文章，似乎只能使用兩層的 proxy，才能完成這兩個需求，我們來看看要怎麼寫吧 (範例可以使用 nginx.conf)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">    <span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">777</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_pass</span> <span class="s">http://upstream_server1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">&#34;upstream_server1&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span> <span class="s">upstream_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">888</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_pass</span> <span class="s">http://upstream_server2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">&#34;upstream_server2&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span> <span class="s">upstream_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">upstream</span> <span class="s">upstream_server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">777</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">888</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/upstream_server/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">proxy_pass</span> <span class="s">http://upstream_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span> <span class="s">upstream_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>可以看到上面的程式碼，我們透過兩層的 proxy，來達到我們想要的效果，這樣子就可以同時使用 upstream，並且帶入對應的 host header。</p>
+<p>首先在 28 ~ 36 行，我們一樣如果 Nginx 收到 request 是 <code>/upstream_server</code> 時，會 proxy 到 upstream_server 這個 upstream 中，而 upstream_server 有兩個 server，分別是 <code>127.0.0.1:777</code>、<code>127.0.0.1:888</code>，但實際上沒有這兩個 port，所以我們需要再寫一層一般的 proxy 設定，分別是 1 ~ 10 行、12 ~ 21 行，這樣子就可以達到我們想要的效果。</p>
+<br>
+<p>但這個方法比較適用於 upstream 後端沒有太多個服務或是機器的情況，如果有很多個服務或是機器，就需要寫很多的 proxy，這樣子會變得很麻煩，所以如果有更好的方法，也歡迎留言跟我分享 🤣。</p>
+<br>
+<p>最後我們來看一下實際執行的結果：</p>
+<br>
+<figure><a class="lightgallery" href="/images/nginx-upstream-set-host-header/2.png" title="/images/nginx-upstream-set-host-header/2.png" data-thumbnail="/images/nginx-upstream-set-host-header/2.png" data-sub-html="<h2>使用多層的 nginx proxy 處理</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/nginx-upstream-set-host-header/2.png"
+            data-srcset="/images/nginx-upstream-set-host-header/2.png, /images/nginx-upstream-set-host-header/2.png 1.5x, /images/nginx-upstream-set-host-header/2.png 2x"
+            data-sizes="auto"
+            alt="/images/nginx-upstream-set-host-header/2.png" width="900" />
+    </a><figcaption class="image-caption">使用多層的 nginx proxy 處理</figcaption>
+    </figure>
+<br>
+<h2 id="參考">參考</h2>
+<p><a href="https://serverfault.com/questions/598202/make-nginx-to-pass-hostname-of-the-upstream-when-reverseproxying" target="_blank" rel="noopener noreffer">Make nginx to pass hostname of the upstream when reverseproxying</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/nginx/">Nginx</a>
+                </span><span><a href="/tags/upstream/">upstream</a>
+                </span><span><a href="/tags/header/">header</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-10-16&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/f68b1c0bb1465c6455cac48565cae32c0b0ef3a5" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;f68b1c0:&nbsp;# 新增 想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？">
+                            <i class="fas fa-hashtag fa-fw"></i>f68b1c0</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/nginx-upstream-set-host-header/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/nginx-upstream-set-host-header/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/" data-title="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？" data-hashtags="Nginx,upstream,header"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/" data-hashtag="Nginx"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/" data-title="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/" data-title="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/nginx-upstream-set-host-header/" data-title="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/soketi-log-502-error/" class="prev" rel="prev" title="Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

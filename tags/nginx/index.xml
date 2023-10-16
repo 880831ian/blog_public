@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/nginx/</link>
         <description>Nginx - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+    <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</title>
+    <link>https://blog.pin-yi.me/nginx-upstream-set-host-header/</link>
+    <pubDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/nginx-upstream-set-host-header/</guid>
+    <description><![CDATA[此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是]]></description>
+</item>
+<item>
     <title>如何在 Nginx 下實作第一個 PHP 留言板 RESTful API</title>
     <link>https://blog.pin-yi.me/php-restful-api/</link>
     <pubDate>Thu, 24 Feb 2022 22:24:24 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/php-restful-api/</guid>

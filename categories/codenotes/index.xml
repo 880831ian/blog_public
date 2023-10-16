@@ -5,6 +5,12 @@
         <description>程式筆記 - 分類 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
             <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.pin-yi.me/categories/codenotes/" rel="self" type="application/rss+xml" /><item>
+    <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</title>
+    <link>https://blog.pin-yi.me/nginx-upstream-set-host-header/</link>
+    <pubDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/nginx-upstream-set-host-header/</guid>
+    <description><![CDATA[此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是]]></description>
+</item>
+<item>
     <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</title>
     <link>https://blog.pin-yi.me/soketi-log-502-error/</link>
     <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-log-502-error/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/bookstack/</link>
     <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>
     <description><![CDATA[最近剛好有公司同事離職，想要把交接的資料給整理整理，雖然部門之前有架設專用的 wiki 給 RD 使用，但覺得介面沒有到很好用，於是就在網路上尋找，可以多人]]></description>
-</item>
-<item>
-    <title>Google Kubernetes Engine CronJob 會有短暫時間沒有執行 Job [已解決]</title>
-    <link>https://blog.pin-yi.me/gke-cronjob-not-working/</link>
-    <pubDate>Fri, 10 Feb 2023 14:14:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gke-cronjob-not-working/</guid>
-    <description><![CDATA[前陣子公司建立在 Google Kubernetes Engine 叢集上的 CronJob 服務會有短暫時間沒有執行 Job。先前情提要一下，此 CronJob 的設定是每分鐘都會執行 (圖一)，所以理當來說 Log 應該要可以]]></description>
 </item>
 </channel>
 </rss>

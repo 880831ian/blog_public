@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>upstream - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/upstream/</link>
+        <description>upstream - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/upstream/" rel="self" type="application/rss+xml" /><item>
+    <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</title>
+    <link>https://blog.pin-yi.me/nginx-upstream-set-host-header/</link>
+    <pubDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/nginx-upstream-set-host-header/</guid>
+    <description><![CDATA[此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是]]></description>
+</item>
+</channel>
+</rss>

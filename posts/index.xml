@@ -23,6 +23,12 @@
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
 </item>
 <item>
+    <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</title>
+    <link>https://blog.pin-yi.me/nginx-upstream-set-host-header/</link>
+    <pubDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/nginx-upstream-set-host-header/</guid>
+    <description><![CDATA[此文章要來記錄一下最近在公司服務入口遇到的一些小問題，以及解決的方法。簡單說明一下，我們的服務入口是用 Nginx 來當作 proxy server，將不同路徑或是]]></description>
+</item>
+<item>
     <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</title>
     <link>https://blog.pin-yi.me/soketi-log-502-error/</link>
     <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-log-502-error/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/terragrunt/</link>
     <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
     <description><![CDATA[我們接續上一篇的 如何將 Terraform 改寫成 module ? ，我們已經將 Terraform 改成 module 的方式來進行管理，但當我們要管理的資源越來越多，且有分不同的專案時，整個服務架構會長的]]></description>
-</item>
-<item>
-    <title>如何將 Terraform 改寫成 module ?</title>
-    <link>https://blog.pin-yi.me/terraform-module/</link>
-    <pubDate>Fri, 16 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terraform-module/</guid>
-    <description><![CDATA[當我們要管理的資源越來越多後，會產生很多的 tf 檔案，假設我們現在有三個 gce 服務，會在以下三個不同環境上面運作，每個環境都會有我們之前學會的基本 tf]]></description>
 </item>
 </channel>
 </rss>
