@@ -4,7 +4,7 @@
         <link>https://blog.pin-yi.me/</link>
         <description>這裡是關於一個菜鳥工程師斜槓Youtuber的部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</lastBuildDate>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</lastBuildDate>
             <atom:link href="https://blog.pin-yi.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>主題文檔 - 基本概念</title>
@@ -23,6 +23,12 @@
     <link>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Wed, 04 Mar 2020 16:29:59 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<p><strong>Hugo</strong> 提供了多個內置的 Shortcodes, 以方便作者保持 Markdown 內容的整潔.</p>]]></description>
+</item>
+<item>
+    <title>在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓</title>
+    <link>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</guid>
+    <description><![CDATA[此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來]]></description>
 </item>
 <item>
     <title>想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？</title>
@@ -59,12 +65,6 @@
     <link>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</link>
     <pubDate>Sun, 30 Jul 2023 20:10:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/gcp-log-reduce-cloud-logging-api/</guid>
     <description><![CDATA[當我們使用 GCP 的 Cloud Logging 服務來查看 Log 時，有時候會有一些我們不需要顯示出來的，或是從來都不會去查詢的 Log，再者是 GCP 本身的錯誤導致大量噴錯的 Log ，這些]]></description>
-</item>
-<item>
-    <title>如何導入 Terragrunt，Terragrunt 好處是什麼？</title>
-    <link>https://blog.pin-yi.me/terragrunt/</link>
-    <pubDate>Wed, 21 Jun 2023 17:02:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/terragrunt/</guid>
-    <description><![CDATA[我們接續上一篇的 如何將 Terraform 改寫成 module ? ，我們已經將 Terraform 改成 module 的方式來進行管理，但當我們要管理的資源越來越多，且有分不同的專案時，整個服務架構會長的]]></description>
 </item>
 </channel>
 </rss>

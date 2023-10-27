@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/kubernetes/</link>
         <description>Kubernetes - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+    <title>在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓</title>
+    <link>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</guid>
+    <description><![CDATA[此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來]]></description>
+</item>
+<item>
     <title>Bookstack 開源知識庫筆記平台安裝 (K8s &#43; docker)</title>
     <link>https://blog.pin-yi.me/bookstack/</link>
     <pubDate>Fri, 07 Apr 2023 16:42:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/bookstack/</guid>

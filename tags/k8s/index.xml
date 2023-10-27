@@ -4,7 +4,13 @@
         <link>https://blog.pin-yi.me/tags/k8s/</link>
         <description>K8s - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓</title>
+    <link>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</guid>
+    <description><![CDATA[此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來]]></description>
+</item>
+<item>
     <title>Soketi WebSocket Server LOG 不定時出現 502 error 以及 connect() failed (111: Connection refused)</title>
     <link>https://blog.pin-yi.me/soketi-log-502-error/</link>
     <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/soketi-log-502-error/</guid>
@@ -57,12 +63,6 @@
     <link>https://blog.pin-yi.me/k8s-advanced/</link>
     <pubDate>Tue, 03 May 2022 10:39:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-advanced/</guid>
     <description><![CDATA[前面我們在基本篇中，為了使 Pod 能夠與本機連線，使用了 port-forward，還有另一種方法就是今天要介紹的第一個主題：Service 那我們會]]></description>
-</item>
-<item>
-    <title>Kubernetes (K8s) 介紹 - 基本</title>
-    <link>https://blog.pin-yi.me/k8s/</link>
-    <pubDate>Thu, 28 Apr 2022 18:17:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s/</guid>
-    <description><![CDATA[什麼是 Kubernetes (K8s)? Kubernetes 也可以叫 K8s，這個名稱來源希臘語，意思是舵手或是飛行員，所以我們可以看到它的 logo 是一個船舵的標誌，之所以叫 K8s 是因為 Kubernetes 的 k 到 s 中間]]></description>
 </item>
 </channel>
 </rss>

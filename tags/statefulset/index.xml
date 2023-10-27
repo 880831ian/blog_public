@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>StatefulSet - 標籤 - PinYi 部落格</title>
+        <link>https://blog.pin-yi.me/tags/statefulset/</link>
+        <description>StatefulSet - 標籤 - PinYi 部落格</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/statefulset/" rel="self" type="application/rss+xml" /><item>
+    <title>在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓</title>
+    <link>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/</guid>
+    <description><![CDATA[此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來]]></description>
+</item>
+</channel>
+</rss>

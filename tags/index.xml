@@ -4,7 +4,25 @@
         <link>https://blog.pin-yi.me/tags/</link>
         <description>Tags - 標籤 - PinYi 部落格</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-tw</language><managingEditor>880831ian@gmail.com (PinYi)</managingEditor>
-            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>880831ian@gmail.com (PinYi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</lastBuildDate><atom:link href="https://blog.pin-yi.me/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>K8s</title>
+    <link>https://blog.pin-yi.me/tags/k8s/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/k8s/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Kubernetes</title>
+    <link>https://blog.pin-yi.me/tags/kubernetes/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/kubernetes/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>StatefulSet</title>
+    <link>https://blog.pin-yi.me/tags/statefulset/</link>
+    <pubDate>Fri, 27 Oct 2023 10:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/statefulset/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>header</title>
     <link>https://blog.pin-yi.me/tags/header/</link>
     <pubDate>Mon, 16 Oct 2023 10:46:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/header/</guid>
@@ -35,12 +53,6 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>K8s</title>
-    <link>https://blog.pin-yi.me/tags/k8s/</link>
-    <pubDate>Wed, 20 Sep 2023 07:21:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/k8s/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>Datadog</title>
     <link>https://blog.pin-yi.me/tags/datadog/</link>
     <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/datadog/</guid>
@@ -50,18 +62,6 @@
     <title>Ingress Nginx Controller</title>
     <link>https://blog.pin-yi.me/tags/ingress-nginx-controller/</link>
     <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/ingress-nginx-controller/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Observability</title>
-    <link>https://blog.pin-yi.me/tags/observability/</link>
-    <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/observability/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Opentelemetry</title>
-    <link>https://blog.pin-yi.me/tags/opentelemetry/</link>
-    <pubDate>Wed, 13 Sep 2023 00:33:00 &#43;0800</pubDate><author>880831ian@gmail.com (PinYi)</author><guid>https://blog.pin-yi.me/tags/opentelemetry/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓 - PinYi 部落格</title><meta name="description" content="這裡是關於一個菜鳥工程師斜槓Youtuber的部落格"><meta property="og:title" content="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓" />
+<meta property="og:description" content="此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" /><meta property="og:image" content="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/featured-image.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-27T10:33:00+08:00" />
+<meta property="article:modified_time" content="2023-10-27T12:17:09+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/featured-image.webp"/>
+<meta name="twitter:title" content="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓"/>
+<meta name="twitter:description" content="此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來"/>
+<meta name="application-name" content="PinYi 部落格">
+<meta name="apple-mobile-web-app-title" content="PinYi 部落格"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/avatar.webp"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" /><link rel="prev" href="https://blog.pin-yi.me/nginx-upstream-set-host-header/" /><link rel="next" href="https://blog.pin-yi.me/theme-documentation-built-in-shortcodes/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css">
+        <link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓",
+        "inLanguage": "zh-tw",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.pin-yi.me\/k8s-statefulset-podmanagementpolicy\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/blog.pin-yi.me\/k8s-statefulset-podmanagementpolicy\/featured-image.webp",
+                            "width":  1280 ,
+                            "height":  300 
+                        }],"genre": "posts","keywords": "Kubernetes, K8s, StatefulSet","wordcount":  2099 ,
+        "url": "https:\/\/blog.pin-yi.me\/k8s-statefulset-podmanagementpolicy\/","datePublished": "2023-10-27T10:33:00+08:00","dateModified": "2023-10-27T12:17:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "Zhuang,Pin-Yi","logo": "https:\/\/blog.pin-yi.me\/images\/avatar.webp"},"author": {
+                "@type": "Person",
+                "name": "PinYi"
+            },"description": ""
+    }
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK8X0P9SDS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-EK8X0P9SDS', { 'anonymize_ip': false });
+}
+</script>
+</head><body data-header-desktop="fixed" data-header-mobile="fixed"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/categories/"> 文章分類 </a><a class="menu-item" href="/tags/"> 文章標籤 </a><a class="menu-item" href="/categories/youtube/"> YouTube 影片 </a><a class="menu-item" href="https://pin-yi.me" rel="noopener noreffer" target="_blank"> 關於我 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="PinYi 部落格">PinYi 部落格</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="請輸入要搜尋的標題或是內容" id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜尋">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/categories/" title="">文章分類</a><a class="menu-item" href="/tags/" title="">文章標籤</a><a class="menu-item" href="/categories/youtube/" title="">YouTube 影片</a><a class="menu-item" href="https://pin-yi.me" title="" rel="noopener noreffer" target="_blank">關於我</a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+                <span>&nbsp;|&nbsp;</span><a href="javascript:void(0);" class="theme-switch" title="切換主題">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目錄</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/k8s-statefulset-podmanagementpolicy/featured-image.webp"
+        data-srcset="/k8s-statefulset-podmanagementpolicy/featured-image.webp, /k8s-statefulset-podmanagementpolicy/featured-image.webp 1.5x, /k8s-statefulset-podmanagementpolicy/featured-image.webp 2x"
+        data-sizes="auto"
+        alt="/k8s-statefulset-podmanagementpolicy/featured-image.webp"
+        title="/k8s-statefulset-podmanagementpolicy/featured-image.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://pin-yi.me" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>PinYi</a></span>&nbsp;<span class="post-category">出版於  <a href="/categories/codenotes/"><i class="far fa-folder fa-fw"></i>程式筆記</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-27">2023-10-27</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;約 2099 字</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;預計閱讀 5 分鐘</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>目錄</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#問題">問題</a></li>
+    <li><a href="#解決辦法">解決辦法</a></li>
+    <li><a href="#測試結果">測試結果</a>
+      <ul>
+        <li><a href="#使用-orderedready-模式">使用 OrderedReady 模式</a>
+          <ul>
+            <li><a href="#使用指令調整-pod-數量">使用指令調整 Pod 數量</a></li>
+            <li><a href="#使用-yaml-調整-pod-數量">使用 yaml 調整 Pod 數量</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用-parallel-模式">使用 Parallel 模式</a>
+          <ul>
+            <li><a href="#使用指令調整-pod-數量-1">使用指令調整 Pod 數量</a></li>
+            <li><a href="#使用-yaml-調整-pod-數量-1">使用 yaml 調整 Pod 數量</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#結論">結論</a></li>
+    <li><a href="#參考資料">參考資料</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>此文章要來記錄一下前陣子在公司的正式環境踩到 StatefulSet 的雷，事情是這樣的，我們有些服務，是使用 StatefulSet 來建置，至於為什麼不用 Deployment，這個說來話長 (也不是因為需要特定的 Pod 名稱、或是網路標記等等)，我們這邊先不討論，這個 StatefulSet 服務是 Nginx + PHP-FPM，為了避免流量進入到 processes 已經被用光的 Pod 中，我們在 StatefulSet 的 PHP Container 上有設定 readiness，readiness 的設定長得像以下：</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">exec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/bin/bash&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;-c&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        CHECK_INFO=$(curl -s -w &#39;http code:\t%{http_code}\n&#39; 127.0.0.1/status)
+</span></span></span><span class="line"><span class="cl"><span class="sd">        HTTP_CODE=$(echo -e &#34;${CHECK_INFO}&#34; | awk &#39;/http code:/ {print $3}&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="sd">        IDLE_PROCESSES=$(echo -e &#34;${CHECK_INFO}&#34; | awk &#39;/idle processes:/ {print $3}&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="sd">        [[ $HTTP_CODE -eq 200 &amp;&amp; $IDLE_PROCESSES -ge 10 ]] || exit 1</span><span class="w">        
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們會用 curl 來打 <code>/status</code>，檢查回傳的 http code 是否為 200，以及 idle processes 是否大於等於 10，如果不符合，就會回傳 1，讓他被標記不健康，讓 Kubernetes 停止流量到不健康的容器，以確保流量被路由到其他健康的副本。</p>
+<br>
+<h2 id="問題">問題</h2>
+<p>當天遇到的情況是，我們上程式後，Pod 都一切正常，當流量開始進來後，發現 10 個 Pod 會開始偶發的噴 <code>Readiness probe failed</code>，查看監控發現 processes 越來越低，最後被反應服務有問題，我們查看 Hpa 的紀錄的確有觸發到 40 個 Pod，只是查看 Pod 數還是依樣卡在 10 個，當下我們有嘗試使用調整 yaml 在 apply，發現 StatefulSet 的 yaml 也已經更新了，但 Pod 還是一樣卡在 10 個，也有使用 kubectl 下 <code>kubectl scale sts [服務名稱] --replicas=0</code>，想要切換 Pod 數也沒有辦法。</p>
+<br>
+<p>當下我們有先 Call Google 的 Support 一起找原因，Google 是建議我們 readiness 的條件不要設的太嚴格，可以加上 <code>timeoutSeconds: 秒數</code>，但對於 Pod 卡住，還是沒有找到原因，後來我們查了一下 StatefulSet 的文件發現，StatefulSet 有一個設定 <code>podManagementPolicy</code>，預設是 <code>OrderedReady</code>，他必須等待前面的 Pod 是 Ready 狀態，才會再繼續建立新的，也就是說我們的 StatefulSet 已經卡住，導致就算 Hpa 觸發要長到 40 個 Pod 也沒有用。</p>
+<br>
+<h2 id="解決辦法">解決辦法</h2>
+<p>當下想趕快解決 readiness 這個問題，調整 <code>timeoutSeconds</code> 後，單純 apply 是沒有用的，要記得刪掉卡住的 Pod，讓他重新建立，才會套用新的設定 (但我們當下太在意為甚麼 Pod 會卡住，沒有想到要先把 readiness 問題修掉 xD，我們當下的解法是先將流量導到地端正常的服務上)。</p>
+<p>另外 Google 也說，假如我們還是必須使用 StatefulSet 來建立服務，建議我們把 podManagementPolicy 改成 <code>Parallel</code>，它會有點像是 Deployment 的感覺，不會等待其他 Pod 變成 Ready 狀態，所以可以讓我們就算在 readiness 卡住的情況下，也可以自動擴縮服務。</p>
+<br>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>StatefulSet podManagementPolicy 參數說明<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>OrderedReady (預設)</li>
+</ul>
+<p>Pods 會按照順序一個接一個地被創建。即，n+1 號 Pod 不會在 n 號 Pod 成功創建且 Ready 之前開始創建。
+在縮小 StatefulSet 的大小時，Pods 會按照反向順序一個接一個地被終止。即，n 號 Pod 不會在 n+1 號 Pod 完全終止之前開始終止。
+這確保了 Pods 的啟動和終止的順序性。</p>
+<br>
+<ul>
+<li>Parallel</li>
+</ul>
+<p>所有 Pods 會同時地被創建或終止。
+當 StatefulSet 擴展時，新的 Pods 會立即開始創建，不用等待其他 Pods 成為 Ready 狀態。
+當縮小 StatefulSet 的大小時，要終止的 Pods 會立即開始終止，不用等待其他 Pods 先終止。
+這種策略提供了快速的擴展和縮小操作，但缺乏順序性保證。</p>
+</div>
+        </div>
+    </div>
+<br>
+<h2 id="測試結果">測試結果</h2>
+<p>最後我們就使用兩種模式來測試看看，已下是測試結果(透過 P1 才知道的設定ＱＱ)：</p>
+<p>有將測試的 StatefulSet 放在 Github，<a href="https://github.com/880831ian/k8s-statefulset-podmanagementpolicy" target="_blank" rel="noopener noreffer">可以點我查看</a> (可以調整 readinessProbe 的 httpGet.Path 故意把他用壞)</p>
+<br>
+<h3 id="使用-orderedready-模式">使用 OrderedReady 模式</h3>
+<p>StatefulSet 在 podManagementPolicy 預設 OrderedReady 的模式，故意讓 readiness 卡住時 (Pod 卡住時)：</p>
+<ul>
+<li>當下的 StatefulSet 設定：</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/1.png" title="/images/k8s-statefulset-podmanagementpolicy/1.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/1.png" data-sub-html="<h2>StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/1.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/1.png, /images/k8s-statefulset-podmanagementpolicy/1.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/1.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/1.png" width="850" />
+    </a><figcaption class="image-caption">StatefulSet 設定</figcaption>
+    </figure>
+<ul>
+<li>Pod 狀態：</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/2.png" title="/images/k8s-statefulset-podmanagementpolicy/2.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/2.png" data-sub-html="<h2>Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/2.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/2.png, /images/k8s-statefulset-podmanagementpolicy/2.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/2.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/2.png" width="850" />
+    </a><figcaption class="image-caption">Pod 狀態</figcaption>
+    </figure>
+<br>
+<h4 id="使用指令調整-pod-數量">使用指令調整 Pod 數量</h4>
+<p>我們這時候下指令調整 Pod 數量，看看會發生什麼事：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl scale sts my-statefulset --replicas=5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們先看 StatefulSet 的 yaml 可以看到 Pod replicas 已經改變，也可以看 generation 有更新，代表 StatefulSet 本身有接收到調整設定的請求。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/3.png" title="/images/k8s-statefulset-podmanagementpolicy/3.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/3.png" data-sub-html="<h2>下指令調整後的 StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/3.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/3.png, /images/k8s-statefulset-podmanagementpolicy/3.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/3.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/3.png" width="850" />
+    </a><figcaption class="image-caption">下指令調整後的 StatefulSet 設定</figcaption>
+    </figure>
+<br>
+<p>看了一下 Pod 數量，也是一樣卡住，且 Pod 數量也沒有變化。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/4.png" title="/images/k8s-statefulset-podmanagementpolicy/4.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/4.png" data-sub-html="<h2>下指令調整後的 Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/4.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/4.png, /images/k8s-statefulset-podmanagementpolicy/4.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/4.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/4.png" width="850" />
+    </a><figcaption class="image-caption">下指令調整後的 Pod 狀態</figcaption>
+    </figure>
+<br>
+<h4 id="使用-yaml-調整-pod-數量">使用 yaml 調整 Pod 數量</h4>
+<p>我們直接調整 StatefulSet yaml 的 Pod 數量，看看會發生什麼事：</p>
+<p>一樣我們先看 StatefulSet 的 yaml 可以看到 Pod replicas 已經改變(這裡應該切別的 Pod 數量，切回 3 個好像沒有意義 xD)，也可以看 generation 有更新。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/5.png" title="/images/k8s-statefulset-podmanagementpolicy/5.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/5.png" data-sub-html="<h2>使用 yaml 調整後的 StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/5.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/5.png, /images/k8s-statefulset-podmanagementpolicy/5.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/5.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/5.png" width="850" />
+    </a><figcaption class="image-caption">使用 yaml 調整後的 StatefulSet 設定</figcaption>
+    </figure>
+<br>
+<p>看了一下 Pod 數量，也是一樣卡住，且 Pod 數量也沒有變化。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/6.png" title="/images/k8s-statefulset-podmanagementpolicy/6.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/6.png" data-sub-html="<h2>使用 yaml 調整後的 Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/6.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/6.png, /images/k8s-statefulset-podmanagementpolicy/6.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/6.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/6.png" width="850" />
+    </a><figcaption class="image-caption">使用 yaml 調整後的 Pod 狀態</figcaption>
+    </figure>
+<br>
+<p>所以代表在 OrderedReady 的模式下，Pod 卡住時，無法對 Pod 進行任何操作，必須要手動刪除卡住的 Pod 才吃得到最新的設定。</p>
+<br>
+<h3 id="使用-parallel-模式">使用 Parallel 模式</h3>
+<p>StatefulSet 在 podManagementPolicy Parallel 的模式，故意讓 readiness 卡住時 (Pod 卡住時)：</p>
+<ul>
+<li>當下的 StatefulSet 設定：</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/7.png" title="/images/k8s-statefulset-podmanagementpolicy/7.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/7.png" data-sub-html="<h2>StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/7.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/7.png, /images/k8s-statefulset-podmanagementpolicy/7.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/7.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/7.png" width="850" />
+    </a><figcaption class="image-caption">StatefulSet 設定</figcaption>
+    </figure>
+<ul>
+<li>Pod 狀態：</li>
+</ul>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/8.png" title="/images/k8s-statefulset-podmanagementpolicy/8.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/8.png" data-sub-html="<h2>Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/8.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/8.png, /images/k8s-statefulset-podmanagementpolicy/8.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/8.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/8.png" width="850" />
+    </a><figcaption class="image-caption">Pod 狀態</figcaption>
+    </figure>
+<br>
+<h4 id="使用指令調整-pod-數量-1">使用指令調整 Pod 數量</h4>
+<p>我們這時候下指令調整 Pod 數量，看看會發生什麼事：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl scale sts my-statefulset --replicas=5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<p>我們先看 StatefulSet 的 yaml 可以看到 Pod replicas 已經改變，也可以看 generation 有更新，代表 StatefulSet 本身有接收到調整設定的請求。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/9.png" title="/images/k8s-statefulset-podmanagementpolicy/9.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/9.png" data-sub-html="<h2>下指令調整後的 StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/9.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/9.png, /images/k8s-statefulset-podmanagementpolicy/9.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/9.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/9.png" width="850" />
+    </a><figcaption class="image-caption">下指令調整後的 StatefulSet 設定</figcaption>
+    </figure>
+<br>
+<p>看了一下 Pod 數量，就算 my-statefulset-2 卡住，還是可以擴到 5 個 Pod。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/10.png" title="/images/k8s-statefulset-podmanagementpolicy/10.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/10.png" data-sub-html="<h2>下指令調整後的 Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/10.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/10.png, /images/k8s-statefulset-podmanagementpolicy/10.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/10.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/10.png" width="850" />
+    </a><figcaption class="image-caption">下指令調整後的 Pod 狀態</figcaption>
+    </figure>
+<br>
+<h4 id="使用-yaml-調整-pod-數量-1">使用 yaml 調整 Pod 數量</h4>
+<p>我們直接調整 StatefulSet yaml 的 Pod 數量，看看會發生什麼事：</p>
+<p>一樣我們先看 StatefulSet 的 yaml 可以看到 Pod replicas 已經改變，也可以看 generation 有更新。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/11.png" title="/images/k8s-statefulset-podmanagementpolicy/11.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/11.png" data-sub-html="<h2>使用 yaml 調整後的 StatefulSet 設定</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/11.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/11.png, /images/k8s-statefulset-podmanagementpolicy/11.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/11.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/11.png" width="850" />
+    </a><figcaption class="image-caption">使用 yaml 調整後的 StatefulSet 設定</figcaption>
+    </figure>
+<br>
+<p>看了一下 Pod 數量，也不會管其他 Pod 是否 Ready，一樣可以縮小成 2 個 Pod。</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/12.png" title="/images/k8s-statefulset-podmanagementpolicy/12.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/12.png" data-sub-html="<h2>使用 yaml 調整後的 Pod 狀態</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/12.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/12.png, /images/k8s-statefulset-podmanagementpolicy/12.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/12.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/12.png" width="850" />
+    </a><figcaption class="image-caption">使用 yaml 調整後的 Pod 狀態</figcaption>
+    </figure>
+<br>
+<h2 id="結論">結論</h2>
+<p>後來我們重新檢查了一下為什麼 processes 會用完，結果發現是 RD 的程式邏輯，導致每筆 Request 必須等待前一筆 Request 做完，才會開始動作，讓 processes 一直被占用，沒辦法即時消化，導致 processes 用完，又加上服務是使用 StatefulSet，預設模式的 OrderedReady，必須等待前一個 Pod 是 Ready 才可以自動擴縮，所以當我們 Hpa 想要擴縮，來增加可用的 processes 數量，也因為沒辦法擴縮，最後導致這一連串的問題 😕。</p>
+<br>
+<p>另外，如果想要從 OrderedReady 模式切成 Parallel 模式 (反正過來也是)，必須先將原本的 StatefulSet 給刪除，才可以調整：</p>
+<br>
+<figure><a class="lightgallery" href="/images/k8s-statefulset-podmanagementpolicy/13.png" title="/images/k8s-statefulset-podmanagementpolicy/13.png" data-thumbnail="/images/k8s-statefulset-podmanagementpolicy/13.png" data-sub-html="<h2>OrderedReady 模式切成 Parallel 模式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/k8s-statefulset-podmanagementpolicy/13.png"
+            data-srcset="/images/k8s-statefulset-podmanagementpolicy/13.png, /images/k8s-statefulset-podmanagementpolicy/13.png 1.5x, /images/k8s-statefulset-podmanagementpolicy/13.png 2x"
+            data-sizes="auto"
+            alt="/images/k8s-statefulset-podmanagementpolicy/13.png" width="850" />
+    </a><figcaption class="image-caption">OrderedReady 模式切成 Parallel 模式</figcaption>
+    </figure>
+<br>
+<h2 id="參考資料">參考資料</h2>
+<p><a href="https://medium.com/learn-or-die/kubernetes-%E5%81%A5%E5%BA%B7%E6%AA%A2%E6%9F%A5-59ee2a798115" target="_blank" rel="noopener noreffer">Kubernetes — 健康檢查</a></p>
+<p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies" target="_blank" rel="noopener noreffer">Pod Management Policies</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/kubernetes/">Kubernetes</a>
+                </span><span><a href="/tags/k8s/">K8s</a>
+                </span><span><a href="/tags/statefulset/">StatefulSet</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>更新於 2023-10-27&nbsp;<a class="git-hash" href="https://github.com/880831ian/blog/commit/6683db6c5463bbde18e6307c0de6a173012c9e9a" target="_blank" title="committed&nbsp;by&nbsp;PIN YI(880831ian@gmail.com)&nbsp;6683db6:&nbsp;# 更新 在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓">
+                            <i class="fas fa-hashtag fa-fw"></i>6683db6</a></span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/k8s-statefulset-podmanagementpolicy/index.md" target="_blank">閱讀原始文檔</a>
+                        </span><span>
+                        &nbsp;|&nbsp;
+                        <a class="link-to-markdown" href="https://github.com/880831ian/blog/tree/main/content/posts/k8s-statefulset-podmanagementpolicy/index.zh-tw.md" target="_blank">Improve Article</a>
+                    </span></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" data-title="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓" data-hashtags="Kubernetes,K8s,StatefulSet"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" data-title="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" data-title="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="https://blog.pin-yi.me/k8s-statefulset-podmanagementpolicy/" data-title="在正式環境上踩到 StatefulSet 的雷，拿到 P1 的教訓"><i class="fab fa-skype fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/nginx-upstream-set-host-header/" class="prev" rel="prev" title="想使用 Nginx Upstream Proxy 到外部服務，並帶入對應的 header 該怎麼做？"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/theme-documentation-built-in-shortcodes/" class="next" rel="next" title="主題文檔 - 內置 Shortcodes">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div id="comments" class="single-card"><div id="disqus_thread"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">此 Blog 多數程式文章都是參考網路大神，加上自己的見解與實作內容編寫而成的筆記，若有侵權，請聯繫我。</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://pin-yi.me">PinYi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Registered');
+        }, err => console.error('PinYi 部落格\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('PinYi 部落格\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到頂部">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看評論">
+                <i class="fas fa-comment-alt fa-fw"></i>
+            </a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css"><script src="https://pin-yi.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"複製到剪貼板","maxShownLines":120},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"找不到你輸入的資料🥲","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>
